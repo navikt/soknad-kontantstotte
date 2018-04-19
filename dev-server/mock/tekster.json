@@ -1,0 +1,12 @@
+{
+    "kontantstotte.tittel": "Søknad om kontantstøtte til småbarnsforeldre",
+    "feilside.dittnav.lenke.tekst": "Gå til Ditt NAV",
+    "feilside.forside.lenke.tekst": "Gå til forsiden nav.no",
+    "kvittering.tittel": "Kvittering",
+    "skjema.fradato.feilmelding": "Du må velge en fra dato",
+    "skjema.fradato.label": "Fra dato",
+    "skjema.land.default": "Velg land",
+    "skjema.land.feilmelding": "Du må velge et land",
+    "skjema.tildato.feilmelding": "Du må velge en til dato",
+    "skjema.tildato.label": "Til dato"
+}
