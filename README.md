@@ -5,7 +5,11 @@ Søknadsdialog for ny kontantstøtte-søknad
 
 # Komme i gang
 
-Hvordan bygge, teste og kjøre koden viss aktuelt.
+* Installere avhengigheter `yarn`
+* Starte dev-server `yarn start`
+* Åpne `http://localhost:8000/soknad-kontantstotte` i nettleseren din
+
+For å bygge en prodversjon kjør `yarn build:prod`
 
 ---
 
