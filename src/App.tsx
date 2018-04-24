@@ -5,7 +5,7 @@ export interface IAppProps {
     navn: string;
 }
 
-type Props = DispatchProp<{action: ()=> any}> & IAppProps;
+type Props = DispatchProp<{ action: () => any }> & IAppProps;
 
 const App: React.StatelessComponent<Props> = ({
     navn

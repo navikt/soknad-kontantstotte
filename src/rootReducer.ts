@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
 
-export interface IRootState {
-
-}
+export interface IRootState {}
 
 const rootReducer = combineReducers({
 
