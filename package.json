@@ -26,7 +26,8 @@
     "react-dom": "16.3.2",
     "react-redux": "5.0.7",
     "redux": "4.0.0",
-    "redux-saga": "^0.16.0"
+    "redux-saga": "^0.16.0",
+    "soknad-frontend": "^0.1.1"
   },
   "devDependencies": {
     "@types/react": "16.3.11",
