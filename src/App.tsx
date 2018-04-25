@@ -14,6 +14,5 @@ const App: React.StatelessComponent<Props> = ({
 };
 
 export default connect((state) => {
-    console.log(state);
     return state;
 })(App);
