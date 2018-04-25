@@ -2,6 +2,11 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="application/javascript">
+        window.frontendlogger = { info: function(){}, warn: function(){}, error: function(){}};
+        window.frontendlogger.appname = 'soknad-kontantstotte';
+    </script>
+    <script type="application/javascript" src="/frontendlogger/logger.js"></script>
 </head>
 <body>
     <div id="app"></div>
