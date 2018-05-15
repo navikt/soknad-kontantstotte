@@ -5114,9 +5114,9 @@ redux-logger@3.0.6:
   dependencies:
     deep-diff "^0.3.5"
 
-redux-saga@^0.16.0:
+redux-saga@0.16.0:
   version "0.16.0"
-  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.16.0.tgz#0a231db0a1489301dd980f6f2f88d8ced418f724"
+  resolved "https://repo.adeo.no/repository/npm-public/redux-saga/-/redux-saga-0.16.0.tgz#0a231db0a1489301dd980f6f2f88d8ced418f724"
 
 redux@4.0.0:
   version "4.0.0"
@@ -5591,9 +5591,9 @@ sntp@2.x.x:
   dependencies:
     hoek "4.x.x"
 
-soknad-frontend@^0.1.1:
-  version "0.1.1"
-  resolved "https://repo.adeo.no/repository/npm-public/soknad-frontend/-/soknad-frontend-0.1.1.tgz#d754ec71dbb26b61268c8f503403fd6148782b50"
+soknad-frontend@^0.1.3:
+  version "0.1.3"
+  resolved "https://repo.adeo.no/repository/npm-public/soknad-frontend/-/soknad-frontend-0.1.3.tgz#a8250406b677837b88cf2299f2fc51cd6c5df29b"
 
 sort-keys@^1.0.0:
   version "1.1.2"

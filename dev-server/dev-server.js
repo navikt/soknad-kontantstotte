@@ -30,6 +30,10 @@ app.get('/sendsoknad/informasjon/land', function(req, res) {
     setTimeout(() => res.send(lesMockFil('land.json')), delayMs);
 });
 
+app.get('/fakta', function (req, res) {
+    res.send(lesMockFil('fakta.json'));
+});
+
 app.listen(port, 'localhost', function onStart(err) {
     if (err) {
         console.log(err);
