@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
-import { faktumReducer, IFaktumState } from './faktum/reducer';
+import { IFaktumState } from 'soknad-frontend/lib/faktum-container';
+import { faktumReducer } from './faktum/reducer';
 
 export interface IRootState {
     faktum: IFaktumState;

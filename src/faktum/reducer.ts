@@ -1,8 +1,8 @@
+import { IFaktum } from 'soknad-frontend/lib/faktum-container';
 import {
     FaktumActionTypes,
     FaktumTypeKeys,
 } from './actions';
-import { IFaktum } from './types';
 
 export interface IFaktumState {
     readonly fakta: IFaktum[];

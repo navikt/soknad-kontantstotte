@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { IFaktum } from './types';
+import { IFaktum } from 'soknad-frontend/lib/faktum-container';
 
 enum FaktumTypeKeys {
     FAKTUM_HENT = 'FAKTUM_HENT',

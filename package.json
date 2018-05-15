@@ -26,8 +26,7 @@
     "react-dom": "16.3.2",
     "react-redux": "5.0.7",
     "redux": "4.0.0",
-    "redux-saga": "^0.16.0",
-    "soknad-frontend": "^0.1.1"
+    "redux-saga": "0.16.0"
   },
   "devDependencies": {
     "@types/react": "16.3.11",
@@ -45,6 +44,7 @@
     "postcss-loader": "2.1.4",
     "react-hot-loader": "4.1.1",
     "redux-logger": "3.0.6",
+    "soknad-frontend": "^0.1.3",
     "style-loader": "0.21.0",
     "ts-loader": "4.2.0",
     "tslint": "5.9.1",
