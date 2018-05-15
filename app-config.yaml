@@ -1,0 +1,11 @@
+image: docker.adeo.no:5000/soknad/soknad-kontantstotte
+replicas:
+  min: 2
+  max: 4
+  cpuThresholdPercentage: 50
+port: 8080
+healthcheck:
+  liveness:
+    path: soknad-kontantstotte/internal/isAlive
+  readiness:
+    path: soknad-kontantstotte/internal/selftest
