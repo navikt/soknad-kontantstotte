@@ -9,3 +9,7 @@ healthcheck:
     path: soknad-kontantstotte/internal/isAlive
   readiness:
     path: soknad-kontantstotte/internal/selftest
+fasitResources:
+  used:
+  - alias: nav_truststore
+    resourceType: Certificate
