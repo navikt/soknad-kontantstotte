@@ -9,6 +9,10 @@ healthcheck:
     path: soknad-kontantstotte/internal/isAlive
   readiness:
     path: soknad-kontantstotte/internal/selftest
+prometheus:
+  # NB: pus-decorator sine metrikker
+  enabled: true
+  path: soknad-kontantstotte/internal/metrics
 fasitResources:
   used:
   - alias: appres.cms
