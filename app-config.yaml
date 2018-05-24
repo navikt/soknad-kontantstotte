@@ -11,5 +11,5 @@ healthcheck:
     path: soknad-kontantstotte/internal/selftest
 fasitResources:
   used:
-  - alias: nav_truststore
-    resourceType: Certificate
+  - alias: appres.cms
+    resourceType: baseUrl

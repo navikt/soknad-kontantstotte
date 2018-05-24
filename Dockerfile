@@ -9,7 +9,7 @@ RUN yarn build
 
 FROM docker.adeo.no:5000/pus/decorator:34.20180522.1421
 ENV APPLICATION_NAME=soknad-kontantstotte
-ENV APPRES_CMS_URL=https://appres.nav.no
+#ENV APPRES_CMS_URL=https://appres.nav.no
 ENV HEADER_TYPE=WITHOUT_MENU
 COPY --from=builder /workspace/dist /app
 COPY --from=builder /workspace/VERSION /app/VERSION
