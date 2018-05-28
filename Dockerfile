@@ -4,7 +4,6 @@ ADD / /workspace
 WORKDIR /workspace
 
 RUN yarn
-# RUN yarn test
 RUN yarn build
 
 FROM docker.adeo.no:5000/pus/decorator:34.20180522.1421
