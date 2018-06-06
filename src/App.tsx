@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { connect, DispatchProp } from 'react-redux';
-import {AnyAction} from "redux";
+import { Route, Switch } from 'react-router-dom';
+import { AnyAction } from 'redux';
+import MineBarnSide from "./sider/mine_barn/MineBarnSide";
+import OppfyllerIkkeVilkaarSide from './sider/feilsider/OppfyllerIkkeVilkaarSide';
+import VeilendingSide from './sider/veiledning/VeiledningSide';
 
 export interface IAppProps {
     navn: string;
@@ -8,13 +12,46 @@ export interface IAppProps {
 
 type Props = DispatchProp<AnyAction> & IAppProps;
 
-const App: React.StatelessComponent<Props> = ({
-    navn
-}) => {
-    return <h1>Søknad {navn}</h1>;
-};
+class App extends React.Component<Props> {
 
-const mapStateToProps = (state: any, ownProp? :any):IAppProps  => ({
+
+    private renderSøknadRoutes(): JSX.Element[] {
+        return [
+            (
+                <Route
+                    key="veiledning"
+                    path="/soknad-kontantstotte"
+                    exact={true}
+                    component={ VeilendingSide }
+                />
+            ),
+            (
+                <Route
+                    key="oppfyllerIkkeVilkaar"
+                    path="/soknad-kontantstotte/oppfyller-ikke-vilkaar"
+                    component={ OppfyllerIkkeVilkaarSide }
+                />
+            ),
+            (
+                <Route
+                    key="minebarn"
+                    path="/soknad-kontantstotte/mine-barn"
+                    component={ MineBarnSide }
+                />
+            )
+        ];
+    }
+
+    render(){
+        return (
+            <Switch>
+                <div> { this.renderSøknadRoutes() } </div>
+            </Switch>
+        );
+    }
+}
+
+const mapStateToProps = (state: any, ownProp?: any): IAppProps  => ({
     navn: ownProp.navn
 });
 

@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
+const historyApi = require('connect-history-api-fallback');
 const config = require('../webpack.dev');
 const fs = require('fs');
 
@@ -11,10 +12,9 @@ const delayMs = 1000;
 const app = express();
 
 const compiler = webpack(config);
-const middleware = webpackDevMiddleware(compiler, {
-    publicPath: config.output.publicPath
-});
+const middleware = webpackDevMiddleware(compiler);
 
+app.use(historyApi());
 app.use(middleware);
 app.use(webpackHotMiddleware(compiler));
 

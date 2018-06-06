@@ -2,10 +2,10 @@ import * as React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import { store } from './createStore';
 import './index.less';
-import { BrowserRouter as Router } from 'react-router-dom';
 
 const rootElement = document.getElementById( 'app' );
 
@@ -26,8 +26,8 @@ if ( module.hot ) {
         render(
             <AppContainer>
                 <Provider store={ store }>
-                    <Router>
-                        <NewApp navn={ navn }/>
+                    <Router basename="/soknad-kontantstotte" >
+                        <NewApp />
                     </Router>
                 </Provider>
             </AppContainer>,
