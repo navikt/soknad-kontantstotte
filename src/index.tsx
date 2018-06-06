@@ -5,14 +5,16 @@ import { Provider } from 'react-redux';
 import App from './App';
 import { store } from './createStore';
 import './index.less';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const rootElement = document.getElementById( 'app' );
-const navn = 'Kontantstøtte';
 
 render(
     <AppContainer>
         <Provider store={ store }>
-            <App navn={ navn }/>
+            <Router>
+                <App/>
+            </Router>
         </Provider>
     </AppContainer>,
     rootElement,
@@ -24,7 +26,9 @@ if ( module.hot ) {
         render(
             <AppContainer>
                 <Provider store={ store }>
-                    <NewApp navn={ navn }/>
+                    <Router>
+                        <NewApp navn={ navn }/>
+                    </Router>
                 </Provider>
             </AppContainer>,
             rootElement,
