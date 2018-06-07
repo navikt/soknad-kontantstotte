@@ -16,7 +16,7 @@ Gyldige OPTIONS:
 
 # Default verdier
 IMAGE_NAME="soknad-kontantstotte"
-DOCKER_REGISTRY="docker.adeo.no:5000"
+DOCKER_REGISTRY="repo.adeo.no:5443"
 DOCKER_REPOSITORY="soknad"
 TAG="${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${IMAGE_NAME}:${versjon}"
 
