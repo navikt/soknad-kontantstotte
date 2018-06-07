@@ -3,8 +3,10 @@ ADD / /workspace
 
 WORKDIR /workspace
 
-RUN NPM_TOKEN=${NPM_AUTH} yarn
-RUN NPM_TOKEN=${NPM_AUTH} yarn build
+# Dette byttes ut med et build-arg på Jenkins og er kun for å slippe å sende det inn lokalt
+ARG NPM_TOKEN="faketoken"
+RUN NPM_TOKEN=${NPM_TOKEN} yarn
+RUN NPM_TOKEN=${NPM_TOKEN} yarn build
 
 FROM repo.adeo.no:5443/pus/decorator:41.20180601.1450
 ENV APPLICATION_NAME=soknad-kontantstotte
