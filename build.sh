@@ -42,7 +42,7 @@ done
 function build_container() {
     docker build \
         --tag ${TAG} \
-        --build-arg NPM_TOKEN=${NPM_AUTH}
+        --build-arg NPM_TOKEN=${NPM_AUTH} \
         .
 }
 
