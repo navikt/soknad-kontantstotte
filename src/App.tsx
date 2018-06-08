@@ -45,7 +45,7 @@ class App extends React.Component<Props> {
     render() {
         return (
             <Switch>
-                <div> { this.renderSøknadRoutes() } </div>
+                <div> { this.renderSoknadRoutes() } </div>
             </Switch>
         );
     }
