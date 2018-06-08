@@ -14,7 +14,6 @@ const config = {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: '[name].[chunkhash].js',
-        publicPath: '/'
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
@@ -36,9 +35,6 @@ const config = {
             }
         ]
     },
-    devServer: {
-        historyApiFallback: true,
-    },
     optimization: {
         splitChunks: {
             chunks: 'all'
@@ -49,7 +45,6 @@ const config = {
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'src/index.html'),
             inject: 'body',
-            filename: 'index.html',
             alwaysWriteToDisk: true
         }),
         new TypeScriptTypeChecker(),

@@ -1,42 +1,20 @@
-const express = require('express');
-const path = require('path');
-const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
-const historyApi = require('connect-history-api-fallback');
-const config = require('../webpack.dev');
-const fs = require('fs');
+const Webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
+const webpackConfig = require('../webpack.dev');
 
-const port = 8000;
-const delayMs = 1000;
-const app = express();
-
-const compiler = webpack(config);
-const middleware = webpackDevMiddleware(compiler);
-
-app.use(historyApi());
-app.use(middleware);
-app.use(webpackHotMiddleware(compiler));
-
-function lesMockFil(filnavn) {
-    return fs.readFileSync(path.join(__dirname, '/mock/' + filnavn), 'UTF-8')
-}
-
-app.get('/sendsoknad/informasjon/tekster', function(req, res) {
-    setTimeout(() => res.send(lesMockFil('tekster.json')), delayMs);
-});
-
-app.get('/sendsoknad/informasjon/land', function(req, res) {
-    setTimeout(() => res.send(lesMockFil('land.json')), delayMs);
-});
-
-app.get('/fakta', function (req, res) {
-    res.send(lesMockFil('fakta.json'));
-});
-
-app.listen(port, 'localhost', function onStart(err) {
-    if (err) {
-        console.log(err);
+const compiler = Webpack(webpackConfig);
+const devServerOptions = Object.assign({}, webpackConfig.devServer, {
+    stats: {
+        colors: true
+    },
+    before(app) {
+        app.use((req, res, next) => {
+            next();
+        });
     }
-    console.info('=== Dev-server startet på %s, åpne http://localhost:%s/soknad-kontantstotte/', port, port);
+});
+const server = new WebpackDevServer(compiler, devServerOptions);
+
+server.listen(8000, '127.0.0.1', () => {
+    console.log('Starting server on http://localhost:8000');
 });

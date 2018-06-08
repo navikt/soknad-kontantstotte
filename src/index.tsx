@@ -26,7 +26,7 @@ if ( module.hot ) {
         render(
             <AppContainer>
                 <Provider store={ store }>
-                    <Router basename="/soknad-kontantstotte" >
+                    <Router>
                         <NewApp />
                     </Router>
                 </Provider>

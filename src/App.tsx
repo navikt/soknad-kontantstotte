@@ -14,7 +14,7 @@ type Props = DispatchProp<AnyAction> & IAppProps;
 
 class App extends React.Component<Props> {
 
-    private renderSøknadRoutes(): JSX.Element[] {
+    private static renderSoknadRoutes(): JSX.Element[] {
         return [
             (
                 <Route
@@ -26,8 +26,9 @@ class App extends React.Component<Props> {
             ),
             (
                 <Route
-                    key="oppfyllerIkkeVilkaar"
+                    key="oppfyller-ikke-vilkaar"
                     path="/soknad-kontantstotte/oppfyller-ikke-vilkaar"
+                    exact={true}
                     component={ OppfyllerIkkeVilkaarSide }
                 />
             ),
