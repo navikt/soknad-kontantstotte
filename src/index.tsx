@@ -1,10 +1,10 @@
+import { ConnectedRouter } from 'connected-react-router';
 import * as React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
-import { store } from './createStore';
+import { history, store } from './createStore';
 import './index.less';
 
 const rootElement = document.getElementById( 'app' );
@@ -12,9 +12,9 @@ const rootElement = document.getElementById( 'app' );
 render(
     <AppContainer>
         <Provider store={ store }>
-            <Router>
-                <App/>
-            </Router>
+            <ConnectedRouter history={history}>
+                <App history={history}/>
+            </ConnectedRouter>
         </Provider>
     </AppContainer>,
     rootElement,
@@ -26,9 +26,9 @@ if ( module.hot ) {
         render(
             <AppContainer>
                 <Provider store={ store }>
-                    <Router>
-                        <NewApp />
-                    </Router>
+                    <ConnectedRouter history={history}>
+                        <NewApp history={history}/>
+                    </ConnectedRouter>
                 </Provider>
             </AppContainer>,
             rootElement,

@@ -1,3 +1,5 @@
+import { connectRouter, routerMiddleware } from 'connected-react-router';
+import { createBrowserHistory } from 'history';
 import {
     applyMiddleware,
     createStore,
@@ -11,6 +13,10 @@ import {
     rootSaga,
 } from './rootSaga';
 
+const history = createBrowserHistory({
+    basename: 'soknad-kontantstotte'
+});
+
 function configureStore() {
 
     const logger = createLogger( {
@@ -19,11 +25,12 @@ function configureStore() {
 
     const saga = createSagaMiddleware();
     const middleware = applyMiddleware(
+        routerMiddleware(history),
         saga,
-        logger,
+        logger
     );
     const createdStore = createStore(
-        rootReducer,
+        connectRouter(history)(rootReducer),
         middleware,
     );
 
@@ -34,4 +41,4 @@ function configureStore() {
 
 const store = configureStore();
 
-export { store };
+export { history, store };

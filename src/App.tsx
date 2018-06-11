@@ -1,25 +1,28 @@
+import OppfyllerIkkeVilkaarSide from './sider/feilsider/OppfyllerIkkeVilkaarSide';
+import MineBarnSide from './sider/mine_barn/MineBarnSide';
+import VeilendingSide from './sider/veiledning/VeiledningSide';
+import { History } from 'history';
 import * as React from 'react';
 import { connect, DispatchProp } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
-import { AnyAction } from 'redux';
-import OppfyllerIkkeVilkaarSide from './sider/feilsider/OppfyllerIkkeVilkaarSide';
-import MineBarnSide from "./sider/mine_barn/MineBarnSide";
-import VeilendingSide from './sider/veiledning/VeiledningSide';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import SidenFinnesIkkeSide from "./sider/feilsider/SidenFinnesIkkeSide";
 
 export interface IAppProps {
-    navn: string;
+    history: History;
 }
 
-type Props = DispatchProp<AnyAction> & IAppProps;
+export interface IState {}
 
-class App extends React.Component<Props> {
+type Props = DispatchProp & IAppProps;
+
+class App extends React.Component<Props, {}> {
 
     private static renderSoknadRoutes(): JSX.Element[] {
         return [
             (
                 <Route
                     key="veiledning"
-                    path="/soknad-kontantstotte"
+                    path="/"
                     exact={true}
                     component={ VeilendingSide }
                 />
@@ -27,16 +30,22 @@ class App extends React.Component<Props> {
             (
                 <Route
                     key="oppfyller-ikke-vilkaar"
-                    path="/soknad-kontantstotte/oppfyller-ikke-vilkaar"
+                    path="/oppfyller-ikke-vilkaar"
                     exact={true}
                     component={ OppfyllerIkkeVilkaarSide }
                 />
             ),
             (
                 <Route
-                    key="minebarn"
-                    path="/soknad-kontantstotte/mine-barn"
+                    key="mine-barn"
+                    path="/mine-barn"
                     component={ MineBarnSide }
+                />
+            ),
+            (
+                <Route
+                    key="siden-finnes-ikke"
+                    component={ SidenFinnesIkkeSide }
                 />
             )
         ];
@@ -45,14 +54,12 @@ class App extends React.Component<Props> {
     render() {
         return (
             <Switch>
-                <div> { App.renderSoknadRoutes() } </div>
+                { App.renderSoknadRoutes() }
             </Switch>
         );
     }
 }
 
-const mapStateToProps = (state: any, ownProp?: any): IAppProps  => ({
-    navn: ownProp.navn
-});
+const mapStateToProps = (state: IState, ownProp: any): IState  => ({});
 
-export default connect(mapStateToProps)(App);
+export default withRouter(connect(mapStateToProps)(App));
