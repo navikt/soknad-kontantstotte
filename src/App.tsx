@@ -6,6 +6,11 @@ import * as React from 'react';
 import { connect, DispatchProp } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import SidenFinnesIkkeSide from "./sider/feilsider/SidenFinnesIkkeSide";
+import OmsorgssituasjonSide from "./sider/omsorgssituasjon/OmsorgssituasjonSide";
+import BarnehageplassSide from "./sider/barnehageplass/BarnehageplassSide";
+import UtenlandskForbindelseSide from "./sider/utenlandsk_forbindelse/UtenlandskForbindelseSide";
+import OppsummeringSide from "./sider/oppsummering/OppsummeringSide";
+import KvitteringSide from "./sider/kvittering/KvitteringSide";
 
 export interface IAppProps {
     history: History;
@@ -40,6 +45,41 @@ class App extends React.Component<Props, {}> {
                     key="mine-barn"
                     path="/mine-barn"
                     component={ MineBarnSide }
+                />
+            ),
+            (
+                <Route
+                    key="omsorgssituasjon"
+                    path="/omsorgssituasjon"
+                    component={ OmsorgssituasjonSide }
+                />
+            ),
+            (
+                <Route
+                    key="barnehageplass"
+                    path="/barnehageplass"
+                    component={ BarnehageplassSide }
+                />
+            ),
+            (
+                <Route
+                    key="utenlandsk-forbindelse"
+                    path="/utenlandsk-forbindelse"
+                    component={ UtenlandskForbindelseSide }
+                />
+            ),
+            (
+                <Route
+                    key="oppsummering"
+                    path="/oppsummering"
+                    component={ OppsummeringSide }
+                />
+            ),
+            (
+                <Route
+                    key="kvittering"
+                    path="/kvittering"
+                    component={ KvitteringSide }
                 />
             ),
             (
