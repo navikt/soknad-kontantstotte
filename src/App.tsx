@@ -1,6 +1,6 @@
 import OppfyllerIkkeVilkaarSide from './sider/feilsider/OppfyllerIkkeVilkaarSide';
 import MineBarnSide from './sider/mine_barn/MineBarnSide';
-import VeilendingSide from './sider/veiledning/VeiledningSide';
+import VeiledningSide from './sider/veiledning/VeiledningSide';
 import { History } from 'history';
 import * as React from 'react';
 import { connect, DispatchProp } from 'react-redux';
@@ -29,7 +29,7 @@ class App extends React.Component<Props, {}> {
                     key="veiledning"
                     path="/"
                     exact={true}
-                    component={ VeilendingSide }
+                    component={ VeiledningSide }
                 />
             ),
             (

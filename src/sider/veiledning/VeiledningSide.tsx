@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-const VeilendingSide = () => {
+const VeiledningSide = () => {
     return (
         <div>
             <h1>Veiledningsside</h1>
@@ -11,4 +11,4 @@ const VeilendingSide = () => {
     );
 };
 
-export default VeilendingSide;
+export default VeiledningSide;
