@@ -9,14 +9,13 @@ Søknadsdialog for ny kontantstøtte-søknad
 * Starte dev-server `yarn start`
 * Åpne `http://localhost:8000/soknad-kontantstotte` i nettleseren din
 
-For å bygge en prodversjon kjør `yarn build:prod`
+For å bygge en prodversjon kjør `yarn build`
 
 # Bygging på egen maskin
 
-`docker build .` 
+`./build.sh` 
 
-Dette vil feile på Step 11/11 `COPY --from=builder /workspace/VERSION /app/VERSION` ettersom VERSION-fila genereres på jeninks for 
-opplasting og versjonering. Lokalt er det ikke lagt opp til versjonering og publisering til repo.adeo.no
+Se også `./build.sh --help` for alternativer 
 
 ---
 
