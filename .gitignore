@@ -1,6 +1,7 @@
 node_modules
 dist
 .DS_Store
+VERSION
 
 # Fra https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
 
