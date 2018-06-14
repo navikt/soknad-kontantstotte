@@ -1,18 +1,20 @@
+import { ConnectedRouter } from 'connected-react-router';
 import * as React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import App from './App';
-import { store } from './createStore';
+import { history, store } from './createStore';
 import './index.less';
 
 const rootElement = document.getElementById( 'app' );
-const navn = 'Kontantstøtte';
 
 render(
     <AppContainer>
         <Provider store={ store }>
-            <App navn={ navn }/>
+            <ConnectedRouter history={history}>
+                <App history={history}/>
+            </ConnectedRouter>
         </Provider>
     </AppContainer>,
     rootElement,
@@ -24,7 +26,9 @@ if ( module.hot ) {
         render(
             <AppContainer>
                 <Provider store={ store }>
-                    <NewApp navn={ navn }/>
+                    <ConnectedRouter history={history}>
+                        <NewApp history={history}/>
+                    </ConnectedRouter>
                 </Provider>
             </AppContainer>,
             rootElement,

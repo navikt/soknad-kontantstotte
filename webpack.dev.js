@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common');
@@ -9,11 +10,11 @@ const config = merge.strategy({
     mode: 'development',
     entry: {
         'soknad-kontantstotte': [
-            'react-hot-loader/patch',
-            'webpack-hot-middleware/client?reload=true',
+            'react-hot-loader/patch'
         ]},
     output: {
-        filename: '[name].[hash].js', //kan denne slettes?
+        filename: '[name].[hash].js',
+        publicPath: '/'
     },
     module: {
         rules: [
@@ -46,6 +47,13 @@ const config = merge.strategy({
             }
 
         ]
+    },
+    devServer: {
+        contentBase: path.join(__dirname, "/dist"),
+        port: 8000,
+        hot: true,
+        historyApiFallback: true,
+        publicPath: '/'
     },
     devtool: 'inline-source-map',
     plugins: [
