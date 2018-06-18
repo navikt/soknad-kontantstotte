@@ -1,4 +1,4 @@
-image: docker.adeo.no:5000/soknad/soknad-kontantstotte
+image: repo.adeo.no:5443/soknad/soknad-kontantstotte
 replicas:
   min: 2
   max: 4
