@@ -6,7 +6,7 @@ const VeiledningSide = () => {
         <div>
             <h1>Veiledningsside</h1>
             <p>Info om søknad om kontantstøtte </p>
-            <Link to="/mine-barn">Gå til mine barn</Link>
+            <Link to="/start">Gå til søknad</Link>
         </div>
     );
 };

@@ -1480,6 +1480,10 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
+classnames@2.2.6:
+  version "2.2.6"
+  resolved "https://repo.adeo.no/repository/npm-public/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
+
 clean-css@4.1.x:
   version "4.1.11"
   resolved "https://repo.adeo.no/repository/npm-public/clean-css/-/clean-css-4.1.11.tgz#2ecdf145aba38f54740f26cefd0ff3e03e125d6a"
@@ -4016,6 +4020,10 @@ lodash.startswith@^4.2.1:
   version "4.2.1"
   resolved "https://repo.adeo.no/repository/npm-public/lodash.startswith/-/lodash.startswith-4.2.1.tgz#c598c4adce188a27e53145731cdc6c0e7177600c"
 
+lodash.throttle@4.1.1:
+  version "4.1.1"
+  resolved "https://repo.adeo.no/repository/npm-public/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
+
 lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://repo.adeo.no/repository/npm-public/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
@@ -4432,6 +4440,36 @@ nanomatch@^1.2.9:
     regex-not "^1.0.0"
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
+
+nav-frontend-core@4.0.5, nav-frontend-core@^4.0.2:
+  version "4.0.5"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-core/-/nav-frontend-core-4.0.5.tgz#309c9de6a5146e8e93b3f52d4fc42cc309acdca1"
+
+nav-frontend-js-utils@1.0.6:
+  version "1.0.6"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-js-utils/-/nav-frontend-js-utils-1.0.6.tgz#e3320dffd377239ccfaf22da7f4886d3b79303df"
+
+nav-frontend-knapper-style@0.3.9:
+  version "0.3.9"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-knapper-style/-/nav-frontend-knapper-style-0.3.9.tgz#798d5deaa0184ab8e88c6860fc59edfaca4abb44"
+
+nav-frontend-knapper@1.0.10:
+  version "1.0.10"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-knapper/-/nav-frontend-knapper-1.0.10.tgz#f6ea921cac1b9e17d111d679943d22008d63e660"
+
+nav-frontend-stegindikator-style@1.0.2:
+  version "1.0.2"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-stegindikator-style/-/nav-frontend-stegindikator-style-1.0.2.tgz#f302e543914f578406a5d005f63ae6a5a0a4c1e5"
+
+nav-frontend-stegindikator@0.0.15:
+  version "0.0.15"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-stegindikator/-/nav-frontend-stegindikator-0.0.15.tgz#addcf0873793ac36ee41c993c4d4d593f47fd9bd"
+
+nav-frontend-typografi-style@1.0.9:
+  version "1.0.9"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-typografi-style/-/nav-frontend-typografi-style-1.0.9.tgz#68e23f1e287b5e361b26466c29bb587df44f960b"
+  dependencies:
+    nav-frontend-core "^4.0.2"
 
 needle@^2.2.0:
   version "2.2.1"
@@ -5367,7 +5405,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.4, prop-types@^15.6.0, prop-types@^15.6.1:
+prop-types@15.6.1, prop-types@^15.5.4, prop-types@^15.6.0, prop-types@^15.6.1:
   version "15.6.1"
   resolved "https://repo.adeo.no/repository/npm-public/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
   dependencies:
@@ -5567,9 +5605,9 @@ react-router@^4.2.0:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
-react@16.3.2:
-  version "16.3.2"
-  resolved "https://repo.adeo.no/repository/npm-public/react/-/react-16.3.2.tgz#fdc8420398533a1e58872f59091b272ce2f91ea9"
+react@16.4.1:
+  version "16.4.1"
+  resolved "https://repo.adeo.no/repository/npm-public/react/-/react-16.4.1.tgz#de51ba5764b5dbcd1f9079037b862bd26b82fe32"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"

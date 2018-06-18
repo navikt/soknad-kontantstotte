@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
 
 const UtenlandskForbindelseSide = () => {
     return (
         <div>
             <h1>Mottar du ytelser fra utlandet?</h1>
-
-
-            <Link to="/oppsummering">Neste</Link>
+            <NavigasjonKnapp to='/oppsummering'>Neste</NavigasjonKnapp>
         </div>
     );
 };

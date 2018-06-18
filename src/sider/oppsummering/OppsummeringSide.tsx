@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
 
 const OppsummeringSide = () => {
     return (
         <div>
             <h1>Oversikt over hva du har fylt ut</h1>
-
-
-            <Link to="/kvittering">Send inn</Link>
+            <NavigasjonKnapp to='/kvittering'>Send Inn</NavigasjonKnapp>
         </div>
     );
 };
