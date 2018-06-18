@@ -50,8 +50,7 @@ class App extends React.Component<Props, {}> {
             }
         );
 
-        return (
-            <div>
+        const indikator: JSX.Element = (
                 <Stegindikator
                     steg={ indikatorsteg }
                     autoResponsiv={true}
@@ -59,6 +58,13 @@ class App extends React.Component<Props, {}> {
                     kompakt={false}
                     aktivtSteg={this.props.aktivSide.stegIndeks}
                 />
+        );
+
+        const visIndikatorHvisSkjemaside: JSX.Element|null = this.props.aktivSide.sideType === SideType.SKJEMASIDE ? indikator : (null);
+
+        return (
+            <div>
+                { visIndikatorHvisSkjemaside }
                 <Switch>
                     { App.renderSoknadRoutes() }
                 </Switch>

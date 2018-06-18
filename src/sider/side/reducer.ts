@@ -7,7 +7,7 @@ export interface ISideState {
 }
 
 const initialState: ISideState = {
-    aktivSide: Sider.filter((side: ISide) => side.stegIndeks === 0)[0],
+    aktivSide: Sider[0],
     viserStegindikator: false
 };
 
