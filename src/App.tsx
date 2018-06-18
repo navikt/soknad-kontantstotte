@@ -1,16 +1,17 @@
-import OppfyllerIkkeVilkaarSide from './sider/feilsider/OppfyllerIkkeVilkaarSide';
-import MineBarnSide from './sider/mine_barn/MineBarnSide';
-import VeiledningSide from './sider/veiledning/VeiledningSide';
 import { History } from 'history';
 import * as React from 'react';
 import { connect, DispatchProp } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
-import SidenFinnesIkkeSide from "./sider/feilsider/SidenFinnesIkkeSide";
-import OmsorgssituasjonSide from "./sider/omsorgssituasjon/OmsorgssituasjonSide";
+import Api from "./api/api";
 import BarnehageplassSide from "./sider/barnehageplass/BarnehageplassSide";
-import UtenlandskForbindelseSide from "./sider/utenlandsk_forbindelse/UtenlandskForbindelseSide";
-import OppsummeringSide from "./sider/oppsummering/OppsummeringSide";
+import OppfyllerIkkeVilkaarSide from './sider/feilsider/OppfyllerIkkeVilkaarSide';
+import SidenFinnesIkkeSide from "./sider/feilsider/SidenFinnesIkkeSide";
 import KvitteringSide from "./sider/kvittering/KvitteringSide";
+import MineBarnSide from './sider/mine_barn/MineBarnSide';
+import OmsorgssituasjonSide from "./sider/omsorgssituasjon/OmsorgssituasjonSide";
+import OppsummeringSide from "./sider/oppsummering/OppsummeringSide";
+import UtenlandskForbindelseSide from "./sider/utenlandsk_forbindelse/UtenlandskForbindelseSide";
+import VeiledningSide from './sider/veiledning/VeiledningSide';
 
 export interface IAppProps {
     history: History;
@@ -92,6 +93,7 @@ class App extends React.Component<Props, {}> {
     }
 
     render() {
+        Api.pingBackend();
         return (
             <Switch>
                 { App.renderSoknadRoutes() }

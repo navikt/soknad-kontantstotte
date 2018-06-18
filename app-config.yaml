@@ -16,3 +16,5 @@ fasitResources:
   used:
   - alias: appres.cms
     resourceType: baseUrl
+  - alias: loginservice
+    resourceType: restservice
