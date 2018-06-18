@@ -1,105 +1,75 @@
-import OppfyllerIkkeVilkaarSide from './sider/feilsider/OppfyllerIkkeVilkaarSide';
-import MineBarnSide from './sider/mine_barn/MineBarnSide';
-import VeiledningSide from './sider/veiledning/VeiledningSide';
 import { History } from 'history';
+import Stegindikator from 'nav-frontend-stegindikator/lib/stegindikator';
+import { StegindikatorStegProps } from 'nav-frontend-stegindikator/lib/stegindikator-steg';
 import * as React from 'react';
 import { connect, DispatchProp } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
-import SidenFinnesIkkeSide from "./sider/feilsider/SidenFinnesIkkeSide";
-import OmsorgssituasjonSide from "./sider/omsorgssituasjon/OmsorgssituasjonSide";
-import BarnehageplassSide from "./sider/barnehageplass/BarnehageplassSide";
-import UtenlandskForbindelseSide from "./sider/utenlandsk_forbindelse/UtenlandskForbindelseSide";
-import OppsummeringSide from "./sider/oppsummering/OppsummeringSide";
-import KvitteringSide from "./sider/kvittering/KvitteringSide";
+import { IRootState } from './rootReducer';
+import { ISide, Sider, SideType } from './sider/side/side';
 
 export interface IAppProps {
     history: History;
 }
 
-export interface IState {}
+interface  IMapStateToProps {
+    aktivSide: ISide;
+    skalStegindikatorVises: boolean;
+}
 
-type Props = DispatchProp & IAppProps;
+type Props = DispatchProp & IAppProps & IMapStateToProps;
 
 class App extends React.Component<Props, {}> {
 
     private static renderSoknadRoutes(): JSX.Element[] {
-        return [
-            (
-                <Route
-                    key="veiledning"
-                    path="/"
-                    exact={true}
-                    component={ VeiledningSide }
-                />
-            ),
-            (
-                <Route
-                    key="oppfyller-ikke-vilkaar"
-                    path="/oppfyller-ikke-vilkaar"
-                    exact={true}
-                    component={ OppfyllerIkkeVilkaarSide }
-                />
-            ),
-            (
-                <Route
-                    key="mine-barn"
-                    path="/mine-barn"
-                    component={ MineBarnSide }
-                />
-            ),
-            (
-                <Route
-                    key="omsorgssituasjon"
-                    path="/omsorgssituasjon"
-                    component={ OmsorgssituasjonSide }
-                />
-            ),
-            (
-                <Route
-                    key="barnehageplass"
-                    path="/barnehageplass"
-                    component={ BarnehageplassSide }
-                />
-            ),
-            (
-                <Route
-                    key="utenlandsk-forbindelse"
-                    path="/utenlandsk-forbindelse"
-                    component={ UtenlandskForbindelseSide }
-                />
-            ),
-            (
-                <Route
-                    key="oppsummering"
-                    path="/oppsummering"
-                    component={ OppsummeringSide }
-                />
-            ),
-            (
-                <Route
-                    key="kvittering"
-                    path="/kvittering"
-                    component={ KvitteringSide }
-                />
-            ),
-            (
-                <Route
-                    key="siden-finnes-ikke"
-                    component={ SidenFinnesIkkeSide }
-                />
-            )
-        ];
+        return Sider.map((side: ISide) => {
+                let routeProps = {
+                    component: side.sideKomponent,
+                    key: side.key,
+                };
+
+                if (side.key !== String('siden-finnes-ikke')) {
+                    routeProps = Object.assign({ path: side.path, exact: true }, routeProps);
+                }
+
+                return (
+                    <Route { ...routeProps }/>
+                );
+            });
+
     }
 
     render() {
+        const indikatorsteg: StegindikatorStegProps[] = Sider
+            .filter((side: ISide) => side.sideType === SideType.SKJEMASIDE)
+            .map((side: ISide) => {
+                return {
+                    aktiv: this.props.aktivSide.stegIndeks === side.stegIndeks,
+                    index: side.stegIndeks,
+                    label: side.key
+                };
+            }
+        );
+
         return (
-            <Switch>
-                { App.renderSoknadRoutes() }
-            </Switch>
+            <div>
+                <Stegindikator
+                    steg={ indikatorsteg }
+                    autoResponsiv={true}
+                    visLabel={false}
+                    kompakt={false}
+                    aktivtSteg={this.props.aktivSide.stegIndeks}
+                />
+                <Switch>
+                    { App.renderSoknadRoutes() }
+                </Switch>
+            </div>
         );
     }
 }
 
-const mapStateToProps = (state: IState, ownProp: any): IState  => ({});
+const mapStateToProps = (state: IRootState, ownProp: any): IMapStateToProps  => ({
+    aktivSide: state.side.aktivSide,
+    skalStegindikatorVises: state.side.aktivSide ? state.side.aktivSide.sideType === SideType.SKJEMASIDE : false
+});
 
 export default withRouter(connect(mapStateToProps)(App));
