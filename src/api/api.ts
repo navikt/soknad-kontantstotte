@@ -1,8 +1,6 @@
-const REST_API_URL: string =  "http://localhost:8080/soknad-kontantstotte-api";
-
 const pingBackend = () => (
-    fetch(REST_API_URL).then((response) => {
-        if (response.status == 401) {
+    fetch(hentRestApiUrl() + '/status/isAlive').then((response) => {
+        if (response.status === 401) {
             redirectTilLogin();
             return;
         }
@@ -17,16 +15,24 @@ const redirectTilLogin = () => {
 
 // TODO: Disse bør inn i fasitvariabler
 const hentLoginUrl = () => {
-    if (window.location.href.indexOf('kontantstotte.nav.no') > -1) {
+    if (window.location.hostname.indexOf('kontantstotte.nav.no') > -1) {
         // Prod
-        return 'https://loginservice.nav.no/login'
-    } else if (window.location.href.indexOf('localhost') > -1) {
+        return 'https://loginservice.nav.no/login';
+    } else if (window.location.hostname.indexOf('localhost') > -1) {
         // Lokalt
-        return 'http://localhost:8080/soknad-kontantstotte-api/local/cookie'
+        return 'http://localhost:8080/soknad-kontantstotte-api/local/cookie';
     } else {
         // Preprod
-        return 'https://loginservice-q.nav.no/login'
+        return 'https://loginservice-q.nav.no/login';
     }
+};
+
+// TODO: Bedre håndtering av dev vs prod-profil -evt bruke pus-decorator sin proxy når den blir klar
+const hentRestApiUrl = () => {
+    if (window.location.hostname.indexOf('localhost') > -1) {
+        return 'http://localhost:8080/soknad-kontantstotte-api';
+    }
+    return window.location.origin + '/soknad-kontantstotte-api';
 };
 
 const Api = { pingBackend };
