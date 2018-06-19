@@ -32,7 +32,7 @@ const hentRestApiUrl = () => {
     if (window.location.hostname.indexOf('localhost') > -1) {
         return 'http://localhost:8080/soknad-kontantstotte-api';
     }
-    return window.location.origin + '/soknad-kontantstotte-api';
+    return 'https://soknad-kontantstotte-api-t6.nais.oera-q.local/soknad-kontantstotte-api';
 };
 
 const Api = { pingBackend };
