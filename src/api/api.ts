@@ -1,5 +1,5 @@
 const pingBackend = () => (
-    fetch(hentRestApiUrl() + '/status/isAlive').then((response) => {
+    fetch(hentRestApiUrl() + '/status/ping').then((response) => {
         if (response.status === 401) {
             redirectTilLogin();
             return;
