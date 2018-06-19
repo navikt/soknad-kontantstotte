@@ -9,9 +9,6 @@ const config = merge.strategy({
 })(common, {
     mode: 'production',
     devtool: 'source-map',
-    output: {
-        publicPath: '/soknad-kontantstotte/'
-    },
     module: {
         rules: [
             {
