@@ -1,13 +1,12 @@
 import { combineReducers } from 'redux';
-import { IFaktumState } from 'soknad-frontend/lib/faktum-container';
-import { faktumReducer } from './faktum/reducer';
+import { barnReducer, IBarnState } from './barn/reducer';
 
 export interface IRootState {
-    faktum: IFaktumState;
+    barn: IBarnState;
 }
 
 const rootReducer = combineReducers({
-    faktum: faktumReducer
+    barn: barnReducer
 });
 
 export { rootReducer };

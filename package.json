@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/navikt/soknad-kontantstotte#readme",
   "dependencies": {
+    "axios": "0.18.0",
     "connect-history-api-fallback": "1.5.0",
     "connected-react-router": "4.3.0",
     "history": "4.7.2",

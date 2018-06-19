@@ -4,6 +4,7 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import App from './App';
+import { barnHent } from './barn/actions';
 import { history, store } from './createStore';
 import './index.less';
 
@@ -35,3 +36,5 @@ if ( module.hot ) {
         );
     });
 }
+
+store.dispatch(barnHent());
