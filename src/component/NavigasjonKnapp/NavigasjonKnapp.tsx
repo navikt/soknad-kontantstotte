@@ -3,9 +3,6 @@ import KnappBase from 'nav-frontend-knapper';
 import * as React from 'react';
 import { connect, DispatchProp } from 'react-redux';
 import { RouteProps } from 'react-router-dom';
-import { gaTilSide } from '../../sider/side/actions';
-import { ISideState } from '../../sider/side/reducer';
-import { ISide, Sider } from '../../sider/side/side';
 
 export interface INavigasjonKnappProps {
     to: string;
@@ -21,7 +18,6 @@ class NavigasjonKnapp extends React.Component<Props> {
 
     navigasjonsHandler(props: Props) {
         const to: string = props.to;
-        props.dispatch(gaTilSide(Sider.filter((side: ISide) => side.path === to)[0]));
         props.dispatch(push(to));
     }
 
@@ -35,7 +31,7 @@ class NavigasjonKnapp extends React.Component<Props> {
 
 }
 
-const mapStateToProps = (state: ISideState) => ({
+const mapStateToProps = (state: any) => ({
 });
 
 export default connect(mapStateToProps)(NavigasjonKnapp);
