@@ -12,6 +12,8 @@ healthcheck:
 prometheus:
   enabled: true
   path: soknad-kontantstotte/internal/metrics
+ingress:
+  enabled: true
 fasitResources:
   used:
   - alias: appres.cms

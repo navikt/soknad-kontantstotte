@@ -1,0 +1,10 @@
+[
+  {
+    "contextPath": "/soknad-kontantstotte-api",
+    "serviceName": "soknad-kontantstotte-api"
+  },
+  {
+    "contextPath": "/login",
+    "serviceName": "loginservice-q"
+  }
+]
