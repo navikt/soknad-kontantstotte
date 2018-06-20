@@ -1,3 +1,5 @@
+import * as React from 'react';
+import { Route, RouteProps } from 'react-router-dom';
 import BarnehageplassSide from './sider/barnehageplass/BarnehageplassSide';
 import OppfyllerIkkeVilkaarSide from './sider/feilsider/OppfyllerIkkeVilkaarSide';
 import SidenFinnesIkkeSide from './sider/feilsider/SidenFinnesIkkeSide';
@@ -8,8 +10,6 @@ import OppsummeringSide from './sider/oppsummering/OppsummeringSide';
 import StartSide from './sider/start/StartSide';
 import UtenlandskForbindelseSide from './sider/utenlandsk_forbindelse/UtenlandskForbindelseSide';
 import VeiledningSide from './sider/veiledning/VeiledningSide';
-import {Route, RouteProps} from 'react-router-dom';
-import * as React from 'react';
 
 export enum SideType {
     SKJEMASIDE = 'SKJEMASIDE',
@@ -101,29 +101,24 @@ const sideMedPath = (path: string) => Sider.filter((side: ISide) => side.path ==
 
 export const hentIndeksForPath = (path: string): number => {
     const potensielleSider = sideMedPath(path);
-    return potensielleSider.length > 0 ? potensielleSider[0].stegIndeks : -10;
-};
-
-export const hentSideForPath = (path: string): ISide => {
-    const potensielleSider = sideMedPath(path);
-    return potensielleSider.length > 0 ? potensielleSider[0] : Sider[9];
+    return potensielleSider.length > 0 ? potensielleSider[0].stegIndeks : -1;
 };
 
 export const renderSoknadRoutes = (): JSX.Element[] => {
-    const routes: JSX.Element[] = Sider.map((side: ISide): JSX.Element => {
-        let routeProps: RouteProps = {
-            component: side.sideKomponent
-        };
+    const routes: JSX.Element[] = Sider.sort((sideA, sideB) => sideB.path.localeCompare(sideA.path))
+        .map((side: ISide): JSX.Element => {
+            let routeProps: RouteProps = {
+                component: side.sideKomponent
+            };
 
-        if (side.key !== String('siden-finnes-ikke')) {
-            routeProps = Object.assign({ path: side.path, exact: true }, routeProps);
-        }
+            if (side.key !== String('siden-finnes-ikke')) {
+                routeProps = Object.assign({ path: side.path, exact: true }, routeProps);
+            }
 
-        return(
-            <Route { ...routeProps } key={side.key}/>
-        );
-
-    });
+            return(
+                <Route { ...routeProps } key={side.key}/>
+            );
+        });
 
     return routes;
 };
