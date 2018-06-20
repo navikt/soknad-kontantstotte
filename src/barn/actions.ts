@@ -48,9 +48,6 @@ function barnHentFeilet(): IBarnHentFeilet {
 export {
     BarnTypeKeys,
     BarnActionTypes,
-    IBarnHent,
-    IBarnHentOK,
-    IBarnHentFeilet,
     barnHent,
     barnHentOk,
     barnHentFeilet
