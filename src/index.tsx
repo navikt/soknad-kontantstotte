@@ -13,7 +13,7 @@ render(
     <AppContainer>
         <Provider store={ store }>
             <ConnectedRouter history={history}>
-                <App history={history}/>
+                <App />
             </ConnectedRouter>
         </Provider>
     </AppContainer>,
@@ -27,7 +27,7 @@ if ( module.hot ) {
             <AppContainer>
                 <Provider store={ store }>
                     <ConnectedRouter history={history}>
-                        <NewApp history={history}/>
+                        <NewApp />
                     </ConnectedRouter>
                 </Provider>
             </AppContainer>,

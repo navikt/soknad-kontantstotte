@@ -1,12 +1,13 @@
 import * as React from 'react';
 import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
+import SideContainer from '../../container/SideContainer/SideContainer';
 
-const KvitteringSide = () => {
+const KvitteringSide = (): JSX.Element => {
     return (
-        <div>
+        <SideContainer>
             <h1>Takk for søknaden! Svarer snarest</h1>
             <NavigasjonKnapp to="/">Tilbake til hovedsiden</NavigasjonKnapp>
-        </div>
+        </SideContainer>
     );
 };
 
