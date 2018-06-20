@@ -9,6 +9,7 @@ import Barn from './Barn';
 
 interface IMapStateToProps {
     barn: IBarn[];
+    valgtBarn: IBarn;
 }
 
 interface IMapDispatchToProps {
@@ -19,12 +20,20 @@ type MineBarnSideProps = IMapStateToProps & IMapDispatchToProps;
 
 const MineBarnSide: React.StatelessComponent<MineBarnSideProps> = ({
     barn,
+    valgtBarn,
     velgBarn
 }) =>  {
     return (
         <div>
             <h1>Mine barn</h1>
-            {barn.map((b) => <Barn key={ b.navn } barn={ b } onClick={ velgBarn } />)}
+            {barn.map((b) =>
+                <Barn
+                    key={ b.navn }
+                    valgt={ b.navn === valgtBarn.navn}
+                    barn={ b }
+                    onClick={ velgBarn }
+                />
+            )}
             <Link to="/">Tilbake til hovedsiden</Link>
             <Link to="/omsorgssituasjon">Neste</Link>
         </div>
@@ -33,7 +42,8 @@ const MineBarnSide: React.StatelessComponent<MineBarnSideProps> = ({
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
-        barn: state.barn.barn
+        barn: state.barn.barn,
+        valgtBarn: state.soknad.barn,
     };
 };
 
