@@ -26,6 +26,10 @@ app.get('/barn', function(req, res) {
     setTimeout(() => res.send(lesMockFil('barn.json')));
 });
 
+app.get('/tekster', function(req, res) {
+    setTimeout(() => res.send(lesMockFil('tekster.json')));
+});
+
 app.get('*', (req, res) => {
     res.write(middleware.fileSystem.readFileSync(path.join(__dirname, '/../dist/index.html')));
     res.end();
