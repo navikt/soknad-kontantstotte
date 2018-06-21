@@ -1,14 +1,13 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
+import SideContainer from '../../container/SideContainer/SideContainer';
 
-const BarnehageplassSide = () => {
+const BarnehageplassSide = (): JSX.Element => {
     return (
-        <div>
+        <SideContainer>
             <h1>Har barnet barnehageplass?</h1>
-
-
-            <Link to="/utenlandsk-forbindelse">Neste</Link>
-        </div>
+            <NavigasjonKnapp to='/utenlandsk-forbindelse'>Neste</NavigasjonKnapp>
+        </SideContainer>
     );
 };
 
