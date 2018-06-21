@@ -9,7 +9,7 @@ enum BarnTypeKeys {
 
 type BarnActionTypes =
     | IBarnHent
-    | IBarnHentOK
+    | IBarnHentOk
     | IBarnHentFeilet
     ;
 
@@ -17,7 +17,7 @@ interface IBarnHent extends Action {
     type: BarnTypeKeys.HENT;
 }
 
-interface IBarnHentOK extends Action  {
+interface IBarnHentOk extends Action  {
     type: BarnTypeKeys.HENT_OK;
     barn: IBarn[];
 }
@@ -32,7 +32,7 @@ function barnHent(): IBarnHent {
     };
 }
 
-function barnHentOk(barn: IBarn[]): IBarnHentOK {
+function barnHentOk(barn: IBarn[]): IBarnHentOk {
     return {
         barn,
         type: BarnTypeKeys.HENT_OK,
