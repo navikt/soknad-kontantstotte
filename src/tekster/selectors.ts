@@ -11,4 +11,4 @@ function selectValgtSprak(state: IRootState) {
 export {
     selectTekster,
     selectValgtSprak,
-}
+};

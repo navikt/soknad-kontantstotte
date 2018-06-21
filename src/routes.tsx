@@ -111,8 +111,12 @@ export const renderSoknadRoutes = (): JSX.Element[] => {
                 component: side.sideKomponent
             };
 
-            if (side.key !== String('siden-finnes-ikke')) {
-                routeProps = Object.assign({ path: side.path, exact: true }, routeProps);
+            if (side.key !== 'siden-finnes-ikke') {
+                routeProps = {
+                    exact: true,
+                    path: side.path,
+                    ...routeProps
+                };
             }
 
             return(

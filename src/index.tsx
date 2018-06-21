@@ -6,9 +6,10 @@ import { Provider } from 'react-redux';
 import App from './App';
 import { barnHent } from './barn/actions';
 import { history, store } from './createStore';
-import './index.less';
-import { teksterHent } from './tekster/actions';
 import IntlProvider from './IntlProvider';
+import { teksterHent } from './tekster/actions';
+
+import './index.less';
 
 const rootElement = document.getElementById( 'app' );
 

@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Dispatch } from 'redux';
-import { IRootState } from '../../rootReducer';
 import { IBarn } from '../../barn/types';
+import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
+import SideContainer from '../../container/SideContainer/SideContainer';
+import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
 import Barn from './Barn';
 
@@ -24,7 +25,7 @@ const MineBarnSide: React.StatelessComponent<MineBarnSideProps> = ({
     velgBarn
 }) =>  {
     return (
-        <div className={"mine-barn"}>
+        <SideContainer className={"mine-barn"}>
             <h1>Mine barn</h1>
             <ul className={"mine-barn__liste"}>
             {barn.map((b) =>
@@ -37,9 +38,8 @@ const MineBarnSide: React.StatelessComponent<MineBarnSideProps> = ({
                 </li>
             )}
             </ul>
-            <Link to="/">Tilbake til hovedsiden</Link>
-            <Link to="/omsorgssituasjon">Neste</Link>
-        </div>
+            <NavigasjonKnapp to='/omsorgssituasjon'>Neste</NavigasjonKnapp>
+        </SideContainer>
     );
 };
 
@@ -54,6 +54,6 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         velgBarn: (barn) => dispatch(soknadSettVerdi('barn', barn))
     };
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MineBarnSide);

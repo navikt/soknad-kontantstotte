@@ -16,12 +16,7 @@ class NavigasjonKnapp extends React.Component<Props> {
         super(props);
     }
 
-    navigasjonsHandler(props: Props) {
-        const to: string = props.to;
-        props.dispatch(push(to));
-    }
-
-    render() {
+    public render() {
         return (
             <KnappBase type='hoved' onClick={() => this.navigasjonsHandler(this.props)}>
                 {this.props.children}
@@ -29,6 +24,10 @@ class NavigasjonKnapp extends React.Component<Props> {
         );
     }
 
+    private navigasjonsHandler(props: Props) {
+        const to: string = props.to;
+        props.dispatch(push(to));
+    }
 }
 
 const mapStateToProps = (state: any) => ({
