@@ -1,14 +1,13 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
+import SideContainer from '../../container/SideContainer/SideContainer';
 
 const OmsorgssituasjonSide = () => {
     return (
-        <div>
+        <SideContainer>
             <h1>Bor begge foreldrene med barnet?</h1>
-
-
-            <Link to="/barnehageplass">Neste</Link>
-        </div>
+            <NavigasjonKnapp to='/barnehageplass'>Neste</NavigasjonKnapp>
+        </SideContainer>
     );
 };
 

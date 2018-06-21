@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
+import SideContainer from '../../container/SideContainer/SideContainer';
 
-const KvitteringSide = () => {
+const KvitteringSide = (): JSX.Element => {
     return (
-        <div>
+        <SideContainer>
             <h1>Takk for søknaden! Svarer snarest</h1>
-
-            <Link to="/">Tilbake til hovedsiden</Link>
-        </div>
+            <NavigasjonKnapp to="/">Tilbake til hovedsiden</NavigasjonKnapp>
+        </SideContainer>
     );
 };
 

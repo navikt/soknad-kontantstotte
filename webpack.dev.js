@@ -37,8 +37,8 @@ const config = merge.strategy({
                         loader: 'less-loader',
                         options: {
                             globalVars: {
-                                coreModulePath: '"~"',
-                                nodeModulesPath: '"~"'
+                                coreModulePath: '~',
+                                nodeModulesPath: '~'
                             }
                         }
                     }
