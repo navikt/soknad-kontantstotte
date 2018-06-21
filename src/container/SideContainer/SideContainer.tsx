@@ -1,17 +1,16 @@
-import {hentIndeksForPath, ISide, Sider, SideType} from "../../routes";
-import Stegindikator from "nav-frontend-stegindikator/lib/stegindikator";
-import {StegindikatorStegProps} from "nav-frontend-stegindikator/lib/stegindikator-steg";
+import Stegindikator from 'nav-frontend-stegindikator/lib/stegindikator';
+import { StegindikatorStegProps } from 'nav-frontend-stegindikator/lib/stegindikator-steg';
 import * as React from 'react';
-import {connect, DispatchProp} from "react-redux";
-import {withRouter, RouterProps, RouteProps} from "react-router";
+import { connect } from 'react-redux';
+import { RouteProps } from 'react-router-dom';
+import { hentIndeksForPath, ISide, Sider, SideType } from '../../routes';
 
 
-type Props = DispatchProp & RouteProps;
+type Props = RouteProps;
 
 class SideContainer extends React.Component<Props> {
-
     render() {
-        const currentPath = this.props.location ? this.props.location.pathname : "";
+        const currentPath = this.props.location ? this.props.location.pathname : '';
 
         const indikatorsteg: StegindikatorStegProps[] = Sider
             .filter((side: ISide) => side.sideType === SideType.SKJEMASIDE)
@@ -23,6 +22,7 @@ class SideContainer extends React.Component<Props> {
                     };
                 }
             );
+
         return (
             <div>
                 <Stegindikator
@@ -43,6 +43,7 @@ class SideContainer extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => ({
+    location: state.router.location
 });
 
-export default withRouter(connect(mapStateToProps)(SideContainer));
+export default connect(mapStateToProps)(SideContainer);
