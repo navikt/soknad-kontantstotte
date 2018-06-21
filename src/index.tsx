@@ -16,11 +16,11 @@ const renderApp = (Component: React.ComponentType<any>) => {
     render(
         <AppContainer>
             <Provider store={ store }>
-                <ConnectedRouter history={history}>
-                    <IntlProvider>
+                <IntlProvider>
+                    <ConnectedRouter history={history}>
                         <Component/>
-                    </IntlProvider>
-                </ConnectedRouter>
+                    </ConnectedRouter>
+                </IntlProvider>
             </Provider>
         </AppContainer>,
         rootElement,
