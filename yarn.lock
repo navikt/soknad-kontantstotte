@@ -4436,9 +4436,9 @@ nav-frontend-knapper@1.0.10:
   version "1.0.10"
   resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-knapper/-/nav-frontend-knapper-1.0.10.tgz#f6ea921cac1b9e17d111d679943d22008d63e660"
 
-nav-frontend-stegindikator-style@1.0.2:
-  version "1.0.2"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-stegindikator-style/-/nav-frontend-stegindikator-style-1.0.2.tgz#f302e543914f578406a5d005f63ae6a5a0a4c1e5"
+nav-frontend-stegindikator-style@1.0.3:
+  version "1.0.3"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-stegindikator-style/-/nav-frontend-stegindikator-style-1.0.3.tgz#f2a260689a49106fcaa06fc1f1d1755e9690e1b6"
 
 nav-frontend-stegindikator@0.0.15:
   version "0.0.15"
