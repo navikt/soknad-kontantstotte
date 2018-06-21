@@ -5,15 +5,15 @@ import {
 import { ITekster } from './types';
 
 interface ITeksterState {
-    readonly tekster: ITekster;
     readonly henter: boolean;
-    readonly valgtSprak: 'nb'
+    readonly tekster: ITekster;
+    readonly valgtSprak: 'nb';
 }
 
 const initialState: ITeksterState = {
-    tekster: {},
     henter: false,
-    valgtSprak: 'nb'
+    tekster: {},
+    valgtSprak: 'nb',
 };
 
 function teksterReducer(state = initialState, action: TeksterActionTypes) {
@@ -42,4 +42,4 @@ function teksterReducer(state = initialState, action: TeksterActionTypes) {
 export {
     ITeksterState,
     teksterReducer,
-}
+};

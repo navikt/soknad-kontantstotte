@@ -5,26 +5,25 @@ import { connect } from 'react-redux';
 import { IRootState } from '../../rootReducer';
 import { hentIndeksForPath, ISide, Sider, SideType } from '../../routes';
 
-
 interface IOwnProps {
-    className?: string,
-    children: React.ReactNode,
+    className?: string;
+    children: React.ReactNode;
 }
 
 interface IMapStateToProps {
     location: {
         pathname: string
-    },
+    };
 }
 
 type Props = IOwnProps & IMapStateToProps;
 
 class SideContainer extends React.Component<Props> {
-    render() {
+    public render() {
 
         const {
             children,
-            className='',
+            className = '',
             location,
         } = this.props;
 
@@ -45,10 +44,10 @@ class SideContainer extends React.Component<Props> {
             <div className={ className }>
                 <Stegindikator
                     steg={ indikatorsteg }
-                    autoResponsiv={true}
-                    visLabel={false}
-                    kompakt={false}
-                    aktivtSteg={hentIndeksForPath(currentPath)}
+                    autoResponsiv={  true }
+                    visLabel={ false }
+                    kompakt={ false }
+                    aktivtSteg={ hentIndeksForPath(currentPath) }
                 />
                 <div>
                     { children }
@@ -62,7 +61,7 @@ class SideContainer extends React.Component<Props> {
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         location: state.router.location
-    }
+    };
 };
 
 export default connect(mapStateToProps)(SideContainer);

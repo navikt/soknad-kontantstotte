@@ -13,7 +13,6 @@ type TeksterActionTypes =
     | ITeksterHentFeilet
     ;
 
-
 interface ITeksterHent extends Action {
     type: TeksterTypeKeys.HENT;
 }
@@ -30,20 +29,20 @@ interface ITeksterHentFeilet extends Action {
 function teksterHent(): ITeksterHent {
     return {
         type: TeksterTypeKeys.HENT
-    }
+    };
 }
 
 function teksterHentOk(tekster: ITekster): ITeksterHentOK {
     return {
+        tekster,
         type: TeksterTypeKeys.HENT_OK,
-        tekster
-    }
+    };
 }
 
 function teksterHentFeilet(): ITeksterHentFeilet {
     return {
         type: TeksterTypeKeys.HENT_FEILET
-    }
+    };
 }
 
 export {

@@ -1,10 +1,10 @@
-import * as React from 'react';
 import * as classNames from 'classnames';
+import * as React from 'react';
 import { IBarn } from '../../barn/types';
 
 interface IBarnProps {
     barn: IBarn;
-    valgt: boolean,
+    valgt: boolean;
     onClick: (barn: IBarn) => any;
 }
 
