@@ -20,7 +20,7 @@ export interface ISide {
     key: string;
     path: string;
     stegIndeks: number;
-    sideKomponent: () => JSX.Element;
+    sideKomponent: React.ComponentType<any>;
     sideType: SideType;
 }
 
