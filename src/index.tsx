@@ -12,7 +12,7 @@ import IntlProvider from './IntlProvider';
 
 const rootElement = document.getElementById( 'app' );
 
-const renderApp = (Component: React.ComponentClass<any>) => {
+const renderApp = (Component: React.ComponentType<any>) => {
     render(
         <AppContainer>
             <Provider store={ store }>
