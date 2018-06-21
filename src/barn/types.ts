@@ -1,7 +1,7 @@
 
 interface IBarn {
     navn: string;
-    fodselsDato: string;
+    fodselsdato: string;
 }
 
 export { IBarn };

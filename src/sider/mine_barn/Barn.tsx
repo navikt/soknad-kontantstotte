@@ -20,7 +20,7 @@ const Barn: React.StatelessComponent<IBarnProps> = ({
             onClick={() => onClick(barn)}
         >
             <p>Navn: {barn.navn}</p>
-            <p>Fødselsdato: {barn.fodselsDato}</p>
+            <p>Fødselsdato: {barn.fodselsdato}</p>
         </button>
     );
 };
