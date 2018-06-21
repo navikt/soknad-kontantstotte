@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as classNames from 'classnames';
 import { IBarn } from '../../barn/types';
 
 interface IBarnProps {
@@ -12,7 +13,10 @@ const Barn: React.StatelessComponent<IBarnProps> = ({
     valgt,
     onClick
 }) => {
-    const className = `mine-barn__barn ${valgt ? 'mine-barn__barn--valgt' : '' }`;
+    const className = classNames(
+        'mine-barn__barn',
+        { 'mine-barn__barn--valgt': valgt }
+    );
     return (
         <button
             key={barn.navn}
