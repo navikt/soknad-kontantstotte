@@ -1,37 +1,43 @@
-const Webpack = require('webpack');
-const WebpackDevServer = require('webpack-dev-server');
-const webpackConfig = require('../webpack.dev');
-
-const fs = require('fs');
+const express = require('express');
 const path = require('path');
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const config = require('../webpack.dev');
+const fs = require('fs');
 
-const compiler = Webpack(webpackConfig);
-const devServerOptions = Object.assign({}, webpackConfig.devServer, {
-    stats: {
-        colors: true
-    },
-    before(app) {
-        app.get('/barn', function(req, res) {
-            setTimeout(() => res.send(fs.readFileSync(
-                path.join(__dirname, '/mock/barn.json'),
-                'UTF-8'
-            )))
-        });
+const port = 8000;
+const delayMs = 1000;
+const app = express();
 
-        app.get('/tekster', function(req, res) {
-            setTimeout(() => res.send(fs.readFileSync(
-                path.join(__dirname, '/mock/tekster.json'),
-                'UTF-8'
-            )))
-        });
-
-        app.use((req, res, next) => {
-            next();
-        });
-    }
+const compiler = webpack(config);
+const middleware = webpackDevMiddleware(compiler, {
+    publicPath: config.output.publicPath,
 });
-const server = new WebpackDevServer(compiler, devServerOptions);
 
-server.listen(8000, '127.0.0.1', () => {
-    console.log('Starting server on http://localhost:8000/');
+function lesMockFil(filnavn) {
+    return fs.readFileSync(path.join(__dirname, '/mock/' + filnavn), 'UTF-8')
+}
+
+app.use(middleware);
+app.use(webpackHotMiddleware(compiler));
+
+app.get('/barn', function(req, res) {
+    setTimeout(() => res.send(lesMockFil('barn.json')));
+});
+
+app.get('/tekster', function(req, res) {
+    setTimeout(() => res.send(lesMockFil('tekster.json')));
+});
+
+app.get('*', (req, res) => {
+    res.write(middleware.fileSystem.readFileSync(path.join(__dirname, '/../dist/index.html')));
+    res.end();
+});
+
+app.listen(port, 'localhost', function onStart(err) {
+    if (err) {
+        console.log(err);
+    }
+    console.info('=== Dev-server startet på %s, åpne http://localhost:%s/', port, port);
 });
