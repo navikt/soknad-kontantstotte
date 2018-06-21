@@ -7,6 +7,7 @@ import App from './App';
 import { barnHent } from './barn/actions';
 import { history, store } from './createStore';
 import './index.less';
+import { teksterHent } from './tekster/actions';
 
 const rootElement = document.getElementById( 'app' );
 
@@ -38,3 +39,4 @@ if ( module.hot ) {
 }
 
 store.dispatch(barnHent());
+store.dispatch(teksterHent());

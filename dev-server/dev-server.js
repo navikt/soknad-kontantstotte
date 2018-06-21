@@ -18,6 +18,13 @@ const devServerOptions = Object.assign({}, webpackConfig.devServer, {
             )))
         });
 
+        app.get('/tekster', function(req, res) {
+            setTimeout(() => res.send(fs.readFileSync(
+                path.join(__dirname, '/mock/tekster.json'),
+                'UTF-8'
+            )))
+        });
+
         app.use((req, res, next) => {
             next();
         });
