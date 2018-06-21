@@ -14,7 +14,6 @@ const config = merge.strategy({
         ]},
     output: {
         filename: '[name].[hash].js',
-        publicPath: '/'
     },
     module: {
         rules: [
