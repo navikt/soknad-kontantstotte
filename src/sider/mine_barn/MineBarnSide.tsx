@@ -24,16 +24,19 @@ const MineBarnSide: React.StatelessComponent<MineBarnSideProps> = ({
     velgBarn
 }) =>  {
     return (
-        <div>
+        <div className={"mine-barn"}>
             <h1>Mine barn</h1>
+            <ul className={"mine-barn__liste"}>
             {barn.map((b) =>
-                <Barn
-                    key={ b.navn }
-                    valgt={ b.navn === valgtBarn.navn}
-                    barn={ b }
-                    onClick={ velgBarn }
-                />
+                <li key={ b.navn }>
+                    <Barn
+                        valgt={ b.navn === valgtBarn.navn}
+                        barn={ b }
+                        onClick={ velgBarn }
+                    />
+                </li>
             )}
+            </ul>
             <Link to="/">Tilbake til hovedsiden</Link>
             <Link to="/omsorgssituasjon">Neste</Link>
         </div>

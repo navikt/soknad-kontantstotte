@@ -14,10 +14,14 @@ const Barn: React.StatelessComponent<IBarnProps> = ({
 }) => {
     const className = `mine-barn__barn ${valgt ? 'mine-barn__barn--valgt' : '' }`;
     return (
-        <div key={barn.navn} className={ className } onClick={() => onClick(barn)}>
+        <button
+            key={barn.navn}
+            className={ className }
+            onClick={() => onClick(barn)}
+        >
             <p>Navn: {barn.navn}</p>
             <p>Fødselsdato: {barn.fodselsDato}</p>
-        </div>
+        </button>
     );
 };
 
