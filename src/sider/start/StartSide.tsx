@@ -39,37 +39,38 @@ const StartSide: React.StatelessComponent<StartSideProps>  = (
 
     return (
       <SideContainer>
-          <CheckboksPanelGruppe legend={ sporsmaal }
-                                checkboxes={
-                                    [
-                                        {
+          <CheckboksPanelGruppe
+              legend={ sporsmaal }
+              checkboxes={
+                  [
+                      {
 
-                                            checked: boddINorgeSisteFemAar,
-                                            label: intl.formatMessage(
-                                                { id: 'startside.krav.boddINorgeSisteFemAar' }
-                                            ),
-                                            value: 'boddINorgeSisteFemAar'
-                                        },
-                                        {
-                                            checked: borSammenMedBarnet,
-                                            label: intl.formatMessage(
-                                                { id: 'startside.krav.borSammenMedBarnet' }
-                                            ),
-                                            value: 'borSammenMedBarnet'
-                                        },
-                                        {
-                                            checked: skalBoMedBarnetINorgeNesteTolvMaaneder,
-                                            label: intl.formatMessage(
-                                                { id: 'startside.krav.skalBoMedBarnetINorgeNesteTolvMaaneder' }
-                                            ),
-                                            value: 'skalBoMedBarnetINorgeNesteTolvMaaneder'
-                                        },
-                                    ]
-                                }
-                                onChange={(event, value) => {
-                                        handterCheckboxEndring(event, settCheckboxVerdi, value);
-                                    }
-                                }
+                          checked: boddINorgeSisteFemAar,
+                          label: intl.formatMessage(
+                              { id: 'startside.krav.boddINorgeSisteFemAar' }
+                          ),
+                          value: 'boddINorgeSisteFemAar'
+                      },
+                      {
+                          checked: borSammenMedBarnet,
+                          label: intl.formatMessage(
+                              { id: 'startside.krav.borSammenMedBarnet' }
+                          ),
+                          value: 'borSammenMedBarnet'
+                      },
+                      {
+                          checked: skalBoMedBarnetINorgeNesteTolvMaaneder,
+                          label: intl.formatMessage(
+                              { id: 'startside.krav.skalBoMedBarnetINorgeNesteTolvMaaneder' }
+                          ),
+                          value: 'skalBoMedBarnetINorgeNesteTolvMaaneder'
+                      },
+                  ]
+              }
+              onChange={(event, value) => {
+                  handterCheckboxEndring(event, settCheckboxVerdi, value);
+                }
+              }
           />
           <NavigasjonKnapp to='/mine-barn'>Neste</NavigasjonKnapp>
       </SideContainer>
