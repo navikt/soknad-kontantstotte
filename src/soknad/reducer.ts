@@ -3,10 +3,16 @@ import { SoknadActionTypes, SoknadTypeKeys } from './actions';
 
 interface ISoknadSate {
     barn: IBarn;
+    boddINorgeSisteFemAar: boolean;
+    borSammenMedBarnet: boolean;
+    skalBoMedBarnetINorgeNesteTolvMaaneder: boolean;
 }
 
 const initialState = {
-    barn: {}
+    barn: {},
+    boddINorgeSisteFemAar: false,
+    borSammenMedBarnet: false,
+    skalBoMedBarnetINorgeNesteTolvMaaneder: false
 };
 
 function soknadReducer(state = initialState, action: SoknadActionTypes) {

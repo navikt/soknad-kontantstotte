@@ -31,7 +31,8 @@ app.get('/tekster', function(req, res) {
 });
 
 app.get('*', (req, res) => {
-    res.send(middleware.fileSystem.readFileSync(path.join(__dirname, '/../dist/index.html')));
+    res.write(middleware.fileSystem.readFileSync(path.join(__dirname, '/../dist/index.html')));
+    res.end();
 });
 
 app.listen(port, 'localhost', function onStart(err) {
