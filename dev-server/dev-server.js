@@ -23,16 +23,15 @@ app.use(middleware);
 app.use(webpackHotMiddleware(compiler));
 
 app.get('/barn', function(req, res) {
-    setTimeout(() => res.send(lesMockFil('barn.json')));
+    setTimeout(() => res.send(lesMockFil('barn.json')), delayMs);
 });
 
 app.get('/tekster', function(req, res) {
-    setTimeout(() => res.send(lesMockFil('tekster.json')));
+    setTimeout(() => res.send(lesMockFil('tekster.json')), delayMs);
 });
 
 app.get('*', (req, res) => {
-    res.write(middleware.fileSystem.readFileSync(path.join(__dirname, '/../dist/index.html')));
-    res.end();
+    res.send(middleware.fileSystem.readFileSync(path.join(__dirname, '/../dist/index.html')));
 });
 
 app.listen(port, 'localhost', function onStart(err) {
