@@ -1,7 +1,9 @@
 import Environment from '../Environment';
 
 const pingBackend = () => (
-    fetch(Environment().apiUrl + '/status/ping').then((response) => {
+    fetch(Environment().apiUrl + '/status/ping', {
+        credentials: 'include'
+    }).then((response) => {
         if (response.status === 401) {
             redirectTilLogin();
             return;
