@@ -1,3 +1,4 @@
+import { RouterState } from "connected-react-router";
 import { combineReducers } from 'redux';
 import { barnReducer, IBarnState } from './barn/reducer';
 import { ISoknadSate, soknadReducer } from './soknad/reducer';
@@ -7,6 +8,7 @@ export interface IRootState {
     barn: IBarnState;
     soknad: ISoknadSate;
     tekster: ITeksterState;
+    router: RouterState;
 }
 
 const rootReducer = combineReducers({

@@ -17,6 +17,10 @@
   version "0.7.0"
   resolved "https://repo.adeo.no/repository/npm-public/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
 
+"@types/classnames@2.2.4":
+  version "2.2.4"
+  resolved "https://repo.adeo.no/repository/npm-public/@types/classnames/-/classnames-2.2.4.tgz#d3ee9ebf714aa34006707b8f4a58fd46b642305a"
+
 "@types/history@*":
   version "4.6.2"
   resolved "https://repo.adeo.no/repository/npm-public/@types/history/-/history-4.6.2.tgz#12cfaba693ba20f114ed5765467ff25fdf67ddb0"

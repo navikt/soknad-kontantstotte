@@ -2,15 +2,32 @@ import Stegindikator from 'nav-frontend-stegindikator/lib/stegindikator';
 import { StegindikatorStegProps } from 'nav-frontend-stegindikator/lib/stegindikator-steg';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { RouteProps } from 'react-router-dom';
+import { IRootState } from '../../rootReducer';
 import { hentIndeksForPath, ISide, Sider, SideType } from '../../routes';
 
+interface IOwnProps {
+    className?: string;
+    children: React.ReactNode;
+}
 
-type Props = RouteProps;
+interface IMapStateToProps {
+    location: {
+        pathname: string
+    };
+}
+
+type Props = IOwnProps & IMapStateToProps;
 
 class SideContainer extends React.Component<Props> {
-    render() {
-        const currentPath = this.props.location ? this.props.location.pathname : '';
+    public render() {
+
+        const {
+            children,
+            className = '',
+            location,
+        } = this.props;
+
+        const currentPath = location ? location.pathname : '';
 
         const indikatorsteg: StegindikatorStegProps[] = Sider
             .filter((side: ISide) => side.sideType === SideType.SKJEMASIDE)
@@ -24,26 +41,27 @@ class SideContainer extends React.Component<Props> {
             );
 
         return (
-            <div>
+            <div className={ className }>
                 <Stegindikator
                     steg={ indikatorsteg }
-                    autoResponsiv={true}
-                    visLabel={false}
-                    kompakt={false}
-                    aktivtSteg={hentIndeksForPath(currentPath)}
+                    autoResponsiv={  true }
+                    visLabel={ false }
+                    kompakt={ false }
+                    aktivtSteg={ hentIndeksForPath(currentPath) }
                 />
                 <div>
-                    { this.props.children }
+                    { children }
                 </div>
             </div>
 
         );
     }
-
 }
 
-const mapStateToProps = (state: any, ownProps: any) => ({
-    location: state.router.location
-});
+const mapStateToProps = (state: IRootState): IMapStateToProps => {
+    return {
+        location: state.router.location
+    };
+};
 
 export default connect(mapStateToProps)(SideContainer);
