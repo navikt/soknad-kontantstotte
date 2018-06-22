@@ -1,0 +1,35 @@
+import { SagaIterator } from 'redux-saga';
+import { all, cancel, fork, put, take } from 'redux-saga/effects';
+import { barnHent, BarnTypeKeys } from '../barn/actions';
+import { teksterHent, TeksterTypeKeys } from '../tekster/actions';
+import { appEndreStatus, AppTypeKeys } from './actions';
+import { AppStatus } from './types';
+
+function * startAppSag(): SagaIterator {
+    yield put(teksterHent());
+    yield put(barnHent());
+
+    yield all([
+        take(TeksterTypeKeys.HENT_OK),
+        take(BarnTypeKeys.HENT_OK),
+    ]);
+
+    yield put(appEndreStatus( AppStatus.KLAR));
+}
+
+function * appSaga(): SagaIterator {
+    while ( yield take(AppTypeKeys.START_APP)) {
+        yield put(appEndreStatus( AppStatus.STARTER ));
+        const startSaga = yield fork(startAppSag);
+        yield take([
+            TeksterTypeKeys.HENT_FEILET,
+            BarnTypeKeys.HENT_FEILET
+        ]);
+        yield cancel(startSaga);
+        yield put( appEndreStatus( AppStatus.FEILSITUASJON ) );
+    }
+}
+
+export {
+    appSaga
+};
