@@ -1,4 +1,4 @@
-import Environment from "../Environment";
+import Environment from '../Environment';
 
 const pingBackend = () => (
     fetch(Environment().apiUrl + '/status/ping').then((response) => {

@@ -1,9 +1,9 @@
-interface IAppSettings {
+interface IEnvUrls {
     apiUrl: string;
     loginUrl: string;
 }
 
-const Environment = (): IAppSettings => {
+const Environment = (): IEnvUrls => {
     if (process.env.NODE_ENV === 'development') {
         return {
             apiUrl: 'http://localhost:8080/soknad-kontantstotte-api',
