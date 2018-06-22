@@ -3,10 +3,8 @@
     "feilside.dittnav.lenke.tekst": "Gå til Ditt NAV",
     "feilside.forside.lenke.tekst": "Gå til forsiden nav.no",
     "kvittering.tittel": "Kvittering",
-    "skjema.fradato.feilmelding": "Du må velge en fra dato",
-    "skjema.fradato.label": "Fra dato",
-    "skjema.land.default": "Velg land",
-    "skjema.land.feilmelding": "Du må velge et land",
-    "skjema.tildato.feilmelding": "Du må velge en til dato",
-    "skjema.tildato.label": "Til dato"
+    "startside.krav.sporsmal": "Oppfyller du kravene under?",
+    "startside.krav.boddINorgeSisteFemAar": "Har du bodd i Norge siste 5 år?",
+    "startside.krav.borSammenMedBarnet": "Bor du sammen med barnet?",
+    "startside.krav.skalBoMedBarnetINorgeNesteTolvMaaneder": "Skal du og barnet bo i Norge de neste 12 mnd?"
 }
