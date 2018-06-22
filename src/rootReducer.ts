@@ -1,13 +1,20 @@
+import { RouterState } from "connected-react-router";
 import { combineReducers } from 'redux';
-import { IFaktumState } from 'soknad-frontend/lib/faktum-container';
-import { faktumReducer } from './faktum/reducer';
+import { barnReducer, IBarnState } from './barn/reducer';
+import { ISoknadSate, soknadReducer } from './soknad/reducer';
+import { ITeksterState, teksterReducer } from './tekster/reducer';
 
 export interface IRootState {
-    faktum: IFaktumState;
+    barn: IBarnState;
+    soknad: ISoknadSate;
+    tekster: ITeksterState;
+    router: RouterState;
 }
 
 const rootReducer = combineReducers({
-    faktum: faktumReducer
+    barn: barnReducer,
+    soknad: soknadReducer,
+    tekster: teksterReducer,
 });
 
 export { rootReducer };

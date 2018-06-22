@@ -1,12 +1,12 @@
 import { all } from 'redux-saga/effects';
-import {
-    faktaSaga,
-} from './faktum/saga';
+import { barnSaga } from './barn/saga';
+import { teksterSaga } from './tekster/saga';
 
 function * rootSaga() {
     yield all( [
-        faktaSaga(),
-    ] );
+        barnSaga(),
+        teksterSaga(),
+    ]);
 }
 
 export {

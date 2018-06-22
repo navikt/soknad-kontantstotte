@@ -10,11 +10,11 @@ const config = merge.strategy({
     mode: 'development',
     entry: {
         'soknad-kontantstotte': [
-            'react-hot-loader/patch'
+            'react-hot-loader/patch',
+            'webpack-hot-middleware/client?reload=true'
         ]},
     output: {
         filename: '[name].[hash].js',
-        publicPath: '/'
     },
     module: {
         rules: [
@@ -38,8 +38,8 @@ const config = merge.strategy({
                         loader: 'less-loader',
                         options: {
                             globalVars: {
-                                coreModulePath: '"~"',
-                                nodeModulesPath: '"~"'
+                                coreModulePath: '~',
+                                nodeModulesPath: '~'
                             }
                         }
                     }
@@ -47,13 +47,6 @@ const config = merge.strategy({
             }
 
         ]
-    },
-    devServer: {
-        contentBase: path.join(__dirname, "/dist"),
-        port: 8000,
-        hot: true,
-        historyApiFallback: true,
-        publicPath: '/'
     },
     devtool: 'inline-source-map',
     plugins: [

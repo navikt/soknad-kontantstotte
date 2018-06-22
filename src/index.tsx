@@ -4,34 +4,38 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import App from './App';
+import { barnHent } from './barn/actions';
 import { history, store } from './createStore';
+import IntlProvider from './IntlProvider';
+import { teksterHent } from './tekster/actions';
+
 import './index.less';
 
 const rootElement = document.getElementById( 'app' );
 
-render(
-    <AppContainer>
-        <Provider store={ store }>
-            <ConnectedRouter history={history}>
-                <App history={history}/>
-            </ConnectedRouter>
-        </Provider>
-    </AppContainer>,
-    rootElement,
-);
+const renderApp = (Component: React.ComponentType<any>) => {
+    render(
+        <AppContainer>
+            <Provider store={ store }>
+                <IntlProvider>
+                    <ConnectedRouter history={history}>
+                        <Component/>
+                    </ConnectedRouter>
+                </IntlProvider>
+            </Provider>
+        </AppContainer>,
+        rootElement,
+    );
+};
+
+renderApp(App);
 
 if ( module.hot ) {
     module.hot.accept('./App', () => {
         const NewApp = require('./App').default;
-        render(
-            <AppContainer>
-                <Provider store={ store }>
-                    <ConnectedRouter history={history}>
-                        <NewApp history={history}/>
-                    </ConnectedRouter>
-                </Provider>
-            </AppContainer>,
-            rootElement,
-        );
+        renderApp(NewApp);
     });
 }
+
+store.dispatch(barnHent());
+store.dispatch(teksterHent());
