@@ -12,8 +12,8 @@ const Environment = (): IAppSettings => {
     }
 
     return {
-        apiUrl: window.location.href + '/soknad-kontantstotte-api',
-        loginUrl: window.location.href + '/login'
+        apiUrl: 'https://soknad-kontantstotte-api-q.nav.no/soknad-kontantstotte-api',
+        loginUrl: 'https://loginservice-q.nav.no/login'
     };
 };
 
