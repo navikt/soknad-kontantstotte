@@ -4,10 +4,12 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { soknadSettVerdi } from '../../soknad/actions';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
+
 
 interface ISporsmaalProps {
     nokkel: string;
-    sporsmal: string;
+    sporsmalNokkel: string;
     verdi?: boolean;
     forklaring?: string;
 }
@@ -16,21 +18,26 @@ interface IMapDispatchToProps {
     settSvar: (felt: string, forklaring?: string, verdi?: boolean) => any;
 }
 
-type JaNeiSporsmalProps = IMapDispatchToProps & ISporsmaalProps;
+type JaNeiSporsmalProps = IMapDispatchToProps & ISporsmaalProps & InjectedIntlProps;
 
 const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
     nokkel,
     verdi,
     forklaring,
     settSvar,
-    sporsmal
+    sporsmalNokkel,
+    intl
 }) => {
 
     const visUtfyllendeSvarTekst = (spesifiser: boolean|undefined): JSX.Element|undefined => {
         if (spesifiser === false) {
             return (
                 <TextareaControlled
-                    label='Fyll inn'
+                    label={ intl.formatMessage(
+                        {
+                            id: 'tekstomrade.fyllInn'
+                        }
+                    ) }
                     defaultValue=''
                     maxLength={500}
                 />
@@ -41,7 +48,11 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
     return (
         <div>
             <RadioPanelGruppe
-                legend={ sporsmal }
+                legend={ intl.formatMessage(
+                    {
+                        id: sporsmalNokkel
+                    }
+                ) }
                 name={ nokkel }
                 onChange={
                     (event: React.SyntheticEvent<EventTarget>, value: string) => {
@@ -51,12 +62,12 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
                 checked={ verdi !== undefined ? verdi.toString() : 'undefined' }
                 radios={
                     [
-                        { label: 'Ja', value: 'true' },
-                        { label: 'Nei', value: 'false'}
+                        { label: intl.formatMessage({ id: 'svar.ja' }), value: 'true' },
+                        { label: intl.formatMessage({ id: 'svar.nei' }), value: 'false'}
                     ]
                 }
             />
-            { visUtfyllendeSvarTekst(verdi)}
+            { visUtfyllendeSvarTekst(verdi) }
         </div>
     );
 };
@@ -72,4 +83,4 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(JaNeiSporsmal);
+export default connect(null, mapDispatchToProps)(injectIntl(JaNeiSporsmal));

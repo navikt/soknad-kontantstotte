@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
@@ -15,7 +14,7 @@ interface IMapStateToProps {
     mottarKontantstotteFraAnnetEOSForklaring?: string;
 }
 
-type ArbeidsforholdSideProps = IMapStateToProps & InjectedIntlProps;
+type ArbeidsforholdSideProps = IMapStateToProps;
 
 const ArbeidsforholdSide: React.StatelessComponent<ArbeidsforholdSideProps> = (
     {
@@ -32,33 +31,21 @@ const ArbeidsforholdSide: React.StatelessComponent<ArbeidsforholdSideProps> = (
         <SideContainer>
             <JaNeiSporsmal
                 nokkel='mottarYtelserFraUtlandet'
-                sporsmal={
-                    intl.formatMessage({
-                        id: 'arbeidsforhold.mottarYtelserFraUtlandet.sporsmal'
-                    })
-                }
+                sporsmalNokkel='arbeidsforhold.mottarYtelserFraUtlandet.sporsmal'
                 verdi={ mottarYtelserFraUtlandet }
                 forklaring={ mottarYtelserFraUtlandetForklaring }
             />
 
             <JaNeiSporsmal
                 nokkel='arbeiderIUtlandetEllerKontinentalsokkel'
-                sporsmal={
-                    intl.formatMessage({
-                        id: 'arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.sporsmal'
-                    })
-                }
+                sporsmalNokkel='arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.sporsmal'
                 verdi={ arbeiderIUtlandetEllerKontinentalsokkel }
                 forklaring={ arbeiderIUtlandetEllerKontinentalsokkelForklaring }
             />
 
             <JaNeiSporsmal
                 nokkel='mottarKontantstotteFraAnnetEOS'
-                sporsmal={
-                    intl.formatMessage({
-                        id: 'arbeidsforhold.mottarKontantstotteFraAnnetEOS.sporsmal'
-                    })
-                }
+                sporsmalNokkel='arbeidsforhold.mottarKontantstotteFraAnnetEOS.sporsmal'
                 verdi={ mottarKontantstotteFraAnnetEOS }
                 forklaring={ mottarKontantstotteFraAnnetEOSForklaring }
             />
@@ -79,4 +66,4 @@ const mapStateToProps = (state: IRootState) => {
     };
 };
 
-export default injectIntl(connect(mapStateToProps)(ArbeidsforholdSide));
+export default connect(mapStateToProps)(ArbeidsforholdSide);
