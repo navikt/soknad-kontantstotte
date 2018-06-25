@@ -30,6 +30,10 @@ app.get('/tekster', function(req, res) {
     setTimeout(() => res.send(lesMockFil('tekster.json')), delayMs);
 });
 
+app.get('/status/ping', function(req, res) {
+    setTimeout(() => res.send(), delayMs );
+});
+
 app.get('*', (req, res) => {
     res.write(middleware.fileSystem.readFileSync(path.join(__dirname, '/../dist/index.html')));
     res.end();

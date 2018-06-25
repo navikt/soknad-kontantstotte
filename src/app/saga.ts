@@ -1,11 +1,14 @@
 import { SagaIterator } from 'redux-saga';
-import { all, cancel, fork, put, take } from 'redux-saga/effects';
+import { all, call, cancel, fork, put, take } from 'redux-saga/effects';
 import { barnHent, BarnTypeKeys } from '../barn/actions';
 import { teksterHent, TeksterTypeKeys } from '../tekster/actions';
 import { appEndreStatus, AppTypeKeys } from './actions';
+import { pingBackend } from './api';
 import { AppStatus } from './types';
 
 function * startAppSag(): SagaIterator {
+    yield call( pingBackend );
+
     yield put(teksterHent());
     yield put(barnHent());
 
