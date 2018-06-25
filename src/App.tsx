@@ -1,7 +1,7 @@
 import Spinner from 'nav-frontend-spinner';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Switch } from 'react-router-dom';
+import { RouteComponentProps, Switch, withRouter } from 'react-router-dom';
 import { AppStatus } from './app/types';
 import { IRootState } from './rootReducer';
 import { renderSoknadRoutes } from './routes';
@@ -10,12 +10,11 @@ interface IMapStateToProps {
     status: AppStatus;
 }
 
-type Props = IMapStateToProps;
+type Props = IMapStateToProps & RouteComponentProps<any>;
 
 const App: React.StatelessComponent<Props> = ({
     status
 }) => {
-
     switch (status) {
         case AppStatus.IKKE_STARTET:
         case AppStatus.STARTER:
@@ -24,11 +23,9 @@ const App: React.StatelessComponent<Props> = ({
             );
         case AppStatus.KLAR:
             return (
-                <div>
-                    <Switch>
-                        { renderSoknadRoutes() }
-                    </Switch>
-                </div>
+                <Switch>
+                    { renderSoknadRoutes() }
+                </Switch>
             );
         case AppStatus.FEILSITUASJON:
             return (
@@ -46,4 +43,4 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     };
 };
 
-export default connect(mapStateToProps)(App);
+export default withRouter(connect(mapStateToProps)(App));
