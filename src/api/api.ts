@@ -1,21 +1,21 @@
+import axios from 'axios';
 import Environment from '../Environment';
 
 const pingBackend = () => (
-    fetch(Environment().apiUrl + '/status/ping', {
-        credentials: 'include'
-    }).then((response) => {
-        if (response.status === 401) {
+    axios.get(`${Environment().apiUrl}/status/ping`, {
+        withCredentials: true
+    }).then((response) => response.data
+    ).catch((error) => {
+        if (error.response.status === 401) {
             redirectTilLogin();
             return;
         }
-        return response.json();
-    })
-);
+    }));
 
 const redirectTilLogin = () => {
     window.location.href =
         Environment().loginUrl + '?redirect=' + window.location.href;
 };
 
-const Api = { pingBackend };
+const Api = {pingBackend};
 export default Api;
