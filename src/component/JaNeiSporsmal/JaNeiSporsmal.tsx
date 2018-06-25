@@ -30,7 +30,7 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
 }) => {
 
     const visUtfyllendeSvarTekst = (spesifiser: boolean|undefined): JSX.Element|undefined => {
-        if (spesifiser === false) {
+        if (spesifiser === true) {
             return (
                 <TextareaControlled
                     label={ intl.formatMessage(
@@ -67,7 +67,7 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
                     ]
                 }
             />
-            { visUtfyllendeSvarTekst(verdi) }
+            { visUtfyllendeSvarTekst(!verdi) }
         </div>
     );
 };
