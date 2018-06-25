@@ -29,6 +29,10 @@
   version "10.3.4"
   resolved "https://repo.adeo.no/repository/npm-public/@types/node/-/node-10.3.4.tgz#c74e8aec19e555df44609b8057311052a2c84d9e"
 
+"@types/prop-types@15.5.3":
+  version "15.5.3"
+  resolved "https://repo.adeo.no/repository/npm-public/@types/prop-types/-/prop-types-15.5.3.tgz#bef071852dca2a2dbb65fecdb7bfb30cedae2de2"
+
 "@types/react-dom@16.0.5":
   version "16.0.5"
   resolved "https://repo.adeo.no/repository/npm-public/@types/react-dom/-/react-dom-16.0.5.tgz#a757457662e3819409229e8f86795ff37b371f96"
@@ -4464,6 +4468,14 @@ nav-frontend-knapper@1.0.10:
   version "1.0.10"
   resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-knapper/-/nav-frontend-knapper-1.0.10.tgz#f6ea921cac1b9e17d111d679943d22008d63e660"
 
+nav-frontend-paneler-style@0.3.9:
+  version "0.3.9"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-paneler-style/-/nav-frontend-paneler-style-0.3.9.tgz#c0f519a258f19e707dc31669db1421c3c1f50aad"
+
+nav-frontend-paneler@1.0.7:
+  version "1.0.7"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-paneler/-/nav-frontend-paneler-1.0.7.tgz#48d7e77326090cda78d3c027ec6d172390295396"
+
 nav-frontend-skjema-style@1.0.4:
   version "1.0.4"
   resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-skjema-style/-/nav-frontend-skjema-style-1.0.4.tgz#c8dbde79e84c3f26a66dcc8be23d9fc090a86a6e"
@@ -4485,6 +4497,10 @@ nav-frontend-typografi-style@1.0.9:
   resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-typografi-style/-/nav-frontend-typografi-style-1.0.9.tgz#68e23f1e287b5e361b26466c29bb587df44f960b"
   dependencies:
     nav-frontend-core "^4.0.2"
+
+nav-frontend-typografi@2.0.5:
+  version "2.0.5"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-typografi/-/nav-frontend-typografi-2.0.5.tgz#9bd255c98f61d2d46122b6426d9b46e144b6ad0e"
 
 needle@^2.2.0:
   version "2.2.1"
