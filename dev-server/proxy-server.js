@@ -1,41 +1,29 @@
 const express = require('express');
-const path = require('path');
+const proxy = require('express-http-proxy');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('../webpack.dev');
-const fs = require('fs');
+const path = require('path');
 
 const port = 8000;
-const delayMs = 1000;
 const app = express();
 
 const compiler = webpack(config);
 const middleware = webpackDevMiddleware(compiler, {
-    publicPath: config.output.publicPath,
+    publicPath: config.output.publicPath
 });
-
-function lesMockFil(filnavn) {
-    return fs.readFileSync(path.join(__dirname, '/mock/' + filnavn), 'UTF-8')
-}
 
 app.use(middleware);
 app.use(webpackHotMiddleware(compiler));
 
-app.get('/soknad-kontantstotte-api/api/barn', function(req, res) {
-    setTimeout(() => res.send(lesMockFil('barn.json')), delayMs);
-});
-
-app.get('/soknad-kontantstotte-api/api/tekster', function(req, res) {
-    setTimeout(() => res.send(lesMockFil('tekster.json')), delayMs);
-});
-
-app.get('/soknad-kontantstotte-api/api/status/ping', function(req, res) {
-    setTimeout(() => res.status(200).send(), delayMs );
-});
+app.use('/soknad-kontantstotte-api/api/', proxy('localhost:8080', {
+    proxyReqPathResolver: function (req) {
+        return `/soknad-kontantstotte-api/api${require('url').parse(req.url).path}`;
+    }
+}));
 
 app.get('*', (req, res) => {
-    res.writeHead(200, {'Content-Type': 'text/html'});
     res.write(middleware.fileSystem.readFileSync(path.join(__dirname, '/../dist/index.html')));
     res.end();
 });

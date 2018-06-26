@@ -15,7 +15,7 @@ const config = {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: '[name].[chunkhash].js',
-        publicPath: '/soknad-kontantstotte/'
+        publicPath: '/'
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']

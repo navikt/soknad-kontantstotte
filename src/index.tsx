@@ -4,10 +4,9 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import App from './App';
-import { barnHent } from './barn/actions';
+import { appStart } from './app/actions';
 import { history, store } from './createStore';
 import IntlProvider from './IntlProvider';
-import { teksterHent } from './tekster/actions';
 
 import './index.less';
 
@@ -37,5 +36,4 @@ if ( module.hot ) {
     });
 }
 
-store.dispatch(barnHent());
-store.dispatch(teksterHent());
+store.dispatch(appStart());
