@@ -31,7 +31,7 @@ app.get('/soknad-kontantstotte-api/tekster', function(req, res) {
 });
 
 app.get('/soknad-kontantstotte-api/status/ping', function(req, res) {
-    setTimeout(() => res.send(), delayMs );
+    setTimeout(() => res.status(200).send(), delayMs );
 });
 
 app.get('*', (req, res) => {
