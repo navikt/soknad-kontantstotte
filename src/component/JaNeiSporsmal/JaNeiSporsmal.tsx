@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { soknadSettVerdi } from '../../soknad/actions';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
+import SpesifiserTextarea from "./SpesifiserTextarea";
 
 
 interface ISporsmaalProps {
@@ -15,7 +16,8 @@ interface ISporsmaalProps {
 }
 
 interface IMapDispatchToProps {
-    settSvar: (felt: string, forklaring?: string, verdi?: boolean) => any;
+    settSvar: (verdi?: boolean) => any;
+    settForklaring: (forklaring?: string) => any;
 }
 
 type JaNeiSporsmalProps = IMapDispatchToProps & ISporsmaalProps & InjectedIntlProps;
@@ -25,26 +27,10 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
     verdi,
     forklaring,
     settSvar,
+    settForklaring,
     sporsmalNokkel,
     intl
 }) => {
-
-    const visUtfyllendeSvarTekst = (spesifiser: boolean|undefined): JSX.Element|undefined => {
-        if (spesifiser === true) {
-            return (
-                <TextareaControlled
-                    label={ intl.formatMessage(
-                        {
-                            id: 'tekstomrade.fyllInn'
-                        }
-                    ) }
-                    defaultValue=''
-                    maxLength={500}
-                />
-            );
-        }
-        return;
-    };
     return (
         <div>
             <RadioPanelGruppe
@@ -56,7 +42,7 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
                 name={ nokkel }
                 onChange={
                     (event: React.SyntheticEvent<EventTarget>, value: string) => {
-                        settSvar(nokkel, forklaring, value === 'true');
+                        settSvar(value === 'true');
                     }
                 }
                 checked={ verdi !== undefined ? verdi.toString() : 'undefined' }
@@ -67,18 +53,23 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
                     ]
                 }
             />
-            { visUtfyllendeSvarTekst(!verdi) }
+            <SpesifiserTextarea
+                nokkel={ nokkel }
+                forklaring={ forklaring }
+                settForklaring={ settForklaring }
+                synlig={ verdi === false }
+            />
         </div>
     );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: ISporsmaalProps): IMapDispatchToProps => {
     return {
-        settSvar: (felt, forklaring, verdi) => {
-            dispatch(soknadSettVerdi(felt, verdi));
-            if (!verdi) {
-                dispatch(soknadSettVerdi(felt + 'Forklaring', forklaring));
-            }
+        settSvar: (verdi) => {
+            dispatch(soknadSettVerdi(ownProps.nokkel, verdi));
+        },
+        settForklaring: (forklaring) => {
+            dispatch(soknadSettVerdi(ownProps.nokkel + 'Forklaring', forklaring));
         }
     };
 };

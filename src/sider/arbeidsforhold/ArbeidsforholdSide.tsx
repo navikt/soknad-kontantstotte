@@ -23,9 +23,7 @@ const ArbeidsforholdSide: React.StatelessComponent<ArbeidsforholdSideProps> = (
         arbeiderIUtlandetEllerKontinentalsokkel,
         arbeiderIUtlandetEllerKontinentalsokkelForklaring,
         mottarKontantstotteFraAnnetEOS,
-        mottarKontantstotteFraAnnetEOSForklaring,
-        intl
-
+        mottarKontantstotteFraAnnetEOSForklaring
     }) => {
     return (
         <SideContainer>
