@@ -34,7 +34,6 @@ const ArbeidsforholdSide: React.StatelessComponent<ArbeidsforholdSideProps> = (
                 forklaring={ mottarYtelserFraUtlandetForklaring }
             />
 
-
             <JaNeiSporsmal
                 nokkel='arbeiderIUtlandetEllerKontinentalsokkel'
                 sporsmalNokkel='arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.sporsmal'
