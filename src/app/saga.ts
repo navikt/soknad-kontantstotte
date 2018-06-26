@@ -6,7 +6,7 @@ import { appEndreStatus, AppTypeKeys } from './actions';
 import { pingBackend } from './api';
 import { AppStatus } from './types';
 
-function * startAppSag(): SagaIterator {
+function * startAppSaga(): SagaIterator {
     yield call( pingBackend );
 
     yield put(teksterHent());
@@ -23,7 +23,7 @@ function * startAppSag(): SagaIterator {
 function * appSaga(): SagaIterator {
     while ( yield take(AppTypeKeys.START_APP)) {
         yield put(appEndreStatus( AppStatus.STARTER ));
-        const startSaga = yield fork(startAppSag);
+        const startSaga = yield fork(startAppSaga);
         yield take([
             TeksterTypeKeys.HENT_FEILET,
             BarnTypeKeys.HENT_FEILET
