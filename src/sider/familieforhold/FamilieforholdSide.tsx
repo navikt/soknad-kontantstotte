@@ -25,6 +25,7 @@ const FamilieforholdSide: React.StatelessComponent<IMapStateToProps> = (
                 nokkel='borForeldreneSammenMedBarnet'
                 sporsmalNokkel='familieforhold.borForeldreneSammenMedBarnet.sporsmal'
                 verdi={ borForeldreneSammenMedBarnet }
+                hjelpetekstNokkel={'familieforhold.borForeldreneSammenMedBarnet.hjelpetekst'}
             />
 
             { borForeldreneSammenMedBarnet === true &&
