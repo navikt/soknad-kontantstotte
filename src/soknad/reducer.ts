@@ -6,6 +6,13 @@ interface ISoknadSate {
     boddINorgeSisteFemAar: boolean;
     borSammenMedBarnet: boolean;
     skalBoMedBarnetINorgeNesteTolvMaaneder: boolean;
+    mottarYtelserFraUtlandet: boolean;
+    mottarYtelserFraUtlandetForklaring?: string;
+    arbeiderIUtlandetEllerKontinentalsokkel: boolean;
+    arbeiderIUtlandetEllerKontinentalsokkelForklaring?: string;
+    mottarKontantstotteFraAnnetEOS: boolean;
+    mottarKontantstotteFraAnnetEOSForklaring?: string;
+
 }
 
 const initialState = {
