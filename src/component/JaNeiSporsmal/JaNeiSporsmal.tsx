@@ -57,7 +57,7 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
                 nokkel={ nokkel }
                 forklaring={ forklaring }
                 settForklaring={ settForklaring }
-                synlig={ verdi === false }
+                skalVises={ verdi === false }
             />
         </div>
     );
