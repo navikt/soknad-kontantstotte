@@ -7,6 +7,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const config = {
     entry: {
         'soknad-kontantstotte': [
+            './src/polyfill.ts',
             './src/index.tsx'
         ]
     },
