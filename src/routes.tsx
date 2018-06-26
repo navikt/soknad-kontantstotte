@@ -6,7 +6,7 @@ import OppfyllerIkkeVilkaarSide from './sider/feilsider/OppfyllerIkkeVilkaarSide
 import SidenFinnesIkkeSide from './sider/feilsider/SidenFinnesIkkeSide';
 import KvitteringSide from './sider/kvittering/KvitteringSide';
 import MineBarnSide from './sider/mine_barn/MineBarnSide';
-import OmsorgssituasjonSide from './sider/omsorgssituasjon/OmsorgssituasjonSide';
+import FamilieforholdSide from './sider/familieforhold/FamilieforholdSide';
 import OppsummeringSide from './sider/oppsummering/OppsummeringSide';
 import StartSide from './sider/start/StartSide';
 import VeiledningSide from './sider/veiledning/VeiledningSide';
@@ -47,9 +47,9 @@ export const Sider: ISide[] = [
         stegIndeks: 1
     },
     {
-        key: 'omsorgssituasjon',
-        path: '/omsorgssituasjon',
-        sideKomponent: OmsorgssituasjonSide,
+        key: 'familieforhold',
+        path: '/familieforhold',
+        sideKomponent: FamilieforholdSide,
         sideType: SideType.SKJEMASIDE,
         stegIndeks: 2
     },
