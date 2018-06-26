@@ -5,7 +5,6 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 interface IOwnProps {
     nokkel: string;
     settForklaring: (verdi: string) => any;
-    skalVises: boolean;
     forklaring?: string;
 }
 
@@ -15,11 +14,10 @@ const SpesifiserTextarea: React.StatelessComponent<SpesifiserTextareaProps> = ({
     nokkel,
     settForklaring,
     forklaring,
-    intl,
-    skalVises
+    intl
 }) => {
 
-    return skalVises ? (
+    return (
         <TextareaControlled
             label={ intl.formatMessage(
                 {
@@ -34,7 +32,7 @@ const SpesifiserTextarea: React.StatelessComponent<SpesifiserTextareaProps> = ({
             defaultValue={forklaring || ''}
             maxLength={500}
         />
-    ) : null;
+    );
 
 };
 

@@ -31,6 +31,18 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
     sporsmalNokkel,
     intl
 }) => {
+    const visTekstomradeHvisNei = () => {
+        if(verdi === false){
+            return (
+                <SpesifiserTextarea
+                    nokkel={ nokkel }
+                    forklaring={ forklaring }
+                    settForklaring={ settForklaring }
+                />
+            );
+        }
+    };
+
     return (
         <div>
             <RadioPanelGruppe
@@ -53,12 +65,9 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
                     ]
                 }
             />
-            <SpesifiserTextarea
-                nokkel={ nokkel }
-                forklaring={ forklaring }
-                settForklaring={ settForklaring }
-                skalVises={ verdi === false }
-            />
+
+            { visTekstomradeHvisNei() }
+
         </div>
     );
 };
