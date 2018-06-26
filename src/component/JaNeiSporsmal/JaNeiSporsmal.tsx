@@ -1,16 +1,18 @@
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { InjectedIntlProps, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { soknadSettVerdi } from '../../soknad/actions';
 import SpesifiserTextarea from './SpesifiserTextarea';
+import HjelpetekstUnder from "nav-frontend-hjelpetekst";
 
 interface ISporsmaalProps {
     nokkel: string;
     sporsmalNokkel: string;
     verdi?: boolean;
     forklaring?: string;
+    hjelpetekstNokkel?: string;
 }
 
 interface IMapDispatchToProps {
@@ -27,10 +29,16 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
     settSvar,
     settForklaring,
     sporsmalNokkel,
-    intl
+    intl,
+    hjelpetekstNokkel
 }) => {
     return (
         <div>
+            {hjelpetekstNokkel &&
+                <HjelpetekstUnder id='hjelpetekst' tittel="test">
+                    <FormattedMessage id={ hjelpetekstNokkel }/>
+                </HjelpetekstUnder>
+            }
             <RadioPanelGruppe
                 legend={ intl.formatMessage(
                     {
