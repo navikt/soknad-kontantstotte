@@ -22,15 +22,15 @@ function lesMockFil(filnavn) {
 app.use(middleware);
 app.use(webpackHotMiddleware(compiler));
 
-app.get('/soknad-kontantstotte-api/barn', function(req, res) {
+app.get('/soknad-kontantstotte-api/api/barn', function(req, res) {
     setTimeout(() => res.send(lesMockFil('barn.json')), delayMs);
 });
 
-app.get('/soknad-kontantstotte-api/tekster', function(req, res) {
+app.get('/soknad-kontantstotte-api/api/tekster', function(req, res) {
     setTimeout(() => res.send(lesMockFil('tekster.json')), delayMs);
 });
 
-app.get('/soknad-kontantstotte-api/status/ping', function(req, res) {
+app.get('/soknad-kontantstotte-api/api/status/ping', function(req, res) {
     setTimeout(() => res.status(200).send(), delayMs );
 });
 
@@ -44,5 +44,5 @@ app.listen(port, 'localhost', function onStart(err) {
     if (err) {
         console.log(err);
     }
-    console.info('=== Dev-server startet på %s, åpne http://localhost:%s/', port, port);
+    console.info('=== Dev-server startet på http://localhost:%s/', port);
 });

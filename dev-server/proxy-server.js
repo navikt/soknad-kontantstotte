@@ -17,9 +17,9 @@ const middleware = webpackDevMiddleware(compiler, {
 app.use(middleware);
 app.use(webpackHotMiddleware(compiler));
 
-app.use('/soknad-kontantstotte-api/', proxy('localhost:8080', {
+app.use('/soknad-kontantstotte-api/api/', proxy('localhost:8080', {
     proxyReqPathResolver: function (req) {
-        return `/soknad-kontantstotte-api${require('url').parse(req.url).path}`;
+        return `/soknad-kontantstotte-api/api${require('url').parse(req.url).path}`;
     }
 }));
 

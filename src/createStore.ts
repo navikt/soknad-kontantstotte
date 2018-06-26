@@ -14,7 +14,7 @@ import {
 } from './rootSaga';
 
 const history = createBrowserHistory({
-    basename: '/soknad-kontantstotte/'
+    basename: '/'
 });
 
 function configureStore() {
