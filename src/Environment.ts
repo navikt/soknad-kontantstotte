@@ -6,7 +6,7 @@ interface IEnvUrls {
 const Environment = (): IEnvUrls => {
     if (process.env.NODE_ENV === 'development') {
         return {
-            apiUrl: 'http://localhost:8000',
+            apiUrl: '',
             loginUrl: 'http://localhost:8000/local/cookie'
         };
     } else if (window.location.hostname.indexOf('soknad-kontantstotte-t') > -1) {
