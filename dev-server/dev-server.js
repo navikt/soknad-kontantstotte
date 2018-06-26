@@ -22,15 +22,15 @@ function lesMockFil(filnavn) {
 app.use(middleware);
 app.use(webpackHotMiddleware(compiler));
 
-app.get('/barn', function(req, res) {
+app.get('/soknad-kontantstotte-api/barn', function(req, res) {
     setTimeout(() => res.send(lesMockFil('barn.json')), delayMs);
 });
 
-app.get('/tekster', function(req, res) {
+app.get('/soknad-kontantstotte-api/tekster', function(req, res) {
     setTimeout(() => res.send(lesMockFil('tekster.json')), delayMs);
 });
 
-app.get('/status/ping', function(req, res) {
+app.get('/soknad-kontantstotte-api/status/ping', function(req, res) {
     setTimeout(() => res.send(), delayMs );
 });
 

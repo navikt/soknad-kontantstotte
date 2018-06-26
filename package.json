@@ -8,6 +8,7 @@
     "build:dev": "webpack --config ./webpack.dev.js",
     "build:prod": "webpack --config ./webpack.prod.js",
     "start": "node ./dev-server/dev-server",
+    "start:proxy": "node ./dev-server/proxy-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,6 +26,7 @@
     "classnames": "2.2.6",
     "connect-history-api-fallback": "1.5.0",
     "connected-react-router": "4.3.0",
+    "express-http-proxy": "1.2.0",
     "history": "4.7.2",
     "lodash.throttle": "4.1.1",
     "nav-frontend-core": "4.0.5",
