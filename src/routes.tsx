@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Route, RouteProps } from 'react-router-dom';
+import ArbeidsforholdSide from './sider/arbeidsforhold/ArbeidsforholdSide';
 import BarnehageplassSide from './sider/barnehageplass/BarnehageplassSide';
 import OppfyllerIkkeVilkaarSide from './sider/feilsider/OppfyllerIkkeVilkaarSide';
 import SidenFinnesIkkeSide from './sider/feilsider/SidenFinnesIkkeSide';
@@ -8,7 +9,6 @@ import MineBarnSide from './sider/mine_barn/MineBarnSide';
 import OmsorgssituasjonSide from './sider/omsorgssituasjon/OmsorgssituasjonSide';
 import OppsummeringSide from './sider/oppsummering/OppsummeringSide';
 import StartSide from './sider/start/StartSide';
-import UtenlandskForbindelseSide from './sider/utenlandsk_forbindelse/UtenlandskForbindelseSide';
 import VeiledningSide from './sider/veiledning/VeiledningSide';
 
 export enum SideType {
@@ -61,9 +61,9 @@ export const Sider: ISide[] = [
         stegIndeks: 3
     },
     {
-        key: 'utenlandsk-forbindelse',
-        path: '/utenlandsk-forbindelse',
-        sideKomponent: UtenlandskForbindelseSide,
+        key: 'arbeidsforhold',
+        path: '/arbeidsforhold',
+        sideKomponent: ArbeidsforholdSide,
         sideType: SideType.SKJEMASIDE,
         stegIndeks: 4
     },

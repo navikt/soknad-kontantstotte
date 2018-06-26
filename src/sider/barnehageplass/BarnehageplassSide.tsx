@@ -6,7 +6,7 @@ const BarnehageplassSide = (): JSX.Element => {
     return (
         <SideContainer>
             <h1>Har barnet barnehageplass?</h1>
-            <NavigasjonKnapp to='/utenlandsk-forbindelse'>Neste</NavigasjonKnapp>
+            <NavigasjonKnapp to='/arbeidsforhold'>Neste</NavigasjonKnapp>
         </SideContainer>
     );
 };
