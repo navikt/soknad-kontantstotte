@@ -12,5 +12,11 @@
     "arbeidsforhold.mottarKontantstotteFraAnnetEOS.sporsmal": "Mottar dere kontantstotte fra et annet EØS-land?",
     "tekstomrade.fyllInn": "Fyll inn",
     "svar.ja": "Ja",
-    "svar.nei": "Nei"
+    "svar.nei": "Nei",
+    "familieforhold.borForeldreneSammenMedBarnet.sporsmal": "Bor begge foreldrene med barnet?",
+    "familieforhold.annenForelderYrkesaktivINorgeEOSIMinstFemAar.sporsmal": "Har barnets andre forelder bodd eller vært yrkesaktiv i Norge eller et annet EØS-land i minst 5 år?",
+    "familieforhold.erAvklartDeltBosted.sporsmal": "Er det avklart delt bosted for barnet?",
+    "familieforhold.annenForelder.tittel": "Annen forelder til barnet:",
+    "familieforhold.annenForelder.navn.placeholder": "Navn",
+    "familieforhold.annenForelder.personnummer.placeholder": "Person nr."
 }
