@@ -10,6 +10,7 @@ const config = merge.strategy({
     mode: 'development',
     entry: {
         'soknad-kontantstotte': [
+            'babel-polyfill',
             'react-hot-loader/patch',
             'webpack-hot-middleware/client?reload=true'
         ]},
