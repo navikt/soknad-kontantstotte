@@ -22,6 +22,9 @@ interface IMapStateToProps {
     jaFraDato?: string;
     jaKommune?: string;
     jaAntallTimer?: string;
+    skalSlutteDato?: string;
+    skalSlutteKommune?: string;
+    skalSlutteAntallTimer?: string;
 }
 
 interface IMapDispatchToProps {
@@ -40,7 +43,7 @@ const BarnehageplassSide: React.StatelessComponent<BarnehageplassSideProps> = ({
         { label: 'Nei', value: BarnehageplassVerdier.Nei },
         { label: 'Nei, men har fått plass', value: BarnehageplassVerdier.NeiHarFaatt },
         { label: 'Ja', value: BarnehageplassVerdier.Ja },
-        { label: 'Ja, men har sluttet', value: BarnehageplassVerdier.JaSkalSlutte }
+        { label: 'Ja, men har nylig sluttet', value: BarnehageplassVerdier.JaSkalSlutte }
     ];
     const visRelevanteEkstraFelter = () => {
         if (harBarnehageplass === BarnehageplassVerdier.NeiHarFaatt) {
@@ -76,6 +79,27 @@ const BarnehageplassSide: React.StatelessComponent<BarnehageplassSideProps> = ({
                         bredde={'M'}
                         onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
                             settEkstraFelt('jaAntallTimer', event.target.value)}
+                    />
+                </div>
+            );
+        } else if (harBarnehageplass === BarnehageplassVerdier.JaSkalSlutte) {
+            return (
+                <div>
+                    <DatoFelt
+                        nokkel={'Hvilken dato slutter barnet i barnehagen?'}
+                        settDato={(dato) => settEkstraFelt('skalSlutteDato', dato.toDateString())}
+                    />
+                    <Input
+                        label={'Hvilken kommune ligger barnehagen i?'}
+                        bredde={'M'}
+                        onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
+                            settEkstraFelt('skalSlutteKommune', event.target.value)}
+                    />
+                    <Input
+                        label={'Hvor mange timer i uken har barnet gått i barnehage?'}
+                        bredde={'M'}
+                        onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
+                            settEkstraFelt('skalSlutteAntallTimer', event.target.value)}
                     />
                 </div>
             );
