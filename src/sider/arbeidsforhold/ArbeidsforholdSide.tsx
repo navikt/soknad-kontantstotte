@@ -7,7 +7,7 @@ import { IRootState } from '../../rootReducer';
 
 interface IMapStateToProps {
     mottarYtelserFraUtlandet: boolean;
-    mottarYtelserFraUtlandetForklaring?: string | undefined;
+    mottarYtelserFraUtlandetForklaring?: string;
     arbeiderIUtlandetEllerKontinentalsokkel: boolean;
     arbeiderIUtlandetEllerKontinentalsokkelForklaring?: string;
     mottarKontantstotteFraAnnetEOS: boolean;
@@ -31,6 +31,7 @@ const ArbeidsforholdSide: React.StatelessComponent<ArbeidsforholdSideProps> = (
                 nokkel='mottarYtelserFraUtlandet'
                 sporsmalNokkel='arbeidsforhold.mottarYtelserFraUtlandet.sporsmal'
                 verdi={ mottarYtelserFraUtlandet }
+                harForklaring={ true }
                 forklaring={ mottarYtelserFraUtlandetForklaring }
             />
 
@@ -38,6 +39,7 @@ const ArbeidsforholdSide: React.StatelessComponent<ArbeidsforholdSideProps> = (
                 nokkel='arbeiderIUtlandetEllerKontinentalsokkel'
                 sporsmalNokkel='arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.sporsmal'
                 verdi={ arbeiderIUtlandetEllerKontinentalsokkel }
+                harForklaring={ true }
                 forklaring={ arbeiderIUtlandetEllerKontinentalsokkelForklaring }
             />
 
@@ -45,6 +47,7 @@ const ArbeidsforholdSide: React.StatelessComponent<ArbeidsforholdSideProps> = (
                 nokkel='mottarKontantstotteFraAnnetEOS'
                 sporsmalNokkel='arbeidsforhold.mottarKontantstotteFraAnnetEOS.sporsmal'
                 verdi={ mottarKontantstotteFraAnnetEOS }
+                harForklaring={ true }
                 forklaring={ mottarKontantstotteFraAnnetEOSForklaring }
             />
 

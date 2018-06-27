@@ -1,23 +1,24 @@
+import HjelpetekstUnder from 'nav-frontend-hjelpetekst';
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
-import TextareaControlled from 'nav-frontend-skjema/lib/textarea-controlled';
 import * as React from 'react';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { soknadSettVerdi } from '../../soknad/actions';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
-import SpesifiserTextarea from "./SpesifiserTextarea";
-
+import SpesifiserTextarea from './SpesifiserTextarea';
 
 interface ISporsmaalProps {
     nokkel: string;
     sporsmalNokkel: string;
-    verdi?: boolean;
     forklaring?: string;
+    harForklaring?: boolean;
+    hjelpetekstNokkel?: string;
+    verdi?: boolean;
 }
 
 interface IMapDispatchToProps {
-    settSvar: (verdi?: boolean) => any;
     settForklaring: (forklaring?: string) => any;
+    settSvar: (verdi?: boolean) => any;
 }
 
 type JaNeiSporsmalProps = IMapDispatchToProps & ISporsmaalProps & InjectedIntlProps;
@@ -29,22 +30,17 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
     settSvar,
     settForklaring,
     sporsmalNokkel,
-    intl
+    intl,
+    harForklaring,
+    hjelpetekstNokkel
 }) => {
-    const visTekstomradeHvisNei = () => {
-        if(verdi === false){
-            return (
-                <SpesifiserTextarea
-                    nokkel={ nokkel }
-                    forklaring={ forklaring }
-                    settForklaring={ settForklaring }
-                />
-            );
-        }
-    };
-
     return (
         <div>
+            {hjelpetekstNokkel &&
+                <HjelpetekstUnder id={hjelpetekstNokkel}>
+                    <FormattedMessage id={ hjelpetekstNokkel }/>
+                </HjelpetekstUnder>
+            }
             <RadioPanelGruppe
                 legend={ intl.formatMessage(
                     {
@@ -66,7 +62,13 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
                 }
             />
 
-            { visTekstomradeHvisNei() }
+            { harForklaring && verdi === false &&
+                <SpesifiserTextarea
+                    nokkel={ nokkel }
+                    forklaring={ forklaring }
+                    settForklaring={ settForklaring }
+                />
+            }
 
         </div>
     );
@@ -74,11 +76,11 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: ISporsmaalProps): IMapDispatchToProps => {
     return {
-        settSvar: (verdi) => {
-            dispatch(soknadSettVerdi(ownProps.nokkel, verdi));
-        },
         settForklaring: (forklaring) => {
             dispatch(soknadSettVerdi(ownProps.nokkel + 'Forklaring', forklaring));
+        },
+        settSvar: (verdi) => {
+            dispatch(soknadSettVerdi(ownProps.nokkel, verdi));
         }
     };
 };
