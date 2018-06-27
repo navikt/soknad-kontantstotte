@@ -1,12 +1,10 @@
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
-import TextareaControlled from 'nav-frontend-skjema/lib/textarea-controlled';
 import * as React from 'react';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { soknadSettVerdi } from '../../soknad/actions';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
 import SpesifiserTextarea from "./SpesifiserTextarea";
-
 
 interface ISporsmaalProps {
     nokkel: string;
@@ -74,11 +72,11 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: ISporsmaalProps): IMapDispatchToProps => {
     return {
-        settSvar: (verdi) => {
-            dispatch(soknadSettVerdi(ownProps.nokkel, verdi));
-        },
         settForklaring: (forklaring) => {
             dispatch(soknadSettVerdi(ownProps.nokkel + 'Forklaring', forklaring));
+        },
+        settSvar: (verdi) => {
+            dispatch(soknadSettVerdi(ownProps.nokkel, verdi));
         }
     };
 };
