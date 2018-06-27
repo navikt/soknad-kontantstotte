@@ -19,7 +19,7 @@ app.use(webpackHotMiddleware(compiler));
 
 app.use('/soknad-kontantstotte-api/api/', proxy('localhost:8080', {
     proxyReqPathResolver: function (req) {
-        return `/soknad-kontantstotte-api/api${require('url').parse(req.url).path}`;
+        return `/api${require('url').parse(req.url).path}`;
     }
 }));
 
