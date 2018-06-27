@@ -30,7 +30,7 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
     intl
 }) => {
     const visTekstomradeHvisNei = () => {
-        if(verdi === false){
+        if (verdi === false) {
             return (
                 <SpesifiserTextarea
                     nokkel={ nokkel }

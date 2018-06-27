@@ -56,7 +56,8 @@ const ArbeidsforholdSide: React.StatelessComponent<ArbeidsforholdSideProps> = (
 const mapStateToProps = (state: IRootState) => {
     return {
         arbeiderIUtlandetEllerKontinentalsokkel: state.soknad.arbeiderIUtlandetEllerKontinentalsokkel,
-        arbeiderIUtlandetEllerKontinentalsokkelForklaring: state.soknad.arbeiderIUtlandetEllerKontinentalsokkelForklaring,
+        arbeiderIUtlandetEllerKontinentalsokkelForklaring:
+            state.soknad.arbeiderIUtlandetEllerKontinentalsokkelForklaring,
         mottarKontantstotteFraAnnetEOS: state.soknad.mottarKontantstotteFraAnnetEOS,
         mottarKontantstotteFraAnnetEOSForklaring: state.soknad.mottarKontantstotteFraAnnetEOSForklaring,
         mottarYtelserFraUtlandet: state.soknad.mottarYtelserFraUtlandet,
