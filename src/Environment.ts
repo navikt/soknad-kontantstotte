@@ -7,7 +7,7 @@ const Environment = (): IEnvUrls => {
     if (process.env.NODE_ENV === 'development') {
         return {
             apiUrl: '/soknad-kontantstotte-api/api',
-            loginUrl: 'http://localhost:8000/local/cookie'
+            loginUrl: 'http://localhost:8080/local/cookie'
         };
     } else if (window.location.hostname.indexOf('soknad-kontantstotte-t') > -1) {
         return {
