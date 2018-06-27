@@ -1,7 +1,8 @@
 import { IBarn } from '../barn/types';
+import { BarnehageplassVerdier } from "../sider/barnehageplass/BarnehageplassSide";
 import { SoknadActionTypes, SoknadTypeKeys } from './actions';
 
-interface ISoknadSate {
+interface ISoknadState {
     barn: IBarn;
     boddINorgeSisteFemAar: boolean;
     borSammenMedBarnet: boolean;
@@ -12,6 +13,7 @@ interface ISoknadSate {
     arbeiderIUtlandetEllerKontinentalsokkelForklaring?: string;
     mottarKontantstotteFraAnnetEOS: boolean;
     mottarKontantstotteFraAnnetEOSForklaring?: string;
+    harBarnehageplass: BarnehageplassVerdier;
 
 }
 
@@ -35,6 +37,6 @@ function soknadReducer(state = initialState, action: SoknadActionTypes) {
 }
 
 export {
-    ISoknadSate,
+    ISoknadState,
     soknadReducer,
 };

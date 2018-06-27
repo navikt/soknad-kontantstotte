@@ -2,13 +2,13 @@ import { RouterState } from "connected-react-router";
 import { combineReducers } from 'redux';
 import { appReducer, IAppState } from './app/reducer';
 import { barnReducer, IBarnState } from './barn/reducer';
-import { ISoknadSate, soknadReducer } from './soknad/reducer';
+import { ISoknadState, soknadReducer } from './soknad/reducer';
 import { ITeksterState, teksterReducer } from './tekster/reducer';
 
 export interface IRootState {
     app: IAppState;
     barn: IBarnState;
-    soknad: ISoknadSate;
+    soknad: ISoknadState;
     tekster: ITeksterState;
     router: RouterState;
 }
