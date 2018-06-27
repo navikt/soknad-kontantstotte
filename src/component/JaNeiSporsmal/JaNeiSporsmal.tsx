@@ -34,7 +34,6 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
     harForklaring,
     hjelpetekstNokkel
 }) => {
-    console.log(forklaring);
     return (
         <div>
             {hjelpetekstNokkel &&
