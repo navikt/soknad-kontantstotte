@@ -19,8 +19,6 @@ const FamilieforholdSide: React.StatelessComponent<IMapStateToProps> = (
 
     return (
         <SideContainer>
-            <h1>Bor begge foreldrene med barnet?</h1>
-
             <JaNeiSporsmal
                 nokkel='borForeldreneSammenMedBarnet'
                 sporsmalNokkel='familieforhold.borForeldreneSammenMedBarnet.sporsmal'
