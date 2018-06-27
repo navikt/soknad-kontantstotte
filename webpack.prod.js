@@ -5,9 +5,14 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = merge.strategy({
+    'entry.soknad-kontantstotte': 'prepend',
     'module.rules': 'append'
 })(common, {
     mode: 'production',
+    entry: {
+        'soknad-kontantstotte': [
+            'babel-polyfill'
+        ]},
     devtool: 'source-map',
     module: {
         rules: [

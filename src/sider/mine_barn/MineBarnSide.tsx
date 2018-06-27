@@ -38,7 +38,7 @@ const MineBarnSide: React.StatelessComponent<MineBarnSideProps> = ({
                 </li>
             )}
             </ul>
-            <NavigasjonKnapp to='/omsorgssituasjon'>Neste</NavigasjonKnapp>
+            <NavigasjonKnapp to='/familieforhold'>Neste</NavigasjonKnapp>
         </SideContainer>
     );
 };
