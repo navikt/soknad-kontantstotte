@@ -1,3 +1,4 @@
+import { Input } from "nav-frontend-skjema";
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
 import { connect, Dispatch } from "react-redux";
@@ -6,7 +7,6 @@ import SideContainer from '../../container/SideContainer/SideContainer';
 import { IRootState } from "../../rootReducer";
 import { soknadSettVerdi } from "../../soknad/actions";
 import DatoFelt from "./DatoFelt";
-import KommuneFelt from "./KommuneFelt";
 
 export enum BarnehageplassVerdier {
     Nei = 'Nei',
@@ -19,6 +19,9 @@ interface IMapStateToProps {
     harBarnehageplass: BarnehageplassVerdier;
     harFaattPlassFraDato?: string;
     harFaattPlassKommune?: string;
+    jaFraDato?: string;
+    jaKommune?: string;
+    jaAntallTimer?: string;
 }
 
 interface IMapDispatchToProps {
@@ -47,9 +50,32 @@ const BarnehageplassSide: React.StatelessComponent<BarnehageplassSideProps> = ({
                         nokkel={'Hvilken dato har barnet fått barnehageplass fra?'}
                         settDato={(dato) => settEkstraFelt('harFaattPlassFraDato', dato.toDateString())}
                     />
-                    <KommuneFelt
-                        nokkel={''}
-                        settKommune={(kommune) => settEkstraFelt('harFaattPlassKommune', kommune)}
+                    <Input
+                        label={'Hvilken kommune ligger barnehagen i?'}
+                        bredde={'M'}
+                        onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
+                            settEkstraFelt('harFaattPlassKommune', event.target.value)}
+                    />
+                </div>
+            );
+        } else if (harBarnehageplass === BarnehageplassVerdier.Ja) {
+            return (
+                <div>
+                    <DatoFelt
+                        nokkel={'Hvilken dato begynte barnet i barnehagen?'}
+                        settDato={(dato) => settEkstraFelt('jaFraDato', dato.toDateString())}
+                    />
+                    <Input
+                        label={'Hvilken kommune ligger barnehagen i?'}
+                        bredde={'M'}
+                        onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
+                            settEkstraFelt('jaKommune', event.target.value)}
+                    />
+                    <Input
+                        label={'Hvor mange timer i uken går barnet i barnehage?'}
+                        bredde={'M'}
+                        onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
+                            settEkstraFelt('jaAntallTimer', event.target.value)}
                     />
                 </div>
             );
