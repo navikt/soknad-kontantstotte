@@ -13,6 +13,11 @@ interface ISoknadState {
     arbeiderIUtlandetEllerKontinentalsokkelForklaring?: string;
     mottarKontantstotteFraAnnetEOS: boolean;
     mottarKontantstotteFraAnnetEOSForklaring?: string;
+    borForeldreneSammenMedBarnet: boolean;
+    erAvklartDeltBosted?: boolean;
+    annenForelderNavn?: string;
+    annenForelderPersonnummer?: string;
+    annenForelderYrkesaktivINorgeEOSIMinstFemAar?: boolean;
     harBarnehageplass: BarnehageplassVerdier;
 
 }
