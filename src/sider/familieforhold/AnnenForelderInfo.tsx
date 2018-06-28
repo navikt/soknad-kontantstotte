@@ -6,11 +6,12 @@ import { Dispatch } from 'redux';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
+import { Svar } from '../../soknad/reducer';
 
 interface IMapStateToProps {
     annenForelderNavn?: string;
     annenForelderPersonnummer?: string;
-    annenForelderYrkesaktivINorgeEOSIMinstFemAar?: boolean;
+    annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar;
 }
 
 interface IMapDispatchToProps {
@@ -68,7 +69,7 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
                 verdi={ annenForelderYrkesaktivINorgeEOSIMinstFemAar }
             />
 
-            { annenForelderYrkesaktivINorgeEOSIMinstFemAar === false &&
+            { annenForelderYrkesaktivINorgeEOSIMinstFemAar === Svar.NEI &&
             <div> Kan ikke gå videre, må gi beskjed om å søke på papir etc etc</div>
             }
         </div>
