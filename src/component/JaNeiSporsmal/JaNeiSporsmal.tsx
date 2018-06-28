@@ -1,4 +1,4 @@
-import HjelpetekstUnder from 'nav-frontend-hjelpetekst';
+import { HjelpetekstUnder } from 'nav-frontend-hjelpetekst';
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
