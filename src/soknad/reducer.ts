@@ -21,6 +21,7 @@ const initialState = {
     barn: {},
     boddINorgeSisteFemAar: false,
     borSammenMedBarnet: false,
+    harBarnehageplass: BarnehageplassVerdier.Ubesvart,
     skalBoMedBarnetINorgeNesteTolvMaaneder: false
 };
 

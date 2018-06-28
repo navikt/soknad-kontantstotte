@@ -12,5 +12,11 @@
     "arbeidsforhold.mottarKontantstotteFraAnnetEOS.sporsmal": "Mottar dere kontantstotte fra et annet EØS-land?",
     "tekstomrade.fyllInn": "Fyll inn",
     "svar.ja": "Ja",
-    "svar.nei": "Nei"
+    "svar.nei": "Nei",
+    "svar.neiHarFaattPlass": "Nei, men har fått plass",
+    "svar.jaHarSluttet": "Ja, men har nylig sluttet",
+    "barnehageplass.harFaattPlassDato": "Hvilken dato har barnet fått barnehageplass fra?",
+    "barnehageplass.kommune": "Hvilken kommune ligger barnehagen i?",
+    "barnehageplass.antallTimer": "Hvor mange timer i uken går barnet i barnehage?",
+    "barnehageplass.skalSlutteDato": "Hvilken dato slutter barnet i barnehagen?"
 }

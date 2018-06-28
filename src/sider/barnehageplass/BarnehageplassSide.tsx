@@ -1,18 +1,19 @@
-import { Input } from "nav-frontend-skjema";
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from "react-redux";
 import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
 import SideContainer from '../../container/SideContainer/SideContainer';
 import { IRootState } from "../../rootReducer";
 import { soknadSettVerdi } from "../../soknad/actions";
-import DatoFelt from "./DatoFelt";
+import { ekstrafelterForHarFaattPlass, ekstrafelterForJa, ekstrafelterForJaSkalSlutte } from "./Ekstrafelter";
 
 export enum BarnehageplassVerdier {
     Nei = 'Nei',
     NeiHarFaatt = 'NeiHarFaatt',
     Ja = 'Ja',
-    JaSkalSlutte = 'JaSkalSlutte'
+    JaSkalSlutte = 'JaSkalSlutte',
+    Ubesvart = 'Ubesvart'
 }
 
 interface IMapStateToProps {
@@ -32,77 +33,27 @@ interface IMapDispatchToProps {
     settEkstraFelt: (nokkel: string, verdi: string) => any;
 }
 
-type BarnehageplassSideProps = IMapStateToProps & IMapDispatchToProps;
+type BarnehageplassSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
 const BarnehageplassSide: React.StatelessComponent<BarnehageplassSideProps> = ({
                                                                                    harBarnehageplass,
                                                                                    settSvar,
-                                                                                   settEkstraFelt
-}) => {
+                                                                                   intl,
+                                                                                   settEkstraFelt,
+                                                                               }) => {
     const radios = [
-        { label: 'Nei', value: BarnehageplassVerdier.Nei },
-        { label: 'Nei, men har fått plass', value: BarnehageplassVerdier.NeiHarFaatt },
-        { label: 'Ja', value: BarnehageplassVerdier.Ja },
-        { label: 'Ja, men har nylig sluttet', value: BarnehageplassVerdier.JaSkalSlutte }
+        {label: intl.formatMessage({id: 'svar.nei'}), value: BarnehageplassVerdier.Nei},
+        {label: intl.formatMessage({id: 'svar.neiHarFaattPlass'}), value: BarnehageplassVerdier.NeiHarFaatt},
+        {label: intl.formatMessage({id: 'svar.ja'}), value: BarnehageplassVerdier.Ja},
+        {label: intl.formatMessage({id: 'svar.jaHarSluttet'}), value: BarnehageplassVerdier.JaSkalSlutte}
     ];
     const visRelevanteEkstraFelter = () => {
         if (harBarnehageplass === BarnehageplassVerdier.NeiHarFaatt) {
-            return (
-                <div>
-                    <DatoFelt
-                        nokkel={'Hvilken dato har barnet fått barnehageplass fra?'}
-                        settDato={(dato) => settEkstraFelt('harFaattPlassFraDato', dato.toDateString())}
-                    />
-                    <Input
-                        label={'Hvilken kommune ligger barnehagen i?'}
-                        bredde={'M'}
-                        onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                            settEkstraFelt('harFaattPlassKommune', event.target.value)}
-                    />
-                </div>
-            );
+            return ekstrafelterForHarFaattPlass(settEkstraFelt, intl);
         } else if (harBarnehageplass === BarnehageplassVerdier.Ja) {
-            return (
-                <div>
-                    <DatoFelt
-                        nokkel={'Hvilken dato begynte barnet i barnehagen?'}
-                        settDato={(dato) => settEkstraFelt('jaFraDato', dato.toDateString())}
-                    />
-                    <Input
-                        label={'Hvilken kommune ligger barnehagen i?'}
-                        bredde={'M'}
-                        onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                            settEkstraFelt('jaKommune', event.target.value)}
-                    />
-                    <Input
-                        label={'Hvor mange timer i uken går barnet i barnehage?'}
-                        bredde={'M'}
-                        onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                            settEkstraFelt('jaAntallTimer', event.target.value)}
-                    />
-                </div>
-            );
+            return ekstrafelterForJa(settEkstraFelt, intl);
         } else if (harBarnehageplass === BarnehageplassVerdier.JaSkalSlutte) {
-            return (
-                <div>
-                    <DatoFelt
-                        nokkel={'Hvilken dato slutter barnet i barnehagen?'}
-                        settDato={(dato) => settEkstraFelt('skalSlutteDato', dato.toDateString())}
-                    />
-                    <Input
-                        label={'Hvilken kommune ligger barnehagen i?'}
-                        bredde={'M'}
-                        onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                            settEkstraFelt('skalSlutteKommune', event.target.value)}
-                    />
-                    <Input
-                        label={'Hvor mange timer i uken har barnet gått i barnehage?'}
-                        bredde={'M'}
-                        onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                            settEkstraFelt('skalSlutteAntallTimer', event.target.value)}
-                    />
-                </div>
-            );
+            return ekstrafelterForJaSkalSlutte(settEkstraFelt, intl);
         }
     };
 
@@ -125,10 +76,10 @@ const BarnehageplassSide: React.StatelessComponent<BarnehageplassSideProps> = ({
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        settEkstraFelt: (nokkel, verdi) => {
+        settEkstraFelt: (nokkel: string, verdi: string) => {
             dispatch(soknadSettVerdi(nokkel, verdi));
         },
-        settSvar: (verdi) => {
+        settSvar: (verdi: BarnehageplassVerdier) => {
             dispatch(soknadSettVerdi('harBarnehageplass', verdi));
         }
     };
@@ -136,10 +87,8 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
-        harBarnehageplass: state.soknad.harBarnehageplass,
-        harFaattPlassFraDato: '',
-        harFaattPlassKommune: ''
+        harBarnehageplass: state.soknad.harBarnehageplass
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BarnehageplassSide);
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(BarnehageplassSide));
