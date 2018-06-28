@@ -19,7 +19,7 @@ interface ISporsmaalProps {
 
 interface IMapDispatchToProps {
     settForklaring: (forklaring?: string) => any;
-    settSvar: (verdi: string) => any;
+    settSvar: (verdi: Svar) => any;
 }
 
 type JaNeiSporsmalProps = IMapDispatchToProps & ISporsmaalProps & InjectedIntlProps;
@@ -51,7 +51,7 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
                 name={ nokkel }
                 onChange={
                     (event: React.SyntheticEvent<EventTarget>, value: string) => {
-                        settSvar(value);
+                        settSvar(value as Svar);
                     }
                 }
                 checked={ verdi }
