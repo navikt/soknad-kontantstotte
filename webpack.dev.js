@@ -29,12 +29,7 @@ const config = merge.strategy({
                             importLoaders: 2
                         }
                     },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: function() { return []; }
-                        }
-                    },
+                    { loader: 'postcss-loader' },
                     {
                         loader: 'less-loader',
                         options: {
