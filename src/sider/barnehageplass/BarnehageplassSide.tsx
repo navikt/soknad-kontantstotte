@@ -1,12 +1,14 @@
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { connect, Dispatch } from "react-redux";
+import { connect, Dispatch } from 'react-redux';
 import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
 import SideContainer from '../../container/SideContainer/SideContainer';
-import { IRootState } from "../../rootReducer";
-import { soknadSettVerdi } from "../../soknad/actions";
-import { ekstrafelterForHarFaattPlass, ekstrafelterForJa, ekstrafelterForJaSkalSlutte } from "./Ekstrafelter";
+import { IRootState } from '../../rootReducer';
+import { soknadSettVerdi } from '../../soknad/actions';
+import JaEkstraFelter from './JaEkstraFelter';
+import JaSkalSlutteEkstraFelter from './JaSkalSlutteEkstraFelter';
+import NeiHarFaattEkstraFelter from './NeiHarFaattEkstraFelter';
 
 export enum BarnehageplassVerdier {
     Nei = 'Nei',
@@ -18,14 +20,14 @@ export enum BarnehageplassVerdier {
 
 interface IMapStateToProps {
     harBarnehageplass: BarnehageplassVerdier;
-    harFaattPlassFraDato?: string;
-    harFaattPlassKommune?: string;
+    neiHarFaattPlassFraDato?: string;
+    neiHarFaattPlassKommune?: string;
     jaFraDato?: string;
     jaKommune?: string;
     jaAntallTimer?: string;
-    skalSlutteDato?: string;
-    skalSlutteKommune?: string;
-    skalSlutteAntallTimer?: string;
+    jaSkalSlutteDato?: string;
+    jaSkalSlutteKommune?: string;
+    jaSkalSlutteAntallTimer?: string;
 }
 
 interface IMapDispatchToProps {
@@ -47,28 +49,24 @@ const BarnehageplassSide: React.StatelessComponent<BarnehageplassSideProps> = ({
         {label: intl.formatMessage({id: 'svar.ja'}), value: BarnehageplassVerdier.Ja},
         {label: intl.formatMessage({id: 'svar.jaHarSluttet'}), value: BarnehageplassVerdier.JaSkalSlutte}
     ];
-    const visRelevanteEkstraFelter = () => {
-        if (harBarnehageplass === BarnehageplassVerdier.NeiHarFaatt) {
-            return ekstrafelterForHarFaattPlass(settEkstraFelt, intl);
-        } else if (harBarnehageplass === BarnehageplassVerdier.Ja) {
-            return ekstrafelterForJa(settEkstraFelt, intl);
-        } else if (harBarnehageplass === BarnehageplassVerdier.JaSkalSlutte) {
-            return ekstrafelterForJaSkalSlutte(settEkstraFelt, intl);
-        }
-    };
 
     return (
         <SideContainer>
             <RadioPanelGruppe
-                name="barnehageplass"
-                legend="Har barnet barnehageplass?"
+                name='barnehageplass'
+                legend='Har barnet barnehageplass?'
                 radios={radios}
-                checked={harBarnehageplass !== undefined ? BarnehageplassVerdier[harBarnehageplass] : undefined}
+                checked={BarnehageplassVerdier[harBarnehageplass]}
                 onChange={ (event: React.SyntheticEvent<EventTarget>, value: string) => {
                     settSvar(value as BarnehageplassVerdier);
                 } }
             />
-            {visRelevanteEkstraFelter()}
+
+            {harBarnehageplass === BarnehageplassVerdier.Ja && <JaEkstraFelter settFelt={settEkstraFelt} />}
+            {harBarnehageplass === BarnehageplassVerdier.NeiHarFaatt &&
+            <NeiHarFaattEkstraFelter settFelt={settEkstraFelt} />}
+            {harBarnehageplass === BarnehageplassVerdier.JaSkalSlutte &&
+            <JaSkalSlutteEkstraFelter settFelt={settEkstraFelt} />}
             <NavigasjonKnapp to='/arbeidsforhold'>Neste</NavigasjonKnapp>
         </SideContainer>
     );

@@ -1,5 +1,5 @@
 import { IBarn } from '../barn/types';
-import { BarnehageplassVerdier } from "../sider/barnehageplass/BarnehageplassSide";
+import { BarnehageplassVerdier } from '../sider/barnehageplass/BarnehageplassSide';
 import { SoknadActionTypes, SoknadTypeKeys } from './actions';
 
 interface ISoknadState {
@@ -19,6 +19,14 @@ interface ISoknadState {
     annenForelderPersonnummer?: string;
     annenForelderYrkesaktivINorgeEOSIMinstFemAar?: boolean;
     harBarnehageplass: BarnehageplassVerdier;
+    neiHarFaattPlassFraDato?: string;
+    neiHarFaattPlassKommune?: string;
+    jaFraDato?: string;
+    jaKommune?: string;
+    jaAntallTimer?: string;
+    jaSkalSlutteDato?: string;
+    jaSkalSlutteKommune?: string;
+    jaSkalSlutteAntallTimer?: string;
 
 }
 
