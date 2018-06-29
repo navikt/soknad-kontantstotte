@@ -4,11 +4,12 @@ import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
 import SideContainer from '../../container/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
+import { Svar } from '../../soknad/reducer';
 import AnnenForelderInfo from './AnnenForelderInfo';
 
 interface IMapStateToProps {
-    borForeldreneSammenMedBarnet: boolean;
-    erAvklartDeltBosted?: boolean;
+    borForeldreneSammenMedBarnet: Svar;
+    erAvklartDeltBosted: Svar;
 }
 
 const FamilieforholdSide: React.StatelessComponent<IMapStateToProps> = (
@@ -26,15 +27,15 @@ const FamilieforholdSide: React.StatelessComponent<IMapStateToProps> = (
                 hjelpetekstNokkel={'familieforhold.borForeldreneSammenMedBarnet.hjelpetekst'}
             />
 
-            { borForeldreneSammenMedBarnet === true &&
+            { borForeldreneSammenMedBarnet === Svar.JA &&
                 <AnnenForelderInfo />
             }
 
-            { borForeldreneSammenMedBarnet === false &&
+            { borForeldreneSammenMedBarnet === Svar.NEI &&
                 <JaNeiSporsmal
                     nokkel='erAvklartDeltBosted'
                     sporsmalNokkel='familieforhold.erAvklartDeltBosted.sporsmal'
-                    verdi={erAvklartDeltBosted}
+                    verdi={ erAvklartDeltBosted }
                 />
             }
 

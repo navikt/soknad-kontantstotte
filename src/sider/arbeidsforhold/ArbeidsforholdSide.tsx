@@ -4,13 +4,14 @@ import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
 import SideContainer from '../../container/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
+import { Svar } from '../../soknad/reducer';
 
 interface IMapStateToProps {
-    mottarYtelserFraUtlandet: boolean;
+    mottarYtelserFraUtlandet: Svar;
     mottarYtelserFraUtlandetForklaring?: string;
-    arbeiderIUtlandetEllerKontinentalsokkel: boolean;
+    arbeiderIUtlandetEllerKontinentalsokkel: Svar;
     arbeiderIUtlandetEllerKontinentalsokkelForklaring?: string;
-    mottarKontantstotteFraAnnetEOS: boolean;
+    mottarKontantstotteFraAnnetEOS: Svar;
     mottarKontantstotteFraAnnetEOSForklaring?: string;
 }
 
