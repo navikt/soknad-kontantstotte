@@ -32,6 +32,7 @@ const IntlProvider: React.StatelessComponent<Props> = ({
 }) => {
     return (
         <Provider
+            key={ Object.keys(tekster).length }
             messages={ tekster }
             defaultLocale={ 'nb' }
             locale={ valgtSprak }
