@@ -11,12 +11,12 @@ const Environment = (): IEnvUrls => {
         };
     } else if (window.location.hostname.indexOf('soknad-kontantstotte-t') > -1) {
         return {
-            apiUrl: 'https://soknad-kontantstotte-api-t.nav.no/soknad-kontantstotte-api/api',
+            apiUrl: 'https://soknad-kontantstotte-api-t.nav.no/api',
             loginUrl: 'https://loginservice-q.nav.no/login'
         };
     } else if (window.location.hostname.indexOf('soknad-kontantstotte-q') > -1) {
         return {
-            apiUrl: 'https://soknad-kontantstotte-api-q.nav.no/soknad-kontantstotte-api/api',
+            apiUrl: 'https://soknad-kontantstotte-api-q.nav.no/api',
             loginUrl: 'https://loginservice-q.nav.no/login'
         };
     }

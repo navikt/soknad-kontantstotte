@@ -7,20 +7,21 @@ import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
 import SideContainer from '../../container/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
+import { Svar } from "../../soknad/reducer";
 
 interface IMapStateToProps {
-    boddINorgeSisteFemAar: boolean;
-    borSammenMedBarnet: boolean;
-    skalBoMedBarnetINorgeNesteTolvMaaneder: boolean;
+    boddINorgeSisteFemAar: Svar;
+    borSammenMedBarnet: Svar;
+    skalBoMedBarnetINorgeNesteTolvMaaneder: Svar;
 }
 
 interface IMapDispatchToProps {
-    settCheckboxVerdi: (felt: string, verdi: boolean) => any;
+    settCheckboxVerdi: (felt: string, verdi: string) => any;
 }
 
 const handterCheckboxEndring = (event: React.SyntheticEvent<EventTarget>, handler: any, value?: string) =>  {
     const target = event.nativeEvent.target as HTMLInputElement;
-    handler(value, target.checked);
+    handler(value, target.checked ? Svar.JA : Svar.UBESVART);
 };
 
 type StartSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
@@ -45,21 +46,21 @@ const StartSide: React.StatelessComponent<StartSideProps>  = (
                   [
                       {
 
-                          checked: boddINorgeSisteFemAar,
+                          checked: boddINorgeSisteFemAar === Svar.JA,
                           label: intl.formatMessage(
                               { id: 'startside.krav.boddINorgeSisteFemAar' }
                           ),
                           value: 'boddINorgeSisteFemAar'
                       },
                       {
-                          checked: borSammenMedBarnet,
+                          checked: borSammenMedBarnet === Svar.JA,
                           label: intl.formatMessage(
                               { id: 'startside.krav.borSammenMedBarnet' }
                           ),
                           value: 'borSammenMedBarnet'
                       },
                       {
-                          checked: skalBoMedBarnetINorgeNesteTolvMaaneder,
+                          checked: skalBoMedBarnetINorgeNesteTolvMaaneder === Svar.JA,
                           label: intl.formatMessage(
                               { id: 'startside.krav.skalBoMedBarnetINorgeNesteTolvMaaneder' }
                           ),

@@ -4,13 +4,14 @@ import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
 import SideContainer from '../../container/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
+import { Svar } from '../../soknad/reducer';
 
 interface IMapStateToProps {
-    mottarYtelserFraUtlandet: boolean;
+    mottarYtelserFraUtlandet: Svar;
     mottarYtelserFraUtlandetForklaring?: string;
-    arbeiderIUtlandetEllerKontinentalsokkel: boolean;
+    arbeiderIUtlandetEllerKontinentalsokkel: Svar;
     arbeiderIUtlandetEllerKontinentalsokkelForklaring?: string;
-    mottarKontantstotteFraAnnetEOS: boolean;
+    mottarKontantstotteFraAnnetEOS: Svar;
     mottarKontantstotteFraAnnetEOSForklaring?: string;
 }
 
@@ -59,7 +60,8 @@ const ArbeidsforholdSide: React.StatelessComponent<ArbeidsforholdSideProps> = (
 const mapStateToProps = (state: IRootState) => {
     return {
         arbeiderIUtlandetEllerKontinentalsokkel: state.soknad.arbeiderIUtlandetEllerKontinentalsokkel,
-        arbeiderIUtlandetEllerKontinentalsokkelForklaring: state.soknad.arbeiderIUtlandetEllerKontinentalsokkelForklaring,
+        arbeiderIUtlandetEllerKontinentalsokkelForklaring:
+            state.soknad.arbeiderIUtlandetEllerKontinentalsokkelForklaring,
         mottarKontantstotteFraAnnetEOS: state.soknad.mottarKontantstotteFraAnnetEOS,
         mottarKontantstotteFraAnnetEOSForklaring: state.soknad.mottarKontantstotteFraAnnetEOSForklaring,
         mottarYtelserFraUtlandet: state.soknad.mottarYtelserFraUtlandet,

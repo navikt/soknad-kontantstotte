@@ -1,10 +1,11 @@
-import HjelpetekstUnder from 'nav-frontend-hjelpetekst';
+import { HjelpetekstUnder } from 'nav-frontend-hjelpetekst';
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { soknadSettVerdi } from '../../soknad/actions';
+import { Svar } from '../../soknad/reducer';
 import SpesifiserTextarea from './SpesifiserTextarea';
 
 interface ISporsmaalProps {
@@ -13,12 +14,12 @@ interface ISporsmaalProps {
     forklaring?: string;
     harForklaring?: boolean;
     hjelpetekstNokkel?: string;
-    verdi?: boolean;
+    verdi: Svar;
 }
 
 interface IMapDispatchToProps {
     settForklaring: (forklaring?: string) => any;
-    settSvar: (verdi?: boolean) => any;
+    settSvar: (verdi: Svar) => any;
 }
 
 type JaNeiSporsmalProps = IMapDispatchToProps & ISporsmaalProps & InjectedIntlProps;
@@ -50,19 +51,19 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
                 name={ nokkel }
                 onChange={
                     (event: React.SyntheticEvent<EventTarget>, value: string) => {
-                        settSvar(value === 'true');
+                        settSvar(value as Svar);
                     }
                 }
-                checked={ verdi !== undefined ? verdi.toString() : 'undefined' }
+                checked={ verdi }
                 radios={
                     [
-                        { label: intl.formatMessage({ id: 'svar.ja' }), value: 'true' },
-                        { label: intl.formatMessage({ id: 'svar.nei' }), value: 'false'}
+                        { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
+                        { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI}
                     ]
                 }
             />
 
-            { harForklaring && verdi === false &&
+            { harForklaring && verdi === Svar.JA &&
                 <SpesifiserTextarea
                     nokkel={ nokkel }
                     forklaring={ forklaring }

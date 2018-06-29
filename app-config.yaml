@@ -6,12 +6,12 @@ replicas:
 port: 8080
 healthcheck:
   liveness:
-    path: soknad-kontantstotte/internal/isAlive
+    path: internal/isAlive
   readiness:
-    path: soknad-kontantstotte/internal/isAlive
+    path: internal/isAlive
 prometheus:
   enabled: true
-  path: soknad-kontantstotte/internal/metrics
+  path: internal/metrics
 ingress:
   enabled: true
 fasitResources:
