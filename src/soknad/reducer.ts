@@ -1,4 +1,5 @@
 import { IBarn } from '../barn/types';
+import { BarnehageplassVerdier } from '../sider/barnehageplass/BarnehageplassSide';
 import { SoknadActionTypes, SoknadTypeKeys } from './actions';
 
 enum Svar {
@@ -6,8 +7,7 @@ enum Svar {
     NEI = 'NEI',
     UBESVART = 'UBESVART'
 }
-
-interface ISoknadSate {
+interface ISoknadState {
     barn: IBarn;
     boddINorgeSisteFemAar: Svar;
     borSammenMedBarnet: Svar;
@@ -23,6 +23,15 @@ interface ISoknadSate {
     annenForelderNavn?: string;
     annenForelderPersonnummer?: string;
     annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar;
+    harBarnehageplass: BarnehageplassVerdier;
+    neiHarFaattPlassFraDato?: string;
+    neiHarFaattPlassKommune?: string;
+    jaFraDato?: string;
+    jaKommune?: string;
+    jaAntallTimer?: string;
+    jaSkalSlutteDato?: string;
+    jaSkalSlutteKommune?: string;
+    jaSkalSlutteAntallTimer?: string;
 }
 
 const initialState = {
@@ -33,6 +42,7 @@ const initialState = {
     borForeldreneSammenMedBarnet: Svar.UBESVART,
     borSammenMedBarnet: Svar.UBESVART,
     erAvklartDeltBosted: Svar.UBESVART,
+    harBarnehageplass: BarnehageplassVerdier.Ubesvart,
     mottarKontantstotteFraAnnetEOS: Svar.UBESVART,
     mottarYtelserFraUtlandet: Svar.UBESVART,
     skalBoMedBarnetINorgeNesteTolvMaaneder: Svar.UBESVART
@@ -52,6 +62,6 @@ function soknadReducer(state = initialState, action: SoknadActionTypes) {
 
 export {
     Svar,
-    ISoknadSate,
+    ISoknadState,
     soknadReducer,
 };
