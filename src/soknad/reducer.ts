@@ -1,41 +1,41 @@
 import { IBarn } from '../barn/types';
-import { BarnehageplassVerdier } from '../sider/barnehageplass/BarnehageplassSide';
 import { SoknadActionTypes, SoknadTypeKeys } from './actions';
 
-interface ISoknadState {
+enum Svar {
+    JA = 'JA',
+    NEI = 'NEI',
+    UBESVART = 'UBESVART'
+}
+
+interface ISoknadSate {
     barn: IBarn;
-    boddINorgeSisteFemAar: boolean;
-    borSammenMedBarnet: boolean;
-    skalBoMedBarnetINorgeNesteTolvMaaneder: boolean;
-    mottarYtelserFraUtlandet: boolean;
+    boddINorgeSisteFemAar: Svar;
+    borSammenMedBarnet: Svar;
+    skalBoMedBarnetINorgeNesteTolvMaaneder: Svar;
+    mottarYtelserFraUtlandet: Svar;
     mottarYtelserFraUtlandetForklaring?: string;
-    arbeiderIUtlandetEllerKontinentalsokkel: boolean;
+    arbeiderIUtlandetEllerKontinentalsokkel: Svar;
     arbeiderIUtlandetEllerKontinentalsokkelForklaring?: string;
-    mottarKontantstotteFraAnnetEOS: boolean;
+    mottarKontantstotteFraAnnetEOS: Svar;
     mottarKontantstotteFraAnnetEOSForklaring?: string;
-    borForeldreneSammenMedBarnet: boolean;
-    erAvklartDeltBosted?: boolean;
+    borForeldreneSammenMedBarnet: Svar;
+    erAvklartDeltBosted: Svar;
     annenForelderNavn?: string;
     annenForelderPersonnummer?: string;
-    annenForelderYrkesaktivINorgeEOSIMinstFemAar?: boolean;
-    harBarnehageplass: BarnehageplassVerdier;
-    neiHarFaattPlassFraDato?: string;
-    neiHarFaattPlassKommune?: string;
-    jaFraDato?: string;
-    jaKommune?: string;
-    jaAntallTimer?: string;
-    jaSkalSlutteDato?: string;
-    jaSkalSlutteKommune?: string;
-    jaSkalSlutteAntallTimer?: string;
-
+    annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar;
 }
 
 const initialState = {
+    annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar.UBESVART,
+    arbeiderIUtlandetEllerKontinentalsokkel: Svar.UBESVART,
     barn: {},
-    boddINorgeSisteFemAar: false,
-    borSammenMedBarnet: false,
-    harBarnehageplass: BarnehageplassVerdier.Ubesvart,
-    skalBoMedBarnetINorgeNesteTolvMaaneder: false
+    boddINorgeSisteFemAar: Svar.UBESVART,
+    borForeldreneSammenMedBarnet: Svar.UBESVART,
+    borSammenMedBarnet: Svar.UBESVART,
+    erAvklartDeltBosted: Svar.UBESVART,
+    mottarKontantstotteFraAnnetEOS: Svar.UBESVART,
+    mottarYtelserFraUtlandet: Svar.UBESVART,
+    skalBoMedBarnetINorgeNesteTolvMaaneder: Svar.UBESVART
 };
 
 function soknadReducer(state = initialState, action: SoknadActionTypes) {
@@ -51,6 +51,7 @@ function soknadReducer(state = initialState, action: SoknadActionTypes) {
 }
 
 export {
-    ISoknadState,
+    Svar,
+    ISoknadSate,
     soknadReducer,
 };
