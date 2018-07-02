@@ -2,16 +2,11 @@ import { push } from 'connected-react-router';
 import { SagaIterator } from 'redux-saga';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { sendInnSoknad } from '../app/api';
-import { ISoknad } from './soknad';
-import { InnsendingTypeKeys, sendInnFeilet, sendInnOk } from './actions';
+import { InnsendingTypeKeys, ISendInn, sendInnFeilet, sendInnOk } from './actions';
 
-const soknad: ISoknad = {
-    soker: '***REMOVED***'
-};
-
-function * sendInnSaga(): SagaIterator {
+function * sendInnSaga(action: ISendInn): SagaIterator {
     try {
-        yield call(sendInnSoknad, soknad);
+        yield call(sendInnSoknad, action.soknad);
         yield put(sendInnOk());
         yield put(push('/kvittering'));
     } catch (error) {

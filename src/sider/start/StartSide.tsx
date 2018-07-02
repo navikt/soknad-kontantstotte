@@ -92,4 +92,8 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     };
 };
 
+export {
+    IMapStateToProps as ISokerKrav
+};
+
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(StartSide));

@@ -69,4 +69,8 @@ const mapStateToProps = (state: IRootState) => {
     };
 };
 
+export {
+    IMapStateToProps as IArbeidsforhold
+};
+
 export default connect(mapStateToProps)(ArbeidsforholdSide);

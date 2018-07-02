@@ -89,4 +89,8 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     };
 };
 
+export {
+    IMapStateToProps as IBarnehageplass
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(BarnehageplassSide));

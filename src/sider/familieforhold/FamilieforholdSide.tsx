@@ -51,4 +51,8 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     };
 };
 
+export {
+    IMapStateToProps as IFamilieforhold
+};
+
 export default connect(mapStateToProps)(FamilieforholdSide);
