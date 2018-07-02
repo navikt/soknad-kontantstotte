@@ -1,14 +1,30 @@
+import KnappBase from 'nav-frontend-knapper';
 import * as React from 'react';
-import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
+import { connect, Dispatch } from 'react-redux';
 import SideContainer from '../../container/SideContainer/SideContainer';
+import { sendInn } from '../../innsending/actions';
 
-const OppsummeringSide = () => {
+interface IMapDispatchToProps {
+    sendSoknad: () => any;
+}
+
+type OppsummeringSideProps = IMapDispatchToProps;
+
+const OppsummeringSide: React.StatelessComponent<OppsummeringSideProps> = ({sendSoknad}) => {
     return (
         <SideContainer>
             <h1>Oversikt over hva du har fylt ut</h1>
-            <NavigasjonKnapp to='/kvittering'>Send Inn</NavigasjonKnapp>
+            <KnappBase type={'hoved'} onClick={sendSoknad}>Send inn</KnappBase>
         </SideContainer>
     );
 };
 
-export default OppsummeringSide;
+const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
+    return {
+        sendSoknad: () => {
+            dispatch(sendInn());
+        }
+    };
+};
+
+export default connect(null, mapDispatchToProps)(OppsummeringSide);
