@@ -9,7 +9,6 @@ import { Svar } from '../../soknad/reducer';
 import SpesifiserTextarea from './SpesifiserTextarea';
 
 interface ISporsmaalProps {
-    feiltekstNokkel: string;
     nokkel: string;
     sporsmalNokkel: string;
     verdi: Svar;
@@ -35,7 +34,6 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
     intl,
     harForklaring,
     hjelpetekstNokkel,
-    feiltekstNokkel
 }) => {
     return (
         <div>
@@ -53,7 +51,7 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
                 name={ nokkel }
                 validators={[
                     {
-                        failText: intl.formatMessage({ id: feiltekstNokkel }),
+                        failText: intl.formatMessage({ id: 'svar.feilmelding' }),
                         test: () => verdi !== Svar.UBESVART
                     }
                 ]}
