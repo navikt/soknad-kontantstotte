@@ -1,20 +1,21 @@
 import { HjelpetekstUnder } from 'nav-frontend-hjelpetekst';
-import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import ValidRadioPanelGruppe from '../../common/lib/validation/ValidRadioPanelGruppe';
 import { soknadSettVerdi } from '../../soknad/actions';
 import { Svar } from '../../soknad/reducer';
 import SpesifiserTextarea from './SpesifiserTextarea';
 
 interface ISporsmaalProps {
+    feiltekstNokkel: string;
     nokkel: string;
     sporsmalNokkel: string;
+    verdi: Svar;
     forklaring?: string;
     harForklaring?: boolean;
     hjelpetekstNokkel?: string;
-    verdi: Svar;
 }
 
 interface IMapDispatchToProps {
@@ -33,7 +34,8 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
     sporsmalNokkel,
     intl,
     harForklaring,
-    hjelpetekstNokkel
+    hjelpetekstNokkel,
+    feiltekstNokkel
 }) => {
     return (
         <div>
@@ -42,16 +44,25 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
                     <FormattedMessage id={ hjelpetekstNokkel }/>
                 </HjelpetekstUnder>
             }
-            <RadioPanelGruppe
+            <ValidRadioPanelGruppe
                 legend={ intl.formatMessage(
                     {
                         id: sporsmalNokkel
                     }
                 ) }
                 name={ nokkel }
+                validators={[
+                    {
+                        failText: intl.formatMessage({ id: feiltekstNokkel }),
+                        test: () => verdi !== Svar.UBESVART
+                    }
+                ]}
                 onChange={
-                    (event: React.SyntheticEvent<EventTarget>, value: string) => {
-                        settSvar(value as Svar);
+                    (event: React.SyntheticEvent<EventTarget>) => {
+                        const element: HTMLBaseElement = (
+                            (event.target as HTMLBaseElement).nextElementSibling as HTMLBaseElement
+                        );
+                        settSvar(element.innerText.toUpperCase() as Svar);
                     }
                 }
                 checked={ verdi }
@@ -87,3 +98,6 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: ISporsmaalProps): IMap
 };
 
 export default connect(null, mapDispatchToProps)(injectIntl(JaNeiSporsmal));
+export {
+    ISporsmaalProps
+};
