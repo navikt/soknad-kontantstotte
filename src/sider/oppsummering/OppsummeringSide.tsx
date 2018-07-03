@@ -28,13 +28,31 @@ const OppsummeringSide: React.StatelessComponent<OppsummeringSideProps> = ({send
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         soknad: {
+            annenForelder: {
+                annenForelderNavn: state.soknad.annenForelderNavn,
+                annenForelderPersonnummer: state.soknad.annenForelderPersonnummer,
+                annenForelderYrkesaktivINorgeEOSIMinstFemAar: state.soknad.annenForelderYrkesaktivINorgeEOSIMinstFemAar,
+            },
             arbeidsforhold: {
                 arbeiderIUtlandetEllerKontinentalsokkel: state.soknad.arbeiderIUtlandetEllerKontinentalsokkel,
+                arbeiderIUtlandetEllerKontinentalsokkelForklaring:
+                    state.soknad.arbeiderIUtlandetEllerKontinentalsokkelForklaring,
                 mottarKontantstotteFraAnnetEOS: state.soknad.mottarKontantstotteFraAnnetEOS,
+                mottarKontantstotteFraAnnetEOSForklaring: state.soknad.mottarKontantstotteFraAnnetEOSForklaring,
                 mottarYtelserFraUtlandet: state.soknad.mottarYtelserFraUtlandet,
+                mottarYtelserFraUtlandetForklaring: state.soknad.mottarYtelserFraUtlandetForklaring
             },
+            barn: state.soknad.barn,
             barnehageplass: {
                 harBarnehageplass: state.soknad.harBarnehageplass,
+                jaAntallTimer: state.soknad.jaAntallTimer,
+                jaFraDato: state.soknad.jaFraDato,
+                jaKommune: state.soknad.jaKommune,
+                jaSkalSlutteAntallTimer: state.soknad.jaSkalSlutteAntallTimer,
+                jaSkalSlutteDato: state.soknad.jaSkalSlutteDato,
+                jaSkalSlutteKommune: state.soknad.jaSkalSlutteKommune,
+                neiHarFaattPlassFraDato: state.soknad.neiHarFaattPlassFraDato,
+                neiHarFaattPlassKommune: state.soknad.neiHarFaattPlassKommune,
             },
             familieforhold: {
                 borForeldreneSammenMedBarnet: state.soknad.borForeldreneSammenMedBarnet,
