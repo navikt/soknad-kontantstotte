@@ -3,6 +3,7 @@ import { Route, RouteProps } from 'react-router-dom';
 import ArbeidsforholdSide from './sider/arbeidsforhold/ArbeidsforholdSide';
 import BarnehageplassSide from './sider/barnehageplass/BarnehageplassSide';
 import FamilieforholdSide from './sider/familieforhold/FamilieforholdSide';
+import InnsendingFeiletSide from './sider/feilsider/InnsendingFeiletSide';
 import OppfyllerIkkeVilkaarSide from './sider/feilsider/OppfyllerIkkeVilkaarSide';
 import SidenFinnesIkkeSide from './sider/feilsider/SidenFinnesIkkeSide';
 import KvitteringSide from './sider/kvittering/KvitteringSide';
@@ -94,6 +95,13 @@ export const Sider: ISide[] = [
         sideKomponent: OppfyllerIkkeVilkaarSide,
         sideType: SideType.ANNEN_INFOSIDE,
         stegIndeks: 8
+    },
+    {
+        key: 'innsending-feilet',
+        path: '/innsending-feilet',
+        sideKomponent: InnsendingFeiletSide,
+        sideType: SideType.ANNEN_INFOSIDE,
+        stegIndeks: 9
     }
 ];
 

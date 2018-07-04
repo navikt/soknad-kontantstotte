@@ -11,6 +11,7 @@ function * sendInnSaga(action: ISendInn): SagaIterator {
         yield put(push('/kvittering'));
     } catch (error) {
         yield put(sendInnFeilet());
+        yield put(push('/innsending-feilet'));
     }
 }
 
