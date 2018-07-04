@@ -5,11 +5,14 @@ import { IAnnenForelder } from '../sider/familieforhold/AnnenForelderInfo';
 import { IFamilieforhold } from '../sider/familieforhold/FamilieforholdSide';
 import { ISokerKrav } from '../sider/start/StartSide';
 
-export interface ISoknad {
+interface IFamilieforholdOgAnnenForelder extends IFamilieforhold {
     annenForelder?: IAnnenForelder;
+}
+
+export interface ISoknad {
     arbeidsforhold: IArbeidsforhold;
     barn: IBarn;
     barnehageplass: IBarnehageplass;
-    familieforhold: IFamilieforhold;
+    familieforhold: IFamilieforholdOgAnnenForelder;
     sokerKrav: ISokerKrav;
 }

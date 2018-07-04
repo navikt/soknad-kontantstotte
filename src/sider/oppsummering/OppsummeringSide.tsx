@@ -28,11 +28,6 @@ const OppsummeringSide: React.StatelessComponent<OppsummeringSideProps> = ({send
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         soknad: {
-            annenForelder: {
-                annenForelderNavn: state.soknad.annenForelderNavn,
-                annenForelderPersonnummer: state.soknad.annenForelderPersonnummer,
-                annenForelderYrkesaktivINorgeEOSIMinstFemAar: state.soknad.annenForelderYrkesaktivINorgeEOSIMinstFemAar,
-            },
             arbeidsforhold: {
                 arbeiderIUtlandetEllerKontinentalsokkel: state.soknad.arbeiderIUtlandetEllerKontinentalsokkel,
                 arbeiderIUtlandetEllerKontinentalsokkelForklaring:
@@ -40,7 +35,7 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
                 mottarKontantstotteFraAnnetEOS: state.soknad.mottarKontantstotteFraAnnetEOS,
                 mottarKontantstotteFraAnnetEOSForklaring: state.soknad.mottarKontantstotteFraAnnetEOSForklaring,
                 mottarYtelserFraUtlandet: state.soknad.mottarYtelserFraUtlandet,
-                mottarYtelserFraUtlandetForklaring: state.soknad.mottarYtelserFraUtlandetForklaring
+                mottarYtelserFraUtlandetForklaring: state.soknad.mottarYtelserFraUtlandetForklaring,
             },
             barn: state.soknad.barn,
             barnehageplass: {
@@ -55,6 +50,12 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
                 neiHarFaattPlassKommune: state.soknad.neiHarFaattPlassKommune,
             },
             familieforhold: {
+                annenForelder: {
+                    annenForelderNavn: state.soknad.annenForelderNavn,
+                    annenForelderPersonnummer: state.soknad.annenForelderPersonnummer,
+                    annenForelderYrkesaktivINorgeEOSIMinstFemAar:
+                    state.soknad.annenForelderYrkesaktivINorgeEOSIMinstFemAar,
+                },
                 borForeldreneSammenMedBarnet: state.soknad.borForeldreneSammenMedBarnet,
                 erAvklartDeltBosted: state.soknad.erAvklartDeltBosted,
             },
