@@ -1,8 +1,8 @@
 import { push } from 'connected-react-router';
 import { SagaIterator } from 'redux-saga';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { sendInnSoknad } from '../app/api';
 import { InnsendingTypeKeys, ISendInn, sendInnFeilet, sendInnOk } from './actions';
+import { sendInnSoknad } from './api';
 
 function * sendInnSaga(action: ISendInn): SagaIterator {
     try {
