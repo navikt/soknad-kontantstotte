@@ -1,14 +1,79 @@
+import KnappBase from 'nav-frontend-knapper';
 import * as React from 'react';
-import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
+import { connect, Dispatch } from 'react-redux';
 import SideContainer from '../../container/SideContainer/SideContainer';
+import { sendInn } from '../../innsending/actions';
+import { ISoknad } from '../../innsending/soknad';
+import { IRootState } from '../../rootReducer';
 
-const OppsummeringSide = () => {
+interface IMapDispatchToProps {
+    sendSoknad: (soknad: ISoknad) => any;
+}
+
+interface IMapStateToProps {
+    soknad: ISoknad;
+}
+
+type OppsummeringSideProps = IMapDispatchToProps & IMapStateToProps;
+
+const OppsummeringSide: React.StatelessComponent<OppsummeringSideProps> = ({sendSoknad, soknad}) => {
     return (
         <SideContainer>
             <h1>Oversikt over hva du har fylt ut</h1>
-            <NavigasjonKnapp to='/kvittering'>Send Inn</NavigasjonKnapp>
+            <KnappBase type={'hoved'} onClick={() => sendSoknad(soknad)}>Send inn</KnappBase>
         </SideContainer>
     );
 };
 
-export default OppsummeringSide;
+const mapStateToProps = (state: IRootState): IMapStateToProps => {
+    return {
+        soknad: {
+            arbeidsforhold: {
+                arbeiderIUtlandetEllerKontinentalsokkel: state.soknad.arbeiderIUtlandetEllerKontinentalsokkel,
+                arbeiderIUtlandetEllerKontinentalsokkelForklaring:
+                    state.soknad.arbeiderIUtlandetEllerKontinentalsokkelForklaring,
+                mottarKontantstotteFraAnnetEOS: state.soknad.mottarKontantstotteFraAnnetEOS,
+                mottarKontantstotteFraAnnetEOSForklaring: state.soknad.mottarKontantstotteFraAnnetEOSForklaring,
+                mottarYtelserFraUtlandet: state.soknad.mottarYtelserFraUtlandet,
+                mottarYtelserFraUtlandetForklaring: state.soknad.mottarYtelserFraUtlandetForklaring,
+            },
+            barn: state.soknad.barn,
+            barnehageplass: {
+                harBarnehageplass: state.soknad.harBarnehageplass,
+                jaAntallTimer: state.soknad.jaAntallTimer,
+                jaFraDato: state.soknad.jaFraDato,
+                jaKommune: state.soknad.jaKommune,
+                jaSkalSlutteAntallTimer: state.soknad.jaSkalSlutteAntallTimer,
+                jaSkalSlutteDato: state.soknad.jaSkalSlutteDato,
+                jaSkalSlutteKommune: state.soknad.jaSkalSlutteKommune,
+                neiHarFaattPlassFraDato: state.soknad.neiHarFaattPlassFraDato,
+                neiHarFaattPlassKommune: state.soknad.neiHarFaattPlassKommune,
+            },
+            familieforhold: {
+                annenForelder: {
+                    annenForelderNavn: state.soknad.annenForelderNavn,
+                    annenForelderPersonnummer: state.soknad.annenForelderPersonnummer,
+                    annenForelderYrkesaktivINorgeEOSIMinstFemAar:
+                    state.soknad.annenForelderYrkesaktivINorgeEOSIMinstFemAar,
+                },
+                borForeldreneSammenMedBarnet: state.soknad.borForeldreneSammenMedBarnet,
+                erAvklartDeltBosted: state.soknad.erAvklartDeltBosted,
+            },
+            sokerKrav: {
+                boddINorgeSisteFemAar: state.soknad.boddINorgeSisteFemAar,
+                borSammenMedBarnet: state.soknad.borSammenMedBarnet,
+                skalBoMedBarnetINorgeNesteTolvMaaneder: state.soknad.skalBoMedBarnetINorgeNesteTolvMaaneder,
+            }
+        }
+    };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
+    return {
+        sendSoknad: (soknad: ISoknad) => {
+            dispatch(sendInn(soknad));
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(OppsummeringSide);
