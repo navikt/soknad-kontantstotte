@@ -6,6 +6,7 @@ import { Dispatch } from 'redux';
 import ValidRadioPanelGruppe from '../../common/lib/validation/ValidRadioPanelGruppe';
 import { soknadSettVerdi } from '../../soknad/actions';
 import { Svar } from '../../soknad/reducer';
+import { harSvartPaJaNeiSporsmal } from '../../validators';
 import SpesifiserTextarea from './SpesifiserTextarea';
 
 interface ISporsmaalProps {
@@ -52,7 +53,7 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
                 validators={[
                     {
                         failText: intl.formatMessage({ id: 'svar.feilmelding' }),
-                        test: () => verdi !== Svar.UBESVART
+                        test: () => harSvartPaJaNeiSporsmal(verdi)
                     }
                 ]}
                 onChange={
