@@ -39,15 +39,10 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
             },
             barn: state.soknad.barn,
             barnehageplass: {
+                antallTimer: state.soknad.antallTimer,
+                fraDato: state.soknad.fraDato,
                 harBarnehageplass: state.soknad.harBarnehageplass,
-                jaAntallTimer: state.soknad.jaAntallTimer,
-                jaFraDato: state.soknad.jaFraDato,
-                jaKommune: state.soknad.jaKommune,
-                jaSkalSlutteAntallTimer: state.soknad.jaSkalSlutteAntallTimer,
-                jaSkalSlutteDato: state.soknad.jaSkalSlutteDato,
-                jaSkalSlutteKommune: state.soknad.jaSkalSlutteKommune,
-                neiHarFaattPlassFraDato: state.soknad.neiHarFaattPlassFraDato,
-                neiHarFaattPlassKommune: state.soknad.neiHarFaattPlassKommune,
+                kommune: state.soknad.kommune,
             },
             familieforhold: {
                 annenForelder: {

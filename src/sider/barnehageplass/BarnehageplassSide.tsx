@@ -22,12 +22,9 @@ interface IMapStateToProps {
     harBarnehageplass: BarnehageplassVerdier;
     neiHarFaattPlassFraDato?: string;
     neiHarFaattPlassKommune?: string;
-    jaFraDato?: string;
-    jaKommune?: string;
-    jaAntallTimer?: string;
-    jaSkalSlutteDato?: string;
-    jaSkalSlutteKommune?: string;
-    jaSkalSlutteAntallTimer?: string;
+    fraDato?: string;
+    kommune?: string;
+    antallTimer?: string;
 }
 
 interface IMapDispatchToProps {

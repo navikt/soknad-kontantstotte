@@ -14,13 +14,13 @@ const NeiHarFaattEkstraFelter: React.StatelessComponent<NeiHarFaattEkstraFelterP
         <div>
             <DatoFelt
                 nokkel={intl.formatMessage({id: 'barnehageplass.harFaattPlassDato'})}
-                settDato={(dato) => settFelt('neiHarFaattPlassFraDato', dato.toDateString())}
+                settDato={(dato) => settFelt('fraDato', dato.toDateString())}
             />
             <Input
                 label={intl.formatMessage({id: 'barnehageplass.kommune'})}
                 bredde={'M'}
                 onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    settFelt('neiHarFaattPlassKommune', event.target.value)}
+                    settFelt('kommune', event.target.value)}
             />
         </div>
     );

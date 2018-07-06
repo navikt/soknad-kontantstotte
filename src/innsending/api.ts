@@ -3,10 +3,17 @@ import Environment from '../Environment';
 import { ISoknad } from './soknad';
 
 function sendInnSoknad(soknad: ISoknad) {
-    return axios.post(`${Environment().apiUrl}/sendinn`, JSON.stringify(soknad), {
+
+    const formData = new FormData();
+    formData.append(
+        'soknad',
+        new Blob([JSON.stringify(soknad)], {
+            type: 'application/json'
+        })
+    );
+    return axios.post(`${Environment().apiUrl}/sendinn`, formData, {
         headers: {
-            'Access-Control-Allow-Credentials': 'true',
-            'content-type': 'application/json',
+            'content-type': 'multipart/form-data;',
         },
         withCredentials: true
     });

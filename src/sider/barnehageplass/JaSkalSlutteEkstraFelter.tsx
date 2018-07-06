@@ -14,19 +14,19 @@ const JaSkalSlutteEkstraFelter: React.StatelessComponent<JaSkalSlutteEkstraFelte
         <div>
             <DatoFelt
                 nokkel={intl.formatMessage({id: 'barnehageplass.skalSlutteDato'})}
-                settDato={(dato) => settFelt('jaSkalSlutteDato', dato.toDateString())}
+                settDato={(dato) => settFelt('fraDato', dato.toDateString())}
             />
             <Input
                 label={intl.formatMessage({id: 'barnehageplass.kommune'})}
                 bredde={'M'}
                 onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    settFelt('jaSkalSlutteKommune', event.target.value)}
+                    settFelt('kommune', event.target.value)}
             />
             <Input
                 label={intl.formatMessage({id: 'barnehageplass.antallTimer'})}
                 bredde={'M'}
                 onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    settFelt('jaSkalSlutteAntallTimer', event.target.value)}
+                    settFelt('antallTimer', event.target.value)}
             />
         </div>
     );

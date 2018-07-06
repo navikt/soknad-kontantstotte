@@ -14,19 +14,19 @@ const EkstraFelterForJa: React.StatelessComponent<JaEkstraFelterProps> = ({settF
         <div>
             <DatoFelt
                 nokkel={intl.formatMessage({id: 'barnehageplass.harFaattPlassDato'})}
-                settDato={(dato) => settFelt('jaFraDato', dato.toDateString())}
+                settDato={(dato) => settFelt('fraDato', dato.toDateString())}
             />
             <Input
                 label={intl.formatMessage({id: 'barnehageplass.kommune'})}
                 bredde={'M'}
                 onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    settFelt('jaKommune', event.target.value)}
+                    settFelt('kommune', event.target.value)}
             />
             <Input
                 label={intl.formatMessage({id: 'barnehageplass.antallTimer'})}
                 bredde={'M'}
                 onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    settFelt('jaAntallTimer', event.target.value)}
+                    settFelt('antallTimer', event.target.value)}
             />
         </div>
     );
