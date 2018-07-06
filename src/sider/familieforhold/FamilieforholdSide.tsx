@@ -1,7 +1,9 @@
+import { push } from 'connected-react-router';
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { connect, DispatchProp } from 'react-redux';
+import { ValidForm } from '../../common/lib/validation';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
-import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
+import SubmitKnapp from '../../component/SubmitKnapp/SubmitKnapp';
 import SideContainer from '../../container/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { Svar } from '../../soknad/reducer';
@@ -12,34 +14,38 @@ interface IMapStateToProps {
     erAvklartDeltBosted: Svar;
 }
 
-const FamilieforholdSide: React.StatelessComponent<IMapStateToProps> = (
+type FamilieforholdProps = IMapStateToProps & DispatchProp;
+
+const FamilieforholdSide: React.StatelessComponent<FamilieforholdProps> = (
     {
         borForeldreneSammenMedBarnet,
         erAvklartDeltBosted,
+        dispatch
     }) => {
 
     return (
         <SideContainer>
-            <JaNeiSporsmal
-                nokkel='borForeldreneSammenMedBarnet'
-                sporsmalNokkel='familieforhold.borForeldreneSammenMedBarnet.sporsmal'
-                verdi={ borForeldreneSammenMedBarnet }
-                hjelpetekstNokkel={'familieforhold.borForeldreneSammenMedBarnet.hjelpetekst'}
-            />
-
-            { borForeldreneSammenMedBarnet === Svar.JA &&
-                <AnnenForelderInfo />
-            }
-
-            { borForeldreneSammenMedBarnet === Svar.NEI &&
+            <ValidForm summaryTitle={'Familieforhold'} onSubmit={() => dispatch(push('/barnehageplass'))}>
                 <JaNeiSporsmal
-                    nokkel='erAvklartDeltBosted'
-                    sporsmalNokkel='familieforhold.erAvklartDeltBosted.sporsmal'
-                    verdi={ erAvklartDeltBosted }
+                    nokkel='borForeldreneSammenMedBarnet'
+                    sporsmalNokkel='familieforhold.borForeldreneSammenMedBarnet.sporsmal'
+                    verdi={ borForeldreneSammenMedBarnet }
+                    hjelpetekstNokkel={'familieforhold.borForeldreneSammenMedBarnet.hjelpetekst'}
                 />
-            }
 
-            <NavigasjonKnapp to='/barnehageplass'>Neste</NavigasjonKnapp>
+                { borForeldreneSammenMedBarnet === Svar.JA &&
+                    <AnnenForelderInfo />
+                }
+
+                { borForeldreneSammenMedBarnet === Svar.NEI &&
+                    <JaNeiSporsmal
+                        nokkel='erAvklartDeltBosted'
+                        sporsmalNokkel='familieforhold.erAvklartDeltBosted.sporsmal'
+                        verdi={ erAvklartDeltBosted }
+                    />
+                }
+                <SubmitKnapp label='submitknapp.neste'/>
+            </ValidForm>
         </SideContainer>
     );
 };
