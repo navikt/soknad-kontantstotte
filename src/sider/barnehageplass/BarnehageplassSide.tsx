@@ -6,33 +6,18 @@ import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
 import SideContainer from '../../container/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
+import { selectBarnehageplass } from '../../soknad/selectors';
+import { BarnehageplassVerdier, IBarnehageplass } from '../../soknad/types';
 import JaEkstraFelter from './JaEkstraFelter';
 import JaSkalSlutteEkstraFelter from './JaSkalSlutteEkstraFelter';
 import NeiHarFaattEkstraFelter from './NeiHarFaattEkstraFelter';
-
-export enum BarnehageplassVerdier {
-    Nei = 'Nei',
-    NeiHarFaatt = 'NeiHarFaatt',
-    Ja = 'Ja',
-    JaSkalSlutte = 'JaSkalSlutte',
-    Ubesvart = 'Ubesvart'
-}
-
-interface IMapStateToProps {
-    harBarnehageplass: BarnehageplassVerdier;
-    neiHarFaattPlassFraDato?: string;
-    neiHarFaattPlassKommune?: string;
-    fraDato?: string;
-    kommune?: string;
-    antallTimer?: string;
-}
 
 interface IMapDispatchToProps {
     settSvar: (verdi: BarnehageplassVerdier) => any;
     settEkstraFelt: (nokkel: string, verdi: string) => any;
 }
 
-type BarnehageplassSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
+type BarnehageplassSideProps = IBarnehageplass & IMapDispatchToProps & InjectedIntlProps;
 
 const BarnehageplassSide: React.StatelessComponent<BarnehageplassSideProps> = ({
                                                                                    harBarnehageplass,
@@ -80,14 +65,8 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     };
 };
 
-const mapStateToProps = (state: IRootState): IMapStateToProps => {
-    return {
-        harBarnehageplass: state.soknad.harBarnehageplass
-    };
-};
-
-export {
-    IMapStateToProps as IBarnehageplass
+const mapStateToProps = (state: IRootState): IBarnehageplass => {
+    return selectBarnehageplass(state);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(BarnehageplassSide));

@@ -1,21 +1,27 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
 import SideContainer from '../../container/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
-import { Svar } from '../../soknad/reducer';
+import { soknadSettVerdi } from '../../soknad/actions';
+import { selectFamilieforhold } from '../../soknad/selectors';
+import { IFamilieforhold, Svar } from '../../soknad/types';
 import AnnenForelderInfo from './AnnenForelderInfo';
 
-interface IMapStateToProps {
-    borForeldreneSammenMedBarnet: Svar;
-    erAvklartDeltBosted: Svar;
+interface IMapDispatchToProps {
+    settAnnenForelderNavn: (navn: string) => any;
+    settAnnenForelderFodselsnummer: (personnummer: string) => any;
 }
 
-const FamilieforholdSide: React.StatelessComponent<IMapStateToProps> = (
+type FamilieforholdSideProps = IFamilieforhold & IMapDispatchToProps;
+
+const FamilieforholdSide: React.StatelessComponent<FamilieforholdSideProps> = (
     {
         borForeldreneSammenMedBarnet,
         erAvklartDeltBosted,
+        ...annenForelderProps
     }) => {
 
     return (
@@ -23,20 +29,22 @@ const FamilieforholdSide: React.StatelessComponent<IMapStateToProps> = (
             <JaNeiSporsmal
                 nokkel='borForeldreneSammenMedBarnet'
                 sporsmalNokkel='familieforhold.borForeldreneSammenMedBarnet.sporsmal'
-                verdi={ borForeldreneSammenMedBarnet }
+                verdi={borForeldreneSammenMedBarnet}
                 hjelpetekstNokkel={'familieforhold.borForeldreneSammenMedBarnet.hjelpetekst'}
             />
 
-            { borForeldreneSammenMedBarnet === Svar.JA &&
-                <AnnenForelderInfo />
+            {borForeldreneSammenMedBarnet === Svar.JA &&
+            <AnnenForelderInfo
+                {...annenForelderProps}
+            />
             }
 
-            { borForeldreneSammenMedBarnet === Svar.NEI &&
-                <JaNeiSporsmal
-                    nokkel='erAvklartDeltBosted'
-                    sporsmalNokkel='familieforhold.erAvklartDeltBosted.sporsmal'
-                    verdi={ erAvklartDeltBosted }
-                />
+            {borForeldreneSammenMedBarnet === Svar.NEI &&
+            <JaNeiSporsmal
+                nokkel='erAvklartDeltBosted'
+                sporsmalNokkel='familieforhold.erAvklartDeltBosted.sporsmal'
+                verdi={erAvklartDeltBosted}
+            />
             }
 
             <NavigasjonKnapp to='/barnehageplass'>Neste</NavigasjonKnapp>
@@ -44,15 +52,19 @@ const FamilieforholdSide: React.StatelessComponent<IMapStateToProps> = (
     );
 };
 
-const mapStateToProps = (state: IRootState): IMapStateToProps => {
+const mapStateToProps = (state: IRootState): IFamilieforhold => {
+    return selectFamilieforhold(state);
+};
+
+const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        borForeldreneSammenMedBarnet: state.soknad.borForeldreneSammenMedBarnet,
-        erAvklartDeltBosted: state.soknad.erAvklartDeltBosted,
+        settAnnenForelderFodselsnummer: (personnr) => {
+            dispatch(soknadSettVerdi('annenForelderPersonnummer', personnr));
+        },
+        settAnnenForelderNavn: (navn) => {
+            dispatch(soknadSettVerdi('annenForelderNavn', navn));
+        },
     };
 };
 
-export {
-    IMapStateToProps as IFamilieforhold
-};
-
-export default connect(mapStateToProps)(FamilieforholdSide);
+export default connect(mapStateToProps, mapDispatchToProps)(FamilieforholdSide);

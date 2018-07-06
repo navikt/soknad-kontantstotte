@@ -5,7 +5,7 @@ import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { soknadSettVerdi } from '../../soknad/actions';
-import { Svar } from '../../soknad/reducer';
+import { Svar } from '../../soknad/types';
 import SpesifiserTextarea from './SpesifiserTextarea';
 
 interface ISporsmaalProps {

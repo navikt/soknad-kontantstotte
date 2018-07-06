@@ -1,5 +1,4 @@
 import { Action } from 'redux';
-import { ISoknad } from './soknad';
 
 enum InnsendingTypeKeys {
     SENDINN = "SENDINN",
@@ -11,7 +10,6 @@ type InnsendingActionTypes = ISendInn | ISendInnOk | ISendInnFeilet;
 
 interface ISendInn extends Action {
     type: InnsendingTypeKeys.SENDINN;
-    soknad: ISoknad;
 }
 
 interface ISendInnOk extends Action {
@@ -22,9 +20,8 @@ interface ISendInnFeilet extends Action {
     type: InnsendingTypeKeys.SENDINN_FEILET;
 }
 
-function sendInn(soknad: ISoknad): ISendInn {
+function sendInn(): ISendInn {
     return {
-        soknad,
         type: InnsendingTypeKeys.SENDINN,
     };
 }

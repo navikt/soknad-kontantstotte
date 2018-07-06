@@ -1,33 +1,26 @@
 import Input from 'nav-frontend-skjema/lib/input';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
-import { IRootState } from '../../rootReducer';
-import { soknadSettVerdi } from '../../soknad/actions';
-import { Svar } from '../../soknad/reducer';
+import { Svar } from '../../soknad/types';
 
-interface IMapStateToProps {
+interface IProps {
     annenForelderNavn?: string;
-    annenForelderPersonnummer?: string;
+    annenForelderFodselsnummer?: string;
     annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar;
-}
-
-interface IMapDispatchToProps {
     settAnnenForelderNavn: (navn: string) => any;
-    settAnnenForelderPersonnummer: (personnummer: string) => any;
+    settAnnenForelderFodselsnummer: (personnummer: string) => any;
 }
 
-type AnnenForelderInfoProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
+type AnnenForelderInfoProps = IProps & InjectedIntlProps;
 
 const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
     annenForelderNavn,
-    annenForelderPersonnummer,
+    annenForelderFodselsnummer,
     annenForelderYrkesaktivINorgeEOSIMinstFemAar,
     intl,
     settAnnenForelderNavn,
-    settAnnenForelderPersonnummer
+    settAnnenForelderFodselsnummer
 }) => {
     return (
         <div>
@@ -57,10 +50,10 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
                 }
                 onBlur={
                     (event: React.SyntheticEvent<EventTarget>) => {
-                        settAnnenForelderPersonnummer((event.target as HTMLInputElement).value);
+                        settAnnenForelderFodselsnummer((event.target as HTMLInputElement).value);
                     }
                 }
-                defaultValue={ annenForelderPersonnummer || '' }
+                defaultValue={ annenForelderFodselsnummer || '' }
             />
 
             <JaNeiSporsmal
@@ -76,27 +69,4 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
     );
 };
 
-const mapStateToProps = (state: IRootState): IMapStateToProps => {
-    return {
-        annenForelderNavn: state.soknad.annenForelderNavn,
-        annenForelderPersonnummer: state.soknad.annenForelderPersonnummer,
-        annenForelderYrkesaktivINorgeEOSIMinstFemAar: state.soknad.annenForelderYrkesaktivINorgeEOSIMinstFemAar
-    };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
-    return {
-        settAnnenForelderNavn: (navn) => {
-            dispatch(soknadSettVerdi('annenForelderNavn', navn));
-        },
-        settAnnenForelderPersonnummer: (personnr) => {
-            dispatch(soknadSettVerdi('annenForelderPersonnummer', personnr));
-        }
-    };
-};
-
-export {
-    IMapStateToProps as IAnnenForelder
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(AnnenForelderInfo));
+export default injectIntl(AnnenForelderInfo);

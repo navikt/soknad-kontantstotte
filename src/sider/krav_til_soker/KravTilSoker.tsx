@@ -7,13 +7,8 @@ import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
 import SideContainer from '../../container/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
-import { Svar } from "../../soknad/reducer";
-
-interface IMapStateToProps {
-    boddINorgeSisteFemAar: Svar;
-    borSammenMedBarnet: Svar;
-    skalBoMedBarnetINorgeNesteTolvMaaneder: Svar;
-}
+import { selectKravTilSoker } from '../../soknad/selectors';
+import { IKravTilSoker, Svar } from '../../soknad/types';
 
 interface IMapDispatchToProps {
     settCheckboxVerdi: (felt: string, verdi: string) => any;
@@ -24,9 +19,9 @@ const handterCheckboxEndring = (event: React.SyntheticEvent<EventTarget>, handle
     handler(value, target.checked ? Svar.JA : Svar.UBESVART);
 };
 
-type StartSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
+type KravTilSokerProps = IKravTilSoker & IMapDispatchToProps & InjectedIntlProps;
 
-const StartSide: React.StatelessComponent<StartSideProps>  = (
+const KravTilSoker: React.StatelessComponent<KravTilSokerProps>  = (
     {
         boddINorgeSisteFemAar,
         borSammenMedBarnet,
@@ -50,7 +45,7 @@ const StartSide: React.StatelessComponent<StartSideProps>  = (
                           label: intl.formatMessage(
                               { id: 'startside.krav.boddINorgeSisteFemAar' }
                           ),
-                          value: 'boddINorgeSisteFemAar'
+                          value: 'kravTilSoker.boddINorgeSisteFemAar'
                       },
                       {
                           checked: borSammenMedBarnet === Svar.JA,
@@ -78,12 +73,8 @@ const StartSide: React.StatelessComponent<StartSideProps>  = (
     );
 };
 
-const mapStateToProps = (state: IRootState): IMapStateToProps => {
-    return {
-        boddINorgeSisteFemAar: state.soknad.boddINorgeSisteFemAar,
-        borSammenMedBarnet: state.soknad.borSammenMedBarnet,
-        skalBoMedBarnetINorgeNesteTolvMaaneder: state.soknad.skalBoMedBarnetINorgeNesteTolvMaaneder
-    };
+const mapStateToProps = (state: IRootState): IKravTilSoker => {
+    return selectKravTilSoker(state);
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
@@ -92,8 +83,4 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     };
 };
 
-export {
-    IMapStateToProps as ISokerKrav
-};
-
-export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(StartSide));
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(KravTilSoker));

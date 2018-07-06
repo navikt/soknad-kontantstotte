@@ -6,10 +6,10 @@ import FamilieforholdSide from './sider/familieforhold/FamilieforholdSide';
 import InnsendingFeiletSide from './sider/feilsider/InnsendingFeiletSide';
 import OppfyllerIkkeVilkaarSide from './sider/feilsider/OppfyllerIkkeVilkaarSide';
 import SidenFinnesIkkeSide from './sider/feilsider/SidenFinnesIkkeSide';
+import KravTilSoker from './sider/krav_til_soker/KravTilSoker';
 import KvitteringSide from './sider/kvittering/KvitteringSide';
 import MineBarnSide from './sider/mine_barn/MineBarnSide';
 import OppsummeringSide from './sider/oppsummering/OppsummeringSide';
-import StartSide from './sider/start/StartSide';
 import VeiledningSide from './sider/veiledning/VeiledningSide';
 
 export enum SideType {
@@ -36,7 +36,7 @@ export const Sider: ISide[] = [
     {
         key: 'start',
         path: '/start',
-        sideKomponent: StartSide,
+        sideKomponent: KravTilSoker,
         sideType: SideType.SKJEMASIDE,
         stegIndeks: 0
     },
