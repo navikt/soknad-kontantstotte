@@ -1,5 +1,4 @@
 import * as React from "react";
-import {NavFrontendInputProps} from "nav-frontend-skjema/lib/input";
 
 export interface ValidatorProps {
     name?: string;

@@ -1,4 +1,4 @@
-import { Input, Select, Textarea } from 'nav-frontend-skjema';
+import { Input, Select, TextareaControlled } from 'nav-frontend-skjema';
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import SkjemaelementFeilmelding from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
 import * as PT from 'prop-types';
@@ -11,6 +11,7 @@ export interface IValidBaseProps {
     name?: string;
     optional?: boolean;
     validators?: Validator[];
+    defaultValue?: string;
     feil?: SkjemaelementFeilmelding;
     validateOnBlur?: boolean;
     validateOnChange?: boolean;
@@ -27,6 +28,7 @@ export interface IValidBaseState {
     hasBlurred: boolean;
     tests: any[];
     valid: boolean;
+    text: string;
     optional?: boolean;
 }
 
@@ -45,7 +47,8 @@ class ValidBase extends React.Component<IProps, IValidBaseState> {
             hasBlurred: false,
             optional: this.props.optional,
             tests: [],
-            valid: true
+            text: this.props.defaultValue || '',
+            valid: true,
         };
         this.onChange = this.onChange.bind(this);
         this.onBlur = this.onBlur.bind(this);
@@ -75,6 +78,8 @@ class ValidBase extends React.Component<IProps, IValidBaseState> {
 
         if (this.props.onChange) {
             this.props.onChange(e);
+        } else {
+            this.setState({...this.state , text: (e as React.ChangeEvent<HTMLTextAreaElement>).target.value});
         }
     }
 
@@ -175,7 +180,7 @@ class ValidBase extends React.Component<IProps, IValidBaseState> {
                     this.element = node;
                 };
                 break;
-            case Textarea:
+            case TextareaControlled:
                 elementRef.textareaRef = (node: any) => {
                     this.element = node;
                 };
@@ -186,14 +191,24 @@ class ValidBase extends React.Component<IProps, IValidBaseState> {
                 };
         }
 
-        return (
-            <this.props.component
-                onChange={this.onChange}
-                onBlur={this.onBlur}
-                feil={feil || failedVerdict}
-                {...other}
-            />
-        );
+        if (!!onChange) {
+            return (
+                <this.props.component
+                    onChange={ this.onChange }
+                    onBlur={this.onBlur}
+                    feil={feil || failedVerdict}
+                    {...other}
+                />
+            );
+        } else {
+            return (
+                <this.props.component
+                    onBlur={this.onBlur}
+                    feil={feil || failedVerdict}
+                    {...other}
+                />
+            );
+        }
     }
 }
 export default ValidBase;

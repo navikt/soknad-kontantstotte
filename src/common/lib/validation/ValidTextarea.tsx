@@ -9,7 +9,7 @@ import {
 class ValidTextarea extends React.Component<IValidBaseProps & TextareaControlledProps> {
     public render() {
         const { ...other } = this.props;
-        return <ValidBase component={TextareaControlled} {...other} />;
+        return <ValidBase component={ TextareaControlled } {...other} />;
     }
 }
 
