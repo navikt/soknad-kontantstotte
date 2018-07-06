@@ -27,5 +27,6 @@
     "familieforhold.erAvklartDeltBosted.sporsmal": "Er det avklart delt bosted for barnet?",
     "familieforhold.annenForelder.tittel": "Annen forelder til barnet:",
     "familieforhold.annenForelder.navn.placeholder": "Navn",
-    "familieforhold.annenForelder.personnummer.placeholder": "Person nr."
+    "familieforhold.annenForelder.personnummer.placeholder": "Person nr.",
+    "submitknapp.neste": "Neste"
 }

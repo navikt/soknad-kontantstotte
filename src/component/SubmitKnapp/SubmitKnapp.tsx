@@ -1,14 +1,22 @@
 import KnappBase from 'nav-frontend-knapper';
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 interface ISubmitKnappProps {
+    label: string;
     children?: any;
 }
 
-const SubmitKnapp: React.StatelessComponent<ISubmitKnappProps> = ({
-   children
+type SubmitKnappProps = ISubmitKnappProps;
+
+const SubmitKnapp: React.StatelessComponent<SubmitKnappProps> = ({
+   label,
 }) => {
-    return <KnappBase type='hoved' htmlType='submit'>{ children }</KnappBase>;
+    return (
+        <KnappBase type='hoved' htmlType='submit'>
+            <FormattedMessage id={label} />
+        </KnappBase>
+    );
 };
 
 export default SubmitKnapp;
