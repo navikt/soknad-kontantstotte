@@ -5,7 +5,8 @@ import { ISoknad } from './soknad';
 function sendInnSoknad(soknad: ISoknad) {
     return axios.post(`${Environment().apiUrl}/sendinn`, JSON.stringify(soknad), {
         headers: {
-            'content-type': 'application/json'
+            'Access-Control-Allow-Credentials': 'true',
+            'content-type': 'application/json',
         },
         withCredentials: true
     });
