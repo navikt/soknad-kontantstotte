@@ -11,24 +11,24 @@ import { harTekstomradeInnhold } from '../../validators';
 
 interface IMapStateToProps {
     annenForelderNavn?: string;
-    annenForelderPersonnummer?: string;
+    annenForelderFodselsnummer?: string;
     annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar;
 }
 
 interface IMapDispatchToProps {
     settAnnenForelderNavn: (navn: string) => any;
-    settAnnenForelderPersonnummer: (personnummer: string) => any;
+    settAnnenForelderFodselsnummer: (personnummer: string) => any;
 }
 
 type AnnenForelderInfoProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
 const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
     annenForelderNavn,
-    annenForelderPersonnummer,
+    annenForelderFodselsnummer,
     annenForelderYrkesaktivINorgeEOSIMinstFemAar,
     intl,
     settAnnenForelderNavn,
-    settAnnenForelderPersonnummer
+    settAnnenForelderFodselsnummer
 }) => {
     return (
         <div>
@@ -47,7 +47,7 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
                             failText: intl.formatMessage({
                                 id: 'familieforhold.annenForelder.navn.feilmelding'
                             }),
-                            test: () => harTekstomradeInnhold(annenForelderPersonnummer)
+                            test: () => harTekstomradeInnhold(annenForelderNavn)
                         }
                     ]
                 }
@@ -62,7 +62,7 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
                 label={
                     intl.formatMessage(
                         {
-                            id: 'familieforhold.annenForelder.personnummer.placeholder'
+                            id: 'familieforhold.annenForelder.fodselsnummer.placeholder'
                         }
                     )
                 }
@@ -70,18 +70,18 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
                     [
                         {
                             failText: intl.formatMessage({
-                                id: 'familieforhold.annenForelder.personnummer.feilmelding'
+                                id: 'familieforhold.annenForelder.fodselsnummer.feilmelding'
                             }),
-                            test: () => harTekstomradeInnhold(annenForelderPersonnummer)
+                            test: () => harTekstomradeInnhold(annenForelderFodselsnummer)
                         }
                     ]
                 }
                 onBlur={
                     (event: React.SyntheticEvent<EventTarget>) => {
-                        settAnnenForelderPersonnummer((event.target as HTMLInputElement).value);
+                        settAnnenForelderFodselsnummer((event.target as HTMLInputElement).value);
                     }
                 }
-                defaultValue={ annenForelderPersonnummer || '' }
+                defaultValue={ annenForelderFodselsnummer || '' }
             />
 
             <JaNeiSporsmal
@@ -99,19 +99,19 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
+        annenForelderFodselsnummer: state.soknad.annenForelderFodselsnummer,
         annenForelderNavn: state.soknad.annenForelderNavn,
-        annenForelderPersonnummer: state.soknad.annenForelderPersonnummer,
         annenForelderYrkesaktivINorgeEOSIMinstFemAar: state.soknad.annenForelderYrkesaktivINorgeEOSIMinstFemAar
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
+        settAnnenForelderFodselsnummer: (personnr) => {
+            dispatch(soknadSettVerdi('annenForelderFodselsnummer', personnr));
+        },
         settAnnenForelderNavn: (navn) => {
             dispatch(soknadSettVerdi('annenForelderNavn', navn));
-        },
-        settAnnenForelderPersonnummer: (personnr) => {
-            dispatch(soknadSettVerdi('annenForelderPersonnummer', personnr));
         }
     };
 };

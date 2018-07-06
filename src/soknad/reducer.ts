@@ -22,7 +22,7 @@ interface ISoknadState {
     borForeldreneSammenMedBarnet: Svar;
     erAvklartDeltBosted: Svar;
     annenForelderNavn?: string;
-    annenForelderPersonnummer?: string;
+    annenForelderFodselsnummer?: string;
     annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar;
     harBarnehageplass: BarnehageplassVerdier;
     neiHarFaattPlassFraDato?: string;

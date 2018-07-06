@@ -28,7 +28,7 @@
     "familieforhold.annenForelder.tittel": "Annen forelder til barnet:",
     "familieforhold.annenForelder.navn.placeholder": "Navn",
     "familieforhold.annenForelder.navn.feilmelding": "Du må oppgi navnet til den andre forelderen.",
-    "familieforhold.annenForelder.personnummer.placeholder": "Person nr.",
-    "familieforhold.annenForelder.personnummer.feilmelding": "Du må oppgi personnummeret til den andre forelderen.",
+    "familieforhold.annenForelder.fodselsnummer.placeholder": "Fødselsnummer",
+    "familieforhold.annenForelder.fodselsnummer.feilmelding": "Du må oppgi fødselsnummeret til den andre forelderen.",
     "submitknapp.neste": "Neste"
 }
