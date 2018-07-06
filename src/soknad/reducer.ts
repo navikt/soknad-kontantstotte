@@ -7,6 +7,7 @@ enum Svar {
     NEI = 'NEI',
     UBESVART = 'UBESVART'
 }
+
 interface ISoknadState {
     barn: IBarn;
     boddINorgeSisteFemAar: Svar;
