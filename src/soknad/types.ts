@@ -15,46 +15,46 @@ enum BarnehageplassVerdier {
 }
 
 interface ISoknadState {
-    barn: IBarn;
-    familieforhold: IFamilieforhold;
-    arbeidsforhold: IArbeidsforhold;
-    barnehageplass: IBarnehageplass;
-    kravTilSoker: IKravTilSoker;
-    annenForelderNavn?: string;
-    annenForelderPersonnummer?: string;
-    annenForelderYrkesaktivINorgeEOSIMinstFemAar?: Svar;
+    readonly barn: IBarn;
+    readonly familieforhold: IFamilieforhold;
+    readonly arbeidsforhold: IArbeidsforhold;
+    readonly barnehageplass: IBarnehageplass;
+    readonly kravTilSoker: IKravTilSoker;
+    readonly annenForelderNavn?: string;
+    readonly annenForelderPersonnummer?: string;
+    readonly annenForelderYrkesaktivINorgeEOSIMinstFemAar?: Svar;
 }
 
 interface IFamilieforhold {
-    borForeldreneSammenMedBarnet: Svar;
-    erAvklartDeltBosted: Svar;
-    annenForelderNavn?: string;
-    annenForelderFodselsnummer?: string;
-    annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar;
+    readonly borForeldreneSammenMedBarnet: Svar;
+    readonly erAvklartDeltBosted: Svar;
+    readonly annenForelderNavn?: string;
+    readonly annenForelderFodselsnummer?: string;
+    readonly annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar;
 }
 
 interface IArbeidsforhold {
-    mottarYtelserFraUtlandet: Svar;
-    mottarYtelserFraUtlandetForklaring?: string;
-    arbeiderIUtlandetEllerKontinentalsokkel: Svar;
-    arbeiderIUtlandetEllerKontinentalsokkelForklaring?: string;
-    mottarKontantstotteFraAnnetEOS: Svar;
-    mottarKontantstotteFraAnnetEOSForklaring?: string;
+    readonly mottarYtelserFraUtlandet: Svar;
+    readonly mottarYtelserFraUtlandetForklaring?: string;
+    readonly arbeiderIUtlandetEllerKontinentalsokkel: Svar;
+    readonly arbeiderIUtlandetEllerKontinentalsokkelForklaring?: string;
+    readonly mottarKontantstotteFraAnnetEOS: Svar;
+    readonly mottarKontantstotteFraAnnetEOSForklaring?: string;
 }
 
 interface IBarnehageplass {
-    harBarnehageplass: BarnehageplassVerdier;
-    neiHarFaattPlassFraDato?: string;
-    neiHarFaattPlassKommune?: string;
-    fraDato?: string;
-    kommune?: string;
-    antallTimer?: string;
+    readonly harBarnehageplass: BarnehageplassVerdier;
+    readonly neiHarFaattPlassFraDato?: string;
+    readonly neiHarFaattPlassKommune?: string;
+    readonly fraDato?: string;
+    readonly kommune?: string;
+    readonly antallTimer?: string;
 }
 
 interface IKravTilSoker {
-    boddINorgeSisteFemAar: Svar;
-    borSammenMedBarnet: Svar;
-    skalBoMedBarnetINorgeNesteTolvMaaneder: Svar;
+    readonly boddINorgeSisteFemAar: Svar;
+    readonly borSammenMedBarnet: Svar;
+    readonly skalBoMedBarnetINorgeNesteTolvMaaneder: Svar;
 }
 
 export {
