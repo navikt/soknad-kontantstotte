@@ -5,11 +5,12 @@ import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { soknadSettVerdi } from '../../soknad/actions';
-import { Svar } from '../../soknad/types';
+import { Bolk, Felt, Svar } from '../../soknad/types';
 import SpesifiserTextarea from './SpesifiserTextarea';
 
 interface ISporsmaalProps {
-    nokkel: string;
+    bolk: Bolk;
+    felt: Felt;
     sporsmalNokkel: string;
     forklaring?: string;
     harForklaring?: boolean;
@@ -25,7 +26,8 @@ interface IMapDispatchToProps {
 type JaNeiSporsmalProps = IMapDispatchToProps & ISporsmaalProps & InjectedIntlProps;
 
 const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
-    nokkel,
+    bolk,
+    felt,
     verdi,
     forklaring,
     settSvar,
@@ -48,7 +50,7 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
                         id: sporsmalNokkel
                     }
                 ) }
-                name={ nokkel }
+                name={ felt }
                 onChange={
                     (event: React.SyntheticEvent<EventTarget>, value: string) => {
                         settSvar(value as Svar);
@@ -65,7 +67,7 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
 
             { harForklaring && verdi === Svar.JA &&
                 <SpesifiserTextarea
-                    nokkel={ nokkel }
+                    nokkel={ felt }
                     forklaring={ forklaring }
                     settForklaring={ settForklaring }
                 />
@@ -78,10 +80,10 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: ISporsmaalProps): IMapDispatchToProps => {
     return {
         settForklaring: (forklaring) => {
-            dispatch(soknadSettVerdi(ownProps.nokkel + 'Forklaring', forklaring));
+            dispatch(soknadSettVerdi(ownProps.bolk, `${ownProps.felt}Forklaring` as Felt, forklaring));
         },
         settSvar: (verdi) => {
-            dispatch(soknadSettVerdi(ownProps.nokkel, verdi));
+            dispatch(soknadSettVerdi(ownProps.bolk, ownProps.felt, verdi));
         }
     };
 };

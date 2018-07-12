@@ -57,7 +57,8 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
             />
 
             <JaNeiSporsmal
-                nokkel='annenForelderYrkesaktivINorgeEOSIMinstFemAar'
+                bolk='familieforhold'
+                felt='annenForelderYrkesaktivINorgeEOSIMinstFemAar'
                 sporsmalNokkel='familieforhold.annenForelderYrkesaktivINorgeEOSIMinstFemAar.sporsmal'
                 verdi={ annenForelderYrkesaktivINorgeEOSIMinstFemAar }
             />

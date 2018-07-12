@@ -8,10 +8,10 @@ import SideContainer from '../../container/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
 import { selectKravTilSoker } from '../../soknad/selectors';
-import { IKravTilSoker, Svar } from '../../soknad/types';
+import { Felt, IKravTilSoker, Svar } from '../../soknad/types';
 
 interface IMapDispatchToProps {
-    settCheckboxVerdi: (felt: string, verdi: string) => any;
+    settCheckboxVerdi: (felt: Felt, verdi: string) => any;
 }
 
 const handterCheckboxEndring = (event: React.SyntheticEvent<EventTarget>, handler: any, value?: string) =>  {
@@ -45,7 +45,7 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps>  = (
                           label: intl.formatMessage(
                               { id: 'startside.krav.boddINorgeSisteFemAar' }
                           ),
-                          value: 'kravTilSoker.boddINorgeSisteFemAar'
+                          value: 'boddINorgeSisteFemAar'
                       },
                       {
                           checked: borSammenMedBarnet === Svar.JA,
@@ -79,7 +79,7 @@ const mapStateToProps = (state: IRootState): IKravTilSoker => {
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        settCheckboxVerdi: (felt, verdi) => dispatch(soknadSettVerdi(felt, verdi)),
+        settCheckboxVerdi: (felt, verdi) => dispatch(soknadSettVerdi('kravTilSoker', felt, verdi)),
     };
 };
 

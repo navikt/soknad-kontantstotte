@@ -7,10 +7,6 @@ const initialState: ISoknadState = {
         mottarKontantstotteFraAnnetEOS: Svar.UBESVART,
         mottarYtelserFraUtlandet: Svar.UBESVART,
     },
-    barn: {
-        fodselsdato: '',
-        navn: '',
-    },
     barnehageplass: {
         harBarnehageplass: BarnehageplassVerdier.Ubesvart,
     },
@@ -24,6 +20,12 @@ const initialState: ISoknadState = {
         borSammenMedBarnet: Svar.UBESVART,
         skalBoMedBarnetINorgeNesteTolvMaaneder: Svar.UBESVART,
     },
+    mineBarn: {
+        valgtBarn: {
+            fodselsdato: '',
+            navn: '',
+        }
+    },
 };
 
 function soknadReducer(state = initialState, action: SoknadActionTypes) {
@@ -31,7 +33,10 @@ function soknadReducer(state = initialState, action: SoknadActionTypes) {
         case SoknadTypeKeys.SETT_VERDI:
             return {
                 ...state,
-                [action.felt]: action.verdi
+                [action.bolk]: {
+                    ...state[action.bolk],
+                    [action.felt]: action.verdi
+                }
             };
         default:
             return state;

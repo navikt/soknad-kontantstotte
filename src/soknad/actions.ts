@@ -1,26 +1,20 @@
-import { Action } from 'redux';
+import { Bolk, Felt } from './types';
 
 enum SoknadTypeKeys {
     SETT_VERDI = 'SOKNAD_SETT_VERDI'
 }
 
-type SoknadActionTypes =
-    | ISoknadSettVerdi
-    ;
-
-interface ISoknadSettVerdi extends Action {
-    felt: string;
-    type: SoknadTypeKeys.SETT_VERDI;
-    verdi: any;
-}
-
-function soknadSettVerdi(felt: string, verdi: any): ISoknadSettVerdi {
+function soknadSettVerdi(bolk: Bolk, felt: Felt, verdi: any) {
     return {
+        bolk,
         felt,
         type: SoknadTypeKeys.SETT_VERDI,
         verdi
     };
 }
+
+type SoknadActionTypes =
+    | ReturnType<typeof soknadSettVerdi>;
 
 export {
     SoknadActionTypes,

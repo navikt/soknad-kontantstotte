@@ -15,14 +15,15 @@ enum BarnehageplassVerdier {
 }
 
 interface ISoknadState {
-    readonly barn: IBarn;
+    readonly mineBarn: IMineBarn;
     readonly familieforhold: IFamilieforhold;
     readonly arbeidsforhold: IArbeidsforhold;
     readonly barnehageplass: IBarnehageplass;
     readonly kravTilSoker: IKravTilSoker;
-    readonly annenForelderNavn?: string;
-    readonly annenForelderPersonnummer?: string;
-    readonly annenForelderYrkesaktivINorgeEOSIMinstFemAar?: Svar;
+}
+
+interface IMineBarn {
+    readonly valgtBarn: IBarn;
 }
 
 interface IFamilieforhold {
@@ -57,12 +58,17 @@ interface IKravTilSoker {
     readonly skalBoMedBarnetINorgeNesteTolvMaaneder: Svar;
 }
 
+type Bolk = keyof ISoknadState;
+type Felt = keyof IMineBarn | keyof IFamilieforhold | keyof IArbeidsforhold | keyof IBarnehageplass | keyof IKravTilSoker;
+
 export {
-    ISoknadState,
-    IFamilieforhold,
-    Svar,
+    BarnehageplassVerdier,
+    Bolk,
+    Felt,
     IArbeidsforhold,
     IBarnehageplass,
-    BarnehageplassVerdier,
+    IFamilieforhold,
     IKravTilSoker,
+    ISoknadState,
+    Svar,
 };

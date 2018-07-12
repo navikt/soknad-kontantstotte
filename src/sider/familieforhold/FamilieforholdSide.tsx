@@ -27,7 +27,8 @@ const FamilieforholdSide: React.StatelessComponent<FamilieforholdSideProps> = (
     return (
         <SideContainer>
             <JaNeiSporsmal
-                nokkel='borForeldreneSammenMedBarnet'
+                bolk='familieforhold'
+                felt='borForeldreneSammenMedBarnet'
                 sporsmalNokkel='familieforhold.borForeldreneSammenMedBarnet.sporsmal'
                 verdi={borForeldreneSammenMedBarnet}
                 hjelpetekstNokkel={'familieforhold.borForeldreneSammenMedBarnet.hjelpetekst'}
@@ -41,7 +42,8 @@ const FamilieforholdSide: React.StatelessComponent<FamilieforholdSideProps> = (
 
             {borForeldreneSammenMedBarnet === Svar.NEI &&
             <JaNeiSporsmal
-                nokkel='erAvklartDeltBosted'
+                bolk='familieforhold'
+                felt='erAvklartDeltBosted'
                 sporsmalNokkel='familieforhold.erAvklartDeltBosted.sporsmal'
                 verdi={erAvklartDeltBosted}
             />
@@ -59,10 +61,10 @@ const mapStateToProps = (state: IRootState): IFamilieforhold => {
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         settAnnenForelderFodselsnummer: (personnr) => {
-            dispatch(soknadSettVerdi('annenForelderPersonnummer', personnr));
+            dispatch(soknadSettVerdi('familieforhold', 'annenForelderFodselsnummer', personnr));
         },
         settAnnenForelderNavn: (navn) => {
-            dispatch(soknadSettVerdi('annenForelderNavn', navn));
+            dispatch(soknadSettVerdi('familieforhold', 'annenForelderNavn', navn));
         },
     };
 };

@@ -1,10 +1,11 @@
 import Input from 'nav-frontend-skjema/lib/input';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { Felt } from '../../soknad/types';
 import DatoFelt from './DatoFelt';
 
 interface IEkstraFelterProps {
-    settFelt: (nokkel: string, verdi: string) => any;
+    settFelt: (nokkel: Felt, verdi: string) => any;
 }
 
 type JaEkstraFelterProps = IEkstraFelterProps & InjectedIntlProps;

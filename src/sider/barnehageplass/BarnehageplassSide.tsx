@@ -7,14 +7,14 @@ import SideContainer from '../../container/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
-import { BarnehageplassVerdier, IBarnehageplass } from '../../soknad/types';
+import { BarnehageplassVerdier, Felt, IBarnehageplass } from '../../soknad/types';
 import JaEkstraFelter from './JaEkstraFelter';
 import JaSkalSlutteEkstraFelter from './JaSkalSlutteEkstraFelter';
 import NeiHarFaattEkstraFelter from './NeiHarFaattEkstraFelter';
 
 interface IMapDispatchToProps {
     settSvar: (verdi: BarnehageplassVerdier) => any;
-    settEkstraFelt: (nokkel: string, verdi: string) => any;
+    settEkstraFelt: (nokkel: Felt, verdi: string) => any;
 }
 
 type BarnehageplassSideProps = IBarnehageplass & IMapDispatchToProps & InjectedIntlProps;
@@ -56,11 +56,11 @@ const BarnehageplassSide: React.StatelessComponent<BarnehageplassSideProps> = ({
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        settEkstraFelt: (nokkel: string, verdi: string) => {
-            dispatch(soknadSettVerdi(nokkel, verdi));
+        settEkstraFelt: (nokkel: Felt, verdi: string) => {
+            dispatch(soknadSettVerdi('barnehageplass', nokkel, verdi));
         },
         settSvar: (verdi: BarnehageplassVerdier) => {
-            dispatch(soknadSettVerdi('harBarnehageplass', verdi));
+            dispatch(soknadSettVerdi('barnehageplass', 'harBarnehageplass', verdi));
         }
     };
 };

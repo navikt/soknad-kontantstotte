@@ -5,7 +5,7 @@ import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
 import SideContainer from '../../container/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { selectArbeidsforhold } from '../../soknad/selectors';
-import { IArbeidsforhold } from '../../soknad/types';
+import { Bolk, IArbeidsforhold } from '../../soknad/types';
 
 type ArbeidsforholdSideProps = IArbeidsforhold;
 
@@ -18,10 +18,12 @@ const ArbeidsforholdSide: React.StatelessComponent<ArbeidsforholdSideProps> = (
         mottarKontantstotteFraAnnetEOS,
         mottarKontantstotteFraAnnetEOSForklaring
     }) => {
+    const bolk: Bolk = 'arbeidsforhold';
     return (
         <SideContainer>
             <JaNeiSporsmal
-                nokkel='mottarYtelserFraUtlandet'
+                bolk={ bolk }
+                felt='mottarYtelserFraUtlandet'
                 sporsmalNokkel='arbeidsforhold.mottarYtelserFraUtlandet.sporsmal'
                 verdi={ mottarYtelserFraUtlandet }
                 harForklaring={ true }
@@ -29,7 +31,8 @@ const ArbeidsforholdSide: React.StatelessComponent<ArbeidsforholdSideProps> = (
             />
 
             <JaNeiSporsmal
-                nokkel='arbeiderIUtlandetEllerKontinentalsokkel'
+                bolk={ bolk }
+                felt='arbeiderIUtlandetEllerKontinentalsokkel'
                 sporsmalNokkel='arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.sporsmal'
                 verdi={ arbeiderIUtlandetEllerKontinentalsokkel }
                 harForklaring={ true }
@@ -37,7 +40,8 @@ const ArbeidsforholdSide: React.StatelessComponent<ArbeidsforholdSideProps> = (
             />
 
             <JaNeiSporsmal
-                nokkel='mottarKontantstotteFraAnnetEOS'
+                bolk={ bolk }
+                felt='mottarKontantstotteFraAnnetEOS'
                 sporsmalNokkel='arbeidsforhold.mottarKontantstotteFraAnnetEOS.sporsmal'
                 verdi={ mottarKontantstotteFraAnnetEOS }
                 harForklaring={ true }
