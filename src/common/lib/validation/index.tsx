@@ -15,7 +15,7 @@ export interface IValidBaseProps {
     feil?: SkjemaelementFeilmelding;
     validateOnBlur?: boolean;
     validateOnChange?: boolean;
-    onChange?: (evt: any) => void;
+    onChange?: (...args: any[]) => void;
     onBlur?: (evt: any) => void;
     onValidate?: (evt: any) => void;
 }
@@ -66,20 +66,20 @@ class ValidBase extends React.Component<IProps, IValidBaseState> {
         }
     }
 
-    public onChange(e: any) {
+    public onChange(...args: any[]) {
         if (this.state.hasBlurred) {
             setTimeout(() => {
                 this.validate();
             });
         }
         if (this.context.validForm) {
-            this.context.validForm.onChange(e, this);
+            this.context.validForm.onChange(...args, this);
         }
 
         if (this.props.onChange) {
-            this.props.onChange(e);
+            this.props.onChange(...args);
         } else {
-            this.setState({...this.state , text: (e as React.ChangeEvent<HTMLTextAreaElement>).target.value});
+            this.setState({...this.state , text: (args[0] as React.ChangeEvent<HTMLTextAreaElement>).target.value});
         }
     }
 
