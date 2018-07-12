@@ -67,4 +67,8 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     };
 };
 
+export {
+    IMapStateToProps as IFamilieforhold
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(FamilieforholdSide);

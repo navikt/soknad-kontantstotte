@@ -1,6 +1,7 @@
 import { all } from 'redux-saga/effects';
 import { appSaga } from './app/saga';
 import { barnSaga } from './barn/saga';
+import { innsendingSaga } from './innsending/saga';
 import { teksterSaga } from './tekster/saga';
 
 function * rootSaga() {
@@ -8,6 +9,7 @@ function * rootSaga() {
         appSaga(),
         barnSaga(),
         teksterSaga(),
+        innsendingSaga(),
     ]);
 }
 

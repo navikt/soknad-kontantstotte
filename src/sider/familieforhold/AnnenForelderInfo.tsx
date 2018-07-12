@@ -118,4 +118,8 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     };
 };
 
+export {
+    IMapStateToProps as IAnnenForelder
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(AnnenForelderInfo));

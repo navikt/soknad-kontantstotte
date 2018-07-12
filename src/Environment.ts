@@ -7,7 +7,7 @@ const Environment = (): IEnvUrls => {
     if (process.env.NODE_ENV === 'development') {
         return {
             apiUrl: '/soknad-kontantstotte-api/api',
-            loginUrl: 'http://localhost:8080/local/cookie'
+            loginUrl: 'http://localhost:8080/api/local/cookie'
         };
     } else if (window.location.hostname.indexOf('soknad-kontantstotte-t') > -1) {
         return {
@@ -22,7 +22,7 @@ const Environment = (): IEnvUrls => {
     }
 
     return {
-        apiUrl: 'https://soknad-kontantstotte-api.nav.no/soknad-kontantstotte-api/api',
+        apiUrl: 'https://soknad-kontantstotte-api.nav.no/api',
         loginUrl: 'https://loginservice.nav.no/login'
     };
 };

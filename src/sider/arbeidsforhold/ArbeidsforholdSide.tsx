@@ -81,4 +81,8 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     };
 };
 
+export {
+    IMapStateToProps as IArbeidsforhold
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(ArbeidsforholdSide);
