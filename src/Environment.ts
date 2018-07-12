@@ -22,7 +22,7 @@ const Environment = (): IEnvUrls => {
     }
 
     return {
-        apiUrl: 'https://soknad-kontantstotte-api.nav.no/soknad-kontantstotte-api/api',
+        apiUrl: 'https://soknad-kontantstotte-api.nav.no/api',
         loginUrl: 'https://loginservice.nav.no/login'
     };
 };

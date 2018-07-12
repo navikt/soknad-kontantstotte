@@ -1,8 +1,13 @@
-import Input from 'nav-frontend-skjema/lib/input';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { ValidInput } from '../../common/lib/validation';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
-import { Svar } from '../../soknad/types';
+import { IRootState } from '../../rootReducer';
+import { soknadSettVerdi } from '../../soknad/actions';
+import { Svar } from '../../soknad/reducer';
+import { harTekstomradeInnhold } from '../../validators';
 
 interface IProps {
     annenForelderNavn?: string;
@@ -25,13 +30,24 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
     return (
         <div>
             <h3>{ intl.formatMessage({ id: 'familieforhold.annenForelder.tittel'}) }</h3>
-            <Input
+            <ValidInput
+                name='annenForelder.navn'
                 label={
                     intl.formatMessage(
                         {
                             id: 'familieforhold.annenForelder.navn.placeholder'
                         }
                     )
+                }
+                validators={
+                    [
+                        {
+                            failText: intl.formatMessage({
+                                id: 'familieforhold.annenForelder.navn.feilmelding'
+                            }),
+                            test: () => harTekstomradeInnhold(annenForelderNavn)
+                        }
+                    ]
                 }
                 onBlur={
                     (event: React.SyntheticEvent<EventTarget>) => {
@@ -40,13 +56,24 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
                 }
                 defaultValue={ annenForelderNavn || '' }
             />
-            <Input
+            <ValidInput
+                name='annenforelder.fodselsnummer'
                 label={
                     intl.formatMessage(
                         {
-                            id: 'familieforhold.annenForelder.personnummer.placeholder'
+                            id: 'familieforhold.annenForelder.fodselsnummer.placeholder'
                         }
                     )
+                }
+                validators={
+                    [
+                        {
+                            failText: intl.formatMessage({
+                                id: 'familieforhold.annenForelder.fodselsnummer.feilmelding'
+                            }),
+                            test: () => harTekstomradeInnhold(annenForelderFodselsnummer)
+                        }
+                    ]
                 }
                 onBlur={
                     (event: React.SyntheticEvent<EventTarget>) => {

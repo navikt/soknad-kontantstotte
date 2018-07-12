@@ -11,6 +11,9 @@
     "arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.sporsmal": "Arbeider du eller den andre av barnets forelder i utlandet, på utenlandsk skip eller på utenlandsk kontinentalsokkel?",
     "arbeidsforhold.mottarKontantstotteFraAnnetEOS.sporsmal": "Mottar dere kontantstotte fra et annet EØS-land?",
     "tekstomrade.fyllInn": "Fyll inn",
+    "tekstomrade.feilmelding": "Du må fylle",
+    "svar.feilmelding": "Du må svare på spørsmålet.",
+    "svar.feilmeldingCheckbox": "For å kunne gå videre må du oppfylle alle kriteriene.",
     "svar.ja": "Ja",
     "svar.nei": "Nei",
     "svar.neiHarFaattPlass": "Nei, men har fått plass",
@@ -25,5 +28,8 @@
     "familieforhold.erAvklartDeltBosted.sporsmal": "Er det avklart delt bosted for barnet?",
     "familieforhold.annenForelder.tittel": "Annen forelder til barnet:",
     "familieforhold.annenForelder.navn.placeholder": "Navn",
-    "familieforhold.annenForelder.personnummer.placeholder": "Person nr."
+    "familieforhold.annenForelder.navn.feilmelding": "Du må oppgi navnet til den andre forelderen.",
+    "familieforhold.annenForelder.fodselsnummer.placeholder": "Fødselsnummer",
+    "familieforhold.annenForelder.fodselsnummer.feilmelding": "Du må oppgi fødselsnummeret til den andre forelderen.",
+    "submitknapp.neste": "Neste"
 }
