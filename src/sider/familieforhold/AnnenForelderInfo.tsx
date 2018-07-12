@@ -109,8 +109,8 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        settAnnenForelderFodselsnummer: (personnr) => {
-            dispatch(soknadSettVerdi('annenForelderFodselsnummer', personnr));
+        settAnnenForelderFodselsnummer: (fodselsnummer) => {
+            dispatch(soknadSettVerdi('annenForelderFodselsnummer', fodselsnummer));
         },
         settAnnenForelderNavn: (navn) => {
             dispatch(soknadSettVerdi('annenForelderNavn', navn));
