@@ -1,6 +1,6 @@
 import { push } from 'connected-react-router';
 import * as React from 'react';
-import { connect, DispatchProp } from 'react-redux';
+import { connect, Dispatch } from 'react-redux';
 import { ValidForm } from '../../common/lib/validation';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import SubmitKnapp from '../../component/SubmitKnapp/SubmitKnapp';
@@ -14,18 +14,22 @@ interface IMapStateToProps {
     erAvklartDeltBosted: Svar;
 }
 
-type FamilieforholdProps = IMapStateToProps & DispatchProp;
+interface IMapDispatchToProps {
+    navigerTilPath: (path: string) => any;
+}
+
+type FamilieforholdProps = IMapStateToProps & IMapDispatchToProps;
 
 const FamilieforholdSide: React.StatelessComponent<FamilieforholdProps> = (
     {
         borForeldreneSammenMedBarnet,
         erAvklartDeltBosted,
-        dispatch
+        navigerTilPath
     }) => {
 
     return (
         <SideContainer>
-            <ValidForm summaryTitle={'Familieforhold'} onSubmit={() => dispatch(push('/barnehageplass'))}>
+            <ValidForm summaryTitle={'Familieforhold'} onSubmit={() => navigerTilPath('/barnehageplass')}>
                 <JaNeiSporsmal
                     nokkel='borForeldreneSammenMedBarnet'
                     sporsmalNokkel='familieforhold.borForeldreneSammenMedBarnet.sporsmal'
@@ -57,4 +61,10 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     };
 };
 
-export default connect(mapStateToProps)(FamilieforholdSide);
+const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
+    return {
+        navigerTilPath: (path: string) => dispatch(push(path))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FamilieforholdSide);
