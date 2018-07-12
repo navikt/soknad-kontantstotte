@@ -25,4 +25,9 @@ export interface ValidationResult {
     valid: boolean;
 }
 
+export interface IFeil {
+    tittel?: string;
+    feilmelding: string;
+}
+
 export type ValidComponentProps = ValidatorProps & InputProps;
