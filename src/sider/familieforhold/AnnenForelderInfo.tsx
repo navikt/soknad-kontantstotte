@@ -1,44 +1,56 @@
-import Input from 'nav-frontend-skjema/lib/input';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { ValidInput } from '../../common/lib/validation';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
 import { Svar } from '../../soknad/reducer';
+import { harTekstomradeInnhold } from '../../validators';
 
 interface IMapStateToProps {
     annenForelderNavn?: string;
-    annenForelderPersonnummer?: string;
+    annenForelderFodselsnummer?: string;
     annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar;
 }
 
 interface IMapDispatchToProps {
     settAnnenForelderNavn: (navn: string) => any;
-    settAnnenForelderPersonnummer: (personnummer: string) => any;
+    settAnnenForelderFodselsnummer: (personnummer: string) => any;
 }
 
 type AnnenForelderInfoProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
 const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
     annenForelderNavn,
-    annenForelderPersonnummer,
+    annenForelderFodselsnummer,
     annenForelderYrkesaktivINorgeEOSIMinstFemAar,
     intl,
     settAnnenForelderNavn,
-    settAnnenForelderPersonnummer
+    settAnnenForelderFodselsnummer
 }) => {
     return (
         <div>
             <h3>{ intl.formatMessage({ id: 'familieforhold.annenForelder.tittel'}) }</h3>
-            <Input
+            <ValidInput
+                name='annenForelder.navn'
                 label={
                     intl.formatMessage(
                         {
                             id: 'familieforhold.annenForelder.navn.placeholder'
                         }
                     )
+                }
+                validators={
+                    [
+                        {
+                            failText: intl.formatMessage({
+                                id: 'familieforhold.annenForelder.navn.feilmelding'
+                            }),
+                            test: () => harTekstomradeInnhold(annenForelderNavn)
+                        }
+                    ]
                 }
                 onBlur={
                     (event: React.SyntheticEvent<EventTarget>) => {
@@ -47,20 +59,31 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
                 }
                 defaultValue={ annenForelderNavn || '' }
             />
-            <Input
+            <ValidInput
+                name='annenforelder.fodselsnummer'
                 label={
                     intl.formatMessage(
                         {
-                            id: 'familieforhold.annenForelder.personnummer.placeholder'
+                            id: 'familieforhold.annenForelder.fodselsnummer.placeholder'
                         }
                     )
                 }
+                validators={
+                    [
+                        {
+                            failText: intl.formatMessage({
+                                id: 'familieforhold.annenForelder.fodselsnummer.feilmelding'
+                            }),
+                            test: () => harTekstomradeInnhold(annenForelderFodselsnummer)
+                        }
+                    ]
+                }
                 onBlur={
                     (event: React.SyntheticEvent<EventTarget>) => {
-                        settAnnenForelderPersonnummer((event.target as HTMLInputElement).value);
+                        settAnnenForelderFodselsnummer((event.target as HTMLInputElement).value);
                     }
                 }
-                defaultValue={ annenForelderPersonnummer || '' }
+                defaultValue={ annenForelderFodselsnummer || '' }
             />
 
             <JaNeiSporsmal
@@ -78,19 +101,19 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
+        annenForelderFodselsnummer: state.soknad.annenForelderFodselsnummer,
         annenForelderNavn: state.soknad.annenForelderNavn,
-        annenForelderPersonnummer: state.soknad.annenForelderPersonnummer,
         annenForelderYrkesaktivINorgeEOSIMinstFemAar: state.soknad.annenForelderYrkesaktivINorgeEOSIMinstFemAar
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
+        settAnnenForelderFodselsnummer: (fodselsnummer) => {
+            dispatch(soknadSettVerdi('annenForelderFodselsnummer', fodselsnummer));
+        },
         settAnnenForelderNavn: (navn) => {
             dispatch(soknadSettVerdi('annenForelderNavn', navn));
-        },
-        settAnnenForelderPersonnummer: (personnr) => {
-            dispatch(soknadSettVerdi('annenForelderPersonnummer', personnr));
         }
     };
 };

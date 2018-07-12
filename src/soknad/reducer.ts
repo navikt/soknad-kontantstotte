@@ -7,6 +7,7 @@ enum Svar {
     NEI = 'NEI',
     UBESVART = 'UBESVART'
 }
+
 interface ISoknadState {
     barn: IBarn;
     boddINorgeSisteFemAar: Svar;
@@ -21,17 +22,12 @@ interface ISoknadState {
     borForeldreneSammenMedBarnet: Svar;
     erAvklartDeltBosted: Svar;
     annenForelderNavn?: string;
-    annenForelderPersonnummer?: string;
+    annenForelderFodselsnummer?: string;
     annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar;
     harBarnehageplass: BarnehageplassVerdier;
-    neiHarFaattPlassFraDato?: string;
-    neiHarFaattPlassKommune?: string;
-    jaFraDato?: string;
-    jaKommune?: string;
-    jaAntallTimer?: string;
-    jaSkalSlutteDato?: string;
-    jaSkalSlutteKommune?: string;
-    jaSkalSlutteAntallTimer?: string;
+    barnehageplassDato?: string;
+    barnehageplassKommune?: string;
+    barnehageplassAntallTimer?: number;
 }
 
 const initialState = {
