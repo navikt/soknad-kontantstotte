@@ -11,3 +11,7 @@ export const erDatoSatt = (verdi?: string): boolean => {
 export const harSvartPaJaNeiSporsmal = (svar: Svar): boolean => {
     return svar !== Svar.UBESVART;
 };
+
+export const harHuketAvPaCheckbox = (svar: Svar): boolean => {
+    return svar === Svar.JA;
+};
