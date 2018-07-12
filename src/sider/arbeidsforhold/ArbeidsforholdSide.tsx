@@ -9,7 +9,11 @@ import { IRootState } from '../../rootReducer';
 import { selectArbeidsforhold } from '../../soknad/selectors';
 import { Bolk, IArbeidsforhold } from '../../soknad/types';
 
-type ArbeidsforholdSideProps = IArbeidsforhold;
+interface IMapDispatchToProps {
+    navigerTilPath: (path: string) => void;
+}
+
+type ArbeidsforholdSideProps = IArbeidsforhold & IMapDispatchToProps;
 
 const ArbeidsforholdSide: React.StatelessComponent<ArbeidsforholdSideProps> = (
     {
@@ -66,6 +70,5 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
         navigerTilPath: (path: string) => dispatch(push(path))
     };
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArbeidsforholdSide);

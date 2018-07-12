@@ -20,20 +20,26 @@ interface IMapDispatchToProps {
 type BarnehageplassSideProps = IBarnehageplass & IMapDispatchToProps & InjectedIntlProps;
 
 const BarnehageplassSide: React.StatelessComponent<BarnehageplassSideProps> = ({
-                                                                                   harBarnehageplass,
-                                                                                   settSvar,
-                                                                                   intl,
-                                                                                   settEkstraFelt,
-                                                                                   navigerTilPath
-                                                                               }) => {
+    harBarnehageplass,
+    settSvar,
+    intl,
+    settEkstraFelt,
+    navigerTilPath,
+    dato,
+    kommune,
+    antallTimer,
+}) => {
     const radios = [
         {label: intl.formatMessage({id: 'svar.nei'}), value: BarnehageplassVerdier.Nei},
         {label: intl.formatMessage({id: 'svar.neiHarFaattPlass'}), value: BarnehageplassVerdier.NeiHarFaatt},
         {label: intl.formatMessage({id: 'svar.ja'}), value: BarnehageplassVerdier.Ja},
         {label: intl.formatMessage({id: 'svar.jaHarSluttet'}), value: BarnehageplassVerdier.JaSkalSlutte}
     ];
-    const valgSomKreverEkstraFelter: BarnehageplassVerdier[] =
-        [BarnehageplassVerdier.Ja, BarnehageplassVerdier.JaSkalSlutte, BarnehageplassVerdier.NeiHarFaatt];
+    const valgSomKreverEkstraFelter: BarnehageplassVerdier[] = [
+        BarnehageplassVerdier.Ja,
+        BarnehageplassVerdier.JaSkalSlutte,
+        BarnehageplassVerdier.NeiHarFaatt,
+    ];
 
     return (
         <SideContainer>
@@ -55,7 +61,14 @@ const BarnehageplassSide: React.StatelessComponent<BarnehageplassSideProps> = ({
                     }
                 />
                 {valgSomKreverEkstraFelter.includes(harBarnehageplass) &&
-                    <EkstraFelter barnehageplassVerdi={ harBarnehageplass }/>
+                    <EkstraFelter
+                        harBarnehageplass={ harBarnehageplass }
+                        dato={ dato }
+                        kommune={ kommune }
+                        antallTimer={ antallTimer }
+                        settFelt={ settEkstraFelt }
+                        intl={ intl }
+                    />
                 }
                 <SubmitKnapp label='submitknapp.neste'/>
             </ValidForm>

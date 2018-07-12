@@ -1,12 +1,8 @@
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 import { ValidInput } from '../../common/lib/validation';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
-import { IRootState } from '../../rootReducer';
-import { soknadSettVerdi } from '../../soknad/actions';
-import { Svar } from '../../soknad/reducer';
+import { Svar } from '../../soknad/types';
 import { harTekstomradeInnhold } from '../../validators';
 
 interface IProps {

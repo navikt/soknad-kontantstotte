@@ -23,7 +23,7 @@ const FamilieforholdSide: React.StatelessComponent<FamilieforholdSideProps> = (
     {
         borForeldreneSammenMedBarnet,
         erAvklartDeltBosted,
-        navigerTilPath
+        navigerTilPath,
         ...annenForelderProps
     }) => {
 
@@ -40,13 +40,14 @@ const FamilieforholdSide: React.StatelessComponent<FamilieforholdSideProps> = (
 
                 { borForeldreneSammenMedBarnet === Svar.JA &&
                     <AnnenForelderInfo
-                {...annenForelderProps}
-                />}
+                        {...annenForelderProps}
+                    />
+                }
 
                 { borForeldreneSammenMedBarnet === Svar.NEI &&
                     <JaNeiSporsmal
                         bolk='familieforhold'
-                    felt='erAvklartDeltBosted'
+                        felt='erAvklartDeltBosted'
                         sporsmalNokkel='familieforhold.erAvklartDeltBosted.sporsmal'
                         verdi={ erAvklartDeltBosted }
                     />
@@ -63,6 +64,7 @@ const mapStateToProps = (state: IRootState): IFamilieforhold => {
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
+        navigerTilPath: (path: string) => dispatch(push(path)),
         settAnnenForelderFodselsnummer: (personnr) => {
             dispatch(soknadSettVerdi('familieforhold', 'annenForelderFodselsnummer', personnr));
         },
@@ -71,12 +73,5 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
         },
     };
 };
-
-const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
-    return {
-        navigerTilPath: (path: string) => dispatch(push(path))
-    };
-};
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(FamilieforholdSide);

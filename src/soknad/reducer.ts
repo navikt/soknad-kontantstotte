@@ -8,7 +8,10 @@ const initialState: ISoknadState = {
         mottarYtelserFraUtlandet: Svar.UBESVART,
     },
     barnehageplass: {
+        antallTimer: '',
+        dato: '',
         harBarnehageplass: BarnehageplassVerdier.Ubesvart,
+        kommune: '',
     },
     familieforhold: {
         annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar.UBESVART,

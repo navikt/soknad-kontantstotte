@@ -45,11 +45,9 @@ interface IArbeidsforhold {
 
 interface IBarnehageplass {
     readonly harBarnehageplass: BarnehageplassVerdier;
-    readonly neiHarFaattPlassFraDato?: string;
-    readonly neiHarFaattPlassKommune?: string;
-    readonly fraDato?: string;
-    readonly kommune?: string;
-    readonly antallTimer?: string;
+    readonly dato: string;
+    readonly kommune: string;
+    readonly antallTimer: string;
 }
 
 interface IKravTilSoker {
