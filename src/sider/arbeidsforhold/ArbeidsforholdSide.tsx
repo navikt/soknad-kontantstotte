@@ -1,6 +1,6 @@
 import { push } from 'connected-react-router';
 import * as React from 'react';
-import { connect, DispatchProp } from 'react-redux';
+import { connect, Dispatch } from 'react-redux';
 import ValidForm from '../../common/lib/validation/ValidForm';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import SubmitKnapp from '../../component/SubmitKnapp/SubmitKnapp';
@@ -17,7 +17,11 @@ interface IMapStateToProps {
     mottarKontantstotteFraAnnetEOSForklaring?: string;
 }
 
-type ArbeidsforholdSideProps = IMapStateToProps & DispatchProp;
+interface IMapDispatchToProps {
+    navigerTilPath: (path: string) => any;
+}
+
+type ArbeidsforholdSideProps = IMapStateToProps & IMapDispatchToProps;
 
 const ArbeidsforholdSide: React.StatelessComponent<ArbeidsforholdSideProps> = (
     {
@@ -27,11 +31,11 @@ const ArbeidsforholdSide: React.StatelessComponent<ArbeidsforholdSideProps> = (
         arbeiderIUtlandetEllerKontinentalsokkelForklaring,
         mottarKontantstotteFraAnnetEOS,
         mottarKontantstotteFraAnnetEOSForklaring,
-        dispatch
+        navigerTilPath
     }) => {
     return (
         <SideContainer>
-            <ValidForm summaryTitle={'Arbeidsforhold'} onSubmit={() => dispatch(push('/oppsummering'))}>
+            <ValidForm summaryTitle={'Arbeidsforhold'} onSubmit={() => navigerTilPath('/oppsummering')}>
                 <JaNeiSporsmal
                     nokkel='mottarYtelserFraUtlandet'
                     sporsmalNokkel='arbeidsforhold.mottarYtelserFraUtlandet.sporsmal'
@@ -71,4 +75,10 @@ const mapStateToProps = (state: IRootState) => {
     };
 };
 
-export default connect(mapStateToProps)(ArbeidsforholdSide);
+const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
+    return {
+        navigerTilPath: (path: string) => dispatch(push(path))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArbeidsforholdSide);
