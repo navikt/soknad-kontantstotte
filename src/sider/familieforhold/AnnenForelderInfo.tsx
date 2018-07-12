@@ -34,6 +34,7 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
         <div>
             <h3>{ intl.formatMessage({ id: 'familieforhold.annenForelder.tittel'}) }</h3>
             <ValidInput
+                name='annenForelder.navn'
                 label={
                     intl.formatMessage(
                         {
@@ -59,6 +60,7 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
                 defaultValue={ annenForelderNavn || '' }
             />
             <ValidInput
+                name='annenforelder.fodselsnummer'
                 label={
                     intl.formatMessage(
                         {
