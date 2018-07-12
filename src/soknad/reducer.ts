@@ -25,14 +25,9 @@ interface ISoknadState {
     annenForelderFodselsnummer?: string;
     annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar;
     harBarnehageplass: BarnehageplassVerdier;
-    neiHarFaattPlassFraDato?: string;
-    neiHarFaattPlassKommune?: string;
-    jaFraDato?: string;
-    jaKommune?: string;
-    jaAntallTimer?: string;
-    jaSkalSlutteDato?: string;
-    jaSkalSlutteKommune?: string;
-    jaSkalSlutteAntallTimer?: string;
+    barnehageplassDato?: string;
+    barnehageplassKommune?: string;
+    barnehageplassAntallTimer?: number;
 }
 
 const initialState = {
