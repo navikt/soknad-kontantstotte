@@ -1,36 +1,25 @@
-import { push } from 'connected-react-router';
 import KnappBase from 'nav-frontend-knapper';
 import * as React from 'react';
-import { connect, DispatchProp } from 'react-redux';
-import { RouteProps } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export interface INavigasjonKnappProps {
     to: string;
+    children: React.ReactNode;
 }
 
-type Props = INavigasjonKnappProps&DispatchProp&RouteProps;
+type Props = INavigasjonKnappProps;
 
-class NavigasjonKnapp extends React.Component<Props> {
-
-    constructor( props: Props ) {
-        super(props);
-    }
-
-    public render() {
-        return (
-            <KnappBase type='hoved' onClick={() => this.navigasjonsHandler(this.props)}>
-                {this.props.children}
+const NavigasjonKnapp: React.StatelessComponent<Props> = ({
+    to,
+    children,
+}) => {
+    return (
+        <Link to={to}>
+            <KnappBase type='hoved'>
+                { children }
             </KnappBase>
-        );
-    }
+        </Link>
+    );
+};
 
-    private navigasjonsHandler(props: Props) {
-        const to: string = props.to;
-        props.dispatch(push(to));
-    }
-}
-
-const mapStateToProps = (state: any) => ({
-});
-
-export default connect(mapStateToProps)(NavigasjonKnapp);
+export default NavigasjonKnapp;
