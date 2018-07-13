@@ -4,7 +4,7 @@ import { connect, Dispatch } from 'react-redux';
 import { ValidForm } from '../../common/lib/validation';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import SubmitKnapp from '../../component/SubmitKnapp/SubmitKnapp';
-import SideContainer from '../../container/SideContainer/SideContainer';
+import SideContainer from '../../component/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
 import { selectFamilieforhold } from '../../soknad/selectors';

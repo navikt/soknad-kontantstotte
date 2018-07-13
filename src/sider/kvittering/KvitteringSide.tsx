@@ -1,6 +1,6 @@
 import * as React from 'react';
 import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
-import SideContainer from '../../container/SideContainer/SideContainer';
+import SideContainer from '../../component/SideContainer/SideContainer';
 
 const KvitteringSide = (): JSX.Element => {
     return (

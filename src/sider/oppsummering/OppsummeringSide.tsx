@@ -1,7 +1,7 @@
 import KnappBase from 'nav-frontend-knapper';
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import SideContainer from '../../container/SideContainer/SideContainer';
+import SideContainer from '../../component/SideContainer/SideContainer';
 import { sendInn } from '../../innsending/actions';
 import { IRootState } from '../../rootReducer';
 import { selectSoknad } from '../../soknad/selectors';
