@@ -34,7 +34,7 @@ export interface IValidBaseState {
 
 class ValidBase extends React.Component<IProps, IValidBaseState> {
     public static contextTypes = {
-        validForm: PT.object
+        validForm: PT.object,
     };
 
     public element: any;
@@ -79,13 +79,16 @@ class ValidBase extends React.Component<IProps, IValidBaseState> {
         if (this.props.onChange) {
             this.props.onChange(...args);
         } else {
-            this.setState({...this.state , text: (args[0] as React.ChangeEvent<HTMLTextAreaElement>).target.value});
+            this.setState({
+                ...this.state,
+                text: (args[0] as React.ChangeEvent<HTMLTextAreaElement>).target.value,
+            });
         }
     }
 
     public onBlur(e: React.FocusEvent<any>) {
         this.setState({
-            hasBlurred: true
+            hasBlurred: true,
         });
 
         if (this.context.validForm) {
@@ -102,7 +105,7 @@ class ValidBase extends React.Component<IProps, IValidBaseState> {
     }
 
     public getFirstFailedVerdict() {
-        return this.state.tests.find((test) => !test.verdict);
+        return this.state.tests.find(test => !test.verdict);
     }
 
     public validate() {
@@ -121,10 +124,10 @@ class ValidBase extends React.Component<IProps, IValidBaseState> {
         }
 
         let valid = true;
-        const testsCopy = this.props.validators.map((validator) => {
+        const testsCopy = this.props.validators.map(validator => {
             const validatorResult = {
                 failText: validator.failText,
-                verdict: validator.test(this.element)
+                verdict: validator.test(this.element),
             };
 
             if (!validatorResult.verdict) {
@@ -135,13 +138,13 @@ class ValidBase extends React.Component<IProps, IValidBaseState> {
 
         this.setState({
             tests: testsCopy.slice(),
-            valid
+            valid,
         });
 
         return {
             name: this.props.name,
             tests: testsCopy.slice(),
-            valid
+            valid,
         };
     }
 
@@ -194,13 +197,13 @@ class ValidBase extends React.Component<IProps, IValidBaseState> {
         if (!!onChange) {
             return (
                 <this.props.component
-                    onChange={ this.onChange }
+                    onChange={this.onChange}
                     onBlur={this.onBlur}
                     feil={feil || failedVerdict}
                     {...other}
                 />
             );
-        } else {
+        } else {
             return (
                 <this.props.component
                     onBlur={this.onBlur}

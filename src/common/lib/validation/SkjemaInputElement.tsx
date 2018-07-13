@@ -11,21 +11,23 @@ export interface ISkjemaInputProps {
     children: React.ReactNode;
 }
 
-const SkjemaInputElement: React.StatelessComponent<ISkjemaInputProps> = (props: ISkjemaInputProps) => {
+const SkjemaInputElement: React.StatelessComponent<ISkjemaInputProps> = (
+    props: ISkjemaInputProps
+) => {
     const { label, id, feil, children } = props;
     const inputId = id || guid();
     return (
         <div
             className={classnames('skjemaelement', {
-                'skjemaelement--harFeil': feil !== undefined
+                'skjemaelement--harFeil': feil !== undefined,
             })}
         >
-            <label className='skjemaelement__label' htmlFor={inputId}>
+            <label className="skjemaelement__label" htmlFor={inputId}>
                 {label}
             </label>
             <div
                 className={classnames({
-                    'skjema__feilomrade--harFeil': feil !== undefined
+                    'skjema__feilomrade--harFeil': feil !== undefined,
                 })}
             >
                 {children}

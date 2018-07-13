@@ -6,7 +6,7 @@ const Veiledning = () => {
         <div>
             <h1>Veiledningsside</h1>
             <p>Info om søknad om kontantstøtte </p>
-            <NavigasjonKnapp to='/start'>Start søknad</NavigasjonKnapp>
+            <NavigasjonKnapp to="/start">Start søknad</NavigasjonKnapp>
         </div>
     );
 };

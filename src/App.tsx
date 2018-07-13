@@ -13,19 +13,13 @@ interface IMapStateToProps {
 
 type Props = IMapStateToProps & RouteComponentProps<{}>;
 
-const App: React.StatelessComponent<Props> = ({
-    status
-}) => {
+const App: React.StatelessComponent<Props> = ({ status }) => {
     switch (status) {
         case AppStatus.IKKE_STARTET:
         case AppStatus.STARTER:
-            return (
-                <Spinner type={'XXL'} />
-            );
+            return <Spinner type={'XXL'} />;
         case AppStatus.KLAR:
-            return (
-                <Routes />
-            );
+            return <Routes />;
         case AppStatus.FEILSITUASJON:
             return (
                 <div>
@@ -33,12 +27,11 @@ const App: React.StatelessComponent<Props> = ({
                 </div>
             );
     }
-
 };
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
-        status: selectAppStatus(state)
+        status: selectAppStatus(state),
     };
 };
 

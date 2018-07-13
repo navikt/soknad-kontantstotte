@@ -1,4 +1,4 @@
-import { BarnActionTypes, BarnTypeKeys } from "./actions";
+import { BarnActionTypes, BarnTypeKeys } from './actions';
 import { IBarn } from './types';
 
 interface IBarnState {
@@ -12,7 +12,7 @@ const initialState: IBarnState = {
 };
 
 function barnReducer(state = initialState, action: BarnActionTypes) {
-    switch ( action.type ) {
+    switch (action.type) {
         case BarnTypeKeys.HENT:
             return {
                 ...state,
@@ -27,7 +27,7 @@ function barnReducer(state = initialState, action: BarnActionTypes) {
         case BarnTypeKeys.HENT_FEILET: {
             return {
                 ...state,
-                henter: false
+                henter: false,
             };
         }
         default:
@@ -35,7 +35,4 @@ function barnReducer(state = initialState, action: BarnActionTypes) {
     }
 }
 
-export {
-    barnReducer,
-    IBarnState,
-};
+export { barnReducer, IBarnState };

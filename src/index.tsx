@@ -10,26 +10,26 @@ import IntlProvider from './IntlProvider';
 
 import './index.less';
 
-const rootElement = document.getElementById( 'app' );
+const rootElement = document.getElementById('app');
 
 const renderApp = (Component: React.ComponentType<{}>) => {
     render(
         <AppContainer>
-            <Provider store={ store }>
+            <Provider store={store}>
                 <IntlProvider>
                     <ConnectedRouter history={history}>
-                        <Component/>
+                        <Component />
                     </ConnectedRouter>
                 </IntlProvider>
             </Provider>
         </AppContainer>,
-        rootElement,
+        rootElement
     );
 };
 
 renderApp(App);
 
-if ( module.hot ) {
+if (module.hot) {
     module.hot.accept('./App', () => {
         const NewApp = require('./App').default;
         renderApp(NewApp);

@@ -1,4 +1,4 @@
-import { RouterState } from "connected-react-router";
+import { RouterState } from 'connected-react-router';
 import { combineReducers } from 'redux';
 import { appReducer, IAppState } from './app/reducer';
 import { barnReducer, IBarnState } from './barn/reducer';

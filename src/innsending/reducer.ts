@@ -5,7 +5,7 @@ interface IInnsendingState {
 }
 
 const initialState: IInnsendingState = {
-    senderinn: false
+    senderinn: false,
 };
 
 function innsendingReducer(state = initialState, action: InnsendingActionTypes) {
@@ -30,7 +30,4 @@ function innsendingReducer(state = initialState, action: InnsendingActionTypes) 
     }
 }
 
-export {
-    innsendingReducer,
-    IInnsendingState,
-};
+export { innsendingReducer, IInnsendingState };

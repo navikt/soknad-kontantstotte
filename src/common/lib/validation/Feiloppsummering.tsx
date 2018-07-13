@@ -13,7 +13,7 @@ interface IFeiloppsummeringProps {
 
 const cls = (show: boolean, className?: string) =>
     classNames('feil-oppsummering-boks', className, {
-        'feil-oppsummering-boks--visible': show
+        'feil-oppsummering-boks--visible': show,
     });
 
 class Feiloppsummering extends React.Component<IFeiloppsummeringProps, {}> {
@@ -26,7 +26,7 @@ class Feiloppsummering extends React.Component<IFeiloppsummeringProps, {}> {
     public render() {
         const { className, show, errors, title, ...other } = this.props;
 
-        const listItems = errors.map((error) => {
+        const listItems = errors.map(error => {
             const link = '#' + error.name;
             return (
                 <li key={error.name}>
@@ -39,7 +39,7 @@ class Feiloppsummering extends React.Component<IFeiloppsummeringProps, {}> {
 
         return (
             <article
-                ref={(node) => {
+                ref={node => {
                     this.element = node;
                 }}
                 tabIndex={-1}

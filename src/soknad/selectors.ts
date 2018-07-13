@@ -1,5 +1,11 @@
 import { IRootState } from '../rootReducer';
-import { IArbeidsforhold, IBarnehageplass, IFamilieforhold, IKravTilSoker, ISoknadState } from './types';
+import {
+    IArbeidsforhold,
+    IBarnehageplass,
+    IFamilieforhold,
+    IKravTilSoker,
+    ISoknadState,
+} from './types';
 
 function selectFamilieforhold(state: IRootState): IFamilieforhold {
     return state.soknad.familieforhold;

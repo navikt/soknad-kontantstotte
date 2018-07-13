@@ -12,7 +12,7 @@ interface IOwnProps {
 
 interface IMapStateToProps {
     location: {
-        pathname: string
+        pathname: string;
     };
 }
 
@@ -20,47 +20,38 @@ type Props = IOwnProps & IMapStateToProps;
 
 class SideContainer extends React.Component<Props> {
     public render() {
-
-        const {
-            children,
-            className = '',
-            location,
-        } = this.props;
+        const { children, className = '', location } = this.props;
 
         const currentPath = location ? location.pathname : '';
 
-        const indikatorsteg: StegindikatorStegProps[] = Sider
-            .filter((side: ISide) => side.sideType === SideType.SKJEMASIDE)
-            .map((side: ISide) => {
-                    return {
-                        aktiv: hentIndeksForPath(currentPath) === side.stegIndeks,
-                        index: side.stegIndeks,
-                        label: side.key
-                    };
-                }
-            );
+        const indikatorsteg: StegindikatorStegProps[] = Sider.filter(
+            (side: ISide) => side.sideType === SideType.SKJEMASIDE
+        ).map((side: ISide) => {
+            return {
+                aktiv: hentIndeksForPath(currentPath) === side.stegIndeks,
+                index: side.stegIndeks,
+                label: side.key,
+            };
+        });
 
         return (
-            <div className={ className }>
+            <div className={className}>
                 <Stegindikator
-                    steg={ indikatorsteg }
-                    autoResponsiv={  true }
-                    visLabel={ false }
-                    kompakt={ false }
-                    aktivtSteg={ hentIndeksForPath(currentPath) }
+                    steg={indikatorsteg}
+                    autoResponsiv={true}
+                    visLabel={false}
+                    kompakt={false}
+                    aktivtSteg={hentIndeksForPath(currentPath)}
                 />
-                <div>
-                    { children }
-                </div>
+                <div>{children}</div>
             </div>
-
         );
     }
 }
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
-        location: state.router.location
+        location: state.router.location,
     };
 };
 

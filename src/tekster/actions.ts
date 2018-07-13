@@ -2,16 +2,12 @@ import { Action } from 'redux';
 import { ITekster } from './types';
 
 enum TeksterTypeKeys {
-    HENT = "TEKSTER_HENT",
-    HENT_OK = "TEKSTER_HENT_OK",
-    HENT_FEILET = "TEKSTER_HENT_FEILET"
+    HENT = 'TEKSTER_HENT',
+    HENT_OK = 'TEKSTER_HENT_OK',
+    HENT_FEILET = 'TEKSTER_HENT_FEILET',
 }
 
-type TeksterActionTypes =
-    | ITeksterHent
-    | ITeksterHentOK
-    | ITeksterHentFeilet
-    ;
+type TeksterActionTypes = ITeksterHent | ITeksterHentOK | ITeksterHentFeilet;
 
 interface ITeksterHent extends Action {
     type: TeksterTypeKeys.HENT;
@@ -28,7 +24,7 @@ interface ITeksterHentFeilet extends Action {
 
 function teksterHent(): ITeksterHent {
     return {
-        type: TeksterTypeKeys.HENT
+        type: TeksterTypeKeys.HENT,
     };
 }
 
@@ -41,14 +37,8 @@ function teksterHentOk(tekster: ITekster): ITeksterHentOK {
 
 function teksterHentFeilet(): ITeksterHentFeilet {
     return {
-        type: TeksterTypeKeys.HENT_FEILET
+        type: TeksterTypeKeys.HENT_FEILET,
     };
 }
 
-export {
-    TeksterTypeKeys,
-    TeksterActionTypes,
-    teksterHent,
-    teksterHentOk,
-    teksterHentFeilet
-};
+export { TeksterTypeKeys, TeksterActionTypes, teksterHent, teksterHentOk, teksterHentFeilet };

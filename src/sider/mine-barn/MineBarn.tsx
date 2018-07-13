@@ -21,26 +21,18 @@ interface IMapDispatchToProps {
 
 type MineBarnSideProps = IMapStateToProps & IMapDispatchToProps;
 
-const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
-    barn,
-    valgtBarn,
-    velgBarn
-}) =>  {
+const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({ barn, valgtBarn, velgBarn }) => {
     return (
-        <SideContainer className={"mine-barn"}>
+        <SideContainer className={'mine-barn'}>
             <h1>Mine barn</h1>
-            <ul className={"mine-barn__liste"}>
-            {barn.map((b) =>
-                <li key={ b.navn }>
-                    <Barn
-                        valgt={ b.navn === valgtBarn.navn}
-                        barn={ b }
-                        onClick={ velgBarn }
-                    />
-                </li>
-            )}
+            <ul className={'mine-barn__liste'}>
+                {barn.map(b => (
+                    <li key={b.navn}>
+                        <Barn valgt={b.navn === valgtBarn.navn} barn={b} onClick={velgBarn} />
+                    </li>
+                ))}
             </ul>
-            <NavigasjonKnapp to='/familieforhold'>Neste</NavigasjonKnapp>
+            <NavigasjonKnapp to="/familieforhold">Neste</NavigasjonKnapp>
         </SideContainer>
     );
 };
@@ -54,8 +46,11 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        velgBarn: (barn) => dispatch(soknadSettVerdi('mineBarn', 'valgtBarn', barn))
+        velgBarn: barn => dispatch(soknadSettVerdi('mineBarn', 'valgtBarn', barn)),
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MineBarn);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(MineBarn);

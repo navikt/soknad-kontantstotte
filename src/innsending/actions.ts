@@ -1,9 +1,9 @@
 import { Action } from 'redux';
 
 enum InnsendingTypeKeys {
-    SENDINN = "SENDINN",
-    SENDINN_OK = "SENDINN_OK",
-    SENDINN_FEILET = "SENDINN_FEILET"
+    SENDINN = 'SENDINN',
+    SENDINN_OK = 'SENDINN_OK',
+    SENDINN_FEILET = 'SENDINN_FEILET',
 }
 
 type InnsendingActionTypes = ISendInn | ISendInnOk | ISendInnFeilet;
@@ -28,21 +28,14 @@ function sendInn(): ISendInn {
 
 function sendInnOk(): ISendInnOk {
     return {
-        type: InnsendingTypeKeys.SENDINN_OK
+        type: InnsendingTypeKeys.SENDINN_OK,
     };
 }
 
 function sendInnFeilet(): ISendInnFeilet {
     return {
-        type: InnsendingTypeKeys.SENDINN_FEILET
+        type: InnsendingTypeKeys.SENDINN_FEILET,
     };
 }
 
-export {
-    InnsendingTypeKeys,
-    InnsendingActionTypes,
-    ISendInn,
-    sendInn,
-    sendInnOk,
-    sendInnFeilet,
-};
+export { InnsendingTypeKeys, InnsendingActionTypes, ISendInn, sendInn, sendInnOk, sendInnFeilet };
