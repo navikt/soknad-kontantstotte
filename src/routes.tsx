@@ -6,9 +6,9 @@ import FamilieforholdSide from './sider/familieforhold/Familieforhold';
 import InnsendingFeilet from './sider/feilsider/InnsendingFeilet';
 import OppfyllerIkkeVilkaar from './sider/feilsider/OppfyllerIkkeVilkaar';
 import SidenFinnesIkke from './sider/feilsider/SidenFinnesIkke';
-import KravTilSoker from './sider/krav_til_soker/KravTilSoker';
+import KravTilSoker from './sider/krav-til-soker/KravTilSoker';
 import Kvittering from './sider/kvittering/Kvittering';
-import MineBarnSide from './sider/mine_barn/MineBarn';
+import MineBarnSide from './sider/mine-barn/MineBarn';
 import OppsummeringSide from './sider/oppsummering/Oppsummering';
 import Veiledning from './sider/veiledning/Veiledning';
 
