@@ -5221,7 +5221,7 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://repo.adeo.no/repository/npm-public/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
-prettier@^1.5.3:
+prettier@1.13.7, prettier@^1.5.3:
   version "1.13.7"
   resolved "https://repo.adeo.no/repository/npm-public/prettier/-/prettier-1.13.7.tgz#850f3b8af784a49a6ea2d2eaa7ed1428a34b7281"
 
@@ -6438,6 +6438,10 @@ ts-loader@4.3.0:
 tslib@^1.8.0, tslib@^1.8.1:
   version "1.9.3"
   resolved "https://repo.adeo.no/repository/npm-public/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
+
+tslint-config-prettier@1.13.0:
+  version "1.13.0"
+  resolved "https://repo.adeo.no/repository/npm-public/tslint-config-prettier/-/tslint-config-prettier-1.13.0.tgz#189e821931ad89e0364e4e292d5c44a14e90ecd6"
 
 tslint-loader@3.6.0:
   version "3.6.0"
