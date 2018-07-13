@@ -2,6 +2,7 @@ import Spinner from 'nav-frontend-spinner';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps, Switch, withRouter } from 'react-router-dom';
+import { selectAppStatus } from './app/selectors';
 import { AppStatus } from './app/types';
 import { IRootState } from './rootReducer';
 import { renderSoknadRoutes } from './routes';
@@ -39,7 +40,7 @@ const App: React.StatelessComponent<Props> = ({
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
-        status: state.app.status
+        status: selectAppStatus(state)
     };
 };
 

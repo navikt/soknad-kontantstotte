@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { selectBarn } from '../../barn/selectors';
 import { IBarn } from '../../barn/types';
 import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
+import { selectValgtBarn } from '../../soknad/selectors';
 import Barn from './Barn';
 
 interface IMapStateToProps {
@@ -45,8 +47,8 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
-        barn: state.barn.barn,
-        valgtBarn: state.soknad.mineBarn.valgtBarn,
+        barn: selectBarn(state),
+        valgtBarn: selectValgtBarn(state),
     };
 };
 

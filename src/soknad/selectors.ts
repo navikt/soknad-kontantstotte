@@ -17,14 +17,19 @@ function selectKravTilSoker(state: IRootState): IKravTilSoker {
     return state.soknad.kravTilSoker;
 }
 
+function selectValgtBarn(state: IRootState) {
+    return state.soknad.mineBarn.valgtBarn;
+}
+
 function selectSoknad(state: IRootState): ISoknadState {
     return state.soknad;
 }
 
 export {
-    selectFamilieforhold,
     selectArbeidsforhold,
     selectBarnehageplass,
+    selectFamilieforhold,
     selectKravTilSoker,
     selectSoknad,
+    selectValgtBarn,
 };
