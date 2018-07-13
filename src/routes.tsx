@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { Route, RouteProps } from 'react-router-dom';
-import ArbeidsforholdSide from './sider/arbeidsforhold/ArbeidsforholdSide';
-import BarnehageplassSide from './sider/barnehageplass/BarnehageplassSide';
-import FamilieforholdSide from './sider/familieforhold/FamilieforholdSide';
-import InnsendingFeiletSide from './sider/feilsider/InnsendingFeiletSide';
-import OppfyllerIkkeVilkaarSide from './sider/feilsider/OppfyllerIkkeVilkaarSide';
-import SidenFinnesIkkeSide from './sider/feilsider/SidenFinnesIkkeSide';
+import ArbeidsforholdSide from './sider/arbeidsforhold/Arbeidsforhold';
+import BarnehageplassSide from './sider/barnehageplass/Barnehageplass';
+import FamilieforholdSide from './sider/familieforhold/Familieforhold';
+import InnsendingFeilet from './sider/feilsider/InnsendingFeilet';
+import OppfyllerIkkeVilkaar from './sider/feilsider/OppfyllerIkkeVilkaar';
+import SidenFinnesIkke from './sider/feilsider/SidenFinnesIkke';
 import KravTilSoker from './sider/krav_til_soker/KravTilSoker';
-import KvitteringSide from './sider/kvittering/KvitteringSide';
-import MineBarnSide from './sider/mine_barn/MineBarnSide';
-import OppsummeringSide from './sider/oppsummering/OppsummeringSide';
-import VeiledningSide from './sider/veiledning/VeiledningSide';
+import Kvittering from './sider/kvittering/Kvittering';
+import MineBarnSide from './sider/mine_barn/MineBarn';
+import OppsummeringSide from './sider/oppsummering/Oppsummering';
+import Veiledning from './sider/veiledning/Veiledning';
 
 export enum SideType {
     SKJEMASIDE = 'SKJEMASIDE',
@@ -29,7 +29,7 @@ export const Sider: ISide[] = [
     {
         key: 'veiledning',
         path: '/',
-        sideKomponent: VeiledningSide,
+        sideKomponent: Veiledning,
         sideType: SideType.ANNEN_INFOSIDE,
         stegIndeks: -1
     },
@@ -78,28 +78,28 @@ export const Sider: ISide[] = [
     {
         key: 'kvittering',
         path: '/kvittering',
-        sideKomponent: KvitteringSide,
+        sideKomponent: Kvittering,
         sideType: SideType.SKJEMASIDE,
         stegIndeks: 6
     },
     {
         key: 'siden-finnes-ikke',
         path: '',
-        sideKomponent: SidenFinnesIkkeSide,
+        sideKomponent: SidenFinnesIkke,
         sideType: SideType.ANNEN_INFOSIDE,
         stegIndeks: 7
     },
     {
         key: 'oppfyller-ikke-vilkaar',
         path: '/oppfyller-ikke-vilkaar',
-        sideKomponent: OppfyllerIkkeVilkaarSide,
+        sideKomponent: OppfyllerIkkeVilkaar,
         sideType: SideType.ANNEN_INFOSIDE,
         stegIndeks: 8
     },
     {
         key: 'innsending-feilet',
         path: '/innsending-feilet',
-        sideKomponent: InnsendingFeiletSide,
+        sideKomponent: InnsendingFeilet,
         sideType: SideType.ANNEN_INFOSIDE,
         stegIndeks: 9
     }

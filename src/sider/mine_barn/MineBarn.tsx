@@ -19,7 +19,7 @@ interface IMapDispatchToProps {
 
 type MineBarnSideProps = IMapStateToProps & IMapDispatchToProps;
 
-const MineBarnSide: React.StatelessComponent<MineBarnSideProps> = ({
+const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
     barn,
     valgtBarn,
     velgBarn
@@ -56,4 +56,4 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MineBarnSide);
+export default connect(mapStateToProps, mapDispatchToProps)(MineBarn);

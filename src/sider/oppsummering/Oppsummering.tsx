@@ -17,7 +17,7 @@ interface IMapStateToProps {
 
 type OppsummeringSideProps = IMapDispatchToProps & IMapStateToProps;
 
-const OppsummeringSide: React.StatelessComponent<OppsummeringSideProps> = ({sendSoknad}) => {
+const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({sendSoknad}) => {
     return (
         <SideContainer>
             <h1>Oversikt over hva du har fylt ut</h1>
@@ -38,4 +38,4 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OppsummeringSide);
+export default connect(mapStateToProps, mapDispatchToProps)(Oppsummering);

@@ -15,7 +15,7 @@ interface IMapDispatchToProps {
 
 type ArbeidsforholdSideProps = IArbeidsforhold & IMapDispatchToProps;
 
-const ArbeidsforholdSide: React.StatelessComponent<ArbeidsforholdSideProps> = (
+const Arbeidsforhold: React.StatelessComponent<ArbeidsforholdSideProps> = (
     {
         mottarYtelserFraUtlandet,
         mottarYtelserFraUtlandetForklaring,
@@ -71,4 +71,4 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArbeidsforholdSide);
+export default connect(mapStateToProps, mapDispatchToProps)(Arbeidsforhold);

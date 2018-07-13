@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const InnsendingFeiletSide = () => {
+const InnsendingFeilet = () => {
     return (
         <div>
             <h1>Beklager!</h1>
@@ -9,4 +9,4 @@ const InnsendingFeiletSide = () => {
     );
 };
 
-export default InnsendingFeiletSide;
+export default InnsendingFeilet;

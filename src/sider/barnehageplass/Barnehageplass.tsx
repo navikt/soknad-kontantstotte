@@ -19,7 +19,7 @@ interface IMapDispatchToProps {
 
 type BarnehageplassSideProps = IBarnehageplass & IMapDispatchToProps & InjectedIntlProps;
 
-const BarnehageplassSide: React.StatelessComponent<BarnehageplassSideProps> = ({
+const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     harBarnehageplass,
     settSvar,
     intl,
@@ -93,4 +93,4 @@ const mapStateToProps = (state: IRootState): IBarnehageplass => {
     return selectBarnehageplass(state);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(BarnehageplassSide));
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Barnehageplass));

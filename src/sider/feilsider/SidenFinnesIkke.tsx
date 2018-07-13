@@ -1,7 +1,7 @@
 import * as React from 'react';
 import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
 
-const SidenFinnesIkkeSide = () => {
+const SidenFinnesIkke = () => {
     return (
         <div>
             <h1>Ooops</h1>
@@ -12,4 +12,4 @@ const SidenFinnesIkkeSide = () => {
     );
 };
 
-export default SidenFinnesIkkeSide;
+export default SidenFinnesIkke;

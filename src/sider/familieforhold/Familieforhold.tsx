@@ -19,7 +19,7 @@ interface IMapDispatchToProps {
 
 type FamilieforholdSideProps = IFamilieforhold & IMapDispatchToProps;
 
-const FamilieforholdSide: React.StatelessComponent<FamilieforholdSideProps> = (
+const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = (
     {
         borForeldreneSammenMedBarnet,
         erAvklartDeltBosted,
@@ -74,4 +74,4 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FamilieforholdSide);
+export default connect(mapStateToProps, mapDispatchToProps)(Familieforhold);
