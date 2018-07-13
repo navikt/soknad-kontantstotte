@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 
 interface ISubmitKnappProps {
     label: string;
-    children?: any;
 }
 
 type SubmitKnappProps = ISubmitKnappProps;

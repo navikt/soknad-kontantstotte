@@ -11,7 +11,7 @@ interface IMapStateToProps {
     status: AppStatus;
 }
 
-type Props = IMapStateToProps & RouteComponentProps<any>;
+type Props = IMapStateToProps & RouteComponentProps<{}>;
 
 const App: React.StatelessComponent<Props> = ({
     status

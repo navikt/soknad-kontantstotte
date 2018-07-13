@@ -12,9 +12,9 @@ import { IFamilieforhold, Svar } from '../../soknad/types';
 import AnnenForelderInfo from './AnnenForelderInfo';
 
 interface IMapDispatchToProps {
-    settAnnenForelderNavn: (navn: string) => any;
-    settAnnenForelderFodselsnummer: (personnummer: string) => any;
-    navigerTilPath: (path: string) => any;
+    settAnnenForelderNavn: (navn: string) => void;
+    settAnnenForelderFodselsnummer: (personnummer: string) => void;
+    navigerTilPath: (path: string) => void;
 }
 
 type FamilieforholdSideProps = IFamilieforhold & IMapDispatchToProps;

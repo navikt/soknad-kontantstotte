@@ -54,7 +54,7 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
                         test: () => harSvartPaJaNeiSporsmal(verdi)
                     }
                 ]}
-                onChange={ (evt: any, value: string) => settSvar(value as Svar) }
+                onChange={ (evt: {}, value: string) => settSvar(value as Svar) }
                 checked={ verdi }
                 radios={
                     [

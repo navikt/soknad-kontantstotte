@@ -16,7 +16,7 @@ interface IMapStateToProps {
 }
 
 interface IMapDispatchToProps {
-    velgBarn: (barn: IBarn) => any;
+    velgBarn: (barn: IBarn) => void;
 }
 
 type MineBarnSideProps = IMapStateToProps & IMapDispatchToProps;

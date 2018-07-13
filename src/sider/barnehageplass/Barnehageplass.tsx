@@ -12,9 +12,9 @@ import { BarnehageplassVerdier, Felt, IBarnehageplass } from '../../soknad/types
 import EkstraFelter from './EkstraFelter';
 
 interface IMapDispatchToProps {
-    navigerTilPath: (path: string) => any;
-    settSvar: (verdi: BarnehageplassVerdier) => any;
-    settEkstraFelt: (nokkel: Felt, verdi: string) => any;
+    navigerTilPath: (path: string) => void;
+    settSvar: (verdi: BarnehageplassVerdier) => void;
+    settEkstraFelt: (nokkel: Felt, verdi: string) => void;
 }
 
 type BarnehageplassSideProps = IBarnehageplass & IMapDispatchToProps & InjectedIntlProps;
@@ -55,7 +55,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                             test: () => harBarnehageplass !== BarnehageplassVerdier.Ubesvart
                         }
                     ]}
-                    onChange={ (event: any, value: string) => {
+                    onChange={ (event: {}, value: string) => {
                         settSvar(value as BarnehageplassVerdier);
                     }}
                 />

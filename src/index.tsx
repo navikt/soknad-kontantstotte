@@ -12,7 +12,7 @@ import './index.less';
 
 const rootElement = document.getElementById( 'app' );
 
-const renderApp = (Component: React.ComponentType<any>) => {
+const renderApp = (Component: React.ComponentType<{}>) => {
     render(
         <AppContainer>
             <Provider store={ store }>

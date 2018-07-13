@@ -8,7 +8,7 @@ import { selectSoknad } from '../../soknad/selectors';
 import { ISoknadState } from '../../soknad/types';
 
 interface IMapDispatchToProps {
-    sendSoknad: () => any;
+    sendSoknad: () => void;
 }
 
 interface IMapStateToProps {

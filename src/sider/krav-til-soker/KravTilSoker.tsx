@@ -14,8 +14,8 @@ import { Felt, IKravTilSoker, Svar } from '../../soknad/types';
 import { harHuketAvPaCheckbox } from '../../validators';
 
 interface IMapDispatchToProps {
-    settCheckboxVerdi: (felt: Felt, verdi: string) => any;
-    navigerTilPath: (path: string) => any;
+    settCheckboxVerdi: (felt: Felt, verdi: string) => void;
+    navigerTilPath: (path: string) => void;
 }
 
 const handterCheckboxEndring = (event: React.SyntheticEvent<EventTarget>, handler: any, value?: string) =>  {
