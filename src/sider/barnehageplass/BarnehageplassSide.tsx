@@ -55,10 +55,9 @@ const BarnehageplassSide: React.StatelessComponent<BarnehageplassSideProps> = ({
                             test: () => harBarnehageplass !== BarnehageplassVerdier.Ubesvart
                         }
                     ]}
-                    onChange={ (...args: any[]) => {
-                        settSvar(args[1] as BarnehageplassVerdier);
-                        }
-                    }
+                    onChange={ (event: any, value: string) => {
+                        settSvar(value as BarnehageplassVerdier);
+                    }}
                 />
                 {valgSomKreverEkstraFelter.includes(harBarnehageplass) &&
                     <EkstraFelter

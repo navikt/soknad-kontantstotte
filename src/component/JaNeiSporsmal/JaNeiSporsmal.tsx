@@ -20,8 +20,8 @@ interface ISporsmaalProps {
 }
 
 interface IMapDispatchToProps {
-    settForklaring: (forklaring?: string) => any;
-    settSvar: (verdi: Svar) => any;
+    settForklaring: (forklaring: string) => void;
+    settSvar: (verdi: Svar) => void;
 }
 
 type JaNeiSporsmalProps = IMapDispatchToProps & ISporsmaalProps & InjectedIntlProps;
@@ -46,11 +46,7 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
                 </HjelpetekstUnder>
             }
             <ValidRadioPanelGruppe
-                legend={ intl.formatMessage(
-                    {
-                        id: sporsmalNokkel
-                    }
-                ) }
+                legend={ intl.formatMessage({ id: sporsmalNokkel }) }
                 name={ felt }
                 validators={[
                     {
@@ -58,14 +54,7 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
                         test: () => harSvartPaJaNeiSporsmal(verdi)
                     }
                 ]}
-                onChange={
-                    (event: React.SyntheticEvent<EventTarget>) => {
-                        const element: HTMLBaseElement = (
-                            (event.target as HTMLBaseElement).nextElementSibling as HTMLBaseElement
-                        );
-                        settSvar(element.innerText.toUpperCase() as Svar);
-                    }
-                }
+                onChange={ (evt: any, value: string) => settSvar(value as Svar) }
                 checked={ verdi }
                 radios={
                     [
@@ -82,7 +71,6 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
                     settForklaring={ settForklaring }
                 />
             }
-
         </div>
     );
 };
@@ -92,13 +80,10 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: ISporsmaalProps): IMap
         settForklaring: (forklaring) => {
             dispatch(soknadSettVerdi(ownProps.bolk, `${ownProps.felt}Forklaring` as Felt, forklaring));
         },
-        settSvar: (verdi) => {
+        settSvar: (verdi: Svar) => {
             dispatch(soknadSettVerdi(ownProps.bolk, ownProps.felt, verdi));
         }
     };
 };
 
 export default connect(null, mapDispatchToProps)(injectIntl(JaNeiSporsmal));
-export {
-    ISporsmaalProps
-};

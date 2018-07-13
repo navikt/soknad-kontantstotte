@@ -4,8 +4,11 @@ import { BarnehageplassVerdier, ISoknadState, Svar } from './types';
 const initialState: ISoknadState = {
     arbeidsforhold: {
         arbeiderIUtlandetEllerKontinentalsokkel: Svar.UBESVART,
+        arbeiderIUtlandetEllerKontinentalsokkelForklaring: '',
         mottarKontantstotteFraAnnetEOS: Svar.UBESVART,
+        mottarKontantstotteFraAnnetEOSForklaring: '',
         mottarYtelserFraUtlandet: Svar.UBESVART,
+        mottarYtelserFraUtlandetForklaring: ''
     },
     barnehageplass: {
         antallTimer: '',
@@ -14,6 +17,8 @@ const initialState: ISoknadState = {
         kommune: '',
     },
     familieforhold: {
+        annenForelderFodselsnummer: '',
+        annenForelderNavn: '',
         annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar.UBESVART,
         borForeldreneSammenMedBarnet: Svar.UBESVART,
         erAvklartDeltBosted: Svar.UBESVART,

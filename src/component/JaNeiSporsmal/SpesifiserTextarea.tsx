@@ -37,8 +37,8 @@ const SpesifiserTextarea: React.StatelessComponent<SpesifiserTextareaProps> = ({
                 ]
             }
             onBlur={
-                (evt: React.SyntheticEvent<EventTarget>) => {
-                    settForklaring((evt.target as HTMLInputElement).value);
+                (evt: React.FocusEvent<HTMLTextAreaElement>) => {
+                    settForklaring(evt.target.value);
                 }
             }
             defaultValue={forklaring}

@@ -46,7 +46,6 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps>  = (
               checkboxes={
                   [
                       {
-
                           checked: boddINorgeSisteFemAar === Svar.JA,
                           label: intl.formatMessage(
                               { id: 'startside.krav.boddINorgeSisteFemAar' }

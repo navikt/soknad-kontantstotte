@@ -29,18 +29,18 @@ interface IMineBarn {
 interface IFamilieforhold {
     readonly borForeldreneSammenMedBarnet: Svar;
     readonly erAvklartDeltBosted: Svar;
-    readonly annenForelderNavn?: string;
-    readonly annenForelderFodselsnummer?: string;
+    readonly annenForelderNavn: string;
+    readonly annenForelderFodselsnummer: string;
     readonly annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar;
 }
 
 interface IArbeidsforhold {
     readonly mottarYtelserFraUtlandet: Svar;
-    readonly mottarYtelserFraUtlandetForklaring?: string;
+    readonly mottarYtelserFraUtlandetForklaring: string;
     readonly arbeiderIUtlandetEllerKontinentalsokkel: Svar;
-    readonly arbeiderIUtlandetEllerKontinentalsokkelForklaring?: string;
+    readonly arbeiderIUtlandetEllerKontinentalsokkelForklaring: string;
     readonly mottarKontantstotteFraAnnetEOS: Svar;
-    readonly mottarKontantstotteFraAnnetEOSForklaring?: string;
+    readonly mottarKontantstotteFraAnnetEOSForklaring: string;
 }
 
 interface IBarnehageplass {
@@ -57,7 +57,12 @@ interface IKravTilSoker {
 }
 
 type Bolk = keyof ISoknadState;
-type Felt = keyof IMineBarn | keyof IFamilieforhold | keyof IArbeidsforhold | keyof IBarnehageplass | keyof IKravTilSoker;
+type Felt =
+    | keyof IMineBarn
+    | keyof IFamilieforhold
+    | keyof IArbeidsforhold
+    | keyof IBarnehageplass
+    | keyof IKravTilSoker;
 
 export {
     BarnehageplassVerdier,
