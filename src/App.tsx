@@ -1,11 +1,11 @@
 import Spinner from 'nav-frontend-spinner';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { RouteComponentProps, Switch, withRouter } from 'react-router-dom';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { selectAppStatus } from './app/selectors';
 import { AppStatus } from './app/types';
 import { IRootState } from './rootReducer';
-import { renderSoknadRoutes } from './routes';
+import { Routes } from './Routes';
 
 interface IMapStateToProps {
     status: AppStatus;
@@ -24,9 +24,7 @@ const App: React.StatelessComponent<Props> = ({
             );
         case AppStatus.KLAR:
             return (
-                <Switch>
-                    { renderSoknadRoutes() }
-                </Switch>
+                <Routes />
             );
         case AppStatus.FEILSITUASJON:
             return (

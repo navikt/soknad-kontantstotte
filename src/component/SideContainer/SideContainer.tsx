@@ -3,7 +3,7 @@ import { StegindikatorStegProps } from 'nav-frontend-stegindikator/lib/stegindik
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { IRootState } from '../../rootReducer';
-import { hentIndeksForPath, ISide, Sider, SideType } from '../../routes';
+import { hentIndeksForPath, ISide, Sider, SideType } from '../../Routes';
 
 interface IOwnProps {
     className?: string;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Route, RouteProps } from 'react-router-dom';
+import { Route, RouteProps, Switch } from 'react-router-dom';
 import ArbeidsforholdSide from './sider/arbeidsforhold/Arbeidsforhold';
 import BarnehageplassSide from './sider/barnehageplass/Barnehageplass';
 import FamilieforholdSide from './sider/familieforhold/Familieforhold';
@@ -112,25 +112,32 @@ export const hentIndeksForPath = (path: string): number => {
     return potensielleSider.length > 0 ? potensielleSider[0].stegIndeks : -1;
 };
 
-export const renderSoknadRoutes = (): JSX.Element[] => {
-    const routes: JSX.Element[] = Sider.sort((sideA, sideB) => sideB.path.localeCompare(sideA.path))
-        .map((side: ISide): JSX.Element => {
-            let routeProps: RouteProps = {
-                component: side.sideKomponent
-            };
+const Routes: React.StatelessComponent<{}> = () => {
+    return (
+        <Switch>
+            {Sider.sort((sideA, sideB) => sideB.path.localeCompare(sideA.path))
+                .map((side: ISide): JSX.Element => {
+                    let routeProps: RouteProps = {
+                        component: side.sideKomponent
+                    };
 
-            if (side.key !== 'siden-finnes-ikke') {
-                routeProps = {
-                    exact: true,
-                    path: side.path,
-                    ...routeProps
-                };
+                    if (side.key !== 'siden-finnes-ikke') {
+                        routeProps = {
+                            exact: true,
+                            path: side.path,
+                            ...routeProps
+                        };
+                    }
+
+                    return(
+                        <Route { ...routeProps } key={side.key}/>
+                    );
+                })
             }
+        </Switch>
+    );
+};
 
-            return(
-                <Route { ...routeProps } key={side.key}/>
-            );
-        });
-
-    return routes;
+export {
+    Routes
 };
