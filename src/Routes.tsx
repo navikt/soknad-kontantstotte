@@ -87,21 +87,21 @@ export const Sider: ISide[] = [
         path: '',
         sideKomponent: SidenFinnesIkke,
         sideType: SideType.ANNEN_INFOSIDE,
-        stegIndeks: 7
+        stegIndeks: -1
     },
     {
         key: 'oppfyller-ikke-vilkaar',
         path: '/oppfyller-ikke-vilkaar',
         sideKomponent: OppfyllerIkkeVilkaar,
         sideType: SideType.ANNEN_INFOSIDE,
-        stegIndeks: 8
+        stegIndeks: -1
     },
     {
         key: 'innsending-feilet',
         path: '/innsending-feilet',
         sideKomponent: InnsendingFeilet,
         sideType: SideType.ANNEN_INFOSIDE,
-        stegIndeks: 9
+        stegIndeks: -1
     }
 ];
 
