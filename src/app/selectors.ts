@@ -4,6 +4,4 @@ function selectAppStatus(state: IRootState) {
     return state.app.status;
 }
 
-export {
-    selectAppStatus
-};
+export { selectAppStatus };

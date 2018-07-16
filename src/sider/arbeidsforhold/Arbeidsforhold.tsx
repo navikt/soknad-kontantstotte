@@ -15,47 +15,49 @@ interface IMapDispatchToProps {
 
 type ArbeidsforholdSideProps = IArbeidsforhold & IMapDispatchToProps;
 
-const Arbeidsforhold: React.StatelessComponent<ArbeidsforholdSideProps> = (
-    {
-        mottarYtelserFraUtlandet,
-        mottarYtelserFraUtlandetForklaring,
-        arbeiderIUtlandetEllerKontinentalsokkel,
-        arbeiderIUtlandetEllerKontinentalsokkelForklaring,
-        mottarKontantstotteFraAnnetEOS,
-        mottarKontantstotteFraAnnetEOSForklaring,
-        navigerTilPath
-    }) => {
+const Arbeidsforhold: React.StatelessComponent<ArbeidsforholdSideProps> = ({
+    mottarYtelserFraUtlandet,
+    mottarYtelserFraUtlandetForklaring,
+    arbeiderIUtlandetEllerKontinentalsokkel,
+    arbeiderIUtlandetEllerKontinentalsokkelForklaring,
+    mottarKontantstotteFraAnnetEOS,
+    mottarKontantstotteFraAnnetEOSForklaring,
+    navigerTilPath,
+}) => {
     const bolk: Bolk = 'arbeidsforhold';
     return (
         <SideContainer>
-            <ValidForm summaryTitle={'Arbeidsforhold'} onSubmit={() => navigerTilPath('/oppsummering')}>
+            <ValidForm
+                summaryTitle={'Arbeidsforhold'}
+                onSubmit={() => navigerTilPath('/oppsummering')}
+            >
                 <JaNeiSporsmal
-                    bolk={ bolk }
-                    felt='mottarYtelserFraUtlandet'
-                    sporsmalNokkel='arbeidsforhold.mottarYtelserFraUtlandet.sporsmal'
-                    verdi={ mottarYtelserFraUtlandet }
-                    harForklaring={ true }
-                    forklaring={ mottarYtelserFraUtlandetForklaring }
+                    bolk={bolk}
+                    felt="mottarYtelserFraUtlandet"
+                    sporsmalNokkel="arbeidsforhold.mottarYtelserFraUtlandet.sporsmal"
+                    verdi={mottarYtelserFraUtlandet}
+                    harForklaring={true}
+                    forklaring={mottarYtelserFraUtlandetForklaring}
                 />
 
                 <JaNeiSporsmal
-                    bolk={ bolk }
-                    felt='arbeiderIUtlandetEllerKontinentalsokkel'
-                    sporsmalNokkel='arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.sporsmal'
-                    verdi={ arbeiderIUtlandetEllerKontinentalsokkel }
-                    harForklaring={ true }
-                    forklaring={ arbeiderIUtlandetEllerKontinentalsokkelForklaring }
+                    bolk={bolk}
+                    felt="arbeiderIUtlandetEllerKontinentalsokkel"
+                    sporsmalNokkel="arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.sporsmal"
+                    verdi={arbeiderIUtlandetEllerKontinentalsokkel}
+                    harForklaring={true}
+                    forklaring={arbeiderIUtlandetEllerKontinentalsokkelForklaring}
                 />
 
                 <JaNeiSporsmal
-                    bolk={ bolk }
-                    felt='mottarKontantstotteFraAnnetEOS'
-                    sporsmalNokkel='arbeidsforhold.mottarKontantstotteFraAnnetEOS.sporsmal'
-                    verdi={ mottarKontantstotteFraAnnetEOS }
-                    harForklaring={ true }
-                    forklaring={ mottarKontantstotteFraAnnetEOSForklaring }
+                    bolk={bolk}
+                    felt="mottarKontantstotteFraAnnetEOS"
+                    sporsmalNokkel="arbeidsforhold.mottarKontantstotteFraAnnetEOS.sporsmal"
+                    verdi={mottarKontantstotteFraAnnetEOS}
+                    harForklaring={true}
+                    forklaring={mottarKontantstotteFraAnnetEOSForklaring}
                 />
-                <SubmitKnapp label='submitknapp.neste'/>
+                <SubmitKnapp label="submitknapp.neste" />
             </ValidForm>
         </SideContainer>
     );
@@ -67,8 +69,11 @@ const mapStateToProps = (state: IRootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        navigerTilPath: (path: string) => dispatch(push(path))
+        navigerTilPath: (path: string) => dispatch(push(path)),
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Arbeidsforhold);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Arbeidsforhold);

@@ -7,7 +7,7 @@ const SidenFinnesIkke = () => {
             <h1>Ooops</h1>
             <p>Siden du prøver å nå finnes ikke</p>
 
-            <NavigasjonKnapp to='/'>Tilbake til hovedsiden</NavigasjonKnapp>
+            <NavigasjonKnapp to="/">Tilbake til hovedsiden</NavigasjonKnapp>
         </div>
     );
 };

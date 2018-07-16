@@ -30,10 +30,16 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     antallTimer,
 }) => {
     const radios = [
-        {label: intl.formatMessage({id: 'svar.nei'}), value: BarnehageplassVerdier.Nei},
-        {label: intl.formatMessage({id: 'svar.neiHarFaattPlass'}), value: BarnehageplassVerdier.NeiHarFaatt},
-        {label: intl.formatMessage({id: 'svar.ja'}), value: BarnehageplassVerdier.Ja},
-        {label: intl.formatMessage({id: 'svar.jaHarSluttet'}), value: BarnehageplassVerdier.JaSkalSlutte}
+        { label: intl.formatMessage({ id: 'svar.nei' }), value: BarnehageplassVerdier.Nei },
+        {
+            label: intl.formatMessage({ id: 'svar.neiHarFaattPlass' }),
+            value: BarnehageplassVerdier.NeiHarFaatt,
+        },
+        { label: intl.formatMessage({ id: 'svar.ja' }), value: BarnehageplassVerdier.Ja },
+        {
+            label: intl.formatMessage({ id: 'svar.jaHarSluttet' }),
+            value: BarnehageplassVerdier.JaSkalSlutte,
+        },
     ];
     const valgSomKreverEkstraFelter: BarnehageplassVerdier[] = [
         BarnehageplassVerdier.Ja,
@@ -43,33 +49,36 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
 
     return (
         <SideContainer>
-            <ValidForm summaryTitle={'Barnehageplass'} onSubmit={() => navigerTilPath('/arbeidsforhold')}>
+            <ValidForm
+                summaryTitle={'Barnehageplass'}
+                onSubmit={() => navigerTilPath('/arbeidsforhold')}
+            >
                 <ValidRadioPanelGruppe
-                    name='barnehageplass'
-                    legend='Har barnet barnehageplass?'
+                    name="barnehageplass"
+                    legend="Har barnet barnehageplass?"
                     radios={radios}
                     checked={BarnehageplassVerdier[harBarnehageplass]}
                     validators={[
                         {
                             failText: intl.formatMessage({ id: 'svar.feilmelding' }),
-                            test: () => harBarnehageplass !== BarnehageplassVerdier.Ubesvart
-                        }
+                            test: () => harBarnehageplass !== BarnehageplassVerdier.Ubesvart,
+                        },
                     ]}
-                    onChange={ (event: {}, value: string) => {
+                    onChange={(event: {}, value: string) => {
                         settSvar(value as BarnehageplassVerdier);
                     }}
                 />
-                {valgSomKreverEkstraFelter.includes(harBarnehageplass) &&
+                {valgSomKreverEkstraFelter.includes(harBarnehageplass) && (
                     <EkstraFelter
-                        harBarnehageplass={ harBarnehageplass }
-                        dato={ dato }
-                        kommune={ kommune }
-                        antallTimer={ antallTimer }
-                        settFelt={ settEkstraFelt }
-                        intl={ intl }
+                        harBarnehageplass={harBarnehageplass}
+                        dato={dato}
+                        kommune={kommune}
+                        antallTimer={antallTimer}
+                        settFelt={settEkstraFelt}
+                        intl={intl}
                     />
-                }
-                <SubmitKnapp label='submitknapp.neste'/>
+                )}
+                <SubmitKnapp label="submitknapp.neste" />
             </ValidForm>
         </SideContainer>
     );
@@ -85,7 +94,7 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
         },
         settSvar: (verdi: BarnehageplassVerdier) => {
             dispatch(soknadSettVerdi('barnehageplass', 'harBarnehageplass', verdi));
-        }
+        },
     };
 };
 
@@ -93,4 +102,7 @@ const mapStateToProps = (state: IRootState): IBarnehageplass => {
     return selectBarnehageplass(state);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Barnehageplass));
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(injectIntl(Barnehageplass));

@@ -19,40 +19,39 @@ interface IMapDispatchToProps {
 
 type FamilieforholdSideProps = IFamilieforhold & IMapDispatchToProps;
 
-const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = (
-    {
-        borForeldreneSammenMedBarnet,
-        erAvklartDeltBosted,
-        navigerTilPath,
-        ...annenForelderProps
-    }) => {
-
+const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
+    borForeldreneSammenMedBarnet,
+    erAvklartDeltBosted,
+    navigerTilPath,
+    ...annenForelderProps
+}) => {
     return (
         <SideContainer>
-            <ValidForm summaryTitle={'Familieforhold'} onSubmit={() => navigerTilPath('/barnehageplass')}>
+            <ValidForm
+                summaryTitle={'Familieforhold'}
+                onSubmit={() => navigerTilPath('/barnehageplass')}
+            >
                 <JaNeiSporsmal
-                    bolk='familieforhold'
-                    felt='borForeldreneSammenMedBarnet'
-                    sporsmalNokkel='familieforhold.borForeldreneSammenMedBarnet.sporsmal'
-                    verdi={ borForeldreneSammenMedBarnet }
+                    bolk="familieforhold"
+                    felt="borForeldreneSammenMedBarnet"
+                    sporsmalNokkel="familieforhold.borForeldreneSammenMedBarnet.sporsmal"
+                    verdi={borForeldreneSammenMedBarnet}
                     hjelpetekstNokkel={'familieforhold.borForeldreneSammenMedBarnet.hjelpetekst'}
                 />
 
-                { borForeldreneSammenMedBarnet === Svar.JA &&
-                    <AnnenForelderInfo
-                        {...annenForelderProps}
-                    />
-                }
+                {borForeldreneSammenMedBarnet === Svar.JA && (
+                    <AnnenForelderInfo {...annenForelderProps} />
+                )}
 
-                { borForeldreneSammenMedBarnet === Svar.NEI &&
+                {borForeldreneSammenMedBarnet === Svar.NEI && (
                     <JaNeiSporsmal
-                        bolk='familieforhold'
-                        felt='erAvklartDeltBosted'
-                        sporsmalNokkel='familieforhold.erAvklartDeltBosted.sporsmal'
-                        verdi={ erAvklartDeltBosted }
+                        bolk="familieforhold"
+                        felt="erAvklartDeltBosted"
+                        sporsmalNokkel="familieforhold.erAvklartDeltBosted.sporsmal"
+                        verdi={erAvklartDeltBosted}
                     />
-                }
-                <SubmitKnapp label='submitknapp.neste'/>
+                )}
+                <SubmitKnapp label="submitknapp.neste" />
             </ValidForm>
         </SideContainer>
     );
@@ -65,13 +64,16 @@ const mapStateToProps = (state: IRootState): IFamilieforhold => {
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         navigerTilPath: (path: string) => dispatch(push(path)),
-        settAnnenForelderFodselsnummer: (personnr) => {
+        settAnnenForelderFodselsnummer: personnr => {
             dispatch(soknadSettVerdi('familieforhold', 'annenForelderFodselsnummer', personnr));
         },
-        settAnnenForelderNavn: (navn) => {
+        settAnnenForelderNavn: navn => {
             dispatch(soknadSettVerdi('familieforhold', 'annenForelderNavn', navn));
         },
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Familieforhold);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Familieforhold);

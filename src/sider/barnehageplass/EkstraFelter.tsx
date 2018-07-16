@@ -18,7 +18,7 @@ const EkstraFelter: React.StatelessComponent<JaEkstraFelterProps> = ({
     kommune,
     antallTimer,
     settFelt,
-    intl
+    intl,
 }) => {
     let datoNokkel: string;
     switch (harBarnehageplass) {
@@ -35,47 +35,49 @@ const EkstraFelter: React.StatelessComponent<JaEkstraFelterProps> = ({
     return (
         <div>
             <DatoInputWithValidation
-                {...dato && {dato: new Date(dato)}}
-                name='barnehageplass.dato'
+                {...dato && { dato: new Date(dato) }}
+                name="barnehageplass.dato"
                 label={intl.formatMessage({ id: datoNokkel })}
-                settDato={ (date) => settFelt('dato', date.toDateString()) }
+                settDato={date => settFelt('dato', date.toDateString())}
                 validators={[
                     {
                         failText: intl.formatMessage({ id: 'svar.feilmelding' }),
-                        test: () => erDatoSatt(dato)
-                    }
+                        test: () => erDatoSatt(dato),
+                    },
                 ]}
             />
             <ValidInput
-                name='barnehageplass.kommune'
-                label={intl.formatMessage({id: 'barnehageplass.kommune'})}
+                name="barnehageplass.kommune"
+                label={intl.formatMessage({ id: 'barnehageplass.kommune' })}
                 bredde={'M'}
                 validators={[
                     {
                         failText: intl.formatMessage({ id: 'svar.feilmelding' }),
-                        test: () => harTekstomradeInnhold(kommune)
-                    }
+                        test: () => harTekstomradeInnhold(kommune),
+                    },
                 ]}
                 onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    settFelt('kommune', event.target.value)}
+                    settFelt('kommune', event.target.value)
+                }
             />
-            { [BarnehageplassVerdier.JaSkalSlutte, BarnehageplassVerdier.Ja].includes(harBarnehageplass) &&
+            {[BarnehageplassVerdier.JaSkalSlutte, BarnehageplassVerdier.Ja].includes(
+                harBarnehageplass
+            ) && (
                 <ValidInput
-                    name='barnehageplass.antallTimer'
-                    label={intl.formatMessage({id: 'barnehageplass.antallTimer'})}
+                    name="barnehageplass.antallTimer"
+                    label={intl.formatMessage({ id: 'barnehageplass.antallTimer' })}
                     bredde={'M'}
-                    validators={
-                        [
-                            {
-                                failText: intl.formatMessage({ id: 'svar.feilmelding' }),
-                                test: () => harTekstomradeInnhold(antallTimer)
-                            }
-                        ]
-                    }
+                    validators={[
+                        {
+                            failText: intl.formatMessage({ id: 'svar.feilmelding' }),
+                            test: () => harTekstomradeInnhold(antallTimer),
+                        },
+                    ]}
                     onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                        settFelt('antallTimer', event.target.value)}
+                        settFelt('antallTimer', event.target.value)
+                    }
                 />
-            }
+            )}
         </div>
     );
 };

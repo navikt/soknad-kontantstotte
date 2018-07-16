@@ -8,7 +8,7 @@ const initialState: ISoknadState = {
         mottarKontantstotteFraAnnetEOS: Svar.UBESVART,
         mottarKontantstotteFraAnnetEOSForklaring: '',
         mottarYtelserFraUtlandet: Svar.UBESVART,
-        mottarYtelserFraUtlandetForklaring: ''
+        mottarYtelserFraUtlandetForklaring: '',
     },
     barnehageplass: {
         antallTimer: '',
@@ -32,7 +32,7 @@ const initialState: ISoknadState = {
         valgtBarn: {
             fodselsdato: '',
             navn: '',
-        }
+        },
     },
 };
 
@@ -43,14 +43,12 @@ function soknadReducer(state = initialState, action: SoknadActionTypes) {
                 ...state,
                 [action.bolk]: {
                     ...state[action.bolk],
-                    [action.felt]: action.verdi
-                }
+                    [action.felt]: action.verdi,
+                },
             };
         default:
             return state;
     }
 }
 
-export {
-    soknadReducer,
-};
+export { soknadReducer };

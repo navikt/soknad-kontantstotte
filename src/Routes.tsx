@@ -14,7 +14,7 @@ import Veiledning from './sider/veiledning/Veiledning';
 
 export enum SideType {
     SKJEMASIDE = 'SKJEMASIDE',
-    ANNEN_INFOSIDE = 'ANNEN_INFOSIDE'
+    ANNEN_INFOSIDE = 'ANNEN_INFOSIDE',
 }
 
 export interface ISide {
@@ -31,78 +31,78 @@ export const Sider: ISide[] = [
         path: '/',
         sideKomponent: Veiledning,
         sideType: SideType.ANNEN_INFOSIDE,
-        stegIndeks: -1
+        stegIndeks: -1,
     },
     {
         key: 'start',
         path: '/start',
         sideKomponent: KravTilSoker,
         sideType: SideType.SKJEMASIDE,
-        stegIndeks: 0
+        stegIndeks: 0,
     },
     {
         key: 'mine-barn',
         path: '/mine-barn',
         sideKomponent: MineBarnSide,
         sideType: SideType.SKJEMASIDE,
-        stegIndeks: 1
+        stegIndeks: 1,
     },
     {
         key: 'familieforhold',
         path: '/familieforhold',
         sideKomponent: FamilieforholdSide,
         sideType: SideType.SKJEMASIDE,
-        stegIndeks: 2
+        stegIndeks: 2,
     },
     {
         key: 'barnehageplass',
         path: '/barnehageplass',
         sideKomponent: BarnehageplassSide,
         sideType: SideType.SKJEMASIDE,
-        stegIndeks: 3
+        stegIndeks: 3,
     },
     {
         key: 'arbeidsforhold',
         path: '/arbeidsforhold',
         sideKomponent: ArbeidsforholdSide,
         sideType: SideType.SKJEMASIDE,
-        stegIndeks: 4
+        stegIndeks: 4,
     },
     {
         key: 'oppsummering',
         path: '/oppsummering',
         sideKomponent: OppsummeringSide,
         sideType: SideType.SKJEMASIDE,
-        stegIndeks: 5
+        stegIndeks: 5,
     },
     {
         key: 'kvittering',
         path: '/kvittering',
         sideKomponent: Kvittering,
         sideType: SideType.SKJEMASIDE,
-        stegIndeks: 6
+        stegIndeks: 6,
     },
     {
         key: 'siden-finnes-ikke',
         path: '',
         sideKomponent: SidenFinnesIkke,
         sideType: SideType.ANNEN_INFOSIDE,
-        stegIndeks: -1
+        stegIndeks: -1,
     },
     {
         key: 'oppfyller-ikke-vilkaar',
         path: '/oppfyller-ikke-vilkaar',
         sideKomponent: OppfyllerIkkeVilkaar,
         sideType: SideType.ANNEN_INFOSIDE,
-        stegIndeks: -1
+        stegIndeks: -1,
     },
     {
         key: 'innsending-feilet',
         path: '/innsending-feilet',
         sideKomponent: InnsendingFeilet,
         sideType: SideType.ANNEN_INFOSIDE,
-        stegIndeks: -1
-    }
+        stegIndeks: -1,
+    },
 ];
 
 const sideMedPath = (path: string) => Sider.filter((side: ISide) => side.path === path);
@@ -115,29 +115,25 @@ export const hentIndeksForPath = (path: string): number => {
 const Routes: React.StatelessComponent<{}> = () => {
     return (
         <Switch>
-            {Sider.sort((sideA, sideB) => sideB.path.localeCompare(sideA.path))
-                .map((side: ISide): JSX.Element => {
+            {Sider.sort((sideA, sideB) => sideB.path.localeCompare(sideA.path)).map(
+                (side: ISide): JSX.Element => {
                     let routeProps: RouteProps = {
-                        component: side.sideKomponent
+                        component: side.sideKomponent,
                     };
 
                     if (side.key !== 'siden-finnes-ikke') {
                         routeProps = {
                             exact: true,
                             path: side.path,
-                            ...routeProps
+                            ...routeProps,
                         };
                     }
 
-                    return(
-                        <Route { ...routeProps } key={side.key}/>
-                    );
-                })
-            }
+                    return <Route {...routeProps} key={side.key} />;
+                }
+            )}
         </Switch>
     );
 };
 
-export {
-    Routes
-};
+export { Routes };

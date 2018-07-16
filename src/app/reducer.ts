@@ -1,7 +1,4 @@
-import {
-    AppActionTypes,
-    AppTypeKeys,
-} from './actions';
+import { AppActionTypes, AppTypeKeys } from './actions';
 import { AppStatus } from './types';
 
 interface IAppState {
@@ -9,21 +6,18 @@ interface IAppState {
 }
 
 const initialState: IAppState = {
-    status: AppStatus.IKKE_STARTET
+    status: AppStatus.IKKE_STARTET,
 };
 
 function appReducer(state: IAppState = initialState, action: AppActionTypes) {
     switch (action.type) {
         case AppTypeKeys.ENDRE_STATUS:
             return {
-                status: action.status
+                status: action.status,
             };
         default:
             return state;
     }
 }
 
-export {
-    appReducer,
-    IAppState,
-};
+export { appReducer, IAppState };

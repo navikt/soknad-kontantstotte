@@ -13,7 +13,14 @@ interface IOwnProps {
 
 type DatoFeltProps = IOwnProps;
 
-const DatoFelt: React.StatelessComponent<DatoFeltProps> = ({name, label, dato, feil, settDato, ...rest}) => {
+const DatoFelt: React.StatelessComponent<DatoFeltProps> = ({
+    name,
+    label,
+    dato,
+    feil,
+    settDato,
+    ...rest
+}) => {
     return (
         <SkjemaInputElement feil={feil} label={label}>
             <Datovelger
@@ -24,11 +31,8 @@ const DatoFelt: React.StatelessComponent<DatoFeltProps> = ({name, label, dato, f
                 inputProps={{ placeholder: 'dd.mm.åååå' }}
             />
         </SkjemaInputElement>
-
     );
 };
 
 export default DatoFelt;
-export {
-    DatoFeltProps
-};
+export { DatoFeltProps };

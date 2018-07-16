@@ -15,32 +15,25 @@ const SpesifiserTextarea: React.StatelessComponent<SpesifiserTextareaProps> = ({
     nokkel,
     settForklaring,
     forklaring = '',
-    intl
+    intl,
 }) => {
-
     return (
         <ValidTextarea
-            label={ intl.formatMessage(
+            label={intl.formatMessage({
+                id: 'tekstomrade.fyllInn',
+            })}
+            name={nokkel}
+            validators={[
                 {
-                    id: 'tekstomrade.fyllInn'
-                }
-            ) }
-            name={ nokkel }
-            validators={
-                [
-                    {
-                        failText: intl.formatMessage({
-                            id: 'tekstomrade.feilmelding'
-                        }),
-                        test: () => harTekstomradeInnhold(forklaring)
-                    }
-                ]
-            }
-            onBlur={
-                (evt: React.FocusEvent<HTMLTextAreaElement>) => {
-                    settForklaring(evt.target.value);
-                }
-            }
+                    failText: intl.formatMessage({
+                        id: 'tekstomrade.feilmelding',
+                    }),
+                    test: () => harTekstomradeInnhold(forklaring),
+                },
+            ]}
+            onBlur={(evt: React.FocusEvent<HTMLTextAreaElement>) => {
+                settForklaring(evt.target.value);
+            }}
             defaultValue={forklaring}
             maxLength={500}
         />

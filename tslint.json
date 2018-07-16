@@ -1,25 +1,10 @@
 {
     "extends": [
         "tslint:latest",
-        "tslint-react"
+        "tslint-react",
+        "tslint-config-prettier"
     ],
     "rules": {
-        "quotemark": ["single"],
-        "whitespace": [
-            true,
-            "check-branch",
-            "check-decl",
-            "check-operator",
-            "check-module",
-            "check-separator",
-            "check-type",
-            "check-typecast",
-            "check-preblock"
-        ],
-        "space-within-parens": false,
-        "trailing-comma": true,
-        "jsx-curly-spacing": [true, 1],
-        "jsx-no-multiline-js": false,
         "jsx-no-lambda": false,
         "no-submodule-imports": false,
         "no-implicit-dependencies": [true, "dev"]

@@ -1,15 +1,9 @@
 import * as React from 'react';
-import {
-    addLocaleData,
-    IntlProvider as Provider
-} from 'react-intl';
+import { addLocaleData, IntlProvider as Provider } from 'react-intl';
 import * as nb from 'react-intl/locale-data/nb';
 import { connect } from 'react-redux';
 import { IRootState } from './rootReducer';
-import {
-    selectTekster,
-    selectValgtSprak,
-} from './tekster/selectors';
+import { selectTekster, selectValgtSprak } from './tekster/selectors';
 import { ITekster } from './tekster/types';
 
 addLocaleData(nb);
@@ -25,19 +19,15 @@ interface IMapStateToProps {
 
 type Props = IOwnProps & IMapStateToProps;
 
-const IntlProvider: React.StatelessComponent<Props> = ({
-    children,
-    tekster,
-    valgtSprak,
-}) => {
+const IntlProvider: React.StatelessComponent<Props> = ({ children, tekster, valgtSprak }) => {
     return (
         <Provider
-            key={ Object.keys(tekster).length }
-            messages={ tekster }
-            defaultLocale={ 'nb' }
-            locale={ valgtSprak }
+            key={Object.keys(tekster).length}
+            messages={tekster}
+            defaultLocale={'nb'}
+            locale={valgtSprak}
         >
-            { children }
+            {children}
         </Provider>
     );
 };

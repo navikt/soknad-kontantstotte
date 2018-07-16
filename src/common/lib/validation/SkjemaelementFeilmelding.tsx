@@ -8,7 +8,7 @@ export interface ISkjemaelementFeilmeldingProps {
 class SkjemaelementFeilmelding extends React.Component<ISkjemaelementFeilmeldingProps> {
     public renderFeil() {
         return (
-            <div className='skjemaelement__feilmelding'>
+            <div className="skjemaelement__feilmelding">
                 {this.props.feil && this.props.feil.feilmelding}
             </div>
         );
@@ -17,7 +17,7 @@ class SkjemaelementFeilmelding extends React.Component<ISkjemaelementFeilmelding
     public render() {
         const { feil } = this.props;
         return (
-            <div role='alert' aria-live='assertive'>
+            <div role="alert" aria-live="assertive">
                 {feil && this.renderFeil()}
             </div>
         );

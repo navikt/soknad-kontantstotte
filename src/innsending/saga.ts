@@ -5,7 +5,7 @@ import { selectSoknad } from '../soknad/selectors';
 import { InnsendingTypeKeys, sendInnFeilet, sendInnOk } from './actions';
 import { sendInnSoknad } from './api';
 
-function * sendInnSaga(): SagaIterator {
+function* sendInnSaga(): SagaIterator {
     try {
         const soknad = yield select(selectSoknad);
         yield call(sendInnSoknad, soknad);
@@ -17,11 +17,8 @@ function * sendInnSaga(): SagaIterator {
     }
 }
 
-function * innsendingSaga(): SagaIterator {
+function* innsendingSaga(): SagaIterator {
     yield takeEvery(InnsendingTypeKeys.SENDINN, sendInnSaga);
 }
 
-export {
-    sendInnSaga,
-    innsendingSaga,
-};
+export { sendInnSaga, innsendingSaga };

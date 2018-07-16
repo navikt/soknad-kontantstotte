@@ -3,7 +3,7 @@ import { IBarn } from '../barn/types';
 enum Svar {
     JA = 'JA',
     NEI = 'NEI',
-    UBESVART = 'UBESVART'
+    UBESVART = 'UBESVART',
 }
 
 enum BarnehageplassVerdier {
@@ -11,7 +11,7 @@ enum BarnehageplassVerdier {
     NeiHarFaatt = 'NeiHarFaatt',
     Ja = 'Ja',
     JaSkalSlutte = 'JaSkalSlutte',
-    Ubesvart = 'Ubesvart'
+    Ubesvart = 'Ubesvart',
 }
 
 interface ISoknadState {

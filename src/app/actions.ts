@@ -6,10 +6,7 @@ enum AppTypeKeys {
     START_APP = 'APP_START_APP',
 }
 
-type AppActionTypes =
-    | IAppEndreStatus
-    | IAppStart
-    ;
+type AppActionTypes = IAppEndreStatus | IAppStart;
 
 interface IAppEndreStatus extends Action {
     status: AppStatus;
@@ -23,19 +20,14 @@ interface IAppStart extends Action {
 function appEndreStatus(status: AppStatus): IAppEndreStatus {
     return {
         status,
-        type: AppTypeKeys.ENDRE_STATUS
+        type: AppTypeKeys.ENDRE_STATUS,
     };
 }
 
 function appStart(): IAppStart {
     return {
-        type: AppTypeKeys.START_APP
+        type: AppTypeKeys.START_APP,
     };
 }
 
-export {
-    AppTypeKeys,
-    AppActionTypes,
-    appEndreStatus,
-    appStart
-};
+export { AppTypeKeys, AppActionTypes, appEndreStatus, appStart };

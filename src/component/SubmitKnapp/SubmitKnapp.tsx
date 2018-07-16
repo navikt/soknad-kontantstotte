@@ -8,11 +8,9 @@ interface ISubmitKnappProps {
 
 type SubmitKnappProps = ISubmitKnappProps;
 
-const SubmitKnapp: React.StatelessComponent<SubmitKnappProps> = ({
-   label,
-}) => {
+const SubmitKnapp: React.StatelessComponent<SubmitKnappProps> = ({ label }) => {
     return (
-        <KnappBase type='hoved' htmlType='submit'>
+        <KnappBase type="hoved" htmlType="submit">
             <FormattedMessage id={label} />
         </KnappBase>
     );

@@ -40,50 +40,54 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
 }) => {
     return (
         <div>
-            {hjelpetekstNokkel &&
+            {hjelpetekstNokkel && (
                 <HjelpetekstUnder id={hjelpetekstNokkel}>
-                    <FormattedMessage id={ hjelpetekstNokkel }/>
+                    <FormattedMessage id={hjelpetekstNokkel} />
                 </HjelpetekstUnder>
-            }
+            )}
             <ValidRadioPanelGruppe
-                legend={ intl.formatMessage({ id: sporsmalNokkel }) }
-                name={ felt }
+                legend={intl.formatMessage({ id: sporsmalNokkel })}
+                name={felt}
                 validators={[
                     {
                         failText: intl.formatMessage({ id: 'svar.feilmelding' }),
-                        test: () => harSvartPaJaNeiSporsmal(verdi)
-                    }
+                        test: () => harSvartPaJaNeiSporsmal(verdi),
+                    },
                 ]}
-                onChange={ (evt: {}, value: string) => settSvar(value as Svar) }
-                checked={ verdi }
-                radios={
-                    [
-                        { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
-                        { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI}
-                    ]
-                }
+                onChange={(evt: {}, value: string) => settSvar(value as Svar)}
+                checked={verdi}
+                radios={[
+                    { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
+                    { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
+                ]}
             />
 
-            { harForklaring && verdi === Svar.JA &&
-                <SpesifiserTextarea
-                    nokkel={ felt }
-                    forklaring={ forklaring }
-                    settForklaring={ settForklaring }
-                />
-            }
+            {harForklaring &&
+                verdi === Svar.JA && (
+                    <SpesifiserTextarea
+                        nokkel={felt}
+                        forklaring={forklaring}
+                        settForklaring={settForklaring}
+                    />
+                )}
         </div>
     );
 };
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: ISporsmaalProps): IMapDispatchToProps => {
     return {
-        settForklaring: (forklaring) => {
-            dispatch(soknadSettVerdi(ownProps.bolk, `${ownProps.felt}Forklaring` as Felt, forklaring));
+        settForklaring: forklaring => {
+            dispatch(
+                soknadSettVerdi(ownProps.bolk, `${ownProps.felt}Forklaring` as Felt, forklaring)
+            );
         },
         settSvar: (verdi: Svar) => {
             dispatch(soknadSettVerdi(ownProps.bolk, ownProps.felt, verdi));
-        }
+        },
     };
 };
 
-export default connect(null, mapDispatchToProps)(injectIntl(JaNeiSporsmal));
+export default connect(
+    null,
+    mapDispatchToProps
+)(injectIntl(JaNeiSporsmal));

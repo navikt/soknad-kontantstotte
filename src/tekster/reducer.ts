@@ -1,7 +1,4 @@
-import {
-    TeksterActionTypes,
-    TeksterTypeKeys,
-} from './actions';
+import { TeksterActionTypes, TeksterTypeKeys } from './actions';
 import { ITekster } from './types';
 
 interface ITeksterState {
@@ -27,7 +24,7 @@ function teksterReducer(state = initialState, action: TeksterActionTypes) {
             return {
                 ...state,
                 henter: false,
-                tekster: action.tekster
+                tekster: action.tekster,
             };
         case TeksterTypeKeys.HENT_FEILET:
             return {
@@ -39,7 +36,4 @@ function teksterReducer(state = initialState, action: TeksterActionTypes) {
     }
 }
 
-export {
-    ITeksterState,
-    teksterReducer,
-};
+export { ITeksterState, teksterReducer };

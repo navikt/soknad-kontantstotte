@@ -4,15 +4,8 @@ import { barnSaga } from './barn/saga';
 import { innsendingSaga } from './innsending/saga';
 import { teksterSaga } from './tekster/saga';
 
-function * rootSaga() {
-    yield all( [
-        appSaga(),
-        barnSaga(),
-        teksterSaga(),
-        innsendingSaga(),
-    ]);
+function* rootSaga() {
+    yield all([appSaga(), barnSaga(), teksterSaga(), innsendingSaga()]);
 }
 
-export {
-    rootSaga,
-};
+export { rootSaga };
