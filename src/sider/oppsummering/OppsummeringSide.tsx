@@ -3,75 +3,37 @@ import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import SideContainer from '../../container/SideContainer/SideContainer';
 import { sendInn } from '../../innsending/actions';
-import { ISoknad } from '../../innsending/soknad';
 import { IRootState } from '../../rootReducer';
+import { selectSoknad } from '../../soknad/selectors';
+import { ISoknadState } from '../../soknad/types';
 
 interface IMapDispatchToProps {
-    sendSoknad: (soknad: ISoknad) => any;
+    sendSoknad: () => any;
 }
 
 interface IMapStateToProps {
-    soknad: ISoknad;
+    soknad: ISoknadState;
 }
 
 type OppsummeringSideProps = IMapDispatchToProps & IMapStateToProps;
 
-const OppsummeringSide: React.StatelessComponent<OppsummeringSideProps> = ({sendSoknad, soknad}) => {
+const OppsummeringSide: React.StatelessComponent<OppsummeringSideProps> = ({sendSoknad}) => {
     return (
         <SideContainer>
             <h1>Oversikt over hva du har fylt ut</h1>
-            <KnappBase type={'hoved'} onClick={() => sendSoknad(soknad)}>Send inn</KnappBase>
+            <KnappBase type={'hoved'} onClick={sendSoknad}>Send inn</KnappBase>
         </SideContainer>
     );
 };
 
-const mapStateToProps = (state: IRootState): IMapStateToProps => {
-    return {
-        soknad: {
-            arbeidsforhold: {
-                arbeiderIUtlandetEllerKontinentalsokkel: state.soknad.arbeiderIUtlandetEllerKontinentalsokkel,
-                arbeiderIUtlandetEllerKontinentalsokkelForklaring:
-                    state.soknad.arbeiderIUtlandetEllerKontinentalsokkelForklaring,
-                mottarKontantstotteFraAnnetEOS: state.soknad.mottarKontantstotteFraAnnetEOS,
-                mottarKontantstotteFraAnnetEOSForklaring: state.soknad.mottarKontantstotteFraAnnetEOSForklaring,
-                mottarYtelserFraUtlandet: state.soknad.mottarYtelserFraUtlandet,
-                mottarYtelserFraUtlandetForklaring: state.soknad.mottarYtelserFraUtlandetForklaring,
-            },
-            barn: state.soknad.barn,
-            barnehageplass: {
-                harBarnehageplass: state.soknad.harBarnehageplass,
-                jaAntallTimer: state.soknad.jaAntallTimer,
-                jaFraDato: state.soknad.jaFraDato,
-                jaKommune: state.soknad.jaKommune,
-                jaSkalSlutteAntallTimer: state.soknad.jaSkalSlutteAntallTimer,
-                jaSkalSlutteDato: state.soknad.jaSkalSlutteDato,
-                jaSkalSlutteKommune: state.soknad.jaSkalSlutteKommune,
-                neiHarFaattPlassFraDato: state.soknad.neiHarFaattPlassFraDato,
-                neiHarFaattPlassKommune: state.soknad.neiHarFaattPlassKommune,
-            },
-            familieforhold: {
-                annenForelder: {
-                    annenForelderNavn: state.soknad.annenForelderNavn,
-                    annenForelderPersonnummer: state.soknad.annenForelderPersonnummer,
-                    annenForelderYrkesaktivINorgeEOSIMinstFemAar:
-                    state.soknad.annenForelderYrkesaktivINorgeEOSIMinstFemAar,
-                },
-                borForeldreneSammenMedBarnet: state.soknad.borForeldreneSammenMedBarnet,
-                erAvklartDeltBosted: state.soknad.erAvklartDeltBosted,
-            },
-            sokerKrav: {
-                boddINorgeSisteFemAar: state.soknad.boddINorgeSisteFemAar,
-                borSammenMedBarnet: state.soknad.borSammenMedBarnet,
-                skalBoMedBarnetINorgeNesteTolvMaaneder: state.soknad.skalBoMedBarnetINorgeNesteTolvMaaneder,
-            }
-        }
-    };
+const mapStateToProps = (state: IRootState): ISoknadState => {
+    return selectSoknad(state);
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        sendSoknad: (soknad: ISoknad) => {
-            dispatch(sendInn(soknad));
+        sendSoknad: () => {
+            dispatch(sendInn());
         }
     };
 };

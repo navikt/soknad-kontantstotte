@@ -1,39 +1,27 @@
 import * as React from 'react';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { connect, Dispatch } from 'react-redux';
+import { InjectedIntl } from 'react-intl';
 import { ValidInput } from '../../common/lib/validation';
 import DatoInputWithValidation from '../../common/lib/validation/DatoInputWithValidation';
-import { IRootState } from '../../rootReducer';
-import { soknadSettVerdi } from '../../soknad/actions';
+import { BarnehageplassVerdier, Felt, IBarnehageplass } from '../../soknad/types';
 import { erDatoSatt, harTekstomradeInnhold } from '../../validators';
-import { BarnehageplassVerdier } from './BarnehageplassSide';
 
-interface IEkstraFelterProps {
-    barnehageplassVerdi: BarnehageplassVerdier;
+interface IEkstraFelterProps extends IBarnehageplass {
+    intl: InjectedIntl;
+    settFelt: (nokkel: Felt, verdi: string) => any;
 }
 
-interface IMapStateToProps {
-    barnehageplassDato?: string;
-    barnehageplassKommune?: string;
-    barnehageplassAntallTimer?: string;
-}
-
-interface IMapDispatchToProps {
-    settFelt: (nokkel: string, verdi: string) => any;
-}
-
-type JaEkstraFelterProps = IEkstraFelterProps & IMapDispatchToProps & IMapStateToProps & InjectedIntlProps;
+type JaEkstraFelterProps = IEkstraFelterProps;
 
 const EkstraFelter: React.StatelessComponent<JaEkstraFelterProps> = ({
-    barnehageplassVerdi,
-    barnehageplassDato,
-    barnehageplassKommune,
-    barnehageplassAntallTimer,
+    harBarnehageplass,
+    dato,
+    kommune,
+    antallTimer,
     settFelt,
     intl
 }) => {
     let datoNokkel: string;
-    switch (barnehageplassVerdi) {
+    switch (harBarnehageplass) {
         case BarnehageplassVerdier.Ja:
         case BarnehageplassVerdier.NeiHarFaatt:
             datoNokkel = 'barnehageplass.harFaattPlassDato';
@@ -47,14 +35,14 @@ const EkstraFelter: React.StatelessComponent<JaEkstraFelterProps> = ({
     return (
         <div>
             <DatoInputWithValidation
-                {...barnehageplassDato && {dato: new Date(barnehageplassDato)}}
+                {...dato && {dato: new Date(dato)}}
                 name='barnehageplass.dato'
                 label={intl.formatMessage({ id: datoNokkel })}
-                settDato={(dato) => settFelt('barnehageplassDato', dato.toDateString())}
+                settDato={ (date) => settFelt('dato', date.toDateString()) }
                 validators={[
                     {
                         failText: intl.formatMessage({ id: 'svar.feilmelding' }),
-                        test: () => erDatoSatt(barnehageplassDato)
+                        test: () => erDatoSatt(dato)
                     }
                 ]}
             />
@@ -65,13 +53,13 @@ const EkstraFelter: React.StatelessComponent<JaEkstraFelterProps> = ({
                 validators={[
                     {
                         failText: intl.formatMessage({ id: 'svar.feilmelding' }),
-                        test: () => harTekstomradeInnhold(barnehageplassKommune)
-                }
-                    ]}
+                        test: () => harTekstomradeInnhold(kommune)
+                    }
+                ]}
                 onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    settFelt('barnehageplassKommune', event.target.value)}
+                    settFelt('kommune', event.target.value)}
             />
-            { [BarnehageplassVerdier.JaSkalSlutte, BarnehageplassVerdier.Ja].includes(barnehageplassVerdi) &&
+            { [BarnehageplassVerdier.JaSkalSlutte, BarnehageplassVerdier.Ja].includes(harBarnehageplass) &&
                 <ValidInput
                     name='barnehageplass.antallTimer'
                     label={intl.formatMessage({id: 'barnehageplass.antallTimer'})}
@@ -80,32 +68,16 @@ const EkstraFelter: React.StatelessComponent<JaEkstraFelterProps> = ({
                         [
                             {
                                 failText: intl.formatMessage({ id: 'svar.feilmelding' }),
-                                test: () => harTekstomradeInnhold(barnehageplassAntallTimer)
+                                test: () => harTekstomradeInnhold(antallTimer)
                             }
                         ]
                     }
                     onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                        settFelt('barnehageplassAntallTimer', event.target.value)}
+                        settFelt('antallTimer', event.target.value)}
                 />
             }
         </div>
     );
 };
 
-const mapStateToProps = (state: IRootState) => {
-  return {
-      barnehageplassAntallTimer: state.soknad.barnehageplassAntallTimer,
-      barnehageplassDato: state.soknad.barnehageplassDato,
-      barnehageplassKommune: state.soknad.barnehageplassKommune
-  };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
-    return {
-        settFelt: (nokkel: string, verdi: string) => {
-            dispatch(soknadSettVerdi(nokkel, verdi));
-        }
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(EkstraFelter));
+export default EkstraFelter;

@@ -5,12 +5,13 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import ValidRadioPanelGruppe from '../../common/lib/validation/ValidRadioPanelGruppe';
 import { soknadSettVerdi } from '../../soknad/actions';
-import { Svar } from '../../soknad/reducer';
+import { Bolk, Felt, Svar } from '../../soknad/types';
 import { harSvartPaJaNeiSporsmal } from '../../validators';
 import SpesifiserTextarea from './SpesifiserTextarea';
 
 interface ISporsmaalProps {
-    nokkel: string;
+    bolk: Bolk;
+    felt: Felt;
     sporsmalNokkel: string;
     verdi: Svar;
     forklaring?: string;
@@ -19,14 +20,15 @@ interface ISporsmaalProps {
 }
 
 interface IMapDispatchToProps {
-    settForklaring: (forklaring?: string) => any;
-    settSvar: (verdi: Svar) => any;
+    settForklaring: (forklaring: string) => void;
+    settSvar: (verdi: Svar) => void;
 }
 
 type JaNeiSporsmalProps = IMapDispatchToProps & ISporsmaalProps & InjectedIntlProps;
 
 const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
-    nokkel,
+    bolk,
+    felt,
     verdi,
     forklaring,
     settSvar,
@@ -44,26 +46,15 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
                 </HjelpetekstUnder>
             }
             <ValidRadioPanelGruppe
-                legend={ intl.formatMessage(
-                    {
-                        id: sporsmalNokkel
-                    }
-                ) }
-                name={ nokkel }
+                legend={ intl.formatMessage({ id: sporsmalNokkel }) }
+                name={ felt }
                 validators={[
                     {
                         failText: intl.formatMessage({ id: 'svar.feilmelding' }),
                         test: () => harSvartPaJaNeiSporsmal(verdi)
                     }
                 ]}
-                onChange={
-                    (event: React.SyntheticEvent<EventTarget>) => {
-                        const element: HTMLBaseElement = (
-                            (event.target as HTMLBaseElement).nextElementSibling as HTMLBaseElement
-                        );
-                        settSvar(element.innerText.toUpperCase() as Svar);
-                    }
-                }
+                onChange={ (evt: any, value: string) => settSvar(value as Svar) }
                 checked={ verdi }
                 radios={
                     [
@@ -75,12 +66,11 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
 
             { harForklaring && verdi === Svar.JA &&
                 <SpesifiserTextarea
-                    nokkel={ nokkel }
+                    nokkel={ felt }
                     forklaring={ forklaring }
                     settForklaring={ settForklaring }
                 />
             }
-
         </div>
     );
 };
@@ -88,15 +78,12 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: ISporsmaalProps): IMapDispatchToProps => {
     return {
         settForklaring: (forklaring) => {
-            dispatch(soknadSettVerdi(ownProps.nokkel + 'Forklaring', forklaring));
+            dispatch(soknadSettVerdi(ownProps.bolk, `${ownProps.felt}Forklaring` as Felt, forklaring));
         },
-        settSvar: (verdi) => {
-            dispatch(soknadSettVerdi(ownProps.nokkel, verdi));
+        settSvar: (verdi: Svar) => {
+            dispatch(soknadSettVerdi(ownProps.bolk, ownProps.felt, verdi));
         }
     };
 };
 
 export default connect(null, mapDispatchToProps)(injectIntl(JaNeiSporsmal));
-export {
-    ISporsmaalProps
-};

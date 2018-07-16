@@ -6,7 +6,7 @@ import { IFeil } from '../../common/lib/validation/types';
 interface IOwnProps {
     name: string;
     label: string;
-    settDato: (verdi: Date) => any;
+    settDato: (verdi: Date) => void;
     dato?: Date;
     feil?: IFeil;
 }

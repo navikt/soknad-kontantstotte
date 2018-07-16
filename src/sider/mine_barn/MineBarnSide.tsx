@@ -46,13 +46,13 @@ const MineBarnSide: React.StatelessComponent<MineBarnSideProps> = ({
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         barn: state.barn.barn,
-        valgtBarn: state.soknad.barn,
+        valgtBarn: state.soknad.mineBarn.valgtBarn,
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        velgBarn: (barn) => dispatch(soknadSettVerdi('barn', barn))
+        velgBarn: (barn) => dispatch(soknadSettVerdi('mineBarn', 'valgtBarn', barn))
     };
 };
 

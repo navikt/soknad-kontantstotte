@@ -1,11 +1,19 @@
 import axios from 'axios';
 import Environment from '../Environment';
-import { ISoknad } from './soknad';
+import { ISoknadState } from '../soknad/types';
 
-function sendInnSoknad(soknad: ISoknad) {
-    return axios.post(`${Environment().apiUrl}/sendinn`, JSON.stringify(soknad), {
+function sendInnSoknad(soknad: ISoknadState) {
+
+    const formData = new FormData();
+    formData.append(
+        'soknad',
+        new Blob([JSON.stringify(soknad)], {
+            type: 'application/json'
+        })
+    );
+    return axios.post(`${Environment().apiUrl}/sendinn`, formData, {
         headers: {
-            'content-type': 'application/json'
+            'content-type': 'multipart/form-data;',
         },
         withCredentials: true
     });

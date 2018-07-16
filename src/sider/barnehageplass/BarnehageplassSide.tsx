@@ -7,43 +7,39 @@ import SubmitKnapp from '../../component/SubmitKnapp/SubmitKnapp';
 import SideContainer from '../../container/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
+import { selectBarnehageplass } from '../../soknad/selectors';
+import { BarnehageplassVerdier, Felt, IBarnehageplass } from '../../soknad/types';
 import EkstraFelter from './EkstraFelter';
-
-export enum BarnehageplassVerdier {
-    Nei = 'Nei',
-    NeiHarFaatt = 'NeiHarFaatt',
-    Ja = 'Ja',
-    JaSkalSlutte = 'JaSkalSlutte',
-    Ubesvart = 'Ubesvart'
-}
-
-interface IMapStateToProps {
-    harBarnehageplass: BarnehageplassVerdier;
-}
 
 interface IMapDispatchToProps {
     navigerTilPath: (path: string) => any;
     settSvar: (verdi: BarnehageplassVerdier) => any;
-    settEkstraFelt: (nokkel: string, verdi: string) => any;
+    settEkstraFelt: (nokkel: Felt, verdi: string) => any;
 }
 
-type BarnehageplassSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
+type BarnehageplassSideProps = IBarnehageplass & IMapDispatchToProps & InjectedIntlProps;
 
 const BarnehageplassSide: React.StatelessComponent<BarnehageplassSideProps> = ({
-                                                                                   harBarnehageplass,
-                                                                                   settSvar,
-                                                                                   intl,
-                                                                                   settEkstraFelt,
-                                                                                   navigerTilPath
-                                                                               }) => {
+    harBarnehageplass,
+    settSvar,
+    intl,
+    settEkstraFelt,
+    navigerTilPath,
+    dato,
+    kommune,
+    antallTimer,
+}) => {
     const radios = [
         {label: intl.formatMessage({id: 'svar.nei'}), value: BarnehageplassVerdier.Nei},
         {label: intl.formatMessage({id: 'svar.neiHarFaattPlass'}), value: BarnehageplassVerdier.NeiHarFaatt},
         {label: intl.formatMessage({id: 'svar.ja'}), value: BarnehageplassVerdier.Ja},
         {label: intl.formatMessage({id: 'svar.jaHarSluttet'}), value: BarnehageplassVerdier.JaSkalSlutte}
     ];
-    const valgSomKreverEkstraFelter: BarnehageplassVerdier[] =
-        [BarnehageplassVerdier.Ja, BarnehageplassVerdier.JaSkalSlutte, BarnehageplassVerdier.NeiHarFaatt];
+    const valgSomKreverEkstraFelter: BarnehageplassVerdier[] = [
+        BarnehageplassVerdier.Ja,
+        BarnehageplassVerdier.JaSkalSlutte,
+        BarnehageplassVerdier.NeiHarFaatt,
+    ];
 
     return (
         <SideContainer>
@@ -59,13 +55,19 @@ const BarnehageplassSide: React.StatelessComponent<BarnehageplassSideProps> = ({
                             test: () => harBarnehageplass !== BarnehageplassVerdier.Ubesvart
                         }
                     ]}
-                    onChange={ (...args: any[]) => {
-                        settSvar(args[1] as BarnehageplassVerdier);
-                        }
-                    }
+                    onChange={ (event: any, value: string) => {
+                        settSvar(value as BarnehageplassVerdier);
+                    }}
                 />
                 {valgSomKreverEkstraFelter.includes(harBarnehageplass) &&
-                    <EkstraFelter barnehageplassVerdi={ harBarnehageplass }/>
+                    <EkstraFelter
+                        harBarnehageplass={ harBarnehageplass }
+                        dato={ dato }
+                        kommune={ kommune }
+                        antallTimer={ antallTimer }
+                        settFelt={ settEkstraFelt }
+                        intl={ intl }
+                    />
                 }
                 <SubmitKnapp label='submitknapp.neste'/>
             </ValidForm>
@@ -78,23 +80,17 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
         navigerTilPath: (path: string) => {
             dispatch(push(path));
         },
-        settEkstraFelt: (nokkel: string, verdi: string) => {
-            dispatch(soknadSettVerdi(nokkel, verdi));
+        settEkstraFelt: (nokkel: Felt, verdi: string) => {
+            dispatch(soknadSettVerdi('barnehageplass', nokkel, verdi));
         },
         settSvar: (verdi: BarnehageplassVerdier) => {
-            dispatch(soknadSettVerdi('harBarnehageplass', verdi));
+            dispatch(soknadSettVerdi('barnehageplass', 'harBarnehageplass', verdi));
         }
     };
 };
 
-const mapStateToProps = (state: IRootState): IMapStateToProps => {
-    return {
-        harBarnehageplass: state.soknad.harBarnehageplass
-    };
-};
-
-export {
-    IMapStateToProps as IBarnehageplass
+const mapStateToProps = (state: IRootState): IBarnehageplass => {
+    return selectBarnehageplass(state);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(BarnehageplassSide));

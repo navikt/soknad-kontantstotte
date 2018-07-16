@@ -6,22 +6,14 @@ import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import SubmitKnapp from '../../component/SubmitKnapp/SubmitKnapp';
 import SideContainer from '../../container/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
-import { Svar } from '../../soknad/reducer';
-
-interface IMapStateToProps {
-    mottarYtelserFraUtlandet: Svar;
-    mottarYtelserFraUtlandetForklaring?: string;
-    arbeiderIUtlandetEllerKontinentalsokkel: Svar;
-    arbeiderIUtlandetEllerKontinentalsokkelForklaring?: string;
-    mottarKontantstotteFraAnnetEOS: Svar;
-    mottarKontantstotteFraAnnetEOSForklaring?: string;
-}
+import { selectArbeidsforhold } from '../../soknad/selectors';
+import { Bolk, IArbeidsforhold } from '../../soknad/types';
 
 interface IMapDispatchToProps {
-    navigerTilPath: (path: string) => any;
+    navigerTilPath: (path: string) => void;
 }
 
-type ArbeidsforholdSideProps = IMapStateToProps & IMapDispatchToProps;
+type ArbeidsforholdSideProps = IArbeidsforhold & IMapDispatchToProps;
 
 const ArbeidsforholdSide: React.StatelessComponent<ArbeidsforholdSideProps> = (
     {
@@ -33,25 +25,31 @@ const ArbeidsforholdSide: React.StatelessComponent<ArbeidsforholdSideProps> = (
         mottarKontantstotteFraAnnetEOSForklaring,
         navigerTilPath
     }) => {
+    const bolk: Bolk = 'arbeidsforhold';
     return (
         <SideContainer>
             <ValidForm summaryTitle={'Arbeidsforhold'} onSubmit={() => navigerTilPath('/oppsummering')}>
                 <JaNeiSporsmal
-                    nokkel='mottarYtelserFraUtlandet'
+                    bolk={ bolk }
+                    felt='mottarYtelserFraUtlandet'
                     sporsmalNokkel='arbeidsforhold.mottarYtelserFraUtlandet.sporsmal'
                     verdi={ mottarYtelserFraUtlandet }
                     harForklaring={ true }
                     forklaring={ mottarYtelserFraUtlandetForklaring }
                 />
+
                 <JaNeiSporsmal
-                    nokkel='arbeiderIUtlandetEllerKontinentalsokkel'
+                    bolk={ bolk }
+                    felt='arbeiderIUtlandetEllerKontinentalsokkel'
                     sporsmalNokkel='arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.sporsmal'
                     verdi={ arbeiderIUtlandetEllerKontinentalsokkel }
                     harForklaring={ true }
                     forklaring={ arbeiderIUtlandetEllerKontinentalsokkelForklaring }
                 />
+
                 <JaNeiSporsmal
-                    nokkel='mottarKontantstotteFraAnnetEOS'
+                    bolk={ bolk }
+                    felt='mottarKontantstotteFraAnnetEOS'
                     sporsmalNokkel='arbeidsforhold.mottarKontantstotteFraAnnetEOS.sporsmal'
                     verdi={ mottarKontantstotteFraAnnetEOS }
                     harForklaring={ true }
@@ -64,25 +62,13 @@ const ArbeidsforholdSide: React.StatelessComponent<ArbeidsforholdSideProps> = (
 };
 
 const mapStateToProps = (state: IRootState) => {
-    return {
-        arbeiderIUtlandetEllerKontinentalsokkel: state.soknad.arbeiderIUtlandetEllerKontinentalsokkel,
-        arbeiderIUtlandetEllerKontinentalsokkelForklaring:
-            state.soknad.arbeiderIUtlandetEllerKontinentalsokkelForklaring,
-        mottarKontantstotteFraAnnetEOS: state.soknad.mottarKontantstotteFraAnnetEOS,
-        mottarKontantstotteFraAnnetEOSForklaring: state.soknad.mottarKontantstotteFraAnnetEOSForklaring,
-        mottarYtelserFraUtlandet: state.soknad.mottarYtelserFraUtlandet,
-        mottarYtelserFraUtlandetForklaring: state.soknad.mottarYtelserFraUtlandetForklaring
-    };
+    return selectArbeidsforhold(state);
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         navigerTilPath: (path: string) => dispatch(push(path))
     };
-};
-
-export {
-    IMapStateToProps as IArbeidsforhold
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArbeidsforholdSide);

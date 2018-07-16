@@ -1,4 +1,4 @@
-import { Svar } from './soknad/reducer';
+import { Svar } from './soknad/types';
 
 export const harTekstomradeInnhold = (verdi?: string): boolean => {
     return verdi ? verdi.length > 0 : false;

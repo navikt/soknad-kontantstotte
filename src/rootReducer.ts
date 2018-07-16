@@ -3,7 +3,8 @@ import { combineReducers } from 'redux';
 import { appReducer, IAppState } from './app/reducer';
 import { barnReducer, IBarnState } from './barn/reducer';
 import { IInnsendingState, innsendingReducer } from './innsending/reducer';
-import { ISoknadState, soknadReducer } from './soknad/reducer';
+import { soknadReducer } from './soknad/reducer';
+import { ISoknadState } from './soknad/types';
 import { ITeksterState, teksterReducer } from './tekster/reducer';
 
 export interface IRootState {

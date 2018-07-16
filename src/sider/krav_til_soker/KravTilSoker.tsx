@@ -9,18 +9,13 @@ import SubmitKnapp from '../../component/SubmitKnapp/SubmitKnapp';
 import SideContainer from '../../container/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
-import { Svar } from '../../soknad/reducer';
+import { selectKravTilSoker } from '../../soknad/selectors';
+import { Felt, IKravTilSoker, Svar } from '../../soknad/types';
 import { harHuketAvPaCheckbox } from '../../validators';
 
-interface IMapStateToProps {
-    boddINorgeSisteFemAar: Svar;
-    borSammenMedBarnet: Svar;
-    skalBoMedBarnetINorgeNesteTolvMaaneder: Svar;
-}
-
 interface IMapDispatchToProps {
+    settCheckboxVerdi: (felt: Felt, verdi: string) => any;
     navigerTilPath: (path: string) => any;
-    settCheckboxVerdi: (felt: string, verdi: string) => any;
 }
 
 const handterCheckboxEndring = (event: React.SyntheticEvent<EventTarget>, handler: any, value?: string) =>  {
@@ -28,9 +23,9 @@ const handterCheckboxEndring = (event: React.SyntheticEvent<EventTarget>, handle
     handler(value, target.checked ? Svar.JA : Svar.UBESVART);
 };
 
-type StartSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
+type KravTilSokerProps = IKravTilSoker & IMapDispatchToProps & InjectedIntlProps;
 
-const StartSide: React.StatelessComponent<StartSideProps>  = (
+const KravTilSoker: React.StatelessComponent<KravTilSokerProps>  = (
     {
         boddINorgeSisteFemAar,
         borSammenMedBarnet,
@@ -51,7 +46,6 @@ const StartSide: React.StatelessComponent<StartSideProps>  = (
               checkboxes={
                   [
                       {
-
                           checked: boddINorgeSisteFemAar === Svar.JA,
                           label: intl.formatMessage(
                               { id: 'startside.krav.boddINorgeSisteFemAar' }
@@ -99,12 +93,8 @@ const StartSide: React.StatelessComponent<StartSideProps>  = (
     );
 };
 
-const mapStateToProps = (state: IRootState): IMapStateToProps => {
-    return {
-        boddINorgeSisteFemAar: state.soknad.boddINorgeSisteFemAar,
-        borSammenMedBarnet: state.soknad.borSammenMedBarnet,
-        skalBoMedBarnetINorgeNesteTolvMaaneder: state.soknad.skalBoMedBarnetINorgeNesteTolvMaaneder
-    };
+const mapStateToProps = (state: IRootState): IKravTilSoker => {
+    return selectKravTilSoker(state);
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
@@ -112,12 +102,8 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
         navigerTilPath: (path: string) => {
             dispatch(push(path));
         },
-        settCheckboxVerdi: (felt, verdi) => dispatch(soknadSettVerdi(felt, verdi)),
+        settCheckboxVerdi: (felt, verdi) => dispatch(soknadSettVerdi('kravTilSoker', felt, verdi)),
     };
 };
 
-export {
-    IMapStateToProps as ISokerKrav
-};
-
-export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(StartSide));
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(KravTilSoker));

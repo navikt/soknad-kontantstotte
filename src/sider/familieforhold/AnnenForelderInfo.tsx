@@ -1,26 +1,19 @@
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 import { ValidInput } from '../../common/lib/validation';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
-import { IRootState } from '../../rootReducer';
-import { soknadSettVerdi } from '../../soknad/actions';
-import { Svar } from '../../soknad/reducer';
+import { Svar } from '../../soknad/types';
 import { harTekstomradeInnhold } from '../../validators';
 
-interface IMapStateToProps {
+interface IProps {
     annenForelderNavn?: string;
     annenForelderFodselsnummer?: string;
     annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar;
-}
-
-interface IMapDispatchToProps {
     settAnnenForelderNavn: (navn: string) => any;
     settAnnenForelderFodselsnummer: (personnummer: string) => any;
 }
 
-type AnnenForelderInfoProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
+type AnnenForelderInfoProps = IProps & InjectedIntlProps;
 
 const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
     annenForelderNavn,
@@ -87,7 +80,8 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
             />
 
             <JaNeiSporsmal
-                nokkel='annenForelderYrkesaktivINorgeEOSIMinstFemAar'
+                bolk='familieforhold'
+                felt='annenForelderYrkesaktivINorgeEOSIMinstFemAar'
                 sporsmalNokkel='familieforhold.annenForelderYrkesaktivINorgeEOSIMinstFemAar.sporsmal'
                 verdi={ annenForelderYrkesaktivINorgeEOSIMinstFemAar }
             />
@@ -99,27 +93,4 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
     );
 };
 
-const mapStateToProps = (state: IRootState): IMapStateToProps => {
-    return {
-        annenForelderFodselsnummer: state.soknad.annenForelderFodselsnummer,
-        annenForelderNavn: state.soknad.annenForelderNavn,
-        annenForelderYrkesaktivINorgeEOSIMinstFemAar: state.soknad.annenForelderYrkesaktivINorgeEOSIMinstFemAar
-    };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
-    return {
-        settAnnenForelderFodselsnummer: (fodselsnummer) => {
-            dispatch(soknadSettVerdi('annenForelderFodselsnummer', fodselsnummer));
-        },
-        settAnnenForelderNavn: (navn) => {
-            dispatch(soknadSettVerdi('annenForelderNavn', navn));
-        }
-    };
-};
-
-export {
-    IMapStateToProps as IAnnenForelder
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(AnnenForelderInfo));
+export default injectIntl(AnnenForelderInfo);
