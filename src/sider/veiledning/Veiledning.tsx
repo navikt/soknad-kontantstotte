@@ -1,7 +1,7 @@
 import * as React from 'react';
 import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
 
-const VeiledningSide = () => {
+const Veiledning = () => {
     return (
         <div>
             <h1>Veiledningsside</h1>
@@ -11,4 +11,4 @@ const VeiledningSide = () => {
     );
 };
 
-export default VeiledningSide;
+export default Veiledning;

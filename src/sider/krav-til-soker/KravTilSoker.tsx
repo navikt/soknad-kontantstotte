@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 import ValidCheckboxPanelGruppe from '../../common/lib/validation/ValidCheckboxPanelGruppe';
 import ValidForm from '../../common/lib/validation/ValidForm';
 import SubmitKnapp from '../../component/SubmitKnapp/SubmitKnapp';
-import SideContainer from '../../container/SideContainer/SideContainer';
+import SideContainer from '../../component/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
 import { selectKravTilSoker } from '../../soknad/selectors';
@@ -14,8 +14,8 @@ import { Felt, IKravTilSoker, Svar } from '../../soknad/types';
 import { harHuketAvPaCheckbox } from '../../validators';
 
 interface IMapDispatchToProps {
-    settCheckboxVerdi: (felt: Felt, verdi: string) => any;
-    navigerTilPath: (path: string) => any;
+    settCheckboxVerdi: (felt: Felt, verdi: string) => void;
+    navigerTilPath: (path: string) => void;
 }
 
 const handterCheckboxEndring = (event: React.SyntheticEvent<EventTarget>, handler: any, value?: string) =>  {

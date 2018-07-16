@@ -4,7 +4,7 @@ import { connect, Dispatch } from 'react-redux';
 import { ValidForm } from '../../common/lib/validation';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import SubmitKnapp from '../../component/SubmitKnapp/SubmitKnapp';
-import SideContainer from '../../container/SideContainer/SideContainer';
+import SideContainer from '../../component/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
 import { selectFamilieforhold } from '../../soknad/selectors';
@@ -12,14 +12,14 @@ import { IFamilieforhold, Svar } from '../../soknad/types';
 import AnnenForelderInfo from './AnnenForelderInfo';
 
 interface IMapDispatchToProps {
-    settAnnenForelderNavn: (navn: string) => any;
-    settAnnenForelderFodselsnummer: (personnummer: string) => any;
-    navigerTilPath: (path: string) => any;
+    settAnnenForelderNavn: (navn: string) => void;
+    settAnnenForelderFodselsnummer: (personnummer: string) => void;
+    navigerTilPath: (path: string) => void;
 }
 
 type FamilieforholdSideProps = IFamilieforhold & IMapDispatchToProps;
 
-const FamilieforholdSide: React.StatelessComponent<FamilieforholdSideProps> = (
+const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = (
     {
         borForeldreneSammenMedBarnet,
         erAvklartDeltBosted,
@@ -74,4 +74,4 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FamilieforholdSide);
+export default connect(mapStateToProps, mapDispatchToProps)(Familieforhold);

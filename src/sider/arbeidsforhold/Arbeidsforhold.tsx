@@ -4,7 +4,7 @@ import { connect, Dispatch } from 'react-redux';
 import ValidForm from '../../common/lib/validation/ValidForm';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import SubmitKnapp from '../../component/SubmitKnapp/SubmitKnapp';
-import SideContainer from '../../container/SideContainer/SideContainer';
+import SideContainer from '../../component/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { selectArbeidsforhold } from '../../soknad/selectors';
 import { Bolk, IArbeidsforhold } from '../../soknad/types';
@@ -15,7 +15,7 @@ interface IMapDispatchToProps {
 
 type ArbeidsforholdSideProps = IArbeidsforhold & IMapDispatchToProps;
 
-const ArbeidsforholdSide: React.StatelessComponent<ArbeidsforholdSideProps> = (
+const Arbeidsforhold: React.StatelessComponent<ArbeidsforholdSideProps> = (
     {
         mottarYtelserFraUtlandet,
         mottarYtelserFraUtlandetForklaring,
@@ -71,4 +71,4 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArbeidsforholdSide);
+export default connect(mapStateToProps, mapDispatchToProps)(Arbeidsforhold);

@@ -9,8 +9,8 @@ interface IProps {
     annenForelderNavn?: string;
     annenForelderFodselsnummer?: string;
     annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar;
-    settAnnenForelderNavn: (navn: string) => any;
-    settAnnenForelderFodselsnummer: (personnummer: string) => any;
+    settAnnenForelderNavn: (navn: string) => void;
+    settAnnenForelderFodselsnummer: (personnummer: string) => void;
 }
 
 type AnnenForelderInfoProps = IProps & InjectedIntlProps;

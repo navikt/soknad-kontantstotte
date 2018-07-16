@@ -7,7 +7,7 @@ import { erDatoSatt, harTekstomradeInnhold } from '../../validators';
 
 interface IEkstraFelterProps extends IBarnehageplass {
     intl: InjectedIntl;
-    settFelt: (nokkel: Felt, verdi: string) => any;
+    settFelt: (nokkel: Felt, verdi: string) => void;
 }
 
 type JaEkstraFelterProps = IEkstraFelterProps;

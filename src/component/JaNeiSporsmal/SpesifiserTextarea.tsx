@@ -5,7 +5,7 @@ import { harTekstomradeInnhold } from '../../validators';
 
 interface IOwnProps {
     nokkel: string;
-    settForklaring: (verdi: string) => any;
+    settForklaring: (verdi: string) => void;
     forklaring?: string;
 }
 

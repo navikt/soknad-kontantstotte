@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { selectBarn } from '../../barn/selectors';
 import { IBarn } from '../../barn/types';
 import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
-import SideContainer from '../../container/SideContainer/SideContainer';
+import SideContainer from '../../component/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
+import { selectValgtBarn } from '../../soknad/selectors';
 import Barn from './Barn';
 
 interface IMapStateToProps {
@@ -14,12 +16,12 @@ interface IMapStateToProps {
 }
 
 interface IMapDispatchToProps {
-    velgBarn: (barn: IBarn) => any;
+    velgBarn: (barn: IBarn) => void;
 }
 
 type MineBarnSideProps = IMapStateToProps & IMapDispatchToProps;
 
-const MineBarnSide: React.StatelessComponent<MineBarnSideProps> = ({
+const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
     barn,
     valgtBarn,
     velgBarn
@@ -45,8 +47,8 @@ const MineBarnSide: React.StatelessComponent<MineBarnSideProps> = ({
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
-        barn: state.barn.barn,
-        valgtBarn: state.soknad.mineBarn.valgtBarn,
+        barn: selectBarn(state),
+        valgtBarn: selectValgtBarn(state),
     };
 };
 
@@ -56,4 +58,4 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MineBarnSide);
+export default connect(mapStateToProps, mapDispatchToProps)(MineBarn);

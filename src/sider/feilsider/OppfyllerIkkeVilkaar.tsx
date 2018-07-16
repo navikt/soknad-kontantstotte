@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const OppfyllerIkkeVilkaarSide = () => {
+const OppfyllerIkkeVilkaar = () => {
     return (
         <div>
             <h1>Beklager</h1>
@@ -10,4 +10,4 @@ const OppfyllerIkkeVilkaarSide = () => {
     );
 };
 
-export default OppfyllerIkkeVilkaarSide;
+export default OppfyllerIkkeVilkaar;

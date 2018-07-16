@@ -4,7 +4,7 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { ValidForm, ValidRadioPanelGruppe } from '../../common/lib/validation';
 import SubmitKnapp from '../../component/SubmitKnapp/SubmitKnapp';
-import SideContainer from '../../container/SideContainer/SideContainer';
+import SideContainer from '../../component/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
@@ -12,14 +12,14 @@ import { BarnehageplassVerdier, Felt, IBarnehageplass } from '../../soknad/types
 import EkstraFelter from './EkstraFelter';
 
 interface IMapDispatchToProps {
-    navigerTilPath: (path: string) => any;
-    settSvar: (verdi: BarnehageplassVerdier) => any;
-    settEkstraFelt: (nokkel: Felt, verdi: string) => any;
+    navigerTilPath: (path: string) => void;
+    settSvar: (verdi: BarnehageplassVerdier) => void;
+    settEkstraFelt: (nokkel: Felt, verdi: string) => void;
 }
 
 type BarnehageplassSideProps = IBarnehageplass & IMapDispatchToProps & InjectedIntlProps;
 
-const BarnehageplassSide: React.StatelessComponent<BarnehageplassSideProps> = ({
+const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     harBarnehageplass,
     settSvar,
     intl,
@@ -55,7 +55,7 @@ const BarnehageplassSide: React.StatelessComponent<BarnehageplassSideProps> = ({
                             test: () => harBarnehageplass !== BarnehageplassVerdier.Ubesvart
                         }
                     ]}
-                    onChange={ (event: any, value: string) => {
+                    onChange={ (event: {}, value: string) => {
                         settSvar(value as BarnehageplassVerdier);
                     }}
                 />
@@ -93,4 +93,4 @@ const mapStateToProps = (state: IRootState): IBarnehageplass => {
     return selectBarnehageplass(state);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(BarnehageplassSide));
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Barnehageplass));

@@ -5,7 +5,7 @@ import { IBarn } from '../../barn/types';
 interface IBarnProps {
     barn: IBarn;
     valgt: boolean;
-    onClick: (barn: IBarn) => any;
+    onClick: (barn: IBarn) => void;
 }
 
 const Barn: React.StatelessComponent<IBarnProps> = ({

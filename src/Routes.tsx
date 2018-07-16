@@ -1,16 +1,16 @@
 import * as React from 'react';
-import { Route, RouteProps } from 'react-router-dom';
-import ArbeidsforholdSide from './sider/arbeidsforhold/ArbeidsforholdSide';
-import BarnehageplassSide from './sider/barnehageplass/BarnehageplassSide';
-import FamilieforholdSide from './sider/familieforhold/FamilieforholdSide';
-import InnsendingFeiletSide from './sider/feilsider/InnsendingFeiletSide';
-import OppfyllerIkkeVilkaarSide from './sider/feilsider/OppfyllerIkkeVilkaarSide';
-import SidenFinnesIkkeSide from './sider/feilsider/SidenFinnesIkkeSide';
-import KravTilSoker from './sider/krav_til_soker/KravTilSoker';
-import KvitteringSide from './sider/kvittering/KvitteringSide';
-import MineBarnSide from './sider/mine_barn/MineBarnSide';
-import OppsummeringSide from './sider/oppsummering/OppsummeringSide';
-import VeiledningSide from './sider/veiledning/VeiledningSide';
+import { Route, RouteProps, Switch } from 'react-router-dom';
+import ArbeidsforholdSide from './sider/arbeidsforhold/Arbeidsforhold';
+import BarnehageplassSide from './sider/barnehageplass/Barnehageplass';
+import FamilieforholdSide from './sider/familieforhold/Familieforhold';
+import InnsendingFeilet from './sider/feilsider/InnsendingFeilet';
+import OppfyllerIkkeVilkaar from './sider/feilsider/OppfyllerIkkeVilkaar';
+import SidenFinnesIkke from './sider/feilsider/SidenFinnesIkke';
+import KravTilSoker from './sider/krav-til-soker/KravTilSoker';
+import Kvittering from './sider/kvittering/Kvittering';
+import MineBarnSide from './sider/mine-barn/MineBarn';
+import OppsummeringSide from './sider/oppsummering/Oppsummering';
+import Veiledning from './sider/veiledning/Veiledning';
 
 export enum SideType {
     SKJEMASIDE = 'SKJEMASIDE',
@@ -29,7 +29,7 @@ export const Sider: ISide[] = [
     {
         key: 'veiledning',
         path: '/',
-        sideKomponent: VeiledningSide,
+        sideKomponent: Veiledning,
         sideType: SideType.ANNEN_INFOSIDE,
         stegIndeks: -1
     },
@@ -78,30 +78,30 @@ export const Sider: ISide[] = [
     {
         key: 'kvittering',
         path: '/kvittering',
-        sideKomponent: KvitteringSide,
+        sideKomponent: Kvittering,
         sideType: SideType.SKJEMASIDE,
         stegIndeks: 6
     },
     {
         key: 'siden-finnes-ikke',
         path: '',
-        sideKomponent: SidenFinnesIkkeSide,
+        sideKomponent: SidenFinnesIkke,
         sideType: SideType.ANNEN_INFOSIDE,
-        stegIndeks: 7
+        stegIndeks: -1
     },
     {
         key: 'oppfyller-ikke-vilkaar',
         path: '/oppfyller-ikke-vilkaar',
-        sideKomponent: OppfyllerIkkeVilkaarSide,
+        sideKomponent: OppfyllerIkkeVilkaar,
         sideType: SideType.ANNEN_INFOSIDE,
-        stegIndeks: 8
+        stegIndeks: -1
     },
     {
         key: 'innsending-feilet',
         path: '/innsending-feilet',
-        sideKomponent: InnsendingFeiletSide,
+        sideKomponent: InnsendingFeilet,
         sideType: SideType.ANNEN_INFOSIDE,
-        stegIndeks: 9
+        stegIndeks: -1
     }
 ];
 
@@ -112,25 +112,32 @@ export const hentIndeksForPath = (path: string): number => {
     return potensielleSider.length > 0 ? potensielleSider[0].stegIndeks : -1;
 };
 
-export const renderSoknadRoutes = (): JSX.Element[] => {
-    const routes: JSX.Element[] = Sider.sort((sideA, sideB) => sideB.path.localeCompare(sideA.path))
-        .map((side: ISide): JSX.Element => {
-            let routeProps: RouteProps = {
-                component: side.sideKomponent
-            };
+const Routes: React.StatelessComponent<{}> = () => {
+    return (
+        <Switch>
+            {Sider.sort((sideA, sideB) => sideB.path.localeCompare(sideA.path))
+                .map((side: ISide): JSX.Element => {
+                    let routeProps: RouteProps = {
+                        component: side.sideKomponent
+                    };
 
-            if (side.key !== 'siden-finnes-ikke') {
-                routeProps = {
-                    exact: true,
-                    path: side.path,
-                    ...routeProps
-                };
+                    if (side.key !== 'siden-finnes-ikke') {
+                        routeProps = {
+                            exact: true,
+                            path: side.path,
+                            ...routeProps
+                        };
+                    }
+
+                    return(
+                        <Route { ...routeProps } key={side.key}/>
+                    );
+                })
             }
+        </Switch>
+    );
+};
 
-            return(
-                <Route { ...routeProps } key={side.key}/>
-            );
-        });
-
-    return routes;
+export {
+    Routes
 };
