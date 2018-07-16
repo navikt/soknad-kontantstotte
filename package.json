@@ -11,6 +11,7 @@
     "prettier": "prettier --config .prettierrc --write 'src/**/*.tsx' 'src/**/*.ts'",
     "start": "node ./dev-server/dev-server",
     "start:proxy": "node ./dev-server/proxy-server",
+    "start:ci": "node ./dev-server/ci-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
