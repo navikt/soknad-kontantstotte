@@ -4,6 +4,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { IRootState } from '../../rootReducer';
 import { hentIndeksForPath, ISide, Sider, SideType } from '../../Routes';
+import AvbrytKnapp from '../AvbrytKnapp/AvbrytKnapp';
 
 interface IOwnProps {
     className?: string;
@@ -44,6 +45,8 @@ class SideContainer extends React.Component<Props> {
                     aktivtSteg={hentIndeksForPath(currentPath)}
                 />
                 <div>{children}</div>
+
+                <AvbrytKnapp />
             </div>
         );
     }

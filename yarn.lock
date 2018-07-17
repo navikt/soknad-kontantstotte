@@ -44,6 +44,12 @@
   version "2.3.8"
   resolved "https://repo.adeo.no/repository/npm-public/@types/react-intl/-/react-intl-2.3.8.tgz#de56b21b67e39df24bc0fc7e67b437976b666919"
 
+"@types/react-modal@3.2.0":
+  version "3.2.0"
+  resolved "https://repo.adeo.no/repository/npm-public/@types/react-modal/-/react-modal-3.2.0.tgz#745c0e93fae9b611a3255d6dc8516d75b80b8abe"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-redux@6.0.2":
   version "6.0.2"
   resolved "https://repo.adeo.no/repository/npm-public/@types/react-redux/-/react-redux-6.0.2.tgz#10069b53db8e0920fd8656e068dcf10c53c9ad2a"
@@ -2413,6 +2419,10 @@ execa@^0.8.0:
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
 
+exenv@^1.2.0:
+  version "1.2.2"
+  resolved "https://repo.adeo.no/repository/npm-public/exenv/-/exenv-1.2.2.tgz#2ae78e85d9894158670b03d47bec1f03bd91bb9d"
+
 exit-hook@^1.0.0:
   version "1.1.1"
   resolved "https://repo.adeo.no/repository/npm-public/exit-hook/-/exit-hook-1.1.1.tgz#f05ca233b48c05d54fff07765df8507e95c02ff8"
@@ -4363,13 +4373,21 @@ nav-frontend-lenker-style@0.2.6:
   version "0.2.6"
   resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-lenker-style/-/nav-frontend-lenker-style-0.2.6.tgz#c937610f845a8b5a2b3109674499fbce9f5ee122"
 
-nav-frontend-lukknapp-style@0.2.6:
-  version "0.2.6"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-lukknapp-style/-/nav-frontend-lukknapp-style-0.2.6.tgz#ff2014bd2e8387e799dd082d71ae3282a662c12f"
+nav-frontend-lukknapp-style@0.2.7:
+  version "0.2.7"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-lukknapp-style/-/nav-frontend-lukknapp-style-0.2.7.tgz#a3f54e68641ea77087e2fc6b8703b992e8acdf28"
 
-nav-frontend-lukknapp@1.0.5:
-  version "1.0.5"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-lukknapp/-/nav-frontend-lukknapp-1.0.5.tgz#58838d58e175beeeefd44deaab27002307a733ae"
+nav-frontend-lukknapp@1.0.6:
+  version "1.0.6"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-lukknapp/-/nav-frontend-lukknapp-1.0.6.tgz#af702f8adb078eb8b50e3d84baf67ce70c680c52"
+
+nav-frontend-modal-style@0.3.12:
+  version "0.3.12"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-modal-style/-/nav-frontend-modal-style-0.3.12.tgz#789586f2e289d6b3a1f88ab4b6c8e8e4d39132a0"
+
+nav-frontend-modal@1.0.7:
+  version "1.0.7"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-modal/-/nav-frontend-modal-1.0.7.tgz#bc6e0ca1822aafb117beb87259be8d4fa6079715"
 
 nav-frontend-paneler-style@0.3.9:
   version "0.3.9"
@@ -5310,7 +5328,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@15.6.2, prop-types@^15.5.4, prop-types@^15.6.0, prop-types@^15.6.1:
+prop-types@15.6.2, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.6.0, prop-types@^15.6.1:
   version "15.6.2"
   resolved "https://repo.adeo.no/repository/npm-public/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   dependencies:
@@ -5500,9 +5518,18 @@ react-intl@2.4.0:
     intl-relativeformat "^2.0.0"
     invariant "^2.1.1"
 
-react-lifecycles-compat@^3.0.2:
+react-lifecycles-compat@^3.0.0, react-lifecycles-compat@^3.0.2:
   version "3.0.4"
   resolved "https://repo.adeo.no/repository/npm-public/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
+
+react-modal@3.5.1:
+  version "3.5.1"
+  resolved "https://repo.adeo.no/repository/npm-public/react-modal/-/react-modal-3.5.1.tgz#33d38527def90ea324848f7d63e53acc4468a451"
+  dependencies:
+    exenv "^1.2.0"
+    prop-types "^15.5.10"
+    react-lifecycles-compat "^3.0.0"
+    warning "^3.0.0"
 
 react-redux@5.0.7:
   version "5.0.7"
