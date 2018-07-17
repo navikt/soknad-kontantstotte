@@ -8,28 +8,28 @@ runExample();
 async function runExample() {
     try {
         const result = await Promise.all([
-            pa11y('http://visual-test-server:8000/', {
+            pa11y('http://ci-test-server:8000/', {
                 actions: ['wait for element h1 to be added'],
             }),
-            pa11y('http://visual-test-server:8000/start', {
+            pa11y('http://ci-test-server:8000/start', {
                 actions: ['wait for element .stegindikator to be added'],
             }),
-            pa11y('http://visual-test-server:8000/mine-barn', {
+            pa11y('http://ci-test-server:8000/mine-barn', {
                 actions: ['wait for element .stegindikator to be added'],
             }),
-            pa11y('http://visual-test-server:8000/familieforhold', {
+            pa11y('http://ci-test-server:8000/familieforhold', {
                 actions: ['wait for element .stegindikator to be added'],
             }),
-            pa11y('http://visual-test-server:8000/barnehageplass', {
+            pa11y('http://ci-test-server:8000/barnehageplass', {
                 actions: ['wait for element .stegindikator to be added'],
             }),
-            pa11y('http://visual-test-server:8000/arbeidsforhold', {
+            pa11y('http://ci-test-server:8000/arbeidsforhold', {
                 actions: ['wait for element .stegindikator to be added'],
             }),
-            pa11y('http://visual-test-server:8000/oppsummering', {
+            pa11y('http://ci-test-server:8000/oppsummering', {
                 actions: ['wait for element .stegindikator to be added'],
             }),
-            pa11y('http://visual-test-server:8000/kvittering', {
+            pa11y('http://ci-test-server:8000/kvittering', {
                 actions: ['wait for element .stegindikator to be added'],
             }),
         ]);

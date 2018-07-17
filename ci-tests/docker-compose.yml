@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  visual-test-server:
+  ci-test-server:
     image: navikt/node-express:1.0.0
     volumes:
       - ../dev-server:/var/server/
@@ -14,7 +14,7 @@ services:
   gemini:
     image: repo.adeo.no:5443/soknad/soknad-docker-gemini:1.0.0
     links:
-      - visual-test-server
+      - ci-test-server
       - chrome
       - hub
     volumes:
@@ -23,7 +23,7 @@ services:
   pa11y:
     image: repo.adeo.no:5443/soknad/soknad-docker-pa11y:1.0.0
     links:
-      - visual-test-server
+      - ci-test-server
     volumes:
       - ./pa11y/:/var/pa11y/
       - ./reports/:/reports/
@@ -42,3 +42,10 @@ services:
       - 5900
     links:
       - hub
+  testcafe:
+    image: testcafe/testcafe
+    command: 'firefox'
+    links:
+      - ci-test-server
+    volumes:
+      - ./testcafe/:/tests

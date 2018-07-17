@@ -12,7 +12,8 @@
     "start": "node ./dev-server/dev-server",
     "start:proxy": "node ./dev-server/proxy-server",
     "start:ci": "node ./dev-server/ci-server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:ci": "./ci-tests/scripts.sh test",
+    "test:ci-capture": "./ci-tests/scripts.sh capture"
   },
   "repository": {
     "type": "git",
@@ -94,6 +95,7 @@
     "redux-logger": "3.0.6",
     "soknad-frontend": "0.1.3",
     "style-loader": "0.21.0",
+    "testcafe": "0.20.4",
     "ts-loader": "4.3.0",
     "tslint": "5.10.0",
     "tslint-config-prettier": "1.13.0",

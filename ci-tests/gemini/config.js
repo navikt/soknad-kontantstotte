@@ -1,5 +1,5 @@
 module.exports = {
-    rootUrl: 'http://visual-test-server:8000',
+    rootUrl: 'http://ci-test-server:8000',
     gridUrl: 'http://hub:4444/wd/hub',
     screenshotsDir: './baseline',
     desiredCapabilities: {
