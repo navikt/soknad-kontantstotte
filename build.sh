@@ -65,6 +65,10 @@ function build_frontend {
 }
 
 
+function test_frontend {
+    build_command yarn test:ci
+}
+
 function build_container {
     docker build \
         --tag ${TAG} \
@@ -82,6 +86,7 @@ function publish_container() {
 
 install_packages
 build_frontend
+test_frontend
 create_version_file
 build_container
 
