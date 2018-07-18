@@ -65,6 +65,10 @@ function build_frontend {
 }
 
 
+function ci_test {
+    ./ci-tests/scripts.sh test
+}
+
 function build_container {
     docker build \
         --tag ${TAG} \
@@ -82,6 +86,7 @@ function publish_container() {
 
 install_packages
 build_frontend
+#ci_test
 create_version_file
 build_container
 
