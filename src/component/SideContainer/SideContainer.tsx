@@ -1,6 +1,8 @@
 import Stegindikator from 'nav-frontend-stegindikator/lib/stegindikator';
 import { StegindikatorStegProps } from 'nav-frontend-stegindikator/lib/stegindikator-steg';
+import { Sidetittel } from 'nav-frontend-typografi';
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { IRootState } from '../../rootReducer';
 import { hentIndeksForPath, ISide, Sider, SideType } from '../../Routes';
@@ -36,6 +38,9 @@ class SideContainer extends React.Component<Props> {
 
         return (
             <div className={className}>
+                <Sidetittel className={'side-container__sidetittel'}>
+                    <FormattedMessage id={'kontantstotte.tittel'} />
+                </Sidetittel>
                 <Stegindikator
                     steg={indikatorsteg}
                     autoResponsiv={true}
