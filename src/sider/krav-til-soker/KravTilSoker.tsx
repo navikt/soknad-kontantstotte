@@ -87,7 +87,7 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
                         },
                     ]}
                 />
-                <SubmitKnapp label="submitknapp.neste" />
+                <SubmitKnapp label="app.neste" />
             </ValidForm>
         </SideContainer>
     );
