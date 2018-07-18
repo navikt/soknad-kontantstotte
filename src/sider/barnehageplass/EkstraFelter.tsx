@@ -59,6 +59,7 @@ const EkstraFelter: React.StatelessComponent<JaEkstraFelterProps> = ({
                 onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
                     settFelt('kommune', event.target.value)
                 }
+                defaultValue={kommune}
             />
             {[BarnehageplassVerdier.JaSkalSlutte, BarnehageplassVerdier.Ja].includes(
                 harBarnehageplass
@@ -76,6 +77,7 @@ const EkstraFelter: React.StatelessComponent<JaEkstraFelterProps> = ({
                     onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
                         settFelt('antallTimer', event.target.value)
                     }
+                    defaultValue={antallTimer}
                 />
             )}
         </div>
