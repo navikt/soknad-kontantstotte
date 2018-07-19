@@ -78,7 +78,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                         intl={intl}
                     />
                 )}
-                <SubmitKnapp label="submitknapp.neste" />
+                <SubmitKnapp label="app.neste" />
             </ValidForm>
         </SideContainer>
     );

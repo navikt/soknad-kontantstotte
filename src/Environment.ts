@@ -9,6 +9,11 @@ const Environment = (): IEnvUrls => {
             apiUrl: '/soknad-kontantstotte-api/api',
             loginUrl: 'http://localhost:8080/api/local/cookie',
         };
+    } else if (window.location.hostname.indexOf('ci-test-server') > -1) {
+        return {
+            apiUrl: '/soknad-kontantstotte-api/api',
+            loginUrl: 'http://localhost:8080/api/local/cookie',
+        };
     } else if (window.location.hostname.indexOf('soknad-kontantstotte-t') > -1) {
         return {
             apiUrl: 'https://soknad-kontantstotte-api-t.nav.no/api',

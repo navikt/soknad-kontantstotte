@@ -57,7 +57,7 @@ const Arbeidsforhold: React.StatelessComponent<ArbeidsforholdSideProps> = ({
                     harForklaring={true}
                     forklaring={mottarKontantstotteFraAnnetEOSForklaring}
                 />
-                <SubmitKnapp label="submitknapp.neste" />
+                <SubmitKnapp label="app.neste" />
             </ValidForm>
         </SideContainer>
     );
