@@ -17,3 +17,5 @@ const SoknadIkon: React.StatelessComponent<ISoknadIkonProps> = ({ ikon }) => {
             return <SuksessIkon />;
     }
 };
+
+export default SoknadIkon;
