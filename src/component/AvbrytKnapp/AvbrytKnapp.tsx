@@ -10,7 +10,11 @@ interface IAvbrytKnappState {
 
 Modal.setAppElement('#app');
 
-type AvbrytKnappProps = InjectedIntlProps;
+/* tslint:disable */
+interface IAvbrytKnappProps {}
+/* tslint:enable */
+
+type AvbrytKnappProps = IAvbrytKnappProps & InjectedIntlProps;
 
 class AvbrytKnapp extends React.Component<AvbrytKnappProps, IAvbrytKnappState> {
     constructor(props: AvbrytKnappProps) {
