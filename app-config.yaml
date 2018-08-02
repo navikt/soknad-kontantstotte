@@ -15,6 +15,9 @@ prometheus:
   path: internal/metrics
 ingress:
   enabled: true
+resources:
+  limits:
+    cpu: 3
 fasitResources:
   used:
   - alias: appres.cms
