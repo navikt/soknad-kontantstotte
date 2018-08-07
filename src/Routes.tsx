@@ -3,6 +3,7 @@ import { Route, RouteProps, Switch } from 'react-router-dom';
 import ArbeidsforholdSide from './sider/arbeidsforhold/Arbeidsforhold';
 import BarnehageplassSide from './sider/barnehageplass/Barnehageplass';
 import FamilieforholdSide from './sider/familieforhold/Familieforhold';
+import IkkeTilgang from './sider/feilsider/IkkeTilgang';
 import InnsendingFeilet from './sider/feilsider/InnsendingFeilet';
 import OppfyllerIkkeVilkaar from './sider/feilsider/OppfyllerIkkeVilkaar';
 import SidenFinnesIkke from './sider/feilsider/SidenFinnesIkke';
@@ -100,6 +101,13 @@ export const Sider: ISide[] = [
         key: 'innsending-feilet',
         path: '/innsending-feilet',
         sideKomponent: InnsendingFeilet,
+        sideType: SideType.ANNEN_INFOSIDE,
+        stegIndeks: -1,
+    },
+    {
+        key: 'ikke-tilgang',
+        path: '/ikke-tilgang',
+        sideKomponent: IkkeTilgang,
         sideType: SideType.ANNEN_INFOSIDE,
         stegIndeks: -1,
     },
