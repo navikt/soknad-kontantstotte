@@ -1,4 +1,5 @@
 image: repo.adeo.no:5443/soknad/soknad-kontantstotte
+team: team-soknad
 replicas:
   min: 2
   max: 4
@@ -14,6 +15,9 @@ prometheus:
   path: internal/metrics
 ingress:
   enabled: true
+resources:
+  limits:
+    cpu: 3
 fasitResources:
   used:
   - alias: appres.cms
