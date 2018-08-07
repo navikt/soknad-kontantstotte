@@ -16,7 +16,7 @@ function* startAppSaga(): SagaIterator {
     yield call(pingBackend);
 
     try {
-        const res = yield call(fetchPersonInfo);
+        yield call(fetchPersonInfo);
         yield put(hentPersonInfoOk());
     } catch (error) {
         if (error.response.status === 403) {
