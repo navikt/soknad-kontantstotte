@@ -15,19 +15,19 @@ const oppsummeringsNokkel = (felt: string, verdi: string) => {
         case 'mottarYtelserFraUtlandet':
             if (verdi === Svar.JA) {
                 return 'oppsummering.arbeidsforhold.mottarYtelserFraUtlandet.ja';
-            } else if (verdi === Svar.NEI) {
+            } else {
                 return 'oppsummering.arbeidsforhold.mottarYtelserFraUtlandet.nei';
             }
         case 'arbeiderIUtlandetEllerKontinentalsokkel':
             if (verdi === Svar.JA) {
                 return 'oppsummering.arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.ja';
-            } else if (verdi === Svar.NEI) {
+            } else {
                 return 'oppsummering.arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.nei';
             }
         case 'mottarKontantstotteFraAnnetEOS':
             if (verdi === Svar.JA) {
                 return 'oppsummering.arbeidsforhold.mottarKontantstotteFraAnnetEOS.ja';
-            } else if (verdi === Svar.NEI) {
+            } else {
                 return 'oppsummering.arbeidsforhold.mottarKontantstotteFraAnnetEOS.nei';
             }
         default:
@@ -86,8 +86,8 @@ const ArbeidsforholdOppsummering: React.StatelessComponent<IArbeidsforholdOppsum
             <OppsummeringsListeElement
                 tekst={intl.formatMessage({
                     id: oppsummeringsNokkel(
-                        'mottarKontantstotteFraAnnetEOSForklaring',
-                        arbeidsforhold.mottarKontantstotteFraAnnetEOSForklaring
+                        'mottarKontantstotteFraAnnetEOS',
+                        arbeidsforhold.mottarKontantstotteFraAnnetEOS
                     ),
                 })}
             >
