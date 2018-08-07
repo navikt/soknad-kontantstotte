@@ -10,6 +10,31 @@ interface IArbeidsforholdOppsummeringProps {
     intl: InjectedIntl;
 }
 
+const oppsummeringsNokkel = (felt: string, verdi: string) => {
+    switch (felt) {
+        case 'mottarYtelserFraUtlandet':
+            if (verdi === Svar.JA) {
+                return 'oppsummering.arbeidsforhold.mottarYtelserFraUtlandet.ja';
+            } else if (verdi === Svar.NEI) {
+                return 'oppsummering.arbeidsforhold.mottarYtelserFraUtlandet.nei';
+            }
+        case 'arbeiderIUtlandetEllerKontinentalsokkel':
+            if (verdi === Svar.JA) {
+                return 'oppsummering.arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.ja';
+            } else if (verdi === Svar.NEI) {
+                return 'oppsummering.arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.nei';
+            }
+        case 'mottarKontantstotteFraAnnetEOS':
+            if (verdi === Svar.JA) {
+                return 'oppsummering.arbeidsforhold.mottarKontantstotteFraAnnetEOS.ja';
+            } else if (verdi === Svar.NEI) {
+                return 'oppsummering.arbeidsforhold.mottarKontantstotteFraAnnetEOS.nei';
+            }
+        default:
+            return '';
+    }
+};
+
 const ArbeidsforholdOppsummering: React.StatelessComponent<IArbeidsforholdOppsummeringProps> = ({
     arbeidsforhold,
     intl,
@@ -18,9 +43,10 @@ const ArbeidsforholdOppsummering: React.StatelessComponent<IArbeidsforholdOppsum
         <>
             <OppsummeringsListeElement
                 tekst={intl.formatMessage({
-                    id:
-                        'oppsummering.arbeidsforhold.mottarYtelserFraUtlandet.' +
-                        arbeidsforhold.mottarYtelserFraUtlandet.toLowerCase(),
+                    id: oppsummeringsNokkel(
+                        'mottarYtelserFraUtlandet',
+                        arbeidsforhold.mottarYtelserFraUtlandet
+                    ),
                 })}
             >
                 {arbeidsforhold.mottarYtelserFraUtlandet === Svar.JA && (
@@ -37,9 +63,10 @@ const ArbeidsforholdOppsummering: React.StatelessComponent<IArbeidsforholdOppsum
 
             <OppsummeringsListeElement
                 tekst={intl.formatMessage({
-                    id:
-                        'oppsummering.arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.' +
-                        arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.toLowerCase(),
+                    id: oppsummeringsNokkel(
+                        'arbeiderIUtlandetEllerKontinentalsokkel',
+                        arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel
+                    ),
                 })}
             >
                 {arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel === Svar.JA && (
@@ -58,9 +85,10 @@ const ArbeidsforholdOppsummering: React.StatelessComponent<IArbeidsforholdOppsum
 
             <OppsummeringsListeElement
                 tekst={intl.formatMessage({
-                    id:
-                        'oppsummering.arbeidsforhold.mottarKontantstotteFraAnnetEOS.' +
-                        arbeidsforhold.mottarKontantstotteFraAnnetEOS.toLowerCase(),
+                    id: oppsummeringsNokkel(
+                        'mottarKontantstotteFraAnnetEOSForklaring',
+                        arbeidsforhold.mottarKontantstotteFraAnnetEOSForklaring
+                    ),
                 })}
             >
                 {arbeidsforhold.mottarKontantstotteFraAnnetEOS === Svar.JA && (
