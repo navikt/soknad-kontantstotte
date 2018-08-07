@@ -18,7 +18,9 @@ function pingBackend() {
 }
 
 function fetchPersonInfo() {
-    return axios.get(`${Environment().apiUrl}/person`);
+    return axios.get(`${Environment().apiUrl}/person`, {
+        withCredentials: true,
+    });
 }
 
 const redirectTilLogin = () => {
