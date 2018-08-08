@@ -21,6 +21,10 @@ app.get('/soknad-kontantstotte-api/api/status/ping', function(req, res) {
     setTimeout(() => res.status(200).send(), delayMs);
 });
 
+app.get('/soknad-kontantstotte-api/api/person', function(req, res) {
+    setTimeout(() => res.status(200).send(), delayMs);
+});
+
 app.post('/soknad-kontantstotte-api/api/sendinn', function(req, res) {
     setTimeout(() => res.status(204).send(), delayMs);
 });
