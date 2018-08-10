@@ -1,7 +1,7 @@
 import { RouterState } from 'connected-react-router';
 import { combineReducers } from 'redux';
 import { appReducer, IAppState } from './app/reducer';
-import { barnReducer, IBarnState } from './barn/reducer';
+import { personReducer, IPersonState } from './person/reducer';
 import { IInnsendingState, innsendingReducer } from './innsending/reducer';
 import { soknadReducer } from './soknad/reducer';
 import { ISoknadState } from './soknad/types';
@@ -9,7 +9,7 @@ import { ITeksterState, teksterReducer } from './tekster/reducer';
 
 export interface IRootState {
     app: IAppState;
-    barn: IBarnState;
+    person: IPersonState;
     innsending: IInnsendingState;
     soknad: ISoknadState;
     tekster: ITeksterState;
@@ -18,7 +18,7 @@ export interface IRootState {
 
 const rootReducer = combineReducers({
     app: appReducer,
-    barn: barnReducer,
+    barn: personReducer,
     innsending: innsendingReducer,
     soknad: soknadReducer,
     tekster: teksterReducer,

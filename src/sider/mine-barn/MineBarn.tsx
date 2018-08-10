@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { selectBarn } from '../../barn/selectors';
-import { IBarn } from '../../barn/types';
+import { selectBarn } from '../../person/selectors';
+import { IBarn } from '../../person/types';
 import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';

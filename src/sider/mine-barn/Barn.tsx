@@ -1,6 +1,6 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
-import { IBarn } from '../../barn/types';
+import { IBarn } from '../../person/types';
 
 interface IBarnProps {
     barn: IBarn;

@@ -1,7 +1,7 @@
 import { IRootState } from '../rootReducer';
 
 function selectBarn(state: IRootState) {
-    return state.barn.barn;
+    return state.person.person.barn;
 }
 
 export { selectBarn };

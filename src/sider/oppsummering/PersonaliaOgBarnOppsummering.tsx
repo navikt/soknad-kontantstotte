@@ -2,7 +2,7 @@ import Element from 'nav-frontend-typografi/lib/element';
 import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { IBarn } from '../../barn/types';
+import { IBarn } from '../../person/types';
 
 interface IMapStateToProps {
     barnet: IBarn;
