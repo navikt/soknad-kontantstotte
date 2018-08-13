@@ -104,13 +104,6 @@ export const Sider: ISide[] = [
         sideType: SideType.ANNEN_INFOSIDE,
         stegIndeks: -1,
     },
-    {
-        key: 'ikke-tilgang',
-        path: '/ikke-tilgang',
-        sideKomponent: IkkeTilgang,
-        sideType: SideType.ANNEN_INFOSIDE,
-        stegIndeks: -1,
-    },
 ];
 
 const sideMedPath = (path: string) => Sider.filter((side: ISide) => side.path === path);

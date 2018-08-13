@@ -6,6 +6,8 @@ import { selectAppStatus } from './app/selectors';
 import { AppStatus } from './app/types';
 import { IRootState } from './rootReducer';
 import { Routes } from './Routes';
+import GenerellFeilside from './sider/feilsider/GenerellFeilside';
+import IkkeTilgang from './sider/feilsider/IkkeTilgang';
 
 interface IMapStateToProps {
     status: AppStatus;
@@ -21,11 +23,9 @@ const App: React.StatelessComponent<Props> = ({ status }) => {
         case AppStatus.KLAR:
             return <Routes />;
         case AppStatus.FEILSITUASJON:
-            return (
-                <div>
-                    <p>En feil har oppstått</p>
-                </div>
-            );
+            return <GenerellFeilside />;
+        case AppStatus.IKKE_TILGANG:
+            return <IkkeTilgang />;
     }
 };
 

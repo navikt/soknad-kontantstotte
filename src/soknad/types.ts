@@ -1,4 +1,4 @@
-import { IBarn } from '../barn/types';
+import { IBarn } from '../person/types';
 
 enum Svar {
     JA = 'JA',
