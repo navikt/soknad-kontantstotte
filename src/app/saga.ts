@@ -1,29 +1,13 @@
-import { push } from 'connected-react-router';
 import { SagaIterator } from 'redux-saga';
 import { all, call, cancel, fork, put, take } from 'redux-saga/effects';
 import { personHent, PersonTypeKeys } from '../person/actions';
 import { teksterHent, TeksterTypeKeys } from '../tekster/actions';
-import {
-    appEndreStatus,
-    AppTypeKeys,
-    hentPersonInfoIkkeTilgang,
-    hentPersonInfoOk,
-} from './actions';
-import { fetchPersonInfo, pingBackend } from './api';
+import { appEndreStatus, AppTypeKeys } from './actions';
+import { pingBackend } from './api';
 import { AppStatus } from './types';
 
 function* startAppSaga(): SagaIterator {
     yield call(pingBackend);
-
-    try {
-        yield call(fetchPersonInfo);
-        yield put(hentPersonInfoOk());
-    } catch (error) {
-        if (error.response.status === 403) {
-            yield put(hentPersonInfoIkkeTilgang());
-            yield put(push('/ikke-tilgang'));
-        }
-    }
 
     yield put(teksterHent());
     yield put(personHent());

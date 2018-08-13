@@ -3,6 +3,7 @@ enum AppStatus {
     STARTER = 'STARTER',
     KLAR = 'KLAR',
     FEILSITUASJON = 'FEILSITUASJON',
+    IKKE_TILGANG = 'IKKE_TILGANG',
 }
 
 export { AppStatus };

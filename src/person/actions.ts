@@ -41,4 +41,4 @@ function personHentFeilet(): IPersonHentFeilet {
     };
 }
 
-export { PersonTypeKeys, PersonActionTypes, personHent, personHentOk, personHentFeilet };
+export { PersonActionTypes, personHent, personHentFeilet, personHentOk, PersonTypeKeys };
