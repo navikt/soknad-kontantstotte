@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { IRootState } from '../../rootReducer';
 import { hentIndeksForPath, ISide, Sider, SideType } from '../../Routes';
 import AvbrytKnapp from '../AvbrytKnapp/AvbrytKnapp';
+import TilbakeKnapp from '../TilbakeKnapp/TilbakeKnapp';
 
 interface IOwnProps {
     className?: string;
@@ -49,6 +50,7 @@ class SideContainer extends React.Component<Props> {
                     kompakt={false}
                     aktivtSteg={hentIndeksForPath(currentPath)}
                 />
+                <TilbakeKnapp />
                 <div>{children}</div>
 
                 <AvbrytKnapp />
