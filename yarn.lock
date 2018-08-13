@@ -4670,6 +4670,14 @@ nav-datovelger@1.1.8:
     react-day-picker "^7.1.4"
     react-dom "^16.2.0"
 
+nav-frontend-chevron-style@0.3.4:
+  version "0.3.4"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-chevron-style/-/nav-frontend-chevron-style-0.3.4.tgz#e6b0d5e9ddd87af988e4e1a44fc7fcb1fbb70994"
+
+nav-frontend-chevron@1.0.5:
+  version "1.0.5"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-chevron/-/nav-frontend-chevron-1.0.5.tgz#7f590b3683755c3f09669df5ffbd1f4e105195ff"
+
 nav-frontend-core@4.0.5, nav-frontend-core@^4.0.2, nav-frontend-core@^4.0.5:
   version "4.0.5"
   resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-core/-/nav-frontend-core-4.0.5.tgz#309c9de6a5146e8e93b3f52d4fc42cc309acdca1"
