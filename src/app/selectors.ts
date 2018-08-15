@@ -4,4 +4,8 @@ function selectAppStatus(state: IRootState) {
     return state.app.status;
 }
 
-export { selectAppStatus };
+function selectAppSteg(state: IRootState) {
+    return state.app.steg;
+}
+
+export { selectAppStatus, selectAppSteg };

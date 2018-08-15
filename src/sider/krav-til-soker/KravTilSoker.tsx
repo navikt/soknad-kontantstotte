@@ -1,8 +1,8 @@
-import { push } from 'connected-react-router';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { appNesteSteg } from '../../app/actions';
 import ValidCheckboxPanelGruppe from '../../common/lib/validation/ValidCheckboxPanelGruppe';
 import ValidForm from '../../common/lib/validation/ValidForm';
 import SideContainer from '../../component/SideContainer/SideContainer';
@@ -15,7 +15,7 @@ import { harHuketAvPaCheckbox } from '../../validators';
 
 interface IMapDispatchToProps {
     settCheckboxVerdi: (felt: Felt, verdi: string) => void;
-    navigerTilPath: (path: string) => void;
+    nesteSteg: () => void;
 }
 
 const handterCheckboxEndring = (
@@ -35,16 +35,13 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
     intl,
     skalBoMedBarnetINorgeNesteTolvMaaneder,
     settCheckboxVerdi,
-    navigerTilPath,
+    nesteSteg,
 }) => {
     const sporsmaal: string = intl.formatMessage({ id: 'startside.krav.sporsmal' });
 
     return (
         <SideContainer>
-            <ValidForm
-                summaryTitle={'Søknad om kontantstøtte'}
-                onSubmit={() => navigerTilPath('/mine-barn')}
-            >
+            <ValidForm summaryTitle={'Søknad om kontantstøtte'} onSubmit={nesteSteg}>
                 <ValidCheckboxPanelGruppe
                     legend={sporsmaal}
                     checkboxes={[
@@ -99,9 +96,7 @@ const mapStateToProps = (state: IRootState): IKravTilSoker => {
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        navigerTilPath: (path: string) => {
-            dispatch(push(path));
-        },
+        nesteSteg: () => dispatch(appNesteSteg()),
         settCheckboxVerdi: (felt, verdi) => dispatch(soknadSettVerdi('kravTilSoker', felt, verdi)),
     };
 };

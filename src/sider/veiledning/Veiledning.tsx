@@ -1,14 +1,29 @@
+import { Hovedknapp } from 'nav-frontend-knapper';
 import * as React from 'react';
-import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
+import { connect, Dispatch } from 'react-redux';
+import { appNesteSteg } from '../../app/actions';
 
-const Veiledning = () => {
+interface IMapDispatchToProps {
+    nesteSteg: () => void;
+}
+
+const Veiledning: React.StatelessComponent<IMapDispatchToProps> = ({ nesteSteg }) => {
     return (
         <div>
             <h1>Veiledningsside</h1>
             <p>Info om søknad om kontantstøtte </p>
-            <NavigasjonKnapp to="/start">Start søknad</NavigasjonKnapp>
+            <Hovedknapp onClick={nesteSteg}>Start søknad</Hovedknapp>
         </div>
     );
 };
 
-export default Veiledning;
+const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
+    return {
+        nesteSteg: () => dispatch(appNesteSteg()),
+    };
+};
+
+export default connect(
+    () => ({}),
+    mapDispatchToProps
+)(Veiledning);

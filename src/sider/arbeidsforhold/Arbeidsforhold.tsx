@@ -1,6 +1,7 @@
 import { push } from 'connected-react-router';
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
+import { appNesteSteg } from '../../app/actions';
 import ValidForm from '../../common/lib/validation/ValidForm';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import SideContainer from '../../component/SideContainer/SideContainer';
@@ -10,7 +11,7 @@ import { selectArbeidsforhold } from '../../soknad/selectors';
 import { Bolk, IArbeidsforhold } from '../../soknad/types';
 
 interface IMapDispatchToProps {
-    navigerTilPath: (path: string) => void;
+    nesteSteg: () => void;
 }
 
 type ArbeidsforholdSideProps = IArbeidsforhold & IMapDispatchToProps;
@@ -22,15 +23,12 @@ const Arbeidsforhold: React.StatelessComponent<ArbeidsforholdSideProps> = ({
     arbeiderIUtlandetEllerKontinentalsokkelForklaring,
     mottarKontantstotteFraAnnetEOS,
     mottarKontantstotteFraAnnetEOSForklaring,
-    navigerTilPath,
+    nesteSteg,
 }) => {
     const bolk: Bolk = 'arbeidsforhold';
     return (
         <SideContainer>
-            <ValidForm
-                summaryTitle={'Arbeidsforhold'}
-                onSubmit={() => navigerTilPath('/oppsummering')}
-            >
+            <ValidForm summaryTitle={'Arbeidsforhold'} onSubmit={nesteSteg}>
                 <JaNeiSporsmal
                     bolk={bolk}
                     felt="mottarYtelserFraUtlandet"
@@ -69,7 +67,7 @@ const mapStateToProps = (state: IRootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        navigerTilPath: (path: string) => dispatch(push(path)),
+        nesteSteg: () => dispatch(appNesteSteg()),
     };
 };
 
