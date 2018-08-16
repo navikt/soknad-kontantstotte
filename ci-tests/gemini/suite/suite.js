@@ -37,6 +37,7 @@ gemini.suite('soknad-kontantstotte', suite => {
             });
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
+            actions.click('body');
         })
         .capture('oppsummering', function(actions) {
             actions.executeJS(function(window) {
