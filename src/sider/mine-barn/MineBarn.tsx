@@ -1,15 +1,15 @@
-import { Hovedknapp } from 'nav-frontend-knapper';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { appNesteSteg } from '../../app/actions';
+import { ValidForm, ValidRadioPanelGruppe } from '../../common/lib/validation';
 import SideContainer from '../../component/SideContainer/SideContainer';
+import SubmitKnapp from '../../component/SubmitKnapp/SubmitKnapp';
 import { selectBarn } from '../../person/selectors';
 import { IBarn } from '../../person/types';
 import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
 import { selectValgtBarn } from '../../soknad/selectors';
-import Barn from './Barn';
 
 interface IMapStateToProps {
     barn: IBarn[];
@@ -31,15 +31,29 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
 }) => {
     return (
         <SideContainer className={'mine-barn'}>
-            <h1>Mine barn</h1>
-            <ul className={'mine-barn__liste'}>
-                {barn.map(b => (
-                    <li key={b.navn}>
-                        <Barn valgt={b.navn === valgtBarn.navn} barn={b} onClick={velgBarn} />
-                    </li>
-                ))}
-            </ul>
-            <Hovedknapp onClick={nesteSteg}>Neste</Hovedknapp>
+            <ValidForm summaryTitle={'mine-barn'} onSubmit={nesteSteg}>
+                <ValidRadioPanelGruppe
+                    radios={barn.map(b => {
+                        return { label: b.navn, value: b.fodselsdato };
+                    })}
+                    name={'barn'}
+                    legend={'Velg barn du søker kontantstøtte for:'}
+                    checked={valgtBarn.fodselsdato}
+                    validators={[
+                        {
+                            failText: 'Du må velge barn',
+                            test: () => !!valgtBarn.fodselsdato && !!valgtBarn.navn,
+                        },
+                    ]}
+                    onChange={(evt: {}, value: string) => {
+                        const bb = barn.find(b => b.fodselsdato === value);
+                        if (bb) {
+                            velgBarn(bb);
+                        }
+                    }}
+                />
+                <SubmitKnapp label={'app.neste'} />
+            </ValidForm>
         </SideContainer>
     );
 };
