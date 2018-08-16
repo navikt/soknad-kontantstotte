@@ -1,7 +1,8 @@
+import { Hovedknapp } from 'nav-frontend-knapper';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import NavigasjonKnapp from '../../component/NavigasjonKnapp/NavigasjonKnapp';
+import { appNesteSteg } from '../../app/actions';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import { selectBarn } from '../../person/selectors';
 import { IBarn } from '../../person/types';
@@ -17,11 +18,17 @@ interface IMapStateToProps {
 
 interface IMapDispatchToProps {
     velgBarn: (barn: IBarn) => void;
+    nesteSteg: () => void;
 }
 
 type MineBarnSideProps = IMapStateToProps & IMapDispatchToProps;
 
-const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({ barn, valgtBarn, velgBarn }) => {
+const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
+    barn,
+    valgtBarn,
+    velgBarn,
+    nesteSteg,
+}) => {
     return (
         <SideContainer className={'mine-barn'}>
             <h1>Mine barn</h1>
@@ -32,7 +39,7 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({ barn, valgtBarn
                     </li>
                 ))}
             </ul>
-            <NavigasjonKnapp to="/familieforhold">Neste</NavigasjonKnapp>
+            <Hovedknapp onClick={nesteSteg}>Neste</Hovedknapp>
         </SideContainer>
     );
 };
@@ -46,6 +53,7 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
+        nesteSteg: () => dispatch(appNesteSteg()),
         velgBarn: barn => dispatch(soknadSettVerdi('mineBarn', 'valgtBarn', barn)),
     };
 };

@@ -1,6 +1,7 @@
 import { push } from 'connected-react-router';
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
+import { appNesteSteg } from '../../app/actions';
 import { ValidForm } from '../../common/lib/validation';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import SideContainer from '../../component/SideContainer/SideContainer';
@@ -14,7 +15,7 @@ import AnnenForelderInfo from './AnnenForelderInfo';
 interface IMapDispatchToProps {
     settAnnenForelderNavn: (navn: string) => void;
     settAnnenForelderFodselsnummer: (personnummer: string) => void;
-    navigerTilPath: (path: string) => void;
+    nesteSteg: () => void;
 }
 
 type FamilieforholdSideProps = IFamilieforhold & IMapDispatchToProps;
@@ -22,15 +23,12 @@ type FamilieforholdSideProps = IFamilieforhold & IMapDispatchToProps;
 const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
     borForeldreneSammenMedBarnet,
     erAvklartDeltBosted,
-    navigerTilPath,
+    nesteSteg,
     ...annenForelderProps
 }) => {
     return (
         <SideContainer>
-            <ValidForm
-                summaryTitle={'Familieforhold'}
-                onSubmit={() => navigerTilPath('/barnehageplass')}
-            >
+            <ValidForm summaryTitle={'Familieforhold'} onSubmit={nesteSteg}>
                 <JaNeiSporsmal
                     bolk="familieforhold"
                     felt="borForeldreneSammenMedBarnet"
@@ -63,7 +61,7 @@ const mapStateToProps = (state: IRootState): IFamilieforhold => {
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        navigerTilPath: (path: string) => dispatch(push(path)),
+        nesteSteg: () => dispatch(appNesteSteg()),
         settAnnenForelderFodselsnummer: personnr => {
             dispatch(soknadSettVerdi('familieforhold', 'annenForelderFodselsnummer', personnr));
         },

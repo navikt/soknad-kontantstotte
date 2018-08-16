@@ -2,6 +2,7 @@ import { push } from 'connected-react-router';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
+import { appNesteSteg } from '../../app/actions';
 import { ValidForm, ValidRadioPanelGruppe } from '../../common/lib/validation';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import SubmitKnapp from '../../component/SubmitKnapp/SubmitKnapp';
@@ -12,7 +13,7 @@ import { BarnehageplassVerdier, Felt, IBarnehageplass } from '../../soknad/types
 import EkstraFelter from './EkstraFelter';
 
 interface IMapDispatchToProps {
-    navigerTilPath: (path: string) => void;
+    nesteSteg: () => void;
     settSvar: (verdi: BarnehageplassVerdier) => void;
     settEkstraFelt: (nokkel: Felt, verdi: string) => void;
 }
@@ -24,7 +25,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     settSvar,
     intl,
     settEkstraFelt,
-    navigerTilPath,
+    nesteSteg,
     dato,
     kommune,
     antallTimer,
@@ -49,10 +50,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
 
     return (
         <SideContainer>
-            <ValidForm
-                summaryTitle={'Barnehageplass'}
-                onSubmit={() => navigerTilPath('/arbeidsforhold')}
-            >
+            <ValidForm summaryTitle={'Barnehageplass'} onSubmit={nesteSteg}>
                 <ValidRadioPanelGruppe
                     name="barnehageplass"
                     legend="Har barnet barnehageplass?"
@@ -86,9 +84,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        navigerTilPath: (path: string) => {
-            dispatch(push(path));
-        },
+        nesteSteg: () => dispatch(appNesteSteg()),
         settEkstraFelt: (nokkel: Felt, verdi: string) => {
             dispatch(soknadSettVerdi('barnehageplass', nokkel, verdi));
         },

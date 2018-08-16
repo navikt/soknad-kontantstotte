@@ -4,8 +4,9 @@ import { Sidetittel } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import { selectAppSteg } from '../../app/selectors';
 import { IRootState } from '../../rootReducer';
-import { hentIndeksForPath, ISide, Sider, SideType } from '../../Routes';
+import { ISteg, stegConfig } from '../../stegConfig';
 import AvbrytKnapp from '../AvbrytKnapp/AvbrytKnapp';
 import TilbakeKnapp from '../TilbakeKnapp/TilbakeKnapp';
 
@@ -15,28 +16,24 @@ interface IOwnProps {
 }
 
 interface IMapStateToProps {
-    location: {
-        pathname: string;
-    };
+    aktivtSteg: number;
 }
 
 type Props = IOwnProps & IMapStateToProps;
 
 class SideContainer extends React.Component<Props> {
     public render() {
-        const { children, className = '', location } = this.props;
+        const { children, className = '', aktivtSteg } = this.props;
 
-        const currentPath = location ? location.pathname : '';
-
-        const indikatorsteg: StegindikatorStegProps[] = Sider.filter(
-            (side: ISide) => side.sideType === SideType.SKJEMASIDE
-        ).map((side: ISide) => {
-            return {
-                aktiv: hentIndeksForPath(currentPath) === side.stegIndeks,
-                index: side.stegIndeks,
-                label: side.key,
-            };
-        });
+        const indikatorsteg: StegindikatorStegProps[] = stegConfig
+            .filter((steg: ISteg) => steg.stegIndeks !== 0)
+            .map((steg: ISteg) => {
+                return {
+                    aktiv: aktivtSteg === steg.stegIndeks,
+                    index: steg.stegIndeks,
+                    label: steg.key,
+                };
+            });
 
         return (
             <div className={className}>
@@ -48,7 +45,7 @@ class SideContainer extends React.Component<Props> {
                     autoResponsiv={true}
                     visLabel={false}
                     kompakt={false}
-                    aktivtSteg={hentIndeksForPath(currentPath)}
+                    aktivtSteg={aktivtSteg - 1} // -1 pga Stegindikator er 0-indeksert
                 />
                 <TilbakeKnapp />
                 <div>{children}</div>
@@ -61,7 +58,7 @@ class SideContainer extends React.Component<Props> {
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
-        location: state.router.location,
+        aktivtSteg: selectAppSteg(state),
     };
 };
 

@@ -1,4 +1,3 @@
-import { push } from 'connected-react-router';
 import { SagaIterator } from 'redux-saga';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { appEndreStatus } from '../app/actions';
