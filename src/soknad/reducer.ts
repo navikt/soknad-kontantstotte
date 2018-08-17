@@ -29,10 +29,8 @@ const initialState: ISoknadState = {
         skalBoMedBarnetINorgeNesteTolvMaaneder: Svar.UBESVART,
     },
     mineBarn: {
-        valgtBarn: {
-            fodselsdato: '',
-            navn: '',
-        },
+        fodselsdato: '',
+        navn: '',
     },
 };
 

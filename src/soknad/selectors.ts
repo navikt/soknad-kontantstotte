@@ -23,8 +23,8 @@ function selectKravTilSoker(state: IRootState): IKravTilSoker {
     return state.soknad.kravTilSoker;
 }
 
-function selectValgtBarn(state: IRootState) {
-    return state.soknad.mineBarn.valgtBarn;
+function selectMineBarn(state: IRootState) {
+    return state.soknad.mineBarn;
 }
 
 function selectSoknad(state: IRootState): ISoknadState {
@@ -37,5 +37,5 @@ export {
     selectFamilieforhold,
     selectKravTilSoker,
     selectSoknad,
-    selectValgtBarn,
+    selectMineBarn,
 };

@@ -35,7 +35,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
             <ul>
                 <PersonaliaOgBarnOppsummering
                     person={{ navn: 'Test Testersen', fodselsnummer: '***REMOVED***' }}
-                    barnet={soknad.mineBarn.valgtBarn}
+                    barnet={soknad.mineBarn}
                 />
                 <KravTilSokerOppsummering intl={intl} kravTilSoker={soknad.kravTilSoker} />
                 <FamilieforholdOppsummering intl={intl} familieforhold={soknad.familieforhold} />
