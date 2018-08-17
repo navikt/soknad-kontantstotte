@@ -1,8 +1,10 @@
+import { Input } from 'nav-frontend-skjema';
+import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { appNesteSteg } from '../../app/actions';
-import { ValidForm, ValidRadioPanelGruppe } from '../../common/lib/validation';
+import { ValidForm, ValidGroup } from '../../common/lib/validation';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import SubmitKnapp from '../../component/SubmitKnapp/SubmitKnapp';
 import { selectBarn } from '../../person/selectors';
@@ -19,39 +21,58 @@ interface IMapStateToProps {
 interface IMapDispatchToProps {
     velgBarn: (barn: IBarn) => void;
     nesteSteg: () => void;
+    settBarnNavn: (navn: string) => void;
+    settBarnFodselsdato: (fodselsdato: string) => void;
 }
 
 type MineBarnSideProps = IMapStateToProps & IMapDispatchToProps;
 
 const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
     barn,
+    nesteSteg,
+    settBarnFodselsdato,
+    settBarnNavn,
     valgtBarn,
     velgBarn,
-    nesteSteg,
 }) => {
     return (
         <SideContainer className={'mine-barn'}>
             <ValidForm summaryTitle={'mine-barn'} onSubmit={nesteSteg}>
-                <ValidRadioPanelGruppe
-                    radios={barn.map(b => {
-                        return { label: b.navn, value: b.fodselsdato };
-                    })}
-                    name={'barn'}
-                    legend={'Velg barn du søker kontantstøtte for:'}
-                    checked={valgtBarn.fodselsdato}
+                <ValidGroup
                     validators={[
                         {
-                            failText: 'Du må velge barn',
+                            failText: 'Du må enten velge barn eller fylle ut informasjon om barnet',
                             test: () => !!valgtBarn.fodselsdato && !!valgtBarn.navn,
                         },
                     ]}
-                    onChange={(evt: {}, value: string) => {
-                        const bb = barn.find(b => b.fodselsdato === value);
-                        if (bb) {
-                            velgBarn(bb);
+                >
+                    <RadioPanelGruppe
+                        radios={barn.map(b => ({ label: b.navn, value: b.fodselsdato }))}
+                        name={'barn'}
+                        legend={'Velg barn du søker kontantstøtte for:'}
+                        checked={valgtBarn.fodselsdato}
+                        onChange={(evt: {}, value: string) => {
+                            const nyttValgtBarn = barn.find(b => b.fodselsdato === value);
+                            if (nyttValgtBarn) {
+                                velgBarn(nyttValgtBarn);
+                            }
+                        }}
+                    />
+                    <Input
+                        label={'Navn'}
+                        onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
+                            settBarnNavn(event.target.value)
                         }
-                    }}
-                />
+                        defaultValue={valgtBarn.navn}
+                    />
+                    <Input
+                        label={'Fødselsdato'}
+                        onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
+                            settBarnFodselsdato(event.target.value)
+                        }
+                        defaultValue={valgtBarn.fodselsdato}
+                    />
+                </ValidGroup>
                 <SubmitKnapp label={'app.neste'} />
             </ValidForm>
         </SideContainer>
@@ -68,7 +89,10 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         nesteSteg: () => dispatch(appNesteSteg()),
-        velgBarn: barn => {
+        settBarnFodselsdato: (fodselsdato: string) =>
+            dispatch(soknadSettVerdi('mineBarn', 'fodselsdato', fodselsdato)),
+        settBarnNavn: (navn: string) => dispatch(soknadSettVerdi('mineBarn', 'navn', navn)),
+        velgBarn: (barn: IBarn) => {
             dispatch(soknadSettVerdi('mineBarn', 'fodselsdato', barn.fodselsdato));
             dispatch(soknadSettVerdi('mineBarn', 'navn', barn.navn));
         },
