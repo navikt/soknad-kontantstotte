@@ -1,5 +1,3 @@
-import { IBarn } from '../person/types';
-
 enum Svar {
     JA = 'JA',
     NEI = 'NEI',
@@ -23,7 +21,8 @@ interface ISoknadState {
 }
 
 interface IMineBarn {
-    readonly valgtBarn: IBarn;
+    readonly navn: string;
+    readonly fodselsdato: string;
 }
 
 interface IFamilieforhold {

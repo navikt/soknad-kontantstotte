@@ -9,7 +9,7 @@ import { selectBarn } from '../../person/selectors';
 import { IBarn } from '../../person/types';
 import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
-import { selectValgtBarn } from '../../soknad/selectors';
+import { selectMineBarn } from '../../soknad/selectors';
 
 interface IMapStateToProps {
     barn: IBarn[];
@@ -61,14 +61,17 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         barn: selectBarn(state),
-        valgtBarn: selectValgtBarn(state),
+        valgtBarn: selectMineBarn(state),
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         nesteSteg: () => dispatch(appNesteSteg()),
-        velgBarn: barn => dispatch(soknadSettVerdi('mineBarn', 'valgtBarn', barn)),
+        velgBarn: barn => {
+            dispatch(soknadSettVerdi('mineBarn', 'fodselsdato', barn.fodselsdato));
+            dispatch(soknadSettVerdi('mineBarn', 'navn', barn.navn));
+        },
     };
 };
 
