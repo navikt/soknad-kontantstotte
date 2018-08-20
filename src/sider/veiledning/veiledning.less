@@ -1,0 +1,41 @@
+.veiledning {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  &__sidetittel {
+    width: 80%;
+  }
+
+  &__info {
+    margin-top: 20px;
+    width: 80%;
+  }
+
+  &__lenke-container {
+    margin-top: 20px;
+    width: 80%;
+  }
+
+  &__knapp {
+    margin-top: 20px;
+    display: block;
+  }
+
+}
+
+@media (min-width: 600px) {
+  .veiledning {
+    &__sidetittel {
+      width: initial;
+    }
+
+    &__info {
+      width: 60%;
+    }
+
+    &__lenke-container {
+      width: 60%;
+    }
+  }
+}

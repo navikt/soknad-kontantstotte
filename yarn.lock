@@ -4709,6 +4709,10 @@ nav-frontend-lenker-style@0.2.6:
   version "0.2.6"
   resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-lenker-style/-/nav-frontend-lenker-style-0.2.6.tgz#c937610f845a8b5a2b3109674499fbce9f5ee122"
 
+nav-frontend-lenker@1.0.18:
+  version "1.0.18"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-lenker/-/nav-frontend-lenker-1.0.18.tgz#ff9cb78b160f7f6ce8fb46dfce370c908640423c"
+
 nav-frontend-lukknapp-style@0.2.7:
   version "0.2.7"
   resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-lukknapp-style/-/nav-frontend-lukknapp-style-0.2.7.tgz#a3f54e68641ea77087e2fc6b8703b992e8acdf28"

@@ -1,18 +1,35 @@
 import { Hovedknapp } from 'nav-frontend-knapper';
+import Lenke from 'nav-frontend-lenker';
+import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { appNesteSteg } from '../../app/actions';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 
 interface IMapDispatchToProps {
     nesteSteg: () => void;
 }
 
-const Veiledning: React.StatelessComponent<IMapDispatchToProps> = ({ nesteSteg }) => {
+type VeiledningProps = IMapDispatchToProps & InjectedIntlProps;
+
+const Veiledning: React.StatelessComponent<VeiledningProps> = ({ nesteSteg, intl }) => {
     return (
-        <div>
-            <h1>Veiledningsside</h1>
-            <p>Info om søknad om kontantstøtte </p>
-            <Hovedknapp onClick={nesteSteg}>Start søknad</Hovedknapp>
+        <div className={'veiledning'}>
+            <Sidetittel className={'veiledning__sidetittel'}>
+                <FormattedMessage id={'kontantstotte.tittel'} />
+            </Sidetittel>
+            <Normaltekst className={'veiledning__info'}>
+                <FormattedMessage id={'veiledningsside.info'} />
+            </Normaltekst>
+            <div className={'veiledning__lenke-container'}>
+                <Lenke href={intl.formatMessage({ id: 'veiledningsside.lenke.url' })}>
+                    <FormattedMessage id={'veiledningsside.lenke.tekst'} />
+                </Lenke>
+            </div>
+            <Hovedknapp className={'veiledning__knapp'} onClick={nesteSteg}>
+                <FormattedMessage id={'veiledningsside.knapp'} />
+            </Hovedknapp>
         </div>
     );
 };
@@ -26,4 +43,4 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
 export default connect(
     () => ({}),
     mapDispatchToProps
-)(Veiledning);
+)(injectIntl(Veiledning));
