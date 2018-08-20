@@ -2,10 +2,10 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import Lenke from 'nav-frontend-lenker';
 import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { appNesteSteg } from '../../app/actions';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
+import Veilederikon from '../../component/Veilederikon/Veilederikon';
 
 interface IMapDispatchToProps {
     nesteSteg: () => void;
@@ -16,6 +16,7 @@ type VeiledningProps = IMapDispatchToProps & InjectedIntlProps;
 const Veiledning: React.StatelessComponent<VeiledningProps> = ({ nesteSteg, intl }) => {
     return (
         <div className={'veiledning'}>
+            <Veilederikon />
             <Sidetittel className={'veiledning__sidetittel'}>
                 <FormattedMessage id={'kontantstotte.tittel'} />
             </Sidetittel>
