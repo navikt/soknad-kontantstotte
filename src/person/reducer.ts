@@ -9,6 +9,7 @@ interface IPersonState {
 const initialState: IPersonState = {
     henter: false,
     person: {
+        navn: '',
         barn: [],
     },
 };

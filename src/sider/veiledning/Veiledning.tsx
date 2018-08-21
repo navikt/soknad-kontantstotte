@@ -7,14 +7,20 @@ import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { appNesteSteg } from '../../app/actions';
 import Veilederikon from '../../component/Veilederikon/Veilederikon';
+import { selectPersonNavn } from '../../person/selectors';
+import { IRootState } from '../../rootReducer';
+
+interface IMapStateToProps {
+    navn: string;
+}
 
 interface IMapDispatchToProps {
     nesteSteg: () => void;
 }
 
-type VeiledningProps = IMapDispatchToProps & InjectedIntlProps;
+type VeiledningProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
-const Veiledning: React.StatelessComponent<VeiledningProps> = ({ nesteSteg, intl }) => {
+const Veiledning: React.StatelessComponent<VeiledningProps> = ({ navn, nesteSteg, intl }) => {
     return (
         <div className={'veiledning'}>
             <div className={'veiledning__veileder-container'}>
@@ -24,7 +30,7 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({ nesteSteg, intl
                     tekst={
                         <div className={'veiledning__veileder-snakkeboble'}>
                             <Element>
-                                <FormattedMessage id={'veiledningsside.veileder.hei'} /> PersonNavn
+                                <FormattedMessage id={'veiledningsside.veileder.hei'} /> {navn}
                             </Element>
                             <Normaltekst>
                                 <FormattedMessage id={'veiledningsside.veileder.melding'} />
@@ -53,6 +59,12 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({ nesteSteg, intl
     );
 };
 
+const mapStateToProps = (state: IRootState): IMapStateToProps => {
+    return {
+        navn: selectPersonNavn(state),
+    };
+};
+
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         nesteSteg: () => dispatch(appNesteSteg()),
@@ -60,6 +72,6 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
 };
 
 export default connect(
-    () => ({}),
+    mapStateToProps,
     mapDispatchToProps
 )(injectIntl(Veiledning));
