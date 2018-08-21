@@ -1,6 +1,10 @@
 import * as React from 'react';
 
-const Veilederikon = () => {
+interface IVeilderikonProps {
+    morkBakgrunn?: boolean;
+}
+
+const Veilederikon: React.StatelessComponent<IVeilderikonProps> = ({ morkBakgrunn }) => {
     return (
         <svg
             width="100px"
@@ -29,7 +33,11 @@ const Veilederikon = () => {
                             <use xlinkHref="#path-1" />
                         </mask>
                         <g id="Mask" />
-                        <g id="STYLING/farge/-Lilla/-60" mask="url(#mask-2)" fill="#C1B5D0">
+                        <g
+                            id="STYLING/farge/-Lilla/-60"
+                            mask="url(#mask-2)"
+                            fill={morkBakgrunn ? '#a190b8' : '#C1B5D0'}
+                        >
                             <g transform="translate(-8.000000, 0.000000)" id="Fill-37">
                                 <polygon points="0 100 126 100 126 0 0 0" />
                             </g>

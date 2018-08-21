@@ -4771,6 +4771,14 @@ nav-frontend-typografi@2.0.5, nav-frontend-typografi@^2.0.2:
   version "2.0.5"
   resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-typografi/-/nav-frontend-typografi-2.0.5.tgz#9bd255c98f61d2d46122b6426d9b46e144b6ad0e"
 
+nav-frontend-veileder-style@1.0.7:
+  version "1.0.7"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-veileder-style/-/nav-frontend-veileder-style-1.0.7.tgz#0284cfaf7ee6c6bc204940957a646fd044671c83"
+
+nav-frontend-veileder@1.0.8:
+  version "1.0.8"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-veileder/-/nav-frontend-veileder-1.0.8.tgz#3e74567172fce47835a9d7ea61ab290debd4d981"
+
 needle@^2.2.1:
   version "2.2.1"
   resolved "https://repo.adeo.no/repository/npm-public/needle/-/needle-2.2.1.tgz#b5e325bd3aae8c2678902fa296f729455d1d3a7d"
