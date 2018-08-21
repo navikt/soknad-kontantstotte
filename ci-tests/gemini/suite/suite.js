@@ -17,7 +17,9 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.waitForElementToShow('.stegindikator', 5000);
         })
         .capture('familieforhold', function(actions) {
-            actions.click('.mine-barn__barn');
+            actions.executeJS(function(window) {
+                window.document.querySelectorAll('[name="barn"]')[0].click();
+            });
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
         })
