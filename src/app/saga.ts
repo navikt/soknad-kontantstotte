@@ -11,21 +11,27 @@ import {
     takeEvery,
     takeLatest,
 } from 'redux-saga/effects';
-import { personHent, PersonTypeKeys } from '../person/actions';
 import { ISteg, stegConfig } from '../stegConfig';
 import { teksterHent, TeksterTypeKeys } from '../tekster/actions';
 import { appEndreStatus, appSettSteg, AppTypeKeys } from './actions';
-import { pingBackend } from './api';
+import { pingBackend, redirectTilLogin } from './api';
 import { selectAppSteg } from './selectors';
 import { AppStatus, ILocationChangeAction } from './types';
 
 function* forsteSidelastSaga(): SagaIterator {
-    yield call(pingBackend);
+    try {
+        const ping = yield call(pingBackend);
+        console.log(ping);
+    } catch (error) {
+        if (error.response.status === 401) {
+            redirectTilLogin();
+            return;
+        }
+    }
 
     yield put(teksterHent());
-    yield put(personHent());
 
-    yield all([take(TeksterTypeKeys.HENT_OK), take(PersonTypeKeys.HENT_OK)]);
+    yield all([take(TeksterTypeKeys.HENT_OK)]);
 
     yield put(appEndreStatus(AppStatus.KLAR));
 }
@@ -33,7 +39,7 @@ function* forsteSidelastSaga(): SagaIterator {
 function* startAppSaga(): SagaIterator {
     yield put(appEndreStatus(AppStatus.STARTER));
     const startSaga = yield fork(forsteSidelastSaga);
-    yield take([TeksterTypeKeys.HENT_FEILET, PersonTypeKeys.HENT_FEILET]);
+    yield take([TeksterTypeKeys.HENT_FEILET]);
     yield cancel(startSaga);
     yield put(appEndreStatus(AppStatus.FEILSITUASJON));
 }
