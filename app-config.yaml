@@ -1,3 +1,4 @@
+#jeg vil ikke ha hjelp fra pus
 image: repo.adeo.no:5443/soknad/soknad-kontantstotte
 team: team-soknad
 replicas:
