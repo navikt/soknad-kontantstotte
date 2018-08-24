@@ -20,8 +20,7 @@ import { AppStatus, ILocationChangeAction } from './types';
 
 function* forsteSidelastSaga(): SagaIterator {
     try {
-        const ping = yield call(pingBackend);
-        console.log(ping);
+        yield call(pingBackend);
     } catch (error) {
         if (error.response.status === 401) {
             redirectTilLogin();
