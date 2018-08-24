@@ -1,3 +1,5 @@
+import Environment from '../Environment';
+
 import { LOCATION_CHANGE, push, replace } from 'connected-react-router';
 import { SagaIterator } from 'redux-saga';
 import {
@@ -18,21 +20,23 @@ import { pingBackend } from './api';
 import { selectAppSteg } from './selectors';
 import { AppStatus, ILocationChangeAction } from './types';
 
-import Environment from '../Environment';
+const redirectTilLogin = () => {
+    window.location.href = Environment().loginUrl + '?redirect=' + window.location.href;
+};
 
-function* authenticateUser() {
+function* autentiserBruker(): SagaIterator {
     try {
         yield call(pingBackend);
     } catch (error) {
         if (error.response.status === 401) {
-            window.location.href = Environment().loginUrl + '?redirect=' + window.location.href;
+            redirectTilLogin();
             return;
         }
     }
 }
 
 function* forsteSidelastSaga(): SagaIterator {
-    authenticateUser();
+    yield call(autentiserBruker);
 
     yield put(teksterHent());
 
