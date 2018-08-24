@@ -14,19 +14,25 @@ import {
 import { ISteg, stegConfig } from '../stegConfig';
 import { teksterHent, TeksterTypeKeys } from '../tekster/actions';
 import { appEndreStatus, appSettSteg, AppTypeKeys } from './actions';
-import { pingBackend, redirectTilLogin } from './api';
+import { pingBackend } from './api';
 import { selectAppSteg } from './selectors';
 import { AppStatus, ILocationChangeAction } from './types';
 
-function* forsteSidelastSaga(): SagaIterator {
+import Environment from '../Environment';
+
+function* authenticateUser() {
     try {
         yield call(pingBackend);
     } catch (error) {
         if (error.response.status === 401) {
-            redirectTilLogin();
+            window.location.href = Environment().loginUrl + '?redirect=' + window.location.href;
             return;
         }
     }
+}
+
+function* forsteSidelastSaga(): SagaIterator {
+    authenticateUser();
 
     yield put(teksterHent());
 

@@ -7,8 +7,4 @@ function pingBackend() {
     });
 }
 
-const redirectTilLogin = () => {
-    window.location.href = Environment().loginUrl + '?redirect=' + window.location.href;
-};
-
-export { pingBackend, redirectTilLogin };
+export { pingBackend };
