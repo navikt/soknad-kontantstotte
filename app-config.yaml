@@ -24,3 +24,5 @@ fasitResources:
     resourceType: baseUrl
   - alias: loginservice
     resourceType: restservice
+  - alias: appdynamics
+    resourceType: applicationproperties
