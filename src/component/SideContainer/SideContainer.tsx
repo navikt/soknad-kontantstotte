@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 import { selectAppSteg } from '../../app/selectors';
 import { IRootState } from '../../rootReducer';
 import { ISteg, stegConfig } from '../../stegConfig';
-import AvbrytKnapp from '../AvbrytKnapp/AvbrytKnapp';
-import TilbakeKnapp from '../TilbakeKnapp/TilbakeKnapp';
+import AvbrytKnapp from '../Avbrytknapp/Avbrytknapp';
+import TilbakeKnapp from '../Tilbakeknapp/Tilbakeknapp';
 
 interface IOwnProps {
     className?: string;

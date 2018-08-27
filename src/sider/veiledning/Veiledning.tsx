@@ -1,14 +1,14 @@
 import { Hovedknapp } from 'nav-frontend-knapper';
-import Lenke from 'nav-frontend-lenker';
 import { Element, Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import Veileder from 'nav-frontend-veileder';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { appNesteSteg } from '../../app/actions';
-import Veilederikon from '../../component/Veilederikon/Veilederikon';
+import Veilederikon from '../../component/Ikoner/Veilederikon';
 import { selectPersonNavn } from '../../person/selectors';
 import { IRootState } from '../../rootReducer';
+import { Personopplysning } from './Personopplysning';
 
 interface IMapStateToProps {
     navn: string;
@@ -25,6 +25,8 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({ navn, nesteSteg
         <div className={'veiledning'}>
             <div className={'veiledning__veileder-container'}>
                 <Veileder
+                    posisjon={'topp'}
+                    className={'veiledning__veileder'}
                     storrelse={'M'}
                     center={true}
                     tekst={
@@ -47,11 +49,7 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({ navn, nesteSteg
             <Normaltekst className={'veiledning__info'}>
                 <FormattedMessage id={'veiledningsside.info'} />
             </Normaltekst>
-            <div className={'veiledning__lenke-container'}>
-                <Lenke href={intl.formatMessage({ id: 'veiledningsside.lenke.url' })}>
-                    <FormattedMessage id={'veiledningsside.lenke.tekst'} />
-                </Lenke>
-            </div>
+            <Personopplysning className={'veiledning__personopplysning'} />
             <Hovedknapp className={'veiledning__knapp'} onClick={nesteSteg}>
                 <FormattedMessage id={'veiledningsside.knapp'} />
             </Hovedknapp>

@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 import { appNesteSteg } from '../../app/actions';
 import { ValidForm, ValidGroup } from '../../common/lib/validation';
 import SideContainer from '../../component/SideContainer/SideContainer';
-import SubmitKnapp from '../../component/SubmitKnapp/SubmitKnapp';
+import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { selectBarn } from '../../person/selectors';
 import { IBarn } from '../../person/types';
 import { IRootState } from '../../rootReducer';
@@ -73,7 +73,7 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                         defaultValue={valgtBarn.fodselsdato}
                     />
                 </ValidGroup>
-                <SubmitKnapp label={'app.neste'} />
+                <Submitknapp label={'app.neste'} />
             </ValidForm>
         </SideContainer>
     );
