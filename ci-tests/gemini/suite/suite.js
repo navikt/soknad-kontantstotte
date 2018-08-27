@@ -8,6 +8,7 @@ gemini.suite('soknad-kontantstotte', suite => {
         .capture('krav-til-soker', function(actions) {
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
+            actions.mouseMove('h1');
         })
         .capture('mine-barn', function(actions) {
             actions.executeJS(function(window) {
@@ -15,6 +16,7 @@ gemini.suite('soknad-kontantstotte', suite => {
             });
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
+            actions.mouseMove('h1');
         })
         .capture('familieforhold', function(actions) {
             actions.executeJS(function(window) {
@@ -22,6 +24,7 @@ gemini.suite('soknad-kontantstotte', suite => {
             });
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
+            actions.mouseMove('h1');
         })
         .capture('barnehageplass', function(actions) {
             actions.executeJS(function(window) {
@@ -32,6 +35,7 @@ gemini.suite('soknad-kontantstotte', suite => {
             });
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
+            actions.mouseMove('h1');
         })
         .capture('arbeidsforhold', function(actions) {
             actions.executeJS(function(window) {
@@ -39,7 +43,7 @@ gemini.suite('soknad-kontantstotte', suite => {
             });
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
-            actions.click('body');
+            actions.mouseMove('h1');
         })
         .capture('oppsummering', function(actions) {
             actions.executeJS(function(window) {
@@ -53,9 +57,11 @@ gemini.suite('soknad-kontantstotte', suite => {
             });
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
+            actions.mouseMove('h1');
         })
         .capture('kvittering', function(actions) {
             actions.wait(1000);
             actions.waitForElementToShow('.stegindikator', 5000);
+            actions.mouseMove('h1');
         });
 });
