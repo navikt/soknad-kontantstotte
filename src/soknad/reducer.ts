@@ -32,6 +32,10 @@ const initialState: ISoknadState = {
         fodselsdato: '',
         navn: '',
     },
+    person: {
+        fnr: '***REMOVED***',
+        navn: 'Test test',
+    },
 };
 
 function soknadReducer(state = initialState, action: SoknadActionTypes) {
