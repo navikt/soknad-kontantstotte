@@ -69,12 +69,30 @@ table#utvidet-info
 }
 
 .utskrift-knapp {
-    padding: calc(.5em - 2px) calc(2.5em - 2px) calc(.5em + 2px) calc(2.5em - 2px);
-    height: 55px;
+    position: relative;
+    padding: .5em 4em .5em 4em
 }
 
-.utskrift-ikon {
-    height: 24px;
-    width: 24px;
-    margin-right: calc(2.5em - 26px);
+.utskrift-knapp-content-container {
+    display: flex; 
+    justify-content: center;
+    direction: row;
 }
+
+.utskrift-knapp-content-tekst {
+    margin: auto;
+}
+
+.utskrift-knapp-content-ikon {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: .5em;
+    top: 5px;
+}
+
+@media print {
+    a[href]:after {
+      content: none !important;
+    }
+  }

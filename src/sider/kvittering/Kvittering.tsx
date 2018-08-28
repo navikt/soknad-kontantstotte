@@ -23,8 +23,17 @@ const Kvittering: React.StatelessComponent<KvitteringProps> = () => {
             <UtvidetInfo />
 
             <div className="utskrift-knapp-container">
-                <KnappBase className="utskrift-knapp" type={'standard'}>
-                    <UtskriftIkon className="utskrift-ikon" /> Skriv ut kvittering
+                <KnappBase
+                    onClick={() => window.print()}
+                    className="utskrift-knapp"
+                    type={'standard'}
+                >
+                    <div className="utskrift-knapp-content-container">
+                        <UtskriftIkon className="utskrift-knapp-content-ikon" />
+                        <span className="utskrift-knapp-content-tekst">
+                            {'Skriv ut kvittering'}
+                        </span>
+                    </div>
                 </KnappBase>
             </div>
         </SideContainer>
@@ -108,9 +117,12 @@ const UtvidetInfo = () => {
                         <td className="left-column" />
                         <td>
                             <span className="typo-normal alertstripe_tekst">
-                                Du finner søknaden din under{' '}
-                                <a href="" className="lenke">
-                                    Dine saker
+                                {'Du finner søknaden din under '}
+                                <a
+                                    href="https://tjenester.nav.no/saksoversikt/app"
+                                    className="lenke"
+                                >
+                                    {'Dine saker'}
                                 </a>
                             </span>
                         </td>
@@ -119,9 +131,12 @@ const UtvidetInfo = () => {
                         <td className="left-column" />
                         <td>
                             <span className="typo-normal alertstripe_tekst">
-                                Se også{' '}
-                                <a href="" className="lenke">
-                                    saksbehandlertidene
+                                {'Se også '}
+                                <a
+                                    href="https://www.nav.no/no/NAV+og+samfunn/Om+NAV/Saksbehandlingstider+i+NAV"
+                                    className="lenke"
+                                >
+                                    {'saksbehandlertidene'}
                                 </a>
                             </span>
                         </td>

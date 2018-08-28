@@ -35,22 +35,26 @@ class SideContainer extends React.Component<Props> {
                 };
             });
 
+        const visStegInformasjon = aktivtSteg !== 7;
+
         return (
             <div className={className}>
                 <Sidetittel className={'side-container__sidetittel'}>
                     <FormattedMessage id={'kontantstotte.tittel'} />
                 </Sidetittel>
-                <Stegindikator
-                    steg={indikatorsteg}
-                    autoResponsiv={true}
-                    visLabel={false}
-                    kompakt={false}
-                    aktivtSteg={aktivtSteg - 1} // -1 pga Stegindikator er 0-indeksert
-                />
-                <TilbakeKnapp />
+                {visStegInformasjon && (
+                    <Stegindikator
+                        steg={indikatorsteg}
+                        autoResponsiv={true}
+                        visLabel={false}
+                        kompakt={false}
+                        aktivtSteg={aktivtSteg - 1} // -1 pga Stegindikator er 0-indeksert
+                    />
+                )}
+                {visStegInformasjon && <TilbakeKnapp />}
                 <div>{children}</div>
 
-                <AvbrytKnapp />
+                {visStegInformasjon && <AvbrytKnapp />}
             </div>
         );
     }
