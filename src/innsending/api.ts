@@ -11,9 +11,6 @@ function sendInnSoknad(soknad: ISoknadState) {
         })
     );
     return axios.post(`${Environment().apiUrl}/sendinn`, formData, {
-        headers: {
-            'content-type': 'multipart/form-data;',
-        },
         withCredentials: true,
     });
 }
