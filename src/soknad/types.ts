@@ -13,17 +13,11 @@ enum BarnehageplassVerdier {
 }
 
 interface ISoknadState {
-    readonly person: IPerson;
     readonly mineBarn: IMineBarn;
     readonly familieforhold: IFamilieforhold;
     readonly arbeidsforhold: IArbeidsforhold;
     readonly barnehageplass: IBarnehageplass;
     readonly kravTilSoker: IKravTilSoker;
-}
-
-interface IPerson {
-    readonly navn: string;
-    readonly fnr: string;
 }
 
 interface IMineBarn {
