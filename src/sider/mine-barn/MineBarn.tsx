@@ -59,6 +59,7 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                         }}
                     />
                     <Input
+                        className={'mine-barn__navn-input'}
                         label={'Navn'}
                         onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
                             settBarnNavn(event.target.value)
@@ -66,6 +67,7 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                         defaultValue={valgtBarn.navn}
                     />
                     <Input
+                        className={'mine-barn__fodselsdato-input'}
                         label={'Fødselsdato'}
                         onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
                             settBarnFodselsdato(event.target.value)

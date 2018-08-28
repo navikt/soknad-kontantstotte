@@ -18,10 +18,9 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.waitForElementToShow('.stegindikator', 5000);
             actions.mouseMove('h1');
         })
-        .capture('familieforhold', function(actions) {
-            actions.executeJS(function(window) {
-                window.document.querySelectorAll('[name="barn"]')[0].click();
-            });
+        .capture('familieforhold', function(actions, find) {
+            actions.sendKeys(find('.mine-barn__navn-input > input'), 'Mock McMockface');
+            actions.sendKeys(find('.mine-barn__fodselsdato-input > input'), '01.01.18');
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
             actions.mouseMove('h1');
