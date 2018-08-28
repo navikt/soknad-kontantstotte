@@ -24,7 +24,7 @@ const Kvittering: React.StatelessComponent<KvitteringProps> = () => {
 
             <div className="utskrift-knapp-container">
                 <KnappBase className="utskrift-knapp" type={'standard'}>
-                    <UtskriftIkon className="utskrift-ikon" /> {'Skriv ut kvittering'}
+                    <UtskriftIkon className="utskrift-ikon" /> Skriv ut kvittering
                 </KnappBase>
             </div>
         </SideContainer>
