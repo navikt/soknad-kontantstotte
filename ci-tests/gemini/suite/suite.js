@@ -60,7 +60,7 @@ gemini.suite('soknad-kontantstotte', suite => {
         })
         .capture('kvittering', function(actions) {
             actions.wait(1000);
-            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.waitForElementToShow('.kvittering__panel', 5000);
             actions.mouseMove('h1');
         });
 });
