@@ -50,8 +50,11 @@ interface IBarnehageplass {
 }
 
 interface IKravTilSoker {
-    readonly boddINorgeSisteFemAar: Svar;
+    readonly norskStatsborger: Svar;
+    readonly boddEllerJobbetINorgeSisteFemAar: Svar;
     readonly borSammenMedBarnet: Svar;
+    readonly barnIkkeHjemme: Svar;
+    readonly ikkeAvtaltDeltBosted: Svar;
     readonly skalBoMedBarnetINorgeNesteTolvMaaneder: Svar;
 }
 

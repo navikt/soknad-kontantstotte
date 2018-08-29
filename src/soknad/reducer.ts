@@ -24,8 +24,11 @@ const initialState: ISoknadState = {
         erAvklartDeltBosted: Svar.UBESVART,
     },
     kravTilSoker: {
-        boddINorgeSisteFemAar: Svar.UBESVART,
+        barnIkkeHjemme: Svar.UBESVART,
+        boddEllerJobbetINorgeSisteFemAar: Svar.UBESVART,
         borSammenMedBarnet: Svar.UBESVART,
+        ikkeAvtaltDeltBosted: Svar.UBESVART,
+        norskStatsborger: Svar.UBESVART,
         skalBoMedBarnetINorgeNesteTolvMaaneder: Svar.UBESVART,
     },
     mineBarn: {

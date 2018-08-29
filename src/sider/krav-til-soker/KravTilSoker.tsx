@@ -1,3 +1,4 @@
+import Veilederpanel from 'nav-frontend-veilederpanel';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -5,6 +6,7 @@ import { Dispatch } from 'redux';
 import { appNesteSteg } from '../../app/actions';
 import ValidCheckboxPanelGruppe from '../../common/lib/validation/ValidCheckboxPanelGruppe';
 import ValidForm from '../../common/lib/validation/ValidForm';
+import Veilederikon from '../../component/Ikoner/Veilederikon';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
@@ -30,32 +32,62 @@ const handterCheckboxEndring = (
 type KravTilSokerProps = IKravTilSoker & IMapDispatchToProps & InjectedIntlProps;
 
 const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
-    boddINorgeSisteFemAar,
+    barnIkkeHjemme,
+    boddEllerJobbetINorgeSisteFemAar,
     borSammenMedBarnet,
-    intl,
+    ikkeAvtaltDeltBosted,
+    norskStatsborger,
     skalBoMedBarnetINorgeNesteTolvMaaneder,
+    intl,
     settCheckboxVerdi,
     nesteSteg,
 }) => {
-    const sporsmaal: string = intl.formatMessage({ id: 'startside.krav.sporsmal' });
-
     return (
         <SideContainer>
+            <Veilederpanel svg={<Veilederikon />} type="normal" kompakt={true}>
+                <h4 className="krav__veileder__velkomstMelding">
+                    {intl.formatMessage({
+                        id: 'startside.krav.velkomstMelding',
+                    })}
+                </h4>
+                {intl.formatMessage({
+                    id: 'startside.krav.veileder',
+                })}
+            </Veilederpanel>
             <ValidForm summaryTitle={'Søknad om kontantstøtte'} onSubmit={nesteSteg}>
                 <ValidCheckboxPanelGruppe
-                    legend={sporsmaal}
+                    legend={''}
                     checkboxes={[
                         {
-                            checked: boddINorgeSisteFemAar === Svar.JA,
+                            checked: norskStatsborger === Svar.JA,
                             label: intl.formatMessage({
-                                id: 'startside.krav.boddINorgeSisteFemAar',
+                                id: 'startside.krav.norskStatsborger',
                             }),
-                            value: 'boddINorgeSisteFemAar',
+                            value: 'norskStatsborger',
+                        },
+                        {
+                            checked: boddEllerJobbetINorgeSisteFemAar === Svar.JA,
+                            label: intl.formatMessage({
+                                id: 'startside.krav.boddEllerJobbetINorgeSisteFemAar',
+                            }),
+                            value: 'boddEllerJobbetINorgeSisteFemAar',
                         },
                         {
                             checked: borSammenMedBarnet === Svar.JA,
                             label: intl.formatMessage({ id: 'startside.krav.borSammenMedBarnet' }),
                             value: 'borSammenMedBarnet',
+                        },
+                        {
+                            checked: barnIkkeHjemme === Svar.JA,
+                            label: intl.formatMessage({ id: 'startside.krav.barnIkkeHjemme' }),
+                            value: 'barnIkkeHjemme',
+                        },
+                        {
+                            checked: ikkeAvtaltDeltBosted === Svar.JA,
+                            label: intl.formatMessage({
+                                id: 'startside.krav.ikkeAvtaltDeltBosted',
+                            }),
+                            value: 'ikkeAvtaltDeltBosted',
                         },
                         {
                             checked: skalBoMedBarnetINorgeNesteTolvMaaneder === Svar.JA,
@@ -71,11 +103,23 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
                     validators={[
                         {
                             failText: intl.formatMessage({ id: 'svar.feilmeldingCheckbox' }),
-                            test: () => harHuketAvPaCheckbox(boddINorgeSisteFemAar),
+                            test: () => harHuketAvPaCheckbox(norskStatsborger),
+                        },
+                        {
+                            failText: intl.formatMessage({ id: 'svar.feilmeldingCheckbox' }),
+                            test: () => harHuketAvPaCheckbox(boddEllerJobbetINorgeSisteFemAar),
                         },
                         {
                             failText: intl.formatMessage({ id: 'svar.feilmeldingCheckbox' }),
                             test: () => harHuketAvPaCheckbox(borSammenMedBarnet),
+                        },
+                        {
+                            failText: intl.formatMessage({ id: 'svar.feilmeldingCheckbox' }),
+                            test: () => harHuketAvPaCheckbox(barnIkkeHjemme),
+                        },
+                        {
+                            failText: intl.formatMessage({ id: 'svar.feilmeldingCheckbox' }),
+                            test: () => harHuketAvPaCheckbox(ikkeAvtaltDeltBosted),
                         },
                         {
                             failText: intl.formatMessage({ id: 'svar.feilmeldingCheckbox' }),
