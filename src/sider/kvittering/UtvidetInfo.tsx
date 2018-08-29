@@ -35,7 +35,9 @@ const UtvidetInfo: React.StatelessComponent<IUtvidedInfoProps> = ({ intl }) => {
                         <td className="table__left-column" />
                         <td>
                             <span className="typo-normal">
-                                {'Du finner søknaden din under '}
+                                {intl.formatMessage({
+                                    id: 'kvittering.soknadLokasjon',
+                                })}{' '}
                                 <Lenke href={Environment().saksoversikt} children={'Dine sider'} />
                             </span>
                         </td>
@@ -44,7 +46,9 @@ const UtvidetInfo: React.StatelessComponent<IUtvidedInfoProps> = ({ intl }) => {
                         <td className="table__left-column" />
                         <td>
                             <span className="typo-normal">
-                                {'Se også '}
+                                {intl.formatMessage({
+                                    id: 'kvittering.seOgsa',
+                                })}{' '}
                                 <Lenke
                                     href="https://www.nav.no/no/NAV+og+samfunn/Om+NAV/Saksbehandlingstider+i+NAV"
                                     children={'saksbehandlertidene'}

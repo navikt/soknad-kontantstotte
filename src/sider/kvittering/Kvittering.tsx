@@ -21,12 +21,9 @@ const Kvittering: React.StatelessComponent<KvitteringProps> = ({ intl }) => {
             </div>
 
             <h3 className="kvittering__tittel">
-                {intl.formatMessage(
-                    {
-                        id: 'kvittering.takkForSoknad',
-                    },
-                    { navn: '' }
-                )}
+                {intl.formatMessage({
+                    id: 'kvittering.takkForSoknad',
+                })}
             </h3>
 
             <UtvidetInfo intl={intl} />
