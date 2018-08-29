@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const SuksessIkon = (props: React.SVGProps<any>) => (
+const Suksessikon = (props: React.SVGProps<any>) => (
     <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
         <title>Suksess</title>
         <g fill="#06893A" fillRule="evenodd">
@@ -10,4 +10,4 @@ const SuksessIkon = (props: React.SVGProps<any>) => (
     </svg>
 );
 
-export default SuksessIkon;
+export default Suksessikon;

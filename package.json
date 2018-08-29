@@ -45,6 +45,7 @@
     "nav-frontend-js-utils": "1.0.6",
     "nav-frontend-knapper": "1.0.10",
     "nav-frontend-knapper-style": "0.3.9",
+    "nav-frontend-lenker": "1.0.18",
     "nav-frontend-lenker-style": "0.2.6",
     "nav-frontend-lukknapp": "1.0.6",
     "nav-frontend-lukknapp-style": "0.2.7",
@@ -60,6 +61,8 @@
     "nav-frontend-stegindikator-style": "1.0.3",
     "nav-frontend-typografi": "2.0.5",
     "nav-frontend-typografi-style": "1.0.9",
+    "nav-frontend-veileder": "2.0.1",
+    "nav-frontend-veileder-style": "2.0.1",
     "prop-types": "15.6.2",
     "react": "16.4.1",
     "react-dom": "16.3.3",
@@ -70,12 +73,12 @@
     "redux-saga": "0.16.0"
   },
   "resolutions": {
-    "@types/react": "16.3.14"
+    "@types/react": "16.3.18"
   },
   "devDependencies": {
     "@types/classnames": "2.2.4",
-    "@types/prop-types": "15.5.3",
-    "@types/react": "16.3.14",
+    "@types/prop-types": "15.5.5",
+    "@types/react": "16.3.18",
     "@types/react-dom": "16.0.5",
     "@types/react-intl": "2.3.8",
     "@types/react-modal": "3.2.0",

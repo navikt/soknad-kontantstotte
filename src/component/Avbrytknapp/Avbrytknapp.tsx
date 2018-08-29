@@ -16,7 +16,7 @@ interface IAvbrytKnappProps {}
 
 type AvbrytKnappProps = IAvbrytKnappProps & InjectedIntlProps;
 
-class AvbrytKnapp extends React.Component<AvbrytKnappProps, IAvbrytKnappState> {
+class Avbrytknapp extends React.Component<AvbrytKnappProps, IAvbrytKnappState> {
     constructor(props: AvbrytKnappProps) {
         super(props);
         this.state = {
@@ -68,4 +68,4 @@ class AvbrytKnapp extends React.Component<AvbrytKnappProps, IAvbrytKnappState> {
     }
 }
 
-export default injectIntl(AvbrytKnapp);
+export default injectIntl(Avbrytknapp);

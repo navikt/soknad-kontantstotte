@@ -5,7 +5,7 @@ const getWindowLocation = ClientFunction(() => window.location);
 fixture('veiledningsside').page('http://ci-test-server:8000/');
 
 test('viser overskrift', async t => {
-    await t.expect(Selector('h1').innerText).eql('Veiledningsside');
+    await t.expect(Selector('h1').innerText).eql('Søknad om kontantstøtte');
 });
 
 test('start søknad', async t => {

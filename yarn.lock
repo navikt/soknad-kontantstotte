@@ -37,9 +37,11 @@
   version "10.5.2"
   resolved "https://repo.adeo.no/repository/npm-public/@types/node/-/node-10.5.2.tgz#f19f05314d5421fe37e74153254201a7bf00a707"
 
-"@types/prop-types@15.5.3":
-  version "15.5.3"
-  resolved "https://repo.adeo.no/repository/npm-public/@types/prop-types/-/prop-types-15.5.3.tgz#bef071852dca2a2dbb65fecdb7bfb30cedae2de2"
+"@types/prop-types@15.5.5":
+  version "15.5.5"
+  resolved "https://repo.adeo.no/repository/npm-public/@types/prop-types/-/prop-types-15.5.5.tgz#17038dd322c2325f5da650a94d5f9974943625e3"
+  dependencies:
+    "@types/react" "*"
 
 "@types/react-dom@16.0.5":
   version "16.0.5"
@@ -80,9 +82,9 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@16.3.14":
-  version "16.3.14"
-  resolved "https://repo.adeo.no/repository/npm-public/@types/react/-/react-16.3.14.tgz#f90ac6834de172e13ecca430dcb6814744225d36"
+"@types/react@*", "@types/react@16.3.18":
+  version "16.3.18"
+  resolved "https://repo.adeo.no/repository/npm-public/@types/react/-/react-16.3.18.tgz#bf195aed4d77dc86f06e4c9bb760214a3b822b8d"
   dependencies:
     csstype "^2.2.0"
 
@@ -4709,6 +4711,10 @@ nav-frontend-lenker-style@0.2.6:
   version "0.2.6"
   resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-lenker-style/-/nav-frontend-lenker-style-0.2.6.tgz#c937610f845a8b5a2b3109674499fbce9f5ee122"
 
+nav-frontend-lenker@1.0.18:
+  version "1.0.18"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-lenker/-/nav-frontend-lenker-1.0.18.tgz#ff9cb78b160f7f6ce8fb46dfce370c908640423c"
+
 nav-frontend-lukknapp-style@0.2.7:
   version "0.2.7"
   resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-lukknapp-style/-/nav-frontend-lukknapp-style-0.2.7.tgz#a3f54e68641ea77087e2fc6b8703b992e8acdf28"
@@ -4766,6 +4772,14 @@ nav-frontend-typografi-style@1.0.9:
 nav-frontend-typografi@2.0.5, nav-frontend-typografi@^2.0.2:
   version "2.0.5"
   resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-typografi/-/nav-frontend-typografi-2.0.5.tgz#9bd255c98f61d2d46122b6426d9b46e144b6ad0e"
+
+nav-frontend-veileder-style@2.0.1:
+  version "2.0.1"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-veileder-style/-/nav-frontend-veileder-style-2.0.1.tgz#7eef42ae11f2d3bac6fbcb1dc2d81041eefa9062"
+
+nav-frontend-veileder@2.0.1:
+  version "2.0.1"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-veileder/-/nav-frontend-veileder-2.0.1.tgz#6804fe14a17a081ca2ee7a32c38b9daf7b3a6280"
 
 needle@^2.2.1:
   version "2.2.1"

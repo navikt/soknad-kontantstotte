@@ -5,7 +5,7 @@ import { connect, Dispatch } from 'react-redux';
 import { appNesteSteg } from '../../app/actions';
 import { ValidForm, ValidRadioPanelGruppe } from '../../common/lib/validation';
 import SideContainer from '../../component/SideContainer/SideContainer';
-import SubmitKnapp from '../../component/SubmitKnapp/SubmitKnapp';
+import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
@@ -76,7 +76,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                         intl={intl}
                     />
                 )}
-                <SubmitKnapp label="app.neste" />
+                <Submitknapp label="app.neste" />
             </ValidForm>
         </SideContainer>
     );

@@ -5,7 +5,7 @@ import { appNesteSteg } from '../../app/actions';
 import { ValidForm } from '../../common/lib/validation';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import SideContainer from '../../component/SideContainer/SideContainer';
-import SubmitKnapp from '../../component/SubmitKnapp/SubmitKnapp';
+import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
 import { selectFamilieforhold } from '../../soknad/selectors';
@@ -49,7 +49,7 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
                         verdi={erAvklartDeltBosted}
                     />
                 )}
-                <SubmitKnapp label="app.neste" />
+                <Submitknapp label="app.neste" />
             </ValidForm>
         </SideContainer>
     );

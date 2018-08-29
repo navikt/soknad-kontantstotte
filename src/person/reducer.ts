@@ -10,6 +10,7 @@ const initialState: IPersonState = {
     henter: false,
     person: {
         barn: [],
+        navn: 'Mockemor',
     },
 };
 

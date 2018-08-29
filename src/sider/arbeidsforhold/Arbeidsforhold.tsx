@@ -5,7 +5,7 @@ import { appNesteSteg } from '../../app/actions';
 import ValidForm from '../../common/lib/validation/ValidForm';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import SideContainer from '../../component/SideContainer/SideContainer';
-import SubmitKnapp from '../../component/SubmitKnapp/SubmitKnapp';
+import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
 import { selectArbeidsforhold } from '../../soknad/selectors';
 import { Bolk, IArbeidsforhold } from '../../soknad/types';
@@ -55,7 +55,7 @@ const Arbeidsforhold: React.StatelessComponent<ArbeidsforholdSideProps> = ({
                     harForklaring={true}
                     forklaring={mottarKontantstotteFraAnnetEOSForklaring}
                 />
-                <SubmitKnapp label="app.neste" />
+                <Submitknapp label="app.neste" />
             </ValidForm>
         </SideContainer>
     );

@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 import { appNesteSteg } from '../../app/actions';
 import { ValidForm, ValidGroup } from '../../common/lib/validation';
 import SideContainer from '../../component/SideContainer/SideContainer';
-import SubmitKnapp from '../../component/SubmitKnapp/SubmitKnapp';
+import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { selectBarn } from '../../person/selectors';
 import { IBarn } from '../../person/types';
 import { IRootState } from '../../rootReducer';
@@ -59,6 +59,7 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                         }}
                     />
                     <Input
+                        className={'mine-barn__navn-input'}
                         label={'Navn'}
                         onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
                             settBarnNavn(event.target.value)
@@ -66,6 +67,7 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                         defaultValue={valgtBarn.navn}
                     />
                     <Input
+                        className={'mine-barn__fodselsdato-input'}
                         label={'Fødselsdato'}
                         onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
                             settBarnFodselsdato(event.target.value)
@@ -73,7 +75,7 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                         defaultValue={valgtBarn.fodselsdato}
                     />
                 </ValidGroup>
-                <SubmitKnapp label={'app.neste'} />
+                <Submitknapp label={'app.neste'} />
             </ValidForm>
         </SideContainer>
     );
