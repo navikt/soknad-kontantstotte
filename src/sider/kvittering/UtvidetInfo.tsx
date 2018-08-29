@@ -2,7 +2,7 @@ import Lenke from 'nav-frontend-lenker';
 import PanelBase from 'nav-frontend-paneler';
 import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
-import SuksessIkon from '../../component/SoknadIkon/ikoner/SuksessIkon';
+import SuksessIkon from '../../component/Ikoner/Suksessikon';
 import Environment from '../../Environment';
 
 interface IUtvidedInfoProps {

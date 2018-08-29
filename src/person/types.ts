@@ -1,4 +1,5 @@
 interface IPerson {
+    navn: string;
     barn: IBarn[];
 }
 

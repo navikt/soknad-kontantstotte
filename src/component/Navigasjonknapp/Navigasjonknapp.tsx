@@ -9,7 +9,7 @@ export interface INavigasjonKnappProps {
 
 type Props = INavigasjonKnappProps;
 
-const NavigasjonKnapp: React.StatelessComponent<Props> = ({ to, children }) => {
+const Navigasjonknapp: React.StatelessComponent<Props> = ({ to, children }) => {
     return (
         <Link to={to}>
             <KnappBase type="hoved">{children}</KnappBase>
@@ -17,4 +17,4 @@ const NavigasjonKnapp: React.StatelessComponent<Props> = ({ to, children }) => {
     );
 };
 
-export default NavigasjonKnapp;
+export default Navigasjonknapp;

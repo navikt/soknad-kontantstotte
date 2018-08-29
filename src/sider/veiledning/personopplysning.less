@@ -1,0 +1,42 @@
+.personopplysning {
+  &__modal {
+    overflow: visible;
+    width: 100%;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  &__innhold {
+    display: flex;
+    flex-direction: column;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  &__ikon {
+    width: 5rem;
+    align-self: center;
+    margin-top: -3.5rem;
+  }
+
+  &__knapp {
+    align-self: center;
+    width: 16rem;
+    height: 3rem;
+  }
+}
+
+@media (min-width: 800px) {
+  .personopplysning {
+    &__modal {
+      width: 65%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    &__innhold {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
+}

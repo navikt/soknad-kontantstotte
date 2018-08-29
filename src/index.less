@@ -1,10 +1,15 @@
 // nav-frontend
 @import "~nav-frontend-core/less/core";
-@import '~nav-datovelger/dist/datovelger/styles/datovelger.css';
+@import "~nav-datovelger/dist/datovelger/styles/datovelger.css";
+@import "~nav-frontend-lenker-style";
 
-// Lokalt
+// Komponenter
+@import "component/SideContainer/side-container";
+@import "component/Tilbakeknapp/tilbakeknapp";
+
+// Sider
+@import "sider/veiledning/veiledning";
 @import "sider/mine-barn/mine-barn";
 @import "sider/oppsummering/oppsummering";
-@import "component/SideContainer/sideContainer";
-@import "component/TilbakeKnapp/tilbakeKnapp";
 @import "sider/kvittering/kvittering";
+@import "component/TilbakeKnapp/tilbakeKnapp";

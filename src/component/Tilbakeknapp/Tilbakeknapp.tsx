@@ -8,10 +8,10 @@ interface IMapDispatchToProps {
     forrigeSteg: () => void;
 }
 
-const TilbakeKnapp: React.StatelessComponent<IMapDispatchToProps> = ({ forrigeSteg }) => {
+const Tilbakeknapp: React.StatelessComponent<IMapDispatchToProps> = ({ forrigeSteg }) => {
     return (
-        <Flatknapp className={'tilbake-knapp'} onClick={forrigeSteg}>
-            <NavFrontendChevron type="venstre" className={'tilbake-knapp__ikon'} />
+        <Flatknapp className={'tilbakeknapp'} onClick={forrigeSteg}>
+            <NavFrontendChevron type="venstre" className={'tilbakeknapp__ikon'} />
             Tilbake
         </Flatknapp>
     );
@@ -26,4 +26,4 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
 export default connect(
     () => ({}),
     mapDispatchToProps
-)(TilbakeKnapp);
+)(Tilbakeknapp);

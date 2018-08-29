@@ -8,4 +8,8 @@ function selectPerson(state: IRootState) {
     return state.person.person;
 }
 
-export { selectBarn, selectPerson };
+function selectPersonNavn(state: IRootState) {
+    return state.person.person.navn;
+}
+
+export { selectBarn, selectPerson, selectPersonNavn };
