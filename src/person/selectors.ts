@@ -4,4 +4,8 @@ function selectBarn(state: IRootState) {
     return state.person.person.barn;
 }
 
-export { selectBarn };
+function selectPerson(state: IRootState) {
+    return state.person.person;
+}
+
+export { selectBarn, selectPerson };

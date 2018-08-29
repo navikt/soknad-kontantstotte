@@ -3,7 +3,6 @@ import ArbeidsforholdSide from './sider/arbeidsforhold/Arbeidsforhold';
 import BarnehageplassSide from './sider/barnehageplass/Barnehageplass';
 import FamilieforholdSide from './sider/familieforhold/Familieforhold';
 import KravTilSoker from './sider/krav-til-soker/KravTilSoker';
-import Kvittering from './sider/kvittering/Kvittering';
 import MineBarnSide from './sider/mine-barn/MineBarn';
 import OppsummeringSide from './sider/oppsummering/Oppsummering';
 import Veiledning from './sider/veiledning/Veiledning';
@@ -57,12 +56,6 @@ const stegConfig: ISteg[] = [
         key: 'oppsummering',
         path: '/oppsummering',
         stegIndeks: 6,
-    },
-    {
-        component: Kvittering,
-        key: 'kvittering',
-        path: '/kvittering',
-        stegIndeks: 7,
     },
 ];
 

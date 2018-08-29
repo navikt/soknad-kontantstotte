@@ -1,6 +1,10 @@
 import * as React from 'react';
 
-const KvitteringIkon = (props: React.SVGProps<any>) => (
+interface IKvitteringIkon {
+    className: string;
+}
+
+const KvitteringIkon: React.StatelessComponent<IKvitteringIkon> = props => (
     <svg
         version="1.1"
         viewBox="0 0 64 64"

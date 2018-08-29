@@ -77,5 +77,8 @@
     "oppsummering.kravtilsoker.borMedBarnet":"Jeg bor sammen med barnet",
     "oppsummering.kravtilsoker.skalBoINorgeNesteAaret":"Jeg og barnet skal bo i Norge de neste 12 månedene",
     "tekstomrade.feilmelding": "Du må fylle",
-    "tekstomrade.fyllInn": "Fyll inn"
+    "tekstomrade.fyllInn": "Fyll inn",
+    "kvittering.takkForSoknad": "Takk for søknaden, {navn}!",
+    "kvittering.skrivUtKvittering": "Skriv ut kvittering",
+    "kvittering.soknadSendt": "Du har sendt inn søknaden"
 }

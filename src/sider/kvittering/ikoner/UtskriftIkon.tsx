@@ -1,6 +1,10 @@
 import * as React from 'react';
 
-const UtskriftIkon = (props: React.SVGProps<any>) => (
+interface IUtskriftIkon {
+    className: string;
+}
+
+const UtskriftIkon: React.StatelessComponent<IUtskriftIkon> = props => (
     <svg
         version="1.1"
         viewBox="0 0 24 23"
