@@ -48,7 +48,7 @@ class SideContainer extends React.Component<Props> {
                     aktivtSteg={aktivtSteg - 1} // -1 pga Stegindikator er 0-indeksert
                 />
                 <TilbakeKnapp />
-                <div>{children}</div>
+                <div className="form__container">{children}</div>
 
                 <AvbrytKnapp />
             </div>

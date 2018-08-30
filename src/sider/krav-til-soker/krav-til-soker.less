@@ -4,7 +4,33 @@
     }
 }
 
-.skjema__fieldset {
-    display: flex;
-    flex-wrap: wrap;
+.nav-veileder__frame {
+    background-color: unset;
+}
+
+.inputPanelGruppe {
+    margin: 0 auto;
+    max-width: 55rem;
+
+    & .inputPanel {
+        width: 45%;
+        margin: 0.5rem;
+        min-height: 5rem;
+    }
+
+    @media (max-width: 600px) {
+        & .inputPanel {
+            width: 100%;
+        }
+    }
+
+    &.krav .inputPanelGruppe__inner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+.nav-veileder.krav.nav-veileder--advarsel.nav-veileder--hoyre {
+    padding-top: 2rem;
 }
