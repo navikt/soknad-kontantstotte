@@ -66,7 +66,7 @@ function build_frontend {
 
 
 function ci_test {
-    ./ci-tests/scripts.sh test
+    build_command yarn test:ci
 }
 
 function build_container {
