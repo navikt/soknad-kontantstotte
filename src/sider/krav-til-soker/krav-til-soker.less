@@ -8,7 +8,7 @@
     background-color: unset;
 }
 
-.inputPanelGruppe {
+.inputPanelGruppe.krav {
     & .inputPanel {
         width: 45%;
         margin: .5rem;
@@ -21,16 +21,20 @@
         }
     }
 
-    &.krav .inputPanelGruppe__inner {
+    & .inputPanelGruppe__inner {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
     }
+
+    & .skjema__fieldset {
+        max-width: 55rem;
+        margin: 0 auto;
+    }
 }
 
-.skjema__fieldset {
-    max-width: 55rem;
-    margin: 0 auto;
+.skjemaelement__feilmelding {
+    text-align: center
 }
 
 .nav-veileder.krav.nav-veileder--advarsel.nav-veileder--hoyre {
