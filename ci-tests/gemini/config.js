@@ -4,25 +4,32 @@ module.exports = {
 
     browsers: {
         chrome_large: {
-            gridUrl: 'http://selenium-hub:4444/wd/hub',
+            gridUrl: 'http://chrome:4444/wd/hub',
             desiredCapabilities: {
                 browserName: 'chrome',
             },
             windowSize: '1600x10000',
         },
         chrome_medium: {
-            gridUrl: 'http://selenium-hub:4444/wd/hub',
+            gridUrl: 'http://chrome:4444/wd/hub',
             desiredCapabilities: {
                 browserName: 'chrome',
             },
             windowSize: '800x10000',
         },
         chrome_small: {
-            gridUrl: 'http://selenium-hub:4444/wd/hub',
+            gridUrl: 'http://chrome:4444/wd/hub',
             desiredCapabilities: {
                 browserName: 'chrome',
+                chromeOptions: {
+                    mobileEmulation: {
+                        deviceMetrics: {
+                            width: 320,
+                            height: 10000,
+                        },
+                    },
+                },
             },
-            windowSize: '436x10000',
         },
     },
 

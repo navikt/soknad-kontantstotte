@@ -16,7 +16,6 @@ services:
     depends_on:
       - ci-test-server
       - chrome
-      - selenium-hub
     volumes:
       - ./gemini:/var/gemini
       - ./reports/:/reports/
@@ -29,18 +28,11 @@ services:
       - ./reports/:/reports/
     cap_add:
       - SYS_ADMIN
-  selenium-hub:
-    image: selenium/hub:3.14.0
-    container_name: selenium-hub
+  chrome:
+    container_name: chrome
+    image: selenium/standalone-chrome:3.14.0
     ports:
       - 4444:4444
-  chrome:
-    image: selenium/node-chrome:3.14.0
-    environment:
-      - HUB_HOST=selenium-hub
-      - HUB_PORT=4444
-    depends_on:
-      - selenium-hub
   testcafe:
     image: testcafe/testcafe
     command: 'firefox'
