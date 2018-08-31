@@ -1,4 +1,3 @@
-import Veilederpanel from 'nav-frontend-veilederpanel';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -6,9 +5,9 @@ import { Dispatch } from 'redux';
 import { appNesteSteg } from '../../app/actions';
 import ValidCheckboxPanelGruppe from '../../common/lib/validation/ValidCheckboxPanelGruppe';
 import ValidForm from '../../common/lib/validation/ValidForm';
-import Veilederikon from '../../component/Ikoner/Veilederikon';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
+import Veileder from '../../component/Veileder/Veileder';
 import { IRootState } from '../../rootReducer';
 import { soknadSettVerdi } from '../../soknad/actions';
 import { selectKravTilSoker } from '../../soknad/selectors';
@@ -44,22 +43,22 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
 }) => {
     return (
         <SideContainer>
-            <div className="veileder">
-                <Veilederpanel
-                    svg={<Veilederikon morkBakgrunn={true} />}
-                    type="normal"
-                    kompakt={true}
-                >
-                    <h4 className="krav__veileder__velkomstMelding">
-                        {intl.formatMessage({
-                            id: 'startside.krav.velkomstMelding',
-                        })}
-                    </h4>
-                    {intl.formatMessage({
-                        id: 'startside.krav.veileder',
-                    })}
-                </Veilederpanel>
-            </div>
+            <Veileder
+                content={
+                    <div>
+                        <h4 className="krav__veileder__velkomstMelding">
+                            {intl.formatMessage({
+                                id: 'startside.krav.velkomstMelding',
+                            })}
+                        </h4>
+                        <span>
+                            {intl.formatMessage({
+                                id: 'startside.krav.veileder',
+                            })}
+                        </span>
+                    </div>
+                }
+            />
             <ValidForm summaryTitle={'Søknad om kontantstøtte'} onSubmit={nesteSteg}>
                 <ValidCheckboxPanelGruppe
                     className="krav"
