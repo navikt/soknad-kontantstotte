@@ -35,7 +35,7 @@ services:
       - 4444:4444
   testcafe:
     image: testcafe/testcafe
-    command: 'firefox'
+    command: 'firefox -S /tests/*.ts'
     depends_on:
       - ci-test-server
     volumes:
