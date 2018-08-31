@@ -7,8 +7,8 @@ interface IAppState {
 }
 
 const initialState: IAppState = {
-    status: AppStatus.KLAR,
-    steg: 1,
+    status: AppStatus.IKKE_STARTET,
+    steg: 0,
 };
 
 function appReducer(state: IAppState = initialState, action: AppActionTypes) {

@@ -137,24 +137,6 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
                         },
                     ]}
                 />
-                {/*this.state.failedSubmit &&
-                    !this.state.valid &&
-                    !noSummary &&
-                    advarselTekst !== undefined && (
-                        <Veileder
-                            className="krav"
-                            type="advarsel"
-                            fargetema="advarsel"
-                            posisjon="høyre"
-                            center
-                            tekst={intl.formatMessage({
-                                id: 'startside.krav.feil.advarsel',
-                            })}
-                            storrelse="M"
-                        >
-                            <Veilederikon morkBakgrunn={true} />
-                        </Veileder>
-                    )*/}
                 <Submitknapp label="app.neste" />
             </ValidForm>
         </SideContainer>
