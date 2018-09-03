@@ -11,7 +11,12 @@ type VeilederProps = IVeilederProps;
 const Veileder: React.StatelessComponent<VeilederProps> = ({ content }) => {
     return (
         <div className="veileder">
-            <Veilederpanel svg={<Veilederikon morkBakgrunn={true} />} type="normal" kompakt={true}>
+            <Veilederpanel
+                svg={<Veilederikon morkBakgrunn={true} />}
+                type="normal"
+                kompakt={true}
+                veilederProps={{ center: true }}
+            >
                 {content}
             </Veilederpanel>
         </div>

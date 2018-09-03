@@ -1,32 +1,34 @@
-.krav__veileder__velkomstMelding {
-    margin-bottom: 0px;
-}
-
-.inputPanelGruppe.krav {
-    & .inputPanel {
-        width: 45%;
-        margin: .5rem;
-        min-height: 5rem;
+.krav {
+    &__velkomst-melding {
+        margin-bottom: 0px;
     }
 
-    @media (max-width: 600px) {
+    &__inputPanelGruppe {
         & .inputPanel {
-            width: 100%;
+            width: 45%;
+            margin: .5rem;
+            min-height: 5rem;
         }
-    }
 
-    & .inputPanelGruppe__inner {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+        @media (max-width: 600px) {
+            & .inputPanel {
+                width: 100%;
+            }
+        }
 
-    & .skjema__fieldset {
-        max-width: 60rem;
-        margin: 0 auto;
-    }
+        & .inputPanelGruppe__inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
-    & .skjemaelement__feilmelding {
-        text-align: center
+        & .skjema__fieldset {
+            max-width: 60rem;
+            margin: 0 auto;
+        }
+
+        & .skjemaelement__feilmelding {
+            text-align: center
+        }
     }
 }

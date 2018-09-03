@@ -46,7 +46,7 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
             <Veileder
                 content={
                     <div>
-                        <h4 className="krav__veileder__velkomstMelding">
+                        <h4 className="krav__velkomst-melding">
                             {intl.formatMessage({
                                 id: 'startside.krav.velkomstMelding',
                             })}
@@ -61,7 +61,7 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
             />
             <ValidForm summaryTitle={'Søknad om kontantstøtte'} onSubmit={nesteSteg}>
                 <ValidCheckboxPanelGruppe
-                    className="krav"
+                    className="krav__inputPanelGruppe"
                     legend={''}
                     checkboxes={[
                         {
