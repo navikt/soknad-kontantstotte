@@ -17,7 +17,7 @@ services:
       - ci-test-server
       - chrome
     volumes:
-      - ./gemini:/var/gemini
+      - ./gemini:/var/gemini/
       - ./reports/:/reports/
   pa11y:
     image: repo.adeo.no:5443/soknad/soknad-docker-pa11y:1.0.0
@@ -35,7 +35,7 @@ services:
       - 4444:4444
   testcafe:
     image: testcafe/testcafe
-    command: 'firefox -S /tests/*.ts'
+    command: ["firefox", "/tests/*.ts"]
     depends_on:
       - ci-test-server
     volumes:
