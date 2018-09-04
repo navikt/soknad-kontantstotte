@@ -2,12 +2,12 @@ import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
 import { ValidInput } from '../../common/lib/validation';
 import DatoInputWithValidation from '../../common/lib/validation/DatoInputWithValidation';
-import { BarnehageplassVerdier, Felt, IBarnehageplass } from '../../soknad/types';
-import { erDatoSatt, harTekstomradeInnhold } from '../../validators';
+import { BarnehageplassVerdier, Feltnavn, IBarnehageplass } from '../../soknad/types';
+import { erDatoSatt, harTekstomradeInnhold } from '../../soknad/validators';
 
 interface IEkstraFelterProps extends IBarnehageplass {
     intl: InjectedIntl;
-    settFelt: (nokkel: Felt, verdi: string) => void;
+    settFelt: (nokkel: Feltnavn, verdi: string) => void;
 }
 
 type JaEkstraFelterProps = IEkstraFelterProps;

@@ -8,7 +8,7 @@ import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
 import { selectArbeidsforhold } from '../../soknad/selectors';
-import { Bolk, IArbeidsforhold } from '../../soknad/types';
+import { Stegnavn, IArbeidsforhold } from '../../soknad/types';
 
 interface IMapDispatchToProps {
     nesteSteg: () => void;
@@ -25,7 +25,7 @@ const Arbeidsforhold: React.StatelessComponent<ArbeidsforholdSideProps> = ({
     mottarKontantstotteFraAnnetEOSForklaring,
     nesteSteg,
 }) => {
-    const bolk: Bolk = 'arbeidsforhold';
+    const bolk: Stegnavn = 'arbeidsforhold';
     return (
         <SideContainer>
             <ValidForm summaryTitle={'Arbeidsforhold'} onSubmit={nesteSteg}>

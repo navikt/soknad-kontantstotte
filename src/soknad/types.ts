@@ -12,6 +12,19 @@ enum BarnehageplassVerdier {
     Ubesvart = 'Ubesvart',
 }
 
+enum ValideringsStatus {
+    FEIL = 'FEIL',
+    ADVARSEL = 'ADVARSEL',
+    OK = 'OK',
+    IKKE_VALIDERT = 'IKKE_VALIDERT',
+}
+
+interface IFelt {
+    verdi: Svar | BarnehageplassVerdier | string;
+    valideringsStatus: ValideringsStatus;
+    feilmeldingsNokkel: string;
+}
+
 interface ISoknadState {
     readonly mineBarn: IMineBarn;
     readonly familieforhold: IFamilieforhold;
@@ -50,16 +63,16 @@ interface IBarnehageplass {
 }
 
 interface IKravTilSoker {
-    readonly norskStatsborger: Svar;
-    readonly boddEllerJobbetINorgeSisteFemAar: Svar;
-    readonly borSammenMedBarnet: Svar;
-    readonly barnIkkeHjemme: Svar;
-    readonly ikkeAvtaltDeltBosted: Svar;
-    readonly skalBoMedBarnetINorgeNesteTolvMaaneder: Svar;
+    readonly norskStatsborger: IFelt;
+    readonly boddEllerJobbetINorgeSisteFemAar: IFelt;
+    readonly borSammenMedBarnet: IFelt;
+    readonly barnIkkeHjemme: IFelt;
+    readonly ikkeAvtaltDeltBosted: IFelt;
+    readonly skalBoMedBarnetINorgeNesteTolvMaaneder: IFelt;
 }
 
-type Bolk = keyof ISoknadState;
-type Felt =
+type Stegnavn = keyof ISoknadState;
+type Feltnavn =
     | keyof IMineBarn
     | keyof IFamilieforhold
     | keyof IArbeidsforhold
@@ -68,12 +81,14 @@ type Felt =
 
 export {
     BarnehageplassVerdier,
-    Bolk,
-    Felt,
+    Stegnavn,
+    Feltnavn,
     IArbeidsforhold,
     IBarnehageplass,
     IFamilieforhold,
     IKravTilSoker,
     ISoknadState,
     Svar,
+    IFelt,
+    ValideringsStatus,
 };

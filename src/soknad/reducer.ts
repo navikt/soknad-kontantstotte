@@ -1,5 +1,5 @@
 import { SoknadActionTypes, SoknadTypeKeys } from './actions';
-import { BarnehageplassVerdier, ISoknadState, Svar } from './types';
+import { BarnehageplassVerdier, ISoknadState, Svar, ValideringsStatus } from './types';
 
 const initialState: ISoknadState = {
     arbeidsforhold: {
@@ -24,12 +24,36 @@ const initialState: ISoknadState = {
         erAvklartDeltBosted: Svar.UBESVART,
     },
     kravTilSoker: {
-        barnIkkeHjemme: Svar.UBESVART,
-        boddEllerJobbetINorgeSisteFemAar: Svar.UBESVART,
-        borSammenMedBarnet: Svar.UBESVART,
-        ikkeAvtaltDeltBosted: Svar.UBESVART,
-        norskStatsborger: Svar.UBESVART,
-        skalBoMedBarnetINorgeNesteTolvMaaneder: Svar.UBESVART,
+        barnIkkeHjemme: {
+            feilmeldingsNokkel: 'svar.feilmeldingCheckbox',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: Svar.UBESVART,
+        },
+        boddEllerJobbetINorgeSisteFemAar: {
+            feilmeldingsNokkel: 'svar.feilmeldingCheckbox',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: Svar.UBESVART,
+        },
+        borSammenMedBarnet: {
+            feilmeldingsNokkel: 'svar.feilmeldingCheckbox',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: Svar.UBESVART,
+        },
+        ikkeAvtaltDeltBosted: {
+            feilmeldingsNokkel: 'svar.feilmeldingCheckbox',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: Svar.UBESVART,
+        },
+        norskStatsborger: {
+            feilmeldingsNokkel: 'svar.feilmeldingCheckbox',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: Svar.UBESVART,
+        },
+        skalBoMedBarnetINorgeNesteTolvMaaneder: {
+            feilmeldingsNokkel: 'svar.feilmeldingCheckbox',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: Svar.UBESVART,
+        },
     },
     mineBarn: {
         fodselsdato: '',
@@ -39,12 +63,12 @@ const initialState: ISoknadState = {
 
 function soknadReducer(state = initialState, action: SoknadActionTypes) {
     switch (action.type) {
-        case SoknadTypeKeys.SETT_VERDI:
+        case SoknadTypeKeys.SETT_FELT:
             return {
                 ...state,
-                [action.bolk]: {
-                    ...state[action.bolk],
-                    [action.felt]: action.verdi,
+                [action.stegnavn]: {
+                    ...state[action.stegnavn],
+                    [action.feltnavn]: action.felt,
                 },
             };
         default:

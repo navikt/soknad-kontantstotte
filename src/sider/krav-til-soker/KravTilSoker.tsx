@@ -1,21 +1,20 @@
+import CheckboksPanelGruppe from 'nav-frontend-skjema/lib/checkboks-panel-gruppe';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { appNesteSteg } from '../../app/actions';
-import ValidCheckboxPanelGruppe from '../../common/lib/validation/ValidCheckboxPanelGruppe';
-import ValidForm from '../../common/lib/validation/ValidForm';
+import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import Veileder from '../../component/Veileder/Veileder';
 import { IRootState } from '../../rootReducer';
-import { soknadSettVerdi } from '../../soknad/actions';
+import { soknadNesteSteg, soknadValidertFelt } from '../../soknad/actions';
 import { selectKravTilSoker } from '../../soknad/selectors';
-import { Felt, IKravTilSoker, Svar } from '../../soknad/types';
-import { harHuketAvPaCheckbox } from '../../validators';
+import { Feltnavn, IFelt, IKravTilSoker, Svar, ValideringsStatus } from '../../soknad/types';
 
 interface IMapDispatchToProps {
-    settCheckboxVerdi: (felt: Felt, verdi: string) => void;
+    settCheckboxVerdi: (felt: Feltnavn, verdi: string) => void;
     nesteSteg: () => void;
 }
 
@@ -28,15 +27,16 @@ const handterCheckboxEndring = (
     handler(value, target.checked ? Svar.JA : Svar.UBESVART);
 };
 
-type KravTilSokerProps = IKravTilSoker & IMapDispatchToProps & InjectedIntlProps;
+interface IMapStateToProps {
+    kravTilSoker: IKravTilSoker;
+    feil?: { feilmelding: string };
+}
+
+type KravTilSokerProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
 const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
-    norskStatsborger,
-    boddEllerJobbetINorgeSisteFemAar,
-    borSammenMedBarnet,
-    barnIkkeHjemme,
-    ikkeAvtaltDeltBosted,
-    skalBoMedBarnetINorgeNesteTolvMaaneder,
+    kravTilSoker,
+    feil,
     intl,
     settCheckboxVerdi,
     nesteSteg,
@@ -59,46 +59,49 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
                     </div>
                 }
             />
-            <ValidForm summaryTitle={'Søknad om kontantstøtte'} onSubmit={nesteSteg}>
-                <ValidCheckboxPanelGruppe
+            <form>
+                <CheckboksPanelGruppe
                     className="krav__inputPanelGruppe"
                     legend={''}
                     checkboxes={[
                         {
-                            checked: norskStatsborger === Svar.JA,
+                            checked: kravTilSoker.norskStatsborger.verdi === Svar.JA,
                             label: intl.formatMessage({
                                 id: 'startside.krav.norskStatsborger',
                             }),
                             value: 'norskStatsborger',
                         },
                         {
-                            checked: boddEllerJobbetINorgeSisteFemAar === Svar.JA,
+                            checked:
+                                kravTilSoker.boddEllerJobbetINorgeSisteFemAar.verdi === Svar.JA,
                             label: intl.formatMessage({
                                 id: 'startside.krav.boddEllerJobbetINorgeSisteFemAar',
                             }),
                             value: 'boddEllerJobbetINorgeSisteFemAar',
                         },
                         {
-                            checked: borSammenMedBarnet === Svar.JA,
+                            checked: kravTilSoker.borSammenMedBarnet.verdi === Svar.JA,
                             label: intl.formatMessage({
                                 id: 'startside.krav.borSammenMedBarnet',
                             }),
                             value: 'borSammenMedBarnet',
                         },
                         {
-                            checked: barnIkkeHjemme === Svar.JA,
+                            checked: kravTilSoker.barnIkkeHjemme.verdi === Svar.JA,
                             label: intl.formatMessage({ id: 'startside.krav.barnIkkeHjemme' }),
                             value: 'barnIkkeHjemme',
                         },
                         {
-                            checked: ikkeAvtaltDeltBosted === Svar.JA,
+                            checked: kravTilSoker.ikkeAvtaltDeltBosted.verdi === Svar.JA,
                             label: intl.formatMessage({
                                 id: 'startside.krav.ikkeAvtaltDeltBosted',
                             }),
                             value: 'ikkeAvtaltDeltBosted',
                         },
                         {
-                            checked: skalBoMedBarnetINorgeNesteTolvMaaneder === Svar.JA,
+                            checked:
+                                kravTilSoker.skalBoMedBarnetINorgeNesteTolvMaaneder.verdi ===
+                                Svar.JA,
                             label: intl.formatMessage({
                                 id: 'startside.krav.skalBoMedBarnetINorgeNesteTolvMaaneder',
                             }),
@@ -108,48 +111,33 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
                     onChange={(event: any, value: any) => {
                         handterCheckboxEndring(event, settCheckboxVerdi, value);
                     }}
-                    validators={[
-                        {
-                            failText: intl.formatMessage({ id: 'svar.feilmeldingCheckbox' }),
-                            test: () => harHuketAvPaCheckbox(norskStatsborger),
-                        },
-                        {
-                            failText: intl.formatMessage({ id: 'svar.feilmeldingCheckbox' }),
-                            test: () => harHuketAvPaCheckbox(boddEllerJobbetINorgeSisteFemAar),
-                        },
-                        {
-                            failText: intl.formatMessage({ id: 'svar.feilmeldingCheckbox' }),
-                            test: () => harHuketAvPaCheckbox(borSammenMedBarnet),
-                        },
-                        {
-                            failText: intl.formatMessage({ id: 'svar.feilmeldingCheckbox' }),
-                            test: () => harHuketAvPaCheckbox(barnIkkeHjemme),
-                        },
-                        {
-                            failText: intl.formatMessage({ id: 'svar.feilmeldingCheckbox' }),
-                            test: () => harHuketAvPaCheckbox(ikkeAvtaltDeltBosted),
-                        },
-                        {
-                            failText: intl.formatMessage({ id: 'svar.feilmeldingCheckbox' }),
-                            test: () =>
-                                harHuketAvPaCheckbox(skalBoMedBarnetINorgeNesteTolvMaaneder),
-                        },
-                    ]}
+                    feil={feil}
                 />
-                <Submitknapp label="app.neste" />
-            </ValidForm>
+            </form>
+            <Submitknapp label="app.neste" onClick={nesteSteg} />
         </SideContainer>
     );
 };
 
-const mapStateToProps = (state: IRootState): IKravTilSoker => {
-    return selectKravTilSoker(state);
+const mapStateToProps = (state: IRootState): IMapStateToProps => {
+    const kravTilSoker = selectKravTilSoker(state);
+    const feltMedFeil = Object.values(kravTilSoker).filter(
+        (felt: IFelt) => felt.valideringsStatus !== ValideringsStatus.OK
+    );
+    return {
+        feil:
+            feltMedFeil.length > 0 && selectHarForsoktNesteSteg(state)
+                ? { feilmelding: feltMedFeil[0].feilmeldingsNokkel }
+                : undefined,
+        kravTilSoker,
+    };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        nesteSteg: () => dispatch(appNesteSteg()),
-        settCheckboxVerdi: (felt, verdi) => dispatch(soknadSettVerdi('kravTilSoker', felt, verdi)),
+        nesteSteg: () => dispatch(soknadNesteSteg()),
+        settCheckboxVerdi: (felt, verdi) =>
+            dispatch(soknadValidertFelt('kravTilSoker', felt, verdi)),
     };
 };
 

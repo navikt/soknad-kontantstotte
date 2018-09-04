@@ -7,15 +7,15 @@ import { ValidForm, ValidRadioPanelGruppe } from '../../common/lib/validation';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
-import { soknadSettVerdi } from '../../soknad/actions';
+import { soknadValidertFelt } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
-import { BarnehageplassVerdier, Felt, IBarnehageplass } from '../../soknad/types';
+import { BarnehageplassVerdier, Feltnavn, IBarnehageplass } from '../../soknad/types';
 import EkstraFelter from './EkstraFelter';
 
 interface IMapDispatchToProps {
     nesteSteg: () => void;
     settSvar: (verdi: BarnehageplassVerdier) => void;
-    settEkstraFelt: (nokkel: Felt, verdi: string) => void;
+    settEkstraFelt: (nokkel: Feltnavn, verdi: string) => void;
 }
 
 type BarnehageplassSideProps = IBarnehageplass & IMapDispatchToProps & InjectedIntlProps;
@@ -85,11 +85,11 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         nesteSteg: () => dispatch(appNesteSteg()),
-        settEkstraFelt: (nokkel: Felt, verdi: string) => {
-            dispatch(soknadSettVerdi('barnehageplass', nokkel, verdi));
+        settEkstraFelt: (nokkel: Feltnavn, verdi: string) => {
+            dispatch(soknadValidertFelt('barnehageplass', nokkel, verdi));
         },
         settSvar: (verdi: BarnehageplassVerdier) => {
-            dispatch(soknadSettVerdi('barnehageplass', 'harBarnehageplass', verdi));
+            dispatch(soknadValidertFelt('barnehageplass', 'harBarnehageplass', verdi));
         },
     };
 };

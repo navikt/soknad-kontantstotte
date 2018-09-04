@@ -10,7 +10,7 @@ import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { selectBarn } from '../../person/selectors';
 import { IBarn } from '../../person/types';
 import { IRootState } from '../../rootReducer';
-import { soknadSettVerdi } from '../../soknad/actions';
+import { soknadValidertFelt } from '../../soknad/actions';
 import { selectMineBarn } from '../../soknad/selectors';
 
 interface IMapStateToProps {
@@ -92,11 +92,11 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         nesteSteg: () => dispatch(appNesteSteg()),
         settBarnFodselsdato: (fodselsdato: string) =>
-            dispatch(soknadSettVerdi('mineBarn', 'fodselsdato', fodselsdato)),
-        settBarnNavn: (navn: string) => dispatch(soknadSettVerdi('mineBarn', 'navn', navn)),
+            dispatch(soknadValidertFelt('mineBarn', 'fodselsdato', fodselsdato)),
+        settBarnNavn: (navn: string) => dispatch(soknadValidertFelt('mineBarn', 'navn', navn)),
         velgBarn: (barn: IBarn) => {
-            dispatch(soknadSettVerdi('mineBarn', 'fodselsdato', barn.fodselsdato));
-            dispatch(soknadSettVerdi('mineBarn', 'navn', barn.navn));
+            dispatch(soknadValidertFelt('mineBarn', 'fodselsdato', barn.fodselsdato));
+            dispatch(soknadValidertFelt('mineBarn', 'navn', barn.navn));
         },
     };
 };

@@ -3,7 +3,7 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { ValidInput } from '../../common/lib/validation';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import { Svar } from '../../soknad/types';
-import { harTekstomradeInnhold } from '../../validators';
+import { harTekstomradeInnhold } from '../../soknad/validators';
 
 interface IProps {
     annenForelderNavn?: string;

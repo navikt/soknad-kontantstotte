@@ -1,26 +1,65 @@
 import { Action } from 'redux';
-import { Bolk, Felt } from './types';
+import { Feltnavn, IFelt, Stegnavn } from './types';
 
 enum SoknadTypeKeys {
-    SETT_VERDI = 'SOKNAD_SETT_VERDI',
+    NESTE_STEG = 'SOKNAD_NESTE_STEG',
+    SETT_FELT = 'SOKNAD_SETT_FELT',
+    VALIDER_FELT = 'SOKNAD_VALIDER_FELT',
 }
 
-type SoknadActionTypes = ISoknadSettVerdi;
+type SoknadActionTypes = ISoknadValiderFelt & ISoknadNesteSteg & ISoknadSettFelt;
 
-interface ISoknadSettVerdi extends Action {
-    bolk: Bolk;
-    felt: Felt;
-    type: SoknadTypeKeys.SETT_VERDI;
+interface ISoknadValiderFelt extends Action {
+    feltnavn: Feltnavn;
+    stegnavn: Stegnavn;
+    type: SoknadTypeKeys.VALIDER_FELT;
     verdi: any;
 }
 
-function soknadSettVerdi(bolk: Bolk, felt: Felt, verdi: any) {
+interface ISoknadSettFelt extends Action {
+    felt: IFelt;
+    feltnavn: Feltnavn;
+    stegnavn: Stegnavn;
+    type: SoknadTypeKeys.SETT_FELT;
+}
+
+interface ISoknadNesteSteg extends Action {
+    type: SoknadTypeKeys.NESTE_STEG;
+}
+
+function soknadValidertFelt(
+    stegnavn: Stegnavn,
+    feltnavn: Feltnavn,
+    verdi: any
+): ISoknadValiderFelt {
     return {
-        bolk,
-        felt,
-        type: SoknadTypeKeys.SETT_VERDI,
+        feltnavn,
+        stegnavn,
+        type: SoknadTypeKeys.VALIDER_FELT,
         verdi,
     };
 }
 
-export { SoknadActionTypes, soknadSettVerdi, SoknadTypeKeys };
+function soknadSettFelt(stegnavn: Stegnavn, feltnavn: Feltnavn, felt: IFelt): ISoknadSettFelt {
+    return {
+        felt,
+        feltnavn,
+        stegnavn,
+        type: SoknadTypeKeys.SETT_FELT,
+    };
+}
+
+function soknadNesteSteg(): ISoknadNesteSteg {
+    return {
+        type: SoknadTypeKeys.NESTE_STEG,
+    };
+}
+
+export {
+    SoknadActionTypes,
+    soknadValidertFelt,
+    SoknadTypeKeys,
+    soknadNesteSteg,
+    ISoknadValiderFelt,
+    soknadSettFelt,
+};
