@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import ValidRadioPanelGruppe from '../../common/lib/validation/ValidRadioPanelGruppe';
 import { soknadValidertFelt } from '../../soknad/actions';
-import { Stegnavn, Feltnavn, Svar } from '../../soknad/types';
+import { Feltnavn, Stegnavn, Svar } from '../../soknad/types';
 import { harSvartPaJaNeiSporsmal } from '../../soknad/validators';
 import SpesifiserTextarea from './SpesifiserTextarea';
 

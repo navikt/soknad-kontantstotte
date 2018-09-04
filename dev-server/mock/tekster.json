@@ -79,5 +79,6 @@
     "veiledningsside.personopplysning.knapp": "Lukk",
     "veiledningsside.personopplysning.lenke": "Les mer om hvordan vi behandler personopplysninger",
     "veiledningsside.veileder.hei": "Hei",
-    "veiledningsside.veileder.melding": "Før vi setter i gang må du godkjenne våre vilkår for søknaden"
+    "veiledningsside.veileder.melding": "Før vi setter i gang må du godkjenne våre vilkår for søknaden",
+    "feilmelding.mineBarn.fodselsDato": "Fødselsdatoen mangler"
 }

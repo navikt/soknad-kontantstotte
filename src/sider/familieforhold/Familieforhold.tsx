@@ -49,7 +49,7 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
                         verdi={erAvklartDeltBosted}
                     />
                 )}
-                <Submitknapp label="app.neste" />
+                <Submitknapp label="app.neste" onClick={nesteSteg} />
             </ValidForm>
         </SideContainer>
     );

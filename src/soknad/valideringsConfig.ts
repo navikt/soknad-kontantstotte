@@ -1,28 +1,32 @@
 import { Feltnavn, IFelt, Stegnavn } from './types';
 import {
+    harFyltInnFodselsdato,
+    harFyltInnFodselsnummer,
     harFyltInnNavn,
     harSvartJaMedFeilmelding,
     harSvartMedFeilmelding,
-    harFyltInnFodselsnummer,
+    svarUtenValidering,
 } from './validators';
 
-type IValideringsConfig = { [stegnavn in Stegnavn]: { [feltnavn in Feltnavn]: () => IFelt } };
+type IValideringsConfig = {
+    [stegnavn in Stegnavn]: { [feltnavn in Feltnavn]: (felt: IFelt) => IFelt }
+};
 
 const valideringsConfig: IValideringsConfig = {
-    // arbeidsforhold: {
-    //     mottarYtelserFraUtlandet
-    //     mottarYtelserFraUtlandetForklaring
-    //     arbeiderIUtlandetEllerKontinentalsokkel
-    //     arbeiderIUtlandetEllerKontinentalsokkelForklaring
-    //     mottarKontantstotteFraAnnetEOS
-    //     mottarKontantstotteFraAnnetEOSForklaring
-    // },
-    // barnehageplass: {
-    //     harBarnehageplass
-    //     dato
-    //     kommune
-    //     antallTimer
-    // },
+    arbeidsforhold: {
+        arbeiderIUtlandetEllerKontinentalsokkel: harSvartMedFeilmelding,
+        arbeiderIUtlandetEllerKontinentalsokkelForklaring: svarUtenValidering,
+        mottarKontantstotteFraAnnetEOS: harSvartMedFeilmelding,
+        mottarKontantstotteFraAnnetEOSForklaring: svarUtenValidering,
+        mottarYtelserFraUtlandet: harSvartMedFeilmelding,
+        mottarYtelserFraUtlandetForklaring: svarUtenValidering,
+    },
+    barnehageplass: {
+        antallTimer: svarUtenValidering,
+        dato: svarUtenValidering,
+        harBarnehageplass: harSvartMedFeilmelding,
+        kommune: svarUtenValidering,
+    },
     familieforhold: {
         annenForelderFodselsnummer: harFyltInnFodselsnummer,
         annenForelderNavn: harFyltInnNavn,
@@ -38,10 +42,10 @@ const valideringsConfig: IValideringsConfig = {
         norskStatsborger: harSvartJaMedFeilmelding,
         skalBoMedBarnetINorgeNesteTolvMaaneder: harSvartJaMedFeilmelding,
     },
-    // mineBarn: {
-    //     navn
-    //     fodselsdato
-    // },
+    mineBarn: {
+        fodselsdato: harFyltInnFodselsdato,
+        navn: harFyltInnNavn,
+    },
 };
 
 export default valideringsConfig;

@@ -75,8 +75,8 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                         defaultValue={valgtBarn.fodselsdato}
                     />
                 </ValidGroup>
-                <Submitknapp label={'app.neste'} />
             </ValidForm>
+            <Submitknapp label={'app.neste'} onClick={nesteSteg} />
         </SideContainer>
     );
 };

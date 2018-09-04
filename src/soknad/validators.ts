@@ -41,7 +41,13 @@ const harFyltInnNavn = (felt: IFelt): IFelt => {
         : feil(felt, 'familieforhold.annenForelder.navn.feilmelding');
 };
 
-const harFyltInnFodselsnummer = (felt: IFelt) => {
+const harFyltInnFodselsdato = (felt: IFelt): IFelt => {
+    return /^\d{2}.\d{2}.\d{4}/.test(felt.verdi.replace(' ', ''))
+        ? ok(felt)
+        : feil(felt, 'feilmelding.mineBarn.fodselsDato');
+};
+
+const harFyltInnFodselsnummer = (felt: IFelt): IFelt => {
     return /^\d{11}/.test(felt.verdi.replace(' ', ''))
         ? ok(felt)
         : feil(felt, 'familieforhold.annenForelder.fodselsnummer.feilmelding');
@@ -51,11 +57,15 @@ const harSvartMedFeilmelding = (felt: IFelt): IFelt => harSvart(felt, 'svar.feil
 const harSvartJaMedFeilmelding = (felt: IFelt): IFelt =>
     harSvartJa(felt, 'svar.feilmeldingCheckbox');
 
+const svarUtenValidering = (felt: IFelt): IFelt => felt;
+
 export {
     harSvart,
     harSvartMedFeilmelding,
     harSvartJa,
     harSvartJaMedFeilmelding,
     harFyltInnNavn,
+    harFyltInnFodselsdato,
     harFyltInnFodselsnummer,
+    svarUtenValidering,
 };
