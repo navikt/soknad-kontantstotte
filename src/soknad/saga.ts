@@ -35,6 +35,9 @@ function* nesteStegSaga() {
         case 1: {
             harFeil = yield call(validerSteg, 'kravTilSoker');
         }
+        case 2: {
+            harFeil = yield call(validerSteg, 'mineBarn');
+        }
     }
     if (!harFeil) {
         yield put(appNesteSteg());

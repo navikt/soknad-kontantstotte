@@ -1,11 +1,13 @@
+import { IFelt } from '../soknad/types';
+
 interface IPerson {
     navn: string;
     barn: IBarn[];
 }
 
 interface IBarn {
-    navn: string;
-    fodselsdato: string;
+    navn: IFelt;
+    fodselsdato: IFelt;
 }
 
 export { IPerson, IBarn };

@@ -23,6 +23,7 @@ function appReducer(state: IAppState = initialState, action: AppActionTypes) {
         case AppTypeKeys.SETT_STEG:
             return {
                 ...state,
+                harForsoktNesteSteg: false,
                 steg: action.steg,
             };
         case AppTypeKeys.SETT_HAR_FORSOKT_NESTE_STEG:

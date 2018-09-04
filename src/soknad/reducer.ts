@@ -117,7 +117,7 @@ const initialState: ISoknadState = {
     },
     mineBarn: {
         fodselsdato: {
-            feilmeldingsNokkel: 'svar.feilmelding',
+            feilmeldingsNokkel: 'feilmelding.mineBarn.fodselsDato',
             valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
             verdi: '',
         },

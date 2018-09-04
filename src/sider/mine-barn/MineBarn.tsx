@@ -1,20 +1,24 @@
 import { Input } from 'nav-frontend-skjema';
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
+import { SkjemaGruppe } from 'nav-frontend-skjema';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { appNesteSteg } from '../../app/actions';
-import { ValidForm, ValidGroup } from '../../common/lib/validation';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { selectBarn } from '../../person/selectors';
 import { IBarn } from '../../person/types';
 import { IRootState } from '../../rootReducer';
-import { soknadValidertFelt } from '../../soknad/actions';
+import { soknadValidertFelt, soknadNesteSteg } from '../../soknad/actions';
 import { selectMineBarn } from '../../soknad/selectors';
+import { Feltnavn, IFelt, IKravTilSoker, Svar, ValideringsStatus } from '../../soknad/types';
+import { selectHarForsoktNesteSteg } from '../../app/selectors';
+import { IFeil } from '../../common/lib/validation/types';
 
 interface IMapStateToProps {
     barn: IBarn[];
+    feltMedFeil: IMineKravFeil;
     valgtBarn: IBarn;
 }
 
@@ -29,6 +33,7 @@ type MineBarnSideProps = IMapStateToProps & IMapDispatchToProps;
 
 const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
     barn,
+    feltMedFeil,
     nesteSteg,
     settBarnFodselsdato,
     settBarnNavn,
@@ -37,22 +42,18 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
 }) => {
     return (
         <SideContainer className={'mine-barn'}>
-            <ValidForm summaryTitle={'mine-barn'} onSubmit={nesteSteg}>
-                <ValidGroup
-                    validators={[
-                        {
-                            failText: 'Du må enten velge barn eller fylle ut informasjon om barnet',
-                            test: () => !!valgtBarn.fodselsdato && !!valgtBarn.navn,
-                        },
-                    ]}
-                >
+            <form>
+                <SkjemaGruppe>
                     <RadioPanelGruppe
-                        radios={barn.map(b => ({ label: b.navn, value: b.fodselsdato }))}
+                        radios={barn.map(b => ({
+                            label: b.navn.verdi,
+                            value: b.fodselsdato.verdi,
+                        }))}
                         name={'barn'}
                         legend={'Velg barn du søker kontantstøtte for:'}
-                        checked={valgtBarn.fodselsdato}
+                        checked={valgtBarn.fodselsdato.verdi}
                         onChange={(evt: {}, value: string) => {
-                            const nyttValgtBarn = barn.find(b => b.fodselsdato === value);
+                            const nyttValgtBarn = barn.find(b => b.fodselsdato.verdi === value);
                             if (nyttValgtBarn) {
                                 velgBarn(nyttValgtBarn);
                             }
@@ -64,7 +65,8 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                         onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
                             settBarnNavn(event.target.value)
                         }
-                        defaultValue={valgtBarn.navn}
+                        defaultValue={valgtBarn.navn.verdi}
+                        feil={feltMedFeil['navn']}
                     />
                     <Input
                         className={'mine-barn__fodselsdato-input'}
@@ -72,25 +74,48 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                         onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
                             settBarnFodselsdato(event.target.value)
                         }
-                        defaultValue={valgtBarn.fodselsdato}
+                        defaultValue={valgtBarn.fodselsdato.verdi}
+                        feil={feltMedFeil['fodselsdato']}
                     />
-                </ValidGroup>
-            </ValidForm>
+                </SkjemaGruppe>
+            </form>
             <Submitknapp label={'app.neste'} onClick={nesteSteg} />
         </SideContainer>
     );
 };
 
+interface IMineKravFeil {
+    [key: string]: IFeil | undefined;
+}
+
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
+    const barn = selectBarn(state);
+    const mineBarn = selectMineBarn(state);
+    const harForsoktNesteSteg = selectHarForsoktNesteSteg(state);
+
+    const feltMedFeil = Object.keys(mineBarn).reduce(
+        (accFeltMedFeil: IMineKravFeil, feltKey: string) => {
+            const felt: IFelt = mineBarn[feltKey];
+
+            accFeltMedFeil[feltKey] =
+                felt.valideringsStatus !== ValideringsStatus.OK && harForsoktNesteSteg
+                    ? { feilmelding: felt.feilmeldingsNokkel }
+                    : undefined;
+            return accFeltMedFeil;
+        },
+        {}
+    );
+
     return {
-        barn: selectBarn(state),
-        valgtBarn: selectMineBarn(state),
+        barn,
+        feltMedFeil,
+        valgtBarn: mineBarn,
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        nesteSteg: () => dispatch(appNesteSteg()),
+        nesteSteg: () => dispatch(soknadNesteSteg()),
         settBarnFodselsdato: (fodselsdato: string) =>
             dispatch(soknadValidertFelt('mineBarn', 'fodselsdato', fodselsdato)),
         settBarnNavn: (navn: string) => dispatch(soknadValidertFelt('mineBarn', 'navn', navn)),
