@@ -3,25 +3,85 @@ import { BarnehageplassVerdier, ISoknadState, Svar, ValideringsStatus } from './
 
 const initialState: ISoknadState = {
     arbeidsforhold: {
-        arbeiderIUtlandetEllerKontinentalsokkel: Svar.UBESVART,
-        arbeiderIUtlandetEllerKontinentalsokkelForklaring: '',
-        mottarKontantstotteFraAnnetEOS: Svar.UBESVART,
-        mottarKontantstotteFraAnnetEOSForklaring: '',
-        mottarYtelserFraUtlandet: Svar.UBESVART,
-        mottarYtelserFraUtlandetForklaring: '',
+        arbeiderIUtlandetEllerKontinentalsokkel: {
+            feilmeldingsNokkel: 'svar.feilmelding',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: Svar.UBESVART,
+        },
+        arbeiderIUtlandetEllerKontinentalsokkelForklaring: {
+            feilmeldingsNokkel: 'svar.feilmelding',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: '',
+        },
+        mottarKontantstotteFraAnnetEOS: {
+            feilmeldingsNokkel: 'svar.feilmelding',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: Svar.UBESVART,
+        },
+        mottarKontantstotteFraAnnetEOSForklaring: {
+            feilmeldingsNokkel: 'svar.feilmelding',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: '',
+        },
+        mottarYtelserFraUtlandet: {
+            feilmeldingsNokkel: 'svar.feilmelding',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: Svar.UBESVART,
+        },
+        mottarYtelserFraUtlandetForklaring: {
+            feilmeldingsNokkel: 'svar.feilmelding',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: '',
+        },
     },
     barnehageplass: {
-        antallTimer: '',
-        dato: '',
-        harBarnehageplass: BarnehageplassVerdier.Ubesvart,
-        kommune: '',
+        antallTimer: {
+            feilmeldingsNokkel: 'svar.feilmelding',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: '',
+        },
+        dato: {
+            feilmeldingsNokkel: 'svar.feilmelding',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: '',
+        },
+        harBarnehageplass: {
+            feilmeldingsNokkel: 'svar.feilmelding',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: BarnehageplassVerdier.Ubesvart,
+        },
+        kommune: {
+            feilmeldingsNokkel: 'svar.feilmelding',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: '',
+        },
     },
     familieforhold: {
-        annenForelderFodselsnummer: '',
-        annenForelderNavn: '',
-        annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar.UBESVART,
-        borForeldreneSammenMedBarnet: Svar.UBESVART,
-        erAvklartDeltBosted: Svar.UBESVART,
+        annenForelderFodselsnummer: {
+            feilmeldingsNokkel: 'svar.feilmelding',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: '',
+        },
+        annenForelderNavn: {
+            feilmeldingsNokkel: 'svar.feilmelding',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: '',
+        },
+        annenForelderYrkesaktivINorgeEOSIMinstFemAar: {
+            feilmeldingsNokkel: 'svar.feilmeldingCheckbox',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: Svar.UBESVART,
+        },
+        borForeldreneSammenMedBarnet: {
+            feilmeldingsNokkel: 'svar.feilmeldingCheckbox',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: Svar.UBESVART,
+        },
+        erAvklartDeltBosted: {
+            feilmeldingsNokkel: 'svar.feilmeldingCheckbox',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: Svar.UBESVART,
+        },
     },
     kravTilSoker: {
         barnIkkeHjemme: {
@@ -56,8 +116,16 @@ const initialState: ISoknadState = {
         },
     },
     mineBarn: {
-        fodselsdato: '',
-        navn: '',
+        fodselsdato: {
+            feilmeldingsNokkel: 'svar.feilmelding',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: '',
+        },
+        navn: {
+            feilmeldingsNokkel: 'svar.feilmelding',
+            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+            verdi: '',
+        },
     },
 };
 

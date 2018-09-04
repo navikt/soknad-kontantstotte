@@ -34,32 +34,32 @@ interface ISoknadState {
 }
 
 interface IMineBarn {
-    readonly navn: string;
-    readonly fodselsdato: string;
+    readonly navn: IFelt;
+    readonly fodselsdato: IFelt;
 }
 
 interface IFamilieforhold {
-    readonly borForeldreneSammenMedBarnet: Svar;
-    readonly erAvklartDeltBosted: Svar;
-    readonly annenForelderNavn: string;
-    readonly annenForelderFodselsnummer: string;
-    readonly annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar;
+    readonly borForeldreneSammenMedBarnet: IFelt;
+    readonly erAvklartDeltBosted: IFelt;
+    readonly annenForelderNavn: IFelt;
+    readonly annenForelderFodselsnummer: IFelt;
+    readonly annenForelderYrkesaktivINorgeEOSIMinstFemAar: IFelt;
 }
 
 interface IArbeidsforhold {
-    readonly mottarYtelserFraUtlandet: Svar;
-    readonly mottarYtelserFraUtlandetForklaring: string;
-    readonly arbeiderIUtlandetEllerKontinentalsokkel: Svar;
-    readonly arbeiderIUtlandetEllerKontinentalsokkelForklaring: string;
-    readonly mottarKontantstotteFraAnnetEOS: Svar;
-    readonly mottarKontantstotteFraAnnetEOSForklaring: string;
+    readonly mottarYtelserFraUtlandet: IFelt;
+    readonly mottarYtelserFraUtlandetForklaring: IFelt;
+    readonly arbeiderIUtlandetEllerKontinentalsokkel: IFelt;
+    readonly arbeiderIUtlandetEllerKontinentalsokkelForklaring: IFelt;
+    readonly mottarKontantstotteFraAnnetEOS: IFelt;
+    readonly mottarKontantstotteFraAnnetEOSForklaring: IFelt;
 }
 
 interface IBarnehageplass {
-    readonly harBarnehageplass: BarnehageplassVerdier;
-    readonly dato: string;
-    readonly kommune: string;
-    readonly antallTimer: string;
+    readonly harBarnehageplass: IFelt;
+    readonly dato: IFelt;
+    readonly kommune: IFelt;
+    readonly antallTimer: IFelt;
 }
 
 interface IKravTilSoker {
