@@ -7,7 +7,7 @@ import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
-import { soknadValidertFelt } from '../../soknad/actions';
+import { soknadValiderFelt } from '../../soknad/actions';
 import { selectFamilieforhold } from '../../soknad/selectors';
 import { IFamilieforhold, Svar } from '../../soknad/types';
 import AnnenForelderInfo from './AnnenForelderInfo';
@@ -63,10 +63,10 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         nesteSteg: () => dispatch(appNesteSteg()),
         settAnnenForelderFodselsnummer: personnr => {
-            dispatch(soknadValidertFelt('familieforhold', 'annenForelderFodselsnummer', personnr));
+            dispatch(soknadValiderFelt('familieforhold', 'annenForelderFodselsnummer', personnr));
         },
         settAnnenForelderNavn: navn => {
-            dispatch(soknadValidertFelt('familieforhold', 'annenForelderNavn', navn));
+            dispatch(soknadValiderFelt('familieforhold', 'annenForelderNavn', navn));
         },
     };
 };

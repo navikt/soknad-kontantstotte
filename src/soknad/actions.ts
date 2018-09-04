@@ -27,11 +27,7 @@ interface ISoknadNesteSteg extends Action {
     type: SoknadTypeKeys.NESTE_STEG;
 }
 
-function soknadValidertFelt(
-    stegnavn: Stegnavn,
-    feltnavn: Feltnavn,
-    verdi: any
-): ISoknadValiderFelt {
+function soknadValiderFelt(stegnavn: Stegnavn, feltnavn: Feltnavn, verdi: any): ISoknadValiderFelt {
     return {
         feltnavn,
         stegnavn,
@@ -57,7 +53,7 @@ function soknadNesteSteg(): ISoknadNesteSteg {
 
 export {
     SoknadActionTypes,
-    soknadValidertFelt,
+    soknadValiderFelt,
     SoknadTypeKeys,
     soknadNesteSteg,
     ISoknadValiderFelt,

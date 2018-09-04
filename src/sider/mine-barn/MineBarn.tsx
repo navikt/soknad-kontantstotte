@@ -10,7 +10,7 @@ import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { selectBarn } from '../../person/selectors';
 import { IBarn } from '../../person/types';
 import { IRootState } from '../../rootReducer';
-import { soknadValidertFelt, soknadNesteSteg } from '../../soknad/actions';
+import { soknadValiderFelt, soknadNesteSteg } from '../../soknad/actions';
 import { selectMineBarn } from '../../soknad/selectors';
 import { Feltnavn, IFelt, IKravTilSoker, Svar, ValideringsStatus } from '../../soknad/types';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
@@ -117,11 +117,11 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         nesteSteg: () => dispatch(soknadNesteSteg()),
         settBarnFodselsdato: (fodselsdato: string) =>
-            dispatch(soknadValidertFelt('mineBarn', 'fodselsdato', fodselsdato)),
-        settBarnNavn: (navn: string) => dispatch(soknadValidertFelt('mineBarn', 'navn', navn)),
+            dispatch(soknadValiderFelt('mineBarn', 'fodselsdato', fodselsdato)),
+        settBarnNavn: (navn: string) => dispatch(soknadValiderFelt('mineBarn', 'navn', navn)),
         velgBarn: (barn: IBarn) => {
-            dispatch(soknadValidertFelt('mineBarn', 'fodselsdato', barn.fodselsdato));
-            dispatch(soknadValidertFelt('mineBarn', 'navn', barn.navn));
+            dispatch(soknadValiderFelt('mineBarn', 'fodselsdato', barn.fodselsdato));
+            dispatch(soknadValiderFelt('mineBarn', 'navn', barn.navn));
         },
     };
 };

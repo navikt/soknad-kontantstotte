@@ -7,7 +7,7 @@ import { ValidForm, ValidRadioPanelGruppe } from '../../common/lib/validation';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
-import { soknadValidertFelt } from '../../soknad/actions';
+import { soknadValiderFelt } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
 import { BarnehageplassVerdier, Feltnavn, IBarnehageplass } from '../../soknad/types';
 import EkstraFelter from './EkstraFelter';
@@ -86,10 +86,10 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         nesteSteg: () => dispatch(appNesteSteg()),
         settEkstraFelt: (nokkel: Feltnavn, verdi: string) => {
-            dispatch(soknadValidertFelt('barnehageplass', nokkel, verdi));
+            dispatch(soknadValiderFelt('barnehageplass', nokkel, verdi));
         },
         settSvar: (verdi: BarnehageplassVerdier) => {
-            dispatch(soknadValidertFelt('barnehageplass', 'harBarnehageplass', verdi));
+            dispatch(soknadValiderFelt('barnehageplass', 'harBarnehageplass', verdi));
         },
     };
 };

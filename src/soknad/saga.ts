@@ -2,6 +2,7 @@ import { SagaIterator } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { appNesteSteg, appSettHarForsoktNesteSteg } from '../app/actions';
 import { selectAppSteg } from '../app/selectors';
+import { stegConfig } from '../stegConfig';
 import { ISoknadValiderFelt, soknadSettFelt, SoknadTypeKeys } from './actions';
 import { selectSoknad } from './selectors';
 import { IFelt, Stegnavn, ValideringsStatus } from './types';
@@ -21,6 +22,7 @@ function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
 
 function* validerSteg(stegnavn: Stegnavn) {
     const soknadState = yield select(selectSoknad);
+
     const harFeil = Object.values(soknadState[stegnavn]).reduce((acc: boolean, felt: IFelt) => {
         return acc || felt.valideringsStatus !== ValideringsStatus.OK;
     }, false);
@@ -32,10 +34,10 @@ function* nesteStegSaga() {
     const appSteg = yield select(selectAppSteg);
     let harFeil: boolean = false;
     switch (appSteg) {
-        case 1: {
+        case stegConfig.kravTilSoker.stegIndeks: {
             harFeil = yield call(validerSteg, 'kravTilSoker');
         }
-        case 2: {
+        case stegConfig.mineBarn.stegIndeks: {
             harFeil = yield call(validerSteg, 'mineBarn');
         }
     }

@@ -8,7 +8,7 @@ import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import Veileder from '../../component/Veileder/Veileder';
 import { IRootState } from '../../rootReducer';
-import { soknadNesteSteg, soknadValidertFelt } from '../../soknad/actions';
+import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectKravTilSoker } from '../../soknad/selectors';
 import { Feltnavn, IFelt, IKravTilSoker, Svar, ValideringsStatus } from '../../soknad/types';
 
@@ -133,7 +133,7 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         nesteSteg: () => dispatch(soknadNesteSteg()),
         settCheckboxVerdi: (feltnavn: Feltnavn, verdi) =>
-            dispatch(soknadValidertFelt('kravTilSoker', feltnavn, verdi)),
+            dispatch(soknadValiderFelt('kravTilSoker', feltnavn, verdi)),
     };
 };
 

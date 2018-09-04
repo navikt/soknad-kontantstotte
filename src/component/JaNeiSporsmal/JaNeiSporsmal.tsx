@@ -4,7 +4,7 @@ import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import ValidRadioPanelGruppe from '../../common/lib/validation/ValidRadioPanelGruppe';
-import { soknadValidertFelt } from '../../soknad/actions';
+import { soknadValiderFelt } from '../../soknad/actions';
 import { Feltnavn, Stegnavn, Svar } from '../../soknad/types';
 import { harSvartPaJaNeiSporsmal } from '../../soknad/validators';
 import SpesifiserTextarea from './SpesifiserTextarea';
@@ -78,7 +78,7 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: ISporsmaalProps): IMap
     return {
         settForklaring: forklaring => {
             dispatch(
-                soknadValidertFelt(
+                soknadValiderFelt(
                     ownProps.bolk,
                     `${ownProps.felt}Forklaring` as Feltnavn,
                     forklaring
@@ -86,7 +86,7 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: ISporsmaalProps): IMap
             );
         },
         settSvar: (verdi: Svar) => {
-            dispatch(soknadValidertFelt(ownProps.bolk, ownProps.felt, verdi));
+            dispatch(soknadValiderFelt(ownProps.bolk, ownProps.felt, verdi));
         },
     };
 };
