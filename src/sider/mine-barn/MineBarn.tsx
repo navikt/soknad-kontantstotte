@@ -66,7 +66,7 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                             settBarnNavn(event.target.value)
                         }
                         defaultValue={valgtBarn.navn.verdi}
-                        feil={feltMedFeil['navn']}
+                        feil={feltMedFeil.navn}
                     />
                     <Input
                         className={'mine-barn__fodselsdato-input'}
@@ -75,7 +75,7 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                             settBarnFodselsdato(event.target.value)
                         }
                         defaultValue={valgtBarn.fodselsdato.verdi}
-                        feil={feltMedFeil['fodselsdato']}
+                        feil={feltMedFeil.fodselsdato}
                     />
                 </SkjemaGruppe>
             </form>

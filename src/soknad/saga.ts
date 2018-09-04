@@ -4,7 +4,7 @@ import { appNesteSteg, appSettHarForsoktNesteSteg } from '../app/actions';
 import { selectAppSteg } from '../app/selectors';
 import { ISoknadValiderFelt, soknadSettFelt, SoknadTypeKeys } from './actions';
 import { selectSoknad } from './selectors';
-import { IFelt, Stegnavn, Svar, ValideringsStatus } from './types';
+import { IFelt, Stegnavn, ValideringsStatus } from './types';
 import valideringsConfig from './valideringsConfig';
 
 function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {

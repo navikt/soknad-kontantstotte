@@ -3,7 +3,6 @@ import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { appNesteSteg } from '../../app/actions';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
@@ -17,15 +16,6 @@ interface IMapDispatchToProps {
     settCheckboxVerdi: (felt: Feltnavn, verdi: string) => void;
     nesteSteg: () => void;
 }
-
-const handterCheckboxEndring = (
-    event: React.SyntheticEvent<EventTarget>,
-    handler: any,
-    value?: string
-) => {
-    const target = event.nativeEvent.target as HTMLInputElement;
-    handler(value, target.checked ? Svar.JA : Svar.UBESVART);
-};
 
 interface IMapStateToProps {
     kravTilSoker: IKravTilSoker;
@@ -108,8 +98,14 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
                             value: 'skalBoMedBarnetINorgeNesteTolvMaaneder',
                         },
                     ]}
-                    onChange={(event: any, value: any) => {
-                        handterCheckboxEndring(event, settCheckboxVerdi, value);
+                    onChange={(event: React.SyntheticEvent<EventTarget>, value?: string) => {
+                        if (value) {
+                            const target = event.nativeEvent.target as HTMLInputElement;
+                            settCheckboxVerdi(
+                                value as Feltnavn,
+                                target.checked ? Svar.JA : Svar.UBESVART
+                            );
+                        }
                     }}
                     feil={feil}
                 />
@@ -136,8 +132,8 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         nesteSteg: () => dispatch(soknadNesteSteg()),
-        settCheckboxVerdi: (felt, verdi) =>
-            dispatch(soknadValidertFelt('kravTilSoker', felt, verdi)),
+        settCheckboxVerdi: (feltnavn: Feltnavn, verdi) =>
+            dispatch(soknadValidertFelt('kravTilSoker', feltnavn, verdi)),
     };
 };
 
