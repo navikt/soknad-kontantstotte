@@ -1,14 +1,13 @@
-import { push } from 'connected-react-router';
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import { appNesteSteg } from '../../app/actions';
 import ValidForm from '../../common/lib/validation/ValidForm';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
+import { soknadNesteSteg } from '../../soknad/actions';
 import { selectArbeidsforhold } from '../../soknad/selectors';
-import { IArbeidsforhold, Stegnavn } from '../../soknad/types';
+import { IArbeidsforhold, Stegnavn, Svar } from '../../soknad/types';
 
 interface IMapDispatchToProps {
     nesteSteg: () => void;
@@ -33,27 +32,27 @@ const Arbeidsforhold: React.StatelessComponent<ArbeidsforholdSideProps> = ({
                     bolk={bolk}
                     felt="mottarYtelserFraUtlandet"
                     sporsmalNokkel="arbeidsforhold.mottarYtelserFraUtlandet.sporsmal"
-                    verdi={mottarYtelserFraUtlandet}
+                    verdi={mottarYtelserFraUtlandet.verdi as Svar}
                     harForklaring={true}
-                    forklaring={mottarYtelserFraUtlandetForklaring}
+                    forklaring={mottarYtelserFraUtlandetForklaring.verdi}
                 />
 
                 <JaNeiSporsmal
                     bolk={bolk}
                     felt="arbeiderIUtlandetEllerKontinentalsokkel"
                     sporsmalNokkel="arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.sporsmal"
-                    verdi={arbeiderIUtlandetEllerKontinentalsokkel}
+                    verdi={arbeiderIUtlandetEllerKontinentalsokkel.verdi as Svar}
                     harForklaring={true}
-                    forklaring={arbeiderIUtlandetEllerKontinentalsokkelForklaring}
+                    forklaring={arbeiderIUtlandetEllerKontinentalsokkelForklaring.verdi}
                 />
 
                 <JaNeiSporsmal
                     bolk={bolk}
                     felt="mottarKontantstotteFraAnnetEOS"
                     sporsmalNokkel="arbeidsforhold.mottarKontantstotteFraAnnetEOS.sporsmal"
-                    verdi={mottarKontantstotteFraAnnetEOS}
+                    verdi={mottarKontantstotteFraAnnetEOS.verdi as Svar}
                     harForklaring={true}
-                    forklaring={mottarKontantstotteFraAnnetEOSForklaring}
+                    forklaring={mottarKontantstotteFraAnnetEOSForklaring.verdi}
                 />
                 <Submitknapp label="app.neste" onClick={nesteSteg} />
             </ValidForm>
@@ -67,7 +66,7 @@ const mapStateToProps = (state: IRootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        nesteSteg: () => dispatch(appNesteSteg()),
+        nesteSteg: () => dispatch(soknadNesteSteg()),
     };
 };
 

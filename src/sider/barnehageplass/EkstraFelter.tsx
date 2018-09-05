@@ -21,7 +21,7 @@ const EkstraFelter: React.StatelessComponent<JaEkstraFelterProps> = ({
     intl,
 }) => {
     let datoNokkel: string;
-    switch (harBarnehageplass) {
+    switch (harBarnehageplass.verdi) {
         case BarnehageplassVerdier.Ja:
         case BarnehageplassVerdier.NeiHarFaatt:
             datoNokkel = 'barnehageplass.harFaattPlassDato';
@@ -35,14 +35,14 @@ const EkstraFelter: React.StatelessComponent<JaEkstraFelterProps> = ({
     return (
         <div>
             <DatoInputWithValidation
-                {...dato && { dato: new Date(dato) }}
+                {...dato && { dato: new Date(dato.verdi) }}
                 name="barnehageplass.dato"
                 label={intl.formatMessage({ id: datoNokkel })}
                 settDato={date => settFelt('dato', date.toDateString())}
                 validators={[
                     {
                         failText: intl.formatMessage({ id: 'svar.feilmelding' }),
-                        test: () => erDatoSatt(dato),
+                        test: () => erDatoSatt(dato.verdi),
                     },
                 ]}
             />
@@ -53,16 +53,16 @@ const EkstraFelter: React.StatelessComponent<JaEkstraFelterProps> = ({
                 validators={[
                     {
                         failText: intl.formatMessage({ id: 'svar.feilmelding' }),
-                        test: () => harTekstomradeInnhold(kommune),
+                        test: () => harTekstomradeInnhold(kommune.verdi),
                     },
                 ]}
                 onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
                     settFelt('kommune', event.target.value)
                 }
-                defaultValue={kommune}
+                defaultValue={kommune.verdi}
             />
             {[BarnehageplassVerdier.JaSkalSlutte, BarnehageplassVerdier.Ja].includes(
-                harBarnehageplass
+                harBarnehageplass.verdi as BarnehageplassVerdier
             ) && (
                 <ValidInput
                     name="barnehageplass.antallTimer"
@@ -71,13 +71,13 @@ const EkstraFelter: React.StatelessComponent<JaEkstraFelterProps> = ({
                     validators={[
                         {
                             failText: intl.formatMessage({ id: 'svar.feilmelding' }),
-                            test: () => harTekstomradeInnhold(antallTimer),
+                            test: () => harTekstomradeInnhold(antallTimer.verdi),
                         },
                     ]}
                     onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
                         settFelt('antallTimer', event.target.value)
                     }
-                    defaultValue={antallTimer}
+                    defaultValue={antallTimer.verdi}
                 />
             )}
         </div>

@@ -21,19 +21,19 @@ const PersonaliaOgBarnOppsummering: React.StatelessComponent<PersonaliaOgBarnPro
                 <FormattedMessage id="oppsummering.sokerKontantstotteFor.label" />
             </Element>
             <br />
-            <Element>{barnet.navn}</Element>
+            <Element>{barnet.navn.verdi}</Element>
             <Normaltekst>
                 <FormattedMessage id="oppsummering.fodselsnummer.label" />
-                {barnet.fodselsdato}
+                {barnet.fodselsdato.verdi}
             </Normaltekst>
             <br />
             <Normaltekst>
                 <FormattedMessage id="oppsummering.avforelder.label" />
             </Normaltekst>
-            <Element>{person.navn}</Element>
+            <Element>{person.navn.verdi}</Element>
             <Normaltekst>
                 <FormattedMessage id="oppsummering.fodselsnummer.label" />
-                {person.fodselsnummer}
+                {person.fodselsnummer.verdi}
             </Normaltekst>
         </div>
     );

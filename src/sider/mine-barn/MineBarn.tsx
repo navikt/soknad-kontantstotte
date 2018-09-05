@@ -1,20 +1,18 @@
-import { Input } from 'nav-frontend-skjema';
+import { Input, SkjemaGruppe } from 'nav-frontend-skjema';
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
-import { SkjemaGruppe } from 'nav-frontend-skjema';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { appNesteSteg } from '../../app/actions';
+import { selectHarForsoktNesteSteg } from '../../app/selectors';
+import { IFeil } from '../../common/lib/validation/types';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { selectBarn } from '../../person/selectors';
 import { IBarn } from '../../person/types';
 import { IRootState } from '../../rootReducer';
-import { soknadValiderFelt, soknadNesteSteg } from '../../soknad/actions';
+import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectMineBarn } from '../../soknad/selectors';
-import { Feltnavn, IFelt, IKravTilSoker, Svar, ValideringsStatus } from '../../soknad/types';
-import { selectHarForsoktNesteSteg } from '../../app/selectors';
-import { IFeil } from '../../common/lib/validation/types';
+import { IFelt, ValideringsStatus } from '../../soknad/types';
 
 interface IMapStateToProps {
     barn: IBarn[];

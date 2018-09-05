@@ -15,7 +15,7 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
     barnehageplass,
     intl,
 }) => {
-    switch (barnehageplass.harBarnehageplass) {
+    switch (barnehageplass.harBarnehageplass.verdi) {
         case BarnehageplassVerdier.Ja:
             return (
                 <OppsummeringsListeElement
@@ -26,21 +26,21 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                             <Normaltekst>
                                 <FormattedMessage id="oppsummering.barnehageplass.dato.label" />
                             </Normaltekst>
-                            <Element>{dagDatoNøkkel(new Date(barnehageplass.dato))}</Element>
+                            <Element>{dagDatoNøkkel(new Date(barnehageplass.dato.verdi))}</Element>
 
                             <br />
 
                             <Normaltekst>
                                 <FormattedMessage id="oppsummering.barnehageplass.kommune.label" />
                             </Normaltekst>
-                            <Element>{barnehageplass.kommune}</Element>
+                            <Element>{barnehageplass.kommune.verdi}</Element>
 
                             <br />
 
                             <Normaltekst>
                                 <FormattedMessage id="oppsummering.barnehageplass.antallTimer.label" />
                             </Normaltekst>
-                            <Element>{barnehageplass.antallTimer}</Element>
+                            <Element>{barnehageplass.antallTimer.verdi}</Element>
                         </li>
                     </ul>
                 </OppsummeringsListeElement>
@@ -57,21 +57,21 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                             <Normaltekst>
                                 <FormattedMessage id="oppsummering.barnehageplass.dato.label" />
                             </Normaltekst>
-                            <Element>{dagDatoNøkkel(new Date(barnehageplass.dato))}</Element>
+                            <Element>{dagDatoNøkkel(new Date(barnehageplass.dato.verdi))}</Element>
 
                             <br />
 
                             <Normaltekst>
                                 <FormattedMessage id="oppsummering.barnehageplass.kommune.label" />
                             </Normaltekst>
-                            <Element>{barnehageplass.kommune}</Element>
+                            <Element>{barnehageplass.kommune.verdi}</Element>
 
                             <br />
 
                             <Normaltekst>
                                 <FormattedMessage id="oppsummering.barnehageplass.antallTimer.label" />
                             </Normaltekst>
-                            <Element>{barnehageplass.antallTimer}</Element>
+                            <Element>{barnehageplass.antallTimer.verdi}</Element>
                         </li>
                     </ul>
                 </OppsummeringsListeElement>
@@ -88,14 +88,14 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                             <Normaltekst>
                                 <FormattedMessage id="oppsummering.barnehageplass.dato.label" />
                             </Normaltekst>
-                            <Element>{dagDatoNøkkel(new Date(barnehageplass.dato))}</Element>
+                            <Element>{dagDatoNøkkel(new Date(barnehageplass.dato.verdi))}</Element>
 
                             <br />
 
                             <Normaltekst>
                                 <FormattedMessage id="oppsummering.barnehageplass.kommune.label" />
                             </Normaltekst>
-                            <Element>{barnehageplass.kommune}</Element>
+                            <Element>{barnehageplass.kommune.verdi}</Element>
                         </li>
                     </ul>
                 </OppsummeringsListeElement>

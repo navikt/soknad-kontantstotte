@@ -1,13 +1,11 @@
-import { push } from 'connected-react-router';
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import { appNesteSteg } from '../../app/actions';
 import { ValidForm } from '../../common/lib/validation';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
-import { soknadValiderFelt } from '../../soknad/actions';
+import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectFamilieforhold } from '../../soknad/selectors';
 import { IFamilieforhold, Svar } from '../../soknad/types';
 import AnnenForelderInfo from './AnnenForelderInfo';
@@ -33,20 +31,20 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
                     bolk="familieforhold"
                     felt="borForeldreneSammenMedBarnet"
                     sporsmalNokkel="familieforhold.borForeldreneSammenMedBarnet.sporsmal"
-                    verdi={borForeldreneSammenMedBarnet}
+                    verdi={borForeldreneSammenMedBarnet.verdi as Svar}
                     hjelpetekstNokkel={'familieforhold.borForeldreneSammenMedBarnet.hjelpetekst'}
                 />
 
-                {borForeldreneSammenMedBarnet === Svar.JA && (
+                {borForeldreneSammenMedBarnet.verdi === Svar.JA && (
                     <AnnenForelderInfo {...annenForelderProps} />
                 )}
 
-                {borForeldreneSammenMedBarnet === Svar.NEI && (
+                {borForeldreneSammenMedBarnet.verdi === Svar.NEI && (
                     <JaNeiSporsmal
                         bolk="familieforhold"
                         felt="erAvklartDeltBosted"
                         sporsmalNokkel="familieforhold.erAvklartDeltBosted.sporsmal"
-                        verdi={erAvklartDeltBosted}
+                        verdi={erAvklartDeltBosted.verdi as Svar}
                     />
                 )}
                 <Submitknapp label="app.neste" onClick={nesteSteg} />
@@ -61,7 +59,7 @@ const mapStateToProps = (state: IRootState): IFamilieforhold => {
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        nesteSteg: () => dispatch(appNesteSteg()),
+        nesteSteg: () => dispatch(soknadNesteSteg()),
         settAnnenForelderFodselsnummer: personnr => {
             dispatch(soknadValiderFelt('familieforhold', 'annenForelderFodselsnummer', personnr));
         },

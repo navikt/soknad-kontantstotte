@@ -1,13 +1,11 @@
-import { push } from 'connected-react-router';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
-import { appNesteSteg } from '../../app/actions';
 import { ValidForm, ValidRadioPanelGruppe } from '../../common/lib/validation';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
-import { soknadValiderFelt } from '../../soknad/actions';
+import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
 import { BarnehageplassVerdier, Feltnavn, IBarnehageplass } from '../../soknad/types';
 import EkstraFelter from './EkstraFelter';
@@ -55,18 +53,22 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                     name="barnehageplass"
                     legend="Har barnet barnehageplass?"
                     radios={radios}
-                    checked={BarnehageplassVerdier[harBarnehageplass]}
+                    checked={
+                        BarnehageplassVerdier[harBarnehageplass.verdi as BarnehageplassVerdier]
+                    }
                     validators={[
                         {
                             failText: intl.formatMessage({ id: 'svar.feilmelding' }),
-                            test: () => harBarnehageplass !== BarnehageplassVerdier.Ubesvart,
+                            test: () => harBarnehageplass.verdi !== BarnehageplassVerdier.Ubesvart,
                         },
                     ]}
                     onChange={(event: {}, value: string) => {
                         settSvar(value as BarnehageplassVerdier);
                     }}
                 />
-                {valgSomKreverEkstraFelter.includes(harBarnehageplass) && (
+                {valgSomKreverEkstraFelter.includes(
+                    harBarnehageplass.verdi as BarnehageplassVerdier
+                ) && (
                     <EkstraFelter
                         harBarnehageplass={harBarnehageplass}
                         dato={dato}
@@ -84,7 +86,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        nesteSteg: () => dispatch(appNesteSteg()),
+        nesteSteg: () => dispatch(soknadNesteSteg()),
         settEkstraFelt: (nokkel: Feltnavn, verdi: string) => {
             dispatch(soknadValiderFelt('barnehageplass', nokkel, verdi));
         },

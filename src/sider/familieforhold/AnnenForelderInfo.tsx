@@ -2,13 +2,13 @@ import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { ValidInput } from '../../common/lib/validation';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
-import { Svar } from '../../soknad/types';
+import { IFelt, Svar } from '../../soknad/types';
 import { harTekstomradeInnhold } from '../../soknad/validators';
 
 interface IProps {
-    annenForelderNavn?: string;
-    annenForelderFodselsnummer?: string;
-    annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar;
+    annenForelderNavn?: IFelt;
+    annenForelderFodselsnummer?: IFelt;
+    annenForelderYrkesaktivINorgeEOSIMinstFemAar: IFelt;
     settAnnenForelderNavn: (navn: string) => void;
     settAnnenForelderFodselsnummer: (personnummer: string) => void;
 }
@@ -36,13 +36,13 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
                         failText: intl.formatMessage({
                             id: 'familieforhold.annenForelder.navn.feilmelding',
                         }),
-                        test: () => harTekstomradeInnhold(annenForelderNavn),
+                        test: () => harTekstomradeInnhold(annenForelderNavn.verdi),
                     },
                 ]}
                 onBlur={(event: React.SyntheticEvent<EventTarget>) => {
                     settAnnenForelderNavn((event.target as HTMLInputElement).value);
                 }}
-                defaultValue={annenForelderNavn || ''}
+                defaultValue={annenForelderNavn.verdi || ''}
             />
             <ValidInput
                 name="annenforelder.fodselsnummer"
@@ -54,23 +54,23 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
                         failText: intl.formatMessage({
                             id: 'familieforhold.annenForelder.fodselsnummer.feilmelding',
                         }),
-                        test: () => harTekstomradeInnhold(annenForelderFodselsnummer),
+                        test: () => harTekstomradeInnhold(annenForelderFodselsnummer.verdi),
                     },
                 ]}
                 onBlur={(event: React.SyntheticEvent<EventTarget>) => {
                     settAnnenForelderFodselsnummer((event.target as HTMLInputElement).value);
                 }}
-                defaultValue={annenForelderFodselsnummer || ''}
+                defaultValue={annenForelderFodselsnummer.verdi || ''}
             />
 
             <JaNeiSporsmal
                 bolk="familieforhold"
                 felt="annenForelderYrkesaktivINorgeEOSIMinstFemAar"
                 sporsmalNokkel="familieforhold.annenForelderYrkesaktivINorgeEOSIMinstFemAar.sporsmal"
-                verdi={annenForelderYrkesaktivINorgeEOSIMinstFemAar}
+                verdi={annenForelderYrkesaktivINorgeEOSIMinstFemAar.verdi as Svar}
             />
 
-            {annenForelderYrkesaktivINorgeEOSIMinstFemAar === Svar.NEI && (
+            {annenForelderYrkesaktivINorgeEOSIMinstFemAar.verdi === Svar.NEI && (
                 <div> Kan ikke gå videre, må gi beskjed om å søke på papir etc etc</div>
             )}
         </div>
