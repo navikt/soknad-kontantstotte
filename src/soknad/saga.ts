@@ -31,16 +31,20 @@ function* validerSteg(stegnavn: Stegnavn) {
 
 function* nesteStegSaga() {
     yield put(appSettHarForsoktNesteSteg(true));
-    const appSteg = yield select(selectAppSteg);
+    const appSteg: number = yield select(selectAppSteg);
     let harFeil: boolean = false;
+
     switch (appSteg) {
         case stegConfig.kravTilSoker.stegIndeks: {
             harFeil = yield call(validerSteg, 'kravTilSoker');
+            break;
         }
         case stegConfig.mineBarn.stegIndeks: {
             harFeil = yield call(validerSteg, 'mineBarn');
+            break;
         }
     }
+
     if (!harFeil) {
         yield put(appNesteSteg());
     }
