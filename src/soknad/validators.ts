@@ -1,4 +1,4 @@
-import { IFelt, Svar, ValideringsStatus } from './types';
+import { BarnehageplassVerdier, IFelt, Svar, ValideringsStatus } from './types';
 
 export const harTekstomradeInnhold = (verdi?: string): boolean => {
     return verdi ? verdi.length > 0 : false;
@@ -17,8 +17,9 @@ export const harHuketAvPaCheckbox = (svar: Svar): boolean => {
 };
 
 const ok = (felt: IFelt): IFelt => ({
-    ...felt,
+    feilmeldingsNokkel: '',
     valideringsStatus: ValideringsStatus.OK,
+    verdi: felt.verdi,
 });
 
 const feil = (felt: IFelt, feilmeldingsNokkel: string): IFelt => ({
@@ -29,6 +30,12 @@ const feil = (felt: IFelt, feilmeldingsNokkel: string): IFelt => ({
 
 const harSvart = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
     return felt.verdi !== Svar.UBESVART ? ok(felt) : feil(felt, feilmeldingsNokkel);
+};
+
+const harSvartBarnehageplassVerdiMedFeilmelding = (felt: IFelt): IFelt => {
+    return felt.verdi !== BarnehageplassVerdier.Ubesvart
+        ? ok(felt)
+        : feil(felt, 'svar.feilmelding');
 };
 
 const harSvartJa = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
@@ -57,11 +64,12 @@ const harSvartMedFeilmelding = (felt: IFelt): IFelt => harSvart(felt, 'svar.feil
 const harSvartJaMedFeilmelding = (felt: IFelt): IFelt =>
     harSvartJa(felt, 'svar.feilmeldingCheckbox');
 
-const svarUtenValidering = (felt: IFelt): IFelt => felt;
+const svarUtenValidering = (felt: IFelt): IFelt => ok(felt);
 
 export {
     harSvart,
     harSvartMedFeilmelding,
+    harSvartBarnehageplassVerdiMedFeilmelding,
     harSvartJa,
     harSvartJaMedFeilmelding,
     harFyltInnNavn,

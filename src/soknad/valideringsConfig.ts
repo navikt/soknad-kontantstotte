@@ -3,6 +3,7 @@ import {
     harFyltInnFodselsdato,
     harFyltInnFodselsnummer,
     harFyltInnNavn,
+    harSvartBarnehageplassVerdiMedFeilmelding,
     harSvartJaMedFeilmelding,
     harSvartMedFeilmelding,
     svarUtenValidering,
@@ -24,7 +25,7 @@ const valideringsConfig: IValideringsConfig = {
     barnehageplass: {
         antallTimer: svarUtenValidering,
         dato: svarUtenValidering,
-        harBarnehageplass: harSvartMedFeilmelding,
+        harBarnehageplass: harSvartBarnehageplassVerdiMedFeilmelding,
         kommune: svarUtenValidering,
     },
     familieforhold: {
@@ -32,7 +33,6 @@ const valideringsConfig: IValideringsConfig = {
         annenForelderNavn: harFyltInnNavn,
         annenForelderYrkesaktivINorgeEOSIMinstFemAar: harSvartMedFeilmelding,
         borForeldreneSammenMedBarnet: harSvartMedFeilmelding,
-        erAvklartDeltBosted: harSvartMedFeilmelding,
     },
     kravTilSoker: {
         barnIkkeHjemme: harSvartJaMedFeilmelding,

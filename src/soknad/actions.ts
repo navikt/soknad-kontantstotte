@@ -4,16 +4,25 @@ import { Feltnavn, IFelt, Stegnavn } from './types';
 enum SoknadTypeKeys {
     NESTE_STEG = 'SOKNAD_NESTE_STEG',
     SETT_FELT = 'SOKNAD_SETT_FELT',
+    VALIDER_STEG = 'SOKNAD_VALIDER_STEG',
     VALIDER_FELT = 'SOKNAD_VALIDER_FELT',
 }
 
-type SoknadActionTypes = ISoknadValiderFelt & ISoknadNesteSteg & ISoknadSettFelt;
+type SoknadActionTypes = ISoknadValiderFelt &
+    ISoknadValiderSteg &
+    ISoknadNesteSteg &
+    ISoknadSettFelt;
 
 interface ISoknadValiderFelt extends Action {
     feltnavn: Feltnavn;
     stegnavn: Stegnavn;
     type: SoknadTypeKeys.VALIDER_FELT;
     verdi: any;
+}
+
+interface ISoknadValiderSteg extends Action {
+    stegnavn: Stegnavn;
+    type: SoknadTypeKeys.VALIDER_STEG;
 }
 
 interface ISoknadSettFelt extends Action {
@@ -36,6 +45,13 @@ function soknadValiderFelt(stegnavn: Stegnavn, feltnavn: Feltnavn, verdi: any): 
     };
 }
 
+function soknadValiderSteg(stegnavn: Stegnavn): ISoknadValiderSteg {
+    return {
+        stegnavn,
+        type: SoknadTypeKeys.VALIDER_STEG,
+    };
+}
+
 function soknadSettFelt(stegnavn: Stegnavn, feltnavn: Feltnavn, felt: IFelt): ISoknadSettFelt {
     return {
         felt,
@@ -54,8 +70,10 @@ function soknadNesteSteg(): ISoknadNesteSteg {
 export {
     SoknadActionTypes,
     soknadValiderFelt,
+    soknadValiderSteg,
     SoknadTypeKeys,
     soknadNesteSteg,
     ISoknadValiderFelt,
+    ISoknadValiderSteg,
     soknadSettFelt,
 };

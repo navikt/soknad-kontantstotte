@@ -1,14 +1,20 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import { ValidForm } from '../../common/lib/validation';
+import { selectHarForsoktNesteSteg } from '../../app/selectors';
+import { IFeltFeil } from '../../common/lib/validation/types';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectFamilieforhold } from '../../soknad/selectors';
-import { IFamilieforhold, Svar } from '../../soknad/types';
+import { IFamilieforhold, Svar, IFelt, ValideringsStatus } from '../../soknad/types';
 import AnnenForelderInfo from './AnnenForelderInfo';
+
+interface IMapStateToProps {
+    familieforhold: IFamilieforhold;
+    feltMedFeil: IFeltFeil;
+}
 
 interface IMapDispatchToProps {
     settAnnenForelderNavn: (navn: string) => void;
@@ -16,45 +22,59 @@ interface IMapDispatchToProps {
     nesteSteg: () => void;
 }
 
-type FamilieforholdSideProps = IFamilieforhold & IMapDispatchToProps;
+type FamilieforholdSideProps = IMapStateToProps & IMapDispatchToProps;
 
 const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
-    borForeldreneSammenMedBarnet,
-    erAvklartDeltBosted,
+    familieforhold,
+    feltMedFeil,
     nesteSteg,
     ...annenForelderProps
 }) => {
     return (
         <SideContainer>
-            <ValidForm summaryTitle={'Familieforhold'} onSubmit={nesteSteg}>
+            <form>
                 <JaNeiSporsmal
                     bolk="familieforhold"
                     felt="borForeldreneSammenMedBarnet"
                     sporsmalNokkel="familieforhold.borForeldreneSammenMedBarnet.sporsmal"
-                    verdi={borForeldreneSammenMedBarnet.verdi as Svar}
+                    verdi={familieforhold.borForeldreneSammenMedBarnet.verdi as Svar}
                     hjelpetekstNokkel={'familieforhold.borForeldreneSammenMedBarnet.hjelpetekst'}
                 />
 
-                {borForeldreneSammenMedBarnet.verdi === Svar.JA && (
-                    <AnnenForelderInfo {...annenForelderProps} />
-                )}
-
-                {borForeldreneSammenMedBarnet.verdi === Svar.NEI && (
-                    <JaNeiSporsmal
-                        bolk="familieforhold"
-                        felt="erAvklartDeltBosted"
-                        sporsmalNokkel="familieforhold.erAvklartDeltBosted.sporsmal"
-                        verdi={erAvklartDeltBosted.verdi as Svar}
+                {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA && (
+                    <AnnenForelderInfo
+                        familieforhold={familieforhold}
+                        feltMedFeil={feltMedFeil}
+                        {...annenForelderProps}
                     />
                 )}
-                <Submitknapp label="app.neste" onClick={nesteSteg} />
-            </ValidForm>
+            </form>
+            <Submitknapp label="app.neste" onClick={nesteSteg} />
         </SideContainer>
     );
 };
 
-const mapStateToProps = (state: IRootState): IFamilieforhold => {
-    return selectFamilieforhold(state);
+const mapStateToProps = (state: IRootState): IMapStateToProps => {
+    const familieforhold = selectFamilieforhold(state);
+    const harForsoktNesteSteg = selectHarForsoktNesteSteg(state);
+
+    const feltMedFeil = Object.keys(familieforhold).reduce(
+        (accFeltMedFeil: IFeltFeil, feltKey: string) => {
+            const felt: IFelt = familieforhold[feltKey];
+
+            accFeltMedFeil[feltKey] =
+                felt.valideringsStatus !== ValideringsStatus.OK && harForsoktNesteSteg
+                    ? { feilmelding: felt.feilmeldingsNokkel }
+                    : undefined;
+            return accFeltMedFeil;
+        },
+        {}
+    );
+
+    return {
+        familieforhold,
+        feltMedFeil,
+    };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {

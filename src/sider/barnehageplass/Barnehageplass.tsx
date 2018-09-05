@@ -1,13 +1,21 @@
+import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
-import { ValidForm, ValidRadioPanelGruppe } from '../../common/lib/validation';
+import { selectHarForsoktNesteSteg } from '../../app/selectors';
+import { IFeltFeil } from '../../common/lib/validation/types';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
-import { BarnehageplassVerdier, Feltnavn, IBarnehageplass } from '../../soknad/types';
+import {
+    BarnehageplassVerdier,
+    Feltnavn,
+    IBarnehageplass,
+    IFelt,
+    ValideringsStatus,
+} from '../../soknad/types';
 import EkstraFelter from './EkstraFelter';
 
 interface IMapDispatchToProps {
@@ -16,17 +24,20 @@ interface IMapDispatchToProps {
     settEkstraFelt: (nokkel: Feltnavn, verdi: string) => void;
 }
 
-type BarnehageplassSideProps = IBarnehageplass & IMapDispatchToProps & InjectedIntlProps;
+interface IMapStateToProps {
+    barnehageplass: IBarnehageplass;
+    feltMedFeil: IFeltFeil;
+}
+
+type BarnehageplassSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
 const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
-    harBarnehageplass,
+    barnehageplass,
+    feltMedFeil,
     settSvar,
     intl,
     settEkstraFelt,
     nesteSteg,
-    dato,
-    kommune,
-    antallTimer,
 }) => {
     const radios = [
         { label: intl.formatMessage({ id: 'svar.nei' }), value: BarnehageplassVerdier.Nei },
@@ -48,38 +59,34 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
 
     return (
         <SideContainer>
-            <ValidForm summaryTitle={'Barnehageplass'} onSubmit={nesteSteg}>
-                <ValidRadioPanelGruppe
+            <form>
+                <RadioPanelGruppe
                     name="barnehageplass"
                     legend="Har barnet barnehageplass?"
                     radios={radios}
                     checked={
-                        BarnehageplassVerdier[harBarnehageplass.verdi as BarnehageplassVerdier]
+                        BarnehageplassVerdier[
+                            barnehageplass.harBarnehageplass.verdi as BarnehageplassVerdier
+                        ]
                     }
-                    validators={[
-                        {
-                            failText: intl.formatMessage({ id: 'svar.feilmelding' }),
-                            test: () => harBarnehageplass.verdi !== BarnehageplassVerdier.Ubesvart,
-                        },
-                    ]}
                     onChange={(event: {}, value: string) => {
                         settSvar(value as BarnehageplassVerdier);
                     }}
+                    feil={feltMedFeil.harBarnehageplass}
                 />
-                {valgSomKreverEkstraFelter.includes(
-                    harBarnehageplass.verdi as BarnehageplassVerdier
-                ) && (
+                {valgSomKreverEkstraFelter.includes(barnehageplass.harBarnehageplass
+                    .verdi as BarnehageplassVerdier) && (
                     <EkstraFelter
-                        harBarnehageplass={harBarnehageplass}
-                        dato={dato}
-                        kommune={kommune}
-                        antallTimer={antallTimer}
+                        harBarnehageplass={barnehageplass.harBarnehageplass}
+                        dato={barnehageplass.dato}
+                        kommune={barnehageplass.kommune}
+                        antallTimer={barnehageplass.antallTimer}
                         settFelt={settEkstraFelt}
                         intl={intl}
                     />
                 )}
-                <Submitknapp label="app.neste" onClick={nesteSteg} />
-            </ValidForm>
+            </form>
+            <Submitknapp label="app.neste" onClick={nesteSteg} />
         </SideContainer>
     );
 };
@@ -96,8 +103,27 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     };
 };
 
-const mapStateToProps = (state: IRootState): IBarnehageplass => {
-    return selectBarnehageplass(state);
+const mapStateToProps = (state: IRootState): IMapStateToProps => {
+    const harForsoktNesteSteg = selectHarForsoktNesteSteg(state);
+    const barnehageplass = selectBarnehageplass(state);
+
+    const feltMedFeil = Object.keys(barnehageplass).reduce(
+        (accFeltMedFeil: IFeltFeil, feltKey: string) => {
+            const felt: IFelt = barnehageplass[feltKey];
+
+            accFeltMedFeil[feltKey] =
+                felt.valideringsStatus !== ValideringsStatus.OK && harForsoktNesteSteg
+                    ? { feilmelding: felt.feilmeldingsNokkel }
+                    : undefined;
+            return accFeltMedFeil;
+        },
+        {}
+    );
+
+    return {
+        barnehageplass,
+        feltMedFeil,
+    };
 };
 
 export default connect(

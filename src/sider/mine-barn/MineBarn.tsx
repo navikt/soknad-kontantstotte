@@ -4,7 +4,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
-import { IFeil } from '../../common/lib/validation/types';
+import { IFeltFeil } from '../../common/lib/validation/types';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { selectBarn } from '../../person/selectors';
@@ -16,7 +16,7 @@ import { IFelt, ValideringsStatus } from '../../soknad/types';
 
 interface IMapStateToProps {
     barn: IBarn[];
-    feltMedFeil: IMineKravFeil;
+    feltMedFeil: IFeltFeil;
     valgtBarn: IBarn;
 }
 
@@ -82,17 +82,13 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
     );
 };
 
-interface IMineKravFeil {
-    [key: string]: IFeil | undefined;
-}
-
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     const barn = selectBarn(state);
     const mineBarn = selectMineBarn(state);
     const harForsoktNesteSteg = selectHarForsoktNesteSteg(state);
 
     const feltMedFeil = Object.keys(mineBarn).reduce(
-        (accFeltMedFeil: IMineKravFeil, feltKey: string) => {
+        (accFeltMedFeil: IFeltFeil, feltKey: string) => {
             const felt: IFelt = mineBarn[feltKey];
 
             accFeltMedFeil[feltKey] =
