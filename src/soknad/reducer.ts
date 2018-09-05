@@ -77,11 +77,6 @@ const initialState: ISoknadState = {
             valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
             verdi: Svar.UBESVART,
         },
-        erAvklartDeltBosted: {
-            feilmeldingsNokkel: 'svar.feilmeldingCheckbox',
-            valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
-            verdi: Svar.UBESVART,
-        },
     },
     kravTilSoker: {
         barnIkkeHjemme: {

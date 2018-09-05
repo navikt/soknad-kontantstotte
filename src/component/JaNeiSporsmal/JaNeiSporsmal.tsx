@@ -5,11 +5,12 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import ValidRadioPanelGruppe from '../../common/lib/validation/ValidRadioPanelGruppe';
 import { soknadValiderFelt } from '../../soknad/actions';
-import { Feltnavn, Stegnavn, Svar } from '../../soknad/types';
+import { Feltnavn, IFelt, Stegnavn, Svar } from '../../soknad/types';
 import { harSvartPaJaNeiSporsmal } from '../../soknad/validators';
 import SpesifiserTextarea from './SpesifiserTextarea';
 
 interface ISporsmaalProps {
+    className: string;
     bolk: Stegnavn;
     felt: Feltnavn;
     sporsmalNokkel: string;
@@ -27,6 +28,7 @@ interface IMapDispatchToProps {
 type JaNeiSporsmalProps = IMapDispatchToProps & ISporsmaalProps & InjectedIntlProps;
 
 const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
+    className,
     bolk,
     felt,
     verdi,
@@ -39,7 +41,7 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
     hjelpetekstNokkel,
 }) => {
     return (
-        <div>
+        <div className={className}>
             {hjelpetekstNokkel && (
                 <HjelpetekstUnder id={hjelpetekstNokkel}>
                     <FormattedMessage id={hjelpetekstNokkel} />

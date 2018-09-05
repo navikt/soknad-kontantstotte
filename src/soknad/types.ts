@@ -40,7 +40,6 @@ interface IMineBarn {
 
 interface IFamilieforhold {
     readonly borForeldreneSammenMedBarnet: IFelt;
-    readonly erAvklartDeltBosted: IFelt;
     readonly annenForelderNavn: IFelt;
     readonly annenForelderFodselsnummer: IFelt;
     readonly annenForelderYrkesaktivINorgeEOSIMinstFemAar: IFelt;

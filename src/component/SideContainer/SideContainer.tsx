@@ -36,7 +36,7 @@ class SideContainer extends React.Component<Props> {
             });
 
         return (
-            <div className={className}>
+            <div>
                 <Sidetittel className={'side-container__sidetittel'}>
                     <FormattedMessage id={'kontantstotte.tittel'} />
                 </Sidetittel>
@@ -48,7 +48,7 @@ class SideContainer extends React.Component<Props> {
                     aktivtSteg={aktivtSteg - 1} // -1 pga Stegindikator er 0-indeksert
                 />
                 <TilbakeKnapp />
-                <div>{children}</div>
+                <div className={className}>{children}</div>
 
                 <AvbrytKnapp />
             </div>

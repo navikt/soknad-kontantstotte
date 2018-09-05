@@ -25,22 +25,6 @@ const FamilieforholdOppsummering: React.StatelessComponent<FamilieforholdOppsumm
                             id: 'oppsummering.familieforhold.foreldreBorIkkeSammen',
                         })}
                     />
-
-                    {familieforhold.erAvklartDeltBosted.verdi === Svar.JA && (
-                        <OppsummeringsListeElement
-                            tekst={intl.formatMessage({
-                                id: 'oppsummering.familieforhold.harAvklartDeltBostedForBarnet',
-                            })}
-                        />
-                    )}
-
-                    {familieforhold.erAvklartDeltBosted.verdi === Svar.NEI && (
-                        <OppsummeringsListeElement
-                            tekst={intl.formatMessage({
-                                id: 'oppsummering.familieforhold.harIkkeAvklartDeltBostedForBarnet',
-                            })}
-                        />
-                    )}
                 </>
             )}
 
