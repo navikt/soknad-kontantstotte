@@ -1,4 +1,6 @@
+import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import BorSammenIkon from '../../component/Ikoner/BorSammenIkon';
 import SideContainer from '../../component/SideContainer/SideContainer';
@@ -8,8 +10,6 @@ import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectFamilieforhold } from '../../soknad/selectors';
 import { IFamilieforhold, Svar } from '../../soknad/types';
 import AnnenForelderInfo from './AnnenForelderInfo';
-import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
-import { InjectedIntlProps, injectIntl, FormattedMessage } from 'react-intl';
 
 interface IMapDispatchToProps {
     settBorForeldreneSammenMedBarnet: (verdi: Svar) => void;
@@ -33,7 +33,7 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
                 <BorSammenIkon />
             </div>
             <form className={'familieforhold__form'} onSubmit={nesteSteg}>
-                <h3>
+                <h3 className={'typo-systemtittel familieforhold__tittel'}>
                     <FormattedMessage id={'familieforhold.borForeldreneSammenMedBarnet.sporsmal'} />
                 </h3>
                 <div className={'familieforhold__sporsmaal'}>

@@ -1,5 +1,5 @@
+import PanelBase from 'nav-frontend-paneler';
 import * as React from 'react';
-import { Panel, default as PanelBase } from 'nav-frontend-paneler';
 
 interface ISoknadPanelProps {
     children: React.ReactNode;

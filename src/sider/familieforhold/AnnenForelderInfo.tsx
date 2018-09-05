@@ -1,9 +1,8 @@
 import { Input } from 'nav-frontend-skjema';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { IFelt } from '../../soknad/types';
-import PanelBase, { Panel } from 'nav-frontend-paneler';
 import SoknadPanel from '../../component/SoknadPanel/SoknadPanel';
+import { IFelt } from '../../soknad/types';
 
 interface IProps {
     annenForelderNavn: IFelt;
