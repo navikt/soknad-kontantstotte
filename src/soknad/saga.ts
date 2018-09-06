@@ -45,13 +45,16 @@ function* validerSteg(action: ISoknadValiderSteg) {
     );
 }
 
+function validerListeMedFelt(feltForSteg: IFelt[]): boolean {
+    return Object.values(feltForSteg).reduce((acc: boolean, felt: IFelt) => {
+        return acc || felt.valideringsStatus !== ValideringsStatus.OK;
+    }, false);
+}
+
 function* sjekkValideringForSteg(stegnavn: Stegnavn) {
     const soknadState = yield select(selectSoknad);
 
-    const harFeil = Object.values(soknadState[stegnavn]).reduce((acc: boolean, felt: IFelt) => {
-        return acc || felt.valideringsStatus !== ValideringsStatus.OK;
-    }, false);
-    return harFeil;
+    return validerListeMedFelt(soknadState[stegnavn]);
 }
 
 function* sjekkValideringForFamilieforhold(stegnavn: Stegnavn) {
@@ -60,10 +63,7 @@ function* sjekkValideringForFamilieforhold(stegnavn: Stegnavn) {
     if (soknadState[stegnavn]['borForeldreneSammenMedBarnet' as Stegnavn].verdi === Svar.NEI) {
         return false;
     } else {
-        const harFeil = Object.values(soknadState[stegnavn]).reduce((acc: boolean, felt: IFelt) => {
-            return acc || felt.valideringsStatus !== ValideringsStatus.OK;
-        }, false);
-        return harFeil;
+        return validerListeMedFelt(soknadState[stegnavn]);
     }
 }
 
@@ -83,10 +83,7 @@ function* sjekkValideringForBarnehageplass(stegnavn: Stegnavn) {
             soknadState[stegnavn]['kommune' as Stegnavn].valideringsStatus === ValideringsStatus.OK
         );
     } else {
-        const harFeil = Object.values(soknadState[stegnavn]).reduce((acc: boolean, felt: IFelt) => {
-            return acc || felt.valideringsStatus !== ValideringsStatus.OK;
-        }, false);
-        return harFeil;
+        return validerListeMedFelt(soknadState[stegnavn]);
     }
 }
 

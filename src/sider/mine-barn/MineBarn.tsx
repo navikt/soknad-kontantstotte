@@ -87,11 +87,9 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     const mineBarn = selectMineBarn(state);
     const harForsoktNesteSteg = selectHarForsoktNesteSteg(state);
 
-    const feltMedFeil = Object.keys(mineBarn).reduce(
-        (accFeltMedFeil: IFeltFeil, feltKey: string) => {
-            const felt: IFelt = mineBarn[feltKey];
-
-            accFeltMedFeil[feltKey] =
+    const feltMedFeil = Object.entries(mineBarn).reduce(
+        (accFeltMedFeil: IFeltFeil, [key, felt]) => {
+            accFeltMedFeil[key] =
                 felt.valideringsStatus !== ValideringsStatus.OK && harForsoktNesteSteg
                     ? { feilmelding: felt.feilmeldingsNokkel }
                     : undefined;

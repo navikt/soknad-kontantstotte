@@ -8,7 +8,7 @@ import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectFamilieforhold } from '../../soknad/selectors';
-import { IFamilieforhold, Svar, IFelt, ValideringsStatus } from '../../soknad/types';
+import { IFamilieforhold, Svar, ValideringsStatus } from '../../soknad/types';
 import AnnenForelderInfo from './AnnenForelderInfo';
 
 interface IMapStateToProps {
@@ -58,11 +58,9 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     const familieforhold = selectFamilieforhold(state);
     const harForsoktNesteSteg = selectHarForsoktNesteSteg(state);
 
-    const feltMedFeil = Object.keys(familieforhold).reduce(
-        (accFeltMedFeil: IFeltFeil, feltKey: string) => {
-            const felt: IFelt = familieforhold[feltKey];
-
-            accFeltMedFeil[feltKey] =
+    const feltMedFeil = Object.entries(familieforhold).reduce(
+        (accFeltMedFeil: IFeltFeil, [key, felt]) => {
+            accFeltMedFeil[key] =
                 felt.valideringsStatus !== ValideringsStatus.OK && harForsoktNesteSteg
                     ? { feilmelding: felt.feilmeldingsNokkel }
                     : undefined;
