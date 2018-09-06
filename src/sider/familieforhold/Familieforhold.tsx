@@ -36,20 +36,19 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
                 <h3 className={'typo-systemtittel familieforhold__tittel'}>
                     <FormattedMessage id={'familieforhold.borForeldreneSammenMedBarnet.sporsmal'} />
                 </h3>
-                <div className={'familieforhold__sporsmaal'}>
-                    <RadioPanelGruppe
-                        legend={''}
-                        name={'borForeldreneSammenMedBarnet'}
-                        onChange={(evt: {}, value: string) =>
-                            settBorForeldreneSammenMedBarnet(value as Svar)
-                        }
-                        checked={borForeldreneSammenMedBarnet.verdi}
-                        radios={[
-                            { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
-                            { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
-                        ]}
-                    />
-                </div>
+                <RadioPanelGruppe
+                    legend={''}
+                    name={'borForeldreneSammenMedBarnet'}
+                    className={'familieforhold__sporsmaal'}
+                    onChange={(evt: {}, value: string) =>
+                        settBorForeldreneSammenMedBarnet(value as Svar)
+                    }
+                    checked={borForeldreneSammenMedBarnet.verdi}
+                    radios={[
+                        { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
+                        { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
+                    ]}
+                />
 
                 {borForeldreneSammenMedBarnet.verdi === Svar.JA && (
                     <AnnenForelderInfo {...annenForelderProps} />
