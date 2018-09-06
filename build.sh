@@ -23,7 +23,7 @@ IMAGE_NAME="soknad-kontantstotte"
 DOCKER_REGISTRY="repo.adeo.no:5443"
 DOCKER_REPOSITORY="soknad"
 TAG="${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${IMAGE_NAME}:${v:="unversioned"}"
-BUILDER_IMAGE="repo.adeo.no:5443/soknad/soknad-docker-builder:0.1.1"
+BUILDER_IMAGE="repo.adeo.no:5443/soknad/soknad-docker-builder:1.0.0"
 
 # Hent ut argumenter
 for arg in "$@"
@@ -86,7 +86,7 @@ function publish_container() {
 
 install_packages
 build_frontend
-#ci_test
+ci_test
 create_version_file
 build_container
 
