@@ -61,7 +61,8 @@ const harFyltInnFodselsnummer = (felt: IFelt): IFelt => {
 };
 
 const harSvartMedFeilmelding = (felt: IFelt): IFelt =>
-    harSvart(felt, 'feilmelding.generell.fodselsDato');
+    harSvart(felt, 'feilmelding.generell.feilmelding');
+
 const harSvartJaMedFeilmelding = (felt: IFelt): IFelt =>
     harSvartJa(felt, 'feilmelding.generell.feilmeldingCheckbox');
 
