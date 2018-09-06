@@ -51,7 +51,7 @@ const harFyltInnNavn = (felt: IFelt): IFelt => {
 const harFyltInnFodselsdato = (felt: IFelt): IFelt => {
     return /^\d{2}.\d{2}.\d{4}/.test(felt.verdi.replace(' ', ''))
         ? ok(felt)
-        : feil(felt, 'feilmelding.mineBarn.fodselsDato');
+        : feil(felt, 'feilmelding.generell.fodselsDato');
 };
 
 const harFyltInnFodselsnummer = (felt: IFelt): IFelt => {

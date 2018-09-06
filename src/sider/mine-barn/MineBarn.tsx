@@ -4,7 +4,6 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
-import { IFeltFeil } from '../../common/lib/validation/types';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { selectBarn } from '../../person/selectors';
@@ -12,11 +11,12 @@ import { IBarn } from '../../person/types';
 import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectMineBarn } from '../../soknad/selectors';
-import { IFelt, ValideringsStatus } from '../../soknad/types';
+import { hentFeltMedFeil } from '../../common/utils';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 
 interface IMapStateToProps {
     barn: IBarn[];
-    feltMedFeil: IFeltFeil;
+    harForsoktNesteSteg: boolean;
     valgtBarn: IBarn;
 }
 
@@ -27,17 +27,19 @@ interface IMapDispatchToProps {
     settBarnFodselsdato: (fodselsdato: string) => void;
 }
 
-type MineBarnSideProps = IMapStateToProps & IMapDispatchToProps;
+type MineBarnSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
 const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
     barn,
-    feltMedFeil,
+    harForsoktNesteSteg,
     nesteSteg,
     settBarnFodselsdato,
     settBarnNavn,
     valgtBarn,
     velgBarn,
+    intl,
 }) => {
+    const feltMedFeil = hentFeltMedFeil(valgtBarn, harForsoktNesteSteg, intl);
     return (
         <SideContainer className={'mine-barn'}>
             <form>
@@ -83,25 +85,10 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
 };
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
-    const barn = selectBarn(state);
-    const mineBarn = selectMineBarn(state);
-    const harForsoktNesteSteg = selectHarForsoktNesteSteg(state);
-
-    const feltMedFeil = Object.entries(mineBarn).reduce(
-        (accFeltMedFeil: IFeltFeil, [key, felt]) => {
-            accFeltMedFeil[key] =
-                felt.valideringsStatus !== ValideringsStatus.OK && harForsoktNesteSteg
-                    ? { feilmelding: felt.feilmeldingsNokkel }
-                    : undefined;
-            return accFeltMedFeil;
-        },
-        {}
-    );
-
     return {
-        barn,
-        feltMedFeil,
-        valgtBarn: mineBarn,
+        barn: selectBarn(state),
+        harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
+        valgtBarn: selectMineBarn(state),
     };
 };
 
@@ -118,7 +105,9 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(MineBarn);
+export default injectIntl(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(MineBarn)
+);

@@ -17,6 +17,7 @@ import {
     ValideringsStatus,
 } from '../../soknad/types';
 import EkstraFelter from './EkstraFelter';
+import { hentFeltMedFeil } from '../../common/utils';
 
 interface IMapDispatchToProps {
     nesteSteg: () => void;
@@ -26,14 +27,14 @@ interface IMapDispatchToProps {
 
 interface IMapStateToProps {
     barnehageplass: IBarnehageplass;
-    feltMedFeil: IFeltFeil;
+    harForsoktNesteSteg: boolean;
 }
 
 type BarnehageplassSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
 const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     barnehageplass,
-    feltMedFeil,
+    harForsoktNesteSteg,
     settSvar,
     intl,
     settEkstraFelt,
@@ -56,6 +57,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
         BarnehageplassVerdier.JaSkalSlutte,
         BarnehageplassVerdier.NeiHarFaatt,
     ];
+    const feltMedFeil = hentFeltMedFeil(barnehageplass, harForsoktNesteSteg, intl);
 
     return (
         <SideContainer>
@@ -104,23 +106,9 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
 };
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
-    const harForsoktNesteSteg = selectHarForsoktNesteSteg(state);
-    const barnehageplass = selectBarnehageplass(state);
-
-    const feltMedFeil = Object.entries(barnehageplass).reduce(
-        (accFeltMedFeil: IFeltFeil, [key, felt]) => {
-            accFeltMedFeil[key] =
-                felt.valideringsStatus !== ValideringsStatus.OK && harForsoktNesteSteg
-                    ? { feilmelding: felt.feilmeldingsNokkel }
-                    : undefined;
-            return accFeltMedFeil;
-        },
-        {}
-    );
-
     return {
-        barnehageplass,
-        feltMedFeil,
+        barnehageplass: selectBarnehageplass(state),
+        harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
     };
 };
 
