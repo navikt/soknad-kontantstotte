@@ -70,15 +70,26 @@ interface IKravTilSoker {
     readonly skalBoMedBarnetINorgeNesteTolvMaaneder: IFelt;
 }
 
+type minebarnFeltnavn = keyof IMineBarn;
+type familieforholdFeltnavn = keyof IFamilieforhold;
+type arbeidsforholdFeltnavn = keyof IArbeidsforhold;
+type barnehageplassFeltnavn = keyof IBarnehageplass;
+type kravTilSokerFeltnavn = keyof IKravTilSoker;
+
 type Stegnavn = keyof ISoknadState;
 type Feltnavn =
-    | keyof IMineBarn
-    | keyof IFamilieforhold
-    | keyof IArbeidsforhold
-    | keyof IBarnehageplass
-    | keyof IKravTilSoker;
+    | minebarnFeltnavn
+    | familieforholdFeltnavn
+    | arbeidsforholdFeltnavn
+    | barnehageplassFeltnavn
+    | kravTilSokerFeltnavn;
 
 export {
+    minebarnFeltnavn,
+    familieforholdFeltnavn,
+    arbeidsforholdFeltnavn,
+    barnehageplassFeltnavn,
+    kravTilSokerFeltnavn,
     BarnehageplassVerdier,
     Stegnavn,
     Feltnavn,

@@ -1,6 +1,6 @@
-import { IFeltFeil, IFeil } from '../common/lib/validation/types';
-import { IFelt, ValideringsStatus } from '../soknad/types';
 import { InjectedIntl } from 'react-intl';
+import { IFeltFeil } from '../common/lib/validation/types';
+import { ValideringsStatus } from '../soknad/types';
 
 export const hentFeltMedFeil = (
     steg: object,

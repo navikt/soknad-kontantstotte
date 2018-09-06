@@ -3,21 +3,14 @@ import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
-import { IFeltFeil } from '../../common/lib/validation/types';
+import { hentFeltMedFeil } from '../../common/utils';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
-import {
-    BarnehageplassVerdier,
-    Feltnavn,
-    IBarnehageplass,
-    IFelt,
-    ValideringsStatus,
-} from '../../soknad/types';
+import { BarnehageplassVerdier, Feltnavn, IBarnehageplass } from '../../soknad/types';
 import EkstraFelter from './EkstraFelter';
-import { hentFeltMedFeil } from '../../common/utils';
 
 interface IMapDispatchToProps {
     nesteSteg: () => void;

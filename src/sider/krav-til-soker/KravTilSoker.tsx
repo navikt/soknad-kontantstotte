@@ -4,15 +4,15 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
+import { IFeil } from '../../common/lib/validation/types';
+import { hentFeltMedFeil } from '../../common/utils';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import Veileder from '../../component/Veileder/Veileder';
 import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectKravTilSoker } from '../../soknad/selectors';
-import { Feltnavn, IFelt, IKravTilSoker, Svar, ValideringsStatus } from '../../soknad/types';
-import { hentFeltMedFeil } from '../../common/utils';
-import { IFeil } from '../../common/lib/validation/types';
+import { Feltnavn, IKravTilSoker, Svar } from '../../soknad/types';
 
 interface IMapDispatchToProps {
     settCheckboxVerdi: (felt: Feltnavn, verdi: string) => void;
