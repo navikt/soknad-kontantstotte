@@ -13,6 +13,7 @@ import {
     harSvartBarnehageplassVerdiMedFeilmelding,
     harSvartJaMedFeilmelding,
     harSvartMedFeilmelding,
+    harSvartTekstMedFeilmelding,
     svarUtenValidering,
 } from './validators';
 
@@ -27,17 +28,17 @@ interface IValideringsConfig {
 const valideringsConfig: IValideringsConfig = {
     arbeidsforhold: {
         arbeiderIUtlandetEllerKontinentalsokkel: harSvartMedFeilmelding,
-        arbeiderIUtlandetEllerKontinentalsokkelForklaring: svarUtenValidering,
+        arbeiderIUtlandetEllerKontinentalsokkelForklaring: harSvartTekstMedFeilmelding,
         mottarKontantstotteFraAnnetEOS: harSvartMedFeilmelding,
-        mottarKontantstotteFraAnnetEOSForklaring: svarUtenValidering,
+        mottarKontantstotteFraAnnetEOSForklaring: harSvartTekstMedFeilmelding,
         mottarYtelserFraUtlandet: harSvartMedFeilmelding,
-        mottarYtelserFraUtlandetForklaring: svarUtenValidering,
+        mottarYtelserFraUtlandetForklaring: harSvartTekstMedFeilmelding,
     },
     barnehageplass: {
-        antallTimer: svarUtenValidering,
-        dato: svarUtenValidering,
+        antallTimer: harSvartTekstMedFeilmelding,
+        dato: harSvartTekstMedFeilmelding,
         harBarnehageplass: harSvartBarnehageplassVerdiMedFeilmelding,
-        kommune: svarUtenValidering,
+        kommune: harSvartTekstMedFeilmelding,
     },
     familieforhold: {
         annenForelderFodselsnummer: harFyltInnFodselsnummer,

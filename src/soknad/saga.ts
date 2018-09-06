@@ -45,7 +45,7 @@ function* validerSteg(action: ISoknadValiderSteg) {
     );
 }
 
-function validerListeMedFelt(feltForSteg: IFelt[]): boolean {
+function harListeMedFeltFeil(feltForSteg: IFelt[]): boolean {
     return Object.values(feltForSteg).reduce((acc: boolean, felt: IFelt) => {
         return acc || felt.valideringsStatus !== ValideringsStatus.OK;
     }, false);
@@ -54,7 +54,7 @@ function validerListeMedFelt(feltForSteg: IFelt[]): boolean {
 function* sjekkValideringForSteg(stegnavn: Stegnavn) {
     const soknadState = yield select(selectSoknad);
 
-    return validerListeMedFelt(soknadState[stegnavn]);
+    return harListeMedFeltFeil(soknadState[stegnavn]);
 }
 
 function* sjekkValideringForFamilieforhold(stegnavn: Stegnavn) {
@@ -63,7 +63,7 @@ function* sjekkValideringForFamilieforhold(stegnavn: Stegnavn) {
     if (soknadState[stegnavn]['borForeldreneSammenMedBarnet' as Stegnavn].verdi === Svar.NEI) {
         return false;
     } else {
-        return validerListeMedFelt(soknadState[stegnavn]);
+        return harListeMedFeltFeil(soknadState[stegnavn]);
     }
 }
 
@@ -79,17 +79,15 @@ function* sjekkValideringForBarnehageplass(stegnavn: Stegnavn) {
         BarnehageplassVerdier.NeiHarFaatt
     ) {
         return (
-            soknadState[stegnavn]['dato' as Stegnavn].valideringsStatus === ValideringsStatus.OK &&
-            soknadState[stegnavn]['kommune' as Stegnavn].valideringsStatus === ValideringsStatus.OK
+            soknadState[stegnavn]['dato' as Stegnavn].valideringsStatus !== ValideringsStatus.OK &&
+            soknadState[stegnavn]['kommune' as Stegnavn].valideringsStatus !== ValideringsStatus.OK
         );
     } else {
-        return validerListeMedFelt(soknadState[stegnavn]);
+        return harListeMedFeltFeil(soknadState[stegnavn]);
     }
 }
 
 function* nesteStegSaga() {
-    yield put(appSettHarForsoktNesteSteg(true));
-
     const appSteg = yield select(selectAppSteg);
     const tilSide: ISteg = Object.values(stegConfig).find(
         (side: ISteg) => side.stegIndeks === appSteg
@@ -108,6 +106,7 @@ function* nesteStegSaga() {
             harFeil = yield call(sjekkValideringForSteg, tilSide.key as Stegnavn);
     }
 
+    yield put(appSettHarForsoktNesteSteg(true));
     if (!harFeil) {
         yield put(appNesteSteg());
     }

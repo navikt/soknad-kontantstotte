@@ -42,6 +42,10 @@ const harSvartJa = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
     return felt.verdi === Svar.JA ? ok(felt) : feil(felt, feilmeldingsNokkel);
 };
 
+const harSvartTekst = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
+    return felt.verdi.length > 0 ? ok(felt) : feil(felt, feilmeldingsNokkel);
+};
+
 const harFyltInnNavn = (felt: IFelt): IFelt => {
     return felt.verdi.replace(' ', '').length > 0
         ? ok(felt)
@@ -66,6 +70,9 @@ const harSvartMedFeilmelding = (felt: IFelt): IFelt =>
 const harSvartJaMedFeilmelding = (felt: IFelt): IFelt =>
     harSvartJa(felt, 'feilmelding.generell.feilmeldingCheckbox');
 
+const harSvartTekstMedFeilmelding = (felt: IFelt): IFelt =>
+    harSvartTekst(felt, 'feilmelding.generell.feilmelding');
+
 const svarUtenValidering = (felt: IFelt): IFelt => ok(felt);
 
 export {
@@ -74,6 +81,7 @@ export {
     harSvartBarnehageplassVerdiMedFeilmelding,
     harSvartJa,
     harSvartJaMedFeilmelding,
+    harSvartTekstMedFeilmelding,
     harFyltInnNavn,
     harFyltInnFodselsdato,
     harFyltInnFodselsnummer,

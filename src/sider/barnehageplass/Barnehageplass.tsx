@@ -72,6 +72,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                 {valgSomKreverEkstraFelter.includes(barnehageplass.harBarnehageplass
                     .verdi as BarnehageplassVerdier) && (
                     <EkstraFelter
+                        feltMedFeil={feltMedFeil}
                         harBarnehageplass={barnehageplass.harBarnehageplass}
                         dato={barnehageplass.dato}
                         kommune={barnehageplass.kommune}
