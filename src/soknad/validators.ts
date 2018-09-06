@@ -35,7 +35,7 @@ const harSvart = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
 const harSvartBarnehageplassVerdiMedFeilmelding = (felt: IFelt): IFelt => {
     return felt.verdi !== BarnehageplassVerdier.Ubesvart
         ? ok(felt)
-        : feil(felt, 'svar.feilmelding');
+        : feil(felt, 'feilmelding.generell.fodselsDato');
 };
 
 const harSvartJa = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
@@ -45,7 +45,7 @@ const harSvartJa = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
 const harFyltInnNavn = (felt: IFelt): IFelt => {
     return felt.verdi.replace(' ', '').length > 0
         ? ok(felt)
-        : feil(felt, 'familieforhold.annenForelder.navn.feilmelding');
+        : feil(felt, 'feilmelding.familieforhold.annenForelder.navn');
 };
 
 const harFyltInnFodselsdato = (felt: IFelt): IFelt => {
@@ -57,12 +57,13 @@ const harFyltInnFodselsdato = (felt: IFelt): IFelt => {
 const harFyltInnFodselsnummer = (felt: IFelt): IFelt => {
     return /^\d{11}/.test(felt.verdi.replace(' ', ''))
         ? ok(felt)
-        : feil(felt, 'familieforhold.annenForelder.fodselsnummer.feilmelding');
+        : feil(felt, 'feilmelding.familieforhold.annenForelder.fodselsnummer');
 };
 
-const harSvartMedFeilmelding = (felt: IFelt): IFelt => harSvart(felt, 'svar.feilmelding');
+const harSvartMedFeilmelding = (felt: IFelt): IFelt =>
+    harSvart(felt, 'feilmelding.generell.fodselsDato');
 const harSvartJaMedFeilmelding = (felt: IFelt): IFelt =>
-    harSvartJa(felt, 'svar.feilmeldingCheckbox');
+    harSvartJa(felt, 'feilmelding.generell.feilmeldingCheckbox');
 
 const svarUtenValidering = (felt: IFelt): IFelt => ok(felt);
 
