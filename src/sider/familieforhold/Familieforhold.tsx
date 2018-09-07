@@ -10,6 +10,7 @@ import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectFamilieforhold } from '../../soknad/selectors';
 import { IFamilieforhold, Svar } from '../../soknad/types';
 import AnnenForelderInfo from './AnnenForelderInfo';
+import SoknadHjelpetekst from '../../component/SoknadHjelpetekst/SoknadHjelpetekst';
 
 interface IMapDispatchToProps {
     settBorForeldreneSammenMedBarnet: (verdi: Svar) => void;
@@ -33,11 +34,22 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
                 <BorSammenIkon />
             </div>
             <form className={'familieforhold__form'} onSubmit={nesteSteg}>
-                <h3 className={'typo-systemtittel familieforhold__tittel'}>
-                    <FormattedMessage id={'familieforhold.borForeldreneSammenMedBarnet.sporsmal'} />
-                </h3>
+                <div className={'familieforhold__tittelcontainer'}>
+                    <h3 className={'typo-innholdstittel familieforhold__tittel'}>
+                        <FormattedMessage id={'familieforhold.tittel'} />
+                    </h3>
+                    <SoknadHjelpetekst
+                        className={'familieforhold__hjelpetekst'}
+                        modalClassName={'familieforhold__hjelpetekst__modal'}
+                        hjelpetekstNokkel={
+                            'familieforhold.borForeldreneSammenMedBarnet.hjelpetekst'
+                        }
+                    />
+                </div>
                 <RadioPanelGruppe
-                    legend={''}
+                    legend={intl.formatMessage({
+                        id: 'familieforhold.borForeldreneSammenMedBarnet.sporsmal',
+                    })}
                     name={'borForeldreneSammenMedBarnet'}
                     className={'familieforhold__sporsmaal'}
                     onChange={(evt: {}, value: string) =>

@@ -8,9 +8,24 @@
     width: 4rem;
   }
 
-  &__tittel {
+  &__tittelcontainer {
     margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__tittel {
     text-align: center;
+  }
+
+  &__hjelpetekst {
+    width: 1.5rem;
+    margin-top: auto;
+    margin-left: 0.75rem;
+
+    &__modal {
+      width: 90%;
+    }
   }
 
   &__form {
@@ -28,6 +43,14 @@
     }
 
     &__tittel {
+
+    }
+
+    &__hjelpetekst {
+
+      &__modal {
+        width: 75%;
+      }
     }
 
     &__form {
@@ -35,6 +58,7 @@
     }
 
     &__sporsmaal {
+      margin-top: 2rem;
 
       & .inputPanelGruppe__inner {
         display: flex;
@@ -57,7 +81,11 @@
       width: 6.25rem;
     }
 
-    &__tittel {
+    &__hjelpetekst {
+
+      &__modal {
+        width: 55%;
+      }
     }
 
     &__form {
