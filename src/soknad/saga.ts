@@ -12,7 +12,19 @@ import {
     soknadValiderSteg,
 } from './actions';
 import { selectSoknad } from './selectors';
-import { BarnehageplassVerdier, Feltnavn, IFelt, Stegnavn, Svar, ValideringsStatus } from './types';
+import {
+    arbeidsforholdFeltnavn,
+    barnehageplassFeltnavn,
+    BarnehageplassVerdier,
+    familieforholdFeltnavn,
+    Feltnavn,
+    IFelt,
+    kravTilSokerFeltnavn,
+    minebarnFeltnavn,
+    Stegnavn,
+    Svar,
+    ValideringsStatus,
+} from './types';
 import valideringsConfig from './valideringsConfig';
 
 function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
@@ -22,7 +34,37 @@ function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
         verdi: action.verdi,
     };
 
-    const validertFelt = valideringsConfig[action.stegnavn][action.feltnavn](feltMedOppdatertVerdi);
+    let validertFelt: IFelt = {
+        feilmeldingsNokkel: '',
+        valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+        verdi: '',
+    };
+    switch (action.stegnavn) {
+        case 'arbeidsforhold':
+            validertFelt = valideringsConfig.arbeidsforhold[
+                action.feltnavn as arbeidsforholdFeltnavn
+            ](feltMedOppdatertVerdi);
+            break;
+        case 'barnehageplass':
+            validertFelt = valideringsConfig.barnehageplass[
+                action.feltnavn as barnehageplassFeltnavn
+            ](feltMedOppdatertVerdi);
+            break;
+        case 'familieforhold':
+            validertFelt = valideringsConfig.familieforhold[
+                action.feltnavn as familieforholdFeltnavn
+            ](feltMedOppdatertVerdi);
+            break;
+        case 'kravTilSoker':
+            validertFelt = valideringsConfig.kravTilSoker[action.feltnavn as kravTilSokerFeltnavn](
+                feltMedOppdatertVerdi
+            );
+            break;
+        case 'mineBarn':
+            validertFelt = valideringsConfig.mineBarn[action.feltnavn as minebarnFeltnavn](
+                feltMedOppdatertVerdi
+            );
+    }
 
     yield put(soknadSettFelt(action.stegnavn, action.feltnavn, validertFelt));
 }
