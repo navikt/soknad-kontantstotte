@@ -1,8 +1,8 @@
 import axios from 'axios';
 import Environment from '../Environment';
 
-function fetchTekster() {
-    return axios.get(`${Environment().apiUrl}/tekster`).then(response => {
+function fetchTekster(valgtSprak: string) {
+    return axios.get(`${Environment().apiUrl}/tekster/${valgtSprak}`).then(response => {
         return response.data;
     });
 }

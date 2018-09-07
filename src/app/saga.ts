@@ -38,7 +38,7 @@ function* autentiserBruker(): SagaIterator {
 function* forsteSidelastSaga(): SagaIterator {
     yield call(autentiserBruker);
 
-    yield put(teksterHent());
+    yield put(teksterHent('nb'));
 
     yield all([take(TeksterTypeKeys.HENT_OK)]);
 

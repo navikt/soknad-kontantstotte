@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { addLocaleData, IntlProvider as Provider } from 'react-intl';
 import * as nb from 'react-intl/locale-data/nb';
+import * as nn from 'react-intl/locale-data/nn';
 import { connect } from 'react-redux';
 import { IRootState } from './rootReducer';
 import { selectTekster, selectValgtSprak } from './tekster/selectors';
 import { ITekster } from './tekster/types';
 
 addLocaleData(nb);
+addLocaleData(nn);
 
 interface IOwnProps {
     children: React.ReactNode;

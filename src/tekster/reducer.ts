@@ -4,7 +4,7 @@ import { ITekster } from './types';
 interface ITeksterState {
     readonly henter: boolean;
     readonly tekster: ITekster;
-    readonly valgtSprak: 'nb';
+    readonly valgtSprak: string;
 }
 
 const initialState: ITeksterState = {
@@ -19,6 +19,7 @@ function teksterReducer(state = initialState, action: TeksterActionTypes) {
             return {
                 ...state,
                 henter: true,
+                valgtSprak: action.valgtSprak,
             };
         case TeksterTypeKeys.HENT_OK:
             return {

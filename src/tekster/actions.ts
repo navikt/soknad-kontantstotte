@@ -11,6 +11,7 @@ type TeksterActionTypes = ITeksterHent | ITeksterHentOK | ITeksterHentFeilet;
 
 interface ITeksterHent extends Action {
     type: TeksterTypeKeys.HENT;
+    valgtSprak: string;
 }
 
 interface ITeksterHentOK extends Action {
@@ -22,9 +23,10 @@ interface ITeksterHentFeilet extends Action {
     type: TeksterTypeKeys.HENT_FEILET;
 }
 
-function teksterHent(): ITeksterHent {
+function teksterHent(valgtSprak: string): ITeksterHent {
     return {
         type: TeksterTypeKeys.HENT,
+        valgtSprak,
     };
 }
 
