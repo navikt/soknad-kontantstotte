@@ -1,14 +1,43 @@
 import * as React from 'react';
-import Navigasjonknapp from '../../component/Navigasjonknapp/Navigasjonknapp';
-import SideContainer from '../../component/SideContainer/SideContainer';
+import { connect } from 'react-redux';
+import { IPerson } from '../../person/types';
+import { IRootState } from '../../rootReducer';
 
-const Kvittering = (): JSX.Element => {
+import { Sidetittel } from 'nav-frontend-typografi';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { selectPerson } from '../../person/selectors';
+import KvitteringIkon from './ikoner/KvitteringIkon';
+import UtvidetInfo from './UtvidetInfo';
+
+type KvitteringProps = IPerson & InjectedIntlProps;
+const Kvittering: React.StatelessComponent<KvitteringProps> = ({ intl }) => {
     return (
-        <SideContainer>
-            <h1>Takk for søknaden! Svarer snarest</h1>
-            <Navigasjonknapp to="/">Tilbake til hovedsiden</Navigasjonknapp>
-        </SideContainer>
+        <div>
+            <Sidetittel className={'side-container__sidetittel'}>
+                <FormattedMessage id={'kontantstotte.tittel'} />
+            </Sidetittel>
+            <div className="kvittering__ikon-container">
+                <KvitteringIkon className="kvittering__ikon" />
+            </div>
+
+            <h3 className="kvittering__tittel">
+                {intl.formatMessage({
+                    id: 'kvittering.takkForSoknad',
+                })}
+            </h3>
+
+            <UtvidetInfo intl={intl} />
+        </div>
     );
 };
 
-export default Kvittering;
+const mapStateToProps = (state: IRootState): IPerson => {
+    return selectPerson(state);
+};
+
+export default injectIntl(
+    connect(
+        mapStateToProps,
+        null
+    )(Kvittering)
+);
