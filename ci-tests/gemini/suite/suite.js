@@ -85,7 +85,7 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.executeJS(enableHover);
             actions.click('.knapp.knapp--hoved');
             actions.wait(2000);
-            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.waitForElementToShow('.kvittering__tittel', 5000);
             actions.click('h1');
             actions.executeJS(disableHover);
         });
