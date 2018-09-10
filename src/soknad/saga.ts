@@ -99,14 +99,32 @@ function* sjekkValideringForSteg(stegnavn: Stegnavn) {
     return harListeMedFeltFeil(soknadState[stegnavn]);
 }
 
-function* sjekkValideringForFamilieforhold(stegnavn: Stegnavn) {
+function* sjekkValideringForArbeidsforhold(stegnavn: Stegnavn) {
     const soknadState = yield select(selectSoknad);
 
-    if (soknadState[stegnavn]['borForeldreneSammenMedBarnet' as Stegnavn].verdi === Svar.NEI) {
-        return false;
-    } else {
-        return harListeMedFeltFeil(soknadState[stegnavn]);
+    let harFeil = false;
+    if (
+        soknadState[stegnavn]['arbeiderIUtlandetEllerKontinentalsokkel' as Stegnavn].verdi ===
+        Svar.JA
+    ) {
+        harFeil =
+            soknadState[stegnavn]['arbeiderIUtlandetEllerKontinentalsokkelForklaring' as Stegnavn]
+                .verdi === Svar.UBESVART;
     }
+
+    if (soknadState[stegnavn]['mottarKontantstotteFraAnnetEOS' as Stegnavn].verdi === Svar.JA) {
+        harFeil =
+            soknadState[stegnavn]['mottarKontantstotteFraAnnetEOSForklaring' as Stegnavn].verdi ===
+            Svar.UBESVART;
+    }
+
+    if (soknadState[stegnavn]['mottarYtelserFraUtlandet' as Stegnavn].verdi === Svar.JA) {
+        harFeil =
+            soknadState[stegnavn]['mottarYtelserFraUtlandetForklaring' as Stegnavn].verdi ===
+            Svar.UBESVART;
+    }
+
+    return harFeil;
 }
 
 function* sjekkValideringForBarnehageplass(stegnavn: Stegnavn) {
@@ -129,6 +147,16 @@ function* sjekkValideringForBarnehageplass(stegnavn: Stegnavn) {
     }
 }
 
+function* sjekkValideringForFamilieforhold(stegnavn: Stegnavn) {
+    const soknadState = yield select(selectSoknad);
+
+    if (soknadState[stegnavn]['borForeldreneSammenMedBarnet' as Stegnavn].verdi === Svar.NEI) {
+        return false;
+    } else {
+        return harListeMedFeltFeil(soknadState[stegnavn]);
+    }
+}
+
 function* nesteStegSaga() {
     const appSteg = yield select(selectAppSteg);
     const tilSide: ISteg = Object.values(stegConfig).find(
@@ -138,11 +166,14 @@ function* nesteStegSaga() {
 
     yield put(soknadValiderSteg(tilSide.key as Stegnavn));
     switch (tilSide.key as Stegnavn) {
-        case 'familieforhold':
-            harFeil = yield call(sjekkValideringForFamilieforhold, tilSide.key as Stegnavn);
+        case 'arbeidsforhold':
+            harFeil = yield call(sjekkValideringForArbeidsforhold, tilSide.key as Stegnavn);
             break;
         case 'barnehageplass':
             harFeil = yield call(sjekkValideringForBarnehageplass, tilSide.key as Stegnavn);
+            break;
+        case 'familieforhold':
+            harFeil = yield call(sjekkValideringForFamilieforhold, tilSide.key as Stegnavn);
             break;
         default:
             harFeil = yield call(sjekkValideringForSteg, tilSide.key as Stegnavn);
