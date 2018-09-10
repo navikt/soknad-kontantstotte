@@ -8,7 +8,7 @@ case "$1" in
             set -e
             docker-compose run --rm testcafe
             docker-compose run --rm gemini test
-            docker-compose run --rm pa11y
+            # docker-compose run --rm pa11y
             docker-compose down
         )
         errorCode=$?
