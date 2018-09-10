@@ -1,0 +1,62 @@
+.barnehage {
+
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  &__sidetittel {
+    margin-bottom: 0;
+  }
+
+  &__info {
+    width: 90%;
+    max-width: 60rem;
+    margin: 1rem auto;
+  }
+
+  & form {
+    width: 90%;
+  }
+
+  &__inputPanelGruppe {
+
+    width: 100%;
+
+    & .inputPanel {
+      margin: .5rem 1rem .5rem 0rem;
+      min-height: 5rem;
+      width: 45%;
+    }
+
+    & .skjema__legend {
+      width: 90%;
+    }
+
+    @media (max-width: 600px) {
+      & .inputPanel {
+        width: 100%;
+        margin: .5rem 0;
+      }
+    }
+
+    & .inputPanelGruppe__inner {
+
+      display: flex;
+      flex-wrap: wrap;
+      align-items: left;
+
+    }
+
+    & .skjema__fieldset {
+
+      max-width: 60rem;
+      margin: 0 auto;
+    }
+
+    & .skjemaelement__feilmelding {
+      text-align: center
+    }
+
+  }
+
+}
