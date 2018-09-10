@@ -1,10 +1,11 @@
 import { Input, SkjemaGruppe } from 'nav-frontend-skjema';
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
-import { IFeil } from '../../common/lib/validation/types';
+import { hentFeltMedFeil } from '../../common/utils';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { selectBarn } from '../../person/selectors';
@@ -12,11 +13,10 @@ import { IBarn } from '../../person/types';
 import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectMineBarn } from '../../soknad/selectors';
-import { IFelt, ValideringsStatus } from '../../soknad/types';
 
 interface IMapStateToProps {
     barn: IBarn[];
-    feltMedFeil: IMineKravFeil;
+    harForsoktNesteSteg: boolean;
     valgtBarn: IBarn;
 }
 
@@ -27,17 +27,19 @@ interface IMapDispatchToProps {
     settBarnFodselsdato: (fodselsdato: string) => void;
 }
 
-type MineBarnSideProps = IMapStateToProps & IMapDispatchToProps;
+type MineBarnSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
 const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
     barn,
-    feltMedFeil,
+    harForsoktNesteSteg,
     nesteSteg,
     settBarnFodselsdato,
     settBarnNavn,
     valgtBarn,
     velgBarn,
+    intl,
 }) => {
+    const feltMedFeil = hentFeltMedFeil(valgtBarn, harForsoktNesteSteg, intl);
     return (
         <SideContainer className={'mine-barn'}>
             <form>
@@ -82,32 +84,11 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
     );
 };
 
-interface IMineKravFeil {
-    [key: string]: IFeil | undefined;
-}
-
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
-    const barn = selectBarn(state);
-    const mineBarn = selectMineBarn(state);
-    const harForsoktNesteSteg = selectHarForsoktNesteSteg(state);
-
-    const feltMedFeil = Object.keys(mineBarn).reduce(
-        (accFeltMedFeil: IMineKravFeil, feltKey: string) => {
-            const felt: IFelt = mineBarn[feltKey];
-
-            accFeltMedFeil[feltKey] =
-                felt.valideringsStatus !== ValideringsStatus.OK && harForsoktNesteSteg
-                    ? { feilmelding: felt.feilmeldingsNokkel }
-                    : undefined;
-            return accFeltMedFeil;
-        },
-        {}
-    );
-
     return {
-        barn,
-        feltMedFeil,
-        valgtBarn: mineBarn,
+        barn: selectBarn(state),
+        harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
+        valgtBarn: selectMineBarn(state),
     };
 };
 
@@ -124,7 +105,9 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(MineBarn);
+export default injectIntl(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(MineBarn)
+);

@@ -30,4 +30,8 @@ export interface IFeil {
     feilmelding: string;
 }
 
+export interface IFeltFeil {
+    [key: string]: IFeil | undefined;
+}
+
 export type ValidComponentProps = ValidatorProps & InputProps;

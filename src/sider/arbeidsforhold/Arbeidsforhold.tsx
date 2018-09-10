@@ -27,7 +27,7 @@ const Arbeidsforhold: React.StatelessComponent<ArbeidsforholdSideProps> = ({
     const bolk: Stegnavn = 'arbeidsforhold';
     return (
         <SideContainer>
-            <ValidForm summaryTitle={'Arbeidsforhold'} onSubmit={nesteSteg}>
+            <form>
                 <JaNeiSporsmal
                     bolk={bolk}
                     felt="mottarYtelserFraUtlandet"
@@ -54,8 +54,8 @@ const Arbeidsforhold: React.StatelessComponent<ArbeidsforholdSideProps> = ({
                     harForklaring={true}
                     forklaring={mottarKontantstotteFraAnnetEOSForklaring.verdi}
                 />
-                <Submitknapp label="app.neste" onClick={nesteSteg} />
-            </ValidForm>
+            </form>
+            <Submitknapp label="app.neste" onClick={nesteSteg} />
         </SideContainer>
     );
 };

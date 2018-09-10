@@ -2,14 +2,21 @@ import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
+import { selectHarForsoktNesteSteg } from '../../app/selectors';
+import { IFeltFeil } from '../../common/lib/validation/types';
 import BorSammenIkon from '../../component/Ikoner/BorSammenIkon';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectFamilieforhold } from '../../soknad/selectors';
-import { IFamilieforhold, Svar } from '../../soknad/types';
+import { IFamilieforhold, Svar, ValideringsStatus } from '../../soknad/types';
 import AnnenForelderInfo from './AnnenForelderInfo';
+
+interface IMapStateToProps {
+    familieforhold: IFamilieforhold;
+    feltMedFeil: IFeltFeil;
+}
 
 interface IMapDispatchToProps {
     settBorForeldreneSammenMedBarnet: (verdi: Svar) => void;
@@ -18,10 +25,11 @@ interface IMapDispatchToProps {
     nesteSteg: () => void;
 }
 
-type FamilieforholdSideProps = IFamilieforhold & IMapDispatchToProps & InjectedIntlProps;
+type FamilieforholdSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
 const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
-    borForeldreneSammenMedBarnet,
+    familieforhold,
+    feltMedFeil,
     nesteSteg,
     settBorForeldreneSammenMedBarnet,
     intl,
@@ -43,15 +51,19 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
                     onChange={(evt: {}, value: string) =>
                         settBorForeldreneSammenMedBarnet(value as Svar)
                     }
-                    checked={borForeldreneSammenMedBarnet.verdi}
+                    checked={familieforhold.borForeldreneSammenMedBarnet.verdi}
                     radios={[
                         { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                         { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
                     ]}
                 />
 
-                {borForeldreneSammenMedBarnet.verdi === Svar.JA && (
-                    <AnnenForelderInfo {...annenForelderProps} />
+                {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA && (
+                    <AnnenForelderInfo
+                        familieforhold={familieforhold}
+                        feltMedFeil={feltMedFeil}
+                        {...annenForelderProps}
+                    />
                 )}
                 <Submitknapp label="app.neste" onClick={nesteSteg} />
             </form>
@@ -59,8 +71,25 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
     );
 };
 
-const mapStateToProps = (state: IRootState): IFamilieforhold => {
-    return selectFamilieforhold(state);
+const mapStateToProps = (state: IRootState): IMapStateToProps => {
+    const familieforhold = selectFamilieforhold(state);
+    const harForsoktNesteSteg = selectHarForsoktNesteSteg(state);
+
+    const feltMedFeil = Object.entries(familieforhold).reduce(
+        (accFeltMedFeil: IFeltFeil, [key, felt]) => {
+            accFeltMedFeil[key] =
+                felt.valideringsStatus !== ValideringsStatus.OK && harForsoktNesteSteg
+                    ? { feilmelding: felt.feilmeldingsNokkel }
+                    : undefined;
+            return accFeltMedFeil;
+        },
+        {}
+    );
+
+    return {
+        familieforhold,
+        feltMedFeil,
+    };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {

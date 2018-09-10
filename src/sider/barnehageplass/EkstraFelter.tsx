@@ -1,11 +1,12 @@
+import { Input } from 'nav-frontend-skjema';
 import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
-import { ValidInput } from '../../common/lib/validation';
-import DatoInputWithValidation from '../../common/lib/validation/DatoInputWithValidation';
+import { IFeltFeil } from '../../common/lib/validation/types';
 import { BarnehageplassVerdier, Feltnavn, IBarnehageplass } from '../../soknad/types';
-import { erDatoSatt, harTekstomradeInnhold } from '../../soknad/validators';
+import DatoFelt from './DatoFelt';
 
 interface IEkstraFelterProps extends IBarnehageplass {
+    feltMedFeil: IFeltFeil;
     intl: InjectedIntl;
     settFelt: (nokkel: Feltnavn, verdi: string) => void;
 }
@@ -13,6 +14,7 @@ interface IEkstraFelterProps extends IBarnehageplass {
 type JaEkstraFelterProps = IEkstraFelterProps;
 
 const EkstraFelter: React.StatelessComponent<JaEkstraFelterProps> = ({
+    feltMedFeil,
     harBarnehageplass,
     dato,
     kommune,
@@ -34,50 +36,35 @@ const EkstraFelter: React.StatelessComponent<JaEkstraFelterProps> = ({
     }
     return (
         <div>
-            <DatoInputWithValidation
+            <DatoFelt
                 {...dato && { dato: new Date(dato.verdi) }}
                 name="barnehageplass.dato"
                 label={intl.formatMessage({ id: datoNokkel })}
                 settDato={date => settFelt('dato', date.toDateString())}
-                validators={[
-                    {
-                        failText: intl.formatMessage({ id: 'svar.feilmelding' }),
-                        test: () => erDatoSatt(dato.verdi),
-                    },
-                ]}
+                feil={feltMedFeil.dato}
             />
-            <ValidInput
+            <Input
                 name="barnehageplass.kommune"
                 label={intl.formatMessage({ id: 'barnehageplass.kommune' })}
                 bredde={'M'}
-                validators={[
-                    {
-                        failText: intl.formatMessage({ id: 'svar.feilmelding' }),
-                        test: () => harTekstomradeInnhold(kommune.verdi),
-                    },
-                ]}
                 onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
                     settFelt('kommune', event.target.value)
                 }
                 defaultValue={kommune.verdi}
+                feil={feltMedFeil.kommune}
             />
             {[BarnehageplassVerdier.JaSkalSlutte, BarnehageplassVerdier.Ja].includes(
                 harBarnehageplass.verdi as BarnehageplassVerdier
             ) && (
-                <ValidInput
+                <Input
                     name="barnehageplass.antallTimer"
                     label={intl.formatMessage({ id: 'barnehageplass.antallTimer' })}
                     bredde={'M'}
-                    validators={[
-                        {
-                            failText: intl.formatMessage({ id: 'svar.feilmelding' }),
-                            test: () => harTekstomradeInnhold(antallTimer.verdi),
-                        },
-                    ]}
                     onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
                         settFelt('antallTimer', event.target.value)
                     }
                     defaultValue={antallTimer.verdi}
+                    feil={feltMedFeil.antallTimer}
                 />
             )}
         </div>

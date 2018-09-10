@@ -7,6 +7,7 @@ import Kvittering from './sider/kvittering/Kvittering';
 import MineBarnSide from './sider/mine-barn/MineBarn';
 import OppsummeringSide from './sider/oppsummering/Oppsummering';
 import Veiledning from './sider/veiledning/Veiledning';
+import { Stegnavn } from './soknad/types';
 
 interface IStegConfig {
     veiledning: ISteg;
@@ -36,13 +37,13 @@ const stegConfig: IStegConfig = {
     },
     kravTilSoker: {
         component: KravTilSoker,
-        key: 'start',
+        key: 'kravTilSoker',
         path: '/start',
         stegIndeks: 1,
     },
     mineBarn: {
         component: MineBarnSide,
-        key: 'mine-barn',
+        key: 'mineBarn',
         path: '/mine-barn',
         stegIndeks: 2,
     },
