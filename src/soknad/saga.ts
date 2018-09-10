@@ -108,20 +108,36 @@ function* sjekkValideringForArbeidsforhold(stegnavn: Stegnavn) {
         Svar.JA
     ) {
         harFeil =
+            harFeil ||
             soknadState[stegnavn]['arbeiderIUtlandetEllerKontinentalsokkelForklaring' as Stegnavn]
-                .verdi === Svar.UBESVART;
+                .verdi.length === 0;
+    } else if (
+        soknadState[stegnavn]['arbeiderIUtlandetEllerKontinentalsokkel' as Stegnavn].verdi ===
+        Svar.UBESVART
+    ) {
+        return true;
     }
 
     if (soknadState[stegnavn]['mottarKontantstotteFraAnnetEOS' as Stegnavn].verdi === Svar.JA) {
         harFeil =
-            soknadState[stegnavn]['mottarKontantstotteFraAnnetEOSForklaring' as Stegnavn].verdi ===
-            Svar.UBESVART;
+            harFeil ||
+            soknadState[stegnavn]['mottarKontantstotteFraAnnetEOSForklaring' as Stegnavn].verdi
+                .length === 0;
+    } else if (
+        soknadState[stegnavn]['mottarKontantstotteFraAnnetEOS' as Stegnavn].verdi === Svar.UBESVART
+    ) {
+        return true;
     }
 
     if (soknadState[stegnavn]['mottarYtelserFraUtlandet' as Stegnavn].verdi === Svar.JA) {
         harFeil =
-            soknadState[stegnavn]['mottarYtelserFraUtlandetForklaring' as Stegnavn].verdi ===
-            Svar.UBESVART;
+            harFeil ||
+            soknadState[stegnavn]['mottarYtelserFraUtlandetForklaring' as Stegnavn].verdi.length ===
+                0;
+    } else if (
+        soknadState[stegnavn]['mottarYtelserFraUtlandet' as Stegnavn].verdi === Svar.UBESVART
+    ) {
+        return true;
     }
 
     return harFeil;
