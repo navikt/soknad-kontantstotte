@@ -10,7 +10,6 @@ import { harSvartPaJaNeiSporsmal } from '../../soknad/validators';
 import SpesifiserTextarea from './SpesifiserTextarea';
 
 interface ISporsmaalProps {
-    className: string;
     bolk: Stegnavn;
     felt: Feltnavn;
     sporsmalNokkel: string;
@@ -28,7 +27,6 @@ interface IMapDispatchToProps {
 type JaNeiSporsmalProps = IMapDispatchToProps & ISporsmaalProps & InjectedIntlProps;
 
 const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
-    className,
     bolk,
     felt,
     verdi,
@@ -41,7 +39,7 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
     hjelpetekstNokkel,
 }) => {
     return (
-        <div className={className}>
+        <div>
             {hjelpetekstNokkel && (
                 <HjelpetekstUnder id={hjelpetekstNokkel}>
                     <FormattedMessage id={hjelpetekstNokkel} />
