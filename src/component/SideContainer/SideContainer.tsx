@@ -49,7 +49,6 @@ class SideContainer extends React.Component<Props> {
                 />
                 <TilbakeKnapp />
                 <div className={className}>{children}</div>
-
                 <AvbrytKnapp />
             </div>
         );
