@@ -41,11 +41,13 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
                 <BorSammenIkon />
             </div>
             <form className={'familieforhold__form'} onSubmit={nesteSteg}>
-                <h3 className={'typo-systemtittel familieforhold__tittel'}>
-                    <FormattedMessage id={'familieforhold.borForeldreneSammenMedBarnet.sporsmal'} />
+                <h3 className={'typo-innholdstittel familieforhold__tittel'}>
+                    <FormattedMessage id={'familieforhold.tittel'} />
                 </h3>
                 <RadioPanelGruppe
-                    legend={''}
+                    legend={intl.formatMessage({
+                        id: 'familieforhold.borForeldreneSammenMedBarnet.sporsmal',
+                    })}
                     name={'borForeldreneSammenMedBarnet'}
                     className={'familieforhold__sporsmaal'}
                     onChange={(evt: {}, value: string) =>
