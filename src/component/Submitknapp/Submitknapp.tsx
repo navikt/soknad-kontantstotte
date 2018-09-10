@@ -4,13 +4,14 @@ import { FormattedMessage } from 'react-intl';
 
 interface ISubmitKnappProps {
     label: string;
+    onClick: () => void;
 }
 
 type SubmitKnappProps = ISubmitKnappProps;
 
-const Submitknapp: React.StatelessComponent<SubmitKnappProps> = ({ label }) => {
+const Submitknapp: React.StatelessComponent<SubmitKnappProps> = ({ label, onClick }) => {
     return (
-        <KnappBase type="hoved" htmlType="submit">
+        <KnappBase type="hoved" onClick={onClick}>
             <FormattedMessage id={label} />
         </KnappBase>
     );

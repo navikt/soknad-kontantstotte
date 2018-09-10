@@ -1,50 +1,67 @@
 import { SoknadActionTypes, SoknadTypeKeys } from './actions';
-import { BarnehageplassVerdier, ISoknadState, Svar } from './types';
+import { BarnehageplassVerdier, ISoknadState, Svar, ValideringsStatus } from './types';
+
+const standardSvarInitialFelt = {
+    feilmeldingsNokkel: '',
+    valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+    verdi: Svar.UBESVART,
+};
+
+const standardStringInitialFelt = {
+    feilmeldingsNokkel: '',
+    valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+    verdi: '',
+};
+
+const standardBarnehageplassVerdiInitialFelt = {
+    feilmeldingsNokkel: '',
+    valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+    verdi: BarnehageplassVerdier.Ubesvart,
+};
 
 const initialState: ISoknadState = {
     arbeidsforhold: {
-        arbeiderIUtlandetEllerKontinentalsokkel: Svar.UBESVART,
-        arbeiderIUtlandetEllerKontinentalsokkelForklaring: '',
-        mottarKontantstotteFraAnnetEOS: Svar.UBESVART,
-        mottarKontantstotteFraAnnetEOSForklaring: '',
-        mottarYtelserFraUtlandet: Svar.UBESVART,
-        mottarYtelserFraUtlandetForklaring: '',
+        arbeiderIUtlandetEllerKontinentalsokkel: standardSvarInitialFelt,
+        arbeiderIUtlandetEllerKontinentalsokkelForklaring: standardStringInitialFelt,
+        mottarKontantstotteFraAnnetEOS: standardSvarInitialFelt,
+        mottarKontantstotteFraAnnetEOSForklaring: standardStringInitialFelt,
+        mottarYtelserFraUtlandet: standardSvarInitialFelt,
+        mottarYtelserFraUtlandetForklaring: standardStringInitialFelt,
     },
     barnehageplass: {
-        antallTimer: '',
-        dato: '',
-        harBarnehageplass: BarnehageplassVerdier.Ubesvart,
-        kommune: '',
+        antallTimer: standardStringInitialFelt,
+        dato: standardStringInitialFelt,
+        harBarnehageplass: standardBarnehageplassVerdiInitialFelt,
+        kommune: standardStringInitialFelt,
     },
     familieforhold: {
-        annenForelderFodselsnummer: '',
-        annenForelderNavn: '',
-        annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar.UBESVART,
-        borForeldreneSammenMedBarnet: Svar.UBESVART,
-        erAvklartDeltBosted: Svar.UBESVART,
+        annenForelderFodselsnummer: standardStringInitialFelt,
+        annenForelderNavn: standardStringInitialFelt,
+        annenForelderYrkesaktivINorgeEOSIMinstFemAar: standardSvarInitialFelt,
+        borForeldreneSammenMedBarnet: standardSvarInitialFelt,
     },
     kravTilSoker: {
-        barnIkkeHjemme: Svar.UBESVART,
-        boddEllerJobbetINorgeSisteFemAar: Svar.UBESVART,
-        borSammenMedBarnet: Svar.UBESVART,
-        ikkeAvtaltDeltBosted: Svar.UBESVART,
-        norskStatsborger: Svar.UBESVART,
-        skalBoMedBarnetINorgeNesteTolvMaaneder: Svar.UBESVART,
+        barnIkkeHjemme: standardSvarInitialFelt,
+        boddEllerJobbetINorgeSisteFemAar: standardSvarInitialFelt,
+        borSammenMedBarnet: standardSvarInitialFelt,
+        ikkeAvtaltDeltBosted: standardSvarInitialFelt,
+        norskStatsborger: standardSvarInitialFelt,
+        skalBoMedBarnetINorgeNesteTolvMaaneder: standardSvarInitialFelt,
     },
     mineBarn: {
-        fodselsdato: '',
-        navn: '',
+        fodselsdato: standardStringInitialFelt,
+        navn: standardStringInitialFelt,
     },
 };
 
 function soknadReducer(state = initialState, action: SoknadActionTypes) {
     switch (action.type) {
-        case SoknadTypeKeys.SETT_VERDI:
+        case SoknadTypeKeys.SETT_FELT:
             return {
                 ...state,
-                [action.bolk]: {
-                    ...state[action.bolk],
-                    [action.felt]: action.verdi,
+                [action.stegnavn]: {
+                    ...state[action.stegnavn],
+                    [action.feltnavn]: action.felt,
                 },
             };
         default:

@@ -12,6 +12,19 @@ enum BarnehageplassVerdier {
     Ubesvart = 'Ubesvart',
 }
 
+enum ValideringsStatus {
+    FEIL = 'FEIL',
+    ADVARSEL = 'ADVARSEL',
+    OK = 'OK',
+    IKKE_VALIDERT = 'IKKE_VALIDERT',
+}
+
+interface IFelt {
+    verdi: Svar | BarnehageplassVerdier | string;
+    valideringsStatus: ValideringsStatus;
+    feilmeldingsNokkel: string;
+}
+
 interface ISoknadState {
     readonly mineBarn: IMineBarn;
     readonly familieforhold: IFamilieforhold;
@@ -21,59 +34,71 @@ interface ISoknadState {
 }
 
 interface IMineBarn {
-    readonly navn: string;
-    readonly fodselsdato: string;
+    readonly navn: IFelt;
+    readonly fodselsdato: IFelt;
 }
 
 interface IFamilieforhold {
-    readonly borForeldreneSammenMedBarnet: Svar;
-    readonly erAvklartDeltBosted: Svar;
-    readonly annenForelderNavn: string;
-    readonly annenForelderFodselsnummer: string;
-    readonly annenForelderYrkesaktivINorgeEOSIMinstFemAar: Svar;
+    readonly borForeldreneSammenMedBarnet: IFelt;
+    readonly annenForelderNavn: IFelt;
+    readonly annenForelderFodselsnummer: IFelt;
+    readonly annenForelderYrkesaktivINorgeEOSIMinstFemAar: IFelt;
 }
 
 interface IArbeidsforhold {
-    readonly mottarYtelserFraUtlandet: Svar;
-    readonly mottarYtelserFraUtlandetForklaring: string;
-    readonly arbeiderIUtlandetEllerKontinentalsokkel: Svar;
-    readonly arbeiderIUtlandetEllerKontinentalsokkelForklaring: string;
-    readonly mottarKontantstotteFraAnnetEOS: Svar;
-    readonly mottarKontantstotteFraAnnetEOSForklaring: string;
+    readonly mottarYtelserFraUtlandet: IFelt;
+    readonly mottarYtelserFraUtlandetForklaring: IFelt;
+    readonly arbeiderIUtlandetEllerKontinentalsokkel: IFelt;
+    readonly arbeiderIUtlandetEllerKontinentalsokkelForklaring: IFelt;
+    readonly mottarKontantstotteFraAnnetEOS: IFelt;
+    readonly mottarKontantstotteFraAnnetEOSForklaring: IFelt;
 }
 
 interface IBarnehageplass {
-    readonly harBarnehageplass: BarnehageplassVerdier;
-    readonly dato: string;
-    readonly kommune: string;
-    readonly antallTimer: string;
+    readonly harBarnehageplass: IFelt;
+    readonly dato: IFelt;
+    readonly kommune: IFelt;
+    readonly antallTimer: IFelt;
 }
 
 interface IKravTilSoker {
-    readonly norskStatsborger: Svar;
-    readonly boddEllerJobbetINorgeSisteFemAar: Svar;
-    readonly borSammenMedBarnet: Svar;
-    readonly barnIkkeHjemme: Svar;
-    readonly ikkeAvtaltDeltBosted: Svar;
-    readonly skalBoMedBarnetINorgeNesteTolvMaaneder: Svar;
+    readonly norskStatsborger: IFelt;
+    readonly boddEllerJobbetINorgeSisteFemAar: IFelt;
+    readonly borSammenMedBarnet: IFelt;
+    readonly barnIkkeHjemme: IFelt;
+    readonly ikkeAvtaltDeltBosted: IFelt;
+    readonly skalBoMedBarnetINorgeNesteTolvMaaneder: IFelt;
 }
 
-type Bolk = keyof ISoknadState;
-type Felt =
-    | keyof IMineBarn
-    | keyof IFamilieforhold
-    | keyof IArbeidsforhold
-    | keyof IBarnehageplass
-    | keyof IKravTilSoker;
+type minebarnFeltnavn = keyof IMineBarn;
+type familieforholdFeltnavn = keyof IFamilieforhold;
+type arbeidsforholdFeltnavn = keyof IArbeidsforhold;
+type barnehageplassFeltnavn = keyof IBarnehageplass;
+type kravTilSokerFeltnavn = keyof IKravTilSoker;
+
+type Stegnavn = keyof ISoknadState;
+type Feltnavn =
+    | minebarnFeltnavn
+    | familieforholdFeltnavn
+    | arbeidsforholdFeltnavn
+    | barnehageplassFeltnavn
+    | kravTilSokerFeltnavn;
 
 export {
+    minebarnFeltnavn,
+    familieforholdFeltnavn,
+    arbeidsforholdFeltnavn,
+    barnehageplassFeltnavn,
+    kravTilSokerFeltnavn,
     BarnehageplassVerdier,
-    Bolk,
-    Felt,
+    Stegnavn,
+    Feltnavn,
     IArbeidsforhold,
     IBarnehageplass,
     IFamilieforhold,
     IKravTilSoker,
     ISoknadState,
     Svar,
+    IFelt,
+    ValideringsStatus,
 };
