@@ -15,7 +15,7 @@ const Veileder: React.StatelessComponent<VeilederProps> = ({ content }) => {
                 svg={<Veilederikon morkBakgrunn={true} />}
                 type="normal"
                 kompakt={true}
-                veilederProps={{ children: {}, center: true }}
+                veilederProps={{ children: <div />, center: true }}
             >
                 {content}
             </Veilederpanel>
