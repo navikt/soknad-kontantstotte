@@ -36,7 +36,7 @@ gemini.suite('soknad-kontantstotte', suite => {
         .capture('familieforhold', function(actions, find) {
             actions.executeJS(enableHover);
             actions.sendKeys(find('.mine-barn__navn-input > input'), 'Mock McMockface');
-            actions.sendKeys(find('.mine-barn__fodselsdato-input > input'), '01.01.18');
+            actions.sendKeys(find('.mine-barn__fodselsdato-input > input'), '01.01.2018');
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
             actions.click('h1');
