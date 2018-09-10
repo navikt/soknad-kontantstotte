@@ -13,39 +13,30 @@ services:
       - /var/server/ci-server.js
   gemini:
     image: repo.adeo.no:5443/soknad/soknad-docker-gemini:1.0.0
-    links:
+    depends_on:
       - ci-test-server
       - chrome
-      - hub
     volumes:
-      - ./gemini:/var/gemini
+      - ./gemini:/var/gemini/
       - ./reports/:/reports/
   pa11y:
     image: repo.adeo.no:5443/soknad/soknad-docker-pa11y:1.0.0
-    links:
+    depends_on:
       - ci-test-server
     volumes:
       - ./pa11y/:/var/pa11y/
       - ./reports/:/reports/
     cap_add:
       - SYS_ADMIN
-  hub:
-    image: selenium/hub
+  chrome:
+    container_name: chrome
+    image: selenium/standalone-chrome:3.14.0
     ports:
       - 4444:4444
-  chrome:
-    image: selenium/node-chrome
-    environment:
-      - HUB_PORT_4444_TCP_ADDR=hub
-      - HUB_PORT_4444_TCP_PORT=4444
-    ports:
-      - 5900
-    links:
-      - hub
   testcafe:
     image: testcafe/testcafe
-    command: 'firefox'
-    links:
+    command: ["firefox", "/tests/*.ts"]
+    depends_on:
       - ci-test-server
     volumes:
       - ./testcafe/:/tests
