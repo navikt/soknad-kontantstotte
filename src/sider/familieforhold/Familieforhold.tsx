@@ -40,7 +40,7 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
             <div className={'familieforhold__ikon'}>
                 <BorSammenIkon />
             </div>
-            <form className={'familieforhold__form'} onSubmit={nesteSteg}>
+            <form className={'familieforhold__form'}>
                 <h3 className={'typo-innholdstittel familieforhold__tittel'}>
                     <FormattedMessage id={'familieforhold.tittel'} />
                 </h3>
@@ -67,8 +67,8 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
                         {...annenForelderProps}
                     />
                 )}
-                <Submitknapp label="app.neste" onClick={nesteSteg} />
             </form>
+            <Submitknapp label="app.neste" onClick={nesteSteg} />
         </SideContainer>
     );
 };
