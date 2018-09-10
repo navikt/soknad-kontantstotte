@@ -66,14 +66,14 @@ const mapStateToProps = (state: IRootState): IFamilieforhold => {
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         nesteSteg: () => dispatch(soknadNesteSteg()),
-        settBorForeldreneSammenMedBarnet: (verdi: Svar) => {
-            dispatch(soknadValiderFelt('familieforhold', 'borForeldreneSammenMedBarnet', verdi));
-        },
         settAnnenForelderFodselsnummer: personnr => {
             dispatch(soknadValiderFelt('familieforhold', 'annenForelderFodselsnummer', personnr));
         },
         settAnnenForelderNavn: navn => {
             dispatch(soknadValiderFelt('familieforhold', 'annenForelderNavn', navn));
+        },
+        settBorForeldreneSammenMedBarnet: (verdi: Svar) => {
+            dispatch(soknadValiderFelt('familieforhold', 'borForeldreneSammenMedBarnet', verdi));
         },
     };
 };
