@@ -1,8 +1,7 @@
 import axios from 'axios';
 import Environment from '../Environment';
-import { ISoknadState } from '../soknad/types';
 
-function sendInnSoknad(soknad: ISoknadState) {
+function sendInnSoknad(soknad: object) {
     const formData = new FormData();
     formData.append(
         'soknad',
