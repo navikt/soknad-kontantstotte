@@ -1,13 +1,13 @@
 import { Input } from 'nav-frontend-skjema';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { IFeltFeil } from '../../common/lib/validation/types';
+import { hentFeltMedFeil } from '../../common/utils';
 import SoknadPanel from '../../component/SoknadPanel/SoknadPanel';
 import { IFamilieforhold } from '../../soknad/types';
 
 interface IProps {
     familieforhold: IFamilieforhold;
-    feltMedFeil: IFeltFeil;
+    harForsoktNesteSteg: boolean;
     settAnnenForelderNavn: (navn: string) => void;
     settAnnenForelderFodselsnummer: (personnummer: string) => void;
 }
@@ -15,12 +15,13 @@ interface IProps {
 type AnnenForelderInfoProps = IProps & InjectedIntlProps;
 
 const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
-    feltMedFeil,
     familieforhold,
     intl,
+    harForsoktNesteSteg,
     settAnnenForelderNavn,
     settAnnenForelderFodselsnummer,
 }) => {
+    const feltMedFeil = hentFeltMedFeil(familieforhold, harForsoktNesteSteg, intl);
     return (
         <SoknadPanel>
             <Input
