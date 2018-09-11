@@ -1,16 +1,15 @@
-import Veileder from 'nav-frontend-veileder';
+import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { appNesteSteg } from '../../app/actions';
-import { ValidForm, ValidRadioPanelGruppe } from '../../common/lib/validation';
-import Barnehageikon from '../../component/Ikoner/Barnehage';
+import Barnehageikon from '../../component/Ikoner/BarnehageIkon';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
 import { soknadSettFelt } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
-import { BarnehageplassVerdier, IBarnehageplass, Svar } from '../../soknad/types';
+import { BarnehageplassVerdier, IBarnehageplass, IFelt, Svar } from '../../soknad/types';
 
 interface IMapDispatchToProps {
     nesteSteg: () => void;
@@ -25,38 +24,36 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     intl,
     nesteSteg,
 }) => {
-    const radios = [
-        { label: intl.formatMessage({ id: 'svar.nei' }), value: BarnehageplassVerdier.Nei },
-        { label: intl.formatMessage({ id: 'svar.ja' }), value: BarnehageplassVerdier.Ja },
-    ];
-
     return (
-        <SideContainer>
-            <div className={'barnehage'}>
-                <Veileder center={true}>
-                    <Barnehageikon />
-                </Veileder>
+        <SideContainer className={'barnehage'}>
+            <div className={'barnehage__ikon'}>
+                <Barnehageikon />
+            </div>
 
-                <h2 className={'barnehage__sidetittel'}>
+            <form className={'barnehage__form'}>
+                <h3 className={'typo-innholdstittel barnehage__sidetittel'}>
                     {intl.formatMessage({ id: 'barnehageplass.tittel' })}
-                </h2>
-                <p className={'barnehage__info'}>
+                </h3>
+                <p className={'typo-normal barnehage__info'}>
                     {intl.formatMessage({ id: 'barnehageplass.ingress' })}
                 </p>
-                <ValidForm summaryTitle={'Barnehageplass'} onSubmit={nesteSteg}>
-                    <ValidRadioPanelGruppe
-                        className={'barnehage__inputPanelGruppe'}
-                        name="barnehageplass"
-                        legend="Har barnet barnehageplass?"
-                        radios={radios}
-                        checked={T.verdi}
-                        onChange={(event: {}, value: string) => {
-                            settSvar(value as BarnehageplassVerdier);
-                        }}
-                    />
-                    <Submitknapp label="app.neste" onClick={nesteSteg} />
-                </ValidForm>
-            </div>
+                <RadioPanelGruppe
+                    legend={intl.formatMessage({
+                        id: 'barnehageplass.harPlass',
+                    })}
+                    name={'harBarnehageplass'}
+                    className={'barnehage__sporsmaal'}
+                    onChange={(evt: {}, value: string) => {
+                        settSvar(value as BarnehageplassVerdier);
+                    }}
+                    checked={harBarnehageplass.verdi}
+                    radios={[
+                        { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
+                        { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
+                    ]}
+                />
+            </form>
+            <Submitknapp label="app.neste" onClick={nesteSteg} />
         </SideContainer>
     );
 };

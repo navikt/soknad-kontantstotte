@@ -2,15 +2,9 @@ import * as React from 'react';
 
 const Barnehageikon: React.StatelessComponent<{}> = () => {
     return (
-        <svg
-            width="64"
-            height="64"
-            viewBox="0 0 64 64"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
             <title>Barnehage Ikon</title>
-            <g id="Mobil-NY" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Mobil-NY" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                 <g id="Group-2-Copy">
                     <g id="spotlight/-element">
                         <g id="-80/-Blå">
@@ -19,7 +13,7 @@ const Barnehageikon: React.StatelessComponent<{}> = () => {
                             </mask>
                             <g id="Mask" />
                             <g id="-60/-Lila" mask="url(#mask-2)" fill="#C1B5D0">
-                                <g id="⚙️/farge/-Lilla/-60">
+                                <g>
                                     <polygon id="Fill-17" points="0 64 64 64 64 0 0 0" />
                                 </g>
                             </g>
