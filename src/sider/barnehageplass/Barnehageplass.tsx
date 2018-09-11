@@ -1,20 +1,16 @@
-import { push } from 'connected-react-router';
+import Veileder from 'nav-frontend-veileder';
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { appNesteSteg } from '../../app/actions';
 import { ValidForm, ValidRadioPanelGruppe } from '../../common/lib/validation';
+import Barnehageikon from '../../component/Ikoner/Barnehage';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
-import { soknadSettVerdi } from '../../soknad/actions';
+import { soknadSettFelt } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
-import { BarnehageplassVerdier, Felt, IBarnehageplass } from '../../soknad/types';
-import Veilederikon from '../../component/Ikoner/Veilederikon';
-import Barnehageikon from '../../component/Ikoner/Barnehage';
-import Veilederpanel from 'nav-frontend-veilederpanel';
-import Veileder from 'nav-frontend-veileder';
-import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
+import { BarnehageplassVerdier, IBarnehageplass, Svar } from '../../soknad/types';
 
 interface IMapDispatchToProps {
     nesteSteg: () => void;
@@ -51,20 +47,14 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                     <ValidRadioPanelGruppe
                         className={'barnehage__inputPanelGruppe'}
                         name="barnehageplass"
-                        legend={intl.formatMessage({ id: 'barnehageplass.harPlass' })}
+                        legend="Har barnet barnehageplass?"
                         radios={radios}
-                        checked={BarnehageplassVerdier[harBarnehageplass]}
-                        validators={[
-                            {
-                                failText: intl.formatMessage({ id: 'svar.feilmelding' }),
-                                test: () => harBarnehageplass !== BarnehageplassVerdier.Ubesvart,
-                            },
-                        ]}
+                        checked={T.verdi}
                         onChange={(event: {}, value: string) => {
                             settSvar(value as BarnehageplassVerdier);
                         }}
                     />
-                    <Submitknapp label="app.neste" />
+                    <Submitknapp label="app.neste" onClick={nesteSteg} />
                 </ValidForm>
             </div>
         </SideContainer>
@@ -75,7 +65,7 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         nesteSteg: () => dispatch(appNesteSteg()),
         settSvar: (verdi: BarnehageplassVerdier) => {
-            dispatch(soknadSettVerdi('barnehageplass', 'harBarnehageplass', verdi));
+            dispatch(soknadSettFelt('barnehageplass', 'harBarnehageplass', verdi));
         },
     };
 };

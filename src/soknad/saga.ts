@@ -150,14 +150,6 @@ function* sjekkValideringForBarnehageplass(stegnavn: Stegnavn) {
         soknadState[stegnavn]['harBarnehageplass' as Stegnavn].verdi === BarnehageplassVerdier.Nei
     ) {
         return false;
-    } else if (
-        soknadState[stegnavn]['harBarnehageplass' as Stegnavn].verdi ===
-        BarnehageplassVerdier.NeiHarFaatt
-    ) {
-        return (
-            soknadState[stegnavn]['dato' as Stegnavn].valideringsStatus !== ValideringsStatus.OK &&
-            soknadState[stegnavn]['kommune' as Stegnavn].valideringsStatus !== ValideringsStatus.OK
-        );
     } else {
         return harListeMedFeltFeil(soknadState[stegnavn]);
     }
