@@ -5,15 +5,14 @@ import { connect, Dispatch } from 'react-redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { hentFeltMedFeil } from '../../common/utils';
 import SideContainer from '../../component/SideContainer/SideContainer';
-import Submitknapp from '../../component/Submitknapp/Submitknapp';
+import Tilbakeknapp from '../../component/Tilbakeknapp/Tilbakeknapp';
 import { IRootState } from '../../rootReducer';
-import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
+import { soknadValiderFelt } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
 import { BarnehageplassVerdier, Feltnavn, IBarnehageplass } from '../../soknad/types';
 import EkstraFelter from './EkstraFelter';
 
 interface IMapDispatchToProps {
-    nesteSteg: () => void;
     settSvar: (verdi: BarnehageplassVerdier) => void;
     settEkstraFelt: (nokkel: Feltnavn, verdi: string) => void;
 }
@@ -31,7 +30,6 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     settSvar,
     intl,
     settEkstraFelt,
-    nesteSteg,
 }) => {
     const radios = [
         { label: intl.formatMessage({ id: 'svar.nei' }), value: BarnehageplassVerdier.Nei },
@@ -54,6 +52,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
 
     return (
         <SideContainer>
+            <Tilbakeknapp posisjon={'oppe'} />
             <form>
                 <RadioPanelGruppe
                     name="barnehageplass"
@@ -82,14 +81,12 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                     />
                 )}
             </form>
-            <Submitknapp label="app.neste" onClick={nesteSteg} />
         </SideContainer>
     );
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        nesteSteg: () => dispatch(soknadNesteSteg()),
         settEkstraFelt: (nokkel: Feltnavn, verdi: string) => {
             dispatch(soknadValiderFelt('barnehageplass', nokkel, verdi));
         },
