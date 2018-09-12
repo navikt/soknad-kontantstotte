@@ -6,7 +6,9 @@ enum Svar {
 
 enum BarnehageplassVerdier {
     Nei = 'Nei',
+    NeiHarFaatt = 'NeiHarFaatt',
     Ja = 'Ja',
+    JaSkalSlutte = 'JaSkalSlutte',
     Ubesvart = 'Ubesvart',
 }
 

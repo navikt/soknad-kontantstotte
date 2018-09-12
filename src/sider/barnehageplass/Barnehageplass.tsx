@@ -5,9 +5,8 @@ import { connect, Dispatch } from 'react-redux';
 import { appNesteSteg } from '../../app/actions';
 import Barnehageikon from '../../component/Ikoner/BarnehageIkon';
 import SideContainer from '../../component/SideContainer/SideContainer';
-import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
-import { soknadSettFelt } from '../../soknad/actions';
+import { soknadValiderFelt } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
 import { BarnehageplassVerdier, IBarnehageplass, IFelt, Svar } from '../../soknad/types';
 
@@ -16,14 +15,19 @@ interface IMapDispatchToProps {
     settSvar: (verdi: BarnehageplassVerdier) => void;
 }
 
-type BarnehageplassSideProps = IBarnehageplass & IMapDispatchToProps & InjectedIntlProps;
+interface IMapStateToProps {
+    barnehagePlass: IBarnehageplass;
+}
+
+type BarnehageplassSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
 const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
-    harBarnehageplass,
+    barnehagePlass,
     settSvar,
     intl,
-    nesteSteg,
 }) => {
+    const { harBarnehageplass } = barnehagePlass;
+
     return (
         <SideContainer className={'barnehage'}>
             <div className={'barnehage__ikon'}>
@@ -53,7 +57,6 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                     ]}
                 />
             </form>
-            <Submitknapp label="app.neste" onClick={nesteSteg} />
         </SideContainer>
     );
 };
@@ -62,13 +65,15 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         nesteSteg: () => dispatch(appNesteSteg()),
         settSvar: (verdi: BarnehageplassVerdier) => {
-            dispatch(soknadSettFelt('barnehageplass', 'harBarnehageplass', verdi));
+            dispatch(soknadValiderFelt('barnehageplass', 'harBarnehageplass', verdi));
         },
     };
 };
 
-const mapStateToProps = (state: IRootState): IBarnehageplass => {
-    return selectBarnehageplass(state);
+const mapStateToProps = (state: IRootState): IMapStateToProps => {
+    return {
+        barnehagePlass: selectBarnehageplass(state),
+    };
 };
 
 export default connect(
