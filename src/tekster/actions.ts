@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { ITekster } from './types';
+import { ISprak, ITekster } from './types';
 
 enum TeksterTypeKeys {
     HENT = 'TEKSTER_HENT',
@@ -11,7 +11,7 @@ type TeksterActionTypes = ITeksterHent | ITeksterHentOK | ITeksterHentFeilet;
 
 interface ITeksterHent extends Action {
     type: TeksterTypeKeys.HENT;
-    valgtSprak: string;
+    valgtSprak: ISprak;
 }
 
 interface ITeksterHentOK extends Action {
@@ -23,7 +23,7 @@ interface ITeksterHentFeilet extends Action {
     type: TeksterTypeKeys.HENT_FEILET;
 }
 
-function teksterHent(valgtSprak: string): ITeksterHent {
+function teksterHent(valgtSprak: ISprak): ITeksterHent {
     return {
         type: TeksterTypeKeys.HENT,
         valgtSprak,
