@@ -146,9 +146,7 @@ function* sjekkValideringForArbeidsforhold(stegnavn: Stegnavn) {
 function* sjekkValideringForBarnehageplass(stegnavn: Stegnavn) {
     const soknadState = yield select(selectSoknad);
 
-    if (
-        soknadState[stegnavn]['harBarnehageplass' as Stegnavn].verdi === BarnehageplassVerdier.Nei
-    ) {
+    if (soknadState[stegnavn]['harBarnehageplass' as Stegnavn].verdi === Svar.NEI) {
         return false;
     } else {
         return harListeMedFeltFeil(soknadState[stegnavn]);

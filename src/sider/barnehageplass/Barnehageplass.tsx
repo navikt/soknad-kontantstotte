@@ -19,21 +19,21 @@ interface IMapDispatchToProps {
 }
 
 interface IMapStateToProps {
-    barnehagePlass: IBarnehageplass;
+    barnehageplass: IBarnehageplass;
     harForsoktNesteSteg: boolean;
 }
 
 type BarnehageplassSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
 const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
-    barnehagePlass,
+    barnehageplass,
     harForsoktNesteSteg,
     intl,
     nesteSteg,
     settSvar,
 }) => {
-    const { harBarnehageplass } = barnehagePlass;
-    const feltMedFeil = hentFeltMedFeil(barnehagePlass, harForsoktNesteSteg, intl);
+    const { harBarnehageplass } = barnehageplass;
+    const feltMedFeil = hentFeltMedFeil(barnehageplass, harForsoktNesteSteg, intl);
 
     return (
         <SideContainer className={'barnehage'}>
@@ -81,7 +81,7 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
-        barnehagePlass: selectBarnehageplass(state),
+        barnehageplass: selectBarnehageplass(state),
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
     };
 };
