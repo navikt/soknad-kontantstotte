@@ -13,6 +13,7 @@ import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
 import { BarnehageplassVerdier, IBarnehageplass, Svar, Feltnavn } from '../../soknad/types';
 import PanelBase from 'nav-frontend-paneler';
+import BarnehageplassStatus from './BarnehageplassStatus';
 
 interface IMapDispatchToProps {
     nesteSteg: () => void;
@@ -73,56 +74,12 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                 />
                 {harBarnehageplass.verdi !== Svar.UBESVART && (
                     <PanelBase className={'barnehage__panel'}>
-                        <RadioPanelGruppe
-                            legend={intl.formatMessage({
-                                id: 'barnehageplass.barnBarnehageplassStatus',
-                            })}
-                            name={'barnBarnehageplassStatus'}
-                            onChange={(evt: {}, value: string) => {
-                                settBarnehageplassVerdiFelt(
-                                    'barnBarnehageplassStatus' as Feltnavn,
-                                    value as BarnehageplassVerdier
-                                );
-                            }}
-                            checked={barnBarnehageplassStatus.verdi}
-                            radios={
-                                harBarnehageplass.verdi === Svar.NEI
-                                    ? [
-                                          {
-                                              label: intl.formatMessage({
-                                                  id: 'barnehageplass.garIkkeIBarnehage',
-                                              }),
-                                              value: BarnehageplassVerdier.garIkkeIBarnehage,
-                                          },
-                                          {
-                                              label: intl.formatMessage({
-                                                  id: 'barnehageplass.harSluttetIBarnehage',
-                                              }),
-                                              value: BarnehageplassVerdier.harSluttetIBarnehage,
-                                          },
-                                      ]
-                                    : [
-                                          {
-                                              label: intl.formatMessage({
-                                                  id: 'barnehageplass.harBarnehageplass',
-                                              }),
-                                              value: BarnehageplassVerdier.harBarnehageplass,
-                                          },
-                                          {
-                                              label: intl.formatMessage({
-                                                  id: 'barnehageplass.skalBegynneIBarnehage',
-                                              }),
-                                              value: BarnehageplassVerdier.skalBegynneIBarnehage,
-                                          },
-                                          {
-                                              label: intl.formatMessage({
-                                                  id: 'barnehageplass.skalBegynneIBarnehage',
-                                              }),
-                                              value: BarnehageplassVerdier.skalSlutteIBarnehage,
-                                          },
-                                      ]
-                            }
-                            feil={feltMedFeil.barnBarnehageplassStatus}
+                        <BarnehageplassStatus
+                            barnBarnehageplassStatus={barnBarnehageplassStatus}
+                            feltMedFeil={feltMedFeil}
+                            harBarnehageplass={harBarnehageplass}
+                            intl={intl}
+                            settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
                         />
                     </PanelBase>
                 )}
