@@ -18,33 +18,17 @@ const FamilieforholdOppsummering: React.StatelessComponent<FamilieforholdOppsumm
 }) => {
     return (
         <>
-            {familieforhold.borForeldreneSammenMedBarnet === Svar.NEI && (
+            {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.NEI && (
                 <>
                     <OppsummeringsListeElement
                         tekst={intl.formatMessage({
                             id: 'oppsummering.familieforhold.foreldreBorIkkeSammen',
                         })}
                     />
-
-                    {familieforhold.erAvklartDeltBosted === Svar.JA && (
-                        <OppsummeringsListeElement
-                            tekst={intl.formatMessage({
-                                id: 'oppsummering.familieforhold.harAvklartDeltBostedForBarnet',
-                            })}
-                        />
-                    )}
-
-                    {familieforhold.erAvklartDeltBosted === Svar.NEI && (
-                        <OppsummeringsListeElement
-                            tekst={intl.formatMessage({
-                                id: 'oppsummering.familieforhold.harIkkeAvklartDeltBostedForBarnet',
-                            })}
-                        />
-                    )}
                 </>
             )}
 
-            {familieforhold.borForeldreneSammenMedBarnet === Svar.JA && (
+            {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA && (
                 <OppsummeringsListeElement
                     tekst={intl.formatMessage({
                         id: 'oppsummering.familieforhold.foreldreBorSammen',
@@ -57,7 +41,7 @@ const FamilieforholdOppsummering: React.StatelessComponent<FamilieforholdOppsumm
                                     id: 'oppsummering.familieforhold.annenForelderNavn.label',
                                 })}
                             </Normaltekst>
-                            <Element>{familieforhold.annenForelderNavn}</Element>
+                            <Element>{familieforhold.annenForelderNavn.verdi}</Element>
                             <br />
                             <Normaltekst>
                                 {intl.formatMessage({
@@ -65,14 +49,14 @@ const FamilieforholdOppsummering: React.StatelessComponent<FamilieforholdOppsumm
                                         'oppsummering.familieforhold.annenForelderFodselsnummer.label',
                                 })}
                             </Normaltekst>
-                            <Element>{familieforhold.annenForelderFodselsnummer}</Element>
+                            <Element>{familieforhold.annenForelderFodselsnummer.verdi}</Element>
                         </li>
                     </ul>
                 </OppsummeringsListeElement>
             )}
 
-            {familieforhold.borForeldreneSammenMedBarnet === Svar.JA &&
-                familieforhold.annenForelderYrkesaktivINorgeEOSIMinstFemAar === Svar.JA && (
+            {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA &&
+                familieforhold.annenForelderYrkesaktivINorgeEOSIMinstFemAar.verdi === Svar.JA && (
                     <OppsummeringsListeElement
                         tekst={intl.formatMessage({
                             id:
@@ -81,8 +65,8 @@ const FamilieforholdOppsummering: React.StatelessComponent<FamilieforholdOppsumm
                     />
                 )}
 
-            {familieforhold.borForeldreneSammenMedBarnet === Svar.JA &&
-                familieforhold.annenForelderYrkesaktivINorgeEOSIMinstFemAar === Svar.NEI && (
+            {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA &&
+                familieforhold.annenForelderYrkesaktivINorgeEOSIMinstFemAar.verdi === Svar.NEI && (
                     <OppsummeringsListeElement
                         tekst={intl.formatMessage({
                             id:

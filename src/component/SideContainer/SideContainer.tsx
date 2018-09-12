@@ -25,7 +25,7 @@ class SideContainer extends React.Component<Props> {
     public render() {
         const { children, className = '', aktivtSteg } = this.props;
 
-        const indikatorsteg: StegindikatorStegProps[] = stegConfig
+        const indikatorsteg: StegindikatorStegProps[] = Object.values(stegConfig)
             .filter((steg: ISteg) => steg.stegIndeks !== 0)
             .map((steg: ISteg) => {
                 return {
@@ -49,7 +49,6 @@ class SideContainer extends React.Component<Props> {
                 />
                 <TilbakeKnapp />
                 <div>{children}</div>
-
                 <AvbrytKnapp />
             </div>
         );

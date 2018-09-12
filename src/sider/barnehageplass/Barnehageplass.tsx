@@ -1,34 +1,37 @@
-import { push } from 'connected-react-router';
+import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
-import { appNesteSteg } from '../../app/actions';
-import { ValidForm, ValidRadioPanelGruppe } from '../../common/lib/validation';
+import { selectHarForsoktNesteSteg } from '../../app/selectors';
+import { hentFeltMedFeil } from '../../common/utils';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
-import { soknadSettVerdi } from '../../soknad/actions';
+import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
-import { BarnehageplassVerdier, Felt, IBarnehageplass } from '../../soknad/types';
+import { BarnehageplassVerdier, Feltnavn, IBarnehageplass } from '../../soknad/types';
 import EkstraFelter from './EkstraFelter';
 
 interface IMapDispatchToProps {
     nesteSteg: () => void;
     settSvar: (verdi: BarnehageplassVerdier) => void;
-    settEkstraFelt: (nokkel: Felt, verdi: string) => void;
+    settEkstraFelt: (nokkel: Feltnavn, verdi: string) => void;
 }
 
-type BarnehageplassSideProps = IBarnehageplass & IMapDispatchToProps & InjectedIntlProps;
+interface IMapStateToProps {
+    barnehageplass: IBarnehageplass;
+    harForsoktNesteSteg: boolean;
+}
+
+type BarnehageplassSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
 const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
-    harBarnehageplass,
+    barnehageplass,
+    harForsoktNesteSteg,
     settSvar,
     intl,
     settEkstraFelt,
     nesteSteg,
-    dato,
-    kommune,
-    antallTimer,
 }) => {
     const radios = [
         { label: intl.formatMessage({ id: 'svar.nei' }), value: BarnehageplassVerdier.Nei },
@@ -47,55 +50,60 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
         BarnehageplassVerdier.JaSkalSlutte,
         BarnehageplassVerdier.NeiHarFaatt,
     ];
+    const feltMedFeil = hentFeltMedFeil(barnehageplass, harForsoktNesteSteg, intl);
 
     return (
         <SideContainer>
-            <ValidForm summaryTitle={'Barnehageplass'} onSubmit={nesteSteg}>
-                <ValidRadioPanelGruppe
+            <form>
+                <RadioPanelGruppe
                     name="barnehageplass"
                     legend="Har barnet barnehageplass?"
                     radios={radios}
-                    checked={BarnehageplassVerdier[harBarnehageplass]}
-                    validators={[
-                        {
-                            failText: intl.formatMessage({ id: 'svar.feilmelding' }),
-                            test: () => harBarnehageplass !== BarnehageplassVerdier.Ubesvart,
-                        },
-                    ]}
+                    checked={
+                        BarnehageplassVerdier[
+                            barnehageplass.harBarnehageplass.verdi as BarnehageplassVerdier
+                        ]
+                    }
                     onChange={(event: {}, value: string) => {
                         settSvar(value as BarnehageplassVerdier);
                     }}
+                    feil={feltMedFeil.harBarnehageplass}
                 />
-                {valgSomKreverEkstraFelter.includes(harBarnehageplass) && (
+                {valgSomKreverEkstraFelter.includes(barnehageplass.harBarnehageplass
+                    .verdi as BarnehageplassVerdier) && (
                     <EkstraFelter
-                        harBarnehageplass={harBarnehageplass}
-                        dato={dato}
-                        kommune={kommune}
-                        antallTimer={antallTimer}
+                        feltMedFeil={feltMedFeil}
+                        harBarnehageplass={barnehageplass.harBarnehageplass}
+                        dato={barnehageplass.dato}
+                        kommune={barnehageplass.kommune}
+                        antallTimer={barnehageplass.antallTimer}
                         settFelt={settEkstraFelt}
                         intl={intl}
                     />
                 )}
-                <Submitknapp label="app.neste" />
-            </ValidForm>
+            </form>
+            <Submitknapp label="app.neste" onClick={nesteSteg} />
         </SideContainer>
     );
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        nesteSteg: () => dispatch(appNesteSteg()),
-        settEkstraFelt: (nokkel: Felt, verdi: string) => {
-            dispatch(soknadSettVerdi('barnehageplass', nokkel, verdi));
+        nesteSteg: () => dispatch(soknadNesteSteg()),
+        settEkstraFelt: (nokkel: Feltnavn, verdi: string) => {
+            dispatch(soknadValiderFelt('barnehageplass', nokkel, verdi));
         },
         settSvar: (verdi: BarnehageplassVerdier) => {
-            dispatch(soknadSettVerdi('barnehageplass', 'harBarnehageplass', verdi));
+            dispatch(soknadValiderFelt('barnehageplass', 'harBarnehageplass', verdi));
         },
     };
 };
 
-const mapStateToProps = (state: IRootState): IBarnehageplass => {
-    return selectBarnehageplass(state);
+const mapStateToProps = (state: IRootState): IMapStateToProps => {
+    return {
+        barnehageplass: selectBarnehageplass(state),
+        harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
+    };
 };
 
 export default connect(

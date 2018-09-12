@@ -4,6 +4,7 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import { sendInn } from '../../innsending/actions';
+import { selectSenderInn } from '../../innsending/selectors';
 import { IRootState } from '../../rootReducer';
 import { selectSoknad } from '../../soknad/selectors';
 import { ISoknadState } from '../../soknad/types';
@@ -18,15 +19,16 @@ interface IMapDispatchToProps {
 }
 
 interface IMapStateToProps {
+    senderinn: boolean;
     soknad: ISoknadState;
 }
 
 type OppsummeringSideProps = IMapDispatchToProps & IMapStateToProps & InjectedIntlProps;
-
 const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
     intl,
     soknad,
     sendSoknad,
+    senderinn,
 }) => {
     return (
         <SideContainer>
@@ -43,7 +45,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
                 <ArbeidsforholdOppsummering intl={intl} arbeidsforhold={soknad.arbeidsforhold} />
             </ul>
 
-            <KnappBase type={'hoved'} onClick={sendSoknad}>
+            <KnappBase spinner={senderinn} type={'hoved'} onClick={sendSoknad}>
                 Send inn
             </KnappBase>
         </SideContainer>
@@ -52,6 +54,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
+        senderinn: selectSenderInn(state),
         soknad: selectSoknad(state),
     };
 };

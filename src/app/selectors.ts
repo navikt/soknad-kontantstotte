@@ -8,4 +8,8 @@ function selectAppSteg(state: IRootState) {
     return state.app.steg;
 }
 
-export { selectAppStatus, selectAppSteg };
+function selectHarForsoktNesteSteg(state: IRootState) {
+    return state.app.harForsoktNesteSteg;
+}
+
+export { selectAppStatus, selectAppSteg, selectHarForsoktNesteSteg };
