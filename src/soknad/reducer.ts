@@ -31,7 +31,7 @@ const initialState: ISoknadState = {
     barnehageplass: {
         antallTimer: standardStringInitialFelt,
         dato: standardStringInitialFelt,
-        harBarnehageplass: standardBarnehageplassVerdiInitialFelt,
+        harBarnehageplass: standardSvarInitialFelt,
         kommune: standardStringInitialFelt,
     },
     familieforhold: {

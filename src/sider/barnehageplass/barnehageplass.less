@@ -1,71 +1,49 @@
 .barnehage {
+    max-width: 60rem;
+    margin: 0 auto;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    &__ikon {
+        width: 4rem;
+        margin: 0 auto;
+    }
 
-  &__ikon {
-    width: 4rem;
-  }
-
-  &__sidetittel {
-    margin-top: 1rem;
-    text-align: center;
-  }
-
-  &__info {
-    width: 90%;
-    margin-top: 0.5rem;
-  }
-
-  &__form {
-    width: 90%;
-  }
-
-  &__sporsmaal {
-    margin-top: 2rem;
-  }
-
-  @media(min-width: 600px) {
-
-    .barnehage {
-
-      &__ikon {
-        width: 6.25rem;
-      }
-
-      &__form {
-        width: 65%;
-      }
-
-      &__sporsmaal {
+    &__sidetittel {
         margin-top: 1rem;
+        text-align: center;
+    }
 
-        & .inputPanelGruppe__inner {
-          display: flex;
-          justify-content: space-between;
-        }
+    &__info {
+        color: #3e3832;
+        margin: 0 auto;
+        max-width: 20rem;
+        padding: .5rem 0 2rem 0;
+        text-align: center;
+    }
 
+    & .skjema__legend {
+        padding-left: .5rem;
+    }
+
+    &__inputPanelGruppe {
         & .inputPanel {
-          width: 49%;
-          margin: .5rem 0;
+            width: calc(100%/2 - 1rem);
+            margin: .5rem;
         }
-      }
+
+        @media (max-width: 600px) {
+            & .inputPanel {
+                width: 100%;
+            }
+        }
+        
+        & .inputPanelGruppe__inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        & .skjemaelement__feilmelding {
+            padding-left: .5rem;
+        }
     }
-  }
-
-  @media(min-width: 1200px) {
-
-    .barnehage {
-
-      &__ikon {
-        width: 6.25rem;
-      }
-
-      &__form {
-        width: 45%;
-      }
-    }
-  }
-
 }
