@@ -11,11 +11,13 @@ import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
-import { BarnehageplassVerdier, IBarnehageplass, Svar } from '../../soknad/types';
+import { BarnehageplassVerdier, IBarnehageplass, Svar, Feltnavn } from '../../soknad/types';
+import PanelBase from 'nav-frontend-paneler';
 
 interface IMapDispatchToProps {
     nesteSteg: () => void;
-    settSvar: (verdi: BarnehageplassVerdier) => void;
+    settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => void;
+    settSvarFelt: (feltnavn: Feltnavn, verdi: Svar) => void;
 }
 
 interface IMapStateToProps {
@@ -30,9 +32,10 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     harForsoktNesteSteg,
     intl,
     nesteSteg,
-    settSvar,
+    settBarnehageplassVerdiFelt,
+    settSvarFelt,
 }) => {
-    const { harBarnehageplass } = barnehageplass;
+    const { barnBarnehageplassStatus, harBarnehageplass } = barnehageplass;
     const feltMedFeil = hentFeltMedFeil(barnehageplass, harForsoktNesteSteg, intl);
 
     return (
@@ -55,15 +58,74 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                     name={'harBarnehageplass'}
                     className={'barnehage__inputPanelGruppe'}
                     onChange={(evt: {}, value: string) => {
-                        settSvar(value as BarnehageplassVerdier);
+                        settSvarFelt('harBarnehageplass' as Feltnavn, value as Svar);
+                        settBarnehageplassVerdiFelt(
+                            'barnBarnehageplassStatus' as Feltnavn,
+                            BarnehageplassVerdier.Ubesvart
+                        );
                     }}
                     checked={harBarnehageplass.verdi}
                     radios={[
-                        { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                         { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
+                        { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                     ]}
                     feil={feltMedFeil.harBarnehageplass}
                 />
+                {harBarnehageplass.verdi !== Svar.UBESVART && (
+                    <PanelBase className={'barnehage__panel'}>
+                        <RadioPanelGruppe
+                            legend={intl.formatMessage({
+                                id: 'barnehageplass.barnBarnehageplassStatus',
+                            })}
+                            name={'barnBarnehageplassStatus'}
+                            onChange={(evt: {}, value: string) => {
+                                settBarnehageplassVerdiFelt(
+                                    'barnBarnehageplassStatus' as Feltnavn,
+                                    value as BarnehageplassVerdier
+                                );
+                            }}
+                            checked={barnBarnehageplassStatus.verdi}
+                            radios={
+                                harBarnehageplass.verdi === Svar.NEI
+                                    ? [
+                                          {
+                                              label: intl.formatMessage({
+                                                  id: 'barnehageplass.garIkkeIBarnehage',
+                                              }),
+                                              value: BarnehageplassVerdier.garIkkeIBarnehage,
+                                          },
+                                          {
+                                              label: intl.formatMessage({
+                                                  id: 'barnehageplass.harSluttetIBarnehage',
+                                              }),
+                                              value: BarnehageplassVerdier.harSluttetIBarnehage,
+                                          },
+                                      ]
+                                    : [
+                                          {
+                                              label: intl.formatMessage({
+                                                  id: 'barnehageplass.harBarnehageplass',
+                                              }),
+                                              value: BarnehageplassVerdier.harBarnehageplass,
+                                          },
+                                          {
+                                              label: intl.formatMessage({
+                                                  id: 'barnehageplass.skalBegynneIBarnehage',
+                                              }),
+                                              value: BarnehageplassVerdier.skalBegynneIBarnehage,
+                                          },
+                                          {
+                                              label: intl.formatMessage({
+                                                  id: 'barnehageplass.skalBegynneIBarnehage',
+                                              }),
+                                              value: BarnehageplassVerdier.skalSlutteIBarnehage,
+                                          },
+                                      ]
+                            }
+                            feil={feltMedFeil.barnBarnehageplassStatus}
+                        />
+                    </PanelBase>
+                )}
             </form>
             <Submitknapp label="app.neste" onClick={nesteSteg} />
         </SideContainer>
@@ -73,8 +135,11 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         nesteSteg: () => dispatch(soknadNesteSteg()),
-        settSvar: (verdi: BarnehageplassVerdier) => {
-            dispatch(soknadValiderFelt('barnehageplass', 'harBarnehageplass', verdi));
+        settSvarFelt: (feltnavn: Feltnavn, verdi: Svar) => {
+            dispatch(soknadValiderFelt('barnehageplass', feltnavn, verdi));
+        },
+        settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => {
+            dispatch(soknadValiderFelt('barnehageplass', feltnavn, verdi));
         },
     };
 };

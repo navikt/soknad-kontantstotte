@@ -36,6 +36,7 @@ const valideringsConfig: IValideringsConfig = {
     },
     barnehageplass: {
         antallTimer: harSvartTekstMedFeilmelding,
+        barnBarnehageplassStatus: harSvartBarnehageplassVerdiMedFeilmelding,
         dato: harSvartTekstMedFeilmelding,
         harBarnehageplass: harSvartMedFeilmelding,
         kommune: harSvartTekstMedFeilmelding,
