@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import ValidTextarea from '../../common/lib/validation/ValidTextarea';
-import { harTekstomradeInnhold } from '../../validators';
+import { harTekstomradeInnhold } from '../../soknad/validators';
 
 interface IOwnProps {
     nokkel: string;

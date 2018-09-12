@@ -4743,9 +4743,9 @@ nav-frontend-skjema-style@1.0.4:
   version "1.0.4"
   resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-skjema-style/-/nav-frontend-skjema-style-1.0.4.tgz#c8dbde79e84c3f26a66dcc8be23d9fc090a86a6e"
 
-nav-frontend-skjema@1.0.19:
-  version "1.0.19"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-skjema/-/nav-frontend-skjema-1.0.19.tgz#13e74ab08170ea18b0a1a13aa8e9641de455845a"
+nav-frontend-skjema@1.0.33:
+  version "1.0.33"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-skjema/-/nav-frontend-skjema-1.0.33.tgz#08f82ce3944bc210f7734a8810f0e7368e384819"
 
 nav-frontend-spinner-style@0.2.4:
   version "0.2.4"
@@ -4780,6 +4780,14 @@ nav-frontend-veileder-style@2.0.1:
 nav-frontend-veileder@2.0.1:
   version "2.0.1"
   resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-veileder/-/nav-frontend-veileder-2.0.1.tgz#6804fe14a17a081ca2ee7a32c38b9daf7b3a6280"
+
+nav-frontend-veilederpanel-style@0.0.8:
+  version "0.0.8"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-veilederpanel-style/-/nav-frontend-veilederpanel-style-0.0.8.tgz#59e2bc3306e824bd48f5ee303bb29bfdbc9b6b35"
+
+nav-frontend-veilederpanel@0.1.1:
+  version "0.1.1"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-veilederpanel/-/nav-frontend-veilederpanel-0.1.1.tgz#54155a3965689e72a2bfd14683ce180de91a2552"
 
 needle@^2.2.1:
   version "2.2.1"

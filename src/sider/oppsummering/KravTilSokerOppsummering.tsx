@@ -15,16 +15,25 @@ const KravTilSokerOppsummering: React.StatelessComponent<IKravTilSokerProps> = (
     return (
         <>
             <OppsummeringsListeElement
+                tekst={intl.formatMessage({ id: 'oppsummering.kravtilsoker.norskStatsborger' })}
+            />
+            <OppsummeringsListeElement
                 tekst={intl.formatMessage({
-                    id: 'oppsummering.kravtilsoker.harBoddINorgeSisteFemAar',
+                    id: 'oppsummering.kravtilsoker.boddEllerJobbetINorgeSisteFemAar',
                 })}
             />
             <OppsummeringsListeElement
-                tekst={intl.formatMessage({ id: 'oppsummering.kravtilsoker.borMedBarnet' })}
+                tekst={intl.formatMessage({ id: 'oppsummering.kravtilsoker.borSammenMedBarnet' })}
+            />
+            <OppsummeringsListeElement
+                tekst={intl.formatMessage({ id: 'oppsummering.kravtilsoker.barnIkkeHjemme' })}
+            />
+            <OppsummeringsListeElement
+                tekst={intl.formatMessage({ id: 'oppsummering.kravtilsoker.ikkeAvtaltDeltBosted' })}
             />
             <OppsummeringsListeElement
                 tekst={intl.formatMessage({
-                    id: 'oppsummering.kravtilsoker.skalBoINorgeNesteAaret',
+                    id: 'oppsummering.kravtilsoker.skalBoMedBarnetINorgeNesteTolvMaaneder',
                 })}
             />
         </>

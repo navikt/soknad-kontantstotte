@@ -8,7 +8,7 @@ import { ISteg, stegConfig } from './stegConfig';
 const Routes: React.StatelessComponent<{}> = () => {
     return (
         <Switch>
-            {stegConfig.map(
+            {Object.values(stegConfig).map(
                 (side: ISteg): JSX.Element => {
                     return <Route {...side} exact={true} key={side.key} />;
                 }

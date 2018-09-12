@@ -5,10 +5,26 @@ import { selectSoknad } from '../soknad/selectors';
 import { InnsendingTypeKeys, sendInnFeilet, sendInnOk } from './actions';
 import { sendInnSoknad } from './api';
 
+function* mapStateToModel(): object {
+    const soknad = yield select(selectSoknad);
+
+    const strippetSoknad = Object.entries(soknad).reduce((acc: object, [stegKey, steg]) => {
+        return {
+            ...acc,
+            [stegKey]: {
+                ...Object.entries(steg).reduce((accFelt: object, [feltKey, felt]) => {
+                    return { ...accFelt, [feltKey]: felt.verdi };
+                }, {}),
+            },
+        };
+    }, {});
+
+    return strippetSoknad;
+}
+
 function* sendInnSaga(): SagaIterator {
     try {
-        const soknad = yield select(selectSoknad);
-        yield call(sendInnSoknad, soknad);
+        yield call(sendInnSoknad, mapStateToModel());
         yield put(sendInnOk());
         yield put(push('/kvittering'));
     } catch (error) {

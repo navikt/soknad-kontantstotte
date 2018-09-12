@@ -7,9 +7,16 @@ enum AppTypeKeys {
     NESTE_STEG = 'APP_NESTE_STEG',
     FORRIGE_STEG = 'APP_FORRIGE_STEG',
     SETT_STEG = 'APP_SETT_STEG',
+    SETT_HAR_FORSOKT_NESTE_STEG = 'APP_SETT_HAR_FORSOKT_NESTE_STEG',
 }
 
-type AppActionTypes = IAppEndreStatus | IAppStart | IAppNesteSteg | IAppForrigeSteg | IAppSettSteg;
+type AppActionTypes =
+    | IAppEndreStatus
+    | IAppStart
+    | IAppNesteSteg
+    | IAppForrigeSteg
+    | IAppSettSteg
+    | IAppSettHarForsoktNesteSteg;
 
 interface IAppEndreStatus extends Action {
     status: AppStatus;
@@ -31,6 +38,11 @@ interface IAppForrigeSteg extends Action {
 interface IAppSettSteg extends Action {
     type: AppTypeKeys.SETT_STEG;
     steg: number;
+}
+
+interface IAppSettHarForsoktNesteSteg extends Action {
+    type: AppTypeKeys.SETT_HAR_FORSOKT_NESTE_STEG;
+    harForsoktNesteSteg: boolean;
 }
 
 function appEndreStatus(status: AppStatus): IAppEndreStatus {
@@ -65,6 +77,13 @@ function appSettSteg(steg: number): IAppSettSteg {
     };
 }
 
+function appSettHarForsoktNesteSteg(harForsoktNesteSteg: boolean): IAppSettHarForsoktNesteSteg {
+    return {
+        harForsoktNesteSteg,
+        type: AppTypeKeys.SETT_HAR_FORSOKT_NESTE_STEG,
+    };
+}
+
 export {
     AppTypeKeys,
     AppActionTypes,
@@ -73,4 +92,5 @@ export {
     appEndreStatus,
     appStart,
     appSettSteg,
+    appSettHarForsoktNesteSteg,
 };

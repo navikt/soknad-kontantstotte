@@ -45,17 +45,19 @@ const ArbeidsforholdOppsummering: React.StatelessComponent<IArbeidsforholdOppsum
                 tekst={intl.formatMessage({
                     id: oppsummeringsNokkel(
                         'mottarYtelserFraUtlandet',
-                        arbeidsforhold.mottarYtelserFraUtlandet
+                        arbeidsforhold.mottarYtelserFraUtlandet.verdi
                     ),
                 })}
             >
-                {arbeidsforhold.mottarYtelserFraUtlandet === Svar.JA && (
+                {arbeidsforhold.mottarYtelserFraUtlandet.verdi === Svar.JA && (
                     <ul>
                         <li className="list-unstyled list-detaljer">
                             <Normaltekst>
                                 <FormattedMessage id="oppsummering.arbeidsforhold.tilleggsinformasjon.label" />
                             </Normaltekst>
-                            <Element>{arbeidsforhold.mottarYtelserFraUtlandetForklaring}</Element>
+                            <Element>
+                                {arbeidsforhold.mottarYtelserFraUtlandetForklaring.verdi}
+                            </Element>
                         </li>
                     </ul>
                 )}
@@ -65,18 +67,21 @@ const ArbeidsforholdOppsummering: React.StatelessComponent<IArbeidsforholdOppsum
                 tekst={intl.formatMessage({
                     id: oppsummeringsNokkel(
                         'arbeiderIUtlandetEllerKontinentalsokkel',
-                        arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel
+                        arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.verdi
                     ),
                 })}
             >
-                {arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel === Svar.JA && (
+                {arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.verdi === Svar.JA && (
                     <ul>
                         <li className="list-unstyled list-detaljer">
                             <Normaltekst>
                                 <FormattedMessage id="oppsummering.arbeidsforhold.tilleggsinformasjon.label" />
                             </Normaltekst>
                             <Element>
-                                {arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkelForklaring}
+                                {
+                                    arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkelForklaring
+                                        .verdi
+                                }
                             </Element>
                         </li>
                     </ul>
@@ -87,18 +92,18 @@ const ArbeidsforholdOppsummering: React.StatelessComponent<IArbeidsforholdOppsum
                 tekst={intl.formatMessage({
                     id: oppsummeringsNokkel(
                         'mottarKontantstotteFraAnnetEOS',
-                        arbeidsforhold.mottarKontantstotteFraAnnetEOS
+                        arbeidsforhold.mottarKontantstotteFraAnnetEOS.verdi
                     ),
                 })}
             >
-                {arbeidsforhold.mottarKontantstotteFraAnnetEOS === Svar.JA && (
+                {arbeidsforhold.mottarKontantstotteFraAnnetEOS.verdi === Svar.JA && (
                     <ul>
                         <li className="list-unstyled list-detaljer">
                             <Normaltekst>
                                 <FormattedMessage id="oppsummering.arbeidsforhold.tilleggsinformasjon.label" />
                             </Normaltekst>
                             <Element>
-                                {arbeidsforhold.mottarKontantstotteFraAnnetEOSForklaring}
+                                {arbeidsforhold.mottarKontantstotteFraAnnetEOSForklaring.verdi}
                             </Element>
                         </li>
                     </ul>

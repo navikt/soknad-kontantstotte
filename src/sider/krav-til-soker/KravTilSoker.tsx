@@ -1,103 +1,141 @@
+import CheckboksPanelGruppe from 'nav-frontend-skjema/lib/checkboks-panel-gruppe';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { appNesteSteg } from '../../app/actions';
-import ValidCheckboxPanelGruppe from '../../common/lib/validation/ValidCheckboxPanelGruppe';
-import ValidForm from '../../common/lib/validation/ValidForm';
+import { selectHarForsoktNesteSteg } from '../../app/selectors';
+import { IFeil } from '../../common/lib/validation/types';
+import { hentFeltMedFeil } from '../../common/utils';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
+import Veileder from '../../component/Veileder/Veileder';
 import { IRootState } from '../../rootReducer';
-import { soknadSettVerdi } from '../../soknad/actions';
+import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectKravTilSoker } from '../../soknad/selectors';
-import { Felt, IKravTilSoker, Svar } from '../../soknad/types';
-import { harHuketAvPaCheckbox } from '../../validators';
+import { Feltnavn, IKravTilSoker, Svar } from '../../soknad/types';
 
 interface IMapDispatchToProps {
-    settCheckboxVerdi: (felt: Felt, verdi: string) => void;
+    settCheckboxVerdi: (felt: Feltnavn, verdi: string) => void;
     nesteSteg: () => void;
 }
 
-const handterCheckboxEndring = (
-    event: React.SyntheticEvent<EventTarget>,
-    handler: any,
-    value?: string
-) => {
-    const target = event.nativeEvent.target as HTMLInputElement;
-    handler(value, target.checked ? Svar.JA : Svar.UBESVART);
-};
+interface IMapStateToProps {
+    harForsoktNesteSteg: boolean;
+    kravTilSoker: IKravTilSoker;
+}
 
-type KravTilSokerProps = IKravTilSoker & IMapDispatchToProps & InjectedIntlProps;
+type KravTilSokerProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
 const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
-    boddINorgeSisteFemAar,
-    borSammenMedBarnet,
+    harForsoktNesteSteg,
+    kravTilSoker,
     intl,
-    skalBoMedBarnetINorgeNesteTolvMaaneder,
     settCheckboxVerdi,
     nesteSteg,
 }) => {
-    const sporsmaal: string = intl.formatMessage({ id: 'startside.krav.sporsmal' });
+    const feil = Object.values(hentFeltMedFeil(kravTilSoker, harForsoktNesteSteg, intl)).reduce(
+        (acc: IFeil | undefined, felt: IFeil | undefined) => {
+            return felt !== undefined ? felt : acc;
+        },
+        undefined
+    );
 
     return (
         <SideContainer>
-            <ValidForm summaryTitle={'Søknad om kontantstøtte'} onSubmit={nesteSteg}>
-                <ValidCheckboxPanelGruppe
-                    legend={sporsmaal}
+            <Veileder
+                content={
+                    <div>
+                        <h4 className="krav__velkomst-melding">
+                            {intl.formatMessage({
+                                id: 'startside.krav.velkomstMelding',
+                            })}
+                        </h4>
+                        <span>
+                            {intl.formatMessage({
+                                id: 'startside.krav.veileder',
+                            })}
+                        </span>
+                    </div>
+                }
+            />
+            <form className={'krav'}>
+                <CheckboksPanelGruppe
+                    className="krav__inputPanelGruppe"
+                    legend={''}
                     checkboxes={[
                         {
-                            checked: boddINorgeSisteFemAar === Svar.JA,
+                            checked: kravTilSoker.norskStatsborger.verdi === Svar.JA,
                             label: intl.formatMessage({
-                                id: 'startside.krav.boddINorgeSisteFemAar',
+                                id: 'startside.krav.norskStatsborger',
                             }),
-                            value: 'boddINorgeSisteFemAar',
+                            value: 'norskStatsborger',
                         },
                         {
-                            checked: borSammenMedBarnet === Svar.JA,
-                            label: intl.formatMessage({ id: 'startside.krav.borSammenMedBarnet' }),
+                            checked:
+                                kravTilSoker.boddEllerJobbetINorgeSisteFemAar.verdi === Svar.JA,
+                            label: intl.formatMessage({
+                                id: 'startside.krav.boddEllerJobbetINorgeSisteFemAar',
+                            }),
+                            value: 'boddEllerJobbetINorgeSisteFemAar',
+                        },
+                        {
+                            checked: kravTilSoker.borSammenMedBarnet.verdi === Svar.JA,
+                            label: intl.formatMessage({
+                                id: 'startside.krav.borSammenMedBarnet',
+                            }),
                             value: 'borSammenMedBarnet',
                         },
                         {
-                            checked: skalBoMedBarnetINorgeNesteTolvMaaneder === Svar.JA,
+                            checked: kravTilSoker.barnIkkeHjemme.verdi === Svar.JA,
+                            label: intl.formatMessage({ id: 'startside.krav.barnIkkeHjemme' }),
+                            value: 'barnIkkeHjemme',
+                        },
+                        {
+                            checked: kravTilSoker.ikkeAvtaltDeltBosted.verdi === Svar.JA,
+                            label: intl.formatMessage({
+                                id: 'startside.krav.ikkeAvtaltDeltBosted',
+                            }),
+                            value: 'ikkeAvtaltDeltBosted',
+                        },
+                        {
+                            checked:
+                                kravTilSoker.skalBoMedBarnetINorgeNesteTolvMaaneder.verdi ===
+                                Svar.JA,
                             label: intl.formatMessage({
                                 id: 'startside.krav.skalBoMedBarnetINorgeNesteTolvMaaneder',
                             }),
                             value: 'skalBoMedBarnetINorgeNesteTolvMaaneder',
                         },
                     ]}
-                    onChange={(event: any, value: any) => {
-                        handterCheckboxEndring(event, settCheckboxVerdi, value);
+                    onChange={(event: React.SyntheticEvent<EventTarget>, value?: string) => {
+                        if (value) {
+                            const target = event.nativeEvent.target as HTMLInputElement;
+                            settCheckboxVerdi(
+                                value as Feltnavn,
+                                target.checked ? Svar.JA : Svar.UBESVART
+                            );
+                        }
                     }}
-                    validators={[
-                        {
-                            failText: intl.formatMessage({ id: 'svar.feilmeldingCheckbox' }),
-                            test: () => harHuketAvPaCheckbox(boddINorgeSisteFemAar),
-                        },
-                        {
-                            failText: intl.formatMessage({ id: 'svar.feilmeldingCheckbox' }),
-                            test: () => harHuketAvPaCheckbox(borSammenMedBarnet),
-                        },
-                        {
-                            failText: intl.formatMessage({ id: 'svar.feilmeldingCheckbox' }),
-                            test: () =>
-                                harHuketAvPaCheckbox(skalBoMedBarnetINorgeNesteTolvMaaneder),
-                        },
-                    ]}
+                    feil={feil}
                 />
-                <Submitknapp label="app.neste" />
-            </ValidForm>
+            </form>
+            <Submitknapp label="app.neste" onClick={nesteSteg} />
         </SideContainer>
     );
 };
 
-const mapStateToProps = (state: IRootState): IKravTilSoker => {
-    return selectKravTilSoker(state);
+const mapStateToProps = (state: IRootState): IMapStateToProps => {
+    return {
+        harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
+        kravTilSoker: selectKravTilSoker(state),
+    };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        nesteSteg: () => dispatch(appNesteSteg()),
-        settCheckboxVerdi: (felt, verdi) => dispatch(soknadSettVerdi('kravTilSoker', felt, verdi)),
+        nesteSteg: () => dispatch(soknadNesteSteg()),
+        settCheckboxVerdi: (feltnavn: Feltnavn, verdi) =>
+            dispatch(soknadValiderFelt('kravTilSoker', feltnavn, verdi)),
     };
 };
 

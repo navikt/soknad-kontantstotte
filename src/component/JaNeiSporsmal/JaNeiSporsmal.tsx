@@ -4,14 +4,14 @@ import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import ValidRadioPanelGruppe from '../../common/lib/validation/ValidRadioPanelGruppe';
-import { soknadSettVerdi } from '../../soknad/actions';
-import { Bolk, Felt, Svar } from '../../soknad/types';
-import { harSvartPaJaNeiSporsmal } from '../../validators';
+import { soknadValiderFelt } from '../../soknad/actions';
+import { Feltnavn, Stegnavn, Svar } from '../../soknad/types';
+import { harSvartPaJaNeiSporsmal } from '../../soknad/validators';
 import SpesifiserTextarea from './SpesifiserTextarea';
 
 interface ISporsmaalProps {
-    bolk: Bolk;
-    felt: Felt;
+    bolk: Stegnavn;
+    felt: Feltnavn;
     sporsmalNokkel: string;
     verdi: Svar;
     forklaring?: string;
@@ -50,7 +50,7 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
                 name={felt}
                 validators={[
                     {
-                        failText: intl.formatMessage({ id: 'svar.feilmelding' }),
+                        failText: intl.formatMessage({ id: 'feilmelding.generell.fodselsDato' }),
                         test: () => harSvartPaJaNeiSporsmal(verdi),
                     },
                 ]}
@@ -78,11 +78,15 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: ISporsmaalProps): IMap
     return {
         settForklaring: forklaring => {
             dispatch(
-                soknadSettVerdi(ownProps.bolk, `${ownProps.felt}Forklaring` as Felt, forklaring)
+                soknadValiderFelt(
+                    ownProps.bolk,
+                    `${ownProps.felt}Forklaring` as Feltnavn,
+                    forklaring
+                )
             );
         },
         settSvar: (verdi: Svar) => {
-            dispatch(soknadSettVerdi(ownProps.bolk, ownProps.felt, verdi));
+            dispatch(soknadValiderFelt(ownProps.bolk, ownProps.felt, verdi));
         },
     };
 };
