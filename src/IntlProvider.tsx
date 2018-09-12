@@ -5,7 +5,7 @@ import * as nn from 'react-intl/locale-data/nn';
 import { connect } from 'react-redux';
 import { IRootState } from './rootReducer';
 import { selectTekster, selectValgtSprak } from './tekster/selectors';
-import { ITekster } from './tekster/types';
+import { ISprak, ITekster } from './tekster/types';
 
 addLocaleData(nb);
 addLocaleData(nn);
@@ -16,7 +16,7 @@ interface IOwnProps {
 
 interface IMapStateToProps {
     tekster: ITekster;
-    valgtSprak: string;
+    valgtSprak: ISprak;
 }
 
 type Props = IOwnProps & IMapStateToProps;
@@ -26,7 +26,7 @@ const IntlProvider: React.StatelessComponent<Props> = ({ children, tekster, valg
         <Provider
             key={Object.keys(tekster).length}
             messages={tekster}
-            defaultLocale={'nb'}
+            defaultLocale={ISprak.nb}
             locale={valgtSprak}
         >
             {children}
