@@ -56,7 +56,4 @@ const mapStateToProps = (state: IRootState) => {
     return selectArbeidsforhold(state);
 };
 
-export default connect(
-    mapStateToProps,
-    () => ({})
-)(Arbeidsforhold);
+export default connect(mapStateToProps)(Arbeidsforhold);

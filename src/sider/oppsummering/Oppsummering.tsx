@@ -42,7 +42,4 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    () => ({})
-)(injectIntl(Oppsummering));
+export default connect(mapStateToProps)(injectIntl(Oppsummering));
