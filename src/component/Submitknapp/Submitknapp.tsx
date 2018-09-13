@@ -1,20 +1,65 @@
 import KnappBase from 'nav-frontend-knapper';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { connect, Dispatch } from 'react-redux';
+import { selectAppSteg } from '../../app/selectors';
+import { sendInn } from '../../innsending/actions';
+import { selectSenderInn } from '../../innsending/selectors';
+import { IRootState } from '../../rootReducer';
+import { soknadNesteSteg } from '../../soknad/actions';
+import { stegConfig } from '../../stegConfig';
 
 interface ISubmitKnappProps {
-    label: string;
-    onClick: () => void;
+    className?: string;
 }
 
-type SubmitKnappProps = ISubmitKnappProps;
+interface IMapStateToProps {
+    senderinn: boolean;
+    stegPosisjon: number;
+}
 
-const Submitknapp: React.StatelessComponent<SubmitKnappProps> = ({ label, onClick }) => {
+interface IMapDispatchToProps {
+    nesteSteg: () => void;
+    sendSoknad: () => void;
+}
+
+type SubmitKnappProps = ISubmitKnappProps & IMapStateToProps & IMapDispatchToProps;
+
+const Submitknapp: React.StatelessComponent<SubmitKnappProps> = ({
+    className,
+    nesteSteg,
+    sendSoknad,
+    senderinn,
+    stegPosisjon,
+}) => {
+    const erOppsummeringsSteg = stegConfig.oppsummering.stegIndeks === stegPosisjon;
+    const label = erOppsummeringsSteg ? 'app.sendSoknad' : 'app.neste';
+    const onClick = erOppsummeringsSteg ? sendSoknad : nesteSteg;
+
     return (
-        <KnappBase type="hoved" onClick={onClick}>
+        <KnappBase spinner={senderinn} className={className} type="hoved" onClick={onClick}>
             <FormattedMessage id={label} />
         </KnappBase>
     );
 };
 
-export default Submitknapp;
+const mapStateToProps = (state: IRootState): IMapStateToProps => {
+    return {
+        senderinn: selectSenderInn(state),
+        stegPosisjon: selectAppSteg(state),
+    };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
+    return {
+        nesteSteg: () => dispatch(soknadNesteSteg()),
+        sendSoknad: () => {
+            dispatch(sendInn());
+        },
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Submitknapp);

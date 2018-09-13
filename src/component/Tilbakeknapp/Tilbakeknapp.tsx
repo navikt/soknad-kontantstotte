@@ -1,19 +1,33 @@
+import * as classNames from 'classnames';
 import NavFrontendChevron from 'nav-frontend-chevron';
-import { Flatknapp } from 'nav-frontend-knapper';
+import KnappBase from 'nav-frontend-knapper';
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { appForrigeSteg } from '../../app/actions';
+
+interface ITilbakeknappProps {
+    posisjon: 'oppe' | 'nede';
+}
 
 interface IMapDispatchToProps {
     forrigeSteg: () => void;
 }
 
-const Tilbakeknapp: React.StatelessComponent<IMapDispatchToProps> = ({ forrigeSteg }) => {
+type TilbakeknappProps = ITilbakeknappProps & IMapDispatchToProps;
+
+const Tilbakeknapp: React.StatelessComponent<TilbakeknappProps> = ({ forrigeSteg, posisjon }) => {
     return (
-        <Flatknapp className={'tilbakeknapp'} onClick={forrigeSteg}>
-            <NavFrontendChevron type="venstre" className={'tilbakeknapp__ikon'} />
-            Tilbake
-        </Flatknapp>
+        <KnappBase
+            className={classNames('tilbakeknapp', `tilbakeknapp__${posisjon}`)}
+            type={posisjon === 'oppe' ? 'flat' : 'standard'}
+            onClick={forrigeSteg}
+        >
+            {posisjon === 'oppe' && (
+                <NavFrontendChevron type="venstre" className={'tilbakeknapp__ikon'} />
+            )}
+            <FormattedMessage id={'app.tilbake'} />
+        </KnappBase>
     );
 };
 

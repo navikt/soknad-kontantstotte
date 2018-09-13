@@ -2,4 +2,8 @@ interface ITekster {
     [key: string]: string;
 }
 
-export { ITekster };
+enum ISprak {
+    nb = 'nb',
+    nn = 'nn',
+}
+export { ITekster, ISprak };

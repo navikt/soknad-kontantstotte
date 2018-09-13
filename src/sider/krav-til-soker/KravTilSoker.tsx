@@ -7,16 +7,14 @@ import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { IFeil } from '../../common/lib/validation/types';
 import { hentFeltMedFeil } from '../../common/utils';
 import SideContainer from '../../component/SideContainer/SideContainer';
-import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import Veileder from '../../component/Veileder/Veileder';
 import { IRootState } from '../../rootReducer';
-import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
+import { soknadValiderFelt } from '../../soknad/actions';
 import { selectKravTilSoker } from '../../soknad/selectors';
 import { Feltnavn, IKravTilSoker, Svar } from '../../soknad/types';
 
 interface IMapDispatchToProps {
     settCheckboxVerdi: (felt: Feltnavn, verdi: string) => void;
-    nesteSteg: () => void;
 }
 
 interface IMapStateToProps {
@@ -31,7 +29,6 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
     kravTilSoker,
     intl,
     settCheckboxVerdi,
-    nesteSteg,
 }) => {
     const feil = Object.values(hentFeltMedFeil(kravTilSoker, harForsoktNesteSteg, intl)).reduce(
         (acc: IFeil | undefined, felt: IFeil | undefined) => {
@@ -119,7 +116,6 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
                     feil={feil}
                 />
             </form>
-            <Submitknapp label="app.neste" onClick={nesteSteg} />
         </SideContainer>
     );
 };
@@ -133,7 +129,6 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        nesteSteg: () => dispatch(soknadNesteSteg()),
         settCheckboxVerdi: (feltnavn: Feltnavn, verdi) =>
             dispatch(soknadValiderFelt('kravTilSoker', feltnavn, verdi)),
     };
