@@ -52,7 +52,6 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
 
     return (
         <SideContainer>
-            <Tilbakeknapp posisjon={'oppe'} />
             <form>
                 <RadioPanelGruppe
                     name="barnehageplass"

@@ -40,7 +40,6 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
     const feltMedFeil = hentFeltMedFeil(valgtBarn, harForsoktNesteSteg, intl);
     return (
         <SideContainer className={'mine-barn'}>
-            <Tilbakeknapp posisjon={'oppe'} />
             <form>
                 <SkjemaGruppe>
                     <RadioPanelGruppe

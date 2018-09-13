@@ -9,6 +9,7 @@ import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg } from '../../soknad/actions';
 import { ISteg, stegConfig } from '../../stegConfig';
 import Navigasjon from '../Navigering/Navigasjon';
+import Tilbakeknapp from '../Tilbakeknapp/Tilbakeknapp';
 
 interface IOwnProps {
     className?: string;
@@ -38,6 +39,7 @@ class SideContainer extends React.Component<Props> {
                     label: steg.key,
                 };
             });
+        const displayTilbakeKnapp = aktivtSteg !== 1;
 
         return (
             <div className={className}>
@@ -51,6 +53,7 @@ class SideContainer extends React.Component<Props> {
                     kompakt={false}
                     aktivtSteg={aktivtSteg - 1} // -1 pga Stegindikator er 0-indeksert
                 />
+                {displayTilbakeKnapp && <Tilbakeknapp posisjon={'oppe'} />}
                 <div className={'side-container__children'}>{children}</div>
                 <Navigasjon />
             </div>

@@ -20,7 +20,6 @@ const Arbeidsforhold: React.StatelessComponent<ArbeidsforholdSideProps> = ({
     const bolk: Stegnavn = 'arbeidsforhold';
     return (
         <SideContainer>
-            <Tilbakeknapp posisjon={'oppe'} />
             <form>
                 <JaNeiSporsmal
                     bolk={bolk}

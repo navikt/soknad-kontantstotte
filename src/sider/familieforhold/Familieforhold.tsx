@@ -32,7 +32,6 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
 }) => {
     return (
         <SideContainer>
-            <Tilbakeknapp posisjon={'oppe'} />
             <form>
                 <JaNeiSporsmal
                     bolk="familieforhold"

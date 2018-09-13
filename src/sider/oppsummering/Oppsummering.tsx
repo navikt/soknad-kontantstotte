@@ -20,7 +20,6 @@ type OppsummeringSideProps = IMapStateToProps & InjectedIntlProps;
 const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({ intl, soknad }) => {
     return (
         <SideContainer>
-            <Tilbakeknapp posisjon={'oppe'} />
             <h1>Oversikt over hva du har fylt ut</h1>
 
             <ul>
