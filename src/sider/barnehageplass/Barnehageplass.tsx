@@ -9,7 +9,7 @@ import { hentFeltMedFeil } from '../../common/utils';
 import Barnehageikon from '../../component/Ikoner/BarnehageIkon';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
-import { soknadValiderFelt } from '../../soknad/actions';
+import { soknadValiderFelt, soknadNullstillNesteSteg } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
 import { BarnehageplassVerdier, Feltnavn, IBarnehageplass, Svar } from '../../soknad/types';
 import BarnehageplassStatus from './BarnehageplassStatus';
@@ -17,6 +17,7 @@ import BarnehageplassStatus from './BarnehageplassStatus';
 interface IMapDispatchToProps {
     settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => void;
     settSvarFelt: (feltnavn: Feltnavn, verdi: Svar) => void;
+    soknadNullstillNesteSteg: () => void;
 }
 
 interface IMapStateToProps {
@@ -32,6 +33,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     intl,
     settBarnehageplassVerdiFelt,
     settSvarFelt,
+    soknadNullstillNesteSteg,
 }) => {
     const { barnBarnehageplassStatus, harBarnehageplass } = barnehageplass;
     const feltMedFeil = hentFeltMedFeil(barnehageplass, harForsoktNesteSteg, intl);
@@ -61,6 +63,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                             'barnBarnehageplassStatus' as Feltnavn,
                             BarnehageplassVerdier.Ubesvart
                         );
+                        soknadNullstillNesteSteg();
                     }}
                     checked={harBarnehageplass.verdi}
                     radios={[
@@ -92,6 +95,9 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
         },
         settSvarFelt: (feltnavn: Feltnavn, verdi: Svar) => {
             dispatch(soknadValiderFelt('barnehageplass', feltnavn, verdi));
+        },
+        soknadNullstillNesteSteg: () => {
+            dispatch(soknadNullstillNesteSteg());
         },
     };
 };
