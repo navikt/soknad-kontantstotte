@@ -44,7 +44,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
             <h3 className={'typo-innholdstittel barnehage__sidetittel'}>
                 {intl.formatMessage({ id: 'barnehageplass.tittel' })}
             </h3>
-            <p className={classNames('typo-normal', 'barnehage__info')}>
+            <p className={classNames('typo-ingress', 'barnehage__info')}>
                 {intl.formatMessage({ id: 'barnehageplass.ingress' })}
             </p>
 

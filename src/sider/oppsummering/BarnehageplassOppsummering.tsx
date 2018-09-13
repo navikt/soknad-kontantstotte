@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
-import { IBarnehageplass } from '../../soknad/types';
+import { BarnehageplassVerdier, IBarnehageplass } from '../../soknad/types';
 import OppsummeringSporsmalSvar from './OppsummeringSporsmalSvar';
 
 interface IBarnehageplassOppsummeringProps {
@@ -12,6 +12,36 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
     barnehageplass,
     intl,
 }) => {
+    let barnBarnehageplassStatusSvar = 'Ubesvart';
+
+    switch (barnehageplass.barnBarnehageplassStatus.verdi as BarnehageplassVerdier) {
+        case BarnehageplassVerdier.garIkkeIBarnehage:
+            barnBarnehageplassStatusSvar = intl.formatMessage({
+                id: 'barnehageplass.garIkkeIBarnehage',
+            });
+            break;
+        case BarnehageplassVerdier.harBarnehageplass:
+            barnBarnehageplassStatusSvar = intl.formatMessage({
+                id: 'barnehageplass.harBarnehageplass',
+            });
+            break;
+        case BarnehageplassVerdier.harSluttetIBarnehage:
+            barnBarnehageplassStatusSvar = intl.formatMessage({
+                id: 'barnehageplass.harSluttetIBarnehage',
+            });
+            break;
+        case BarnehageplassVerdier.skalBegynneIBarnehage:
+            barnBarnehageplassStatusSvar = intl.formatMessage({
+                id: 'barnehageplass.skalBegynneIBarnehage',
+            });
+            break;
+        case BarnehageplassVerdier.skalSlutteIBarnehage:
+            barnBarnehageplassStatusSvar = intl.formatMessage({
+                id: 'barnehageplass.skalSlutteIBarnehage',
+            });
+            break;
+    }
+
     return (
         <div>
             <OppsummeringSporsmalSvar
@@ -22,9 +52,7 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
             />
             <OppsummeringSporsmalSvar
                 sporsmal={intl.formatMessage({ id: 'barnehageplass.barnBarnehageplassStatus' })}
-                svar={intl.formatMessage({
-                    id: 'barnehageplass.'.concat(barnehageplass.barnBarnehageplassStatus.verdi),
-                })}
+                svar={barnBarnehageplassStatusSvar}
             />
         </div>
     );
