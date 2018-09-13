@@ -1,8 +1,8 @@
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
-import { InjectedIntl } from 'react-intl';
 import * as React from 'react';
+import { InjectedIntl } from 'react-intl';
 import { IFeltFeil } from '../../common/lib/validation/types';
-import { BarnehageplassVerdier, Svar, Feltnavn, IFelt } from '../../soknad/types';
+import { BarnehageplassVerdier, Feltnavn, IFelt, Svar } from '../../soknad/types';
 
 interface IBarnehageplassStatus {
     intl: InjectedIntl;

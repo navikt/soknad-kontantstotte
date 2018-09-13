@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
 import { IBarnehageplass, Svar } from '../../soknad/types';
-import OppsummeringsListeElement from './OppsummeringsListeElement';
+import OppsummeringSporsmalSvar from './OppsummeringSporsmalSvar';
 
 interface IBarnehageplassOppsummeringProps {
     barnehageplass: IBarnehageplass;
@@ -12,22 +12,20 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
     barnehageplass,
     intl,
 }) => {
-    switch (barnehageplass.harBarnehageplass.verdi) {
-        case Svar.JA:
-            return (
-                <OppsummeringsListeElement
-                    tekst={intl.formatMessage({ id: 'oppsummering.barnehageplass.harPlass' })}
-                />
-            );
-        case Svar.NEI:
-            return (
-                <OppsummeringsListeElement
-                    tekst={intl.formatMessage({ id: 'oppsummering.barnehageplass.harIkkePlass' })}
-                />
-            );
-        default:
-            return null;
-    }
+    return (
+        <div>
+            <OppsummeringSporsmalSvar
+                sporsmal={intl.formatMessage({
+                    id: 'oppsummering.barnehageplass.harBarnehageplass',
+                })}
+                svar={barnehageplass.harBarnehageplass.verdi}
+            />
+            <OppsummeringSporsmalSvar
+                sporsmal={intl.formatMessage({ id: 'barnehageplass.barnBarnehageplassStatus' })}
+                svar={barnehageplass.barnBarnehageplassStatus.verdi}
+            />
+        </div>
+    );
 };
 
 export default BarnehageplassOppsummering;

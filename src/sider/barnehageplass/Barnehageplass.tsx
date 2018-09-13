@@ -1,4 +1,5 @@
 import * as classNames from 'classnames';
+import PanelBase from 'nav-frontend-paneler';
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
@@ -11,8 +12,7 @@ import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
-import { BarnehageplassVerdier, IBarnehageplass, Svar, Feltnavn } from '../../soknad/types';
-import PanelBase from 'nav-frontend-paneler';
+import { BarnehageplassVerdier, Feltnavn, IBarnehageplass, Svar } from '../../soknad/types';
 import BarnehageplassStatus from './BarnehageplassStatus';
 
 interface IMapDispatchToProps {
@@ -92,10 +92,10 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         nesteSteg: () => dispatch(soknadNesteSteg()),
-        settSvarFelt: (feltnavn: Feltnavn, verdi: Svar) => {
+        settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => {
             dispatch(soknadValiderFelt('barnehageplass', feltnavn, verdi));
         },
-        settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => {
+        settSvarFelt: (feltnavn: Feltnavn, verdi: Svar) => {
             dispatch(soknadValiderFelt('barnehageplass', feltnavn, verdi));
         },
     };

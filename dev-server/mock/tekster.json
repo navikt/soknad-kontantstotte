@@ -38,6 +38,8 @@
     "oppsummering.arbeidsforhold.mottarYtelserFraUtlandet.nei":"Ingen av foreldrene mottar andre ytelser fra utlandet",
     "oppsummering.arbeidsforhold.tilleggsinformasjon.label":"Tilleggsinformasjon:",
     "oppsummering.avforelder.label":"Av forelder: ",
+    "oppsummering.barnehageplass.tittel":"Tildelt barnehageplass",
+    "oppsummering.barnehageplass.harBarnehageplass":"Har barnet barnehageplass?",
     "oppsummering.barnehageplass.antallTimer.label":"Antall timer: ",
     "oppsummering.barnehageplass.dato.label":"Dato: ",
     "oppsummering.barnehageplass.harIkkePlass":"Barnet har ikke barnehageplass",
