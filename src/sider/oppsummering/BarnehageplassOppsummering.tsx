@@ -16,29 +16,19 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
 
     switch (barnehageplass.barnBarnehageplassStatus.verdi as BarnehageplassVerdier) {
         case BarnehageplassVerdier.garIkkeIBarnehage:
-            barnBarnehageplassStatusSvar = intl.formatMessage({
-                id: 'barnehageplass.garIkkeIBarnehage',
-            });
+            barnBarnehageplassStatusSvar = 'barnehageplass.garIkkeIBarnehage';
             break;
         case BarnehageplassVerdier.harBarnehageplass:
-            barnBarnehageplassStatusSvar = intl.formatMessage({
-                id: 'barnehageplass.harBarnehageplass',
-            });
+            barnBarnehageplassStatusSvar = 'barnehageplass.harBarnehageplass';
             break;
         case BarnehageplassVerdier.harSluttetIBarnehage:
-            barnBarnehageplassStatusSvar = intl.formatMessage({
-                id: 'barnehageplass.harSluttetIBarnehage',
-            });
+            barnBarnehageplassStatusSvar = 'barnehageplass.harSluttetIBarnehage';
             break;
         case BarnehageplassVerdier.skalBegynneIBarnehage:
-            barnBarnehageplassStatusSvar = intl.formatMessage({
-                id: 'barnehageplass.skalBegynneIBarnehage',
-            });
+            barnBarnehageplassStatusSvar = 'barnehageplass.skalBegynneIBarnehage';
             break;
         case BarnehageplassVerdier.skalSlutteIBarnehage:
-            barnBarnehageplassStatusSvar = intl.formatMessage({
-                id: 'barnehageplass.skalSlutteIBarnehage',
-            });
+            barnBarnehageplassStatusSvar = 'barnehageplass.skalSlutteIBarnehage';
             break;
     }
 
@@ -52,7 +42,9 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
             />
             <OppsummeringSporsmalSvar
                 sporsmal={intl.formatMessage({ id: 'barnehageplass.barnBarnehageplassStatus' })}
-                svar={barnBarnehageplassStatusSvar}
+                svar={intl.formatMessage({
+                    id: barnBarnehageplassStatusSvar,
+                })}
             />
         </div>
     );
