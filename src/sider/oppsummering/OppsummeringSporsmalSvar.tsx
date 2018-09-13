@@ -9,10 +9,11 @@ const OppsummeringSporsmalSvar: React.StatelessComponent<IOppsummeringSporsmalSv
     sporsmal,
     svar,
 }) => {
+    const svarLowerCase = svar.toLowerCase();
     return (
         <div className={'oppsummering__element'}>
             <h4 className={'oppsummering__element--sporsmal'}>{sporsmal}</h4>
-            <span className={'oppsummering__element--svar'}>{svar.toLowerCase()}</span>
+            <span className={'oppsummering__element--svar'}>{svar}</span>
         </div>
     );
 };

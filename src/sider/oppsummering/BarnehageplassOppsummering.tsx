@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
-import { IBarnehageplass, Svar } from '../../soknad/types';
+import { IBarnehageplass } from '../../soknad/types';
 import OppsummeringSporsmalSvar from './OppsummeringSporsmalSvar';
 
 interface IBarnehageplassOppsummeringProps {
@@ -22,7 +22,9 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
             />
             <OppsummeringSporsmalSvar
                 sporsmal={intl.formatMessage({ id: 'barnehageplass.barnBarnehageplassStatus' })}
-                svar={barnehageplass.barnBarnehageplassStatus.verdi}
+                svar={intl.formatMessage({
+                    id: 'barnehageplass.'.concat(barnehageplass.barnBarnehageplassStatus.verdi),
+                })}
             />
         </div>
     );
