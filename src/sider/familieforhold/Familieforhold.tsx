@@ -4,7 +4,7 @@ import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { IFeltFeil } from '../../common/lib/validation/types';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import SideContainer from '../../component/SideContainer/SideContainer';
-import Submitknapp from '../../component/Submitknapp/Submitknapp';
+import Tilbakeknapp from '../../component/Tilbakeknapp/Tilbakeknapp';
 import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectFamilieforhold } from '../../soknad/selectors';
@@ -49,7 +49,6 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
                     />
                 )}
             </form>
-            <Submitknapp label="app.neste" onClick={nesteSteg} />
         </SideContainer>
     );
 };
