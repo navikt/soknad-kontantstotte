@@ -7,11 +7,11 @@ import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { hentFeltMedFeil } from '../../common/utils';
 import SideContainer from '../../component/SideContainer/SideContainer';
-import Submitknapp from '../../component/Submitknapp/Submitknapp';
+import Tilbakeknapp from '../../component/Tilbakeknapp/Tilbakeknapp';
 import { selectBarn } from '../../person/selectors';
 import { IBarn } from '../../person/types';
 import { IRootState } from '../../rootReducer';
-import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
+import { soknadValiderFelt } from '../../soknad/actions';
 import { selectMineBarn } from '../../soknad/selectors';
 
 interface IMapStateToProps {
@@ -22,7 +22,6 @@ interface IMapStateToProps {
 
 interface IMapDispatchToProps {
     velgBarn: (barn: IBarn) => void;
-    nesteSteg: () => void;
     settBarnNavn: (navn: string) => void;
     settBarnFodselsdato: (fodselsdato: string) => void;
 }
@@ -32,7 +31,6 @@ type MineBarnSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlPr
 const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
     barn,
     harForsoktNesteSteg,
-    nesteSteg,
     settBarnFodselsdato,
     settBarnNavn,
     valgtBarn,
@@ -79,7 +77,6 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                     />
                 </SkjemaGruppe>
             </form>
-            <Submitknapp label={'app.neste'} onClick={nesteSteg} />
         </SideContainer>
     );
 };
@@ -94,7 +91,6 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        nesteSteg: () => dispatch(soknadNesteSteg()),
         settBarnFodselsdato: (fodselsdato: string) =>
             dispatch(soknadValiderFelt('mineBarn', 'fodselsdato', fodselsdato)),
         settBarnNavn: (navn: string) => dispatch(soknadValiderFelt('mineBarn', 'navn', navn)),

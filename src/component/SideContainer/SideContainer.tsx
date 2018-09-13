@@ -3,12 +3,13 @@ import { StegindikatorStegProps } from 'nav-frontend-stegindikator/lib/stegindik
 import { Sidetittel } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, Dispatch } from 'react-redux';
 import { selectAppSteg } from '../../app/selectors';
 import { IRootState } from '../../rootReducer';
+import { soknadNesteSteg } from '../../soknad/actions';
 import { ISteg, stegConfig } from '../../stegConfig';
-import AvbrytKnapp from '../Avbrytknapp/Avbrytknapp';
-import TilbakeKnapp from '../Tilbakeknapp/Tilbakeknapp';
+import Navigasjon from '../Navigering/Navigasjon';
+import Tilbakeknapp from '../Tilbakeknapp/Tilbakeknapp';
 
 interface IOwnProps {
     className?: string;
@@ -19,7 +20,11 @@ interface IMapStateToProps {
     aktivtSteg: number;
 }
 
-type Props = IOwnProps & IMapStateToProps;
+interface IMapDispatchToProps {
+    nesteSteg: () => void;
+}
+
+type Props = IOwnProps & IMapStateToProps & IMapDispatchToProps;
 
 class SideContainer extends React.Component<Props> {
     public render() {
@@ -34,6 +39,7 @@ class SideContainer extends React.Component<Props> {
                     label: steg.key,
                 };
             });
+        const displayTilbakeKnapp = aktivtSteg !== 1;
 
         return (
             <div>
@@ -47,9 +53,9 @@ class SideContainer extends React.Component<Props> {
                     kompakt={false}
                     aktivtSteg={aktivtSteg - 1} // -1 pga Stegindikator er 0-indeksert
                 />
-                <TilbakeKnapp />
-                <div className={className}>{children}</div>
-                <AvbrytKnapp />
+                {displayTilbakeKnapp && <Tilbakeknapp posisjon={'oppe'} />}
+                <div className={'side-container__children'}>{children}</div>
+                <Navigasjon />
             </div>
         );
     }
@@ -61,4 +67,13 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     };
 };
 
-export default connect(mapStateToProps)(SideContainer);
+const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
+    return {
+        nesteSteg: () => dispatch(soknadNesteSteg()),
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SideContainer);
