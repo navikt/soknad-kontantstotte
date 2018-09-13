@@ -148,7 +148,7 @@ function* sjekkValideringForBarnehageplass(stegnavn: Stegnavn) {
 
     if (
         soknadState[stegnavn]['harBarnehageplass' as Stegnavn].verdi !== Svar.UBESVART &&
-        soknadState[stegnavn]['barnBarnehageplassStatus' as Stegnavn].verdi !=
+        soknadState[stegnavn]['barnBarnehageplassStatus' as Stegnavn].verdi !==
             BarnehageplassVerdier.Ubesvart
     ) {
         return;
