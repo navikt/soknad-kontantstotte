@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
-import { IBarnehageplass, Svar } from '../../soknad/types';
+import { BarnehageplassVerdier, IBarnehageplass } from '../../soknad/types';
 import OppsummeringSporsmalSvar from './OppsummeringSporsmalSvar';
 
 interface IBarnehageplassOppsummeringProps {
@@ -12,6 +12,26 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
     barnehageplass,
     intl,
 }) => {
+    let barnBarnehageplassStatusSvar = 'Ubesvart';
+
+    switch (barnehageplass.barnBarnehageplassStatus.verdi as BarnehageplassVerdier) {
+        case BarnehageplassVerdier.garIkkeIBarnehage:
+            barnBarnehageplassStatusSvar = 'barnehageplass.garIkkeIBarnehage';
+            break;
+        case BarnehageplassVerdier.harBarnehageplass:
+            barnBarnehageplassStatusSvar = 'barnehageplass.harBarnehageplass';
+            break;
+        case BarnehageplassVerdier.harSluttetIBarnehage:
+            barnBarnehageplassStatusSvar = 'barnehageplass.harSluttetIBarnehage';
+            break;
+        case BarnehageplassVerdier.skalBegynneIBarnehage:
+            barnBarnehageplassStatusSvar = 'barnehageplass.skalBegynneIBarnehage';
+            break;
+        case BarnehageplassVerdier.skalSlutteIBarnehage:
+            barnBarnehageplassStatusSvar = 'barnehageplass.skalSlutteIBarnehage';
+            break;
+    }
+
     return (
         <div>
             <OppsummeringSporsmalSvar
@@ -22,7 +42,9 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
             />
             <OppsummeringSporsmalSvar
                 sporsmal={intl.formatMessage({ id: 'barnehageplass.barnBarnehageplassStatus' })}
-                svar={barnehageplass.barnBarnehageplassStatus.verdi}
+                svar={intl.formatMessage({
+                    id: barnBarnehageplassStatusSvar,
+                })}
             />
         </div>
     );

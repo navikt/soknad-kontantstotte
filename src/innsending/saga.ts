@@ -2,6 +2,7 @@ import { push } from 'connected-react-router';
 import { SagaIterator } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { selectSoknad } from '../soknad/selectors';
+import { selectValgtSprak } from '../tekster/selectors';
 import { InnsendingTypeKeys, sendInnFeilet, sendInnOk } from './actions';
 import { sendInnSoknad } from './api';
 
@@ -19,7 +20,8 @@ function* mapStateToModel(): object {
         };
     }, {});
 
-    return strippetSoknad;
+    const sprak = yield select(selectValgtSprak);
+    return { ...strippetSoknad, sprak };
 }
 
 function* sendInnSaga(): SagaIterator {

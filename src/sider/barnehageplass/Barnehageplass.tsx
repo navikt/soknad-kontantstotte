@@ -8,16 +8,14 @@ import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { hentFeltMedFeil } from '../../common/utils';
 import Barnehageikon from '../../component/Ikoner/BarnehageIkon';
 import SideContainer from '../../component/SideContainer/SideContainer';
-import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
-import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
+import { soknadValiderFelt } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
 import { BarnehageplassVerdier, Feltnavn, IBarnehageplass, Svar } from '../../soknad/types';
 import BarnehageplassHarSluttetInfo from './BarnehageplassHarSluttetInfo';
 import BarnehageplassStatus from './BarnehageplassStatus';
 
 interface IMapDispatchToProps {
-    nesteSteg: () => void;
     settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => void;
     settSvarFelt: (feltnavn: Feltnavn, verdi: Svar) => void;
 }
@@ -33,7 +31,6 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     barnehageplass,
     harForsoktNesteSteg,
     intl,
-    nesteSteg,
     settBarnehageplassVerdiFelt,
     settSvarFelt,
 }) => {
@@ -48,7 +45,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
             <h3 className={'typo-innholdstittel barnehage__sidetittel'}>
                 {intl.formatMessage({ id: 'barnehageplass.tittel' })}
             </h3>
-            <p className={classNames('typo-normal', 'barnehage__info')}>
+            <p className={classNames('typo-ingress', 'barnehage__info')}>
                 {intl.formatMessage({ id: 'barnehageplass.ingress' })}
             </p>
 
@@ -93,14 +90,12 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                     </PanelBase>
                 )}
             </form>
-            <Submitknapp label="app.neste" onClick={nesteSteg} />
         </SideContainer>
     );
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        nesteSteg: () => dispatch(soknadNesteSteg()),
         settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => {
             dispatch(soknadValiderFelt('barnehageplass', feltnavn, verdi));
         },
