@@ -9,8 +9,8 @@ interface IAppState {
 
 const initialState: IAppState = {
     harForsoktNesteSteg: false,
-    status: AppStatus.KLAR,
-    steg: 6,
+    status: AppStatus.IKKE_STARTET,
+    steg: 0,
 };
 
 function appReducer(state: IAppState = initialState, action: AppActionTypes) {
