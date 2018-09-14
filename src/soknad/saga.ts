@@ -23,6 +23,7 @@ import {
     minebarnFeltnavn,
     Stegnavn,
     Svar,
+    utenlandskKontantstotteFeltnavn,
     ValideringsStatus,
 } from './types';
 import valideringsConfig from './valideringsConfig';
@@ -59,6 +60,11 @@ function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
             validertFelt = valideringsConfig.kravTilSoker[action.feltnavn as kravTilSokerFeltnavn](
                 feltMedOppdatertVerdi
             );
+            break;
+        case 'utenlandskKontantstotte':
+            validertFelt = valideringsConfig.utenlandskKontantstotte[
+                action.feltnavn as utenlandskKontantstotteFeltnavn
+            ](feltMedOppdatertVerdi);
             break;
         case 'mineBarn':
             validertFelt = valideringsConfig.mineBarn[action.feltnavn as minebarnFeltnavn](

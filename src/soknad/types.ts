@@ -30,6 +30,7 @@ interface ISoknadState {
     readonly familieforhold: IFamilieforhold;
     readonly arbeidsforhold: IArbeidsforhold;
     readonly barnehageplass: IBarnehageplass;
+    readonly utenlandskKontantstotte: IUtenlandskKontantstotte;
     readonly kravTilSoker: IKravTilSoker;
 }
 
@@ -42,6 +43,10 @@ interface IFamilieforhold {
     readonly borForeldreneSammenMedBarnet: IFelt;
     readonly annenForelderNavn: IFelt;
     readonly annenForelderFodselsnummer: IFelt;
+}
+
+interface IUtenlandskKontantstotte {
+    readonly mottarKontantstotteFraUtlandet: IFelt;
 }
 
 interface IArbeidsforhold {
@@ -69,6 +74,7 @@ interface IKravTilSoker {
 
 type minebarnFeltnavn = keyof IMineBarn;
 type familieforholdFeltnavn = keyof IFamilieforhold;
+type utenlandskKontantstotteFeltnavn = keyof IUtenlandskKontantstotte;
 type arbeidsforholdFeltnavn = keyof IArbeidsforhold;
 type barnehageplassFeltnavn = keyof IBarnehageplass;
 type kravTilSokerFeltnavn = keyof IKravTilSoker;
@@ -78,6 +84,7 @@ type Feltnavn =
     | minebarnFeltnavn
     | familieforholdFeltnavn
     | arbeidsforholdFeltnavn
+    | utenlandskKontantstotteFeltnavn
     | barnehageplassFeltnavn
     | kravTilSokerFeltnavn;
 
@@ -93,9 +100,11 @@ export {
     IArbeidsforhold,
     IBarnehageplass,
     IFamilieforhold,
+    IUtenlandskKontantstotte,
     IKravTilSoker,
     ISoknadState,
     Svar,
     IFelt,
+    utenlandskKontantstotteFeltnavn,
     ValideringsStatus,
 };

@@ -49,6 +49,9 @@ const initialState: ISoknadState = {
         fodselsdato: standardStringInitialFelt,
         navn: standardStringInitialFelt,
     },
+    utenlandskKontantstotte: {
+        mottarKontantstotteFraUtlandet: standardSvarInitialFelt,
+    },
 };
 
 function soknadReducer(state = initialState, action: SoknadActionTypes) {

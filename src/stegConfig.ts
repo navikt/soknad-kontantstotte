@@ -2,6 +2,7 @@ import * as React from 'react';
 import ArbeidsforholdSide from './sider/arbeidsforhold/Arbeidsforhold';
 import BarnehageplassSide from './sider/barnehageplass/Barnehageplass';
 import FamilieforholdSide from './sider/familieforhold/Familieforhold';
+import UtenlandskKontantstotteSide from './sider/utenlandsk-kontantstotte/UtenlandskKontantstotte';
 import KravTilSoker from './sider/krav-til-soker/KravTilSoker';
 import MineBarnSide from './sider/mine-barn/MineBarn';
 import OppsummeringSide from './sider/oppsummering/Oppsummering';
@@ -12,6 +13,7 @@ interface IStegConfig {
     kravTilSoker: ISteg;
     mineBarn: ISteg;
     familieforhold: ISteg;
+    utenlandskKontantstotte: ISteg;
     barnehageplass: ISteg;
     arbeidsforhold: ISteg;
     oppsummering: ISteg;
@@ -62,11 +64,17 @@ const stegConfig: IStegConfig = {
         path: '/arbeidsforhold',
         stegIndeks: 5,
     },
+    utenlandskKontantstotte: {
+        component: UtenlandskKontantstotteSide,
+        key: 'utenlandskKontantstotte',
+        path: '/utenlandsk-kontantstotte',
+        stegIndeks: 6,
+    },
     oppsummering: {
         component: OppsummeringSide,
         key: 'oppsummering',
         path: '/oppsummering',
-        stegIndeks: 6,
+        stegIndeks: 7,
     },
 };
 /* tslint:enable:object-literal-sort-keys */
