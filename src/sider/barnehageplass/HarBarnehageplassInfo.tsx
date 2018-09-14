@@ -33,7 +33,7 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
         <SkjemaGruppe>
             <Input
                 label={intl.formatMessage({
-                    id: 'barnehageplass.gaarIBarnehage.dato.sporsmal',
+                    id: 'barnehageplass.harBarnehageplass.dato.sporsmal',
                 })}
                 onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
                     settBarnehageplassVerdiFelt(
@@ -46,7 +46,7 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
             />
             <Input
                 label={intl.formatMessage({
-                    id: 'barnehageplass.harSluttetIBarnehage.kommune.sporsmal',
+                    id: 'barnehageplass.harBarnehageplass.kommune.sporsmal',
                 })}
                 onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
                     settBarnehageplassVerdiFelt(
@@ -59,7 +59,7 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
             />
             <Input
                 label={intl.formatMessage({
-                    id: 'barnehageplass.harSluttetIBarnehage.antallTimer.sporsmal',
+                    id: 'barnehageplass.harBarnehageplass.antallTimer.sporsmal',
                 })}
                 onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
                     settBarnehageplassVerdiFelt(

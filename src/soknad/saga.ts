@@ -149,7 +149,10 @@ function* sjekkValideringForBarnehageplass(stegnavn: Stegnavn) {
     if (
         soknadState[stegnavn]['harBarnehageplass' as Stegnavn].verdi !== Svar.UBESVART &&
         soknadState[stegnavn]['barnBarnehageplassStatus' as Stegnavn].verdi !==
-            BarnehageplassVerdier.Ubesvart
+            BarnehageplassVerdier.Ubesvart &&
+        soknadState[stegnavn]['harBarnehageplassKommune' as Stegnavn].verdi.length > 0 &&
+        soknadState[stegnavn]['harBarnehageplassDato' as Stegnavn].verdi.length > 0 &&
+        soknadState[stegnavn]['harBarnehageplassAntallTimer' as Stegnavn].verdi.length > 0
     ) {
         return;
     } else {

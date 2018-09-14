@@ -13,6 +13,7 @@ import { soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/action
 import { selectBarnehageplass } from '../../soknad/selectors';
 import { BarnehageplassVerdier, Feltnavn, IBarnehageplass, Svar } from '../../soknad/types';
 import BarnehageplassStatus from './BarnehageplassStatus';
+import HarBarnehageplassInfo from './HarBarnehageplassInfo';
 
 interface IMapDispatchToProps {
     nullstillNesteSteg: () => void;
@@ -81,6 +82,15 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                             intl={intl}
                             settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
                         />
+
+                        {barnBarnehageplassStatus.verdi ===
+                            BarnehageplassVerdier.harBarnehageplass && (
+                            <HarBarnehageplassInfo
+                                feltMedFeil={feltMedFeil}
+                                intl={intl}
+                                settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
+                            />
+                        )}
                     </PanelBase>
                 )}
             </form>
