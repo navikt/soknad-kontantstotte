@@ -65,10 +65,12 @@ function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
             validertFelt = valideringsConfig.mineBarn[action.feltnavn as minebarnFeltnavn](
                 feltMedOppdatertVerdi
             );
+            break;
         case 'utenlandskYtelser':
             validertFelt = valideringsConfig.utenlandskYtelser[
                 action.feltnavn as utenlandskYtelserFeltnavn
             ](feltMedOppdatertVerdi);
+            break;
     }
 
     yield put(soknadSettFelt(action.stegnavn, action.feltnavn, validertFelt));

@@ -24,7 +24,7 @@ const UtenlandskYtelserOppsummering: React.StatelessComponent<
     const { borForeldreneSammenMedBarnet } = familieforhold;
 
     return (
-        <div>
+        <div className={'utenlandskYtelser__oppsummering'}>
             <OppsummeringSporsmalSvar
                 sporsmal={intl.formatMessage({
                     id: 'oppsummering.utenlandskYtelser.mottarYtelserFraUtland',
@@ -37,7 +37,9 @@ const UtenlandskYtelserOppsummering: React.StatelessComponent<
                         <Normaltekst>
                             <FormattedMessage id="oppsummering.utenlandskYtelser.forklaring.label" />
                         </Normaltekst>
-                        <Element>{mottarYtelserFraUtlandForklaring.verdi}</Element>
+                        <Element className={'utenlandskYtelser__oppsummering--forklaring'}>
+                            {mottarYtelserFraUtlandForklaring.verdi}
+                        </Element>
                     </li>
                 </ul>
             )}
@@ -57,7 +59,9 @@ const UtenlandskYtelserOppsummering: React.StatelessComponent<
                             <Normaltekst>
                                 <FormattedMessage id="oppsummering.utenlandskYtelser.forklaring.label" />
                             </Normaltekst>
-                            <Element>{mottarAnnenForelderYtelserFraUtlandForklaring.verdi}</Element>
+                            <Element className={'utenlandskYtelser__oppsummering--forklaring'}>
+                                {mottarAnnenForelderYtelserFraUtlandForklaring.verdi}
+                            </Element>
                         </li>
                     </ul>
                 )}

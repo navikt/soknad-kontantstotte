@@ -71,8 +71,8 @@ const UtenlandskYtelser: React.StatelessComponent<UtenlandskYtelserProps> = ({
                     }}
                     checked={mottarYtelserFraUtland.verdi}
                     radios={[
-                        { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                         { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
+                        { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                     ]}
                     feil={feltMedFeil.mottarYtelserFraUtland}
                 />
@@ -83,6 +83,7 @@ const UtenlandskYtelser: React.StatelessComponent<UtenlandskYtelserProps> = ({
                                 id: 'utenlandskYtelser.forklaring.hjelpetekst',
                             })}
                             defaultValue={mottarYtelserFraUtlandForklaring.verdi}
+                            maxLength={500}
                             onBlur={(evt: any) => {
                                 settStringFelt(
                                     'mottarYtelserFraUtlandForklaring' as Feltnavn,
@@ -114,8 +115,8 @@ const UtenlandskYtelser: React.StatelessComponent<UtenlandskYtelserProps> = ({
                         }}
                         checked={mottarAnnenForelderYtelserFraUtland.verdi}
                         radios={[
-                            { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                             { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
+                            { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                         ]}
                         feil={feltMedFeil.mottarAnnenForelderYtelserFraUtland}
                     />
@@ -127,6 +128,7 @@ const UtenlandskYtelser: React.StatelessComponent<UtenlandskYtelserProps> = ({
                                 id: 'utenlandskYtelser.forklaring.hjelpetekst',
                             })}
                             defaultValue={mottarAnnenForelderYtelserFraUtlandForklaring.verdi}
+                            maxLength={500}
                             onBlur={(evt: any) => {
                                 settStringFelt(
                                     'mottarAnnenForelderYtelserFraUtlandForklaring' as Feltnavn,
