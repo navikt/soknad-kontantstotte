@@ -23,6 +23,7 @@ import {
     minebarnFeltnavn,
     Stegnavn,
     Svar,
+    utenlandskYtelserFeltnavn,
     ValideringsStatus,
 } from './types';
 import valideringsConfig from './valideringsConfig';
@@ -64,6 +65,10 @@ function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
             validertFelt = valideringsConfig.mineBarn[action.feltnavn as minebarnFeltnavn](
                 feltMedOppdatertVerdi
             );
+        case 'utenlandskYtelser':
+            validertFelt = valideringsConfig.utenlandskYtelser[
+                action.feltnavn as utenlandskYtelserFeltnavn
+            ](feltMedOppdatertVerdi);
     }
 
     yield put(soknadSettFelt(action.stegnavn, action.feltnavn, validertFelt));
@@ -167,6 +172,43 @@ function* sjekkValideringForFamilieforhold(stegnavn: Stegnavn) {
     }
 }
 
+function* sjekkValideringForUtenlandskYtelser(stegnavn: Stegnavn) {
+    const soknadState = yield select(selectSoknad);
+
+    let harFeil =
+        soknadState[stegnavn]['mottarYtelserFraUtland' as Stegnavn].valideringsStatus !==
+        ValideringsStatus.OK;
+
+    if (soknadState[stegnavn]['mottarYtelserFraUtland' as Stegnavn].verdi === Svar.JA) {
+        harFeil =
+            harFeil ||
+            soknadState[stegnavn]['mottarYtelserFraUtlandForklaring' as Stegnavn]
+                .valideringsStatus !== ValideringsStatus.OK;
+    }
+
+    if (
+        soknadState['familieforhold' as Stegnavn]['borForeldreneSammenMedBarnet' as Stegnavn]
+            .verdi === Svar.JA
+    ) {
+        harFeil =
+            harFeil ||
+            soknadState[stegnavn]['mottarAnnenForelderYtelserFraUtland' as Stegnavn]
+                .valideringsStatus !== ValideringsStatus.OK;
+
+        if (
+            soknadState[stegnavn]['mottarAnnenForelderYtelserFraUtland' as Stegnavn].verdi ===
+            Svar.JA
+        ) {
+            harFeil =
+                harFeil ||
+                soknadState[stegnavn]['mottarAnnenForelderYtelserFraUtlandForklaring' as Stegnavn]
+                    .valideringsStatus !== ValideringsStatus.OK;
+        }
+    }
+
+    return harFeil;
+}
+
 function* nullstillNesteStegSaga() {
     yield put(appSettHarForsoktNesteSteg(false));
 }
@@ -188,6 +230,9 @@ function* nesteStegSaga() {
             break;
         case 'familieforhold':
             harFeil = yield call(sjekkValideringForFamilieforhold, tilSide.key as Stegnavn);
+            break;
+        case 'utenlandskYtelser':
+            harFeil = yield call(sjekkValideringForUtenlandskYtelser, tilSide.key as Stegnavn);
             break;
         default:
             harFeil = yield call(sjekkValideringForSteg, tilSide.key as Stegnavn);

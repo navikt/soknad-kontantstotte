@@ -5,6 +5,7 @@ import {
     IFelt,
     kravTilSokerFeltnavn,
     minebarnFeltnavn,
+    utenlandskYtelserFeltnavn,
 } from './types';
 import {
     harFyltInnFodselsdato,
@@ -23,6 +24,7 @@ interface IValideringsConfig {
     familieforhold: { [felt in familieforholdFeltnavn]: (felt: IFelt) => IFelt };
     kravTilSoker: { [felt in kravTilSokerFeltnavn]: (felt: IFelt) => IFelt };
     mineBarn: { [felt in minebarnFeltnavn]: (felt: IFelt) => IFelt };
+    utenlandskYtelser: { [felt in utenlandskYtelserFeltnavn]: (felt: IFelt) => IFelt };
 }
 
 const valideringsConfig: IValideringsConfig = {
@@ -57,6 +59,12 @@ const valideringsConfig: IValideringsConfig = {
     mineBarn: {
         fodselsdato: harFyltInnFodselsdato,
         navn: harFyltInnNavn,
+    },
+    utenlandskYtelser: {
+        mottarAnnenForelderYtelserFraUtland: harSvartMedFeilmelding,
+        mottarAnnenForelderYtelserFraUtlandForklaring: harSvartTekstMedFeilmelding,
+        mottarYtelserFraUtland: harSvartMedFeilmelding,
+        mottarYtelserFraUtlandForklaring: harSvartTekstMedFeilmelding,
     },
 };
 

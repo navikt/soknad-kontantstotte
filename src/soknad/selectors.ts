@@ -27,6 +27,10 @@ function selectMineBarn(state: IRootState) {
     return state.soknad.mineBarn;
 }
 
+function selectYtelserFraUtland(state: IRootState) {
+    return state.soknad.utenlandskYtelser;
+}
+
 function selectSoknad(state: IRootState): ISoknadState {
     return state.soknad;
 }
@@ -36,6 +40,7 @@ export {
     selectBarnehageplass,
     selectFamilieforhold,
     selectKravTilSoker,
+    selectYtelserFraUtland,
     selectSoknad,
     selectMineBarn,
 };
