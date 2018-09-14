@@ -6,7 +6,7 @@ import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { hentFeltMedFeil } from '../../common/utils';
 import BorSammenIkon from '../../component/Ikoner/BorSammenIkon';
 import SideContainer from '../../component/SideContainer/SideContainer';
-import Tilbakeknapp from '../../component/Tilbakeknapp/Tilbakeknapp';
+import SoknadHjelpetekst from '../../component/SoknadHjelpetekst/SoknadHjelpetekst';
 import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg, soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectFamilieforhold } from '../../soknad/selectors';
@@ -43,9 +43,18 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
                 <BorSammenIkon />
             </div>
             <form className={'familieforhold__form'}>
-                <h3 className={'typo-innholdstittel familieforhold__tittel'}>
-                    <FormattedMessage id={'familieforhold.tittel'} />
-                </h3>
+                <div className={'familieforhold__tittelcontainer'}>
+                    <h3 className={'typo-innholdstittel familieforhold__tittel'}>
+                        <FormattedMessage id={'familieforhold.tittel'} />
+                    </h3>
+                    <SoknadHjelpetekst
+                        className={'familieforhold__hjelpetekst'}
+                        modalClassName={'familieforhold__hjelpetekst__modal'}
+                        hjelpetekstNokkel={
+                            'familieforhold.borForeldreneSammenMedBarnet.hjelpetekst'
+                        }
+                    />
+                </div>
                 <RadioPanelGruppe
                     legend={intl.formatMessage({
                         id: 'familieforhold.borForeldreneSammenMedBarnet.sporsmal',

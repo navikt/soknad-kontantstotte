@@ -1,11 +1,21 @@
-import Hovedknapp from 'nav-frontend-knapper/lib/hovedknapp';
+import * as classNames from 'classnames';
+import Ikon from 'nav-frontend-ikoner-assets';
 import Modal from 'nav-frontend-modal';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
-import HjelpetekstIkon from '../Ikoner/HjelpetekstIkon';
+
+export interface IAnchorProps {
+    className?: string;
+    hover?: boolean;
+}
+
+const Anchor: React.StatelessComponent<IAnchorProps> = ({ className, hover }) => (
+    <Ikon kind={hover ? 'help-circle_hover' : 'help-circle'} className={className} />
+);
 
 interface ISoknadHjelpetekstState {
     modalIsOpen: boolean;
+    hover: boolean;
 }
 
 interface ISoknadHjelpetekstProps {
@@ -20,19 +30,27 @@ class SoknadHjelpetekst extends React.Component<SoknadHjelpetekstProps, ISoknadH
     constructor(props: SoknadHjelpetekstProps) {
         super(props);
         this.state = {
+            hover: false,
             modalIsOpen: false,
         };
         this.closeModal = this.closeModal.bind(this);
         this.openModal = this.openModal.bind(this);
+        this.setHover = this.setHover.bind(this);
     }
 
     public render() {
         const { intl, hjelpetekstNokkel, className, modalClassName } = this.props;
         return (
             <div className={className}>
-                <div onClick={this.openModal}>
-                    <HjelpetekstIkon />
-                </div>
+                <button
+                    type="button"
+                    className={'hjelpetekst__apneknapp'}
+                    onClick={this.openModal}
+                    onMouseEnter={this.setHover(true)}
+                    onMouseLeave={this.setHover(false)}
+                >
+                    <Anchor hover={this.state.hover} className={'hjelpetekst__anchor'} />
+                </button>
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     contentLabel={intl.formatMessage({ id: 'app.avbrytmodal.tekst' })}
@@ -53,6 +71,10 @@ class SoknadHjelpetekst extends React.Component<SoknadHjelpetekstProps, ISoknadH
 
     private closeModal() {
         this.setState({ modalIsOpen: false });
+    }
+
+    private setHover(value: boolean) {
+        return () => this.setState({ hover: value });
     }
 }
 
