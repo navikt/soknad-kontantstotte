@@ -38,7 +38,7 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
     );
 
     return (
-        <SideContainer>
+        <SideContainer className={'krav'}>
             <Veileder
                 content={
                     <div>
@@ -55,9 +55,9 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
                     </div>
                 }
             />
-            <form className={'krav'}>
+            <form>
                 <CheckboksPanelGruppe
-                    className="krav__inputPanelGruppe"
+                    className={'krav__inputPanelGruppe'}
                     legend={''}
                     checkboxes={[
                         {
