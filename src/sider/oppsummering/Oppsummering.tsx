@@ -2,7 +2,6 @@ import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import SideContainer from '../../component/SideContainer/SideContainer';
-import Tilbakeknapp from '../../component/Tilbakeknapp/Tilbakeknapp';
 import { IRootState } from '../../rootReducer';
 import { selectSoknad } from '../../soknad/selectors';
 import { ISoknadState } from '../../soknad/types';
@@ -11,6 +10,7 @@ import BarnehageplassOppsummering from './BarnehageplassOppsummering';
 import FamilieforholdOppsummering from './FamilieforholdOppsummering';
 import KravTilSokerOppsummering from './KravTilSokerOppsummering';
 import PersonaliaOgBarnOppsummering from './PersonaliaOgBarnOppsummering';
+import UtenlandskKontantstotteOppsummering from './UtenlandskKontantstotteOppsummering';
 
 interface IMapStateToProps {
     soknad: ISoknadState;
@@ -31,6 +31,10 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({ intl, s
                 <FamilieforholdOppsummering intl={intl} familieforhold={soknad.familieforhold} />
                 <BarnehageplassOppsummering intl={intl} barnehageplass={soknad.barnehageplass} />
                 <ArbeidsforholdOppsummering intl={intl} arbeidsforhold={soknad.arbeidsforhold} />
+                <UtenlandskKontantstotteOppsummering
+                    intl={intl}
+                    utenlandskKontantstotte={soknad.utenlandskKontantstotte}
+                />
             </ul>
         </SideContainer>
     );
