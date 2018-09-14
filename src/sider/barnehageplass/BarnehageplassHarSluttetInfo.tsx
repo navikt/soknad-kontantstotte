@@ -30,46 +30,51 @@ const BarnehageplassHarSluttetInfo: React.StatelessComponent<BarnehageplassHarSl
     harSluttetIBarnehageKommune,
 }) => {
     return (
-        <SkjemaGruppe>
-            <Input
-                label={intl.formatMessage({
-                    id: 'barnehageplass.harSluttetIBarnehage.dato.sporsmal',
-                })}
-                onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    settBarnehageplassVerdiFelt(
-                        'harSluttetIBarnehageDato' as Feltnavn,
-                        event.target.value as BarnehageplassVerdier
-                    )
-                }
-                defaultValue={harSluttetIBarnehageDato.verdi}
-                feil={feltMedFeil.harSluttetIBarnehageDato}
-            />
-            <Input
-                label={intl.formatMessage({
-                    id: 'barnehageplass.harSluttetIBarnehage.kommune.sporsmal',
-                })}
-                onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    settBarnehageplassVerdiFelt(
-                        'harSluttetIBarnehageKommune' as Feltnavn,
-                        event.target.value as BarnehageplassVerdier
-                    )
-                }
-                defaultValue={harSluttetIBarnehageKommune.verdi}
-                feil={feltMedFeil.harSluttetIBarnehageKommune}
-            />
-            <Input
-                label={intl.formatMessage({
-                    id: 'barnehageplass.harSluttetIBarnehage.antallTimer.sporsmal',
-                })}
-                onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    settBarnehageplassVerdiFelt(
-                        'harSluttetIBarnehageAntallTimer' as Feltnavn,
-                        event.target.value as BarnehageplassVerdier
-                    )
-                }
-                defaultValue={harSluttetIBarnehageAntallTimer.verdi}
-                feil={feltMedFeil.harSluttetIBarnehageAntallTimer}
-            />
+        <SkjemaGruppe className={'barnehage__inputSkjemaGruppe'}>
+            <div className={'inputSkjemaGruppe__inner'}>
+                <Input
+                    className={'inputElement'}
+                    label={intl.formatMessage({
+                        id: 'barnehageplass.harSluttetIBarnehage.dato.sporsmal',
+                    })}
+                    onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        settBarnehageplassVerdiFelt(
+                            'harSluttetIBarnehageDato' as Feltnavn,
+                            event.target.value as BarnehageplassVerdier
+                        )
+                    }
+                    defaultValue={harSluttetIBarnehageDato.verdi}
+                    feil={feltMedFeil.harSluttetIBarnehageDato}
+                />
+                <Input
+                    className={'inputElement'}
+                    label={intl.formatMessage({
+                        id: 'barnehageplass.harSluttetIBarnehage.antallTimer.sporsmal',
+                    })}
+                    onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        settBarnehageplassVerdiFelt(
+                            'harSluttetIBarnehageAntallTimer' as Feltnavn,
+                            event.target.value as BarnehageplassVerdier
+                        )
+                    }
+                    defaultValue={harSluttetIBarnehageAntallTimer.verdi}
+                    feil={feltMedFeil.harSluttetIBarnehageAntallTimer}
+                />
+                <Input
+                    className={'inputElement'}
+                    label={intl.formatMessage({
+                        id: 'barnehageplass.harSluttetIBarnehage.kommune.sporsmal',
+                    })}
+                    onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        settBarnehageplassVerdiFelt(
+                            'harSluttetIBarnehageKommune' as Feltnavn,
+                            event.target.value as BarnehageplassVerdier
+                        )
+                    }
+                    defaultValue={harSluttetIBarnehageKommune.verdi}
+                    feil={feltMedFeil.harSluttetIBarnehageKommune}
+                />
+            </div>
         </SkjemaGruppe>
     );
 };
