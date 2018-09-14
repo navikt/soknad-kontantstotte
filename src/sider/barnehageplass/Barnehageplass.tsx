@@ -17,7 +17,7 @@ import BarnehageplassStatus from './BarnehageplassStatus';
 interface IMapDispatchToProps {
     settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => void;
     settSvarFelt: (feltnavn: Feltnavn, verdi: Svar) => void;
-    soknadNullstillNesteSteg: () => void;
+    nullstillValidering: () => void;
 }
 
 interface IMapStateToProps {
@@ -33,7 +33,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     intl,
     settBarnehageplassVerdiFelt,
     settSvarFelt,
-    soknadNullstillNesteSteg,
+    nullstillValidering,
 }) => {
     const { barnBarnehageplassStatus, harBarnehageplass } = barnehageplass;
     const feltMedFeil = hentFeltMedFeil(barnehageplass, harForsoktNesteSteg, intl);
@@ -63,7 +63,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                             'barnBarnehageplassStatus' as Feltnavn,
                             BarnehageplassVerdier.Ubesvart
                         );
-                        soknadNullstillNesteSteg();
+                        nullstillValidering();
                     }}
                     checked={harBarnehageplass.verdi}
                     radios={[
@@ -96,7 +96,7 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
         settSvarFelt: (feltnavn: Feltnavn, verdi: Svar) => {
             dispatch(soknadValiderFelt('barnehageplass', feltnavn, verdi));
         },
-        soknadNullstillNesteSteg: () => {
+        nullstillValidering: () => {
             dispatch(soknadNullstillNesteSteg());
         },
     };
