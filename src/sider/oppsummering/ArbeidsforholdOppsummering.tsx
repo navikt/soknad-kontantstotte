@@ -24,12 +24,6 @@ const oppsummeringsNokkel = (felt: string, verdi: string) => {
             } else {
                 return 'oppsummering.arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.nei';
             }
-        case 'mottarKontantstotteFraAnnetEOS':
-            if (verdi === Svar.JA) {
-                return 'oppsummering.arbeidsforhold.mottarKontantstotteFraAnnetEOS.ja';
-            } else {
-                return 'oppsummering.arbeidsforhold.mottarKontantstotteFraAnnetEOS.nei';
-            }
         default:
             return '';
     }
@@ -82,28 +76,6 @@ const ArbeidsforholdOppsummering: React.StatelessComponent<IArbeidsforholdOppsum
                                     arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkelForklaring
                                         .verdi
                                 }
-                            </Element>
-                        </li>
-                    </ul>
-                )}
-            </OppsummeringsListeElement>
-
-            <OppsummeringsListeElement
-                tekst={intl.formatMessage({
-                    id: oppsummeringsNokkel(
-                        'mottarKontantstotteFraAnnetEOS',
-                        arbeidsforhold.mottarKontantstotteFraAnnetEOS.verdi
-                    ),
-                })}
-            >
-                {arbeidsforhold.mottarKontantstotteFraAnnetEOS.verdi === Svar.JA && (
-                    <ul>
-                        <li className="list-unstyled list-detaljer">
-                            <Normaltekst>
-                                <FormattedMessage id="oppsummering.arbeidsforhold.tilleggsinformasjon.label" />
-                            </Normaltekst>
-                            <Element>
-                                {arbeidsforhold.mottarKontantstotteFraAnnetEOSForklaring.verdi}
                             </Element>
                         </li>
                     </ul>

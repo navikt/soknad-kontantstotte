@@ -23,8 +23,6 @@ const initialState: ISoknadState = {
     arbeidsforhold: {
         arbeiderIUtlandetEllerKontinentalsokkel: standardSvarInitialFelt,
         arbeiderIUtlandetEllerKontinentalsokkelForklaring: standardStringInitialFelt,
-        mottarKontantstotteFraAnnetEOS: standardSvarInitialFelt,
-        mottarKontantstotteFraAnnetEOSForklaring: standardStringInitialFelt,
         mottarYtelserFraUtlandet: standardSvarInitialFelt,
         mottarYtelserFraUtlandetForklaring: standardStringInitialFelt,
     },

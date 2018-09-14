@@ -29,8 +29,6 @@ const valideringsConfig: IValideringsConfig = {
     arbeidsforhold: {
         arbeiderIUtlandetEllerKontinentalsokkel: harSvartMedFeilmelding,
         arbeiderIUtlandetEllerKontinentalsokkelForklaring: harSvartTekstMedFeilmelding,
-        mottarKontantstotteFraAnnetEOS: harSvartMedFeilmelding,
-        mottarKontantstotteFraAnnetEOSForklaring: harSvartTekstMedFeilmelding,
         mottarYtelserFraUtlandet: harSvartMedFeilmelding,
         mottarYtelserFraUtlandetForklaring: harSvartTekstMedFeilmelding,
     },

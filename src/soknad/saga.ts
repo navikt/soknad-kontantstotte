@@ -118,17 +118,6 @@ function* sjekkValideringForArbeidsforhold(stegnavn: Stegnavn) {
         return true;
     }
 
-    if (soknadState[stegnavn]['mottarKontantstotteFraAnnetEOS' as Stegnavn].verdi === Svar.JA) {
-        harFeil =
-            harFeil ||
-            soknadState[stegnavn]['mottarKontantstotteFraAnnetEOSForklaring' as Stegnavn].verdi
-                .length === 0;
-    } else if (
-        soknadState[stegnavn]['mottarKontantstotteFraAnnetEOS' as Stegnavn].verdi === Svar.UBESVART
-    ) {
-        return true;
-    }
-
     if (soknadState[stegnavn]['mottarYtelserFraUtlandet' as Stegnavn].verdi === Svar.JA) {
         harFeil =
             harFeil ||

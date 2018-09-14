@@ -71,9 +71,6 @@ gemini.suite('soknad-kontantstotte', suite => {
                 window.document
                     .querySelectorAll('[name="arbeiderIUtlandetEllerKontinentalsokkel"]')[1]
                     .click();
-                window.document
-                    .querySelectorAll('[name="mottarKontantstotteFraAnnetEOS"]')[1]
-                    .click();
             });
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);

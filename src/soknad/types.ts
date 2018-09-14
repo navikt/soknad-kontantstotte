@@ -49,8 +49,6 @@ interface IArbeidsforhold {
     readonly mottarYtelserFraUtlandetForklaring: IFelt;
     readonly arbeiderIUtlandetEllerKontinentalsokkel: IFelt;
     readonly arbeiderIUtlandetEllerKontinentalsokkelForklaring: IFelt;
-    readonly mottarKontantstotteFraAnnetEOS: IFelt;
-    readonly mottarKontantstotteFraAnnetEOSForklaring: IFelt;
 }
 
 interface IBarnehageplass {
