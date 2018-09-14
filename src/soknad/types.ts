@@ -5,10 +5,11 @@ enum Svar {
 }
 
 enum BarnehageplassVerdier {
-    Nei = 'Nei',
-    NeiHarFaatt = 'NeiHarFaatt',
-    Ja = 'Ja',
-    JaSkalSlutte = 'JaSkalSlutte',
+    garIkkeIBarnehage = 'garIkkeIBarnehage',
+    harBarnehageplass = 'harBarnehageplass',
+    harSluttetIBarnehage = 'harSluttetIBarnehage',
+    skalBegynneIBarnehage = 'skalBegynneIBarnehage',
+    skalSlutteIBarnehage = 'skalSlutteIBarnehage',
     Ubesvart = 'Ubesvart',
 }
 
@@ -42,7 +43,6 @@ interface IFamilieforhold {
     readonly borForeldreneSammenMedBarnet: IFelt;
     readonly annenForelderNavn: IFelt;
     readonly annenForelderFodselsnummer: IFelt;
-    readonly annenForelderYrkesaktivINorgeEOSIMinstFemAar: IFelt;
 }
 
 interface IArbeidsforhold {
@@ -56,6 +56,7 @@ interface IArbeidsforhold {
 
 interface IBarnehageplass {
     readonly harBarnehageplass: IFelt;
+    readonly barnBarnehageplassStatus: IFelt;
     readonly dato: IFelt;
     readonly kommune: IFelt;
     readonly antallTimer: IFelt;
@@ -70,15 +71,26 @@ interface IKravTilSoker {
     readonly skalBoMedBarnetINorgeNesteTolvMaaneder: IFelt;
 }
 
+type minebarnFeltnavn = keyof IMineBarn;
+type familieforholdFeltnavn = keyof IFamilieforhold;
+type arbeidsforholdFeltnavn = keyof IArbeidsforhold;
+type barnehageplassFeltnavn = keyof IBarnehageplass;
+type kravTilSokerFeltnavn = keyof IKravTilSoker;
+
 type Stegnavn = keyof ISoknadState;
 type Feltnavn =
-    | keyof IMineBarn
-    | keyof IFamilieforhold
-    | keyof IArbeidsforhold
-    | keyof IBarnehageplass
-    | keyof IKravTilSoker;
+    | minebarnFeltnavn
+    | familieforholdFeltnavn
+    | arbeidsforholdFeltnavn
+    | barnehageplassFeltnavn
+    | kravTilSokerFeltnavn;
 
 export {
+    minebarnFeltnavn,
+    familieforholdFeltnavn,
+    arbeidsforholdFeltnavn,
+    barnehageplassFeltnavn,
+    kravTilSokerFeltnavn,
     BarnehageplassVerdier,
     Stegnavn,
     Feltnavn,

@@ -1,12 +1,13 @@
 import { Input } from 'nav-frontend-skjema';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { hentFeltMedFeil } from '../../common/utils';
 import SoknadPanel from '../../component/SoknadPanel/SoknadPanel';
-import { IFelt } from '../../soknad/types';
+import { IFamilieforhold } from '../../soknad/types';
 
 interface IProps {
-    annenForelderNavn: IFelt;
-    annenForelderFodselsnummer: IFelt;
+    familieforhold: IFamilieforhold;
+    harForsoktNesteSteg: boolean;
     settAnnenForelderNavn: (navn: string) => void;
     settAnnenForelderFodselsnummer: (personnummer: string) => void;
 }
@@ -14,12 +15,13 @@ interface IProps {
 type AnnenForelderInfoProps = IProps & InjectedIntlProps;
 
 const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
-    annenForelderNavn,
-    annenForelderFodselsnummer,
+    familieforhold,
     intl,
+    harForsoktNesteSteg,
     settAnnenForelderNavn,
     settAnnenForelderFodselsnummer,
 }) => {
+    const feltMedFeil = hentFeltMedFeil(familieforhold, harForsoktNesteSteg, intl);
     return (
         <SoknadPanel>
             <Input
@@ -30,7 +32,8 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
                 onBlur={(event: React.SyntheticEvent<EventTarget>) => {
                     settAnnenForelderNavn((event.target as HTMLInputElement).value);
                 }}
-                defaultValue={annenForelderNavn.verdi}
+                defaultValue={familieforhold.annenForelderNavn.verdi}
+                feil={feltMedFeil.annenForelderNavn}
             />
             <Input
                 name="annenforelder.fodselsnummer"
@@ -40,7 +43,8 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
                 onBlur={(event: React.SyntheticEvent<EventTarget>) => {
                     settAnnenForelderFodselsnummer((event.target as HTMLInputElement).value);
                 }}
-                defaultValue={annenForelderFodselsnummer.verdi}
+                defaultValue={familieforhold.annenForelderFodselsnummer.verdi}
+                feil={feltMedFeil.annenForelderFodselsnummer}
             />
         </SoknadPanel>
     );

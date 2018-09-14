@@ -4,35 +4,41 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
+import { IFeil } from '../../common/lib/validation/types';
+import { hentFeltMedFeil } from '../../common/utils';
 import SideContainer from '../../component/SideContainer/SideContainer';
-import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import Veileder from '../../component/Veileder/Veileder';
 import { IRootState } from '../../rootReducer';
-import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
+import { soknadValiderFelt } from '../../soknad/actions';
 import { selectKravTilSoker } from '../../soknad/selectors';
-import { Feltnavn, IFelt, IKravTilSoker, Svar, ValideringsStatus } from '../../soknad/types';
+import { Feltnavn, IKravTilSoker, Svar } from '../../soknad/types';
 
 interface IMapDispatchToProps {
     settCheckboxVerdi: (felt: Feltnavn, verdi: string) => void;
-    nesteSteg: () => void;
 }
 
 interface IMapStateToProps {
+    harForsoktNesteSteg: boolean;
     kravTilSoker: IKravTilSoker;
-    feil?: { feilmelding: string };
 }
 
 type KravTilSokerProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
 const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
+    harForsoktNesteSteg,
     kravTilSoker,
-    feil,
     intl,
     settCheckboxVerdi,
-    nesteSteg,
 }) => {
+    const feil = Object.values(hentFeltMedFeil(kravTilSoker, harForsoktNesteSteg, intl)).reduce(
+        (acc: IFeil | undefined, felt: IFeil | undefined) => {
+            return felt !== undefined ? felt : acc;
+        },
+        undefined
+    );
+
     return (
-        <SideContainer>
+        <SideContainer className={'krav'}>
             <Veileder
                 content={
                     <div>
@@ -51,7 +57,7 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
             />
             <form>
                 <CheckboksPanelGruppe
-                    className="krav__inputPanelGruppe"
+                    className={'krav__inputPanelGruppe'}
                     legend={''}
                     checkboxes={[
                         {
@@ -110,28 +116,19 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
                     feil={feil}
                 />
             </form>
-            <Submitknapp label="app.neste" onClick={nesteSteg} />
         </SideContainer>
     );
 };
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
-    const kravTilSoker = selectKravTilSoker(state);
-    const feltMedFeil = Object.values(kravTilSoker).filter(
-        (felt: IFelt) => felt.valideringsStatus !== ValideringsStatus.OK
-    );
     return {
-        feil:
-            feltMedFeil.length > 0 && selectHarForsoktNesteSteg(state)
-                ? { feilmelding: feltMedFeil[0].feilmeldingsNokkel }
-                : undefined,
-        kravTilSoker,
+        harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
+        kravTilSoker: selectKravTilSoker(state),
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        nesteSteg: () => dispatch(soknadNesteSteg()),
         settCheckboxVerdi: (feltnavn: Feltnavn, verdi) =>
             dispatch(soknadValiderFelt('kravTilSoker', feltnavn, verdi)),
     };

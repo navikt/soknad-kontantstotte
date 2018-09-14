@@ -15,6 +15,7 @@ import {
 } from 'redux-saga/effects';
 import { ISteg, stegConfig } from '../stegConfig';
 import { teksterHent, TeksterTypeKeys } from '../tekster/actions';
+import { ISprak } from '../tekster/types';
 import { appEndreStatus, appSettSteg, AppTypeKeys } from './actions';
 import { pingBackend } from './api';
 import { selectAppSteg } from './selectors';
@@ -22,6 +23,13 @@ import { AppStatus, ILocationChangeAction } from './types';
 
 const redirectTilLogin = () => {
     window.location.href = Environment().loginUrl + '?redirect=' + window.location.href;
+};
+
+const bestemSprakFraParams = (): ISprak => {
+    const sprakParams = new URLSearchParams(window.location.search);
+    const sprak = sprakParams.get('sprak');
+
+    return Object.values(ISprak).includes(sprak) ? (sprak as ISprak) : ISprak.nb;
 };
 
 function* autentiserBruker(): SagaIterator {
@@ -38,7 +46,8 @@ function* autentiserBruker(): SagaIterator {
 function* forsteSidelastSaga(): SagaIterator {
     yield call(autentiserBruker);
 
-    yield put(teksterHent());
+    const sprak = bestemSprakFraParams();
+    yield put(teksterHent(sprak));
 
     yield all([take(TeksterTypeKeys.HENT_OK)]);
 
@@ -54,7 +63,7 @@ function* startAppSaga(): SagaIterator {
 }
 
 function* urlEndretSaga(action: ILocationChangeAction): SagaIterator {
-    /*const appSteg = yield select(selectAppSteg);
+    const appSteg = yield select(selectAppSteg);
     const naavaerendeSide = Object.values(stegConfig).find(
         (side: ISteg) => side.path === action.payload.location.pathname
     );
@@ -68,7 +77,7 @@ function* urlEndretSaga(action: ILocationChangeAction): SagaIterator {
     } else if (naavaerendeSide && naavaerendeSide.stegIndeks < appSteg) {
         yield put(appSettSteg(naavaerendeSide.stegIndeks));
         yield put(replace(naavaerendeSide.path));
-    }*/
+    }
 }
 
 function* tilStegSaga(steg: number) {

@@ -1,38 +1,50 @@
-import { Feltnavn, IFelt, Stegnavn } from './types';
+import {
+    arbeidsforholdFeltnavn,
+    barnehageplassFeltnavn,
+    familieforholdFeltnavn,
+    IFelt,
+    kravTilSokerFeltnavn,
+    minebarnFeltnavn,
+} from './types';
 import {
     harFyltInnFodselsdato,
     harFyltInnFodselsnummer,
     harFyltInnNavn,
+    harSvartBarnehageplassVerdiMedFeilmelding,
     harSvartJaMedFeilmelding,
     harSvartMedFeilmelding,
+    harSvartTekstMedFeilmelding,
     svarUtenValidering,
 } from './validators';
 
-type IValideringsConfig = {
-    [stegnavn in Stegnavn]: { [feltnavn in Feltnavn]: (felt: IFelt) => IFelt }
-};
+interface IValideringsConfig {
+    arbeidsforhold: { [felt in arbeidsforholdFeltnavn]: (felt: IFelt) => IFelt };
+    barnehageplass: { [felt in barnehageplassFeltnavn]: (felt: IFelt) => IFelt };
+    familieforhold: { [felt in familieforholdFeltnavn]: (felt: IFelt) => IFelt };
+    kravTilSoker: { [felt in kravTilSokerFeltnavn]: (felt: IFelt) => IFelt };
+    mineBarn: { [felt in minebarnFeltnavn]: (felt: IFelt) => IFelt };
+}
 
 const valideringsConfig: IValideringsConfig = {
     arbeidsforhold: {
         arbeiderIUtlandetEllerKontinentalsokkel: harSvartMedFeilmelding,
-        arbeiderIUtlandetEllerKontinentalsokkelForklaring: svarUtenValidering,
+        arbeiderIUtlandetEllerKontinentalsokkelForklaring: harSvartTekstMedFeilmelding,
         mottarKontantstotteFraAnnetEOS: harSvartMedFeilmelding,
-        mottarKontantstotteFraAnnetEOSForklaring: svarUtenValidering,
+        mottarKontantstotteFraAnnetEOSForklaring: harSvartTekstMedFeilmelding,
         mottarYtelserFraUtlandet: harSvartMedFeilmelding,
-        mottarYtelserFraUtlandetForklaring: svarUtenValidering,
+        mottarYtelserFraUtlandetForklaring: harSvartTekstMedFeilmelding,
     },
     barnehageplass: {
-        antallTimer: svarUtenValidering,
-        dato: svarUtenValidering,
+        antallTimer: harSvartTekstMedFeilmelding,
+        barnBarnehageplassStatus: harSvartBarnehageplassVerdiMedFeilmelding,
+        dato: harSvartTekstMedFeilmelding,
         harBarnehageplass: harSvartMedFeilmelding,
-        kommune: svarUtenValidering,
+        kommune: harSvartTekstMedFeilmelding,
     },
     familieforhold: {
         annenForelderFodselsnummer: harFyltInnFodselsnummer,
         annenForelderNavn: harFyltInnNavn,
-        annenForelderYrkesaktivINorgeEOSIMinstFemAar: harSvartMedFeilmelding,
         borForeldreneSammenMedBarnet: harSvartMedFeilmelding,
-        erAvklartDeltBosted: harSvartMedFeilmelding,
     },
     kravTilSoker: {
         barnIkkeHjemme: harSvartJaMedFeilmelding,

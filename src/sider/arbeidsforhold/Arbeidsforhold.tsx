@@ -1,19 +1,13 @@
 import * as React from 'react';
-import { connect, Dispatch } from 'react-redux';
-import ValidForm from '../../common/lib/validation/ValidForm';
+import { connect } from 'react-redux';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import SideContainer from '../../component/SideContainer/SideContainer';
-import Submitknapp from '../../component/Submitknapp/Submitknapp';
+import Tilbakeknapp from '../../component/Tilbakeknapp/Tilbakeknapp';
 import { IRootState } from '../../rootReducer';
-import { soknadNesteSteg } from '../../soknad/actions';
 import { selectArbeidsforhold } from '../../soknad/selectors';
 import { IArbeidsforhold, Stegnavn, Svar } from '../../soknad/types';
 
-interface IMapDispatchToProps {
-    nesteSteg: () => void;
-}
-
-type ArbeidsforholdSideProps = IArbeidsforhold & IMapDispatchToProps;
+type ArbeidsforholdSideProps = IArbeidsforhold;
 
 const Arbeidsforhold: React.StatelessComponent<ArbeidsforholdSideProps> = ({
     mottarYtelserFraUtlandet,
@@ -22,12 +16,11 @@ const Arbeidsforhold: React.StatelessComponent<ArbeidsforholdSideProps> = ({
     arbeiderIUtlandetEllerKontinentalsokkelForklaring,
     mottarKontantstotteFraAnnetEOS,
     mottarKontantstotteFraAnnetEOSForklaring,
-    nesteSteg,
 }) => {
     const bolk: Stegnavn = 'arbeidsforhold';
     return (
         <SideContainer>
-            <ValidForm summaryTitle={'Arbeidsforhold'} onSubmit={nesteSteg}>
+            <form>
                 <JaNeiSporsmal
                     bolk={bolk}
                     felt="mottarYtelserFraUtlandet"
@@ -54,8 +47,7 @@ const Arbeidsforhold: React.StatelessComponent<ArbeidsforholdSideProps> = ({
                     harForklaring={true}
                     forklaring={mottarKontantstotteFraAnnetEOSForklaring.verdi}
                 />
-                <Submitknapp label="app.neste" onClick={nesteSteg} />
-            </ValidForm>
+            </form>
         </SideContainer>
     );
 };
@@ -64,13 +56,4 @@ const mapStateToProps = (state: IRootState) => {
     return selectArbeidsforhold(state);
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
-    return {
-        nesteSteg: () => dispatch(soknadNesteSteg()),
-    };
-};
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Arbeidsforhold);
+export default connect(mapStateToProps)(Arbeidsforhold);

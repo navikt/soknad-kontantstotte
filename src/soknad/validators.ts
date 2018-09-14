@@ -1,4 +1,4 @@
-import { IFelt, Svar, ValideringsStatus } from './types';
+import { BarnehageplassVerdier, IFelt, Svar, ValideringsStatus } from './types';
 
 export const harTekstomradeInnhold = (verdi?: string): boolean => {
     return verdi ? verdi.length > 0 : false;
@@ -17,8 +17,9 @@ export const harHuketAvPaCheckbox = (svar: Svar): boolean => {
 };
 
 const ok = (felt: IFelt): IFelt => ({
-    ...felt,
+    feilmeldingsNokkel: '',
     valideringsStatus: ValideringsStatus.OK,
+    verdi: felt.verdi,
 });
 
 const feil = (felt: IFelt, feilmeldingsNokkel: string): IFelt => ({
@@ -31,39 +32,56 @@ const harSvart = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
     return felt.verdi !== Svar.UBESVART ? ok(felt) : feil(felt, feilmeldingsNokkel);
 };
 
+const harSvartBarnehageplassVerdiMedFeilmelding = (felt: IFelt): IFelt => {
+    return felt.verdi !== BarnehageplassVerdier.Ubesvart
+        ? ok(felt)
+        : feil(felt, 'feilmelding.generell.feilmelding');
+};
+
 const harSvartJa = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
     return felt.verdi === Svar.JA ? ok(felt) : feil(felt, feilmeldingsNokkel);
+};
+
+const harSvartTekst = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
+    return felt.verdi.length > 0 ? ok(felt) : feil(felt, feilmeldingsNokkel);
 };
 
 const harFyltInnNavn = (felt: IFelt): IFelt => {
     return felt.verdi.replace(' ', '').length > 0
         ? ok(felt)
-        : feil(felt, 'familieforhold.annenForelder.navn.feilmelding');
+        : feil(felt, 'feilmelding.familieforhold.annenForelder.navn');
 };
 
 const harFyltInnFodselsdato = (felt: IFelt): IFelt => {
     return /^\d{2}.\d{2}.\d{4}/.test(felt.verdi.replace(' ', ''))
         ? ok(felt)
-        : feil(felt, 'feilmelding.mineBarn.fodselsDato');
+        : feil(felt, 'feilmelding.generell.fodselsDato');
 };
 
 const harFyltInnFodselsnummer = (felt: IFelt): IFelt => {
     return /^\d{11}/.test(felt.verdi.replace(' ', ''))
         ? ok(felt)
-        : feil(felt, 'familieforhold.annenForelder.fodselsnummer.feilmelding');
+        : feil(felt, 'feilmelding.familieforhold.annenForelder.fodselsnummer');
 };
 
-const harSvartMedFeilmelding = (felt: IFelt): IFelt => harSvart(felt, 'svar.feilmelding');
-const harSvartJaMedFeilmelding = (felt: IFelt): IFelt =>
-    harSvartJa(felt, 'svar.feilmeldingCheckbox');
+const harSvartMedFeilmelding = (felt: IFelt): IFelt =>
+    harSvart(felt, 'feilmelding.generell.feilmelding');
 
-const svarUtenValidering = (felt: IFelt): IFelt => felt;
+const harSvartJaMedFeilmelding = (felt: IFelt): IFelt =>
+    harSvartJa(felt, 'feilmelding.generell.feilmeldingCheckbox');
+
+const harSvartTekstMedFeilmelding = (felt: IFelt): IFelt =>
+    harSvartTekst(felt, 'feilmelding.generell.feilmelding');
+
+const svarUtenValidering = (felt: IFelt): IFelt => ok(felt);
 
 export {
     harSvart,
     harSvartMedFeilmelding,
+    harSvartBarnehageplassVerdiMedFeilmelding,
     harSvartJa,
     harSvartJaMedFeilmelding,
+    harSvartTekstMedFeilmelding,
     harFyltInnNavn,
     harFyltInnFodselsdato,
     harFyltInnFodselsnummer,

@@ -1,17 +1,35 @@
 import { push } from 'connected-react-router';
 import { SagaIterator } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
-import { appNesteSteg } from '../app/actions';
 import { selectSoknad } from '../soknad/selectors';
+import { selectValgtSprak } from '../tekster/selectors';
 import { InnsendingTypeKeys, sendInnFeilet, sendInnOk } from './actions';
 import { sendInnSoknad } from './api';
 
+function* mapStateToModel(): object {
+    const soknad = yield select(selectSoknad);
+
+    const strippetSoknad = Object.entries(soknad).reduce((acc: object, [stegKey, steg]) => {
+        return {
+            ...acc,
+            [stegKey]: {
+                ...Object.entries(steg).reduce((accFelt: object, [feltKey, felt]) => {
+                    return { ...accFelt, [feltKey]: felt.verdi };
+                }, {}),
+            },
+        };
+    }, {});
+
+    const sprak = yield select(selectValgtSprak);
+    return { ...strippetSoknad, sprak };
+}
+
 function* sendInnSaga(): SagaIterator {
     try {
-        const soknad = yield select(selectSoknad);
+        const soknad = yield call(mapStateToModel);
         yield call(sendInnSoknad, soknad);
         yield put(sendInnOk());
-        yield put(appNesteSteg());
+        yield put(push('/kvittering'));
     } catch (error) {
         yield put(sendInnFeilet());
         yield put(push('/innsending-feilet'));

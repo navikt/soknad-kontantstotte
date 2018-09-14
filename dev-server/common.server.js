@@ -9,7 +9,7 @@ function lesMockFil(filnavn) {
     return fs.readFileSync(path.join(__dirname, '/mock/' + filnavn), 'UTF-8');
 }
 
-app.get('/soknad-kontantstotte-api/api/tekster', function(req, res) {
+app.get('/soknad-kontantstotte-api/api/tekster/nb', function(req, res) {
     setTimeout(() => res.send(lesMockFil('tekster.json')), delayMs);
 });
 

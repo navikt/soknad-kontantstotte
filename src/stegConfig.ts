@@ -3,7 +3,6 @@ import ArbeidsforholdSide from './sider/arbeidsforhold/Arbeidsforhold';
 import BarnehageplassSide from './sider/barnehageplass/Barnehageplass';
 import FamilieforholdSide from './sider/familieforhold/Familieforhold';
 import KravTilSoker from './sider/krav-til-soker/KravTilSoker';
-import Kvittering from './sider/kvittering/Kvittering';
 import MineBarnSide from './sider/mine-barn/MineBarn';
 import OppsummeringSide from './sider/oppsummering/Oppsummering';
 import Veiledning from './sider/veiledning/Veiledning';
@@ -16,7 +15,6 @@ interface IStegConfig {
     barnehageplass: ISteg;
     arbeidsforhold: ISteg;
     oppsummering: ISteg;
-    kvittering: ISteg;
 }
 
 interface ISteg {
@@ -36,13 +34,13 @@ const stegConfig: IStegConfig = {
     },
     kravTilSoker: {
         component: KravTilSoker,
-        key: 'start',
+        key: 'kravTilSoker',
         path: '/start',
         stegIndeks: 1,
     },
     mineBarn: {
         component: MineBarnSide,
-        key: 'mine-barn',
+        key: 'mineBarn',
         path: '/mine-barn',
         stegIndeks: 2,
     },
@@ -69,12 +67,6 @@ const stegConfig: IStegConfig = {
         key: 'oppsummering',
         path: '/oppsummering',
         stegIndeks: 6,
-    },
-    kvittering: {
-        component: Kvittering,
-        key: 'kvittering',
-        path: '/kvittering',
-        stegIndeks: 7,
     },
 };
 /* tslint:enable:object-literal-sort-keys */

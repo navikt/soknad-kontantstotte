@@ -1,11 +1,13 @@
 import { SagaIterator } from 'redux-saga';
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { teksterHentFeilet, teksterHentOk, TeksterTypeKeys } from './actions';
 import { fetchTekster } from './api';
+import { selectValgtSprak } from './selectors';
 
 function* fetchTeksterSaga(): SagaIterator {
     try {
-        const tekster = yield call(fetchTekster);
+        const valgtSprak = yield select(selectValgtSprak);
+        const tekster = yield call(fetchTekster, valgtSprak);
         yield put(teksterHentOk(tekster));
     } catch (err) {
         yield put(teksterHentFeilet());

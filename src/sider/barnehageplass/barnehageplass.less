@@ -1,17 +1,35 @@
-.krav {
+.barnehage {
     max-width: 60rem;
     margin: 0 auto;
-    
-    &__velkomst-melding {
-        margin-bottom: 0px;
+
+    &__ikon {
+        width: 4rem;
+        margin: 0 auto;
     }
 
-    & .skjema__feilomrade--harFeil {
-        box-shadow: unset;
-        padding-bottom: 1rem;
-        margin-bottom: 0;
+    &__sidetittel {
+        margin-top: 1rem;
+        text-align: center;
     }
-    
+
+    &__info {
+        font-size: 1rem;
+        line-height: 1.4rem;
+        margin: 0 auto;
+        max-width: 20rem;
+        padding: .5rem 0 2rem 0;
+        text-align: center;
+    }
+
+    & .skjema__legend {
+        padding-left: .5rem;
+    }
+
+    &__panel {
+        background-color: #e7e9e9;
+        margin: 0 .5rem;
+    }
+
     &__inputPanelGruppe {
         & .inputPanel {
             width: calc(100%/2 - 1rem);
