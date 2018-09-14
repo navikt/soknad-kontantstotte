@@ -58,9 +58,9 @@ interface IArbeidsforhold {
 interface IBarnehageplass {
     readonly harBarnehageplass: IFelt;
     readonly barnBarnehageplassStatus: IFelt;
-    readonly dato: IFelt;
-    readonly kommune: IFelt;
-    readonly antallTimer: IFelt;
+    readonly harBarnehageplassAntallTimer: IFelt;
+    readonly harBarnehageplassDato: IFelt;
+    readonly harBarnehageplassKommune: IFelt;
 }
 
 interface IKravTilSoker {

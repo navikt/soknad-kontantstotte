@@ -29,11 +29,11 @@ const initialState: ISoknadState = {
         mottarYtelserFraUtlandetForklaring: standardStringInitialFelt,
     },
     barnehageplass: {
-        antallTimer: standardStringInitialFelt,
         barnBarnehageplassStatus: standardBarnehageplassVerdiInitialFelt,
-        dato: standardStringInitialFelt,
         harBarnehageplass: standardSvarInitialFelt,
-        kommune: standardStringInitialFelt,
+        harBarnehageplassAntallTimer: standardStringInitialFelt,
+        harBarnehageplassDato: standardStringInitialFelt,
+        harBarnehageplassKommune: standardStringInitialFelt,
     },
     familieforhold: {
         annenForelderFodselsnummer: standardStringInitialFelt,

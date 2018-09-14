@@ -35,11 +35,11 @@ const valideringsConfig: IValideringsConfig = {
         mottarYtelserFraUtlandetForklaring: harSvartTekstMedFeilmelding,
     },
     barnehageplass: {
-        antallTimer: harSvartTekstMedFeilmelding,
         barnBarnehageplassStatus: harSvartBarnehageplassVerdiMedFeilmelding,
-        dato: harSvartTekstMedFeilmelding,
         harBarnehageplass: harSvartMedFeilmelding,
-        kommune: harSvartTekstMedFeilmelding,
+        harBarnehageplassAntallTimer: harSvartTekstMedFeilmelding,
+        harBarnehageplassDato: harSvartTekstMedFeilmelding,
+        harBarnehageplassKommune: harSvartTekstMedFeilmelding,
     },
     familieforhold: {
         annenForelderFodselsnummer: harFyltInnFodselsnummer,
