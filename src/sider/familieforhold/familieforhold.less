@@ -1,0 +1,61 @@
+.familieforhold {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__ikon {
+    width: 4rem;
+  }
+
+  &__tittel {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  &__form {
+    width: 90%;
+  }
+}
+
+@media(min-width: 600px) {
+
+  .familieforhold {
+
+    &__ikon {
+      width: 6.25rem;
+    }
+
+    &__form {
+      width: 65%;
+    }
+
+    &__sporsmaal {
+      margin-top: 1rem;
+
+      & .inputPanelGruppe__inner {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      & .inputPanel {
+        width: 49%;
+        margin: .5rem 0;
+      }
+    }
+  }
+}
+
+@media(min-width: 1200px) {
+
+  .familieforhold {
+
+    &__ikon {
+      width: 6.25rem;
+    }
+
+    &__form {
+      width: 45%;
+    }
+  }
+}
+
