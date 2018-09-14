@@ -64,12 +64,24 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.click('h1');
             actions.executeJS(disableHover);
         })
-        .capture('oppsummering', function(actions) {
+        .capture('utenlandsk-kontantstotte', function(actions) {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
                 window.document.querySelectorAll('[name="mottarYtelserFraUtlandet"]')[1].click();
                 window.document
                     .querySelectorAll('[name="arbeiderIUtlandetEllerKontinentalsokkel"]')[1]
+                    .click();
+            });
+            actions.click('.knapp.knapp--hoved');
+            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.click('h1');
+            actions.executeJS(disableHover);
+        })
+        .capture('oppsummering', function(actions) {
+            actions.executeJS(enableHover);
+            actions.executeJS(function(window) {
+                window.document
+                    .querySelectorAll('[name="mottarKontantstotteFraUtlandet"]')[0]
                     .click();
             });
             actions.click('.knapp.knapp--hoved');
