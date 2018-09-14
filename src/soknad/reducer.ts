@@ -37,7 +37,6 @@ const initialState: ISoknadState = {
     familieforhold: {
         annenForelderFodselsnummer: standardStringInitialFelt,
         annenForelderNavn: standardStringInitialFelt,
-        annenForelderYrkesaktivINorgeEOSIMinstFemAar: standardSvarInitialFelt,
         borForeldreneSammenMedBarnet: standardSvarInitialFelt,
     },
     kravTilSoker: {

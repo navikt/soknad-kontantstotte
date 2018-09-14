@@ -1,3 +1,4 @@
+import * as classNames from 'classnames';
 import Stegindikator from 'nav-frontend-stegindikator/lib/stegindikator';
 import { StegindikatorStegProps } from 'nav-frontend-stegindikator/lib/stegindikator-steg';
 import { Sidetittel } from 'nav-frontend-typografi';
@@ -42,7 +43,7 @@ class SideContainer extends React.Component<Props> {
         const displayTilbakeKnapp = aktivtSteg !== 1;
 
         return (
-            <div className={className}>
+            <div>
                 <Sidetittel className={'side-container__sidetittel'}>
                     <FormattedMessage id={'kontantstotte.tittel'} />
                 </Sidetittel>
@@ -54,7 +55,7 @@ class SideContainer extends React.Component<Props> {
                     aktivtSteg={aktivtSteg - 1} // -1 pga Stegindikator er 0-indeksert
                 />
                 {displayTilbakeKnapp && <Tilbakeknapp posisjon={'oppe'} />}
-                <div className={'side-container__children'}>{children}</div>
+                <div className={classNames('side-container__children', className)}>{children}</div>
                 <Navigasjon />
             </div>
         );

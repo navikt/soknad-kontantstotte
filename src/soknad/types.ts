@@ -42,7 +42,6 @@ interface IFamilieforhold {
     readonly borForeldreneSammenMedBarnet: IFelt;
     readonly annenForelderNavn: IFelt;
     readonly annenForelderFodselsnummer: IFelt;
-    readonly annenForelderYrkesaktivINorgeEOSIMinstFemAar: IFelt;
 }
 
 interface IArbeidsforhold {

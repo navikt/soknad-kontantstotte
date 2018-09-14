@@ -4743,9 +4743,9 @@ nav-frontend-skjema-style@1.0.4:
   version "1.0.4"
   resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-skjema-style/-/nav-frontend-skjema-style-1.0.4.tgz#c8dbde79e84c3f26a66dcc8be23d9fc090a86a6e"
 
-nav-frontend-skjema@1.0.33:
-  version "1.0.33"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-skjema/-/nav-frontend-skjema-1.0.33.tgz#08f82ce3944bc210f7734a8810f0e7368e384819"
+nav-frontend-skjema@1.0.34:
+  version "1.0.34"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-skjema/-/nav-frontend-skjema-1.0.34.tgz#ef1f1ac6c391fa6d306f442356573e46fad9b89c"
 
 nav-frontend-spinner-style@0.2.4:
   version "0.2.4"

@@ -43,7 +43,6 @@ const valideringsConfig: IValideringsConfig = {
     familieforhold: {
         annenForelderFodselsnummer: harFyltInnFodselsnummer,
         annenForelderNavn: harFyltInnNavn,
-        annenForelderYrkesaktivINorgeEOSIMinstFemAar: harSvartMedFeilmelding,
         borForeldreneSammenMedBarnet: harSvartMedFeilmelding,
     },
     kravTilSoker: {
