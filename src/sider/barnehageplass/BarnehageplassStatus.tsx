@@ -65,7 +65,7 @@ const BarnehageplassStatus: React.StatelessComponent<BarnehageplassStatusProps> 
                           },
                           {
                               label: intl.formatMessage({
-                                  id: 'barnehageplass.skalBegynneIBarnehage',
+                                  id: 'barnehageplass.skalSlutteIBarnehage',
                               }),
                               value: BarnehageplassVerdier.skalSlutteIBarnehage,
                           },

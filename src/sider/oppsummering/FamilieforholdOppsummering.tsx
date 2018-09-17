@@ -54,26 +54,6 @@ const FamilieforholdOppsummering: React.StatelessComponent<FamilieforholdOppsumm
                     </ul>
                 </OppsummeringsListeElement>
             )}
-
-            {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA &&
-                familieforhold.annenForelderYrkesaktivINorgeEOSIMinstFemAar.verdi === Svar.JA && (
-                    <OppsummeringsListeElement
-                        tekst={intl.formatMessage({
-                            id:
-                                'oppsummering.familieforhold.annenForelderHarBoddEllerVaertYrkesaktiv',
-                        })}
-                    />
-                )}
-
-            {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA &&
-                familieforhold.annenForelderYrkesaktivINorgeEOSIMinstFemAar.verdi === Svar.NEI && (
-                    <OppsummeringsListeElement
-                        tekst={intl.formatMessage({
-                            id:
-                                'oppsummering.familieforhold.annenForelderHarIkkeBoddEllerVaertYrkesaktiv',
-                        })}
-                    />
-                )}
         </>
     );
 };

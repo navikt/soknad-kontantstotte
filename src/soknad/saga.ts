@@ -177,6 +177,10 @@ function* sjekkValideringForFamilieforhold(stegnavn: Stegnavn) {
     }
 }
 
+function* nullstillNesteStegSaga() {
+    yield put(appSettHarForsoktNesteSteg(false));
+}
+
 function* nesteStegSaga() {
     const appSteg = yield select(selectAppSteg);
     const tilSide: ISteg = Object.values(stegConfig).find(
@@ -207,6 +211,7 @@ function* nesteStegSaga() {
 
 function* soknadSaga() {
     yield takeEvery(SoknadTypeKeys.NESTE_STEG, nesteStegSaga);
+    yield takeEvery(SoknadTypeKeys.NULLSTILL_NESTE_STEG, nullstillNesteStegSaga);
     yield takeEvery(SoknadTypeKeys.VALIDER_STEG, validerSteg);
     yield takeEvery(SoknadTypeKeys.VALIDER_FELT, validerFeltSaga);
 }

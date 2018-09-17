@@ -9,13 +9,14 @@ import { hentFeltMedFeil } from '../../common/utils';
 import Barnehageikon from '../../component/Ikoner/BarnehageIkon';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
-import { soknadValiderFelt } from '../../soknad/actions';
+import { soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
 import { BarnehageplassVerdier, Feltnavn, IBarnehageplass, Svar } from '../../soknad/types';
 import BarnehageplassHarSluttetInfo from './BarnehageplassHarSluttetInfo';
 import BarnehageplassStatus from './BarnehageplassStatus';
 
 interface IMapDispatchToProps {
+    nullstillNesteSteg: () => void;
     settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => void;
     settSvarFelt: (feltnavn: Feltnavn, verdi: Svar) => void;
 }
@@ -31,6 +32,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     barnehageplass,
     harForsoktNesteSteg,
     intl,
+    nullstillNesteSteg,
     settBarnehageplassVerdiFelt,
     settSvarFelt,
 }) => {
@@ -62,6 +64,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                             'barnBarnehageplassStatus' as Feltnavn,
                             BarnehageplassVerdier.Ubesvart
                         );
+                        nullstillNesteSteg();
                     }}
                     checked={harBarnehageplass.verdi}
                     radios={[
@@ -96,6 +99,9 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
+        nullstillNesteSteg: () => {
+            dispatch(soknadNullstillNesteSteg());
+        },
         settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => {
             dispatch(soknadValiderFelt('barnehageplass', feltnavn, verdi));
         },

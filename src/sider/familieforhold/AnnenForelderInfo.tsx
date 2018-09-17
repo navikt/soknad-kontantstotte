@@ -1,13 +1,13 @@
 import { Input } from 'nav-frontend-skjema';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { IFeltFeil } from '../../common/lib/validation/types';
-import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
-import { IFamilieforhold, Svar } from '../../soknad/types';
+import { hentFeltMedFeil } from '../../common/utils';
+import SoknadPanel from '../../component/SoknadPanel/SoknadPanel';
+import { IFamilieforhold } from '../../soknad/types';
 
 interface IProps {
     familieforhold: IFamilieforhold;
-    feltMedFeil: IFeltFeil;
+    harForsoktNesteSteg: boolean;
     settAnnenForelderNavn: (navn: string) => void;
     settAnnenForelderFodselsnummer: (personnummer: string) => void;
 }
@@ -15,15 +15,15 @@ interface IProps {
 type AnnenForelderInfoProps = IProps & InjectedIntlProps;
 
 const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
-    feltMedFeil,
     familieforhold,
     intl,
+    harForsoktNesteSteg,
     settAnnenForelderNavn,
     settAnnenForelderFodselsnummer,
 }) => {
+    const feltMedFeil = hentFeltMedFeil(familieforhold, harForsoktNesteSteg, intl);
     return (
-        <div>
-            <h3>{intl.formatMessage({ id: 'familieforhold.annenForelder.tittel' })}</h3>
+        <SoknadPanel>
             <Input
                 name="annenForelder.navn"
                 label={intl.formatMessage({
@@ -32,7 +32,7 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
                 onBlur={(event: React.SyntheticEvent<EventTarget>) => {
                     settAnnenForelderNavn((event.target as HTMLInputElement).value);
                 }}
-                defaultValue={familieforhold.annenForelderNavn.verdi || ''}
+                defaultValue={familieforhold.annenForelderNavn.verdi}
                 feil={feltMedFeil.annenForelderNavn}
             />
             <Input
@@ -43,21 +43,10 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
                 onBlur={(event: React.SyntheticEvent<EventTarget>) => {
                     settAnnenForelderFodselsnummer((event.target as HTMLInputElement).value);
                 }}
-                defaultValue={familieforhold.annenForelderFodselsnummer.verdi || ''}
+                defaultValue={familieforhold.annenForelderFodselsnummer.verdi}
                 feil={feltMedFeil.annenForelderFodselsnummer}
             />
-
-            <JaNeiSporsmal
-                bolk="familieforhold"
-                felt="annenForelderYrkesaktivINorgeEOSIMinstFemAar"
-                sporsmalNokkel="familieforhold.annenForelderYrkesaktivINorgeEOSIMinstFemAar.sporsmal"
-                verdi={familieforhold.annenForelderYrkesaktivINorgeEOSIMinstFemAar.verdi as Svar}
-            />
-
-            {familieforhold.annenForelderYrkesaktivINorgeEOSIMinstFemAar.verdi === Svar.NEI && (
-                <div> Kan ikke gå videre, må gi beskjed om å søke på papir etc etc</div>
-            )}
-        </div>
+        </SoknadPanel>
     );
 };
 
