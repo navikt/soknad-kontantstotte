@@ -160,7 +160,17 @@ function* sjekkValideringForBarnehageplass(stegnavn: Stegnavn) {
                 return;
 
             case BarnehageplassVerdier.skalSlutteIBarnehage:
-                return;
+                if (
+                    soknadState[stegnavn]['skalSlutteIBarnehageKommune' as Stegnavn].verdi.length >
+                        0 &&
+                    soknadState[stegnavn]['skalSlutteIBarnehageDato' as Stegnavn].verdi.length >
+                        0 &&
+                    soknadState[stegnavn]['skalSlutteIBarnehageAntallTimer' as Stegnavn].verdi
+                        .length > 0
+                ) {
+                    return;
+                }
+                break;
 
             case BarnehageplassVerdier.harSluttetIBarnehage:
                 if (

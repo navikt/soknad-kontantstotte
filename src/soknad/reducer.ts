@@ -34,6 +34,9 @@ const initialState: ISoknadState = {
         harSluttetIBarnehageAntallTimer: standardStringInitialFelt,
         harSluttetIBarnehageDato: standardStringInitialFelt,
         harSluttetIBarnehageKommune: standardStringInitialFelt,
+        skalSlutteIBarnehageAntallTimer: standardStringInitialFelt,
+        skalSlutteIBarnehageDato: standardStringInitialFelt,
+        skalSlutteIBarnehageKommune: standardStringInitialFelt,
     },
     familieforhold: {
         annenForelderFodselsnummer: standardStringInitialFelt,

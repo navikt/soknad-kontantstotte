@@ -60,6 +60,9 @@ interface IBarnehageplass {
     readonly harSluttetIBarnehageAntallTimer: IFelt;
     readonly harSluttetIBarnehageDato: IFelt;
     readonly harSluttetIBarnehageKommune: IFelt;
+    readonly skalSlutteIBarnehageAntallTimer: IFelt;
+    readonly skalSlutteIBarnehageDato: IFelt;
+    readonly skalSlutteIBarnehageKommune: IFelt;
 }
 
 interface IKravTilSoker {

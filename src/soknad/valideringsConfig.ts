@@ -40,6 +40,9 @@ const valideringsConfig: IValideringsConfig = {
         harSluttetIBarnehageAntallTimer: harSvartTekstMedFeilmelding,
         harSluttetIBarnehageDato: harSvartTekstMedFeilmelding,
         harSluttetIBarnehageKommune: harSvartTekstMedFeilmelding,
+        skalSlutteIBarnehageAntallTimer: harSvartTekstMedFeilmelding,
+        skalSlutteIBarnehageDato: harSvartTekstMedFeilmelding,
+        skalSlutteIBarnehageKommune: harSvartTekstMedFeilmelding,
     },
     familieforhold: {
         annenForelderFodselsnummer: harFyltInnFodselsnummer,
