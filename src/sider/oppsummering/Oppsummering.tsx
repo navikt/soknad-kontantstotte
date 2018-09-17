@@ -25,9 +25,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({ soknad 
             </h3>
 
             <SoknadPanel>
-                <PersonaliaOppsummering
-                    person={{ navn: 'Rebecca Navnssen', fodselsnummer: '***REMOVED***' }}
-                />
+                <PersonaliaOppsummering person={{ navn: '', fodselsnummer: '' }} />
                 <KravTilSokerOppsummering />
                 <BarnOppsummering barn={soknad.mineBarn} />
                 <BarnehageplassOppsummering barnehageplass={soknad.barnehageplass} />
