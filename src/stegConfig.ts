@@ -5,7 +5,7 @@ import FamilieforholdSide from './sider/familieforhold/Familieforhold';
 import KravTilSoker from './sider/krav-til-soker/KravTilSoker';
 import MineBarnSide from './sider/mine-barn/MineBarn';
 import OppsummeringSide from './sider/oppsummering/Oppsummering';
-import utenlandskeYtelser from './sider/utenlandske-ytelser/utenlandskeYtelser';
+import UtenlandskeYtelser from './sider/utenlandske-ytelser/UtenlandskeYtelser';
 import Veiledning from './sider/veiledning/Veiledning';
 
 interface IStegConfig {
@@ -65,7 +65,7 @@ const stegConfig: IStegConfig = {
         stegIndeks: 5,
     },
     utenlandskeYtelser: {
-        component: utenlandskeYtelser,
+        component: UtenlandskeYtelser,
         key: 'utenlandskeYtelser',
         path: '/utenlandske-ytelser',
         stegIndeks: 6,
