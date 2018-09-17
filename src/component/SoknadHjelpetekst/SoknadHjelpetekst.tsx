@@ -1,17 +1,7 @@
-import * as classNames from 'classnames';
-import Ikon from 'nav-frontend-ikoner-assets';
 import Modal from 'nav-frontend-modal';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
-
-export interface IAnchorProps {
-    className?: string;
-    hover?: boolean;
-}
-
-const Anchor: React.StatelessComponent<IAnchorProps> = ({ className, hover }) => (
-    <Ikon kind={hover ? 'help-circle_hover' : 'help-circle'} className={className} />
-);
+import Anchor from './Anchor';
 
 interface ISoknadHjelpetekstState {
     modalIsOpen: boolean;
