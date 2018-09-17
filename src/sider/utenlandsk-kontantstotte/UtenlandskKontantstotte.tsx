@@ -10,6 +10,7 @@ import { IUtenlandskKontantstotte, Svar } from '../../soknad/types';
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import { hentFeltMedFeil } from '../../common/utils';
 import { selectUtenlandskKontantstotte } from '../../soknad/selectors';
+import UtenlandskeYtelserIkon from '../../component/Ikoner/UtenlandskeYtelserIkon';
 
 interface IMapStateToProps {
     utenlandskKontantstotte: IUtenlandskKontantstotte;
@@ -33,14 +34,11 @@ const UtenlandskKontantstotte: React.StatelessComponent<UtenlandskKontantstotteS
     const feltMedFeil = hentFeltMedFeil(utenlandskKontantstotte, harForsoktNesteSteg, intl);
 
     return (
-        <SideContainer className={'utenlandsk-kontantstotte'}>
-            <div className={'utenlandsk-kontantstotte__ikon'}>
-                <FlaskeIkon />
-            </div>
+        <SideContainer
+            ikon={<FlaskeIkon />}
+            tittel={intl.formatMessage({ id: 'utenlandskKontantstotte.tittel' })}
+        >
             <form className={'utenlandsk-kontantstotte__form'}>
-                <h3 className={'typo-innholdstittel utenlandsk-kontantstotte__tittel'}>
-                    <FormattedMessage id={'utenlandskKontantstotte.tittel'} />
-                </h3>
                 <RadioPanelGruppe
                     legend={intl.formatMessage({
                         id: 'utenlandskKontantstotte.mottarKontantstotteFraUtlandet.sporsmal',
