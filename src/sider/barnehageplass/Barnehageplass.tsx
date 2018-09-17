@@ -12,6 +12,7 @@ import { IRootState } from '../../rootReducer';
 import { soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
 import { BarnehageplassVerdier, Feltnavn, IBarnehageplass, Svar } from '../../soknad/types';
+import BarnehageplassHarSluttetInfo from './BarnehageplassHarSluttetInfo';
 import BarnehageplassStatus from './BarnehageplassStatus';
 import HarBarnehageplassInfo from './HarBarnehageplassInfo';
 
@@ -82,6 +83,14 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                             intl={intl}
                             settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
                         />
+                        {barnBarnehageplassStatus.verdi ===
+                            BarnehageplassVerdier.harSluttetIBarnehage && (
+                            <BarnehageplassHarSluttetInfo
+                                intl={intl}
+                                feltMedFeil={feltMedFeil}
+                                settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
+                            />
+                        )}
 
                         {barnBarnehageplassStatus.verdi ===
                             BarnehageplassVerdier.harBarnehageplass && (

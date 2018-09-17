@@ -34,6 +34,9 @@ const initialState: ISoknadState = {
         harBarnehageplassAntallTimer: standardStringInitialFelt,
         harBarnehageplassDato: standardStringInitialFelt,
         harBarnehageplassKommune: standardStringInitialFelt,
+        harSluttetIBarnehageAntallTimer: standardStringInitialFelt,
+        harSluttetIBarnehageDato: standardStringInitialFelt,
+        harSluttetIBarnehageKommune: standardStringInitialFelt,
     },
     familieforhold: {
         annenForelderFodselsnummer: standardStringInitialFelt,

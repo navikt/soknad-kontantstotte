@@ -47,6 +47,29 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                 })}
             />
             {barnehageplass.barnBarnehageplassStatus.verdi ===
+                BarnehageplassVerdier.harSluttetIBarnehage && (
+                <>
+                    <OppsummeringSporsmalSvar
+                        sporsmal={intl.formatMessage({
+                            id: 'barnehageplass.harSluttetIBarnehage.dato.sporsmal',
+                        })}
+                        svar={barnehageplass.harSluttetIBarnehageDato.verdi}
+                    />
+                    <OppsummeringSporsmalSvar
+                        sporsmal={intl.formatMessage({
+                            id: 'barnehageplass.harSluttetIBarnehage.kommune.sporsmal',
+                        })}
+                        svar={barnehageplass.harSluttetIBarnehageKommune.verdi}
+                    />
+                    <OppsummeringSporsmalSvar
+                        sporsmal={intl.formatMessage({
+                            id: 'barnehageplass.harSluttetIBarnehage.antallTimer.sporsmal',
+                        })}
+                        svar={barnehageplass.harSluttetIBarnehageAntallTimer.verdi}
+                    />
+                </>
+            )}
+            {barnehageplass.barnBarnehageplassStatus.verdi ===
                 BarnehageplassVerdier.harBarnehageplass && (
                 <>
                     <OppsummeringSporsmalSvar
