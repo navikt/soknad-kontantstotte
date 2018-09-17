@@ -147,12 +147,19 @@ function* sjekkValideringForBarnehageplass(stegnavn: Stegnavn) {
     const soknadState = yield select(selectSoknad);
 
     if (
-        soknadState[stegnavn]['harBarnehageplass' as Stegnavn].verdi !== Svar.UBESVART &&
-        soknadState[stegnavn]['barnBarnehageplassStatus' as Stegnavn].verdi !==
-            BarnehageplassVerdier.Ubesvart &&
+        soknadState[stegnavn]['barnBarnehageplassStatus' as Stegnavn].verdi ===
+            BarnehageplassVerdier.harSluttetIBarnehage &&
         soknadState[stegnavn]['harSluttetIBarnehageKommune' as Stegnavn].verdi.length > 0 &&
         soknadState[stegnavn]['harSluttetIBarnehageDato' as Stegnavn].verdi.length > 0 &&
         soknadState[stegnavn]['harSluttetIBarnehageAntallTimer' as Stegnavn].verdi.length > 0
+    ) {
+        return;
+    }
+
+    if (
+        soknadState[stegnavn]['harBarnehageplass' as Stegnavn].verdi !== Svar.UBESVART &&
+        soknadState[stegnavn]['barnBarnehageplassStatus' as Stegnavn].verdi !==
+            BarnehageplassVerdier.Ubesvart
     ) {
         return;
     } else {
