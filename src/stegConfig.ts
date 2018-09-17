@@ -6,6 +6,7 @@ import UtenlandskKontantstotteSide from './sider/utenlandsk-kontantstotte/Utenla
 import KravTilSoker from './sider/krav-til-soker/KravTilSoker';
 import MineBarnSide from './sider/mine-barn/MineBarn';
 import OppsummeringSide from './sider/oppsummering/Oppsummering';
+import UtenlandskeYtelser from './sider/utenlandske-ytelser/UtenlandskeYtelser';
 import Veiledning from './sider/veiledning/Veiledning';
 
 interface IStegConfig {
@@ -16,6 +17,7 @@ interface IStegConfig {
     utenlandskKontantstotte: ISteg;
     barnehageplass: ISteg;
     arbeidsforhold: ISteg;
+    utenlandskeYtelser: ISteg;
     oppsummering: ISteg;
 }
 
@@ -64,17 +66,23 @@ const stegConfig: IStegConfig = {
         path: '/arbeidsforhold',
         stegIndeks: 5,
     },
+    utenlandskeYtelser: {
+        component: UtenlandskeYtelser,
+        key: 'utenlandskeYtelser',
+        path: '/utenlandske-ytelser',
+        stegIndeks: 6,
+    },
     utenlandskKontantstotte: {
         component: UtenlandskKontantstotteSide,
         key: 'utenlandskKontantstotte',
         path: '/utenlandsk-kontantstotte',
-        stegIndeks: 6,
+        stegIndeks: 7,
     },
     oppsummering: {
         component: OppsummeringSide,
         key: 'oppsummering',
         path: '/oppsummering',
-        stegIndeks: 7,
+        stegIndeks: 8,
     },
 };
 /* tslint:enable:object-literal-sort-keys */

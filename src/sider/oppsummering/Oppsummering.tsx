@@ -11,6 +11,7 @@ import FamilieforholdOppsummering from './FamilieforholdOppsummering';
 import KravTilSokerOppsummering from './KravTilSokerOppsummering';
 import PersonaliaOgBarnOppsummering from './PersonaliaOgBarnOppsummering';
 import UtenlandskKontantstotteOppsummering from './UtenlandskKontantstotteOppsummering';
+import UtenlandskeYtelserOppsummering from './UtenlandskeYtelserOppsummering';
 
 interface IMapStateToProps {
     soknad: ISoknadState;
@@ -31,6 +32,11 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({ intl, s
                 <FamilieforholdOppsummering intl={intl} familieforhold={soknad.familieforhold} />
                 <BarnehageplassOppsummering intl={intl} barnehageplass={soknad.barnehageplass} />
                 <ArbeidsforholdOppsummering intl={intl} arbeidsforhold={soknad.arbeidsforhold} />
+                <UtenlandskeYtelserOppsummering
+                    intl={intl}
+                    familieforhold={soknad.familieforhold}
+                    utenlandskeYtelser={soknad.utenlandskeYtelser}
+                />
                 <UtenlandskKontantstotteOppsummering
                     intl={intl}
                     utenlandskKontantstotte={soknad.utenlandskKontantstotte}
