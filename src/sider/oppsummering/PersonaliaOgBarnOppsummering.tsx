@@ -23,7 +23,7 @@ const PersonaliaOgBarnOppsummering: React.StatelessComponent<PersonaliaOgBarnPro
             <br />
             <Element>{barnet.navn.verdi}</Element>
             <Normaltekst>
-                <FormattedMessage id="oppsummering.fodselsnummer.label" />
+                <FormattedMessage id="oppsummering.fodselsdato.label" />
                 {barnet.fodselsdato.verdi}
             </Normaltekst>
             <br />
