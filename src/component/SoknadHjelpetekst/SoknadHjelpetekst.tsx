@@ -1,6 +1,6 @@
 import Modal from 'nav-frontend-modal';
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import Anchor from './Anchor';
 
 interface ISoknadHjelpetekstState {
@@ -12,6 +12,7 @@ interface ISoknadHjelpetekstProps {
     hjelpetekstNokkel: string;
     className?: string;
     modalClassName?: string;
+    hjelpetekstErHtml?: boolean;
 }
 
 type SoknadHjelpetekstProps = ISoknadHjelpetekstProps & InjectedIntlProps;
@@ -29,7 +30,13 @@ class SoknadHjelpetekst extends React.Component<SoknadHjelpetekstProps, ISoknadH
     }
 
     public render() {
-        const { intl, hjelpetekstNokkel, className, modalClassName } = this.props;
+        const {
+            intl,
+            hjelpetekstNokkel,
+            className,
+            modalClassName,
+            hjelpetekstErHtml,
+        } = this.props;
         return (
             <div className={className}>
                 <button
@@ -48,7 +55,11 @@ class SoknadHjelpetekst extends React.Component<SoknadHjelpetekstProps, ISoknadH
                     className={modalClassName}
                 >
                     <p>
-                        <FormattedMessage id={hjelpetekstNokkel} />
+                        {hjelpetekstErHtml ? (
+                            <FormattedHTMLMessage id={hjelpetekstNokkel} />
+                        ) : (
+                            <FormattedMessage id={hjelpetekstNokkel} />
+                        )}
                     </p>
                 </Modal>
             </div>

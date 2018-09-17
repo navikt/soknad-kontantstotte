@@ -49,7 +49,7 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
                     </h3>
                     <SoknadHjelpetekst
                         className={'familieforhold__hjelpetekst'}
-                        modalClassName={'familieforhold__hjelpetekst__modal'}
+                        modalClassName={'familieforhold__modal'}
                         hjelpetekstNokkel={
                             'familieforhold.borForeldreneSammenMedBarnet.hjelpetekst'
                         }

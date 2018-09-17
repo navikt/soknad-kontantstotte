@@ -8,6 +8,7 @@ import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { hentFeltMedFeil } from '../../common/utils';
 import Barnehageikon from '../../component/Ikoner/BarnehageIkon';
 import SideContainer from '../../component/SideContainer/SideContainer';
+import SoknadHjelpetekst from '../../component/SoknadHjelpetekst/SoknadHjelpetekst';
 import { IRootState } from '../../rootReducer';
 import { soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
@@ -44,9 +45,17 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
             <div className={'barnehage__ikon'}>
                 <Barnehageikon />
             </div>
-            <h3 className={'typo-innholdstittel barnehage__sidetittel'}>
-                {intl.formatMessage({ id: 'barnehageplass.tittel' })}
-            </h3>
+            <div className={'barnehage__tittelcontainer'}>
+                <h3 className={'typo-innholdstittel barnehage__sidetittel'}>
+                    {intl.formatMessage({ id: 'barnehageplass.tittel' })}
+                </h3>
+                <SoknadHjelpetekst
+                    className={'familieforhold__hjelpetekst'}
+                    modalClassName={'familieforhold__modal'}
+                    hjelpetekstNokkel={'barnehageplass.hjelpetekst'}
+                    hjelpetekstErHtml={true}
+                />
+            </div>
             <p className={classNames('typo-ingress', 'barnehage__info')}>
                 {intl.formatMessage({ id: 'barnehageplass.ingress' })}
             </p>

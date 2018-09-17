@@ -7,9 +7,33 @@
         margin: 0 auto;
     }
 
-    &__sidetittel {
+    &__tittelcontainer {
         margin-top: 1rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__sidetittel {
         text-align: center;
+    }
+
+    &__hjelpetekst {
+        width: 1.5rem;
+        margin-top: auto;
+        margin-left: 0.75rem;
+    }
+
+
+    &__modal {
+        width: 90%;
+
+        @media (min-width: 600px) {
+            width: 70%;
+        }
+
+        @media (min-width: 1200px) {
+            width: 55%;
+        }
     }
 
     &__info {
