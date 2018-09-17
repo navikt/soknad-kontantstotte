@@ -43,6 +43,7 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({ navn, nesteSteg
                     <Veilederikon morkBakgrunn={true} />
                 </Veileder>
             </div>
+
             <Sidetittel className={'veiledning__sidetittel'}>
                 <FormattedMessage id={'kontantstotte.tittel'} />
             </Sidetittel>

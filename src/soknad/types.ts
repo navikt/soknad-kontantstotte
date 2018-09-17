@@ -5,10 +5,11 @@ enum Svar {
 }
 
 enum BarnehageplassVerdier {
-    Nei = 'Nei',
-    NeiHarFaatt = 'NeiHarFaatt',
-    Ja = 'Ja',
-    JaSkalSlutte = 'JaSkalSlutte',
+    garIkkeIBarnehage = 'garIkkeIBarnehage',
+    harBarnehageplass = 'harBarnehageplass',
+    harSluttetIBarnehage = 'harSluttetIBarnehage',
+    skalBegynneIBarnehage = 'skalBegynneIBarnehage',
+    skalSlutteIBarnehage = 'skalSlutteIBarnehage',
     Ubesvart = 'Ubesvart',
 }
 
@@ -58,9 +59,10 @@ interface IArbeidsforhold {
 
 interface IBarnehageplass {
     readonly harBarnehageplass: IFelt;
-    readonly dato: IFelt;
-    readonly kommune: IFelt;
-    readonly antallTimer: IFelt;
+    readonly barnBarnehageplassStatus: IFelt;
+    readonly harSluttetIBarnehageAntallTimer: IFelt;
+    readonly harSluttetIBarnehageDato: IFelt;
+    readonly harSluttetIBarnehageKommune: IFelt;
 }
 
 interface IKravTilSoker {

@@ -35,7 +35,7 @@ const harSvart = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
 const harSvartBarnehageplassVerdiMedFeilmelding = (felt: IFelt): IFelt => {
     return felt.verdi !== BarnehageplassVerdier.Ubesvart
         ? ok(felt)
-        : feil(felt, 'feilmelding.generell.fodselsDato');
+        : feil(felt, 'feilmelding.generell.feilmelding');
 };
 
 const harSvartJa = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
