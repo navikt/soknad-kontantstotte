@@ -49,6 +49,7 @@ interface IFamilieforhold {
 
 interface IUtenlandskKontantstotte {
     readonly mottarKontantstotteFraUtlandet: IFelt;
+    readonly mottarKontantstotteFraUtlandetTilleggsinfo: IFelt;
 }
 
 interface IArbeidsforhold {

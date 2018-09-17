@@ -2,10 +2,10 @@ import * as React from 'react';
 import ArbeidsforholdSide from './sider/arbeidsforhold/Arbeidsforhold';
 import BarnehageplassSide from './sider/barnehageplass/Barnehageplass';
 import FamilieforholdSide from './sider/familieforhold/Familieforhold';
-import UtenlandskKontantstotteSide from './sider/utenlandsk-kontantstotte/UtenlandskKontantstotte';
 import KravTilSoker from './sider/krav-til-soker/KravTilSoker';
 import MineBarnSide from './sider/mine-barn/MineBarn';
 import OppsummeringSide from './sider/oppsummering/Oppsummering';
+import UtenlandskKontantstotteSide from './sider/utenlandsk-kontantstotte/UtenlandskKontantstotte';
 import UtenlandskeYtelser from './sider/utenlandske-ytelser/UtenlandskeYtelser';
 import Veiledning from './sider/veiledning/Veiledning';
 

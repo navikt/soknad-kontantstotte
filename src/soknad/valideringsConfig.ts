@@ -60,14 +60,15 @@ const valideringsConfig: IValideringsConfig = {
         fodselsdato: harFyltInnFodselsdato,
         navn: harFyltInnNavn,
     },
+    utenlandskKontantstotte: {
+        mottarKontantstotteFraUtlandet: harSvartMedFeilmelding,
+        mottarKontantstotteFraUtlandetTilleggsinfo: harSvartTekstMedFeilmelding,
+    },
     utenlandskeYtelser: {
         mottarAnnenForelderYtelserFraUtland: harSvartMedFeilmelding,
         mottarAnnenForelderYtelserFraUtlandForklaring: harSvartTekstMedFeilmelding,
         mottarYtelserFraUtland: harSvartMedFeilmelding,
         mottarYtelserFraUtlandForklaring: harSvartTekstMedFeilmelding,
-    },
-    utenlandskKontantstotte: {
-        mottarKontantstotteFraUtlandet: harSvartMedFeilmelding,
     },
 };
 

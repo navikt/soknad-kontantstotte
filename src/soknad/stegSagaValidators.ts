@@ -5,6 +5,7 @@ import {
     IFamilieforhold,
     IFelt,
     IUtenlandskeYtelser,
+    IUtenlandskKontantstotte,
     Stegnavn,
     Svar,
     ValideringsStatus,
@@ -114,10 +115,28 @@ function* sjekkValideringForUtenlandskeYtelser(
     return harFeil;
 }
 
+function* sjekkValideringForUtenlandskKontantstotte(
+    utenlandskKontantstotte: IUtenlandskKontantstotte
+) {
+    let harFeil =
+        utenlandskKontantstotte.mottarKontantstotteFraUtlandet.valideringsStatus !==
+        ValideringsStatus.OK;
+
+    if (utenlandskKontantstotte.mottarKontantstotteFraUtlandet.verdi === Svar.JA) {
+        harFeil =
+            harFeil ||
+            utenlandskKontantstotte.mottarKontantstotteFraUtlandetTilleggsinfo.valideringsStatus !==
+                ValideringsStatus.OK;
+    }
+
+    return harFeil;
+}
+
 export {
     sjekkValideringForSteg,
     sjekkValideringForArbeidsforhold,
     sjekkValideringForBarnehageplass,
     sjekkValideringForFamilieforhold,
     sjekkValideringForUtenlandskeYtelser,
+    sjekkValideringForUtenlandskKontantstotte,
 };

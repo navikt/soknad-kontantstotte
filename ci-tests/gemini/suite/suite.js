@@ -72,9 +72,6 @@ gemini.suite('soknad-kontantstotte', suite => {
                 window.document
                     .querySelectorAll('[name="arbeiderIUtlandetEllerKontinentalsokkel"]')[1]
                     .click();
-                window.document
-                    .querySelectorAll('[name="mottarKontantstotteFraAnnetEOS"]')[1]
-                    .click();
             });
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
@@ -84,10 +81,7 @@ gemini.suite('soknad-kontantstotte', suite => {
         .capture('utenlandsk-kontantstotte', function(actions) {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
-                window.document.querySelectorAll('[name="mottarYtelserFraUtlandet"]')[1].click();
-                window.document
-                    .querySelectorAll('[name="arbeiderIUtlandetEllerKontinentalsokkel"]')[1]
-                    .click();
+                window.document.querySelectorAll('[name="mottarYtelserFraUtland"]')[1].click();
             });
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
@@ -98,7 +92,7 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
                 window.document
-                    .querySelectorAll('[name="mottarKontantstotteFraUtlandet"]')[0]
+                    .querySelectorAll('[name="mottarKontantstotteFraUtlandet"]')[1]
                     .click();
             });
             actions.click('.knapp.knapp--hoved');

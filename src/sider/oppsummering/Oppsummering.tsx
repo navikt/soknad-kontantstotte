@@ -10,8 +10,8 @@ import BarnehageplassOppsummering from './BarnehageplassOppsummering';
 import FamilieforholdOppsummering from './FamilieforholdOppsummering';
 import KravTilSokerOppsummering from './KravTilSokerOppsummering';
 import PersonaliaOgBarnOppsummering from './PersonaliaOgBarnOppsummering';
-import UtenlandskKontantstotteOppsummering from './UtenlandskKontantstotteOppsummering';
 import UtenlandskeYtelserOppsummering from './UtenlandskeYtelserOppsummering';
+import UtenlandskKontantstotteOppsummering from './UtenlandskKontantstotteOppsummering';
 
 interface IMapStateToProps {
     soknad: ISoknadState;

@@ -1,16 +1,16 @@
+import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
+import { hentFeltMedFeil } from '../../common/utils';
 import FlaskeIkon from '../../component/Ikoner/FlaskeIkon';
 import SideContainer from '../../component/SideContainer/SideContainer';
+import TilleggsinformasjonInput from '../../component/TilleggsinformasjonInput/TilleggsinformasjonInput';
 import { IRootState } from '../../rootReducer';
-import { soknadNesteSteg, soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
-import { IUtenlandskKontantstotte, Svar } from '../../soknad/types';
-import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
-import { hentFeltMedFeil } from '../../common/utils';
+import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectUtenlandskKontantstotte } from '../../soknad/selectors';
-import UtenlandskeYtelserIkon from '../../component/Ikoner/UtenlandskeYtelserIkon';
+import { Feltnavn, IUtenlandskKontantstotte, Svar } from '../../soknad/types';
 
 interface IMapStateToProps {
     utenlandskKontantstotte: IUtenlandskKontantstotte;
@@ -19,7 +19,8 @@ interface IMapStateToProps {
 
 interface IMapDispatchToProps {
     nesteSteg: () => void;
-    settMottarKontantstotteFraUtlandet: (verdi: Svar) => void;
+    settSvar: (feltnavn: Feltnavn, verdi: Svar) => void;
+    settTekstSvar: (feltnavn: Feltnavn, verdi: string) => void;
 }
 
 type UtenlandskKontantstotteSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
@@ -27,10 +28,16 @@ type UtenlandskKontantstotteSideProps = IMapStateToProps & IMapDispatchToProps &
 const UtenlandskKontantstotte: React.StatelessComponent<UtenlandskKontantstotteSideProps> = ({
     utenlandskKontantstotte,
     harForsoktNesteSteg,
-    settMottarKontantstotteFraUtlandet,
+    settSvar,
+    settTekstSvar,
     nesteSteg,
     intl,
 }) => {
+    const {
+        mottarKontantstotteFraUtlandet,
+        mottarKontantstotteFraUtlandetTilleggsinfo,
+    } = utenlandskKontantstotte;
+
     const feltMedFeil = hentFeltMedFeil(utenlandskKontantstotte, harForsoktNesteSteg, intl);
 
     return (
@@ -38,23 +45,39 @@ const UtenlandskKontantstotte: React.StatelessComponent<UtenlandskKontantstotteS
             ikon={<FlaskeIkon />}
             tittel={intl.formatMessage({ id: 'utenlandskKontantstotte.tittel' })}
         >
-            <form className={'utenlandsk-kontantstotte__form'}>
+            <form>
                 <RadioPanelGruppe
                     legend={intl.formatMessage({
                         id: 'utenlandskKontantstotte.mottarKontantstotteFraUtlandet.sporsmal',
                     })}
                     name={'mottarKontantstotteFraUtlandet'}
-                    className={'utenlandsk-kontantstotte__sporsmaal'}
+                    className={'soknad__inputPanelGruppe'}
                     onChange={(evt: {}, value: string) => {
-                        settMottarKontantstotteFraUtlandet(value as Svar);
+                        settSvar('mottarKontantstotteFraUtlandet', value as Svar);
                     }}
-                    checked={utenlandskKontantstotte.mottarKontantstotteFraUtlandet.verdi}
+                    checked={mottarKontantstotteFraUtlandet.verdi}
                     radios={[
                         { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                         { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
                     ]}
                     feil={feltMedFeil.mottarKontantstotteFraUtlandet}
                 />
+                {mottarKontantstotteFraUtlandet.verdi === Svar.JA && (
+                    <TilleggsinformasjonInput
+                        label={intl.formatMessage({
+                            id:
+                                'utenlandskKontantstotte.mottarKontantstotteFraUtlandet.tilleggsinfo.sporsmal',
+                        })}
+                        defaultValue={mottarKontantstotteFraUtlandetTilleggsinfo}
+                        onBlur={(value: string) => {
+                            settTekstSvar(
+                                'mottarKontantstotteFraUtlandetTilleggsinfo',
+                                value as string
+                            );
+                        }}
+                        feil={feltMedFeil.mottarKontantstotteFraUtlandetTilleggsinfo}
+                    />
+                )}
             </form>
         </SideContainer>
     );
@@ -70,14 +93,11 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         nesteSteg: () => dispatch(soknadNesteSteg()),
-        settMottarKontantstotteFraUtlandet: (verdi: Svar) => {
-            dispatch(
-                soknadValiderFelt(
-                    'utenlandskKontantstotte',
-                    'mottarKontantstotteFraUtlandet',
-                    verdi
-                )
-            );
+        settSvar: (feltnavn: Feltnavn, verdi: Svar) => {
+            dispatch(soknadValiderFelt('utenlandskKontantstotte', feltnavn, verdi));
+        },
+        settTekstSvar: (feltnavn: Feltnavn, verdi: string) => {
+            dispatch(soknadValiderFelt('utenlandskKontantstotte', feltnavn, verdi));
         },
     };
 };

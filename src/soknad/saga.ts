@@ -18,6 +18,7 @@ import {
     sjekkValideringForFamilieforhold,
     sjekkValideringForSteg,
     sjekkValideringForUtenlandskeYtelser,
+    sjekkValideringForUtenlandskKontantstotte,
 } from './stegSagaValidators';
 import {
     arbeidsforholdFeltnavn,
@@ -129,6 +130,12 @@ function* nesteStegSaga() {
             break;
         case 'familieforhold':
             harFeil = yield call(sjekkValideringForFamilieforhold, soknadState.familieforhold);
+            break;
+        case 'utenlandskKontantstotte':
+            harFeil = yield call(
+                sjekkValideringForUtenlandskKontantstotte,
+                soknadState.utenlandskKontantstotte
+            );
             break;
         case 'utenlandskeYtelser':
             harFeil = yield call(
