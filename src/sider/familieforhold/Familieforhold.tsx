@@ -48,6 +48,9 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
                         <FormattedMessage id={'familieforhold.tittel'} />
                     </h3>
                     <SoknadHjelpetekst
+                        ariaContentLabel={intl.formatMessage({
+                            id: 'familieforhold.hjelpetekst.label',
+                        })}
                         className={'familieforhold__hjelpetekst'}
                         modalClassName={'familieforhold__modal'}
                         hjelpetekstNokkel={

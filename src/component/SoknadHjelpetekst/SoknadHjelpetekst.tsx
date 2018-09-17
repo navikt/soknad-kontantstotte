@@ -1,6 +1,6 @@
 import Modal from 'nav-frontend-modal';
 import * as React from 'react';
-import { FormattedHTMLMessage, FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import Anchor from './Anchor';
 
 interface ISoknadHjelpetekstState {
@@ -10,15 +10,14 @@ interface ISoknadHjelpetekstState {
 
 interface ISoknadHjelpetekstProps {
     hjelpetekstNokkel: string;
+    ariaContentLabel: string;
     className?: string;
     modalClassName?: string;
     hjelpetekstErHtml?: boolean;
 }
 
-type SoknadHjelpetekstProps = ISoknadHjelpetekstProps & InjectedIntlProps;
-
-class SoknadHjelpetekst extends React.Component<SoknadHjelpetekstProps, ISoknadHjelpetekstState> {
-    constructor(props: SoknadHjelpetekstProps) {
+class SoknadHjelpetekst extends React.Component<ISoknadHjelpetekstProps, ISoknadHjelpetekstState> {
+    constructor(props: ISoknadHjelpetekstProps) {
         super(props);
         this.state = {
             hover: false,
@@ -31,8 +30,8 @@ class SoknadHjelpetekst extends React.Component<SoknadHjelpetekstProps, ISoknadH
 
     public render() {
         const {
-            intl,
             hjelpetekstNokkel,
+            ariaContentLabel,
             className,
             modalClassName,
             hjelpetekstErHtml,
@@ -50,7 +49,7 @@ class SoknadHjelpetekst extends React.Component<SoknadHjelpetekstProps, ISoknadH
                 </button>
                 <Modal
                     isOpen={this.state.modalIsOpen}
-                    contentLabel={intl.formatMessage({ id: 'app.avbrytmodal.tekst' })}
+                    contentLabel={ariaContentLabel}
                     onRequestClose={this.closeModal}
                     className={modalClassName}
                 >
@@ -79,4 +78,4 @@ class SoknadHjelpetekst extends React.Component<SoknadHjelpetekstProps, ISoknadH
     }
 }
 
-export default injectIntl(SoknadHjelpetekst);
+export default SoknadHjelpetekst;

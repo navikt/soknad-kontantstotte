@@ -50,6 +50,9 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                     {intl.formatMessage({ id: 'barnehageplass.tittel' })}
                 </h3>
                 <SoknadHjelpetekst
+                    ariaContentLabel={intl.formatMessage({
+                        id: 'barnehageplass.hjelpetekst.label',
+                    })}
                     className={'familieforhold__hjelpetekst'}
                     modalClassName={'familieforhold__modal'}
                     hjelpetekstNokkel={'barnehageplass.hjelpetekst'}
