@@ -145,26 +145,42 @@ function* sjekkValideringForArbeidsforhold(stegnavn: Stegnavn) {
 
 function* sjekkValideringForBarnehageplass(stegnavn: Stegnavn) {
     const soknadState = yield select(selectSoknad);
+    const barnehageplassStatus: BarnehageplassVerdier =
+        soknadState[stegnavn]['barnBarnehageplassStatus' as Stegnavn].verdi;
 
-    if (
-        soknadState[stegnavn]['barnBarnehageplassStatus' as Stegnavn].verdi ===
-            BarnehageplassVerdier.harSluttetIBarnehage &&
-        soknadState[stegnavn]['harSluttetIBarnehageKommune' as Stegnavn].verdi.length > 0 &&
-        soknadState[stegnavn]['harSluttetIBarnehageDato' as Stegnavn].verdi.length > 0 &&
-        soknadState[stegnavn]['harSluttetIBarnehageAntallTimer' as Stegnavn].verdi.length > 0
-    ) {
-        return;
+    if (soknadState[stegnavn]['harBarnehageplass' as Stegnavn].verdi !== Svar.UBESVART) {
+        switch (barnehageplassStatus) {
+            case BarnehageplassVerdier.garIkkeIBarnehage:
+                return;
+
+            case BarnehageplassVerdier.harBarnehageplass:
+                return;
+
+            case BarnehageplassVerdier.skalBegynneIBarnehage:
+                return;
+
+            case BarnehageplassVerdier.skalSlutteIBarnehage:
+                return;
+
+            case BarnehageplassVerdier.harSluttetIBarnehage:
+                if (
+                    soknadState[stegnavn]['harSluttetIBarnehageKommune' as Stegnavn].verdi.length >
+                        0 &&
+                    soknadState[stegnavn]['harSluttetIBarnehageDato' as Stegnavn].verdi.length >
+                        0 &&
+                    soknadState[stegnavn]['harSluttetIBarnehageAntallTimer' as Stegnavn].verdi
+                        .length > 0
+                ) {
+                    return;
+                }
+                break;
+
+            default:
+                return harListeMedFeltFeil(soknadState[stegnavn]);
+        }
     }
 
-    if (
-        soknadState[stegnavn]['harBarnehageplass' as Stegnavn].verdi !== Svar.UBESVART &&
-        soknadState[stegnavn]['barnBarnehageplassStatus' as Stegnavn].verdi !==
-            BarnehageplassVerdier.Ubesvart
-    ) {
-        return;
-    } else {
-        return harListeMedFeltFeil(soknadState[stegnavn]);
-    }
+    return harListeMedFeltFeil(soknadState[stegnavn]);
 }
 
 function* sjekkValideringForFamilieforhold(stegnavn: Stegnavn) {
