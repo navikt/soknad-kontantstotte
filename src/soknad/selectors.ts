@@ -28,7 +28,7 @@ function selectMineBarn(state: IRootState) {
 }
 
 function selectYtelserFraUtland(state: IRootState) {
-    return state.soknad.utenlandskYtelser;
+    return state.soknad.utenlandskeYtelser;
 }
 
 function selectSoknad(state: IRootState): ISoknadState {

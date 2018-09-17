@@ -4,7 +4,7 @@ import {
     IBarnehageplass,
     IFamilieforhold,
     IFelt,
-    IUtenlandskYtelser,
+    IutenlandskeYtelser,
     Stegnavn,
     Svar,
     ValideringsStatus,
@@ -90,9 +90,9 @@ function* sjekkValideringForFamilieforhold(familieforhold: IFamilieforhold) {
     }
 }
 
-function* sjekkValideringForUtenlandskYtelser(
+function* sjekkValideringForutenlandskeYtelser(
     familieforhold: IFamilieforhold,
-    utenlandsYtelser: IUtenlandskYtelser
+    utenlandsYtelser: IutenlandskeYtelser
 ) {
     let harFeil =
         utenlandsYtelser.mottarYtelserFraUtland.valideringsStatus !== ValideringsStatus.OK;
@@ -126,5 +126,5 @@ export {
     sjekkValideringForArbeidsforhold,
     sjekkValideringForBarnehageplass,
     sjekkValideringForFamilieforhold,
-    sjekkValideringForUtenlandskYtelser,
+    sjekkValideringForutenlandskeYtelser,
 };

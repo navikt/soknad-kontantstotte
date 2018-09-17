@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const UtenlandskYtelserIkon: React.StatelessComponent<{}> = () => {
+const utenlandskeYtelserIkon: React.StatelessComponent<{}> = () => {
     return (
         <svg
             version="1.1"
@@ -47,4 +47,4 @@ const UtenlandskYtelserIkon: React.StatelessComponent<{}> = () => {
     );
 };
 
-export default UtenlandskYtelserIkon;
+export default utenlandskeYtelserIkon;

@@ -7,12 +7,12 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { hentFeltMedFeil } from '../../common/utils';
-import UtenlandskYtelserIkon from '../../component/Ikoner/UtenlandskYtelserIkon';
+import UtenlandskeYtelserIkon from '../../component/Ikoner/UtenlandskeYtelserIkon';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectFamilieforhold, selectYtelserFraUtland } from '../../soknad/selectors';
-import { Feltnavn, IFamilieforhold, IUtenlandskYtelser, Svar } from '../../soknad/types';
+import { Feltnavn, IFamilieforhold, IutenlandskeYtelser, Svar } from '../../soknad/types';
 
 interface IMapDispatchToProps {
     nullstillNesteSteg: () => void;
@@ -23,42 +23,42 @@ interface IMapDispatchToProps {
 interface IMapStateToProps {
     familieforhold: IFamilieforhold;
     harForsoktNesteSteg: boolean;
-    utenlandskYtelser: IUtenlandskYtelser;
+    utenlandskeYtelser: IutenlandskeYtelser;
 }
 
-type UtenlandskYtelserProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
+type UtenlandskeYtelserProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
-const UtenlandskYtelser: React.StatelessComponent<UtenlandskYtelserProps> = ({
+const UtenlandskeYtelser: React.StatelessComponent<UtenlandskeYtelserProps> = ({
     familieforhold,
     harForsoktNesteSteg,
     intl,
     nullstillNesteSteg,
     settStringFelt,
     settSvarFelt,
-    utenlandskYtelser,
+    utenlandskeYtelser,
 }) => {
     const {
         mottarYtelserFraUtland,
         mottarYtelserFraUtlandForklaring,
         mottarAnnenForelderYtelserFraUtland,
         mottarAnnenForelderYtelserFraUtlandForklaring,
-    } = utenlandskYtelser;
+    } = utenlandskeYtelser;
     const { borForeldreneSammenMedBarnet } = familieforhold;
-    const feltMedFeil = hentFeltMedFeil(utenlandskYtelser, harForsoktNesteSteg, intl);
+    const feltMedFeil = hentFeltMedFeil(utenlandskeYtelser, harForsoktNesteSteg, intl);
     const annenForelderLabel = intl.formatMessage({
-        id: 'utenlandskYtelser.mottarAnnenForelderYtelserFraUtland.annenForelder',
+        id: 'utenlandskeYtelser.mottarAnnenForelderYtelserFraUtland.annenForelder',
     });
 
     return (
         <SideContainer
-            className={'utenlandsk-ytelser'}
-            ikon={<UtenlandskYtelserIkon />}
-            tittel={intl.formatMessage({ id: 'utenlandskYtelser.tittel' })}
+            className={'utenlandske-ytelser'}
+            ikon={<UtenlandskeYtelserIkon />}
+            tittel={intl.formatMessage({ id: 'utenlandskeYtelser.tittel' })}
         >
             <form>
                 <RadioPanelGruppe
                     legend={intl.formatMessage({
-                        id: 'utenlandskYtelser.mottarYtelserFraUtland.sporsmal',
+                        id: 'utenlandskeYtelser.mottarYtelserFraUtland.sporsmal',
                     })}
                     name={'mottarYtelserFraUtland'}
                     className={'side-container__children__inputPanelGruppe'}
@@ -74,10 +74,10 @@ const UtenlandskYtelser: React.StatelessComponent<UtenlandskYtelserProps> = ({
                     feil={feltMedFeil.mottarYtelserFraUtland}
                 />
                 {mottarYtelserFraUtland.verdi === Svar.JA && (
-                    <PanelBase className={'utenlandsk-ytelser__panel'}>
+                    <PanelBase className={'utenlandske-ytelser__panel'}>
                         <TextareaControlled
                             label={intl.formatMessage({
-                                id: 'utenlandskYtelser.forklaring.hjelpetekst',
+                                id: 'utenlandskeYtelser.forklaring.hjelpetekst',
                             })}
                             defaultValue={mottarYtelserFraUtlandForklaring.verdi}
                             maxLength={500}
@@ -97,7 +97,7 @@ const UtenlandskYtelser: React.StatelessComponent<UtenlandskYtelserProps> = ({
                         legend={intl.formatMessage(
                             {
                                 id:
-                                    'utenlandskYtelser.mottarAnnenForelderYtelserFraUtland.sporsmal',
+                                    'utenlandskeYtelser.mottarAnnenForelderYtelserFraUtland.sporsmal',
                             },
                             { navn: annenForelderLabel }
                         )}
@@ -119,10 +119,10 @@ const UtenlandskYtelser: React.StatelessComponent<UtenlandskYtelserProps> = ({
                     />
                 )}
                 {mottarAnnenForelderYtelserFraUtland.verdi === Svar.JA && (
-                    <PanelBase className={'utenlandsk-ytelser__panel'}>
+                    <PanelBase className={'utenlandske-ytelser__panel'}>
                         <TextareaControlled
                             label={intl.formatMessage({
-                                id: 'utenlandskYtelser.forklaring.hjelpetekst',
+                                id: 'utenlandskeYtelser.forklaring.hjelpetekst',
                             })}
                             defaultValue={mottarAnnenForelderYtelserFraUtlandForklaring.verdi}
                             maxLength={500}
@@ -145,7 +145,7 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         familieforhold: selectFamilieforhold(state),
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
-        utenlandskYtelser: selectYtelserFraUtland(state),
+        utenlandskeYtelser: selectYtelserFraUtland(state),
     };
 };
 
@@ -155,10 +155,10 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
             dispatch(soknadNullstillNesteSteg());
         },
         settStringFelt: (feltnavn: Feltnavn, verdi: string) => {
-            dispatch(soknadValiderFelt('utenlandskYtelser', feltnavn, verdi));
+            dispatch(soknadValiderFelt('utenlandskeYtelser', feltnavn, verdi));
         },
         settSvarFelt: (feltnavn: Feltnavn, verdi: Svar) => {
-            dispatch(soknadValiderFelt('utenlandskYtelser', feltnavn, verdi));
+            dispatch(soknadValiderFelt('utenlandskeYtelser', feltnavn, verdi));
         },
     };
 };
@@ -166,4 +166,4 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(injectIntl(UtenlandskYtelser));
+)(injectIntl(UtenlandskeYtelser));

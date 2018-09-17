@@ -5,7 +5,7 @@ import FamilieforholdSide from './sider/familieforhold/Familieforhold';
 import KravTilSoker from './sider/krav-til-soker/KravTilSoker';
 import MineBarnSide from './sider/mine-barn/MineBarn';
 import OppsummeringSide from './sider/oppsummering/Oppsummering';
-import UtenlandskYtelser from './sider/utenlandsk-ytelser/UtenlandskYtelser';
+import utenlandskeYtelser from './sider/utenlandske-ytelser/utenlandskeYtelser';
 import Veiledning from './sider/veiledning/Veiledning';
 
 interface IStegConfig {
@@ -15,7 +15,7 @@ interface IStegConfig {
     familieforhold: ISteg;
     barnehageplass: ISteg;
     arbeidsforhold: ISteg;
-    utenlandskYtelser: ISteg;
+    utenlandskeYtelser: ISteg;
     oppsummering: ISteg;
 }
 
@@ -64,10 +64,10 @@ const stegConfig: IStegConfig = {
         path: '/arbeidsforhold',
         stegIndeks: 5,
     },
-    utenlandskYtelser: {
-        component: UtenlandskYtelser,
-        key: 'utenlandskYtelser',
-        path: '/utenlandsk-ytelser',
+    utenlandskeYtelser: {
+        component: utenlandskeYtelser,
+        key: 'utenlandskeYtelser',
+        path: '/utenlandske-ytelser',
         stegIndeks: 6,
     },
     oppsummering: {

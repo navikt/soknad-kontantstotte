@@ -65,7 +65,7 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.click('h1');
             actions.executeJS(disableHover);
         })
-        .capture('utenlandsk-ytelser', function(actions) {
+        .capture('utenlandske-ytelser', function(actions) {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
                 window.document.querySelectorAll('[name="mottarYtelserFraUtlandet"]')[1].click();

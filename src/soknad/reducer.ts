@@ -52,7 +52,7 @@ const initialState: ISoknadState = {
         fodselsdato: standardStringInitialFelt,
         navn: standardStringInitialFelt,
     },
-    utenlandskYtelser: {
+    utenlandskeYtelser: {
         mottarAnnenForelderYtelserFraUtland: standardSvarInitialFelt,
         mottarAnnenForelderYtelserFraUtlandForklaring: standardStringInitialFelt,
         mottarYtelserFraUtland: standardSvarInitialFelt,

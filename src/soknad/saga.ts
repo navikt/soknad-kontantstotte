@@ -17,7 +17,7 @@ import {
     sjekkValideringForBarnehageplass,
     sjekkValideringForFamilieforhold,
     sjekkValideringForSteg,
-    sjekkValideringForUtenlandskYtelser,
+    sjekkValideringForutenlandskeYtelser,
 } from './stegSagaValidators';
 import {
     arbeidsforholdFeltnavn,
@@ -29,7 +29,7 @@ import {
     kravTilSokerFeltnavn,
     minebarnFeltnavn,
     Stegnavn,
-    utenlandskYtelserFeltnavn,
+    utenlandskeYtelserFeltnavn,
     ValideringsStatus,
 } from './types';
 import valideringsConfig from './valideringsConfig';
@@ -72,9 +72,9 @@ function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
                 feltMedOppdatertVerdi
             );
             break;
-        case 'utenlandskYtelser':
-            validertFelt = valideringsConfig.utenlandskYtelser[
-                action.feltnavn as utenlandskYtelserFeltnavn
+        case 'utenlandskeYtelser':
+            validertFelt = valideringsConfig.utenlandskeYtelser[
+                action.feltnavn as utenlandskeYtelserFeltnavn
             ](feltMedOppdatertVerdi);
             break;
     }
@@ -124,11 +124,11 @@ function* nesteStegSaga() {
         case 'familieforhold':
             harFeil = yield call(sjekkValideringForFamilieforhold, soknadState.familieforhold);
             break;
-        case 'utenlandskYtelser':
+        case 'utenlandskeYtelser':
             harFeil = yield call(
-                sjekkValideringForUtenlandskYtelser,
+                sjekkValideringForutenlandskeYtelser,
                 soknadState.familieforhold,
-                soknadState.utenlandskYtelser
+                soknadState.utenlandskeYtelser
             );
             break;
         default:

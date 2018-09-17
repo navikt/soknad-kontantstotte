@@ -2,32 +2,32 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import Element from 'nav-frontend-typografi/lib/element';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntl } from 'react-intl';
-import { IFamilieforhold, IUtenlandskYtelser, Svar } from '../../soknad/types';
+import { IFamilieforhold, IutenlandskeYtelser, Svar } from '../../soknad/types';
 import OppsummeringSporsmalSvar from './OppsummeringSporsmalSvar';
 
-interface IUtenlandskYtelserOppsummeringProps {
+interface IutenlandskeYtelserOppsummeringProps {
     familieforhold: IFamilieforhold;
     intl: InjectedIntl;
-    utenlandskYtelser: IUtenlandskYtelser;
+    utenlandskeYtelser: IutenlandskeYtelser;
 }
 
-const UtenlandskYtelserOppsummering: React.StatelessComponent<
-    IUtenlandskYtelserOppsummeringProps
-> = ({ familieforhold, intl, utenlandskYtelser }) => {
+const utenlandskeYtelserOppsummering: React.StatelessComponent<
+    IutenlandskeYtelserOppsummeringProps
+> = ({ familieforhold, intl, utenlandskeYtelser }) => {
     const {
         mottarYtelserFraUtland,
         mottarYtelserFraUtlandForklaring,
         mottarAnnenForelderYtelserFraUtland,
         mottarAnnenForelderYtelserFraUtlandForklaring,
-    } = utenlandskYtelser;
+    } = utenlandskeYtelser;
 
     const { borForeldreneSammenMedBarnet } = familieforhold;
 
     return (
-        <div className={'utenlandskYtelser__oppsummering'}>
+        <div className={'utenlandskeYtelser__oppsummering'}>
             <OppsummeringSporsmalSvar
                 sporsmal={intl.formatMessage({
-                    id: 'oppsummering.utenlandskYtelser.mottarYtelserFraUtland',
+                    id: 'oppsummering.utenlandskeYtelser.mottarYtelserFraUtland',
                 })}
                 svar={mottarYtelserFraUtland.verdi}
             />
@@ -35,9 +35,9 @@ const UtenlandskYtelserOppsummering: React.StatelessComponent<
                 <ul>
                     <li className="list-unstyled list-detaljer">
                         <Normaltekst>
-                            <FormattedMessage id="oppsummering.utenlandskYtelser.forklaring.label" />
+                            <FormattedMessage id="oppsummering.utenlandskeYtelser.forklaring.label" />
                         </Normaltekst>
-                        <Element className={'utenlandskYtelser__oppsummering--forklaring'}>
+                        <Element className={'utenlandskeYtelser__oppsummering--forklaring'}>
                             {mottarYtelserFraUtlandForklaring.verdi}
                         </Element>
                     </li>
@@ -47,7 +47,7 @@ const UtenlandskYtelserOppsummering: React.StatelessComponent<
             {borForeldreneSammenMedBarnet.verdi === Svar.JA && (
                 <OppsummeringSporsmalSvar
                     sporsmal={intl.formatMessage({
-                        id: 'oppsummering.utenlandskYtelser.mottarAnnenForelderYtelserFraUtland',
+                        id: 'oppsummering.utenlandskeYtelser.mottarAnnenForelderYtelserFraUtland',
                     })}
                     svar={mottarAnnenForelderYtelserFraUtland.verdi}
                 />
@@ -57,9 +57,9 @@ const UtenlandskYtelserOppsummering: React.StatelessComponent<
                     <ul>
                         <li className="list-unstyled list-detaljer">
                             <Normaltekst>
-                                <FormattedMessage id="oppsummering.utenlandskYtelser.forklaring.label" />
+                                <FormattedMessage id="oppsummering.utenlandskeYtelser.forklaring.label" />
                             </Normaltekst>
-                            <Element className={'utenlandskYtelser__oppsummering--forklaring'}>
+                            <Element className={'utenlandskeYtelser__oppsummering--forklaring'}>
                                 {mottarAnnenForelderYtelserFraUtlandForklaring.verdi}
                             </Element>
                         </li>
@@ -69,4 +69,4 @@ const UtenlandskYtelserOppsummering: React.StatelessComponent<
     );
 };
 
-export default UtenlandskYtelserOppsummering;
+export default utenlandskeYtelserOppsummering;
