@@ -47,14 +47,39 @@ function* sjekkValideringForArbeidsforhold(arbeidsforhold: IArbeidsforhold) {
 }
 
 function* sjekkValideringForBarnehageplass(barnehageplass: IBarnehageplass) {
-    if (
-        barnehageplass.harBarnehageplass.verdi !== Svar.UBESVART &&
-        barnehageplass.barnBarnehageplassStatus.verdi !== BarnehageplassVerdier.Ubesvart
-    ) {
-        return;
-    } else {
-        return harListeMedFeltFeil(Object.values(barnehageplass));
+    const barnehageplassStatus: BarnehageplassVerdier = barnehageplass.barnBarnehageplassStatus
+        .verdi as BarnehageplassVerdier;
+
+    if (barnehageplass.harBarnehageplass.verdi !== Svar.UBESVART) {
+        switch (barnehageplassStatus) {
+            case BarnehageplassVerdier.garIkkeIBarnehage:
+                return;
+
+            case BarnehageplassVerdier.harBarnehageplass:
+                return;
+
+            case BarnehageplassVerdier.skalBegynneIBarnehage:
+                return;
+
+            case BarnehageplassVerdier.skalSlutteIBarnehage:
+                return;
+
+            case BarnehageplassVerdier.harSluttetIBarnehage:
+                if (
+                    barnehageplass.harSluttetIBarnehageKommune.verdi.length > 0 &&
+                    barnehageplass.harSluttetIBarnehageDato.verdi.length > 0 &&
+                    barnehageplass.harSluttetIBarnehageAntallTimer.verdi.length > 0
+                ) {
+                    return;
+                }
+                break;
+
+            default:
+                return harListeMedFeltFeil(Object.values(barnehageplass));
+        }
     }
+
+    return harListeMedFeltFeil(Object.values(barnehageplass));
 }
 
 function* sjekkValideringForFamilieforhold(familieforhold: IFamilieforhold) {

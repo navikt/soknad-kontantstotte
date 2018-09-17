@@ -58,7 +58,7 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
                 window.document.querySelectorAll('[name="harBarnehageplass"]')[1].click();
-                window.document.querySelectorAll('[name="barnBarnehageplassStatus"]')[1].click();
+                window.document.querySelectorAll('[name="barnBarnehageplassStatus"]')[0].click();
             });
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
