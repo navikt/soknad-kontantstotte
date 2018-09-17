@@ -49,7 +49,7 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
                         id: 'familieforhold.borForeldreneSammenMedBarnet.sporsmal',
                     })}
                     name={'borForeldreneSammenMedBarnet'}
-                    className={'side-container__children__inputPanelGruppe'}
+                    className={'soknad__inputPanelGruppe'}
                     onChange={(evt: {}, value: string) => {
                         settBorForeldreneSammenMedBarnetOgNullstillNeste(value as Svar);
                     }}

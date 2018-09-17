@@ -61,7 +61,7 @@ const UtenlandskeYtelser: React.StatelessComponent<UtenlandskeYtelserProps> = ({
                         id: 'utenlandskeYtelser.mottarYtelserFraUtland.sporsmal',
                     })}
                     name={'mottarYtelserFraUtland'}
-                    className={'side-container__children__inputPanelGruppe'}
+                    className={'soknad__inputPanelGruppe'}
                     onChange={(evt: {}, value: string) => {
                         settSvarFelt('mottarYtelserFraUtland' as Feltnavn, value as Svar);
                         nullstillNesteSteg();
@@ -102,7 +102,7 @@ const UtenlandskeYtelser: React.StatelessComponent<UtenlandskeYtelserProps> = ({
                             { navn: annenForelderLabel }
                         )}
                         name={'mottarAnnenForelderYtelserFraUtland'}
-                        className={'side-container__children__inputPanelGruppe'}
+                        className={'soknad__inputPanelGruppe'}
                         onChange={(evt: {}, value: string) => {
                             settSvarFelt(
                                 'mottarAnnenForelderYtelserFraUtland' as Feltnavn,

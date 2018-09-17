@@ -55,7 +55,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                         id: 'barnehageplass.harPlass',
                     })}
                     name={'harBarnehageplass'}
-                    className={'side-container__children__inputPanelGruppe'}
+                    className={'soknad__inputPanelGruppe'}
                     onChange={(evt: {}, value: string) => {
                         settSvarFelt('harBarnehageplass' as Feltnavn, value as Svar);
                         settBarnehageplassVerdiFelt(
