@@ -30,46 +30,51 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
     harBarnehageplassKommune,
 }) => {
     return (
-        <SkjemaGruppe>
-            <Input
-                label={intl.formatMessage({
-                    id: 'barnehageplass.harBarnehageplass.dato.sporsmal',
-                })}
-                onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    settBarnehageplassVerdiFelt(
-                        'harBarnehageplassDato' as Feltnavn,
-                        event.target.value as BarnehageplassVerdier
-                    )
-                }
-                defaultValue={harBarnehageplassDato.verdi}
-                feil={feltMedFeil.harBarnehageplassDato}
-            />
-            <Input
-                label={intl.formatMessage({
-                    id: 'barnehageplass.harBarnehageplass.kommune.sporsmal',
-                })}
-                onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    settBarnehageplassVerdiFelt(
-                        'harBarnehageplassKommune' as Feltnavn,
-                        event.target.value as BarnehageplassVerdier
-                    )
-                }
-                defaultValue={harBarnehageplassKommune.verdi}
-                feil={feltMedFeil.harBarnehageplassKommune}
-            />
-            <Input
-                label={intl.formatMessage({
-                    id: 'barnehageplass.harBarnehageplass.antallTimer.sporsmal',
-                })}
-                onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    settBarnehageplassVerdiFelt(
-                        'harBarnehageplassAntallTimer' as Feltnavn,
-                        event.target.value as BarnehageplassVerdier
-                    )
-                }
-                defaultValue={harBarnehageplassAntallTimer.verdi}
-                feil={feltMedFeil.harBarnehageplassAntallTimer}
-            />
+        <SkjemaGruppe className={'barnehage__inputSkjemaGruppe'}>
+            <div className={'inputSkjemaGruppe__inner'}>
+                <Input
+                    className={'inputElement'}
+                    label={intl.formatMessage({
+                        id: 'barnehageplass.harBarnehageplass.dato.sporsmal',
+                    })}
+                    onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        settBarnehageplassVerdiFelt(
+                            'harBarnehageplassDato' as Feltnavn,
+                            event.target.value as BarnehageplassVerdier
+                        )
+                    }
+                    defaultValue={harBarnehageplassDato.verdi}
+                    feil={feltMedFeil.harBarnehageplassDato}
+                />
+                <Input
+                    className={'inputElement'}
+                    label={intl.formatMessage({
+                        id: 'barnehageplass.harBarnehageplass.kommune.sporsmal',
+                    })}
+                    onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        settBarnehageplassVerdiFelt(
+                            'harBarnehageplassKommune' as Feltnavn,
+                            event.target.value as BarnehageplassVerdier
+                        )
+                    }
+                    defaultValue={harBarnehageplassKommune.verdi}
+                    feil={feltMedFeil.harBarnehageplassKommune}
+                />
+                <Input
+                    className={'inputElement'}
+                    label={intl.formatMessage({
+                        id: 'barnehageplass.harBarnehageplass.antallTimer.sporsmal',
+                    })}
+                    onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        settBarnehageplassVerdiFelt(
+                            'harBarnehageplassAntallTimer' as Feltnavn,
+                            event.target.value as BarnehageplassVerdier
+                        )
+                    }
+                    defaultValue={harBarnehageplassAntallTimer.verdi}
+                    feil={feltMedFeil.harBarnehageplassAntallTimer}
+                />
+            </div>
         </SkjemaGruppe>
     );
 };
