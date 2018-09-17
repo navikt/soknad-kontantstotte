@@ -35,8 +35,7 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
     return (
         <OppsummeringPanel>
             <Element>
-                {' '}
-                <FormattedMessage id={'oppsummering.barnehageplass.tittel'} />{' '}
+                <FormattedMessage id={'oppsummering.barnehageplass.tittel'} />
             </Element>
             <SporsmalSvar
                 sporsmal={<FormattedMessage id={'oppsummering.barnehageplass.harBarnehageplass'} />}
