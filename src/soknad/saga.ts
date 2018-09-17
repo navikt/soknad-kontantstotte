@@ -13,16 +13,22 @@ import {
 } from './actions';
 import { selectSoknad } from './selectors';
 import {
+    sjekkValideringForArbeidsforhold,
+    sjekkValideringForBarnehageplass,
+    sjekkValideringForFamilieforhold,
+    sjekkValideringForSteg,
+    sjekkValideringForUtenlandskYtelser,
+} from './stegSagaValidators';
+import {
     arbeidsforholdFeltnavn,
     barnehageplassFeltnavn,
-    BarnehageplassVerdier,
     familieforholdFeltnavn,
     Feltnavn,
     IFelt,
+    ISoknadState,
     kravTilSokerFeltnavn,
     minebarnFeltnavn,
     Stegnavn,
-    Svar,
     utenlandskYtelserFeltnavn,
     ValideringsStatus,
 } from './types';
@@ -94,129 +100,14 @@ function* validerSteg(action: ISoknadValiderSteg) {
     );
 }
 
-function harListeMedFeltFeil(feltForSteg: IFelt[]): boolean {
-    return Object.values(feltForSteg).reduce((acc: boolean, felt: IFelt) => {
-        return acc || felt.valideringsStatus !== ValideringsStatus.OK;
-    }, false);
-}
-
-function* sjekkValideringForSteg(stegnavn: Stegnavn) {
-    const soknadState = yield select(selectSoknad);
-
-    return harListeMedFeltFeil(soknadState[stegnavn]);
-}
-
-function* sjekkValideringForArbeidsforhold(stegnavn: Stegnavn) {
-    const soknadState = yield select(selectSoknad);
-
-    let harFeil = false;
-    if (
-        soknadState[stegnavn]['arbeiderIUtlandetEllerKontinentalsokkel' as Stegnavn].verdi ===
-        Svar.JA
-    ) {
-        harFeil =
-            harFeil ||
-            soknadState[stegnavn]['arbeiderIUtlandetEllerKontinentalsokkelForklaring' as Stegnavn]
-                .verdi.length === 0;
-    } else if (
-        soknadState[stegnavn]['arbeiderIUtlandetEllerKontinentalsokkel' as Stegnavn].verdi ===
-        Svar.UBESVART
-    ) {
-        return true;
-    }
-
-    if (soknadState[stegnavn]['mottarKontantstotteFraAnnetEOS' as Stegnavn].verdi === Svar.JA) {
-        harFeil =
-            harFeil ||
-            soknadState[stegnavn]['mottarKontantstotteFraAnnetEOSForklaring' as Stegnavn].verdi
-                .length === 0;
-    } else if (
-        soknadState[stegnavn]['mottarKontantstotteFraAnnetEOS' as Stegnavn].verdi === Svar.UBESVART
-    ) {
-        return true;
-    }
-
-    if (soknadState[stegnavn]['mottarYtelserFraUtlandet' as Stegnavn].verdi === Svar.JA) {
-        harFeil =
-            harFeil ||
-            soknadState[stegnavn]['mottarYtelserFraUtlandetForklaring' as Stegnavn].verdi.length ===
-                0;
-    } else if (
-        soknadState[stegnavn]['mottarYtelserFraUtlandet' as Stegnavn].verdi === Svar.UBESVART
-    ) {
-        return true;
-    }
-
-    return harFeil;
-}
-
-function* sjekkValideringForBarnehageplass(stegnavn: Stegnavn) {
-    const soknadState = yield select(selectSoknad);
-
-    if (
-        soknadState[stegnavn]['harBarnehageplass' as Stegnavn].verdi !== Svar.UBESVART &&
-        soknadState[stegnavn]['barnBarnehageplassStatus' as Stegnavn].verdi !==
-            BarnehageplassVerdier.Ubesvart
-    ) {
-        return;
-    } else {
-        return harListeMedFeltFeil(soknadState[stegnavn]);
-    }
-}
-
-function* sjekkValideringForFamilieforhold(stegnavn: Stegnavn) {
-    const soknadState = yield select(selectSoknad);
-
-    if (soknadState[stegnavn]['borForeldreneSammenMedBarnet' as Stegnavn].verdi === Svar.NEI) {
-        return false;
-    } else {
-        return harListeMedFeltFeil(soknadState[stegnavn]);
-    }
-}
-
-function* sjekkValideringForUtenlandskYtelser(stegnavn: Stegnavn) {
-    const soknadState = yield select(selectSoknad);
-
-    let harFeil =
-        soknadState[stegnavn]['mottarYtelserFraUtland' as Stegnavn].valideringsStatus !==
-        ValideringsStatus.OK;
-
-    if (soknadState[stegnavn]['mottarYtelserFraUtland' as Stegnavn].verdi === Svar.JA) {
-        harFeil =
-            harFeil ||
-            soknadState[stegnavn]['mottarYtelserFraUtlandForklaring' as Stegnavn]
-                .valideringsStatus !== ValideringsStatus.OK;
-    }
-
-    if (
-        soknadState['familieforhold' as Stegnavn]['borForeldreneSammenMedBarnet' as Stegnavn]
-            .verdi === Svar.JA
-    ) {
-        harFeil =
-            harFeil ||
-            soknadState[stegnavn]['mottarAnnenForelderYtelserFraUtland' as Stegnavn]
-                .valideringsStatus !== ValideringsStatus.OK;
-
-        if (
-            soknadState[stegnavn]['mottarAnnenForelderYtelserFraUtland' as Stegnavn].verdi ===
-            Svar.JA
-        ) {
-            harFeil =
-                harFeil ||
-                soknadState[stegnavn]['mottarAnnenForelderYtelserFraUtlandForklaring' as Stegnavn]
-                    .valideringsStatus !== ValideringsStatus.OK;
-        }
-    }
-
-    return harFeil;
-}
-
 function* nullstillNesteStegSaga() {
     yield put(appSettHarForsoktNesteSteg(false));
 }
 
 function* nesteStegSaga() {
     const appSteg = yield select(selectAppSteg);
+    const soknadState: ISoknadState = yield select(selectSoknad);
+
     const tilSide: ISteg = Object.values(stegConfig).find(
         (side: ISteg) => side.stegIndeks === appSteg
     );
@@ -225,19 +116,23 @@ function* nesteStegSaga() {
     yield put(soknadValiderSteg(tilSide.key as Stegnavn));
     switch (tilSide.key as Stegnavn) {
         case 'arbeidsforhold':
-            harFeil = yield call(sjekkValideringForArbeidsforhold, tilSide.key as Stegnavn);
+            harFeil = yield call(sjekkValideringForArbeidsforhold, soknadState.arbeidsforhold);
             break;
         case 'barnehageplass':
-            harFeil = yield call(sjekkValideringForBarnehageplass, tilSide.key as Stegnavn);
+            harFeil = yield call(sjekkValideringForBarnehageplass, soknadState.barnehageplass);
             break;
         case 'familieforhold':
-            harFeil = yield call(sjekkValideringForFamilieforhold, tilSide.key as Stegnavn);
+            harFeil = yield call(sjekkValideringForFamilieforhold, soknadState.familieforhold);
             break;
         case 'utenlandskYtelser':
-            harFeil = yield call(sjekkValideringForUtenlandskYtelser, tilSide.key as Stegnavn);
+            harFeil = yield call(
+                sjekkValideringForUtenlandskYtelser,
+                soknadState.familieforhold,
+                soknadState.utenlandskYtelser
+            );
             break;
         default:
-            harFeil = yield call(sjekkValideringForSteg, tilSide.key as Stegnavn);
+            harFeil = yield call(sjekkValideringForSteg, tilSide.key as Stegnavn, soknadState);
     }
 
     yield put(appSettHarForsoktNesteSteg(true));

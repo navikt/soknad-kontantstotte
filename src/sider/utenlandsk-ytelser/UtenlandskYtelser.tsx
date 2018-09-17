@@ -50,29 +50,26 @@ const UtenlandskYtelser: React.StatelessComponent<UtenlandskYtelserProps> = ({
     });
 
     return (
-        <SideContainer className={'utenlandsk-ytelser'}>
-            <div className={'utenlandsk-ytelser__ikon'}>
-                <UtenlandskYtelserIkon />
-            </div>
-            <h3 className={'typo-innholdstittel utenlandsk-ytelser__sidetittel'}>
-                {intl.formatMessage({ id: 'utenlandskYtelser.tittel' })}
-            </h3>
-
+        <SideContainer
+            className={'utenlandsk-ytelser'}
+            ikon={<UtenlandskYtelserIkon />}
+            tittel={intl.formatMessage({ id: 'utenlandskYtelser.tittel' })}
+        >
             <form>
                 <RadioPanelGruppe
                     legend={intl.formatMessage({
                         id: 'utenlandskYtelser.mottarYtelserFraUtland.sporsmal',
                     })}
                     name={'mottarYtelserFraUtland'}
-                    className={'utenlandsk-ytelser__inputPanelGruppe'}
+                    className={'side-container__children__inputPanelGruppe'}
                     onChange={(evt: {}, value: string) => {
                         settSvarFelt('mottarYtelserFraUtland' as Feltnavn, value as Svar);
                         nullstillNesteSteg();
                     }}
                     checked={mottarYtelserFraUtland.verdi}
                     radios={[
-                        { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
                         { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
+                        { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
                     ]}
                     feil={feltMedFeil.mottarYtelserFraUtland}
                 />
@@ -105,7 +102,7 @@ const UtenlandskYtelser: React.StatelessComponent<UtenlandskYtelserProps> = ({
                             { navn: annenForelderLabel }
                         )}
                         name={'mottarAnnenForelderYtelserFraUtland'}
-                        className={'utenlandsk-ytelser__inputPanelGruppe'}
+                        className={'side-container__children__inputPanelGruppe'}
                         onChange={(evt: {}, value: string) => {
                             settSvarFelt(
                                 'mottarAnnenForelderYtelserFraUtland' as Feltnavn,
@@ -115,8 +112,8 @@ const UtenlandskYtelser: React.StatelessComponent<UtenlandskYtelserProps> = ({
                         }}
                         checked={mottarAnnenForelderYtelserFraUtland.verdi}
                         radios={[
-                            { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
                             { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
+                            { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
                         ]}
                         feil={feltMedFeil.mottarAnnenForelderYtelserFraUtland}
                     />

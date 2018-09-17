@@ -57,8 +57,8 @@ gemini.suite('soknad-kontantstotte', suite => {
         .capture('arbeidsforhold', function(actions) {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
-                window.document.querySelectorAll('[name="harBarnehageplass"]')[0].click();
-                window.document.querySelectorAll('[name="barnBarnehageplassStatus"]')[0].click();
+                window.document.querySelectorAll('[name="harBarnehageplass"]')[1].click();
+                window.document.querySelectorAll('[name="barnBarnehageplassStatus"]')[1].click();
             });
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
@@ -84,7 +84,7 @@ gemini.suite('soknad-kontantstotte', suite => {
         .capture('oppsummering', function(actions) {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
-                window.document.querySelectorAll('[name="mottarYtelserFraUtland"]')[0].click();
+                window.document.querySelectorAll('[name="mottarYtelserFraUtland"]')[1].click();
             });
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);

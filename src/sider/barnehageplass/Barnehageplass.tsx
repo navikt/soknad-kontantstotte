@@ -39,14 +39,12 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     const feltMedFeil = hentFeltMedFeil(barnehageplass, harForsoktNesteSteg, intl);
 
     return (
-        <SideContainer className={'barnehage'}>
-            <div className={'barnehage__ikon'}>
-                <Barnehageikon />
-            </div>
-            <h3 className={'typo-innholdstittel barnehage__sidetittel'}>
-                {intl.formatMessage({ id: 'barnehageplass.tittel' })}
-            </h3>
-            <p className={classNames('typo-ingress', 'barnehage__info')}>
+        <SideContainer
+            className={'barnehage'}
+            ikon={<Barnehageikon />}
+            tittel={intl.formatMessage({ id: 'barnehageplass.tittel' })}
+        >
+            <p className={classNames('typo-ingress', 'barnehage__ingress')}>
                 {intl.formatMessage({ id: 'barnehageplass.ingress' })}
             </p>
 
@@ -56,7 +54,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                         id: 'barnehageplass.harPlass',
                     })}
                     name={'harBarnehageplass'}
-                    className={'barnehage__inputPanelGruppe'}
+                    className={'side-container__children__inputPanelGruppe'}
                     onChange={(evt: {}, value: string) => {
                         settSvarFelt('harBarnehageplass' as Feltnavn, value as Svar);
                         settBarnehageplassVerdiFelt(
@@ -67,8 +65,8 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                     }}
                     checked={harBarnehageplass.verdi}
                     radios={[
-                        { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
                         { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
+                        { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
                     ]}
                     feil={feltMedFeil.harBarnehageplass}
                 />
