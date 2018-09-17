@@ -12,7 +12,7 @@ import SideContainer from '../../component/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectFamilieforhold, selectYtelserFraUtland } from '../../soknad/selectors';
-import { Feltnavn, IFamilieforhold, IutenlandskeYtelser, Svar } from '../../soknad/types';
+import { Feltnavn, IFamilieforhold, IUtenlandskeYtelser, Svar } from '../../soknad/types';
 
 interface IMapDispatchToProps {
     nullstillNesteSteg: () => void;
@@ -23,7 +23,7 @@ interface IMapDispatchToProps {
 interface IMapStateToProps {
     familieforhold: IFamilieforhold;
     harForsoktNesteSteg: boolean;
-    utenlandskeYtelser: IutenlandskeYtelser;
+    utenlandskeYtelser: IUtenlandskeYtelser;
 }
 
 type UtenlandskeYtelserProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;

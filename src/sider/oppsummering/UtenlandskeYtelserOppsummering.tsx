@@ -2,17 +2,17 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import Element from 'nav-frontend-typografi/lib/element';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntl } from 'react-intl';
-import { IFamilieforhold, IutenlandskeYtelser, Svar } from '../../soknad/types';
+import { IFamilieforhold, IUtenlandskeYtelser, Svar } from '../../soknad/types';
 import OppsummeringSporsmalSvar from './OppsummeringSporsmalSvar';
 
-interface IutenlandskeYtelserOppsummeringProps {
+interface IUtenlandskeYtelserOppsummeringProps {
     familieforhold: IFamilieforhold;
     intl: InjectedIntl;
-    utenlandskeYtelser: IutenlandskeYtelser;
+    utenlandskeYtelser: IUtenlandskeYtelser;
 }
 
 const utenlandskeYtelserOppsummering: React.StatelessComponent<
-    IutenlandskeYtelserOppsummeringProps
+    IUtenlandskeYtelserOppsummeringProps
 > = ({ familieforhold, intl, utenlandskeYtelser }) => {
     const {
         mottarYtelserFraUtland,

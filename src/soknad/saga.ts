@@ -17,7 +17,7 @@ import {
     sjekkValideringForBarnehageplass,
     sjekkValideringForFamilieforhold,
     sjekkValideringForSteg,
-    sjekkValideringForutenlandskeYtelser,
+    sjekkValideringForUtenlandskeYtelser,
 } from './stegSagaValidators';
 import {
     arbeidsforholdFeltnavn,
@@ -126,7 +126,7 @@ function* nesteStegSaga() {
             break;
         case 'utenlandskeYtelser':
             harFeil = yield call(
-                sjekkValideringForutenlandskeYtelser,
+                sjekkValideringForUtenlandskeYtelser,
                 soknadState.familieforhold,
                 soknadState.utenlandskeYtelser
             );
