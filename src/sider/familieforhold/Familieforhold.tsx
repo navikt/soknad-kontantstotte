@@ -5,8 +5,8 @@ import { connect, Dispatch } from 'react-redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { hentFeltMedFeil } from '../../common/utils';
 import BorSammenIkon from '../../component/Ikoner/BorSammenIkon';
+import ModalHjelpetekst from '../../component/ModalHjelpetekst/ModalHjelpetekst';
 import SideContainer from '../../component/SideContainer/SideContainer';
-import SoknadHjelpetekst from '../../component/SoknadHjelpetekst/SoknadHjelpetekst';
 import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg, soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectFamilieforhold } from '../../soknad/selectors';
@@ -47,7 +47,7 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
                     <h3 className={'typo-innholdstittel familieforhold__tittel'}>
                         <FormattedMessage id={'familieforhold.tittel'} />
                     </h3>
-                    <SoknadHjelpetekst
+                    <ModalHjelpetekst
                         ariaContentLabel={intl.formatMessage({
                             id: 'familieforhold.hjelpetekst.label',
                         })}

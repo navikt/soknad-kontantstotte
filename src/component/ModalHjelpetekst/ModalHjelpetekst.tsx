@@ -3,12 +3,12 @@ import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import Anchor from './Anchor';
 
-interface ISoknadHjelpetekstState {
+interface IModalHjelpetekstState {
     modalIsOpen: boolean;
     hover: boolean;
 }
 
-interface ISoknadHjelpetekstProps {
+interface IModalHjelpetekstProps {
     hjelpetekstNokkel: string;
     ariaContentLabel: string;
     className?: string;
@@ -16,8 +16,8 @@ interface ISoknadHjelpetekstProps {
     hjelpetekstErHtml?: boolean;
 }
 
-class SoknadHjelpetekst extends React.Component<ISoknadHjelpetekstProps, ISoknadHjelpetekstState> {
-    constructor(props: ISoknadHjelpetekstProps) {
+class ModalHjelpetekst extends React.Component<IModalHjelpetekstProps, IModalHjelpetekstState> {
+    constructor(props: IModalHjelpetekstProps) {
         super(props);
         this.state = {
             hover: false,
@@ -78,4 +78,4 @@ class SoknadHjelpetekst extends React.Component<ISoknadHjelpetekstProps, ISoknad
     }
 }
 
-export default SoknadHjelpetekst;
+export default ModalHjelpetekst;
