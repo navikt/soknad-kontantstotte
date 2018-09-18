@@ -1,9 +1,10 @@
 import Element from 'nav-frontend-typografi/lib/element';
 import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 import * as React from 'react';
-import { InjectedIntl } from 'react-intl';
+import { FormattedMessage, InjectedIntl } from 'react-intl';
 import { IFamilieforhold, IUtenlandskKontantstotte, Svar } from '../../soknad/types';
 import OppsummeringsListeElement from './OppsummeringsListeElement';
+import OppsummeringSporsmalSvar from './OppsummeringSporsmalSvar';
 
 interface IUtenlandskKontantstotteOppsummeringProps {
     intl: InjectedIntl;
@@ -15,24 +16,27 @@ type UtenlandskKontantstotteOppsummeringProps = IUtenlandskKontantstotteOppsumme
 const UtenlandskKontantstotteOppsummering: React.StatelessComponent<
     UtenlandskKontantstotteOppsummeringProps
 > = ({ intl, utenlandskKontantstotte }) => {
+    const {
+        mottarKontantstotteFraUtlandet,
+        mottarKontantstotteFraUtlandetTilleggsinfo,
+    } = utenlandskKontantstotte;
     return (
         <>
-            {utenlandskKontantstotte.mottarKontantstotteFraUtlandet.verdi === Svar.NEI && (
-                <>
-                    <OppsummeringsListeElement
-                        tekst={intl.formatMessage({
-                            id: 'oppsummering.utenlandskKontantstotte.mottarIkkeKontantstotte',
-                        })}
-                    />
-                </>
-            )}
-
-            {utenlandskKontantstotte.mottarKontantstotteFraUtlandet.verdi === Svar.JA && (
-                <OppsummeringsListeElement
-                    tekst={intl.formatMessage({
-                        id: 'oppsummering.utenlandskKontantstotte.mottarKontantstotte',
-                    })}
-                />
+            <OppsummeringSporsmalSvar
+                sporsmal={intl.formatMessage({
+                    id: 'utenlandskKontantstotte.mottarKontantstotteFraUtlandet.sporsmal',
+                })}
+                svar={mottarKontantstotteFraUtlandet.verdi}
+            />
+            {mottarKontantstotteFraUtlandet.verdi === 'JA' && (
+                <ul>
+                    <li className="list-unstyled list-detaljer">
+                        <Normaltekst>
+                            <FormattedMessage id="utenlandskKontantstotte.mottarKontantstotteFraUtlandet.tilleggsinfo.sporsmal" />
+                        </Normaltekst>
+                        <Element>{mottarKontantstotteFraUtlandetTilleggsinfo.verdi}</Element>
+                    </li>
+                </ul>
             )}
         </>
     );

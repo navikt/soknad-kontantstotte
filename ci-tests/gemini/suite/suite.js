@@ -92,7 +92,7 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
                 window.document
-                    .querySelectorAll('[name="mottarKontantstotteFraUtlandet"]')[1]
+                    .querySelectorAll('[name="mottarKontantstotteFraUtlandet"]')[0]
                     .click();
             });
             actions.click('.knapp.knapp--hoved');
