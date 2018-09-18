@@ -105,6 +105,36 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                     />
                 </>
             )}
+
+            {barnehageplass.barnBarnehageplassStatus.verdi ===
+                BarnehageplassVerdier.skalBegynneIBarnehage && (
+                <>
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.skalBegynneIBarnehage.dato.sporsmal'}
+                            />
+                        }
+                        svar={barnehageplass.skalBegynneIBarnehageDato.verdi}
+                    />
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.skalBegynneIBarnehage.kommune.sporsmal'}
+                            />
+                        }
+                        svar={barnehageplass.skalBegynneIBarnehageKommune.verdi}
+                    />
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.skalBegynneIBarnehage.antallTimer.sporsmal'}
+                            />
+                        }
+                        svar={barnehageplass.skalBegynneIBarnehageAntallTimer.verdi}
+                    />
+                </>
+            )}
         </OppsummeringPanel>
     );
 };
