@@ -84,7 +84,7 @@ gemini.suite('soknad-kontantstotte', suite => {
         .capture('oppsummering', function(actions) {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
-                window.document.querySelectorAll('[name="mottarYtelserFraUtland"]')[1].click();
+                window.document.querySelectorAll('[name="mottarYtelserFraUtland"]')[0].click();
             });
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
