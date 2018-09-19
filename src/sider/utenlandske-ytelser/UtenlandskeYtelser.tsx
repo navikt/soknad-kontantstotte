@@ -1,6 +1,4 @@
-import PanelBase from 'nav-frontend-paneler';
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
-import TextareaControlled from 'nav-frontend-skjema/lib/textarea-controlled';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -9,6 +7,7 @@ import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { hentFeltMedFeil } from '../../common/utils';
 import UtenlandskeYtelserIkon from '../../component/Ikoner/UtenlandskeYtelserIkon';
 import SideContainer from '../../component/SideContainer/SideContainer';
+import TilleggsinformasjonInput from '../../component/TilleggsinformasjonInput/TilleggsinformasjonInput';
 import { IRootState } from '../../rootReducer';
 import { soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectFamilieforhold, selectYtelserFraUtland } from '../../soknad/selectors';
@@ -68,28 +67,22 @@ const UtenlandskeYtelser: React.StatelessComponent<UtenlandskeYtelserProps> = ({
                     }}
                     checked={mottarYtelserFraUtland.verdi}
                     radios={[
-                        { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                         { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
+                        { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                     ]}
                     feil={feltMedFeil.mottarYtelserFraUtland}
                 />
                 {mottarYtelserFraUtland.verdi === Svar.JA && (
-                    <PanelBase className={'utenlandske-ytelser__panel'}>
-                        <TextareaControlled
-                            label={intl.formatMessage({
-                                id: 'utenlandskeYtelser.forklaring.hjelpetekst',
-                            })}
-                            defaultValue={mottarYtelserFraUtlandForklaring.verdi}
-                            maxLength={500}
-                            onBlur={(evt: any) => {
-                                settStringFelt(
-                                    'mottarYtelserFraUtlandForklaring' as Feltnavn,
-                                    evt.target.value
-                                );
-                            }}
-                            feil={feltMedFeil.mottarYtelserFraUtlandForklaring}
-                        />
-                    </PanelBase>
+                    <TilleggsinformasjonInput
+                        label={intl.formatMessage({
+                            id: 'utenlandskeYtelser.forklaring.hjelpetekst',
+                        })}
+                        defaultValue={mottarYtelserFraUtlandForklaring}
+                        onBlur={(value: string) => {
+                            settStringFelt('mottarYtelserFraUtlandForklaring' as Feltnavn, value);
+                        }}
+                        feil={feltMedFeil.mottarYtelserFraUtlandForklaring}
+                    />
                 )}
 
                 {borForeldreneSammenMedBarnet.verdi === Svar.JA && (
@@ -112,29 +105,26 @@ const UtenlandskeYtelser: React.StatelessComponent<UtenlandskeYtelserProps> = ({
                         }}
                         checked={mottarAnnenForelderYtelserFraUtland.verdi}
                         radios={[
-                            { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                             { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
+                            { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                         ]}
                         feil={feltMedFeil.mottarAnnenForelderYtelserFraUtland}
                     />
                 )}
                 {mottarAnnenForelderYtelserFraUtland.verdi === Svar.JA && (
-                    <PanelBase className={'utenlandske-ytelser__panel'}>
-                        <TextareaControlled
-                            label={intl.formatMessage({
-                                id: 'utenlandskeYtelser.forklaring.hjelpetekst',
-                            })}
-                            defaultValue={mottarAnnenForelderYtelserFraUtlandForklaring.verdi}
-                            maxLength={500}
-                            onBlur={(evt: any) => {
-                                settStringFelt(
-                                    'mottarAnnenForelderYtelserFraUtlandForklaring' as Feltnavn,
-                                    evt.target.value
-                                );
-                            }}
-                            feil={feltMedFeil.mottarAnnenForelderYtelserFraUtlandForklaring}
-                        />
-                    </PanelBase>
+                    <TilleggsinformasjonInput
+                        label={intl.formatMessage({
+                            id: 'utenlandskeYtelser.forklaring.hjelpetekst',
+                        })}
+                        defaultValue={mottarAnnenForelderYtelserFraUtlandForklaring}
+                        onBlur={(value: string) => {
+                            settStringFelt(
+                                'mottarAnnenForelderYtelserFraUtlandForklaring' as Feltnavn,
+                                value
+                            );
+                        }}
+                        feil={feltMedFeil.mottarAnnenForelderYtelserFraUtlandForklaring}
+                    />
                 )}
             </form>
         </SideContainer>
