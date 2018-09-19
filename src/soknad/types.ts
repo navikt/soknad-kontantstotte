@@ -32,6 +32,7 @@ interface ISoknadState {
     readonly arbeidsforhold: IArbeidsforhold;
     readonly barnehageplass: IBarnehageplass;
     readonly kravTilSoker: IKravTilSoker;
+    readonly oppsummering: IOppsummering;
 }
 
 interface IMineBarn {
@@ -71,11 +72,16 @@ interface IKravTilSoker {
     readonly skalBoMedBarnetINorgeNesteTolvMaaneder: IFelt;
 }
 
+interface IOppsummering {
+    readonly bekreftelse: IFelt;
+}
+
 type minebarnFeltnavn = keyof IMineBarn;
 type familieforholdFeltnavn = keyof IFamilieforhold;
 type arbeidsforholdFeltnavn = keyof IArbeidsforhold;
 type barnehageplassFeltnavn = keyof IBarnehageplass;
 type kravTilSokerFeltnavn = keyof IKravTilSoker;
+type oppsummeringFeltnavn = keyof IOppsummering;
 
 type Stegnavn = keyof ISoknadState;
 type Feltnavn =
@@ -83,7 +89,8 @@ type Feltnavn =
     | familieforholdFeltnavn
     | arbeidsforholdFeltnavn
     | barnehageplassFeltnavn
-    | kravTilSokerFeltnavn;
+    | kravTilSokerFeltnavn
+    | oppsummeringFeltnavn;
 
 export {
     minebarnFeltnavn,
@@ -91,6 +98,7 @@ export {
     arbeidsforholdFeltnavn,
     barnehageplassFeltnavn,
     kravTilSokerFeltnavn,
+    oppsummeringFeltnavn,
     BarnehageplassVerdier,
     Stegnavn,
     Feltnavn,

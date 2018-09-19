@@ -52,6 +52,9 @@ const initialState: ISoknadState = {
         fodselsdato: standardStringInitialFelt,
         navn: standardStringInitialFelt,
     },
+    oppsummering: {
+        bekreftelse: standardSvarInitialFelt,
+    },
 };
 
 function soknadReducer(state = initialState, action: SoknadActionTypes) {

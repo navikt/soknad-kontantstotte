@@ -1,11 +1,11 @@
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { OppsummeringPanel } from './OppsummeringPanel';
+import { OppsummeringSteg } from './OppsummeringSteg';
 
 const KravTilSokerOppsummering: React.StatelessComponent<{}> = () => {
     return (
-        <OppsummeringPanel>
+        <OppsummeringSteg>
             <Element>
                 <FormattedMessage id={'oppsummering.kravtilsoker.tittel'} />
             </Element>
@@ -37,7 +37,7 @@ const KravTilSokerOppsummering: React.StatelessComponent<{}> = () => {
                     id={'oppsummering.kravtilsoker.skalBoMedBarnetINorgeNesteTolvMaaneder'}
                 />
             </Normaltekst>
-        </OppsummeringPanel>
+        </OppsummeringSteg>
     );
 };
 
