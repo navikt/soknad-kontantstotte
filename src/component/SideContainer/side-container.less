@@ -21,6 +21,30 @@
         text-align: center;
     }
 
+    &__hjelpetekst-container {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__hjelpetekst {
+        width: 1.5rem;
+        margin-top: auto;
+        margin-left: 0.75rem;
+    }
+
+    &__modal {
+        width: 90%;
+
+        @media (min-width: 600px) {
+            width: 70%;
+        }
+
+        @media (min-width: 1200px) {
+            width: 55%;
+        }
+    }
+
     & .skjema__legend {
         padding: 1rem 0 0 .5rem;
     }

@@ -7,7 +7,6 @@ import { connect, Dispatch } from 'react-redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { hentFeltMedFeil } from '../../common/utils';
 import Barnehageikon from '../../component/Ikoner/BarnehageIkon';
-import ModalHjelpetekst from '../../component/ModalHjelpetekst/ModalHjelpetekst';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
@@ -45,16 +44,8 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
             className={'barnehage'}
             ikon={<Barnehageikon />}
             tittel={intl.formatMessage({ id: 'barnehageplass.tittel' })}
+            hjelpetekstNokkel={'barnehageplass.hjelpetekst'}
         >
-            <ModalHjelpetekst
-                ariaContentLabel={intl.formatMessage({
-                    id: 'barnehageplass.hjelpetekst.label',
-                })}
-                className={'familieforhold__hjelpetekst'}
-                modalClassName={'familieforhold__modal'}
-                hjelpetekstNokkel={'barnehageplass.hjelpetekst'}
-                hjelpetekstErHtml={true}
-            />
             <p className={classNames('typo-ingress', 'barnehage__ingress')}>
                 {intl.formatMessage({ id: 'barnehageplass.ingress' })}
             </p>

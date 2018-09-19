@@ -1,11 +1,10 @@
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { hentFeltMedFeil } from '../../common/utils';
 import BorSammenIkon from '../../component/Ikoner/BorSammenIkon';
-import ModalHjelpetekst from '../../component/ModalHjelpetekst/ModalHjelpetekst';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg, soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
@@ -42,16 +41,9 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
             className={'familieforhold'}
             ikon={<BorSammenIkon />}
             tittel={intl.formatMessage({ id: 'familieforhold.tittel' })}
+            hjelpetekstNokkel={'familieforhold.hjelpetekst'}
         >
             <form>
-                <ModalHjelpetekst
-                    ariaContentLabel={intl.formatMessage({
-                        id: 'familieforhold.hjelpetekst.label',
-                    })}
-                    className={'familieforhold__hjelpetekst'}
-                    modalClassName={'familieforhold__modal'}
-                    hjelpetekstNokkel={'familieforhold.borForeldreneSammenMedBarnet.hjelpetekst'}
-                />
                 <RadioPanelGruppe
                     legend={intl.formatMessage({
                         id: 'familieforhold.borForeldreneSammenMedBarnet.sporsmal',

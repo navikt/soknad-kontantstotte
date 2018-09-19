@@ -1,6 +1,6 @@
 import Modal from 'nav-frontend-modal';
 import * as React from 'react';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedHTMLMessage } from 'react-intl';
 import Anchor from './Anchor';
 
 interface IModalHjelpetekstState {
@@ -13,7 +13,6 @@ interface IModalHjelpetekstProps {
     ariaContentLabel: string;
     className?: string;
     modalClassName?: string;
-    hjelpetekstErHtml?: boolean;
 }
 
 class ModalHjelpetekst extends React.Component<IModalHjelpetekstProps, IModalHjelpetekstState> {
@@ -29,13 +28,7 @@ class ModalHjelpetekst extends React.Component<IModalHjelpetekstProps, IModalHje
     }
 
     public render() {
-        const {
-            hjelpetekstNokkel,
-            ariaContentLabel,
-            className,
-            modalClassName,
-            hjelpetekstErHtml,
-        } = this.props;
+        const { hjelpetekstNokkel, ariaContentLabel, className, modalClassName } = this.props;
         return (
             <div className={className}>
                 <button
@@ -54,11 +47,7 @@ class ModalHjelpetekst extends React.Component<IModalHjelpetekstProps, IModalHje
                     className={modalClassName}
                 >
                     <p>
-                        {hjelpetekstErHtml ? (
-                            <FormattedHTMLMessage id={hjelpetekstNokkel} />
-                        ) : (
-                            <FormattedMessage id={hjelpetekstNokkel} />
-                        )}
+                        <FormattedHTMLMessage id={hjelpetekstNokkel} />
                     </p>
                 </Modal>
             </div>
