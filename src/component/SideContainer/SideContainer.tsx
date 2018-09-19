@@ -11,7 +11,6 @@ import { soknadNesteSteg } from '../../soknad/actions';
 import { ISteg, stegConfig } from '../../stegConfig';
 import Navigasjon from '../Navigering/Navigasjon';
 import Tilbakeknapp from '../Tilbakeknapp/Tilbakeknapp';
-import ModalHjelpetekst from '../ModalHjelpetekst/ModalHjelpetekst';
 import HjelpetekstContainer from './HjelpetekstContainer';
 
 interface IOwnProps {

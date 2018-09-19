@@ -107,6 +107,8 @@
     "svar.neiHarFaattPlass": "Nei, men har fått plass",
     "tekstomrade.feilmelding": "Du må fylle",
     "tekstomrade.fyllInn": "Fyll inn",
+    "utenlandskeYtelser.hjelpetekst": "Hvis du eller den andre forelderen mottar en ytelse (for eksempel dagpenger, pensjon eller foreldrepenger) som likestilles som arbeidsinntekt fra et annet EØS-land, må vi ha informasjon om dette.",
+    "utenlandskeYtelser.hjelpetekst.label": "Hjelpetekst for spørsmål om utenlandske ytelser",
     "utenlandskeYtelser.forklaring.hjelpetekst": "Oppgi land, utenlandsk id-nummer, adresse i landene og perioder",
     "utenlandskeYtelser.mottarAnnenForelderYtelserFraUtland.annenForelder": "annen forelder",
     "utenlandskeYtelser.mottarAnnenForelderYtelserFraUtland.sporsmal": "Mottar annen forelder ytelser fra utlandet?",
