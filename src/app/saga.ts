@@ -63,7 +63,7 @@ function* startAppSaga(): SagaIterator {
 }
 
 function* urlEndretSaga(action: ILocationChangeAction): SagaIterator {
-    const appSteg = yield select(selectAppSteg);
+    /*const appSteg = yield select(selectAppSteg);
     const naavaerendeSide = Object.values(stegConfig).find(
         (side: ISteg) => side.path === action.payload.location.pathname
     );
@@ -77,7 +77,7 @@ function* urlEndretSaga(action: ILocationChangeAction): SagaIterator {
     } else if (naavaerendeSide && naavaerendeSide.stegIndeks < appSteg) {
         yield put(appSettSteg(naavaerendeSide.stegIndeks));
         yield put(replace(naavaerendeSide.path));
-    }
+    }*/
 }
 
 function* tilStegSaga(steg: number) {

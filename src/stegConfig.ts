@@ -5,6 +5,7 @@ import FamilieforholdSide from './sider/familieforhold/Familieforhold';
 import KravTilSoker from './sider/krav-til-soker/KravTilSoker';
 import MineBarnSide from './sider/mine-barn/MineBarn';
 import OppsummeringSide from './sider/oppsummering/Oppsummering';
+import TilknytningTilUtland from './sider/tilknytning-utland/TilknytningTilUtland';
 import UtenlandskeYtelser from './sider/utenlandske-ytelser/UtenlandskeYtelser';
 import Veiledning from './sider/veiledning/Veiledning';
 
@@ -16,6 +17,7 @@ interface IStegConfig {
     barnehageplass: ISteg;
     arbeidsforhold: ISteg;
     utenlandskeYtelser: ISteg;
+    tilknytningTilUtland: ISteg;
     oppsummering: ISteg;
 }
 
@@ -46,35 +48,41 @@ const stegConfig: IStegConfig = {
         path: '/mine-barn',
         stegIndeks: 2,
     },
-    familieforhold: {
-        component: FamilieforholdSide,
-        key: 'familieforhold',
-        path: '/familieforhold',
-        stegIndeks: 3,
-    },
     barnehageplass: {
         component: BarnehageplassSide,
         key: 'barnehageplass',
         path: '/barnehageplass',
+        stegIndeks: 3,
+    },
+    familieforhold: {
+        component: FamilieforholdSide,
+        key: 'familieforhold',
+        path: '/familieforhold',
         stegIndeks: 4,
+    },
+    tilknytningTilUtland: {
+        component: TilknytningTilUtland,
+        key: 'tilknytningTilUtland',
+        path: '/tilknytning-utland',
+        stegIndeks: 5,
     },
     arbeidsforhold: {
         component: ArbeidsforholdSide,
         key: 'arbeidsforhold',
         path: '/arbeidsforhold',
-        stegIndeks: 5,
+        stegIndeks: 6,
     },
     utenlandskeYtelser: {
         component: UtenlandskeYtelser,
         key: 'utenlandskeYtelser',
         path: '/utenlandske-ytelser',
-        stegIndeks: 6,
+        stegIndeks: 7,
     },
     oppsummering: {
         component: OppsummeringSide,
         key: 'oppsummering',
         path: '/oppsummering',
-        stegIndeks: 7,
+        stegIndeks: 8,
     },
 };
 /* tslint:enable:object-literal-sort-keys */

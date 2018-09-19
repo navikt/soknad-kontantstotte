@@ -1,4 +1,10 @@
-import { BarnehageplassVerdier, IFelt, Svar, ValideringsStatus } from './types';
+import {
+    BarnehageplassVerdier,
+    IFelt,
+    Svar,
+    TilknytningTilUtlandVerdier,
+    ValideringsStatus,
+} from './types';
 
 export const harTekstomradeInnhold = (verdi?: string): boolean => {
     return verdi ? verdi.length > 0 : false;
@@ -34,6 +40,12 @@ const harSvart = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
 
 const harSvartBarnehageplassVerdiMedFeilmelding = (felt: IFelt): IFelt => {
     return felt.verdi !== BarnehageplassVerdier.Ubesvart
+        ? ok(felt)
+        : feil(felt, 'feilmelding.generell.feilmelding');
+};
+
+const harSvartTilknytningTilUtlandVerdiMedFeilmelding = (felt: IFelt): IFelt => {
+    return felt.verdi !== TilknytningTilUtlandVerdier.Ubesvart
         ? ok(felt)
         : feil(felt, 'feilmelding.generell.feilmelding');
 };
@@ -79,6 +91,7 @@ export {
     harSvart,
     harSvartMedFeilmelding,
     harSvartBarnehageplassVerdiMedFeilmelding,
+    harSvartTilknytningTilUtlandVerdiMedFeilmelding,
     harSvartJa,
     harSvartJaMedFeilmelding,
     harSvartTekstMedFeilmelding,

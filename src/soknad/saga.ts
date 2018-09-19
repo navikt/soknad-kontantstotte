@@ -17,6 +17,7 @@ import {
     sjekkValideringForBarnehageplass,
     sjekkValideringForFamilieforhold,
     sjekkValideringForSteg,
+    sjekkValideringForTilknytningTilUtland,
     sjekkValideringForUtenlandskeYtelser,
 } from './stegSagaValidators';
 import {
@@ -29,6 +30,7 @@ import {
     kravTilSokerFeltnavn,
     minebarnFeltnavn,
     Stegnavn,
+    tilknytningTilUtlandFeltnavn,
     utenlandskeYtelserFeltnavn,
     ValideringsStatus,
 } from './types';
@@ -75,6 +77,11 @@ function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
         case 'utenlandskeYtelser':
             validertFelt = valideringsConfig.utenlandskeYtelser[
                 action.feltnavn as utenlandskeYtelserFeltnavn
+            ](feltMedOppdatertVerdi);
+            break;
+        case 'tilknytningTilUtland':
+            validertFelt = valideringsConfig.tilknytningTilUtland[
+                action.feltnavn as tilknytningTilUtlandFeltnavn
             ](feltMedOppdatertVerdi);
             break;
     }
@@ -129,6 +136,12 @@ function* nesteStegSaga() {
                 sjekkValideringForUtenlandskeYtelser,
                 soknadState.familieforhold,
                 soknadState.utenlandskeYtelser
+            );
+            break;
+        case 'tilknytningTilUtland':
+            harFeil = yield call(
+                sjekkValideringForTilknytningTilUtland,
+                soknadState.tilknytningTilUtland
             );
             break;
         default:

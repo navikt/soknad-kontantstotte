@@ -4,9 +4,11 @@ import {
     IBarnehageplass,
     IFamilieforhold,
     IFelt,
+    ITilknytningTilUtland,
     IUtenlandskeYtelser,
     Stegnavn,
     Svar,
+    TilknytningTilUtlandVerdier,
     ValideringsStatus,
 } from './types';
 
@@ -121,10 +123,23 @@ function* sjekkValideringForUtenlandskeYtelser(
     return harFeil;
 }
 
+function* sjekkValideringForTilknytningTilUtland(tilknytningTilUtland: ITilknytningTilUtland) {
+    const boddEllerJobbetINorgeSisteFemAarVerdi = tilknytningTilUtland
+        .boddEllerJobbetINorgeMinstFemAar.verdi as TilknytningTilUtlandVerdier;
+    const boddEllerJobbetINorgeSisteFemAarValideringsStatus =
+        tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.valideringsStatus;
+
+    return (
+        boddEllerJobbetINorgeSisteFemAarVerdi !== TilknytningTilUtlandVerdier.Ubesvart &&
+        boddEllerJobbetINorgeSisteFemAarValideringsStatus === ValideringsStatus.OK
+    );
+}
+
 export {
     sjekkValideringForSteg,
     sjekkValideringForArbeidsforhold,
     sjekkValideringForBarnehageplass,
     sjekkValideringForFamilieforhold,
+    sjekkValideringForTilknytningTilUtland,
     sjekkValideringForUtenlandskeYtelser,
 };
