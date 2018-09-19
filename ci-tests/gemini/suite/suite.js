@@ -83,6 +83,11 @@ gemini.suite('soknad-kontantstotte', suite => {
         })
         .capture('kvittering', function(actions) {
             actions.executeJS(enableHover);
+            actions.executeJS(function(window) {
+                window.document
+                    .querySelectorAll('.oppsummering__bekreftelse .inputPanel__field')[0]
+                    .click();
+            });
             actions.click('.knapp.knapp--hoved');
             actions.wait(2000);
             actions.waitForElementToShow('.kvittering__tittel', 5000);
