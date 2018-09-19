@@ -14,6 +14,7 @@ import { selectBarnehageplass } from '../../soknad/selectors';
 import { BarnehageplassVerdier, Feltnavn, IBarnehageplass, Svar } from '../../soknad/types';
 import BarnehageplassHarSluttetInfo from './BarnehageplassHarSluttetInfo';
 import BarnehageplassStatus from './BarnehageplassStatus';
+import HarBarnehageplassInfo from './HarBarnehageplassInfo';
 
 interface IMapDispatchToProps {
     nullstillNesteSteg: () => void;
@@ -85,6 +86,15 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                             <BarnehageplassHarSluttetInfo
                                 intl={intl}
                                 feltMedFeil={feltMedFeil}
+                                settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
+                            />
+                        )}
+
+                        {barnBarnehageplassStatus.verdi ===
+                            BarnehageplassVerdier.harBarnehageplass && (
+                            <HarBarnehageplassInfo
+                                feltMedFeil={feltMedFeil}
+                                intl={intl}
                                 settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
                             />
                         )}
