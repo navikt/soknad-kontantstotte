@@ -34,6 +34,21 @@ import {
 } from './types';
 import valideringsConfig from './valideringsConfig';
 
+function kjorValideringsFunksjoner(
+    valideringsFunksjoner: Array<((felt: IFelt) => IFelt)>,
+    felt: IFelt
+): IFelt {
+    const validertFelt: IFelt = valideringsFunksjoner.reduce(
+        (acc: IFelt, valideringsFunksjon) => {
+            const nyttValidertFelt = valideringsFunksjon(felt);
+            return acc.valideringsStatus === ValideringsStatus.FEIL ? acc : nyttValidertFelt;
+        },
+        { verdi: '', valideringsStatus: ValideringsStatus.IKKE_VALIDERT, feilmeldingsNokkel: '' }
+    );
+
+    return validertFelt;
+}
+
 function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
     const soknadState = yield select(selectSoknad);
     const feltMedOppdatertVerdi = {
@@ -48,34 +63,40 @@ function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
     };
     switch (action.stegnavn) {
         case 'arbeidsforhold':
-            validertFelt = valideringsConfig.arbeidsforhold[
-                action.feltnavn as arbeidsforholdFeltnavn
-            ](feltMedOppdatertVerdi);
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.arbeidsforhold[action.feltnavn as arbeidsforholdFeltnavn],
+                feltMedOppdatertVerdi
+            );
             break;
         case 'barnehageplass':
-            validertFelt = valideringsConfig.barnehageplass[
-                action.feltnavn as barnehageplassFeltnavn
-            ](feltMedOppdatertVerdi);
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.barnehageplass[action.feltnavn as barnehageplassFeltnavn],
+                feltMedOppdatertVerdi
+            );
             break;
         case 'familieforhold':
-            validertFelt = valideringsConfig.familieforhold[
-                action.feltnavn as familieforholdFeltnavn
-            ](feltMedOppdatertVerdi);
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.familieforhold[action.feltnavn as familieforholdFeltnavn],
+                feltMedOppdatertVerdi
+            );
             break;
         case 'kravTilSoker':
-            validertFelt = valideringsConfig.kravTilSoker[action.feltnavn as kravTilSokerFeltnavn](
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.kravTilSoker[action.feltnavn as kravTilSokerFeltnavn],
                 feltMedOppdatertVerdi
             );
             break;
         case 'mineBarn':
-            validertFelt = valideringsConfig.mineBarn[action.feltnavn as minebarnFeltnavn](
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.mineBarn[action.feltnavn as minebarnFeltnavn],
                 feltMedOppdatertVerdi
             );
             break;
         case 'utenlandskeYtelser':
-            validertFelt = valideringsConfig.utenlandskeYtelser[
-                action.feltnavn as utenlandskeYtelserFeltnavn
-            ](feltMedOppdatertVerdi);
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.utenlandskeYtelser[action.feltnavn as utenlandskeYtelserFeltnavn],
+                feltMedOppdatertVerdi
+            );
             break;
     }
 
