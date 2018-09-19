@@ -2,6 +2,8 @@ import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
+import { selectHarForsoktNesteSteg } from '../../app/selectors';
+import { hentFeltMedFeil } from '../../common/utils';
 import TimeglassIkon from '../../component/Ikoner/TimeglassIkon';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
@@ -18,6 +20,7 @@ import {
 interface IMapStateToProps {
     familieforhold: IFamilieforhold;
     tilknytningTilUtland: ITilknytningTilUtland;
+    harForsoktNesteSteg: boolean;
 }
 
 interface IMapDispatchToProps {
@@ -32,6 +35,7 @@ type TilknytningTilUtland = IMapStateToProps & IMapDispatchToProps & InjectedInt
 const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
     intl,
     familieforhold,
+    harForsoktNesteSteg,
     tilknytningTilUtland,
     settTilknytningTilUtlandVerdiFelt,
 }) => {
@@ -39,6 +43,9 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
         boddEllerJobbetINorgeMinstFemAar,
         annenForelderBoddEllerJobbetINorgeMinstFemAar,
     } = tilknytningTilUtland;
+
+    const feltMedFeil = hentFeltMedFeil(tilknytningTilUtland, harForsoktNesteSteg, intl);
+
     return (
         <SideContainer
             tittel={intl.formatMessage({ id: 'tilknytningTilUtland.tittel' })}
@@ -77,6 +84,7 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
                         value: TilknytningTilUtlandVerdier.nei,
                     },
                 ]}
+                feil={feltMedFeil.boddEllerJobbetINorgeMinstFemAar}
             />
             {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA && (
                 <RadioPanelGruppe
@@ -113,6 +121,7 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
                             value: TilknytningTilUtlandVerdier.nei,
                         },
                     ]}
+                    feil={feltMedFeil.annenForelderBoddEllerJobbetINorgeMinstFemAar}
                 />
             )}
         </SideContainer>
@@ -122,6 +131,7 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         familieforhold: selectFamilieforhold(state),
+        harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         tilknytningTilUtland: selectTilknytningTilUtland(state),
     };
 };
