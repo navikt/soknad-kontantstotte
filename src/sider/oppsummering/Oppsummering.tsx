@@ -5,7 +5,6 @@ import SideContainer from '../../component/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { selectSoknad } from '../../soknad/selectors';
 import { ISoknadState } from '../../soknad/types';
-import ArbeidsforholdOppsummering from './ArbeidsforholdOppsummering';
 import BarnehageplassOppsummering from './BarnehageplassOppsummering';
 import FamilieforholdOppsummering from './FamilieforholdOppsummering';
 import KravTilSokerOppsummering from './KravTilSokerOppsummering';
@@ -30,7 +29,6 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({ intl, s
                 <KravTilSokerOppsummering intl={intl} kravTilSoker={soknad.kravTilSoker} />
                 <FamilieforholdOppsummering intl={intl} familieforhold={soknad.familieforhold} />
                 <BarnehageplassOppsummering intl={intl} barnehageplass={soknad.barnehageplass} />
-                <ArbeidsforholdOppsummering intl={intl} arbeidsforhold={soknad.arbeidsforhold} />
                 <UtenlandskeYtelserOppsummering
                     intl={intl}
                     familieforhold={soknad.familieforhold}

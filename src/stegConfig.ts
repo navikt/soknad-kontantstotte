@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ArbeidsforholdSide from './sider/arbeidsforhold/Arbeidsforhold';
+import ArbeidIUtlandet from './sider/arbeid-i-utlandet/ArbeidIUtlandet';
 import BarnehageplassSide from './sider/barnehageplass/Barnehageplass';
 import FamilieforholdSide from './sider/familieforhold/Familieforhold';
 import KravTilSoker from './sider/krav-til-soker/KravTilSoker';
@@ -14,7 +14,7 @@ interface IStegConfig {
     mineBarn: ISteg;
     familieforhold: ISteg;
     barnehageplass: ISteg;
-    arbeidsforhold: ISteg;
+    arbeidIUtlandet: ISteg;
     utenlandskeYtelser: ISteg;
     oppsummering: ISteg;
 }
@@ -58,10 +58,10 @@ const stegConfig: IStegConfig = {
         path: '/barnehageplass',
         stegIndeks: 4,
     },
-    arbeidsforhold: {
-        component: ArbeidsforholdSide,
-        key: 'arbeidsforhold',
-        path: '/arbeidsforhold',
+    arbeidIUtlandet: {
+        component: ArbeidIUtlandet,
+        key: 'arbeidIUtlandet',
+        path: '/arbeid-i-utlandet',
         stegIndeks: 5,
     },
     utenlandskeYtelser: {

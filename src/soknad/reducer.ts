@@ -20,13 +20,11 @@ const standardBarnehageplassVerdiInitialFelt = {
 };
 
 const initialState: ISoknadState = {
-    arbeidsforhold: {
+    arbeidIUtlandet: {
+        arbeiderAnnenForelderIUtlandet: standardSvarInitialFelt,
+        arbeiderAnnenForelderIUtlandetForklaring: standardStringInitialFelt,
         arbeiderIUtlandetEllerKontinentalsokkel: standardSvarInitialFelt,
         arbeiderIUtlandetEllerKontinentalsokkelForklaring: standardStringInitialFelt,
-        mottarKontantstotteFraAnnetEOS: standardSvarInitialFelt,
-        mottarKontantstotteFraAnnetEOSForklaring: standardStringInitialFelt,
-        mottarYtelserFraUtlandet: standardSvarInitialFelt,
-        mottarYtelserFraUtlandetForklaring: standardStringInitialFelt,
     },
     barnehageplass: {
         barnBarnehageplassStatus: standardBarnehageplassVerdiInitialFelt,

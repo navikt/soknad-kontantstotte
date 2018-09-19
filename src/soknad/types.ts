@@ -29,7 +29,7 @@ interface IFelt {
 interface ISoknadState {
     readonly mineBarn: IMineBarn;
     readonly familieforhold: IFamilieforhold;
-    readonly arbeidsforhold: IArbeidsforhold;
+    readonly arbeidIUtlandet: IArbeidIUtlandet;
     readonly barnehageplass: IBarnehageplass;
     readonly kravTilSoker: IKravTilSoker;
     readonly utenlandskeYtelser: IUtenlandskeYtelser;
@@ -44,15 +44,6 @@ interface IFamilieforhold {
     readonly borForeldreneSammenMedBarnet: IFelt;
     readonly annenForelderNavn: IFelt;
     readonly annenForelderFodselsnummer: IFelt;
-}
-
-interface IArbeidsforhold {
-    readonly mottarYtelserFraUtlandet: IFelt;
-    readonly mottarYtelserFraUtlandetForklaring: IFelt;
-    readonly arbeiderIUtlandetEllerKontinentalsokkel: IFelt;
-    readonly arbeiderIUtlandetEllerKontinentalsokkelForklaring: IFelt;
-    readonly mottarKontantstotteFraAnnetEOS: IFelt;
-    readonly mottarKontantstotteFraAnnetEOSForklaring: IFelt;
 }
 
 interface IBarnehageplass {
@@ -72,6 +63,13 @@ interface IKravTilSoker {
     readonly skalBoMedBarnetINorgeNesteTolvMaaneder: IFelt;
 }
 
+interface IArbeidIUtlandet {
+    readonly arbeiderIUtlandetEllerKontinentalsokkel: IFelt;
+    readonly arbeiderIUtlandetEllerKontinentalsokkelForklaring: IFelt;
+    readonly arbeiderAnnenForelderIUtlandet: IFelt;
+    readonly arbeiderAnnenForelderIUtlandetForklaring: IFelt;
+}
+
 interface IUtenlandskeYtelser {
     readonly mottarYtelserFraUtland: IFelt;
     readonly mottarYtelserFraUtlandForklaring: IFelt;
@@ -81,31 +79,31 @@ interface IUtenlandskeYtelser {
 
 type minebarnFeltnavn = keyof IMineBarn;
 type familieforholdFeltnavn = keyof IFamilieforhold;
-type arbeidsforholdFeltnavn = keyof IArbeidsforhold;
 type barnehageplassFeltnavn = keyof IBarnehageplass;
 type kravTilSokerFeltnavn = keyof IKravTilSoker;
 type utenlandskeYtelserFeltnavn = keyof IUtenlandskeYtelser;
+type arbeidIUtlandetFeltnavn = keyof IArbeidIUtlandet;
 
 type Stegnavn = keyof ISoknadState;
 type Feltnavn =
     | minebarnFeltnavn
     | familieforholdFeltnavn
-    | arbeidsforholdFeltnavn
     | barnehageplassFeltnavn
     | kravTilSokerFeltnavn
+    | arbeidIUtlandetFeltnavn
     | utenlandskeYtelserFeltnavn;
 
 export {
     minebarnFeltnavn,
     familieforholdFeltnavn,
-    arbeidsforholdFeltnavn,
+    arbeidIUtlandetFeltnavn,
     barnehageplassFeltnavn,
     kravTilSokerFeltnavn,
     utenlandskeYtelserFeltnavn,
     BarnehageplassVerdier,
     Stegnavn,
     Feltnavn,
-    IArbeidsforhold,
+    IArbeidIUtlandet,
     IBarnehageplass,
     IFamilieforhold,
     IKravTilSoker,
