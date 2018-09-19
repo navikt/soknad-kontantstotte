@@ -1,41 +1,5 @@
 .barnehage {
-    max-width: 60rem;
-    margin: 0 auto;
-
-    &__ikon {
-        width: 4rem;
-        margin: 0 auto;
-    }
-
-    &__tittelcontainer {
-        margin-top: 1rem;
-        display: flex;
-        justify-content: center;
-    }
-
-    &__sidetittel {
-        text-align: center;
-    }
-
-    &__hjelpetekst {
-        width: 1.5rem;
-        margin-top: auto;
-        margin-left: 0.75rem;
-    }
-
-    &__modal {
-        width: 90%;
-
-        @media (min-width: 600px) {
-            width: 70%;
-        }
-
-        @media (min-width: 1200px) {
-            width: 55%;
-        }
-    }
-
-    &__info {
+    &__ingress {
         font-size: 1rem;
         line-height: 1.4rem;
         margin: 0 auto;
@@ -44,59 +8,32 @@
         text-align: center;
     }
 
-    & .skjema__legend {
-        padding-left: .5rem;
+    &__tittelcontainer {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    &__hjelpetekst {
+      width: 1.5rem;
+      margin-top: auto;
+      margin-left: 0.75rem;
+    }
+
+    &__modal {
+      width: 90%;
+
+      @media (min-width: 600px) {
+        width: 70%;
+      }
+
+      @media (min-width: 1200px) {
+        width: 55%;
+      }
     }
 
     &__panel {
-        background-color: #e7e9e9;
+        background-color: @panelBakgrunn;
         margin: 0 .5rem;
-    }
-
-    &__inputPanelGruppe {
-        & .inputPanel {
-            width: calc(100%/2 - 1rem);
-            margin: .5rem;
-        }
-
-        @media (max-width: 600px) {
-            & .inputPanel {
-                width: 100%;
-            }
-        }
-        
-        & .inputPanelGruppe__inner {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        & .skjemaelement__feilmelding {
-            padding-left: .5rem;
-        }
-    }
-
-    &__inputSkjemaGruppe {
-        & .inputElement {
-            width: calc(100%/2 - 1rem);
-            margin: .5rem;
-        }
-
-        @media (max-width: 600px) {
-            & .inputElement {
-                width: 100%;
-            }
-        }
-
-        & .inputSkjemaGruppe__inner {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: left;
-            align-items: flex-end;
-        }
-
-        & .skjemaelement__feilmelding {
-            padding-left: .5rem;
-        }
     }
 }

@@ -41,25 +41,21 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     const feltMedFeil = hentFeltMedFeil(barnehageplass, harForsoktNesteSteg, intl);
 
     return (
-        <SideContainer className={'barnehage'}>
-            <div className={'barnehage__ikon'}>
-                <Barnehageikon />
-            </div>
-            <div className={'barnehage__tittelcontainer'}>
-                <h3 className={'typo-innholdstittel barnehage__sidetittel'}>
-                    {intl.formatMessage({ id: 'barnehageplass.tittel' })}
-                </h3>
-                <ModalHjelpetekst
-                    ariaContentLabel={intl.formatMessage({
-                        id: 'barnehageplass.hjelpetekst.label',
-                    })}
-                    className={'familieforhold__hjelpetekst'}
-                    modalClassName={'familieforhold__modal'}
-                    hjelpetekstNokkel={'barnehageplass.hjelpetekst'}
-                    hjelpetekstErHtml={true}
-                />
-            </div>
-            <p className={classNames('typo-ingress', 'barnehage__info')}>
+        <SideContainer
+            className={'barnehage'}
+            ikon={<Barnehageikon />}
+            tittel={intl.formatMessage({ id: 'barnehageplass.tittel' })}
+        >
+            <ModalHjelpetekst
+                ariaContentLabel={intl.formatMessage({
+                    id: 'barnehageplass.hjelpetekst.label',
+                })}
+                className={'familieforhold__hjelpetekst'}
+                modalClassName={'familieforhold__modal'}
+                hjelpetekstNokkel={'barnehageplass.hjelpetekst'}
+                hjelpetekstErHtml={true}
+            />
+            <p className={classNames('typo-ingress', 'barnehage__ingress')}>
                 {intl.formatMessage({ id: 'barnehageplass.ingress' })}
             </p>
 
@@ -69,7 +65,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                         id: 'barnehageplass.harPlass',
                     })}
                     name={'harBarnehageplass'}
-                    className={'barnehage__inputPanelGruppe'}
+                    className={'soknad__inputPanelGruppe'}
                     onChange={(evt: {}, value: string) => {
                         settSvarFelt('harBarnehageplass' as Feltnavn, value as Svar);
                         settBarnehageplassVerdiFelt(
@@ -80,8 +76,8 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                     }}
                     checked={harBarnehageplass.verdi}
                     radios={[
-                        { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
                         { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
+                        { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
                     ]}
                     feil={feltMedFeil.harBarnehageplass}
                 />
