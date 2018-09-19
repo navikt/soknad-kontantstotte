@@ -57,7 +57,7 @@ gemini.suite('soknad-kontantstotte', suite => {
         .capture('arbeidsforhold', function(actions) {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
-                window.document.querySelectorAll('[name="harBarnehageplass"]')[0].click();
+                window.document.querySelectorAll('[name="harBarnehageplass"]')[1].click();
                 window.document.querySelectorAll('[name="barnBarnehageplassStatus"]')[0].click();
             });
             actions.click('.knapp.knapp--hoved');
@@ -65,7 +65,7 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.click('h1');
             actions.executeJS(disableHover);
         })
-        .capture('oppsummering', function(actions) {
+        .capture('utenlandske-ytelser', function(actions) {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
                 window.document.querySelectorAll('[name="mottarYtelserFraUtlandet"]')[1].click();
@@ -75,6 +75,16 @@ gemini.suite('soknad-kontantstotte', suite => {
                 window.document
                     .querySelectorAll('[name="mottarKontantstotteFraAnnetEOS"]')[1]
                     .click();
+            });
+            actions.click('.knapp.knapp--hoved');
+            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.click('h1');
+            actions.executeJS(disableHover);
+        })
+        .capture('oppsummering', function(actions) {
+            actions.executeJS(enableHover);
+            actions.executeJS(function(window) {
+                window.document.querySelectorAll('[name="mottarYtelserFraUtland"]')[0].click();
             });
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
