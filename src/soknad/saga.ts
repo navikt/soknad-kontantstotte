@@ -141,7 +141,8 @@ function* nesteStegSaga() {
         case 'tilknytningTilUtland':
             harFeil = yield call(
                 sjekkValideringForTilknytningTilUtland,
-                soknadState.tilknytningTilUtland
+                soknadState.tilknytningTilUtland,
+                soknadState.familieforhold
             );
             break;
         default:

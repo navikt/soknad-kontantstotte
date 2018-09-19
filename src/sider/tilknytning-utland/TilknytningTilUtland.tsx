@@ -11,6 +11,7 @@ import {
     Feltnavn,
     IFamilieforhold,
     ITilknytningTilUtland,
+    Svar,
     TilknytningTilUtlandVerdier,
 } from '../../soknad/types';
 
@@ -30,10 +31,14 @@ type TilknytningTilUtland = IMapStateToProps & IMapDispatchToProps & InjectedInt
 
 const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
     intl,
+    familieforhold,
     tilknytningTilUtland,
     settTilknytningTilUtlandVerdiFelt,
 }) => {
-    const { boddEllerJobbetINorgeMinstFemAar } = tilknytningTilUtland;
+    const {
+        boddEllerJobbetINorgeMinstFemAar,
+        annenForelderBoddEllerJobbetINorgeMinstFemAar,
+    } = tilknytningTilUtland;
     return (
         <SideContainer
             tittel={intl.formatMessage({ id: 'tilknytningTilUtland.tittel' })}
@@ -73,6 +78,43 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
                     },
                 ]}
             />
+            {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA && (
+                <RadioPanelGruppe
+                    legend={intl.formatMessage({
+                        id:
+                            'tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.sporsmal',
+                    })}
+                    name={'annenForelderBoddEllerJobbetINorgeMinstFemAar'}
+                    className={'soknad__inputPanelGruppe'}
+                    onChange={(evt: {}, value: string) => {
+                        settTilknytningTilUtlandVerdiFelt(
+                            'annenForelderBoddEllerJobbetINorgeMinstFemAar' as Feltnavn,
+                            value as TilknytningTilUtlandVerdier
+                        );
+                    }}
+                    checked={annenForelderBoddEllerJobbetINorgeMinstFemAar.verdi}
+                    radios={[
+                        {
+                            label: intl.formatMessage({ id: 'tilknytningTilUtland.svar.jaINorge' }),
+                            value: TilknytningTilUtlandVerdier.jaINorge,
+                        },
+                        {
+                            label: intl.formatMessage({ id: 'tilknytningTilUtland.svar.jaIEOS' }),
+                            value: TilknytningTilUtlandVerdier.jaIEOS,
+                        },
+                        {
+                            label: intl.formatMessage({
+                                id: 'tilknytningTilUtland.svar.jaLeggerSammenPerioderEOS',
+                            }),
+                            value: TilknytningTilUtlandVerdier.jaLeggerSammenPerioderEOS,
+                        },
+                        {
+                            label: intl.formatMessage({ id: 'tilknytningTilUtland.svar.nei' }),
+                            value: TilknytningTilUtlandVerdier.nei,
+                        },
+                    ]}
+                />
+            )}
         </SideContainer>
     );
 };

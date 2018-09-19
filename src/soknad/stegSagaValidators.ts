@@ -123,16 +123,22 @@ function* sjekkValideringForUtenlandskeYtelser(
     return harFeil;
 }
 
-function* sjekkValideringForTilknytningTilUtland(tilknytningTilUtland: ITilknytningTilUtland) {
-    const boddEllerJobbetINorgeSisteFemAarVerdi = tilknytningTilUtland
-        .boddEllerJobbetINorgeMinstFemAar.verdi as TilknytningTilUtlandVerdier;
-    const boddEllerJobbetINorgeSisteFemAarValideringsStatus =
-        tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.valideringsStatus;
+function* sjekkValideringForTilknytningTilUtland(
+    tilknytningTilUtland: ITilknytningTilUtland,
+    familieforhold: IFamilieforhold
+) {
+    let harFeil =
+        tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.valideringsStatus !==
+        ValideringsStatus.OK;
 
-    return (
-        boddEllerJobbetINorgeSisteFemAarVerdi !== TilknytningTilUtlandVerdier.Ubesvart &&
-        boddEllerJobbetINorgeSisteFemAarValideringsStatus === ValideringsStatus.OK
-    );
+    if (familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA) {
+        harFeil =
+            harFeil ||
+            tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.valideringsStatus !==
+                ValideringsStatus.OK;
+    }
+
+    return harFeil;
 }
 
 export {
