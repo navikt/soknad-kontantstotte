@@ -1,7 +1,4 @@
 .krav {
-    max-width: 60rem;
-    margin: 0 auto;
-    
     &__velkomst-melding {
         margin-bottom: 0px;
     }
@@ -10,28 +7,5 @@
         box-shadow: unset;
         padding-bottom: 1rem;
         margin-bottom: 0;
-    }
-    
-    &__inputPanelGruppe {
-        & .inputPanel {
-            width: calc(100%/2 - 1rem);
-            margin: .5rem;
-        }
-
-        @media (max-width: 600px) {
-            & .inputPanel {
-                width: 100%;
-            }
-        }
-        
-        & .inputPanelGruppe__inner {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        & .skjemaelement__feilmelding {
-            padding-left: .5rem;
-        }
     }
 }
