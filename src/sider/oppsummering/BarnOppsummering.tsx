@@ -1,7 +1,7 @@
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { IBarn } from '../../person/types';
 import { OppsummeringPanel } from './OppsummeringPanel';
-import { FormattedMessage } from 'react-intl';
 import { SporsmalSvar } from './SporsmalSvar';
 
 interface IBarnOppsummeringProps {
