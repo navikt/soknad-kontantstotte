@@ -22,7 +22,6 @@
     }
 
     &__hjelpetekst-container {
-        margin-top: 1rem;
         display: flex;
         justify-content: center;
     }
@@ -37,7 +36,11 @@
         width: 100%;
 
         @media (min-width: 600px) {
-            width: calc(100%/2 - 1rem);;
+            width: calc((100%/3)*2 - 1rem);
+        }
+
+        @media(min-width: 1200px) {
+            width: calc(100%/2 - 1rem);
         }
     }
 
