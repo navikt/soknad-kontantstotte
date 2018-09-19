@@ -1,41 +1,42 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import SideContainer from '../../component/SideContainer/SideContainer';
-import SoknadPanel from '../../component/SoknadPanel/SoknadPanel';
 import { IRootState } from '../../rootReducer';
 import { selectSoknad } from '../../soknad/selectors';
 import { ISoknadState } from '../../soknad/types';
+import ArbeidsforholdOppsummering from './ArbeidsforholdOppsummering';
 import BarnehageplassOppsummering from './BarnehageplassOppsummering';
-import { BarnOppsummering } from './BarnOppsummering';
 import FamilieforholdOppsummering from './FamilieforholdOppsummering';
 import KravTilSokerOppsummering from './KravTilSokerOppsummering';
-import PersonaliaOppsummering from './PersonaliaOppsummering';
+import PersonaliaOgBarnOppsummering from './PersonaliaOgBarnOppsummering';
 import UtenlandskeYtelserOppsummering from './UtenlandskeYtelserOppsummering';
 
 interface IMapStateToProps {
     soknad: ISoknadState;
 }
 
-type OppsummeringSideProps = IMapStateToProps;
-const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({ soknad }) => {
+type OppsummeringSideProps = IMapStateToProps & InjectedIntlProps;
+const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({ intl, soknad }) => {
     return (
-        <SideContainer className={'oppsummering'}>
-            <h3 className={'typo-innholdstittel oppsummering__tittel'}>
-                <FormattedMessage id={'oppsummering.tittel'} />
-            </h3>
+        <SideContainer>
+            <h1>Oversikt over hva du har fylt ut</h1>
 
-            <SoknadPanel>
-                <PersonaliaOppsummering person={{ navn: '', fodselsnummer: '' }} />
-                <KravTilSokerOppsummering />
-                <BarnOppsummering barn={soknad.mineBarn} />
-                <BarnehageplassOppsummering barnehageplass={soknad.barnehageplass} />
-                <FamilieforholdOppsummering familieforhold={soknad.familieforhold} />
+            <ul>
+                <PersonaliaOgBarnOppsummering
+                    person={{ navn: '', fodselsnummer: '' }}
+                    barnet={soknad.mineBarn}
+                />
+                <KravTilSokerOppsummering intl={intl} kravTilSoker={soknad.kravTilSoker} />
+                <FamilieforholdOppsummering intl={intl} familieforhold={soknad.familieforhold} />
+                <BarnehageplassOppsummering intl={intl} barnehageplass={soknad.barnehageplass} />
+                <ArbeidsforholdOppsummering intl={intl} arbeidsforhold={soknad.arbeidsforhold} />
                 <UtenlandskeYtelserOppsummering
+                    intl={intl}
                     familieforhold={soknad.familieforhold}
                     utenlandskeYtelser={soknad.utenlandskeYtelser}
                 />
-            </SoknadPanel>
+            </ul>
         </SideContainer>
     );
 };
@@ -46,4 +47,4 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     };
 };
 
-export default connect(mapStateToProps)(Oppsummering);
+export default connect(mapStateToProps)(injectIntl(Oppsummering));

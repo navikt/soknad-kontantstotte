@@ -1,51 +1,60 @@
 import Element from 'nav-frontend-typografi/lib/element';
+import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { InjectedIntl } from 'react-intl';
 import { IFamilieforhold, Svar } from '../../soknad/types';
-import { OppsummeringPanel } from './OppsummeringPanel';
-import { SporsmalSvar } from './SporsmalSvar';
+import OppsummeringsListeElement from './OppsummeringsListeElement';
 
 interface IFamilieforholdOppsummering {
+    intl: InjectedIntl;
     familieforhold: IFamilieforhold;
 }
 
 type FamilieforholdOppsummeringProps = IFamilieforholdOppsummering;
 
 const FamilieforholdOppsummering: React.StatelessComponent<FamilieforholdOppsummeringProps> = ({
+    intl,
     familieforhold,
 }) => {
     return (
-        <OppsummeringPanel>
-            <Element>
-                <FormattedMessage id={'familieforhold.tittel'} />
-            </Element>
-            <SporsmalSvar
-                sporsmal={
-                    <FormattedMessage id={'familieforhold.borForeldreneSammenMedBarnet.sporsmal'} />
-                }
-                svar={familieforhold.borForeldreneSammenMedBarnet.verdi}
-            />
-            {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA && (
+        <>
+            {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.NEI && (
                 <>
-                    <SporsmalSvar
-                        sporsmal={
-                            <FormattedMessage
-                                id={'oppsummering.familieforhold.annenForelderNavn.label'}
-                            />
-                        }
-                        svar={familieforhold.annenForelderNavn.verdi}
-                    />
-                    <SporsmalSvar
-                        sporsmal={
-                            <FormattedMessage
-                                id={'oppsummering.familieforhold.annenForelderFodselsnummer.label'}
-                            />
-                        }
-                        svar={familieforhold.annenForelderFodselsnummer.verdi}
+                    <OppsummeringsListeElement
+                        tekst={intl.formatMessage({
+                            id: 'oppsummering.familieforhold.foreldreBorIkkeSammen',
+                        })}
                     />
                 </>
             )}
-        </OppsummeringPanel>
+
+            {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA && (
+                <OppsummeringsListeElement
+                    tekst={intl.formatMessage({
+                        id: 'oppsummering.familieforhold.foreldreBorSammen',
+                    })}
+                >
+                    <ul>
+                        <li className="list-unstyled list-detaljer">
+                            <Normaltekst>
+                                {intl.formatMessage({
+                                    id: 'oppsummering.familieforhold.annenForelderNavn.label',
+                                })}
+                            </Normaltekst>
+                            <Element>{familieforhold.annenForelderNavn.verdi}</Element>
+                            <br />
+                            <Normaltekst>
+                                {intl.formatMessage({
+                                    id:
+                                        'oppsummering.familieforhold.annenForelderFodselsnummer.label',
+                                })}
+                            </Normaltekst>
+                            <Element>{familieforhold.annenForelderFodselsnummer.verdi}</Element>
+                        </li>
+                    </ul>
+                </OppsummeringsListeElement>
+            )}
+        </>
     );
 };
 

@@ -1,19 +1,19 @@
 import { Normaltekst } from 'nav-frontend-typografi';
 import Element from 'nav-frontend-typografi/lib/element';
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, InjectedIntl } from 'react-intl';
 import { IFamilieforhold, IUtenlandskeYtelser, Svar } from '../../soknad/types';
-import { OppsummeringPanel } from './OppsummeringPanel';
-import { SporsmalSvar } from './SporsmalSvar';
+import OppsummeringSporsmalSvar from './OppsummeringSporsmalSvar';
 
 interface IUtenlandskeYtelserOppsummeringProps {
     familieforhold: IFamilieforhold;
+    intl: InjectedIntl;
     utenlandskeYtelser: IUtenlandskeYtelser;
 }
 
 const utenlandskeYtelserOppsummering: React.StatelessComponent<
     IUtenlandskeYtelserOppsummeringProps
-> = ({ familieforhold, utenlandskeYtelser }) => {
+> = ({ familieforhold, intl, utenlandskeYtelser }) => {
     const {
         mottarYtelserFraUtland,
         mottarYtelserFraUtlandForklaring,
@@ -24,51 +24,48 @@ const utenlandskeYtelserOppsummering: React.StatelessComponent<
     const { borForeldreneSammenMedBarnet } = familieforhold;
 
     return (
-        <OppsummeringPanel>
-            <Element>
-                <FormattedMessage id={'utenlandskeYtelser.tittel'} />
-            </Element>
-            <SporsmalSvar
-                sporsmal={
-                    <FormattedMessage
-                        id={'oppsummering.utenlandskeYtelser.mottarYtelserFraUtland'}
-                    />
-                }
+        <div className={'utenlandskeYtelser__oppsummering'}>
+            <OppsummeringSporsmalSvar
+                sporsmal={intl.formatMessage({
+                    id: 'oppsummering.utenlandskeYtelser.mottarYtelserFraUtland',
+                })}
                 svar={mottarYtelserFraUtland.verdi}
             />
             {mottarYtelserFraUtlandForklaring.verdi !== '' && (
-                <SporsmalSvar
-                    sporsmal={
-                        <FormattedMessage id={'oppsummering.utenlandskeYtelser.forklaring.label'} />
-                    }
-                    svar={mottarYtelserFraUtlandForklaring.verdi}
-                />
+                <ul>
+                    <li className="list-unstyled list-detaljer">
+                        <Normaltekst>
+                            <FormattedMessage id="oppsummering.utenlandskeYtelser.forklaring.label" />
+                        </Normaltekst>
+                        <Element className={'utenlandskeYtelser__oppsummering--forklaring'}>
+                            {mottarYtelserFraUtlandForklaring.verdi}
+                        </Element>
+                    </li>
+                </ul>
             )}
 
             {borForeldreneSammenMedBarnet.verdi === Svar.JA && (
-                <SporsmalSvar
-                    sporsmal={
-                        <FormattedMessage
-                            id={
-                                'oppsummering.utenlandskeYtelser.mottarAnnenForelderYtelserFraUtland'
-                            }
-                        />
-                    }
+                <OppsummeringSporsmalSvar
+                    sporsmal={intl.formatMessage({
+                        id: 'oppsummering.utenlandskeYtelser.mottarAnnenForelderYtelserFraUtland',
+                    })}
                     svar={mottarAnnenForelderYtelserFraUtland.verdi}
                 />
             )}
             {borForeldreneSammenMedBarnet.verdi === Svar.JA &&
                 mottarAnnenForelderYtelserFraUtlandForklaring.verdi !== '' && (
-                    <SporsmalSvar
-                        sporsmal={
-                            <FormattedMessage
-                                id={'oppsummering.utenlandskeYtelser.forklaring.label'}
-                            />
-                        }
-                        svar={mottarAnnenForelderYtelserFraUtlandForklaring.verdi}
-                    />
+                    <ul>
+                        <li className="list-unstyled list-detaljer">
+                            <Normaltekst>
+                                <FormattedMessage id="oppsummering.utenlandskeYtelser.forklaring.label" />
+                            </Normaltekst>
+                            <Element className={'utenlandskeYtelser__oppsummering--forklaring'}>
+                                {mottarAnnenForelderYtelserFraUtlandForklaring.verdi}
+                            </Element>
+                        </li>
+                    </ul>
                 )}
-        </OppsummeringPanel>
+        </div>
     );
 };
 
