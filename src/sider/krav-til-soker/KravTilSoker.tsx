@@ -57,7 +57,7 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
             />
             <form>
                 <CheckboksPanelGruppe
-                    className={'krav__inputPanelGruppe'}
+                    className={'soknad__inputPanelGruppe'}
                     legend={''}
                     checkboxes={[
                         {

@@ -1,17 +1,21 @@
-.list-unstyled {
-  list-style: none;
-}
+@import "oppsummering-panel";
 
-.list-detaljer {
-  margin: 1rem 0 1rem 0rem;
-}
+.oppsummering {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-.oppsummering__element {
-  &--sporsmal {
-    margin-bottom: .5rem;
+  &__tittel {
+    margin: 2rem 0;
   }
 
-  &--svar {
-    margin-top: 0;
+  &__svar {
+    font-style: italic;
+    margin: 0.25rem 0;
   }
+}
+
+.utenlandskeYtelser__oppsummering--forklaring {
+  white-space: pre-wrap;
+  word-break: break-word;
 }

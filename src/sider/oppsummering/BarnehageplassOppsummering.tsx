@@ -1,16 +1,16 @@
+import { Element } from 'nav-frontend-typografi';
 import * as React from 'react';
-import { InjectedIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { BarnehageplassVerdier, IBarnehageplass } from '../../soknad/types';
-import OppsummeringSporsmalSvar from './OppsummeringSporsmalSvar';
+import { OppsummeringPanel } from './OppsummeringPanel';
+import { SporsmalSvar } from './SporsmalSvar';
 
 interface IBarnehageplassOppsummeringProps {
     barnehageplass: IBarnehageplass;
-    intl: InjectedIntl;
 }
 
 const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsummeringProps> = ({
     barnehageplass,
-    intl,
 }) => {
     let barnBarnehageplassStatusSvar = 'Ubesvart';
 
@@ -33,38 +33,44 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
     }
 
     return (
-        <div>
-            <OppsummeringSporsmalSvar
-                sporsmal={intl.formatMessage({
-                    id: 'oppsummering.barnehageplass.harBarnehageplass',
-                })}
+        <OppsummeringPanel>
+            <Element>
+                <FormattedMessage id={'barnehageplass.tittel'} />
+            </Element>
+            <SporsmalSvar
+                sporsmal={<FormattedMessage id={'oppsummering.barnehageplass.harBarnehageplass'} />}
                 svar={barnehageplass.harBarnehageplass.verdi}
             />
-            <OppsummeringSporsmalSvar
-                sporsmal={intl.formatMessage({ id: 'barnehageplass.barnBarnehageplassStatus' })}
-                svar={intl.formatMessage({
-                    id: barnBarnehageplassStatusSvar,
-                })}
+
+            <SporsmalSvar
+                sporsmal={<FormattedMessage id={'barnehageplass.barnBarnehageplassStatus'} />}
+                svar={<FormattedMessage id={barnBarnehageplassStatusSvar} />}
             />
             {barnehageplass.barnBarnehageplassStatus.verdi ===
                 BarnehageplassVerdier.harSluttetIBarnehage && (
                 <>
-                    <OppsummeringSporsmalSvar
-                        sporsmal={intl.formatMessage({
-                            id: 'barnehageplass.harSluttetIBarnehage.dato.sporsmal',
-                        })}
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.harSluttetIBarnehage.dato.sporsmal'}
+                            />
+                        }
                         svar={barnehageplass.harSluttetIBarnehageDato.verdi}
                     />
-                    <OppsummeringSporsmalSvar
-                        sporsmal={intl.formatMessage({
-                            id: 'barnehageplass.harSluttetIBarnehage.kommune.sporsmal',
-                        })}
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.harSluttetIBarnehage.kommune.sporsmal'}
+                            />
+                        }
                         svar={barnehageplass.harSluttetIBarnehageKommune.verdi}
                     />
-                    <OppsummeringSporsmalSvar
-                        sporsmal={intl.formatMessage({
-                            id: 'barnehageplass.harSluttetIBarnehage.antallTimer.sporsmal',
-                        })}
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.harSluttetIBarnehage.antallTimer.sporsmal'}
+                            />
+                        }
                         svar={barnehageplass.harSluttetIBarnehageAntallTimer.verdi}
                     />
                 </>
@@ -72,27 +78,33 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
             {barnehageplass.barnBarnehageplassStatus.verdi ===
                 BarnehageplassVerdier.harBarnehageplass && (
                 <>
-                    <OppsummeringSporsmalSvar
-                        sporsmal={intl.formatMessage({
-                            id: 'barnehageplass.harBarnehageplass.antallTimer.sporsmal',
-                        })}
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.harBarnehageplass.antallTimer.sporsmal'}
+                            />
+                        }
                         svar={barnehageplass.harBarnehageplassAntallTimer.verdi}
                     />
-                    <OppsummeringSporsmalSvar
-                        sporsmal={intl.formatMessage({
-                            id: 'barnehageplass.harBarnehageplass.dato.sporsmal',
-                        })}
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.harBarnehageplass.dato.sporsmal'}
+                            />
+                        }
                         svar={barnehageplass.harBarnehageplassDato.verdi}
                     />
-                    <OppsummeringSporsmalSvar
-                        sporsmal={intl.formatMessage({
-                            id: 'barnehageplass.harBarnehageplass.kommune.sporsmal',
-                        })}
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.harBarnehageplass.kommune.sporsmal'}
+                            />
+                        }
                         svar={barnehageplass.harBarnehageplassKommune.verdi}
                     />
                 </>
             )}
-        </div>
+        </OppsummeringPanel>
     );
 };
 
