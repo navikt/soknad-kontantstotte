@@ -18,7 +18,6 @@ interface IMapStateToProps {
 }
 
 interface IMapDispatchToProps {
-    nesteSteg: () => void;
     settSvar: (feltnavn: Feltnavn, verdi: Svar) => void;
     settTekstSvar: (feltnavn: Feltnavn, verdi: string) => void;
 }
@@ -30,7 +29,6 @@ const UtenlandskKontantstotte: React.StatelessComponent<UtenlandskKontantstotteS
     harForsoktNesteSteg,
     settSvar,
     settTekstSvar,
-    nesteSteg,
     intl,
 }) => {
     const {
@@ -92,7 +90,6 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        nesteSteg: () => dispatch(soknadNesteSteg()),
         settSvar: (feltnavn: Feltnavn, verdi: Svar) => {
             dispatch(soknadValiderFelt('utenlandskKontantstotte', feltnavn, verdi));
         },
