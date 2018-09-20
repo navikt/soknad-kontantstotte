@@ -61,7 +61,7 @@ const harSvartTekst = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
 const harFyltInnNavn = (felt: IFelt): IFelt => {
     return felt.verdi.replace(' ', '').length > 0
         ? ok(felt)
-        : feil(felt, 'feilmelding.familieforhold.annenForelder.navn');
+        : feil(felt, 'feilmelding.generell.navn');
 };
 
 const harFyltInnFodselsdato = (felt: IFelt): IFelt => {
