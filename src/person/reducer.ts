@@ -1,33 +1,32 @@
-import { PersonActionTypes, PersonTypeKeys } from './actions';
-import { IPerson } from './types';
+import { SokerActionTypes, SokerTypeKeys } from './actions';
+import { ISoker } from './types';
 
-interface IPersonState {
-    readonly person: IPerson;
+interface ISokerState {
+    readonly soker: ISoker;
     readonly henter: boolean;
 }
 
-const initialState: IPersonState = {
+const initialState: ISokerState = {
     henter: false,
-    person: {
-        barn: [],
-        navn: '',
+    soker: {
+        innloggetSom: '',
     },
 };
 
-function personReducer(state = initialState, action: PersonActionTypes) {
+function sokerReducer(state = initialState, action: SokerActionTypes) {
     switch (action.type) {
-        case PersonTypeKeys.HENT:
+        case SokerTypeKeys.HENT:
             return {
                 ...state,
                 henter: true,
             };
-        case PersonTypeKeys.HENT_OK:
+        case SokerTypeKeys.HENT_OK:
             return {
                 ...state,
                 henter: false,
-                person: action.person,
+                soker: action.soker,
             };
-        case PersonTypeKeys.HENT_FEILET: {
+        case SokerTypeKeys.HENT_FEILET: {
             return {
                 ...state,
                 henter: false,
@@ -38,4 +37,4 @@ function personReducer(state = initialState, action: PersonActionTypes) {
     }
 }
 
-export { personReducer, IPersonState };
+export { sokerReducer, ISokerState };

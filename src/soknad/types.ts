@@ -108,6 +108,7 @@ export {
     BarnehageplassVerdier,
     Stegnavn,
     Feltnavn,
+    IMineBarn,
     IArbeidsforhold,
     IBarnehageplass,
     IFamilieforhold,

@@ -1,9 +1,9 @@
 import axios from 'axios';
 import Environment from '../Environment';
 
-function fetchPerson() {
+function fetchSoker() {
     return axios
-        .get(`${Environment().apiUrl}/person`, {
+        .get(`${Environment().apiUrl}/soker`, {
             withCredentials: true,
         })
         .then(response => {
@@ -11,4 +11,4 @@ function fetchPerson() {
         });
 }
 
-export { fetchPerson };
+export { fetchSoker };

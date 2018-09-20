@@ -1,44 +1,44 @@
 import { Action } from 'redux';
-import { IPerson } from './types';
+import { ISoker } from './types';
 
-enum PersonTypeKeys {
-    HENT = 'PERSON_HENT',
-    HENT_OK = 'PERSON_HENT_OK',
-    HENT_FEILET = 'PERSON_HENT_FEILET',
+enum SokerTypeKeys {
+    HENT = 'SOKER_HENT',
+    HENT_OK = 'SOKER_HENT_OK',
+    HENT_FEILET = 'SOKER_HENT_FEILET',
 }
 
-type PersonActionTypes = IPersonHent | IPersonHentOk | IPersonHentFeilet;
+type SokerActionTypes = ISokerHent | ISokerHentOk | ISokerHentFeilet;
 
-interface IPersonHent extends Action {
-    type: PersonTypeKeys.HENT;
+interface ISokerHent extends Action {
+    type: SokerTypeKeys.HENT;
 }
 
-interface IPersonHentOk extends Action {
-    type: PersonTypeKeys.HENT_OK;
-    person: IPerson;
+interface ISokerHentOk extends Action {
+    type: SokerTypeKeys.HENT_OK;
+    soker: ISoker;
 }
 
-interface IPersonHentFeilet extends Action {
-    type: PersonTypeKeys.HENT_FEILET;
+interface ISokerHentFeilet extends Action {
+    type: SokerTypeKeys.HENT_FEILET;
 }
 
-function personHent(): IPersonHent {
+function sokerHent(): ISokerHent {
     return {
-        type: PersonTypeKeys.HENT,
+        type: SokerTypeKeys.HENT,
     };
 }
 
-function personHentOk(person: IPerson): IPersonHentOk {
+function sokerHentOk(soker: ISoker): ISokerHentOk {
     return {
-        person,
-        type: PersonTypeKeys.HENT_OK,
+        soker,
+        type: SokerTypeKeys.HENT_OK,
     };
 }
 
-function personHentFeilet(): IPersonHentFeilet {
+function sokerHentFeilet(): ISokerHentFeilet {
     return {
-        type: PersonTypeKeys.HENT_FEILET,
+        type: SokerTypeKeys.HENT_FEILET,
     };
 }
 
-export { PersonActionTypes, personHent, personHentFeilet, personHentOk, PersonTypeKeys };
+export { SokerActionTypes, sokerHent, sokerHentFeilet, sokerHentOk, SokerTypeKeys };

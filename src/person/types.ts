@@ -1,13 +1,4 @@
-import { IFelt } from '../soknad/types';
-
-interface IPerson {
-    navn: string;
-    barn: IBarn[];
+interface ISoker {
+    innloggetSom: string;
 }
-
-interface IBarn {
-    navn: IFelt;
-    fodselsdato: IFelt;
-}
-
-export { IPerson, IBarn };
+export { ISoker };
