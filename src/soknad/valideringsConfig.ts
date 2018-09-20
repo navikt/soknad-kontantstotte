@@ -64,8 +64,8 @@ const valideringsConfig: IValideringsConfig = {
         navn: [harFyltInnNavn],
     },
     utenlandskKontantstotte: {
-        mottarKontantstotteFraUtlandet: harSvartMedFeilmelding,
-        mottarKontantstotteFraUtlandetTilleggsinfo: harSvartTekstMedFeilmelding,
+        mottarKontantstotteFraUtlandet: [harSvartMedFeilmelding],
+        mottarKontantstotteFraUtlandetTilleggsinfo: [harSvartTekstMedFeilmelding],
     },
     utenlandskeYtelser: {
         mottarAnnenForelderYtelserFraUtland: [harSvartMedFeilmelding],
