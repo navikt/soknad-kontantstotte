@@ -62,14 +62,14 @@ const valideringsConfig: IValideringsConfig = {
         fodselsdato: harFyltInnFodselsdato,
         navn: harFyltInnNavn,
     },
+    oppsummering: {
+        bekreftelse: svarUtenValidering,
+    },
     utenlandskeYtelser: {
         mottarAnnenForelderYtelserFraUtland: harSvartMedFeilmelding,
         mottarAnnenForelderYtelserFraUtlandForklaring: harSvartTekstMedFeilmelding,
         mottarYtelserFraUtland: harSvartMedFeilmelding,
         mottarYtelserFraUtlandForklaring: harSvartTekstMedFeilmelding,
-    },
-    oppsummering: {
-        bekreftelse: harSvartJaMedFeilmelding,
     },
 };
 
