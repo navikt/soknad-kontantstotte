@@ -89,9 +89,12 @@ function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
             );
             break;
         case 'utenlandskKontantstotte':
-            validertFelt = valideringsConfig.utenlandskKontantstotte[
-                action.feltnavn as utenlandskKontantstotteFeltnavn
-            ](feltMedOppdatertVerdi);
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.utenlandskKontantstotte[
+                    action.feltnavn as utenlandskKontantstotteFeltnavn
+                ],
+                feltMedOppdatertVerdi
+            );
             break;
         case 'mineBarn':
             validertFelt = kjorValideringsFunksjoner(
