@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects';
 import { appSaga } from './app/saga';
 import { innsendingSaga } from './innsending/saga';
-import { sokerSaga } from './person/saga';
+import { sokerSaga } from './soker/saga';
 import { soknadSaga } from './soknad/saga';
 import { teksterSaga } from './tekster/saga';
 
