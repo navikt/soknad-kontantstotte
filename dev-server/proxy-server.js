@@ -11,17 +11,20 @@ const app = express();
 
 const compiler = webpack(config);
 const middleware = webpackDevMiddleware(compiler, {
-    publicPath: config.output.publicPath
+    publicPath: config.output.publicPath,
 });
 
 app.use(middleware);
 app.use(webpackHotMiddleware(compiler));
 
-app.use('/soknad-kontantstotte-api/api/', proxy('localhost:8080', {
-    proxyReqPathResolver: function (req) {
-        return `/api${require('url').parse(req.url).path}`;
-    }
-}));
+app.use(
+    '/kontantstotte-api/api/',
+    proxy('localhost:8080', {
+        proxyReqPathResolver: function(req) {
+            return `/api${require('url').parse(req.url).path}`;
+        },
+    })
+);
 
 app.get('*', (req, res) => {
     res.write(middleware.fileSystem.readFileSync(path.join(__dirname, '/../dist/index.html')));

@@ -9,23 +9,23 @@ function lesMockFil(filnavn) {
     return fs.readFileSync(path.join(__dirname, '/mock/' + filnavn), 'UTF-8');
 }
 
-app.get('/soknad-kontantstotte-api/api/tekster/nb', function(req, res) {
+app.get('/kontantstotte-api/api/tekster/nb', function(req, res) {
     setTimeout(() => res.send(lesMockFil('tekster.json')), delayMs);
 });
 
-app.get('/soknad-kontantstotte-api/api/status/ping', function(req, res) {
+app.get('/kontantstotte-api/api/status/ping', function(req, res) {
     setTimeout(() => res.status(200).send(), delayMs);
 });
 
-app.get('/soknad-kontantstotte-api/api/person', function(req, res) {
+app.get('/kontantstotte-api/api/person', function(req, res) {
     setTimeout(() => res.send(lesMockFil('person.json')), delayMs);
 });
 
-app.get('/soknad-kontantstotte-api/api/feature', function(req, res) {
+app.get('/api/feature', function(req, res) {
     setTimeout(() => res.send(lesMockFil('toggles.json')), delayMs);
 });
 
-app.post('/soknad-kontantstotte-api/api/sendinn', function(req, res) {
+app.post('/kontantstotte-api/api/sendinn', function(req, res) {
     setTimeout(() => res.status(204).send(), delayMs);
 });
 

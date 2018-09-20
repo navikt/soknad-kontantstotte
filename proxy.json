@@ -1,0 +1,6 @@
+[
+  {
+    "contextPath": "/kontantstotte-api",
+    "serviceName": "http://soknad-kontantstotte-api"
+  }
+]
