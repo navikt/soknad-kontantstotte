@@ -4,3 +4,4 @@ ENV HEADER_TYPE=WITHOUT_MENU
 ENV CONTEXT_PATH=/
 COPY ./dist /app
 COPY ./VERSION /app/VERSION
+ADD proxy.json /proxy.json
