@@ -5,8 +5,8 @@ import {
     IFelt,
     kravTilSokerFeltnavn,
     minebarnFeltnavn,
-    utenlandskeYtelserFeltnavn,
     oppsummeringFeltnavn,
+    utenlandskeYtelserFeltnavn,
 } from './types';
 import {
     harFyltInnFodselsdato,
@@ -16,7 +16,6 @@ import {
     harSvartJaMedFeilmelding,
     harSvartMedFeilmelding,
     harSvartTekstMedFeilmelding,
-    svarUtenValidering,
 } from './validators';
 
 interface IValideringsConfig {
@@ -26,7 +25,7 @@ interface IValideringsConfig {
     kravTilSoker: { [felt in kravTilSokerFeltnavn]: Array<((felt: IFelt) => IFelt)> };
     mineBarn: { [felt in minebarnFeltnavn]: Array<((felt: IFelt) => IFelt)> };
     utenlandskeYtelser: { [felt in utenlandskeYtelserFeltnavn]: Array<((felt: IFelt) => IFelt)> };
-    oppsummering: { [felt in oppsummeringFeltnavn]: (felt: IFelt) => IFelt };
+    oppsummering: { [felt in oppsummeringFeltnavn]: Array<((felt: IFelt) => IFelt)> };
 }
 
 const valideringsConfig: IValideringsConfig = {
@@ -66,7 +65,7 @@ const valideringsConfig: IValideringsConfig = {
         navn: [harFyltInnNavn],
     },
     oppsummering: {
-        bekreftelse: svarUtenValidering,
+        bekreftelse: [harSvartMedFeilmelding],
     },
     utenlandskeYtelser: {
         mottarAnnenForelderYtelserFraUtland: [harSvartMedFeilmelding],
