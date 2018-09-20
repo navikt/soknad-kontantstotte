@@ -1,18 +1,15 @@
 .mine-barn {
-
-  &__liste {
-    list-style: none;
-    width: 200px;
-  }
-
-  &__barn {
-    background-color: salmon;
-    margin: 20px 0 0 0;
-    width: 100%;
-
-    &--valgt {
-      background-color: aqua;
+    &__sporsmal {
+        display: flex;
+        flex-wrap: wrap;
     }
-  }
 
+    & .skjemaelement {
+        width: calc(100%/2 - 1rem);
+        margin: .5rem;
+
+        @media (max-width: 600px) {
+            width: 100%;
+        }
+    }
 }
