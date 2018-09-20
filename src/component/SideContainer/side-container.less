@@ -1,19 +1,27 @@
 .side-container {
-  &__sidetittel {
-    background-color: @navLillaLighten60;
-    margin: 0 0 40px 0;
-    padding: 20px 0 20px 0;
-    text-align: center;
-    width: 100%;
-  }
+    margin: 0 auto;
+    max-width: 60rem;
 
-  &__children {
-    padding-top: 2rem;
-  }
-
-  @media (max-width: 750px) {
-    &__children {
-      padding-top: 1rem;
+    &__soknadtittel {
+        background-color: @navLillaLighten60;
+        margin: 0 0 40px 0;
+        padding: 20px 0 20px 0;
+        text-align: center;
+        width: 100%;
     }
-  }
+
+    &__ikon {
+        margin: 0 auto;
+        padding-top: 2rem;
+        width: 4rem;
+    }
+
+    &__sidetittel {
+        margin-top: 1rem;
+        text-align: center;
+    }
+
+    & .skjema__legend {
+        padding: 1rem 0 0 .5rem;
+    }
 }

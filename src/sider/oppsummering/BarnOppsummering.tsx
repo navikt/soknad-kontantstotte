@@ -12,7 +12,7 @@ const BarnOppsummering: React.StatelessComponent<IBarnOppsummeringProps> = ({ ba
     return (
         <OppsummeringPanel>
             <SporsmalSvar
-                sporsmal={<FormattedMessage id={'oppsummering.barne.tittel'} />}
+                sporsmal={<FormattedMessage id={'barn.tittel'} />}
                 svar={`${barn.navn.verdi} - ${barn.fodselsdato.verdi}`}
             />
         </OppsummeringPanel>

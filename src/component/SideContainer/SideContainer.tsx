@@ -15,6 +15,8 @@ import Tilbakeknapp from '../Tilbakeknapp/Tilbakeknapp';
 interface IOwnProps {
     className?: string;
     children: React.ReactNode;
+    ikon?: React.ReactNode;
+    tittel?: string;
 }
 
 interface IMapStateToProps {
@@ -29,7 +31,7 @@ type Props = IOwnProps & IMapStateToProps & IMapDispatchToProps;
 
 class SideContainer extends React.Component<Props> {
     public render() {
-        const { children, className = '', aktivtSteg } = this.props;
+        const { aktivtSteg, children, className = '', ikon, tittel } = this.props;
 
         const indikatorsteg: StegindikatorStegProps[] = Object.values(stegConfig)
             .filter((steg: ISteg) => steg.stegIndeks !== 0)
@@ -44,19 +46,31 @@ class SideContainer extends React.Component<Props> {
 
         return (
             <div>
-                <Sidetittel className={'side-container__sidetittel'}>
+                <Sidetittel className={'side-container__soknadtittel'}>
                     <FormattedMessage id={'kontantstotte.tittel'} />
                 </Sidetittel>
-                <Stegindikator
-                    steg={indikatorsteg}
-                    autoResponsiv={true}
-                    visLabel={false}
-                    kompakt={false}
-                    aktivtSteg={aktivtSteg - 1} // -1 pga Stegindikator er 0-indeksert
-                />
-                {displayTilbakeKnapp && <Tilbakeknapp posisjon={'oppe'} />}
-                <div className={classNames('side-container__children', className)}>{children}</div>
-                <Navigasjon />
+
+                <div className={'side-container'}>
+                    <Stegindikator
+                        steg={indikatorsteg}
+                        autoResponsiv={true}
+                        visLabel={false}
+                        kompakt={false}
+                        aktivtSteg={aktivtSteg - 1} // -1 pga Stegindikator er 0-indeksert
+                    />
+
+                    {displayTilbakeKnapp && <Tilbakeknapp posisjon={'oppe'} />}
+                    {ikon && <div className={'side-container__ikon'}>{ikon}</div>}
+                    {tittel && (
+                        <h3 className={'typo-innholdstittel side-container__sidetittel'}>
+                            {tittel}
+                        </h3>
+                    )}
+                    <div className={classNames('side-container__children', className)}>
+                        {children}
+                    </div>
+                    <Navigasjon />
+                </div>
             </div>
         );
     }

@@ -38,20 +38,18 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
     const feltMedFeil = hentFeltMedFeil(familieforhold, harForsoktNesteSteg, intl);
 
     return (
-        <SideContainer className={'familieforhold'}>
-            <div className={'familieforhold__ikon'}>
-                <BorSammenIkon />
-            </div>
-            <form className={'familieforhold__form'}>
-                <h3 className={'typo-innholdstittel familieforhold__tittel'}>
-                    <FormattedMessage id={'familieforhold.tittel'} />
-                </h3>
+        <SideContainer
+            className={'familieforhold'}
+            ikon={<BorSammenIkon />}
+            tittel={intl.formatMessage({ id: 'familieforhold.tittel' })}
+        >
+            <form>
                 <RadioPanelGruppe
                     legend={intl.formatMessage({
                         id: 'familieforhold.borForeldreneSammenMedBarnet.sporsmal',
                     })}
                     name={'borForeldreneSammenMedBarnet'}
-                    className={'familieforhold__sporsmaal'}
+                    className={'soknad__inputPanelGruppe'}
                     onChange={(evt: {}, value: string) => {
                         settBorForeldreneSammenMedBarnetOgNullstillNeste(value as Svar);
                     }}

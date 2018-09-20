@@ -13,7 +13,7 @@ type KvitteringProps = IPerson & InjectedIntlProps;
 const Kvittering: React.StatelessComponent<KvitteringProps> = ({ intl }) => {
     return (
         <div>
-            <Sidetittel className={'side-container__sidetittel'}>
+            <Sidetittel className={'side-container__soknadtittel'}>
                 <FormattedMessage id={'kontantstotte.tittel'} />
             </Sidetittel>
             <div className="kvittering__ikon-container">

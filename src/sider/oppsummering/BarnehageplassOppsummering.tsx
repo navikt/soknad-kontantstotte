@@ -35,7 +35,7 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
     return (
         <OppsummeringPanel>
             <Element>
-                <FormattedMessage id={'oppsummering.barnehageplass.tittel'} />
+                <FormattedMessage id={'barnehageplass.tittel'} />
             </Element>
             <SporsmalSvar
                 sporsmal={<FormattedMessage id={'oppsummering.barnehageplass.harBarnehageplass'} />}
@@ -102,6 +102,35 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                             />
                         }
                         svar={barnehageplass.skalSlutteIBarnehageAntallTimer.verdi}
+                    />
+                </>
+            )}
+            {barnehageplass.barnBarnehageplassStatus.verdi ===
+                BarnehageplassVerdier.harBarnehageplass && (
+                <>
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.harBarnehageplass.antallTimer.sporsmal'}
+                            />
+                        }
+                        svar={barnehageplass.harBarnehageplassAntallTimer.verdi}
+                    />
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.harBarnehageplass.dato.sporsmal'}
+                            />
+                        }
+                        svar={barnehageplass.harBarnehageplassDato.verdi}
+                    />
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.harBarnehageplass.antallTimer.sporsmal'}
+                            />
+                        }
+                        svar={barnehageplass.harBarnehageplass.verdi}
                     />
                 </>
             )}
