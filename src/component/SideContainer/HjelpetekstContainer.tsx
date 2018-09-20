@@ -11,12 +11,12 @@ const HjelpetekstContainer: React.StatelessComponent<IHjelpetekstContainerProps>
     hjelpetekstNokkel,
 }) => {
     return (
-        <div className={'side-container__hjelpetekst-container'}>
+        <div className={'hjelpetekst-container'}>
             <h3 className={'typo-innholdstittel side-container__sidetittel'}>{tittel}</h3>
             <ModalHjelpetekst
                 ariaContentLabel={hjelpetekstNokkel + '.label'}
-                className={'side-container__hjelpetekst'}
-                modalClassName={'side-container__modal'}
+                className={'hjelpetekst-container__hjelpetekst'}
+                modalClassName={'hjelpetekst-container__modal'}
                 hjelpetekstNokkel={hjelpetekstNokkel}
             />
         </div>

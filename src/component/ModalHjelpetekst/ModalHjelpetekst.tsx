@@ -22,9 +22,6 @@ class ModalHjelpetekst extends React.Component<IModalHjelpetekstProps, IModalHje
             hover: false,
             modalIsOpen: false,
         };
-        this.closeModal = this.closeModal.bind(this);
-        this.openModal = this.openModal.bind(this);
-        this.setHover = this.setHover.bind(this);
     }
 
     public render() {
@@ -54,17 +51,17 @@ class ModalHjelpetekst extends React.Component<IModalHjelpetekstProps, IModalHje
         );
     }
 
-    private openModal() {
+    private openModal = () => {
         this.setState({ modalIsOpen: true });
-    }
+    };
 
-    private closeModal() {
+    private closeModal = () => {
         this.setState({ modalIsOpen: false });
-    }
+    };
 
-    private setHover(value: boolean) {
+    private setHover = (value: boolean) => {
         return () => this.setState({ hover: value });
-    }
+    };
 }
 
 export default ModalHjelpetekst;
