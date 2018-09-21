@@ -75,6 +75,36 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                     />
                 </>
             )}
+
+            {barnehageplass.barnBarnehageplassStatus.verdi ===
+                BarnehageplassVerdier.skalSlutteIBarnehage && (
+                <>
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.skalSlutteIBarnehage.dato.sporsmal'}
+                            />
+                        }
+                        svar={barnehageplass.skalSlutteIBarnehageDato.verdi}
+                    />
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.skalSlutteIBarnehage.kommune.sporsmal'}
+                            />
+                        }
+                        svar={barnehageplass.skalSlutteIBarnehageKommune.verdi}
+                    />
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.skalSlutteIBarnehage.antallTimer.sporsmal'}
+                            />
+                        }
+                        svar={barnehageplass.skalSlutteIBarnehageAntallTimer.verdi}
+                    />
+                </>
+            )}
             {barnehageplass.barnBarnehageplassStatus.verdi ===
                 BarnehageplassVerdier.harBarnehageplass && (
                 <>
@@ -97,10 +127,40 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                     <SporsmalSvar
                         sporsmal={
                             <FormattedMessage
-                                id={'barnehageplass.harBarnehageplass.kommune.sporsmal'}
+                                id={'barnehageplass.harBarnehageplass.antallTimer.sporsmal'}
                             />
                         }
-                        svar={barnehageplass.harBarnehageplassKommune.verdi}
+                        svar={barnehageplass.harBarnehageplass.verdi}
+                    />
+                </>
+            )}
+
+            {barnehageplass.barnBarnehageplassStatus.verdi ===
+                BarnehageplassVerdier.skalBegynneIBarnehage && (
+                <>
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.skalBegynneIBarnehage.dato.sporsmal'}
+                            />
+                        }
+                        svar={barnehageplass.skalBegynneIBarnehageDato.verdi}
+                    />
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.skalBegynneIBarnehage.kommune.sporsmal'}
+                            />
+                        }
+                        svar={barnehageplass.skalBegynneIBarnehageKommune.verdi}
+                    />
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.skalBegynneIBarnehage.antallTimer.sporsmal'}
+                            />
+                        }
+                        svar={barnehageplass.skalBegynneIBarnehageAntallTimer.verdi}
                     />
                 </>
             )}

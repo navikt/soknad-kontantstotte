@@ -50,13 +50,34 @@ function* sjekkValideringForBarnehageplass(barnehageplass: IBarnehageplass) {
                 return;
 
             case BarnehageplassVerdier.harBarnehageplass:
-                return;
+                if (
+                    barnehageplass.harBarnehageplassKommune.verdi.length > 0 &&
+                    barnehageplass.harBarnehageplassDato.verdi.length > 0 &&
+                    barnehageplass.harBarnehageplassAntallTimer.verdi.length > 0
+                ) {
+                    return;
+                }
+                break;
 
             case BarnehageplassVerdier.skalBegynneIBarnehage:
-                return;
+                if (
+                    barnehageplass.skalBegynneIBarnehageKommune.verdi.length > 0 &&
+                    barnehageplass.skalBegynneIBarnehageDato.verdi.length > 0 &&
+                    barnehageplass.skalBegynneIBarnehageAntallTimer.verdi.length > 0
+                ) {
+                    return;
+                }
+                break;
 
             case BarnehageplassVerdier.skalSlutteIBarnehage:
-                return;
+                if (
+                    barnehageplass.skalSlutteIBarnehageKommune.verdi.length > 0 &&
+                    barnehageplass.skalSlutteIBarnehageDato.verdi.length > 0 &&
+                    barnehageplass.skalSlutteIBarnehageAntallTimer.verdi.length > 0
+                ) {
+                    return;
+                }
+                break;
 
             case BarnehageplassVerdier.harSluttetIBarnehage:
                 if (

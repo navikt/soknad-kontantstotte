@@ -13,6 +13,8 @@ import { soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/action
 import { selectBarnehageplass } from '../../soknad/selectors';
 import { BarnehageplassVerdier, Feltnavn, IBarnehageplass, Svar } from '../../soknad/types';
 import BarnehageplassHarSluttetInfo from './BarnehageplassHarSluttetInfo';
+import BarnehageplassSkalBegynneInfo from './BarnehageplassSkalBegynneInfo';
+import BarnehageplassSkalSlutteInfo from './BarnehageplassSkalSlutteInfo';
 import BarnehageplassStatus from './BarnehageplassStatus';
 import HarBarnehageplassInfo from './HarBarnehageplassInfo';
 
@@ -90,7 +92,22 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                                 settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
                             />
                         )}
-
+                        {barnBarnehageplassStatus.verdi ===
+                            BarnehageplassVerdier.skalSlutteIBarnehage && (
+                            <BarnehageplassSkalSlutteInfo
+                                intl={intl}
+                                feltMedFeil={feltMedFeil}
+                                settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
+                            />
+                        )}
+                        {barnBarnehageplassStatus.verdi ===
+                            BarnehageplassVerdier.skalBegynneIBarnehage && (
+                            <BarnehageplassSkalBegynneInfo
+                                intl={intl}
+                                feltMedFeil={feltMedFeil}
+                                settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
+                            />
+                        )}
                         {barnBarnehageplassStatus.verdi ===
                             BarnehageplassVerdier.harBarnehageplass && (
                             <HarBarnehageplassInfo
