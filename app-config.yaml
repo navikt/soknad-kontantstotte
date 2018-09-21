@@ -26,3 +26,5 @@ fasitResources:
     resourceType: restservice
   - alias: appdynamics
     resourceType: applicationproperties
+  - alias: unleash-api
+    resourceType: restservice
