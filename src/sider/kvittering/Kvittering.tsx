@@ -1,15 +1,10 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import { IPerson } from '../../person/types';
-import { IRootState } from '../../rootReducer';
-
 import { Sidetittel } from 'nav-frontend-typografi';
+import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
-import { selectPerson } from '../../person/selectors';
 import KvitteringIkon from './ikoner/KvitteringIkon';
 import UtvidetInfo from './UtvidetInfo';
 
-type KvitteringProps = IPerson & InjectedIntlProps;
+type KvitteringProps = InjectedIntlProps;
 const Kvittering: React.StatelessComponent<KvitteringProps> = ({ intl }) => {
     return (
         <div>
@@ -31,13 +26,4 @@ const Kvittering: React.StatelessComponent<KvitteringProps> = ({ intl }) => {
     );
 };
 
-const mapStateToProps = (state: IRootState): IPerson => {
-    return selectPerson(state);
-};
-
-export default injectIntl(
-    connect(
-        mapStateToProps,
-        null
-    )(Kvittering)
-);
+export default injectIntl(Kvittering);

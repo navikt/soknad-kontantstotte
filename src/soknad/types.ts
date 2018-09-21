@@ -128,6 +128,7 @@ export {
     TilknytningTilUtlandVerdier,
     Stegnavn,
     Feltnavn,
+    IMineBarn,
     IArbeidsforhold,
     IBarnehageplass,
     IFamilieforhold,
