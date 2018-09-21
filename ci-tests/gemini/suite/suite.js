@@ -46,7 +46,7 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
                 window.document
-                    .querySelectorAll('[name="borForeldreneSammenMedBarnet"]')[1]
+                    .querySelectorAll('[name="borForeldreneSammenMedBarnet"]')[0]
                     .click();
             });
             actions.click('.knapp.knapp--hoved');
@@ -72,16 +72,13 @@ gemini.suite('soknad-kontantstotte', suite => {
                 window.document
                     .querySelectorAll('[name="arbeiderIUtlandetEllerKontinentalsokkel"]')[1]
                     .click();
-                window.document
-                    .querySelectorAll('[name="mottarKontantstotteFraAnnetEOS"]')[1]
-                    .click();
             });
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
             actions.click('h1');
             actions.executeJS(disableHover);
         })
-        .capture('oppsummering', function(actions) {
+        .capture('utenlandsk-kontantstotte', function(actions) {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
                 window.document.querySelectorAll('[name="mottarYtelserFraUtland"]')[0].click();
@@ -91,8 +88,25 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.click('h1');
             actions.executeJS(disableHover);
         })
+        .capture('oppsummering', function(actions) {
+            actions.executeJS(enableHover);
+            actions.executeJS(function(window) {
+                window.document
+                    .querySelectorAll('[name="mottarKontantstotteFraUtlandet"]')[0]
+                    .click();
+            });
+            actions.click('.knapp.knapp--hoved');
+            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.click('h1');
+            actions.executeJS(disableHover);
+        })
         .capture('kvittering', function(actions) {
             actions.executeJS(enableHover);
+            actions.executeJS(function(window) {
+                window.document
+                    .querySelectorAll('.oppsummering__bekreftelse .inputPanel__field')[0]
+                    .click();
+            });
             actions.click('.knapp.knapp--hoved');
             actions.wait(2000);
             actions.waitForElementToShow('.kvittering__tittel', 5000);

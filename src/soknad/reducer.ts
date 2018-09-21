@@ -23,8 +23,6 @@ const initialState: ISoknadState = {
     arbeidsforhold: {
         arbeiderIUtlandetEllerKontinentalsokkel: standardSvarInitialFelt,
         arbeiderIUtlandetEllerKontinentalsokkelForklaring: standardStringInitialFelt,
-        mottarKontantstotteFraAnnetEOS: standardSvarInitialFelt,
-        mottarKontantstotteFraAnnetEOSForklaring: standardStringInitialFelt,
         mottarYtelserFraUtlandet: standardSvarInitialFelt,
         mottarYtelserFraUtlandetForklaring: standardStringInitialFelt,
     },
@@ -60,6 +58,13 @@ const initialState: ISoknadState = {
     mineBarn: {
         fodselsdato: standardStringInitialFelt,
         navn: standardStringInitialFelt,
+    },
+    oppsummering: {
+        bekreftelse: standardSvarInitialFelt,
+    },
+    utenlandskKontantstotte: {
+        mottarKontantstotteFraUtlandet: standardSvarInitialFelt,
+        mottarKontantstotteFraUtlandetTilleggsinfo: standardStringInitialFelt,
     },
     utenlandskeYtelser: {
         mottarAnnenForelderYtelserFraUtland: standardSvarInitialFelt,

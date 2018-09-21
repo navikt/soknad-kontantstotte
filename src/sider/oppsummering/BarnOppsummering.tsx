@@ -1,21 +1,21 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { IBarn } from '../../person/types';
-import { OppsummeringPanel } from './OppsummeringPanel';
+import { IMineBarn } from '../../soknad/types';
+import { OppsummeringSteg } from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
 interface IBarnOppsummeringProps {
-    barn: IBarn;
+    barn: IMineBarn;
 }
 
 const BarnOppsummering: React.StatelessComponent<IBarnOppsummeringProps> = ({ barn }) => {
     return (
-        <OppsummeringPanel>
+        <OppsummeringSteg>
             <SporsmalSvar
                 sporsmal={<FormattedMessage id={'barn.tittel'} />}
                 svar={`${barn.navn.verdi} - ${barn.fodselsdato.verdi}`}
             />
-        </OppsummeringPanel>
+        </OppsummeringSteg>
     );
 };
 

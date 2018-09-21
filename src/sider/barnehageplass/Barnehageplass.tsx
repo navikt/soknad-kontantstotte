@@ -47,6 +47,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
             className={'barnehage'}
             ikon={<Barnehageikon />}
             tittel={intl.formatMessage({ id: 'barnehageplass.tittel' })}
+            hjelpetekstNokkel={'barnehageplass.hjelpetekst'}
         >
             <p className={classNames('typo-ingress', 'barnehage__ingress')}>
                 {intl.formatMessage({ id: 'barnehageplass.ingress' })}

@@ -5,6 +5,7 @@ import {
     IFamilieforhold,
     IFelt,
     IUtenlandskeYtelser,
+    IUtenlandskKontantstotte,
     Stegnavn,
     Svar,
     ValideringsStatus,
@@ -27,13 +28,6 @@ function* sjekkValideringForArbeidsforhold(arbeidsforhold: IArbeidsforhold) {
             harFeil ||
             arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkelForklaring.verdi.length === 0;
     } else if (arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.verdi === Svar.UBESVART) {
-        return true;
-    }
-
-    if (arbeidsforhold.mottarKontantstotteFraAnnetEOS.verdi === Svar.JA) {
-        harFeil =
-            harFeil || arbeidsforhold.mottarKontantstotteFraAnnetEOSForklaring.verdi.length === 0;
-    } else if (arbeidsforhold.mottarKontantstotteFraAnnetEOS.verdi === Svar.UBESVART) {
         return true;
     }
 
@@ -142,10 +136,28 @@ function* sjekkValideringForUtenlandskeYtelser(
     return harFeil;
 }
 
+function* sjekkValideringForUtenlandskKontantstotte(
+    utenlandskKontantstotte: IUtenlandskKontantstotte
+) {
+    let harFeil =
+        utenlandskKontantstotte.mottarKontantstotteFraUtlandet.valideringsStatus !==
+        ValideringsStatus.OK;
+
+    if (utenlandskKontantstotte.mottarKontantstotteFraUtlandet.verdi === Svar.JA) {
+        harFeil =
+            harFeil ||
+            utenlandskKontantstotte.mottarKontantstotteFraUtlandetTilleggsinfo.valideringsStatus !==
+                ValideringsStatus.OK;
+    }
+
+    return harFeil;
+}
+
 export {
     sjekkValideringForSteg,
     sjekkValideringForArbeidsforhold,
     sjekkValideringForBarnehageplass,
     sjekkValideringForFamilieforhold,
     sjekkValideringForUtenlandskeYtelser,
+    sjekkValideringForUtenlandskKontantstotte,
 };

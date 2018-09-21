@@ -1,12 +1,11 @@
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { hentFeltMedFeil } from '../../common/utils';
 import BorSammenIkon from '../../component/Ikoner/BorSammenIkon';
 import SideContainer from '../../component/SideContainer/SideContainer';
-import Tilbakeknapp from '../../component/Tilbakeknapp/Tilbakeknapp';
 import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg, soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectFamilieforhold } from '../../soknad/selectors';
@@ -42,6 +41,7 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
             className={'familieforhold'}
             ikon={<BorSammenIkon />}
             tittel={intl.formatMessage({ id: 'familieforhold.tittel' })}
+            hjelpetekstNokkel={'familieforhold.hjelpetekst'}
         >
             <form>
                 <RadioPanelGruppe
@@ -55,8 +55,8 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
                     }}
                     checked={familieforhold.borForeldreneSammenMedBarnet.verdi}
                     radios={[
-                        { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                         { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
+                        { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                     ]}
                     feil={feltMedFeil.borForeldreneSammenMedBarnet}
                 />
