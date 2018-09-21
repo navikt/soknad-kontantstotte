@@ -53,6 +53,7 @@ const UtenlandskeYtelser: React.StatelessComponent<UtenlandskeYtelserProps> = ({
             className={'utenlandske-ytelser'}
             ikon={<UtenlandskeYtelserIkon />}
             tittel={intl.formatMessage({ id: 'utenlandskeYtelser.tittel' })}
+            hjelpetekstNokkel={'utenlandskeYtelser.hjelpetekst'}
         >
             <form>
                 <RadioPanelGruppe
