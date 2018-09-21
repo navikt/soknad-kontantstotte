@@ -1,9 +1,9 @@
-import { Normaltekst } from 'nav-frontend-typografi';
 import Element from 'nav-frontend-typografi/lib/element';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntl } from 'react-intl';
 import { IArbeidIUtlandet, IFamilieforhold, Svar } from '../../soknad/types';
-import OppsummeringSporsmalSvar from './OppsummeringSporsmalSvar';
+import { OppsummeringSteg } from './OppsummeringSteg';
+import { SporsmalSvar } from './SporsmalSvar';
 
 interface IArbeidIUtlandetOppsummeringProps {
     familieforhold: IFamilieforhold;
@@ -26,48 +26,45 @@ const arbeidIUtlandetOppsummering: React.StatelessComponent<IArbeidIUtlandetOpps
     const { borForeldreneSammenMedBarnet } = familieforhold;
 
     return (
-        <div className={'arbeidIUtlandet__oppsummering'}>
-            <OppsummeringSporsmalSvar
-                sporsmal={intl.formatMessage({
-                    id: 'arbeidIUtlandet.arbeiderIUtlandetEllerKontinentalsokkel.sporsmal',
-                })}
+        <OppsummeringSteg>
+            <Element>
+                <FormattedMessage id={'arbeidIUtlandet.tittel'} />
+            </Element>
+            <SporsmalSvar
+                sporsmal={
+                    <FormattedMessage
+                        id={'arbeidIUtlandet.arbeiderIUtlandetEllerKontinentalsokkel.sporsmal'}
+                    />
+                }
                 svar={arbeiderIUtlandetEllerKontinentalsokkel.verdi}
             />
             {arbeiderIUtlandetEllerKontinentalsokkelForklaring.verdi !== '' && (
-                <ul>
-                    <li className="list-unstyled list-detaljer">
-                        <Normaltekst>
-                            <FormattedMessage id="arbeidIUtlandet.forklaring.hjelpetekst" />
-                        </Normaltekst>
-                        <Element className={'arbeidIUtlandet__oppsummering--forklaring'}>
-                            {arbeiderIUtlandetEllerKontinentalsokkelForklaring.verdi}
-                        </Element>
-                    </li>
-                </ul>
+                <SporsmalSvar
+                    sporsmal={<FormattedMessage id={'arbeidIUtlandet.forklaring.hjelpetekst'} />}
+                    svar={arbeiderIUtlandetEllerKontinentalsokkelForklaring.verdi}
+                />
             )}
 
             {borForeldreneSammenMedBarnet.verdi === Svar.JA && (
-                <OppsummeringSporsmalSvar
-                    sporsmal={intl.formatMessage({
-                        id: 'arbeidIUtlandet.arbeiderAnnenForelderIUtlandet.sporsmal',
-                    })}
+                <SporsmalSvar
+                    sporsmal={
+                        <FormattedMessage
+                            id={'arbeidIUtlandet.arbeiderAnnenForelderIUtlandet.sporsmal'}
+                        />
+                    }
                     svar={arbeiderAnnenForelderIUtlandet.verdi}
                 />
             )}
             {borForeldreneSammenMedBarnet.verdi === Svar.JA &&
                 arbeiderAnnenForelderIUtlandetForklaring.verdi !== '' && (
-                    <ul>
-                        <li className="list-unstyled list-detaljer">
-                            <Normaltekst>
-                                <FormattedMessage id="arbeidIUtlandet.forklaring.hjelpetekst" />
-                            </Normaltekst>
-                            <Element className={'arbeidIUtlandet__oppsummering--forklaring'}>
-                                {arbeiderAnnenForelderIUtlandetForklaring.verdi}
-                            </Element>
-                        </li>
-                    </ul>
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage id={'arbeidIUtlandet.forklaring.hjelpetekst'} />
+                        }
+                        svar={arbeiderAnnenForelderIUtlandetForklaring.verdi}
+                    />
                 )}
-        </div>
+        </OppsummeringSteg>
     );
 };
 

@@ -13,7 +13,10 @@ import { soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/action
 import { selectBarnehageplass } from '../../soknad/selectors';
 import { BarnehageplassVerdier, Feltnavn, IBarnehageplass, Svar } from '../../soknad/types';
 import BarnehageplassHarSluttetInfo from './BarnehageplassHarSluttetInfo';
+import BarnehageplassSkalBegynneInfo from './BarnehageplassSkalBegynneInfo';
+import BarnehageplassSkalSlutteInfo from './BarnehageplassSkalSlutteInfo';
 import BarnehageplassStatus from './BarnehageplassStatus';
+import HarBarnehageplassInfo from './HarBarnehageplassInfo';
 
 interface IMapDispatchToProps {
     nullstillNesteSteg: () => void;
@@ -44,6 +47,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
             className={'barnehage'}
             ikon={<Barnehageikon />}
             tittel={intl.formatMessage({ id: 'barnehageplass.tittel' })}
+            hjelpetekstNokkel={'barnehageplass.hjelpetekst'}
         >
             <p className={classNames('typo-ingress', 'barnehage__ingress')}>
                 {intl.formatMessage({ id: 'barnehageplass.ingress' })}
@@ -66,8 +70,8 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                     }}
                     checked={harBarnehageplass.verdi}
                     radios={[
-                        { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                         { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
+                        { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                     ]}
                     feil={feltMedFeil.harBarnehageplass}
                 />
@@ -85,6 +89,30 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                             <BarnehageplassHarSluttetInfo
                                 intl={intl}
                                 feltMedFeil={feltMedFeil}
+                                settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
+                            />
+                        )}
+                        {barnBarnehageplassStatus.verdi ===
+                            BarnehageplassVerdier.skalSlutteIBarnehage && (
+                            <BarnehageplassSkalSlutteInfo
+                                intl={intl}
+                                feltMedFeil={feltMedFeil}
+                                settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
+                            />
+                        )}
+                        {barnBarnehageplassStatus.verdi ===
+                            BarnehageplassVerdier.skalBegynneIBarnehage && (
+                            <BarnehageplassSkalBegynneInfo
+                                intl={intl}
+                                feltMedFeil={feltMedFeil}
+                                settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
+                            />
+                        )}
+                        {barnBarnehageplassStatus.verdi ===
+                            BarnehageplassVerdier.harBarnehageplass && (
+                            <HarBarnehageplassInfo
+                                feltMedFeil={feltMedFeil}
+                                intl={intl}
                                 settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
                             />
                         )}

@@ -5,7 +5,9 @@ import {
     IFelt,
     kravTilSokerFeltnavn,
     minebarnFeltnavn,
+    oppsummeringFeltnavn,
     utenlandskeYtelserFeltnavn,
+    utenlandskKontantstotteFeltnavn,
 } from './types';
 import {
     harFyltInnFodselsdato,
@@ -15,54 +17,73 @@ import {
     harSvartJaMedFeilmelding,
     harSvartMedFeilmelding,
     harSvartTekstMedFeilmelding,
-    svarUtenValidering,
 } from './validators';
 
 interface IValideringsConfig {
-    arbeidIUtlandet: { [felt in arbeidIUtlandetFeltnavn]: (felt: IFelt) => IFelt };
-    barnehageplass: { [felt in barnehageplassFeltnavn]: (felt: IFelt) => IFelt };
-    familieforhold: { [felt in familieforholdFeltnavn]: (felt: IFelt) => IFelt };
-    kravTilSoker: { [felt in kravTilSokerFeltnavn]: (felt: IFelt) => IFelt };
-    mineBarn: { [felt in minebarnFeltnavn]: (felt: IFelt) => IFelt };
-    utenlandskeYtelser: { [felt in utenlandskeYtelserFeltnavn]: (felt: IFelt) => IFelt };
+    arbeidIUtlandet: { [felt in arbeidIUtlandetFeltnavn]: Array<((felt: IFelt) => IFelt)> };
+    barnehageplass: { [felt in barnehageplassFeltnavn]: Array<((felt: IFelt) => IFelt)> };
+    familieforhold: { [felt in familieforholdFeltnavn]: Array<((felt: IFelt) => IFelt)> };
+    kravTilSoker: { [felt in kravTilSokerFeltnavn]: Array<((felt: IFelt) => IFelt)> };
+    mineBarn: { [felt in minebarnFeltnavn]: Array<((felt: IFelt) => IFelt)> };
+    utenlandskeYtelser: { [felt in utenlandskeYtelserFeltnavn]: Array<((felt: IFelt) => IFelt)> };
+    oppsummering: { [felt in oppsummeringFeltnavn]: Array<((felt: IFelt) => IFelt)> };
+    utenlandskKontantstotte: {
+        [felt in utenlandskKontantstotteFeltnavn]: Array<((felt: IFelt) => IFelt)>
+    };
 }
 
 const valideringsConfig: IValideringsConfig = {
     arbeidIUtlandet: {
-        arbeiderAnnenForelderIUtlandet: harSvartMedFeilmelding,
-        arbeiderAnnenForelderIUtlandetForklaring: harSvartTekstMedFeilmelding,
-        arbeiderIUtlandetEllerKontinentalsokkel: harSvartMedFeilmelding,
-        arbeiderIUtlandetEllerKontinentalsokkelForklaring: harSvartTekstMedFeilmelding,
+        arbeiderAnnenForelderIUtlandet: [harSvartMedFeilmelding],
+        arbeiderAnnenForelderIUtlandetForklaring: [harSvartTekstMedFeilmelding],
+        arbeiderIUtlandetEllerKontinentalsokkel: [harSvartMedFeilmelding],
+        arbeiderIUtlandetEllerKontinentalsokkelForklaring: [harSvartTekstMedFeilmelding],
     },
     barnehageplass: {
-        barnBarnehageplassStatus: harSvartBarnehageplassVerdiMedFeilmelding,
-        harBarnehageplass: harSvartMedFeilmelding,
-        harSluttetIBarnehageAntallTimer: harSvartTekstMedFeilmelding,
-        harSluttetIBarnehageDato: harSvartTekstMedFeilmelding,
-        harSluttetIBarnehageKommune: harSvartTekstMedFeilmelding,
+        barnBarnehageplassStatus: [harSvartBarnehageplassVerdiMedFeilmelding],
+        harBarnehageplass: [harSvartMedFeilmelding],
+        harBarnehageplassAntallTimer: [harSvartTekstMedFeilmelding],
+        harBarnehageplassDato: [harSvartTekstMedFeilmelding],
+        harBarnehageplassKommune: [harSvartTekstMedFeilmelding],
+        harSluttetIBarnehageAntallTimer: [harSvartTekstMedFeilmelding],
+        harSluttetIBarnehageDato: [harSvartTekstMedFeilmelding],
+        harSluttetIBarnehageKommune: [harSvartTekstMedFeilmelding],
+        skalBegynneIBarnehageAntallTimer: [harSvartTekstMedFeilmelding],
+        skalBegynneIBarnehageDato: [harSvartTekstMedFeilmelding],
+        skalBegynneIBarnehageKommune: [harSvartTekstMedFeilmelding],
+        skalSlutteIBarnehageAntallTimer: [harSvartTekstMedFeilmelding],
+        skalSlutteIBarnehageDato: [harSvartTekstMedFeilmelding],
+        skalSlutteIBarnehageKommune: [harSvartTekstMedFeilmelding],
     },
     familieforhold: {
-        annenForelderFodselsnummer: harFyltInnFodselsnummer,
-        annenForelderNavn: harFyltInnNavn,
-        borForeldreneSammenMedBarnet: harSvartMedFeilmelding,
+        annenForelderFodselsnummer: [harSvartTekstMedFeilmelding, harFyltInnFodselsnummer],
+        annenForelderNavn: [harFyltInnNavn],
+        borForeldreneSammenMedBarnet: [harSvartMedFeilmelding],
     },
     kravTilSoker: {
-        barnIkkeHjemme: harSvartJaMedFeilmelding,
-        boddEllerJobbetINorgeSisteFemAar: harSvartJaMedFeilmelding,
-        borSammenMedBarnet: harSvartJaMedFeilmelding,
-        ikkeAvtaltDeltBosted: harSvartJaMedFeilmelding,
-        norskStatsborger: harSvartJaMedFeilmelding,
-        skalBoMedBarnetINorgeNesteTolvMaaneder: harSvartJaMedFeilmelding,
+        barnIkkeHjemme: [harSvartJaMedFeilmelding],
+        boddEllerJobbetINorgeSisteFemAar: [harSvartJaMedFeilmelding],
+        borSammenMedBarnet: [harSvartJaMedFeilmelding],
+        ikkeAvtaltDeltBosted: [harSvartJaMedFeilmelding],
+        norskStatsborger: [harSvartJaMedFeilmelding],
+        skalBoMedBarnetINorgeNesteTolvMaaneder: [harSvartJaMedFeilmelding],
     },
     mineBarn: {
-        fodselsdato: harFyltInnFodselsdato,
-        navn: harFyltInnNavn,
+        fodselsdato: [harSvartTekstMedFeilmelding, harFyltInnFodselsdato],
+        navn: [harFyltInnNavn],
+    },
+    oppsummering: {
+        bekreftelse: [harSvartMedFeilmelding],
+    },
+    utenlandskKontantstotte: {
+        mottarKontantstotteFraUtlandet: [harSvartMedFeilmelding],
+        mottarKontantstotteFraUtlandetTilleggsinfo: [harSvartTekstMedFeilmelding],
     },
     utenlandskeYtelser: {
-        mottarAnnenForelderYtelserFraUtland: harSvartMedFeilmelding,
-        mottarAnnenForelderYtelserFraUtlandForklaring: harSvartTekstMedFeilmelding,
-        mottarYtelserFraUtland: harSvartMedFeilmelding,
-        mottarYtelserFraUtlandForklaring: harSvartTekstMedFeilmelding,
+        mottarAnnenForelderYtelserFraUtland: [harSvartMedFeilmelding],
+        mottarAnnenForelderYtelserFraUtlandForklaring: [harSvartTekstMedFeilmelding],
+        mottarYtelserFraUtland: [harSvartMedFeilmelding],
+        mottarYtelserFraUtlandForklaring: [harSvartTekstMedFeilmelding],
     },
 };
 

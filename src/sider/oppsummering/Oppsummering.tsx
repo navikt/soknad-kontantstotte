@@ -1,54 +1,98 @@
+import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import * as React from 'react';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { connect } from 'react-redux';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { connect, Dispatch } from 'react-redux';
+import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import SideContainer from '../../component/SideContainer/SideContainer';
+import SoknadPanel from '../../component/SoknadPanel/SoknadPanel';
 import { IRootState } from '../../rootReducer';
+import { soknadValiderFelt } from '../../soknad/actions';
 import { selectSoknad } from '../../soknad/selectors';
-import { ISoknadState } from '../../soknad/types';
+import { ISoknadState, Svar, ValideringsStatus } from '../../soknad/types';
 import ArbeidIUtlandetOppsummering from './ArbeidIUtlandetOppsummering';
 import BarnehageplassOppsummering from './BarnehageplassOppsummering';
+import { BarnOppsummering } from './BarnOppsummering';
 import FamilieforholdOppsummering from './FamilieforholdOppsummering';
 import KravTilSokerOppsummering from './KravTilSokerOppsummering';
-import PersonaliaOgBarnOppsummering from './PersonaliaOgBarnOppsummering';
+import PersonaliaOppsummering from './PersonaliaOppsummering';
 import UtenlandskeYtelserOppsummering from './UtenlandskeYtelserOppsummering';
+import UtenlandskKontantstotteOppsummering from './UtenlandskKontantstotteOppsummering';
 
 interface IMapStateToProps {
     soknad: ISoknadState;
+    harForsoktNesteSteg: boolean;
 }
 
-type OppsummeringSideProps = IMapStateToProps & InjectedIntlProps;
-const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({ intl, soknad }) => {
-    return (
-        <SideContainer>
-            <h1>Oversikt over hva du har fylt ut</h1>
+interface IMapDispatchToProps {
+    settBekreftelse: (verdi: Svar) => void;
+}
 
-            <ul>
-                <PersonaliaOgBarnOppsummering
-                    person={{ navn: '', fodselsnummer: '' }}
-                    barnet={soknad.mineBarn}
-                />
-                <KravTilSokerOppsummering intl={intl} kravTilSoker={soknad.kravTilSoker} />
-                <FamilieforholdOppsummering intl={intl} familieforhold={soknad.familieforhold} />
-                <BarnehageplassOppsummering intl={intl} barnehageplass={soknad.barnehageplass} />
+type OppsummeringSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
+
+const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
+    harForsoktNesteSteg,
+    intl,
+    settBekreftelse,
+    soknad,
+}) => {
+    return (
+        <SideContainer
+            className={'oppsummering'}
+            tittel={<FormattedMessage id={'oppsummering.tittel'} />}
+        >
+            <SoknadPanel className={'oppsummering__panel'}>
+                <PersonaliaOppsummering person={{ navn: '', fodselsnummer: '' }} />
+                <KravTilSokerOppsummering />
+                <BarnOppsummering barn={soknad.mineBarn} />
+                <BarnehageplassOppsummering barnehageplass={soknad.barnehageplass} />
+                <FamilieforholdOppsummering familieforhold={soknad.familieforhold} />
                 <ArbeidIUtlandetOppsummering
                     intl={intl}
                     familieforhold={soknad.familieforhold}
                     arbeidIUtlandet={soknad.arbeidIUtlandet}
                 />
                 <UtenlandskeYtelserOppsummering
-                    intl={intl}
                     familieforhold={soknad.familieforhold}
                     utenlandskeYtelser={soknad.utenlandskeYtelser}
                 />
-            </ul>
+                <UtenlandskKontantstotteOppsummering
+                    utenlandskKontantstotte={soknad.utenlandskKontantstotte}
+                />
+            </SoknadPanel>
+            <BekreftCheckboksPanel
+                className={'oppsummering__bekreftelse'}
+                onChange={(evt: React.SyntheticEvent<EventTarget>) => {
+                    const target = evt.nativeEvent.target as HTMLInputElement;
+                    settBekreftelse(target.checked ? Svar.JA : Svar.NEI);
+                }}
+                checked={soknad.oppsummering.bekreftelse.verdi === Svar.JA}
+                label={intl.formatMessage({ id: 'oppsummering.bekreftelse.label' })}
+            />
+            {harForsoktNesteSteg &&
+                soknad.oppsummering.bekreftelse.valideringsStatus !== ValideringsStatus.OK && (
+                    <FormattedMessage id={soknad.oppsummering.bekreftelse.feilmeldingsNokkel}>
+                        {txt => <div className={'skjemaelement__feilmelding'}>{txt}</div>}
+                    </FormattedMessage>
+                )}
         </SideContainer>
     );
 };
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
+        harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         soknad: selectSoknad(state),
     };
 };
 
-export default connect(mapStateToProps)(injectIntl(Oppsummering));
+const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
+    return {
+        settBekreftelse: (verdi: Svar) =>
+            dispatch(soknadValiderFelt('oppsummering', 'bekreftelse', verdi)),
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(injectIntl(Oppsummering));

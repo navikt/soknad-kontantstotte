@@ -1,42 +1,43 @@
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import * as React from 'react';
-import { InjectedIntl } from 'react-intl';
-import { IKravTilSoker } from '../../soknad/types';
-import OppsummeringsListeElement from './OppsummeringsListeElement';
+import { FormattedMessage } from 'react-intl';
+import { OppsummeringSteg } from './OppsummeringSteg';
 
-interface IKravTilSokerProps {
-    kravTilSoker: IKravTilSoker;
-    intl: InjectedIntl;
-}
-
-const KravTilSokerOppsummering: React.StatelessComponent<IKravTilSokerProps> = ({
-    intl,
-    kravTilSoker,
-}) => {
+const KravTilSokerOppsummering: React.StatelessComponent<{}> = () => {
     return (
-        <>
-            <OppsummeringsListeElement
-                tekst={intl.formatMessage({ id: 'oppsummering.kravtilsoker.norskStatsborger' })}
-            />
-            <OppsummeringsListeElement
-                tekst={intl.formatMessage({
-                    id: 'oppsummering.kravtilsoker.boddEllerJobbetINorgeSisteFemAar',
-                })}
-            />
-            <OppsummeringsListeElement
-                tekst={intl.formatMessage({ id: 'oppsummering.kravtilsoker.borSammenMedBarnet' })}
-            />
-            <OppsummeringsListeElement
-                tekst={intl.formatMessage({ id: 'oppsummering.kravtilsoker.barnIkkeHjemme' })}
-            />
-            <OppsummeringsListeElement
-                tekst={intl.formatMessage({ id: 'oppsummering.kravtilsoker.ikkeAvtaltDeltBosted' })}
-            />
-            <OppsummeringsListeElement
-                tekst={intl.formatMessage({
-                    id: 'oppsummering.kravtilsoker.skalBoMedBarnetINorgeNesteTolvMaaneder',
-                })}
-            />
-        </>
+        <OppsummeringSteg>
+            <Element>
+                <FormattedMessage id={'oppsummering.kravtilsoker.tittel'} />
+            </Element>
+
+            <Normaltekst className={'oppsummering__svar'}>
+                <FormattedMessage id={'oppsummering.kravtilsoker.norskStatsborger'} />
+            </Normaltekst>
+
+            <Normaltekst className={'oppsummering__svar'}>
+                <FormattedMessage
+                    id={'oppsummering.kravtilsoker.boddEllerJobbetINorgeSisteFemAar'}
+                />
+            </Normaltekst>
+
+            <Normaltekst className={'oppsummering__svar'}>
+                <FormattedMessage id={'oppsummering.kravtilsoker.borSammenMedBarnet'} />
+            </Normaltekst>
+
+            <Normaltekst className={'oppsummering__svar'}>
+                <FormattedMessage id={'oppsummering.kravtilsoker.barnIkkeHjemme'} />
+            </Normaltekst>
+
+            <Normaltekst className={'oppsummering__svar'}>
+                <FormattedMessage id={'oppsummering.kravtilsoker.ikkeAvtaltDeltBosted'} />
+            </Normaltekst>
+
+            <Normaltekst className={'oppsummering__svar'}>
+                <FormattedMessage
+                    id={'oppsummering.kravtilsoker.skalBoMedBarnetINorgeNesteTolvMaaneder'}
+                />
+            </Normaltekst>
+        </OppsummeringSteg>
     );
 };
 

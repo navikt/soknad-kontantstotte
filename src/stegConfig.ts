@@ -1,10 +1,11 @@
 import * as React from 'react';
 import ArbeidIUtlandet from './sider/arbeid-i-utlandet/ArbeidIUtlandet';
-import BarnehageplassSide from './sider/barnehageplass/Barnehageplass';
-import FamilieforholdSide from './sider/familieforhold/Familieforhold';
+import Barnehageplass from './sider/barnehageplass/Barnehageplass';
+import Familieforhold from './sider/familieforhold/Familieforhold';
 import KravTilSoker from './sider/krav-til-soker/KravTilSoker';
-import MineBarnSide from './sider/mine-barn/MineBarn';
-import OppsummeringSide from './sider/oppsummering/Oppsummering';
+import MineBarn from './sider/mine-barn/MineBarn';
+import Oppsummering from './sider/oppsummering/Oppsummering';
+import UtenlandskKontantstotte from './sider/utenlandsk-kontantstotte/UtenlandskKontantstotte';
 import UtenlandskeYtelser from './sider/utenlandske-ytelser/UtenlandskeYtelser';
 import Veiledning from './sider/veiledning/Veiledning';
 
@@ -13,6 +14,7 @@ interface IStegConfig {
     kravTilSoker: ISteg;
     mineBarn: ISteg;
     familieforhold: ISteg;
+    utenlandskKontantstotte: ISteg;
     barnehageplass: ISteg;
     arbeidIUtlandet: ISteg;
     utenlandskeYtelser: ISteg;
@@ -41,19 +43,19 @@ const stegConfig: IStegConfig = {
         stegIndeks: 1,
     },
     mineBarn: {
-        component: MineBarnSide,
+        component: MineBarn,
         key: 'mineBarn',
         path: '/mine-barn',
         stegIndeks: 2,
     },
     familieforhold: {
-        component: FamilieforholdSide,
+        component: Familieforhold,
         key: 'familieforhold',
         path: '/familieforhold',
         stegIndeks: 3,
     },
     barnehageplass: {
-        component: BarnehageplassSide,
+        component: Barnehageplass,
         key: 'barnehageplass',
         path: '/barnehageplass',
         stegIndeks: 4,
@@ -70,11 +72,17 @@ const stegConfig: IStegConfig = {
         path: '/utenlandske-ytelser',
         stegIndeks: 6,
     },
+    utenlandskKontantstotte: {
+        component: UtenlandskKontantstotte,
+        key: 'utenlandskKontantstotte',
+        path: '/utenlandsk-kontantstotte',
+        stegIndeks: 7,
+    },
     oppsummering: {
-        component: OppsummeringSide,
+        component: Oppsummering,
         key: 'oppsummering',
         path: '/oppsummering',
-        stegIndeks: 7,
+        stegIndeks: 8,
     },
 };
 /* tslint:enable:object-literal-sort-keys */

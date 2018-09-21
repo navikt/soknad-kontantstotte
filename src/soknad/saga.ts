@@ -2,6 +2,7 @@ import { SagaIterator } from 'redux-saga';
 import { all, call, put, select, takeEvery } from 'redux-saga/effects';
 import { appNesteSteg, appSettHarForsoktNesteSteg } from '../app/actions';
 import { selectAppSteg } from '../app/selectors';
+import { sendInn } from '../innsending/actions';
 import { ISteg, stegConfig } from '../stegConfig';
 import {
     ISoknadValiderFelt,
@@ -18,6 +19,7 @@ import {
     sjekkValideringForFamilieforhold,
     sjekkValideringForSteg,
     sjekkValideringForUtenlandskeYtelser,
+    sjekkValideringForUtenlandskKontantstotte,
 } from './stegSagaValidators';
 import {
     arbeidIUtlandetFeltnavn,
@@ -28,11 +30,28 @@ import {
     ISoknadState,
     kravTilSokerFeltnavn,
     minebarnFeltnavn,
+    oppsummeringFeltnavn,
     Stegnavn,
     utenlandskeYtelserFeltnavn,
+    utenlandskKontantstotteFeltnavn,
     ValideringsStatus,
 } from './types';
 import valideringsConfig from './valideringsConfig';
+
+function kjorValideringsFunksjoner(
+    valideringsFunksjoner: Array<((felt: IFelt) => IFelt)>,
+    felt: IFelt
+): IFelt {
+    const validertFelt: IFelt = valideringsFunksjoner.reduce(
+        (acc: IFelt, valideringsFunksjon) => {
+            const nyttValidertFelt = valideringsFunksjon(felt);
+            return acc.valideringsStatus === ValideringsStatus.FEIL ? acc : nyttValidertFelt;
+        },
+        { verdi: '', valideringsStatus: ValideringsStatus.IKKE_VALIDERT, feilmeldingsNokkel: '' }
+    );
+
+    return validertFelt;
+}
 
 function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
     const soknadState = yield select(selectSoknad);
@@ -48,34 +67,54 @@ function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
     };
     switch (action.stegnavn) {
         case 'arbeidIUtlandet':
-            validertFelt = valideringsConfig.arbeidIUtlandet[
-                action.feltnavn as arbeidIUtlandetFeltnavn
-            ](feltMedOppdatertVerdi);
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.arbeidIUtlandet[action.feltnavn as arbeidIUtlandetFeltnavn],
+                feltMedOppdatertVerdi
+            );
             break;
         case 'barnehageplass':
-            validertFelt = valideringsConfig.barnehageplass[
-                action.feltnavn as barnehageplassFeltnavn
-            ](feltMedOppdatertVerdi);
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.barnehageplass[action.feltnavn as barnehageplassFeltnavn],
+                feltMedOppdatertVerdi
+            );
             break;
         case 'familieforhold':
-            validertFelt = valideringsConfig.familieforhold[
-                action.feltnavn as familieforholdFeltnavn
-            ](feltMedOppdatertVerdi);
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.familieforhold[action.feltnavn as familieforholdFeltnavn],
+                feltMedOppdatertVerdi
+            );
             break;
         case 'kravTilSoker':
-            validertFelt = valideringsConfig.kravTilSoker[action.feltnavn as kravTilSokerFeltnavn](
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.kravTilSoker[action.feltnavn as kravTilSokerFeltnavn],
+                feltMedOppdatertVerdi
+            );
+            break;
+        case 'utenlandskKontantstotte':
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.utenlandskKontantstotte[
+                    action.feltnavn as utenlandskKontantstotteFeltnavn
+                ],
                 feltMedOppdatertVerdi
             );
             break;
         case 'mineBarn':
-            validertFelt = valideringsConfig.mineBarn[action.feltnavn as minebarnFeltnavn](
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.mineBarn[action.feltnavn as minebarnFeltnavn],
                 feltMedOppdatertVerdi
             );
             break;
         case 'utenlandskeYtelser':
-            validertFelt = valideringsConfig.utenlandskeYtelser[
-                action.feltnavn as utenlandskeYtelserFeltnavn
-            ](feltMedOppdatertVerdi);
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.utenlandskeYtelser[action.feltnavn as utenlandskeYtelserFeltnavn],
+                feltMedOppdatertVerdi
+            );
+            break;
+        case 'oppsummering':
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.oppsummering[action.feltnavn as oppsummeringFeltnavn],
+                feltMedOppdatertVerdi
+            );
             break;
     }
 
@@ -128,6 +167,12 @@ function* nesteStegSaga() {
         case 'familieforhold':
             harFeil = yield call(sjekkValideringForFamilieforhold, soknadState.familieforhold);
             break;
+        case 'utenlandskKontantstotte':
+            harFeil = yield call(
+                sjekkValideringForUtenlandskKontantstotte,
+                soknadState.utenlandskKontantstotte
+            );
+            break;
         case 'utenlandskeYtelser':
             harFeil = yield call(
                 sjekkValideringForUtenlandskeYtelser,
@@ -141,7 +186,11 @@ function* nesteStegSaga() {
 
     yield put(appSettHarForsoktNesteSteg(true));
     if (!harFeil) {
-        yield put(appNesteSteg());
+        if (tilSide.key === stegConfig.oppsummering.key) {
+            yield put(sendInn());
+        } else {
+            yield put(appNesteSteg());
+        }
     }
 }
 

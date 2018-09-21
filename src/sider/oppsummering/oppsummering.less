@@ -1,22 +1,36 @@
-.list-unstyled {
-  list-style: none;
-}
+@import "oppsummering-steg";
 
-.list-detaljer {
-  margin: 1rem 0 1rem 0rem;
-}
+.oppsummering {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-.oppsummering__element {
-  &--sporsmal {
-    margin-bottom: .5rem;
+  &__panel {
+    margin-top: 2rem;
+    width: 100%;
   }
 
-  &--svar {
-    margin-top: 0;
+  &__svar {
+    font-style: italic;
+    margin: 0.25rem 0;
+    white-space: pre-wrap;
+  }
+
+  &__bekreftelse {
+    margin: 1rem 1rem 0 1rem;
   }
 }
 
-.utenlandskeYtelser__oppsummering--forklaring {
-  white-space: pre-wrap;
-  word-break: break-word;
+
+@media (min-width: 750px) {
+  .oppsummering {
+    &__panel {
+      width: 70%;
+    }
+
+    &__bekreftelse {
+      margin: 1rem 0 0 0;
+      width: 70%;
+    }
+  }
 }

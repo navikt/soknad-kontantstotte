@@ -29,9 +29,18 @@ const initialState: ISoknadState = {
     barnehageplass: {
         barnBarnehageplassStatus: standardBarnehageplassVerdiInitialFelt,
         harBarnehageplass: standardSvarInitialFelt,
+        harBarnehageplassAntallTimer: standardStringInitialFelt,
+        harBarnehageplassDato: standardStringInitialFelt,
+        harBarnehageplassKommune: standardStringInitialFelt,
         harSluttetIBarnehageAntallTimer: standardStringInitialFelt,
         harSluttetIBarnehageDato: standardStringInitialFelt,
         harSluttetIBarnehageKommune: standardStringInitialFelt,
+        skalBegynneIBarnehageAntallTimer: standardStringInitialFelt,
+        skalBegynneIBarnehageDato: standardStringInitialFelt,
+        skalBegynneIBarnehageKommune: standardStringInitialFelt,
+        skalSlutteIBarnehageAntallTimer: standardStringInitialFelt,
+        skalSlutteIBarnehageDato: standardStringInitialFelt,
+        skalSlutteIBarnehageKommune: standardStringInitialFelt,
     },
     familieforhold: {
         annenForelderFodselsnummer: standardStringInitialFelt,
@@ -49,6 +58,13 @@ const initialState: ISoknadState = {
     mineBarn: {
         fodselsdato: standardStringInitialFelt,
         navn: standardStringInitialFelt,
+    },
+    oppsummering: {
+        bekreftelse: standardSvarInitialFelt,
+    },
+    utenlandskKontantstotte: {
+        mottarKontantstotteFraUtlandet: standardSvarInitialFelt,
+        mottarKontantstotteFraUtlandetTilleggsinfo: standardStringInitialFelt,
     },
     utenlandskeYtelser: {
         mottarAnnenForelderYtelserFraUtland: standardSvarInitialFelt,

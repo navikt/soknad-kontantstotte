@@ -50,9 +50,9 @@ const UtenlandskeYtelser: React.StatelessComponent<UtenlandskeYtelserProps> = ({
 
     return (
         <SideContainer
-            className={'utenlandske-ytelser'}
             ikon={<UtenlandskeYtelserIkon />}
             tittel={intl.formatMessage({ id: 'utenlandskeYtelser.tittel' })}
+            hjelpetekstNokkel={'utenlandskeYtelser.hjelpetekst'}
         >
             <form>
                 <RadioPanelGruppe
@@ -67,8 +67,8 @@ const UtenlandskeYtelser: React.StatelessComponent<UtenlandskeYtelserProps> = ({
                     }}
                     checked={mottarYtelserFraUtland.verdi}
                     radios={[
-                        { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                         { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
+                        { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                     ]}
                     feil={feltMedFeil.mottarYtelserFraUtland}
                 />
@@ -105,8 +105,8 @@ const UtenlandskeYtelser: React.StatelessComponent<UtenlandskeYtelserProps> = ({
                         }}
                         checked={mottarAnnenForelderYtelserFraUtland.verdi}
                         radios={[
-                            { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                             { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
+                            { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                         ]}
                         feil={feltMedFeil.mottarAnnenForelderYtelserFraUtland}
                     />

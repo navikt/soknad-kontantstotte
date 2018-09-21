@@ -49,7 +49,7 @@ const harSvartTekst = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
 const harFyltInnNavn = (felt: IFelt): IFelt => {
     return felt.verdi.replace(' ', '').length > 0
         ? ok(felt)
-        : feil(felt, 'feilmelding.familieforhold.annenForelder.navn');
+        : feil(felt, 'feilmelding.generell.navn');
 };
 
 const harFyltInnFodselsdato = (felt: IFelt): IFelt => {
@@ -61,7 +61,7 @@ const harFyltInnFodselsdato = (felt: IFelt): IFelt => {
 const harFyltInnFodselsnummer = (felt: IFelt): IFelt => {
     return /^\d{11}/.test(felt.verdi.replace(' ', ''))
         ? ok(felt)
-        : feil(felt, 'feilmelding.familieforhold.annenForelder.fodselsnummer');
+        : feil(felt, 'feilmelding.generell.fodselsnummer');
 };
 
 const harSvartMedFeilmelding = (felt: IFelt): IFelt =>
