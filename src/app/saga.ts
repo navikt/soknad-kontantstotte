@@ -16,6 +16,7 @@ import {
 import { ISteg, stegConfig } from '../stegConfig';
 import { teksterHent, TeksterTypeKeys } from '../tekster/actions';
 import { ISprak } from '../tekster/types';
+import { togglesHent } from '../toggles/actions';
 import { appEndreStatus, appSettSteg, AppTypeKeys } from './actions';
 import { pingBackend } from './api';
 import { selectAppSteg } from './selectors';
@@ -51,6 +52,7 @@ function* forsteSidelastSaga(): SagaIterator {
 
     yield all([take(TeksterTypeKeys.HENT_OK)]);
 
+    yield put(togglesHent());
     yield put(appEndreStatus(AppStatus.KLAR));
 }
 

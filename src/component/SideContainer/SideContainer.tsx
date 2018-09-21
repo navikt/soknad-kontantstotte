@@ -10,12 +10,14 @@ import { IRootState } from '../../rootReducer';
 import { ISteg, stegConfig } from '../../stegConfig';
 import Navigasjon from '../Navigering/Navigasjon';
 import Tilbakeknapp from '../Tilbakeknapp/Tilbakeknapp';
+import HjelpetekstContainer from './HjelpetekstContainer';
 
 interface IOwnProps {
     className?: string;
     children: React.ReactNode;
     ikon?: React.ReactNode;
     tittel?: string;
+    hjelpetekstNokkel?: string;
 }
 
 interface IMapStateToProps {
@@ -26,7 +28,14 @@ type Props = IOwnProps & IMapStateToProps;
 
 class SideContainer extends React.Component<Props> {
     public render() {
-        const { aktivtSteg, children, className = '', ikon, tittel } = this.props;
+        const {
+            aktivtSteg,
+            children,
+            className = '',
+            ikon,
+            tittel,
+            hjelpetekstNokkel,
+        } = this.props;
 
         const indikatorsteg: StegindikatorStegProps[] = Object.values(stegConfig)
             .filter((steg: ISteg) => steg.stegIndeks !== 0)
@@ -56,10 +65,18 @@ class SideContainer extends React.Component<Props> {
 
                     {displayTilbakeKnapp && <Tilbakeknapp posisjon={'oppe'} />}
                     {ikon && <div className={'side-container__ikon'}>{ikon}</div>}
-                    {tittel && (
-                        <h3 className={'typo-innholdstittel side-container__sidetittel'}>
-                            {tittel}
-                        </h3>
+
+                    {tittel && hjelpetekstNokkel ? (
+                        <HjelpetekstContainer
+                            tittel={tittel}
+                            hjelpetekstNokkel={hjelpetekstNokkel}
+                        />
+                    ) : (
+                        tittel && (
+                            <h3 className={'typo-innholdstittel side-container__sidetittel'}>
+                                {tittel}
+                            </h3>
+                        )
                     )}
                     <div className={classNames('side-container__children', className)}>
                         {children}
