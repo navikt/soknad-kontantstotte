@@ -1,9 +1,8 @@
-import { Normaltekst } from 'nav-frontend-typografi';
 import Element from 'nav-frontend-typografi/lib/element';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { IFamilieforhold, IUtenlandskeYtelser, Svar } from '../../soknad/types';
-import { OppsummeringPanel } from './OppsummeringPanel';
+import { OppsummeringSteg } from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
 interface IUtenlandskeYtelserOppsummeringProps {
@@ -24,7 +23,7 @@ const utenlandskeYtelserOppsummering: React.StatelessComponent<
     const { borForeldreneSammenMedBarnet } = familieforhold;
 
     return (
-        <OppsummeringPanel>
+        <OppsummeringSteg>
             <Element>
                 <FormattedMessage id={'utenlandskeYtelser.tittel'} />
             </Element>
@@ -68,7 +67,7 @@ const utenlandskeYtelserOppsummering: React.StatelessComponent<
                         svar={mottarAnnenForelderYtelserFraUtlandForklaring.verdi}
                     />
                 )}
-        </OppsummeringPanel>
+        </OppsummeringSteg>
     );
 };
 

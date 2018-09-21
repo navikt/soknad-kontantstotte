@@ -34,6 +34,7 @@ interface ISoknadState {
     readonly utenlandskKontantstotte: IUtenlandskKontantstotte;
     readonly kravTilSoker: IKravTilSoker;
     readonly utenlandskeYtelser: IUtenlandskeYtelser;
+    readonly oppsummering: IOppsummering;
 }
 
 interface IMineBarn {
@@ -86,6 +87,10 @@ interface IUtenlandskeYtelser {
     readonly mottarAnnenForelderYtelserFraUtlandForklaring: IFelt;
 }
 
+interface IOppsummering {
+    readonly bekreftelse: IFelt;
+}
+
 type minebarnFeltnavn = keyof IMineBarn;
 type familieforholdFeltnavn = keyof IFamilieforhold;
 type utenlandskKontantstotteFeltnavn = keyof IUtenlandskKontantstotte;
@@ -93,6 +98,7 @@ type arbeidsforholdFeltnavn = keyof IArbeidsforhold;
 type barnehageplassFeltnavn = keyof IBarnehageplass;
 type kravTilSokerFeltnavn = keyof IKravTilSoker;
 type utenlandskeYtelserFeltnavn = keyof IUtenlandskeYtelser;
+type oppsummeringFeltnavn = keyof IOppsummering;
 
 type Stegnavn = keyof ISoknadState;
 type Feltnavn =
@@ -102,7 +108,8 @@ type Feltnavn =
     | utenlandskKontantstotteFeltnavn
     | barnehageplassFeltnavn
     | kravTilSokerFeltnavn
-    | utenlandskeYtelserFeltnavn;
+    | utenlandskeYtelserFeltnavn
+    | oppsummeringFeltnavn;
 
 export {
     minebarnFeltnavn,
@@ -111,6 +118,7 @@ export {
     barnehageplassFeltnavn,
     kravTilSokerFeltnavn,
     utenlandskeYtelserFeltnavn,
+    oppsummeringFeltnavn,
     BarnehageplassVerdier,
     Stegnavn,
     Feltnavn,
