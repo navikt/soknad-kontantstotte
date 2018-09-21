@@ -55,14 +55,14 @@ const initialState: ISoknadState = {
         fodselsdato: standardStringInitialFelt,
         navn: standardStringInitialFelt,
     },
+    oppsummering: {
+        bekreftelse: standardSvarInitialFelt,
+    },
     utenlandskeYtelser: {
         mottarAnnenForelderYtelserFraUtland: standardSvarInitialFelt,
         mottarAnnenForelderYtelserFraUtlandForklaring: standardStringInitialFelt,
         mottarYtelserFraUtland: standardSvarInitialFelt,
         mottarYtelserFraUtlandForklaring: standardStringInitialFelt,
-    },
-    oppsummering: {
-        bekreftelse: standardSvarInitialFelt,
     },
 };
 

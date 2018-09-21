@@ -101,7 +101,8 @@ function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
             );
             break;
         case 'oppsummering':
-            validertFelt = valideringsConfig.oppsummering[action.feltnavn as oppsummeringFeltnavn](
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.oppsummering[action.feltnavn as oppsummeringFeltnavn],
                 feltMedOppdatertVerdi
             );
             break;
