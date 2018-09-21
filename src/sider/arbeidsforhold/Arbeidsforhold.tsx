@@ -2,7 +2,6 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import JaNeiSporsmal from '../../component/JaNeiSporsmal/JaNeiSporsmal';
 import SideContainer from '../../component/SideContainer/SideContainer';
-import Tilbakeknapp from '../../component/Tilbakeknapp/Tilbakeknapp';
 import { IRootState } from '../../rootReducer';
 import { selectArbeidsforhold } from '../../soknad/selectors';
 import { IArbeidsforhold, Stegnavn, Svar } from '../../soknad/types';
@@ -14,8 +13,6 @@ const Arbeidsforhold: React.StatelessComponent<ArbeidsforholdSideProps> = ({
     mottarYtelserFraUtlandetForklaring,
     arbeiderIUtlandetEllerKontinentalsokkel,
     arbeiderIUtlandetEllerKontinentalsokkelForklaring,
-    mottarKontantstotteFraAnnetEOS,
-    mottarKontantstotteFraAnnetEOSForklaring,
 }) => {
     const bolk: Stegnavn = 'arbeidsforhold';
     return (
@@ -37,15 +34,6 @@ const Arbeidsforhold: React.StatelessComponent<ArbeidsforholdSideProps> = ({
                     verdi={arbeiderIUtlandetEllerKontinentalsokkel.verdi as Svar}
                     harForklaring={true}
                     forklaring={arbeiderIUtlandetEllerKontinentalsokkelForklaring.verdi}
-                />
-
-                <JaNeiSporsmal
-                    bolk={bolk}
-                    felt="mottarKontantstotteFraAnnetEOS"
-                    sporsmalNokkel="arbeidsforhold.mottarKontantstotteFraAnnetEOS.sporsmal"
-                    verdi={mottarKontantstotteFraAnnetEOS.verdi as Svar}
-                    harForklaring={true}
-                    forklaring={mottarKontantstotteFraAnnetEOSForklaring.verdi}
                 />
             </form>
         </SideContainer>

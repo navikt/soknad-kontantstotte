@@ -19,6 +19,7 @@ import {
     sjekkValideringForFamilieforhold,
     sjekkValideringForSteg,
     sjekkValideringForUtenlandskeYtelser,
+    sjekkValideringForUtenlandskKontantstotte,
 } from './stegSagaValidators';
 import {
     arbeidsforholdFeltnavn,
@@ -32,6 +33,7 @@ import {
     oppsummeringFeltnavn,
     Stegnavn,
     utenlandskeYtelserFeltnavn,
+    utenlandskKontantstotteFeltnavn,
     ValideringsStatus,
 } from './types';
 import valideringsConfig from './valideringsConfig';
@@ -85,6 +87,14 @@ function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
         case 'kravTilSoker':
             validertFelt = kjorValideringsFunksjoner(
                 valideringsConfig.kravTilSoker[action.feltnavn as kravTilSokerFeltnavn],
+                feltMedOppdatertVerdi
+            );
+            break;
+        case 'utenlandskKontantstotte':
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.utenlandskKontantstotte[
+                    action.feltnavn as utenlandskKontantstotteFeltnavn
+                ],
                 feltMedOppdatertVerdi
             );
             break;
@@ -152,6 +162,12 @@ function* nesteStegSaga() {
             break;
         case 'familieforhold':
             harFeil = yield call(sjekkValideringForFamilieforhold, soknadState.familieforhold);
+            break;
+        case 'utenlandskKontantstotte':
+            harFeil = yield call(
+                sjekkValideringForUtenlandskKontantstotte,
+                soknadState.utenlandskKontantstotte
+            );
             break;
         case 'utenlandskeYtelser':
             harFeil = yield call(
