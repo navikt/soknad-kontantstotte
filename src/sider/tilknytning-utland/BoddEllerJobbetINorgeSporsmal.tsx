@@ -5,6 +5,7 @@ import TilleggsinformasjonInput from '../../component/TilleggsinformasjonInput/T
 import { Feltnavn, IFelt, TilknytningTilUtlandVerdier } from '../../soknad/types';
 
 interface IBoddEllerJobbetINorgeSporsmalProps {
+    nullstillNeste: () => void;
     settTilknytningTilUtlandVerdiFelt: (
         feltnavn: Feltnavn,
         verdi: TilknytningTilUtlandVerdier
@@ -21,6 +22,7 @@ interface IBoddEllerJobbetINorgeSporsmalProps {
 const BoddEllerJobbetINorgeSporsmal: React.StatelessComponent<
     IBoddEllerJobbetINorgeSporsmalProps
 > = ({
+    nullstillNeste,
     settTilknytningTilUtlandVerdiFelt,
     settForklaringsFelt,
     intl,
@@ -43,6 +45,7 @@ const BoddEllerJobbetINorgeSporsmal: React.StatelessComponent<
                         feltNavn as Feltnavn,
                         value as TilknytningTilUtlandVerdier
                     );
+                    nullstillNeste();
                 }}
                 checked={feltVerdi}
                 radios={[

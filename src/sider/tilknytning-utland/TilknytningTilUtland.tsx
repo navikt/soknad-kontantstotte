@@ -6,7 +6,7 @@ import { hentFeltMedFeil } from '../../common/utils';
 import TimeglassIkon from '../../component/Ikoner/TimeglassIkon';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
-import { soknadValiderFelt } from '../../soknad/actions';
+import { soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectFamilieforhold, selectTilknytningTilUtland } from '../../soknad/selectors';
 import {
     Feltnavn,
@@ -29,6 +29,7 @@ interface IMapDispatchToProps {
         verdi: TilknytningTilUtlandVerdier
     ) => void;
     settTilleggsinfoFelt: (feltnavn: Feltnavn, verdi: string) => void;
+    nullstillNesteSteg: () => void;
 }
 
 type TilknytningTilUtland = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
@@ -38,6 +39,7 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
     familieforhold,
     harForsoktNesteSteg,
     tilknytningTilUtland,
+    nullstillNesteSteg,
     settTilknytningTilUtlandVerdiFelt,
     settTilleggsinfoFelt,
 }) => {
@@ -64,6 +66,7 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
                 feltVerdi={boddEllerJobbetINorgeMinstFemAar.verdi as TilknytningTilUtlandVerdier}
                 forklaringFeltVerdi={boddEllerJobbetINorgeMinstFemAarForklaring}
                 forklaringFeltFeil={feltMedFeil.boddEllerJobbetINorgeMinstFemAarForklaring}
+                nullstillNeste={nullstillNesteSteg}
             />
             {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA && (
                 <BoddEllerJobbetINorgeSporsmal
@@ -79,6 +82,7 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
                     forklaringFeltFeil={
                         feltMedFeil.annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring
                     }
+                    nullstillNeste={nullstillNesteSteg}
                 />
             )}
         </SideContainer>
@@ -95,6 +99,9 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
+        nullstillNesteSteg: () => {
+            dispatch(soknadNullstillNesteSteg());
+        },
         settTilknytningTilUtlandVerdiFelt: (
             feltnavn: Feltnavn,
             verdi: TilknytningTilUtlandVerdier
