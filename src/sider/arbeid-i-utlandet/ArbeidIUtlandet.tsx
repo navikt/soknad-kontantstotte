@@ -109,8 +109,8 @@ const ArbeidIUtlandet: React.StatelessComponent<ArbeidIUtlandetProps> = ({
                         }}
                         checked={arbeiderAnnenForelderIUtlandet.verdi}
                         radios={[
-                            { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                             { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
+                            { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                         ]}
                         feil={feltMedFeil.arbeiderAnnenForelderIUtlandet}
                     />
