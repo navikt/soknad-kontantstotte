@@ -7,20 +7,17 @@ import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { hentFeltMedFeil } from '../../common/utils';
 import BarnIkon from '../../component/Ikoner/BarnIkon';
 import SideContainer from '../../component/SideContainer/SideContainer';
-import { selectBarn } from '../../person/selectors';
-import { IBarn } from '../../person/types';
 import { IRootState } from '../../rootReducer';
 import { soknadValiderFelt } from '../../soknad/actions';
 import { selectMineBarn } from '../../soknad/selectors';
+import { IMineBarn } from '../../soknad/types';
 
 interface IMapStateToProps {
-    barn: IBarn[];
     harForsoktNesteSteg: boolean;
-    valgtBarn: IBarn;
+    valgtBarn: IMineBarn;
 }
 
 interface IMapDispatchToProps {
-    velgBarn: (barn: IBarn) => void;
     settBarnNavn: (navn: string) => void;
     settBarnFodselsdato: (fodselsdato: string) => void;
 }
@@ -28,7 +25,6 @@ interface IMapDispatchToProps {
 type MineBarnSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
 const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
-    barn,
     harForsoktNesteSteg,
     settBarnFodselsdato,
     settBarnNavn,
@@ -73,7 +69,6 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
-        barn: selectBarn(state),
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         valgtBarn: selectMineBarn(state),
     };
@@ -84,10 +79,6 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
         settBarnFodselsdato: (fodselsdato: string) =>
             dispatch(soknadValiderFelt('mineBarn', 'fodselsdato', fodselsdato)),
         settBarnNavn: (navn: string) => dispatch(soknadValiderFelt('mineBarn', 'navn', navn)),
-        velgBarn: (barn: IBarn) => {
-            dispatch(soknadValiderFelt('mineBarn', 'fodselsdato', barn.fodselsdato));
-            dispatch(soknadValiderFelt('mineBarn', 'navn', barn.navn));
-        },
     };
 };
 
