@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { IBarn } from '../../person/types';
+import { IMineBarn } from '../../soknad/types';
 import { OppsummeringPanel } from './OppsummeringPanel';
 import { SporsmalSvar } from './SporsmalSvar';
 
 interface IBarnOppsummeringProps {
-    barn: IBarn;
+    barn: IMineBarn;
 }
 
 const BarnOppsummering: React.StatelessComponent<IBarnOppsummeringProps> = ({ barn }) => {
