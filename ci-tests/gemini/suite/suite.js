@@ -46,7 +46,7 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
                 window.document
-                    .querySelectorAll('[name="borForeldreneSammenMedBarnet"]')[1]
+                    .querySelectorAll('[name="borForeldreneSammenMedBarnet"]')[0]
                     .click();
             });
             actions.click('.knapp.knapp--hoved');
@@ -57,7 +57,7 @@ gemini.suite('soknad-kontantstotte', suite => {
         .capture('arbeidsforhold', function(actions) {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
-                window.document.querySelectorAll('[name="harBarnehageplass"]')[1].click();
+                window.document.querySelectorAll('[name="harBarnehageplass"]')[0].click();
                 window.document.querySelectorAll('[name="barnBarnehageplassStatus"]')[0].click();
             });
             actions.click('.knapp.knapp--hoved');
