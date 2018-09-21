@@ -34,11 +34,10 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
     soknad,
 }) => {
     return (
-        <SideContainer className={'oppsummering'}>
-            <h3 className={'typo-innholdstittel oppsummering__tittel'}>
-                <FormattedMessage id={'oppsummering.tittel'} />
-            </h3>
-
+        <SideContainer
+            className={'oppsummering'}
+            tittel={<FormattedMessage id={'oppsummering.tittel'} />}
+        >
             <SoknadPanel className={'oppsummering__panel'}>
                 <PersonaliaOppsummering person={{ navn: '', fodselsnummer: '' }} />
                 <KravTilSokerOppsummering />

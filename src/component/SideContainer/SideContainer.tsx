@@ -16,7 +16,7 @@ interface IOwnProps {
     className?: string;
     children: React.ReactNode;
     ikon?: React.ReactNode;
-    tittel?: string;
+    tittel?: React.ReactNode;
     hjelpetekstNokkel?: string;
 }
 
