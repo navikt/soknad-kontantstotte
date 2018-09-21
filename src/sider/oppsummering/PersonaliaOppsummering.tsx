@@ -1,7 +1,7 @@
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { OppsummeringPanel } from './OppsummeringPanel';
+import { OppsummeringSteg } from './OppsummeringSteg';
 
 interface IMapStateToProps {
     person: {
@@ -14,7 +14,7 @@ type PersonaliaOgBarnProps = IMapStateToProps;
 
 const PersonaliaOppsummering: React.StatelessComponent<PersonaliaOgBarnProps> = ({ person }) => {
     return (
-        <OppsummeringPanel>
+        <OppsummeringSteg>
             <Element>
                 <FormattedMessage id="oppsummering.sokerKontantstotteAv.label" />
             </Element>
@@ -23,7 +23,7 @@ const PersonaliaOppsummering: React.StatelessComponent<PersonaliaOgBarnProps> = 
                 <FormattedMessage id="oppsummering.fodselsnummer.label" />
                 {person.fodselsnummer}
             </Normaltekst>
-        </OppsummeringPanel>
+        </OppsummeringSteg>
     );
 };
 
