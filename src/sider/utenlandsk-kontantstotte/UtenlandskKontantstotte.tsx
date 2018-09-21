@@ -42,6 +42,7 @@ const UtenlandskKontantstotte: React.StatelessComponent<UtenlandskKontantstotteS
         <SideContainer
             ikon={<FlaskeIkon />}
             tittel={intl.formatMessage({ id: 'utenlandskKontantstotte.tittel' })}
+            hjelpetekstNokkel={'utenlandskKontantstotte.hjelpetekst'}
         >
             <form>
                 <RadioPanelGruppe
