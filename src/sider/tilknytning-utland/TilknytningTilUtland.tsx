@@ -56,6 +56,7 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
         <SideContainer
             tittel={intl.formatMessage({ id: 'tilknytningTilUtland.tittel' })}
             ikon={<TimeglassIkon />}
+            hjelpetekstNokkel={'tilknytningTilUtland.hjelpetekst'}
         >
             <BoddEllerJobbetINorgeSporsmal
                 settTilknytningTilUtlandVerdiFelt={settTilknytningTilUtlandVerdiFelt}
