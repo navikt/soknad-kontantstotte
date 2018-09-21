@@ -2,7 +2,7 @@ import { Element } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { BarnehageplassVerdier, IBarnehageplass } from '../../soknad/types';
-import { OppsummeringPanel } from './OppsummeringPanel';
+import { OppsummeringSteg } from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
 interface IBarnehageplassOppsummeringProps {
@@ -33,7 +33,7 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
     }
 
     return (
-        <OppsummeringPanel>
+        <OppsummeringSteg>
             <Element>
                 <FormattedMessage id={'barnehageplass.tittel'} />
             </Element>
@@ -104,7 +104,7 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                     />
                 </>
             )}
-        </OppsummeringPanel>
+        </OppsummeringSteg>
     );
 };
 

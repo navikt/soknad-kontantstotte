@@ -2,6 +2,7 @@ import { SagaIterator } from 'redux-saga';
 import { all, call, put, select, takeEvery } from 'redux-saga/effects';
 import { appNesteSteg, appSettHarForsoktNesteSteg } from '../app/actions';
 import { selectAppSteg } from '../app/selectors';
+import { sendInn } from '../innsending/actions';
 import { ISteg, stegConfig } from '../stegConfig';
 import {
     ISoknadValiderFelt,
@@ -29,6 +30,7 @@ import {
     ISoknadState,
     kravTilSokerFeltnavn,
     minebarnFeltnavn,
+    oppsummeringFeltnavn,
     Stegnavn,
     utenlandskeYtelserFeltnavn,
     utenlandskKontantstotteFeltnavn,
@@ -108,6 +110,12 @@ function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
                 feltMedOppdatertVerdi
             );
             break;
+        case 'oppsummering':
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.oppsummering[action.feltnavn as oppsummeringFeltnavn],
+                feltMedOppdatertVerdi
+            );
+            break;
     }
 
     yield put(soknadSettFelt(action.stegnavn, action.feltnavn, validertFelt));
@@ -174,7 +182,11 @@ function* nesteStegSaga() {
 
     yield put(appSettHarForsoktNesteSteg(true));
     if (!harFeil) {
-        yield put(appNesteSteg());
+        if (tilSide.key === stegConfig.oppsummering.key) {
+            yield put(sendInn());
+        } else {
+            yield put(appNesteSteg());
+        }
     }
 }
 

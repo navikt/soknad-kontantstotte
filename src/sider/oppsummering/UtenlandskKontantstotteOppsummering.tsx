@@ -2,7 +2,7 @@ import Element from 'nav-frontend-typografi/lib/element';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntl } from 'react-intl';
 import { IUtenlandskKontantstotte } from '../../soknad/types';
-import { OppsummeringPanel } from './OppsummeringPanel';
+import { OppsummeringSteg } from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
 interface IUtenlandskKontantstotteOppsummeringProps {
@@ -19,7 +19,7 @@ const UtenlandskKontantstotteOppsummering: React.StatelessComponent<
         mottarKontantstotteFraUtlandetTilleggsinfo,
     } = utenlandskKontantstotte;
     return (
-        <OppsummeringPanel>
+        <OppsummeringSteg>
             <Element>
                 <FormattedMessage id={'utenlandskKontantstotte.tittel'} />
             </Element>
@@ -43,7 +43,7 @@ const UtenlandskKontantstotteOppsummering: React.StatelessComponent<
                     svar={mottarKontantstotteFraUtlandetTilleggsinfo.verdi}
                 />
             )}
-        </OppsummeringPanel>
+        </OppsummeringSteg>
     );
 };
 
