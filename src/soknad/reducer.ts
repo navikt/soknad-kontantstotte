@@ -69,7 +69,9 @@ const initialState: ISoknadState = {
     },
     tilknytningTilUtland: {
         annenForelderBoddEllerJobbetINorgeMinstFemAar: standardTilknytningTilUtlandVerdiInitialFelt,
+        annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring: standardStringInitialFelt,
         boddEllerJobbetINorgeMinstFemAar: standardTilknytningTilUtlandVerdiInitialFelt,
+        boddEllerJobbetINorgeMinstFemAarForklaring: standardStringInitialFelt,
     },
     utenlandskeYtelser: {
         mottarAnnenForelderYtelserFraUtland: standardSvarInitialFelt,

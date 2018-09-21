@@ -101,9 +101,12 @@ function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
             );
             break;
         case 'tilknytningTilUtland':
-            validertFelt = valideringsConfig.tilknytningTilUtland[
-                action.feltnavn as tilknytningTilUtlandFeltnavn
-            ](feltMedOppdatertVerdi);
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.tilknytningTilUtland[
+                    action.feltnavn as tilknytningTilUtlandFeltnavn
+                ],
+                feltMedOppdatertVerdi
+            );
             break;
     }
 

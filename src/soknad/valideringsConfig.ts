@@ -17,7 +17,6 @@ import {
     harSvartMedFeilmelding,
     harSvartTekstMedFeilmelding,
     harSvartTilknytningTilUtlandVerdiMedFeilmelding,
-    svarUtenValidering,
 } from './validators';
 
 interface IValideringsConfig {
@@ -27,7 +26,9 @@ interface IValideringsConfig {
     kravTilSoker: { [felt in kravTilSokerFeltnavn]: Array<((felt: IFelt) => IFelt)> };
     mineBarn: { [felt in minebarnFeltnavn]: Array<((felt: IFelt) => IFelt)> };
     utenlandskeYtelser: { [felt in utenlandskeYtelserFeltnavn]: Array<((felt: IFelt) => IFelt)> };
-    tilknytningTilUtland: { [felt in tilknytningTilUtlandFeltnavn]: (felt: IFelt) => IFelt };
+    tilknytningTilUtland: {
+        [felt in tilknytningTilUtlandFeltnavn]: Array<((felt: IFelt) => IFelt)>
+    };
 }
 
 const valideringsConfig: IValideringsConfig = {
@@ -67,8 +68,12 @@ const valideringsConfig: IValideringsConfig = {
         navn: [harFyltInnNavn],
     },
     tilknytningTilUtland: {
-        annenForelderBoddEllerJobbetINorgeMinstFemAar: harSvartTilknytningTilUtlandVerdiMedFeilmelding,
-        boddEllerJobbetINorgeMinstFemAar: harSvartTilknytningTilUtlandVerdiMedFeilmelding,
+        annenForelderBoddEllerJobbetINorgeMinstFemAar: [
+            harSvartTilknytningTilUtlandVerdiMedFeilmelding,
+        ],
+        annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring: [harSvartTekstMedFeilmelding],
+        boddEllerJobbetINorgeMinstFemAar: [harSvartTilknytningTilUtlandVerdiMedFeilmelding],
+        boddEllerJobbetINorgeMinstFemAarForklaring: [harSvartTekstMedFeilmelding],
     },
     utenlandskeYtelser: {
         mottarAnnenForelderYtelserFraUtland: [harSvartMedFeilmelding],

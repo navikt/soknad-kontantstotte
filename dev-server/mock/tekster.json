@@ -107,6 +107,7 @@
     "tilknytningTilUtland.tittel": "Tilknytning til andre land",
     "tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.sporsmal": "Har den andre forelderen bodd eller vært yrkesaktiv i Norge eller andre EØS-land i minst fem år tilsammen?",
     "tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.sporsmal": "Har du bodd eller vært yrkesaktiv i Norge eller andre EØS-land i minst fem år tilsammen?",
+    "tilknytningTilUtland.forklaring.hjelpetekst": "Oppgi land, utenlandsk ID-nummer, adresse i landene og perioder",
     "tilknytningTilUtland.svar.jaINorge": "Ja, i Norge",
     "tilknytningTilUtland.svar.jaIEOS": "Ja, i ett EØS-land",
     "tilknytningTilUtland.svar.jaLeggerSammenPerioderEOS": "Ja, hvis jeg legger sammen perioder i EØS-land",

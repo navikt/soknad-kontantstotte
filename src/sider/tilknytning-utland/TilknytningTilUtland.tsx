@@ -1,4 +1,3 @@
-import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
@@ -16,6 +15,7 @@ import {
     Svar,
     TilknytningTilUtlandVerdier,
 } from '../../soknad/types';
+import BoddEllerJobbetINorgeSporsmal from './BoddEllerJobbetINorgeSporsmal';
 
 interface IMapStateToProps {
     familieforhold: IFamilieforhold;
@@ -28,6 +28,7 @@ interface IMapDispatchToProps {
         feltnavn: Feltnavn,
         verdi: TilknytningTilUtlandVerdier
     ) => void;
+    settTilleggsinfoFelt: (feltnavn: Feltnavn, verdi: string) => void;
 }
 
 type TilknytningTilUtland = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
@@ -38,10 +39,13 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
     harForsoktNesteSteg,
     tilknytningTilUtland,
     settTilknytningTilUtlandVerdiFelt,
+    settTilleggsinfoFelt,
 }) => {
     const {
         boddEllerJobbetINorgeMinstFemAar,
+        boddEllerJobbetINorgeMinstFemAarForklaring,
         annenForelderBoddEllerJobbetINorgeMinstFemAar,
+        annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring,
     } = tilknytningTilUtland;
 
     const feltMedFeil = hentFeltMedFeil(tilknytningTilUtland, harForsoktNesteSteg, intl);
@@ -51,77 +55,30 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
             tittel={intl.formatMessage({ id: 'tilknytningTilUtland.tittel' })}
             ikon={<TimeglassIkon />}
         >
-            <RadioPanelGruppe
-                legend={intl.formatMessage({
-                    id: 'tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.sporsmal',
-                })}
-                name={'boddEllerJobbetINorgeMinstFemAar'}
-                className={'soknad__inputPanelGruppe'}
-                onChange={(evt: {}, value: string) => {
-                    settTilknytningTilUtlandVerdiFelt(
-                        'boddEllerJobbetINorgeMinstFemAar' as Feltnavn,
-                        value as TilknytningTilUtlandVerdier
-                    );
-                }}
-                checked={boddEllerJobbetINorgeMinstFemAar.verdi}
-                radios={[
-                    {
-                        label: intl.formatMessage({ id: 'tilknytningTilUtland.svar.jaINorge' }),
-                        value: TilknytningTilUtlandVerdier.jaINorge,
-                    },
-                    {
-                        label: intl.formatMessage({ id: 'tilknytningTilUtland.svar.jaIEOS' }),
-                        value: TilknytningTilUtlandVerdier.jaIEOS,
-                    },
-                    {
-                        label: intl.formatMessage({
-                            id: 'tilknytningTilUtland.svar.jaLeggerSammenPerioderEOS',
-                        }),
-                        value: TilknytningTilUtlandVerdier.jaLeggerSammenPerioderEOS,
-                    },
-                    {
-                        label: intl.formatMessage({ id: 'tilknytningTilUtland.svar.nei' }),
-                        value: TilknytningTilUtlandVerdier.nei,
-                    },
-                ]}
-                feil={feltMedFeil.boddEllerJobbetINorgeMinstFemAar}
+            <BoddEllerJobbetINorgeSporsmal
+                settTilknytningTilUtlandVerdiFelt={settTilknytningTilUtlandVerdiFelt}
+                settForklaringsFelt={settTilleggsinfoFelt}
+                intl={intl}
+                feltMedFeil={feltMedFeil.boddEllerJobbetINorgeMinstFemAar}
+                feltNavn={'boddEllerJobbetINorgeMinstFemAar'}
+                feltVerdi={boddEllerJobbetINorgeMinstFemAar.verdi as TilknytningTilUtlandVerdier}
+                forklaringFeltVerdi={boddEllerJobbetINorgeMinstFemAarForklaring}
+                forklaringFeltFeil={feltMedFeil.boddEllerJobbetINorgeMinstFemAarForklaring}
             />
             {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA && (
-                <RadioPanelGruppe
-                    legend={intl.formatMessage({
-                        id:
-                            'tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.sporsmal',
-                    })}
-                    name={'annenForelderBoddEllerJobbetINorgeMinstFemAar'}
-                    className={'soknad__inputPanelGruppe'}
-                    onChange={(evt: {}, value: string) => {
-                        settTilknytningTilUtlandVerdiFelt(
-                            'annenForelderBoddEllerJobbetINorgeMinstFemAar' as Feltnavn,
-                            value as TilknytningTilUtlandVerdier
-                        );
-                    }}
-                    checked={annenForelderBoddEllerJobbetINorgeMinstFemAar.verdi}
-                    radios={[
-                        {
-                            label: intl.formatMessage({ id: 'tilknytningTilUtland.svar.jaINorge' }),
-                            value: TilknytningTilUtlandVerdier.jaINorge,
-                        },
-                        {
-                            label: intl.formatMessage({ id: 'tilknytningTilUtland.svar.jaIEOS' }),
-                            value: TilknytningTilUtlandVerdier.jaIEOS,
-                        },
-                        {
-                            label: intl.formatMessage({
-                                id: 'tilknytningTilUtland.svar.jaLeggerSammenPerioderEOS',
-                            }),
-                            value: TilknytningTilUtlandVerdier.jaLeggerSammenPerioderEOS,
-                        },
-                        {
-                            label: intl.formatMessage({ id: 'tilknytningTilUtland.svar.nei' }),
-                            value: TilknytningTilUtlandVerdier.nei,
-                        },
-                    ]}
-                    feil={feltMedFeil.annenForelderBoddEllerJobbetINorgeMinstFemAar}
+                <BoddEllerJobbetINorgeSporsmal
+                    settTilknytningTilUtlandVerdiFelt={settTilknytningTilUtlandVerdiFelt}
+                    settForklaringsFelt={settTilleggsinfoFelt}
+                    intl={intl}
+                    feltMedFeil={feltMedFeil.annenForelderBoddEllerJobbetINorgeMinstFemAar}
+                    feltNavn={'annenForelderBoddEllerJobbetINorgeMinstFemAar'}
+                    feltVerdi={
+                        annenForelderBoddEllerJobbetINorgeMinstFemAar.verdi as TilknytningTilUtlandVerdier
+                    }
+                    forklaringFeltVerdi={annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring}
+                    forklaringFeltFeil={
+                        feltMedFeil.annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring
+                    }
                 />
             )}
         </SideContainer>
@@ -142,6 +99,9 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
             feltnavn: Feltnavn,
             verdi: TilknytningTilUtlandVerdier
         ) => {
+            dispatch(soknadValiderFelt('tilknytningTilUtland', feltnavn, verdi));
+        },
+        settTilleggsinfoFelt: (feltnavn: Feltnavn, verdi: string) => {
             dispatch(soknadValiderFelt('tilknytningTilUtland', feltnavn, verdi));
         },
     };

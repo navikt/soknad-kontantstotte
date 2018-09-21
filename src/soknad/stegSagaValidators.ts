@@ -131,11 +131,35 @@ function* sjekkValideringForTilknytningTilUtland(
         tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.valideringsStatus !==
         ValideringsStatus.OK;
 
+    if (
+        tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.verdi ===
+            TilknytningTilUtlandVerdier.jaIEOS ||
+        tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.verdi ===
+            TilknytningTilUtlandVerdier.jaLeggerSammenPerioderEOS
+    ) {
+        harFeil =
+            harFeil ||
+            tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAarForklaring.valideringsStatus !==
+                ValideringsStatus.OK;
+    }
+
     if (familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA) {
         harFeil =
             harFeil ||
             tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.valideringsStatus !==
                 ValideringsStatus.OK;
+
+        if (
+            tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.verdi ===
+                TilknytningTilUtlandVerdier.jaIEOS ||
+            tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.verdi ===
+                TilknytningTilUtlandVerdier.jaLeggerSammenPerioderEOS
+        ) {
+            harFeil =
+                harFeil ||
+                tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring
+                    .valideringsStatus !== ValideringsStatus.OK;
+        }
     }
 
     return harFeil;

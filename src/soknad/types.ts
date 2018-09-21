@@ -93,7 +93,9 @@ interface IUtenlandskeYtelser {
 
 interface ITilknytningTilUtland {
     readonly boddEllerJobbetINorgeMinstFemAar: IFelt;
+    readonly boddEllerJobbetINorgeMinstFemAarForklaring: IFelt;
     readonly annenForelderBoddEllerJobbetINorgeMinstFemAar: IFelt;
+    readonly annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring: IFelt;
 }
 
 type minebarnFeltnavn = keyof IMineBarn;
