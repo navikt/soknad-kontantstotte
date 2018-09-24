@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const arbeidIUtlandetIkon: React.StatelessComponent<{}> = () => {
+const ArbeidIUtlandetIkon: React.StatelessComponent<{}> = () => {
     return (
         <svg
             version="1.1"
@@ -43,4 +43,4 @@ const arbeidIUtlandetIkon: React.StatelessComponent<{}> = () => {
     );
 };
 
-export default arbeidIUtlandetIkon;
+export default ArbeidIUtlandetIkon;
