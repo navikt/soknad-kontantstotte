@@ -47,7 +47,6 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
                 <BarnehageplassOppsummering barnehageplass={soknad.barnehageplass} />
                 <FamilieforholdOppsummering familieforhold={soknad.familieforhold} />
                 <ArbeidIUtlandetOppsummering
-                    intl={intl}
                     familieforhold={soknad.familieforhold}
                     arbeidIUtlandet={soknad.arbeidIUtlandet}
                 />

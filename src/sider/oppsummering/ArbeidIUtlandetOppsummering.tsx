@@ -1,19 +1,17 @@
 import Element from 'nav-frontend-typografi/lib/element';
 import * as React from 'react';
-import { FormattedMessage, InjectedIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { IArbeidIUtlandet, IFamilieforhold, Svar } from '../../soknad/types';
 import { OppsummeringSteg } from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
 interface IArbeidIUtlandetOppsummeringProps {
     familieforhold: IFamilieforhold;
-    intl: InjectedIntl;
     arbeidIUtlandet: IArbeidIUtlandet;
 }
 
 const arbeidIUtlandetOppsummering: React.StatelessComponent<IArbeidIUtlandetOppsummeringProps> = ({
     familieforhold,
-    intl,
     arbeidIUtlandet,
 }) => {
     const {
