@@ -14,7 +14,7 @@ import {
 } from './actions';
 import { selectSoknad } from './selectors';
 import {
-    sjekkValideringForArbeidsforhold,
+    sjekkValideringForArbeidIUtlandet,
     sjekkValideringForBarnehageplass,
     sjekkValideringForFamilieforhold,
     sjekkValideringForSteg,
@@ -22,7 +22,7 @@ import {
     sjekkValideringForUtenlandskKontantstotte,
 } from './stegSagaValidators';
 import {
-    arbeidsforholdFeltnavn,
+    arbeidIUtlandetFeltnavn,
     barnehageplassFeltnavn,
     familieforholdFeltnavn,
     Feltnavn,
@@ -66,9 +66,9 @@ function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
         verdi: '',
     };
     switch (action.stegnavn) {
-        case 'arbeidsforhold':
+        case 'arbeidIUtlandet':
             validertFelt = kjorValideringsFunksjoner(
-                valideringsConfig.arbeidsforhold[action.feltnavn as arbeidsforholdFeltnavn],
+                valideringsConfig.arbeidIUtlandet[action.feltnavn as arbeidIUtlandetFeltnavn],
                 feltMedOppdatertVerdi
             );
             break;
@@ -154,8 +154,12 @@ function* nesteStegSaga() {
 
     yield put(soknadValiderSteg(tilSide.key as Stegnavn));
     switch (tilSide.key as Stegnavn) {
-        case 'arbeidsforhold':
-            harFeil = yield call(sjekkValideringForArbeidsforhold, soknadState.arbeidsforhold);
+        case 'arbeidIUtlandet':
+            harFeil = yield call(
+                sjekkValideringForArbeidIUtlandet,
+                soknadState.familieforhold,
+                soknadState.arbeidIUtlandet
+            );
             break;
         case 'barnehageplass':
             harFeil = yield call(sjekkValideringForBarnehageplass, soknadState.barnehageplass);

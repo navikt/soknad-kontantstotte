@@ -1,5 +1,5 @@
 import {
-    arbeidsforholdFeltnavn,
+    arbeidIUtlandetFeltnavn,
     barnehageplassFeltnavn,
     familieforholdFeltnavn,
     IFelt,
@@ -20,7 +20,7 @@ import {
 } from './validators';
 
 interface IValideringsConfig {
-    arbeidsforhold: { [felt in arbeidsforholdFeltnavn]: Array<((felt: IFelt) => IFelt)> };
+    arbeidIUtlandet: { [felt in arbeidIUtlandetFeltnavn]: Array<((felt: IFelt) => IFelt)> };
     barnehageplass: { [felt in barnehageplassFeltnavn]: Array<((felt: IFelt) => IFelt)> };
     familieforhold: { [felt in familieforholdFeltnavn]: Array<((felt: IFelt) => IFelt)> };
     kravTilSoker: { [felt in kravTilSokerFeltnavn]: Array<((felt: IFelt) => IFelt)> };
@@ -33,11 +33,11 @@ interface IValideringsConfig {
 }
 
 const valideringsConfig: IValideringsConfig = {
-    arbeidsforhold: {
+    arbeidIUtlandet: {
+        arbeiderAnnenForelderIUtlandet: [harSvartMedFeilmelding],
+        arbeiderAnnenForelderIUtlandetForklaring: [harSvartTekstMedFeilmelding],
         arbeiderIUtlandetEllerKontinentalsokkel: [harSvartMedFeilmelding],
         arbeiderIUtlandetEllerKontinentalsokkelForklaring: [harSvartTekstMedFeilmelding],
-        mottarYtelserFraUtlandet: [harSvartMedFeilmelding],
-        mottarYtelserFraUtlandetForklaring: [harSvartTekstMedFeilmelding],
     },
     barnehageplass: {
         barnBarnehageplassStatus: [harSvartBarnehageplassVerdiMedFeilmelding],

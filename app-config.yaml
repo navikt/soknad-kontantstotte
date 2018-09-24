@@ -18,6 +18,9 @@ ingress:
 resources:
   limits:
     cpu: 3
+    memory: 786Mi
+  requests:
+    memory: 512Mi
 fasitResources:
   used:
   - alias: appres.cms

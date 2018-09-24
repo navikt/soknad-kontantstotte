@@ -1,6 +1,6 @@
 import {
     BarnehageplassVerdier,
-    IArbeidsforhold,
+    IArbeidIUtlandet,
     IBarnehageplass,
     IFamilieforhold,
     IFelt,
@@ -21,20 +21,33 @@ function* sjekkValideringForSteg(stegnavn: Stegnavn, soknadState: any) {
     return harListeMedFeltFeil(Object.values(soknadState[stegnavn]));
 }
 
-function* sjekkValideringForArbeidsforhold(arbeidsforhold: IArbeidsforhold) {
-    let harFeil = false;
-    if (arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.verdi === Svar.JA) {
+function* sjekkValideringForArbeidIUtlandet(
+    familieforhold: IFamilieforhold,
+    arbeidIUtlandet: IArbeidIUtlandet
+) {
+    let harFeil =
+        arbeidIUtlandet.arbeiderIUtlandetEllerKontinentalsokkel.valideringsStatus !==
+        ValideringsStatus.OK;
+
+    if (arbeidIUtlandet.arbeiderIUtlandetEllerKontinentalsokkel.verdi === Svar.JA) {
         harFeil =
             harFeil ||
-            arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkelForklaring.verdi.length === 0;
-    } else if (arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.verdi === Svar.UBESVART) {
-        return true;
+            arbeidIUtlandet.arbeiderIUtlandetEllerKontinentalsokkelForklaring.valideringsStatus !==
+                ValideringsStatus.OK;
     }
 
-    if (arbeidsforhold.mottarYtelserFraUtlandet.verdi === Svar.JA) {
-        harFeil = harFeil || arbeidsforhold.mottarYtelserFraUtlandetForklaring.verdi.length === 0;
-    } else if (arbeidsforhold.mottarYtelserFraUtlandet.verdi === Svar.UBESVART) {
-        return true;
+    if (familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA) {
+        harFeil =
+            harFeil ||
+            arbeidIUtlandet.arbeiderIUtlandetEllerKontinentalsokkel.valideringsStatus !==
+                ValideringsStatus.OK;
+
+        if (arbeidIUtlandet.arbeiderIUtlandetEllerKontinentalsokkel.verdi === Svar.JA) {
+            harFeil =
+                harFeil ||
+                arbeidIUtlandet.arbeiderIUtlandetEllerKontinentalsokkelForklaring
+                    .valideringsStatus !== ValideringsStatus.OK;
+        }
     }
 
     return harFeil;
@@ -155,7 +168,7 @@ function* sjekkValideringForUtenlandskKontantstotte(
 
 export {
     sjekkValideringForSteg,
-    sjekkValideringForArbeidsforhold,
+    sjekkValideringForArbeidIUtlandet,
     sjekkValideringForBarnehageplass,
     sjekkValideringForFamilieforhold,
     sjekkValideringForUtenlandskeYtelser,
