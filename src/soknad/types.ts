@@ -37,7 +37,7 @@ interface IFelt {
 interface ISoknadState {
     readonly mineBarn: IMineBarn;
     readonly familieforhold: IFamilieforhold;
-    readonly arbeidsforhold: IArbeidsforhold;
+    readonly arbeidIUtlandet: IArbeidIUtlandet;
     readonly barnehageplass: IBarnehageplass;
     readonly utenlandskKontantstotte: IUtenlandskKontantstotte;
     readonly kravTilSoker: IKravTilSoker;
@@ -60,13 +60,6 @@ interface IFamilieforhold {
 interface IUtenlandskKontantstotte {
     readonly mottarKontantstotteFraUtlandet: IFelt;
     readonly mottarKontantstotteFraUtlandetTilleggsinfo: IFelt;
-}
-
-interface IArbeidsforhold {
-    readonly mottarYtelserFraUtlandet: IFelt;
-    readonly mottarYtelserFraUtlandetForklaring: IFelt;
-    readonly arbeiderIUtlandetEllerKontinentalsokkel: IFelt;
-    readonly arbeiderIUtlandetEllerKontinentalsokkelForklaring: IFelt;
 }
 
 interface IBarnehageplass {
@@ -95,6 +88,13 @@ interface IKravTilSoker {
     readonly skalBoMedBarnetINorgeNesteTolvMaaneder: IFelt;
 }
 
+interface IArbeidIUtlandet {
+    readonly arbeiderIUtlandetEllerKontinentalsokkel: IFelt;
+    readonly arbeiderIUtlandetEllerKontinentalsokkelForklaring: IFelt;
+    readonly arbeiderAnnenForelderIUtlandet: IFelt;
+    readonly arbeiderAnnenForelderIUtlandetForklaring: IFelt;
+}
+
 interface IUtenlandskeYtelser {
     readonly mottarYtelserFraUtland: IFelt;
     readonly mottarYtelserFraUtlandForklaring: IFelt;
@@ -115,11 +115,11 @@ interface ITilknytningTilUtland {
 
 type minebarnFeltnavn = keyof IMineBarn;
 type familieforholdFeltnavn = keyof IFamilieforhold;
-type utenlandskKontantstotteFeltnavn = keyof IUtenlandskKontantstotte;
-type arbeidsforholdFeltnavn = keyof IArbeidsforhold;
 type barnehageplassFeltnavn = keyof IBarnehageplass;
 type kravTilSokerFeltnavn = keyof IKravTilSoker;
 type utenlandskeYtelserFeltnavn = keyof IUtenlandskeYtelser;
+type arbeidIUtlandetFeltnavn = keyof IArbeidIUtlandet;
+type utenlandskKontantstotteFeltnavn = keyof IUtenlandskKontantstotte;
 type oppsummeringFeltnavn = keyof IOppsummering;
 type tilknytningTilUtlandFeltnavn = keyof ITilknytningTilUtland;
 
@@ -127,18 +127,18 @@ type Stegnavn = keyof ISoknadState;
 type Feltnavn =
     | minebarnFeltnavn
     | familieforholdFeltnavn
-    | arbeidsforholdFeltnavn
-    | utenlandskKontantstotteFeltnavn
     | barnehageplassFeltnavn
     | kravTilSokerFeltnavn
+    | arbeidIUtlandetFeltnavn
     | utenlandskeYtelserFeltnavn
+    | utenlandskKontantstotteFeltnavn
     | oppsummeringFeltnavn
     | tilknytningTilUtlandFeltnavn;
 
 export {
     minebarnFeltnavn,
     familieforholdFeltnavn,
-    arbeidsforholdFeltnavn,
+    arbeidIUtlandetFeltnavn,
     barnehageplassFeltnavn,
     kravTilSokerFeltnavn,
     utenlandskeYtelserFeltnavn,
@@ -148,8 +148,8 @@ export {
     TilknytningTilUtlandVerdier,
     Stegnavn,
     Feltnavn,
+    IArbeidIUtlandet,
     IMineBarn,
-    IArbeidsforhold,
     IBarnehageplass,
     IFamilieforhold,
     IUtenlandskKontantstotte,

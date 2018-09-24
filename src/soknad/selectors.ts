@@ -1,6 +1,6 @@
 import { IRootState } from '../rootReducer';
 import {
-    IArbeidsforhold,
+    IArbeidIUtlandet,
     IBarnehageplass,
     IFamilieforhold,
     IKravTilSoker,
@@ -10,10 +10,6 @@ import {
 
 function selectFamilieforhold(state: IRootState): IFamilieforhold {
     return state.soknad.familieforhold;
-}
-
-function selectArbeidsforhold(state: IRootState): IArbeidsforhold {
-    return state.soknad.arbeidsforhold;
 }
 
 function selectBarnehageplass(state: IRootState): IBarnehageplass {
@@ -32,6 +28,10 @@ function selectMineBarn(state: IRootState) {
     return state.soknad.mineBarn;
 }
 
+function selectArbeidIUtlandet(state: IRootState): IArbeidIUtlandet {
+    return state.soknad.arbeidIUtlandet;
+}
+
 function selectYtelserFraUtland(state: IRootState) {
     return state.soknad.utenlandskeYtelser;
 }
@@ -45,7 +45,7 @@ function selectSoknad(state: IRootState): ISoknadState {
 }
 
 export {
-    selectArbeidsforhold,
+    selectArbeidIUtlandet,
     selectBarnehageplass,
     selectFamilieforhold,
     selectUtenlandskKontantstotte,

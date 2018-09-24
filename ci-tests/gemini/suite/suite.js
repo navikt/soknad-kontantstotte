@@ -54,7 +54,7 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.click('h1');
             actions.executeJS(disableHover);
         })
-        .capture('arbeidsforhold', function(actions) {
+        .capture('arbeidIUtlandet', function(actions) {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
                 window.document.querySelectorAll('[name="harBarnehageplass"]')[0].click();
@@ -68,9 +68,8 @@ gemini.suite('soknad-kontantstotte', suite => {
         .capture('utenlandske-ytelser', function(actions) {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
-                window.document.querySelectorAll('[name="mottarYtelserFraUtlandet"]')[1].click();
                 window.document
-                    .querySelectorAll('[name="arbeiderIUtlandetEllerKontinentalsokkel"]')[1]
+                    .querySelectorAll('[name="arbeiderIUtlandetEllerKontinentalsokkel"]')[0]
                     .click();
             });
             actions.click('.knapp.knapp--hoved');

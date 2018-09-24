@@ -9,6 +9,7 @@ import { IRootState } from '../../rootReducer';
 import { soknadValiderFelt } from '../../soknad/actions';
 import { selectSoknad } from '../../soknad/selectors';
 import { ISoknadState, Svar, ValideringsStatus } from '../../soknad/types';
+import ArbeidIUtlandetOppsummering from './ArbeidIUtlandetOppsummering';
 import BarnehageplassOppsummering from './BarnehageplassOppsummering';
 import { BarnOppsummering } from './BarnOppsummering';
 import FamilieforholdOppsummering from './FamilieforholdOppsummering';
@@ -49,6 +50,10 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
                 <TilknytningTilUtlandOppsummering
                     familieforhold={soknad.familieforhold}
                     tilknytningTilUtland={soknad.tilknytningTilUtland}
+                />
+                <ArbeidIUtlandetOppsummering
+                    familieforhold={soknad.familieforhold}
+                    arbeidIUtlandet={soknad.arbeidIUtlandet}
                 />
                 <UtenlandskeYtelserOppsummering
                     familieforhold={soknad.familieforhold}

@@ -32,11 +32,11 @@ const standardTilknytningTilUtlandVerdiInitialFelt = {
 };
 
 const initialState: ISoknadState = {
-    arbeidsforhold: {
+    arbeidIUtlandet: {
+        arbeiderAnnenForelderIUtlandet: standardSvarInitialFelt,
+        arbeiderAnnenForelderIUtlandetForklaring: standardStringInitialFelt,
         arbeiderIUtlandetEllerKontinentalsokkel: standardSvarInitialFelt,
         arbeiderIUtlandetEllerKontinentalsokkelForklaring: standardStringInitialFelt,
-        mottarYtelserFraUtlandet: standardSvarInitialFelt,
-        mottarYtelserFraUtlandetForklaring: standardStringInitialFelt,
     },
     barnehageplass: {
         barnBarnehageplassStatus: standardBarnehageplassVerdiInitialFelt,
