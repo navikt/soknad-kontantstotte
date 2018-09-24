@@ -1,7 +1,7 @@
 import { SagaIterator } from 'redux-saga';
 import { all, call, put, select, takeEvery } from 'redux-saga/effects';
 import { appNesteSteg, appSettHarForsoktNesteSteg } from '../app/actions';
-import { selectAppSteg } from '../app/selectors';
+import { selectAppSteg, selectHarForsoktNesteSteg } from '../app/selectors';
 import { sendInn } from '../innsending/actions';
 import { ISteg, stegConfig } from '../stegConfig';
 import {
@@ -14,6 +14,7 @@ import {
 } from './actions';
 import { selectSoknad } from './selectors';
 import {
+    sjekkAdvarslerForSteg,
     sjekkValideringForArbeidsforhold,
     sjekkValideringForBarnehageplass,
     sjekkValideringForFamilieforhold,
@@ -45,7 +46,10 @@ function kjorValideringsFunksjoner(
     const validertFelt: IFelt = valideringsFunksjoner.reduce(
         (acc: IFelt, valideringsFunksjon) => {
             const nyttValidertFelt = valideringsFunksjon(felt);
-            return acc.valideringsStatus === ValideringsStatus.FEIL ? acc : nyttValidertFelt;
+            return acc.valideringsStatus === ValideringsStatus.FEIL ||
+                acc.valideringsStatus === ValideringsStatus.ADVARSEL
+                ? acc
+                : nyttValidertFelt;
         },
         { verdi: '', valideringsStatus: ValideringsStatus.IKKE_VALIDERT, feilmeldingsNokkel: '' }
     );
@@ -180,8 +184,11 @@ function* nesteStegSaga() {
             harFeil = yield call(sjekkValideringForSteg, tilSide.key as Stegnavn, soknadState);
     }
 
+    const harForsoktNesteSteg = yield select(selectHarForsoktNesteSteg);
+    const harAdvarsler = yield call(sjekkAdvarslerForSteg, tilSide.key as Stegnavn, soknadState);
+
     yield put(appSettHarForsoktNesteSteg(true));
-    if (!harFeil) {
+    if (!harFeil && !(!harForsoktNesteSteg && harAdvarsler)) {
         if (tilSide.key === stegConfig.oppsummering.key) {
             yield put(sendInn());
         } else {

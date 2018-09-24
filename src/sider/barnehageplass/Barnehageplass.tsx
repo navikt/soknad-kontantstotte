@@ -1,17 +1,25 @@
 import * as classNames from 'classnames';
 import PanelBase from 'nav-frontend-paneler';
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
+import Veileder from 'nav-frontend-veileder';
 import * as React from 'react';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { hentFeltMedFeil } from '../../common/utils';
 import Barnehageikon from '../../component/Ikoner/BarnehageIkon';
+import Veilederikon from '../../component/Ikoner/Veilederikon';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import { IRootState } from '../../rootReducer';
 import { soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
-import { BarnehageplassVerdier, Feltnavn, IBarnehageplass, Svar } from '../../soknad/types';
+import {
+    BarnehageplassVerdier,
+    Feltnavn,
+    IBarnehageplass,
+    Svar,
+    ValideringsStatus,
+} from '../../soknad/types';
 import BarnehageplassHarSluttetInfo from './BarnehageplassHarSluttetInfo';
 import BarnehageplassSkalBegynneInfo from './BarnehageplassSkalBegynneInfo';
 import BarnehageplassSkalSlutteInfo from './BarnehageplassSkalSlutteInfo';
@@ -39,7 +47,11 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     settBarnehageplassVerdiFelt,
     settSvarFelt,
 }) => {
-    const { barnBarnehageplassStatus, harBarnehageplass } = barnehageplass;
+    const {
+        barnBarnehageplassStatus,
+        harBarnehageplass,
+        harBarnehageplassAntallTimer,
+    } = barnehageplass;
     const feltMedFeil = hentFeltMedFeil(barnehageplass, harForsoktNesteSteg, intl);
 
     return (
@@ -76,47 +88,74 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                     feil={feltMedFeil.harBarnehageplass}
                 />
                 {harBarnehageplass.verdi !== Svar.UBESVART && (
-                    <PanelBase className={'barnehage__panel'}>
-                        <BarnehageplassStatus
-                            barnBarnehageplassStatus={barnBarnehageplassStatus}
-                            feltMedFeil={feltMedFeil}
-                            harBarnehageplass={harBarnehageplass}
-                            intl={intl}
-                            settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
-                        />
-                        {barnBarnehageplassStatus.verdi ===
-                            BarnehageplassVerdier.harSluttetIBarnehage && (
-                            <BarnehageplassHarSluttetInfo
-                                intl={intl}
+                    <>
+                        <PanelBase className={'barnehage__panel'}>
+                            <BarnehageplassStatus
+                                barnBarnehageplassStatus={barnBarnehageplassStatus}
                                 feltMedFeil={feltMedFeil}
-                                settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
-                            />
-                        )}
-                        {barnBarnehageplassStatus.verdi ===
-                            BarnehageplassVerdier.skalSlutteIBarnehage && (
-                            <BarnehageplassSkalSlutteInfo
+                                harBarnehageplass={harBarnehageplass}
                                 intl={intl}
-                                feltMedFeil={feltMedFeil}
-                                settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
+                                settBarnehageplassVerdiFelt={(
+                                    feltnavn: Feltnavn,
+                                    value: BarnehageplassVerdier
+                                ) => {
+                                    settBarnehageplassVerdiFelt(feltnavn, value);
+                                    nullstillNesteSteg();
+                                }}
                             />
-                        )}
+                            {barnBarnehageplassStatus.verdi ===
+                                BarnehageplassVerdier.harSluttetIBarnehage && (
+                                <BarnehageplassHarSluttetInfo
+                                    intl={intl}
+                                    feltMedFeil={feltMedFeil}
+                                    settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
+                                />
+                            )}
+                            {barnBarnehageplassStatus.verdi ===
+                                BarnehageplassVerdier.skalSlutteIBarnehage && (
+                                <BarnehageplassSkalSlutteInfo
+                                    intl={intl}
+                                    feltMedFeil={feltMedFeil}
+                                    settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
+                                />
+                            )}
+                            {barnBarnehageplassStatus.verdi ===
+                                BarnehageplassVerdier.skalBegynneIBarnehage && (
+                                <BarnehageplassSkalBegynneInfo
+                                    intl={intl}
+                                    feltMedFeil={feltMedFeil}
+                                    settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
+                                />
+                            )}
+                            {barnBarnehageplassStatus.verdi ===
+                                BarnehageplassVerdier.harBarnehageplass && (
+                                <HarBarnehageplassInfo
+                                    feltMedFeil={feltMedFeil}
+                                    harForsoktNesteSteg={harForsoktNesteSteg}
+                                    intl={intl}
+                                    settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
+                                />
+                            )}
+                        </PanelBase>
                         {barnBarnehageplassStatus.verdi ===
-                            BarnehageplassVerdier.skalBegynneIBarnehage && (
-                            <BarnehageplassSkalBegynneInfo
-                                intl={intl}
-                                feltMedFeil={feltMedFeil}
-                                settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
-                            />
-                        )}
-                        {barnBarnehageplassStatus.verdi ===
-                            BarnehageplassVerdier.harBarnehageplass && (
-                            <HarBarnehageplassInfo
-                                feltMedFeil={feltMedFeil}
-                                intl={intl}
-                                settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
-                            />
-                        )}
-                    </PanelBase>
+                            BarnehageplassVerdier.harBarnehageplass &&
+                            harBarnehageplassAntallTimer.valideringsStatus ===
+                                ValideringsStatus.ADVARSEL &&
+                            harForsoktNesteSteg && (
+                                <Veileder
+                                    posisjon={'høyre'}
+                                    className={'barnehage__advarsel'}
+                                    tekst={
+                                        <FormattedMessage
+                                            id={harBarnehageplassAntallTimer.feilmeldingsNokkel}
+                                        />
+                                    }
+                                    type={'advarsel'}
+                                >
+                                    <Veilederikon morkBakgrunn={true} />
+                                </Veileder>
+                            )}
+                    </>
                 )}
             </form>
         </SideContainer>

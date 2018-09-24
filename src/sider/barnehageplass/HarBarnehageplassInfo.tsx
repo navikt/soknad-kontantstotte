@@ -5,11 +5,12 @@ import { connect } from 'react-redux';
 import { IFeltFeil } from '../../common/lib/validation/types';
 import { IRootState } from '../../rootReducer';
 import { selectBarnehageplass } from '../../soknad/selectors';
-import { BarnehageplassVerdier, Feltnavn, IFelt } from '../../soknad/types';
+import { BarnehageplassVerdier, Feltnavn, IFelt, ValideringsStatus } from '../../soknad/types';
 
 interface IHarBarnehageplassInfo {
     intl: InjectedIntl;
     feltMedFeil: IFeltFeil;
+    harForsoktNesteSteg: boolean;
     settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => void;
 }
 
@@ -22,12 +23,13 @@ interface IMapStateToProps {
 type HarBarnehageplassType = IHarBarnehageplassInfo & IMapStateToProps;
 
 const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = ({
-    intl,
     feltMedFeil,
-    settBarnehageplassVerdiFelt,
     harBarnehageplassAntallTimer,
     harBarnehageplassDato,
     harBarnehageplassKommune,
+    harForsoktNesteSteg,
+    intl,
+    settBarnehageplassVerdiFelt,
 }) => {
     return (
         <SkjemaGruppe className={'barnehage__inputSkjemaGruppe'}>
@@ -61,7 +63,10 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                     feil={feltMedFeil.harBarnehageplassKommune}
                 />
                 <Input
-                    className={'inputElement'}
+                    className={`inputElement${harBarnehageplassAntallTimer.valideringsStatus ===
+                        ValideringsStatus.ADVARSEL &&
+                        harForsoktNesteSteg &&
+                        '--advarsel'}`}
                     label={intl.formatMessage({
                         id: 'barnehageplass.harBarnehageplass.antallTimer.sporsmal',
                     })}

@@ -22,6 +22,12 @@ const ok = (felt: IFelt): IFelt => ({
     verdi: felt.verdi,
 });
 
+const advarsel = (felt: IFelt, advarselNokkel: string): IFelt => ({
+    feilmeldingsNokkel: advarselNokkel,
+    valideringsStatus: ValideringsStatus.ADVARSEL,
+    verdi: felt.verdi,
+});
+
 const feil = (felt: IFelt, feilmeldingsNokkel: string): IFelt => ({
     feilmeldingsNokkel,
     valideringsStatus: ValideringsStatus.FEIL,
@@ -64,6 +70,24 @@ const harFyltInnFodselsnummer = (felt: IFelt): IFelt => {
         : feil(felt, 'feilmelding.generell.fodselsnummer');
 };
 
+const harFyltInnTall = (felt: IFelt): IFelt => {
+    return /^[+-]?\d+(\.\d+)?$/.test(felt.verdi.replace(' ', ''))
+        ? ok(felt)
+        : feil(felt, 'feilmelding.generell.tall');
+};
+
+const harFyltInnGyldingAntallTimer = (felt: IFelt): IFelt => {
+    const timer = parseFloat(felt.verdi);
+    switch (true) {
+        case timer >= 0 && timer <= 33:
+            return ok(felt);
+        case timer >= 33 && timer <= 50:
+            return advarsel(felt, 'advarsel.barnehageplass.timerIBarnehage');
+        default:
+            return feil(felt, 'feilmelding.barnehageplass.timerIBarnehage');
+    }
+};
+
 const harSvartMedFeilmelding = (felt: IFelt): IFelt =>
     harSvart(felt, 'feilmelding.generell.feilmelding');
 
@@ -76,14 +100,16 @@ const harSvartTekstMedFeilmelding = (felt: IFelt): IFelt =>
 const svarUtenValidering = (felt: IFelt): IFelt => ok(felt);
 
 export {
+    harFyltInnFodselsdato,
+    harFyltInnFodselsnummer,
+    harFyltInnGyldingAntallTimer,
+    harFyltInnNavn,
+    harFyltInnTall,
     harSvart,
-    harSvartMedFeilmelding,
     harSvartBarnehageplassVerdiMedFeilmelding,
     harSvartJa,
     harSvartJaMedFeilmelding,
+    harSvartMedFeilmelding,
     harSvartTekstMedFeilmelding,
-    harFyltInnNavn,
-    harFyltInnFodselsdato,
-    harFyltInnFodselsnummer,
     svarUtenValidering,
 };

@@ -21,6 +21,16 @@ function* sjekkValideringForSteg(stegnavn: Stegnavn, soknadState: any) {
     return harListeMedFeltFeil(Object.values(soknadState[stegnavn]));
 }
 
+function harListeMedFeltAdvarsler(feltForSteg: IFelt[]): boolean {
+    return feltForSteg.reduce((acc: boolean, felt: IFelt) => {
+        return acc || felt.valideringsStatus === ValideringsStatus.ADVARSEL;
+    }, false);
+}
+
+function* sjekkAdvarslerForSteg(stegnavn: Stegnavn, soknadState: any) {
+    return harListeMedFeltAdvarsler(Object.values(soknadState[stegnavn]));
+}
+
 function* sjekkValideringForArbeidsforhold(arbeidsforhold: IArbeidsforhold) {
     let harFeil = false;
     if (arbeidsforhold.arbeiderIUtlandetEllerKontinentalsokkel.verdi === Svar.JA) {
@@ -154,6 +164,7 @@ function* sjekkValideringForUtenlandskKontantstotte(
 }
 
 export {
+    sjekkAdvarslerForSteg,
     sjekkValideringForSteg,
     sjekkValideringForArbeidsforhold,
     sjekkValideringForBarnehageplass,
