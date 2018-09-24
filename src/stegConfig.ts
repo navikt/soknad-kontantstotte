@@ -50,16 +50,16 @@ const stegConfig: IStegConfig = {
         path: '/mine-barn',
         stegIndeks: 2,
     },
-    familieforhold: {
-        component: Familieforhold,
-        key: 'familieforhold',
-        path: '/familieforhold',
-        stegIndeks: 3,
-    },
     barnehageplass: {
         component: Barnehageplass,
         key: 'barnehageplass',
         path: '/barnehageplass',
+        stegIndeks: 3,
+    },
+    familieforhold: {
+        component: Familieforhold,
+        key: 'familieforhold',
+        path: '/familieforhold',
         stegIndeks: 4,
     },
     tilknytningTilUtland: {
