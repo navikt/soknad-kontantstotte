@@ -1,7 +1,12 @@
 import Element from 'nav-frontend-typografi/lib/element';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { IFamilieforhold, ITilknytningTilUtland, Svar } from '../../soknad/types';
+import {
+    IFamilieforhold,
+    ITilknytningTilUtland,
+    Svar,
+    TilknytningTilUtlandVerdier,
+} from '../../soknad/types';
 import { OppsummeringPanel } from './OppsummeringPanel';
 import { SporsmalSvar } from './SporsmalSvar';
 
@@ -10,9 +15,38 @@ interface ITilknytningTilUtlandOppsummeringProps {
     tilknytningTilUtland: ITilknytningTilUtland;
 }
 
+const hentTekstNokkelForTilknytningTilUtlandSvar: (
+    svar: TilknytningTilUtlandVerdier
+) => string = svar => {
+    let tekstNokkelForSvar: string = 'Ubesvart';
+    switch (svar) {
+        case TilknytningTilUtlandVerdier.jaINorge:
+            tekstNokkelForSvar = 'oppsummering.tilknytningTilUtland.svar.jaINorge';
+            break;
+        case TilknytningTilUtlandVerdier.jaIEOS:
+            tekstNokkelForSvar = 'oppsummering.tilknytningTilUtland.svar.jaIEOS';
+            break;
+        case TilknytningTilUtlandVerdier.jaLeggerSammenPerioderEOS:
+            tekstNokkelForSvar = 'oppsummering.tilknytningTilUtland.svar.jaLeggerSammenPerioderEOS';
+            break;
+        case TilknytningTilUtlandVerdier.nei:
+            tekstNokkelForSvar = 'oppsummering.tilknytningTilUtland.svar.nei';
+            break;
+    }
+    return tekstNokkelForSvar;
+};
+
 const TilknytningTilUtlandOppsummering: React.StatelessComponent<
     ITilknytningTilUtlandOppsummeringProps
 > = ({ familieforhold, tilknytningTilUtland }) => {
+    const boddEllerJobbetINorgeMinstFemAarSvar = hentTekstNokkelForTilknytningTilUtlandSvar(
+        tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.verdi as TilknytningTilUtlandVerdier
+    );
+    const annenForelderBoddEllerJobbetINorgeMinstFemAarSvar = hentTekstNokkelForTilknytningTilUtlandSvar(
+        tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar
+            .verdi as TilknytningTilUtlandVerdier
+    );
+
     return (
         <OppsummeringPanel>
             <Element>
@@ -24,16 +58,12 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
                         id={'oppsummering.tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar'}
                     />
                 }
-                svar={tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.verdi}
+                svar={<FormattedMessage id={boddEllerJobbetINorgeMinstFemAarSvar} />}
             />
             {tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAarForklaring.verdi !== '' && (
                 <SporsmalSvar
                     sporsmal={
-                        <FormattedMessage
-                            id={
-                                'oppsummering.tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAarForklaring'
-                            }
-                        />
+                        <FormattedMessage id={'oppsummering.tilknytningTilUtland.forklaring'} />
                     }
                     svar={tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAarForklaring.verdi}
                 />
@@ -48,7 +78,9 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
                             }
                         />
                     }
-                    svar={tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.verdi}
+                    svar={
+                        <FormattedMessage id={annenForelderBoddEllerJobbetINorgeMinstFemAarSvar} />
+                    }
                 />
             )}
 
@@ -57,11 +89,7 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
                     .verdi !== '' && (
                     <SporsmalSvar
                         sporsmal={
-                            <FormattedMessage
-                                id={
-                                    'oppsummering.tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring'
-                                }
-                            />
+                            <FormattedMessage id={'oppsummering.tilknytningTilUtland.forklaring'} />
                         }
                         svar={
                             tilknytningTilUtland
