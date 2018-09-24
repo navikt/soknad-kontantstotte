@@ -1,21 +1,36 @@
-@import "oppsummering-panel";
+@import "oppsummering-steg";
 
 .oppsummering {
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  &__tittel {
-    margin: 2rem 0;
+  &__panel {
+    margin-top: 2rem;
+    width: 100%;
   }
 
   &__svar {
     font-style: italic;
     margin: 0.25rem 0;
+    white-space: pre-wrap;
+  }
+
+  &__bekreftelse {
+    margin: 1rem 1rem 0 1rem;
   }
 }
 
-.utenlandskeYtelser__oppsummering--forklaring {
-  white-space: pre-wrap;
-  word-break: break-word;
+
+@media (min-width: 750px) {
+  .oppsummering {
+    &__panel {
+      width: 70%;
+    }
+
+    &__bekreftelse {
+      margin: 1rem 0 0 0;
+      width: 70%;
+    }
+  }
 }

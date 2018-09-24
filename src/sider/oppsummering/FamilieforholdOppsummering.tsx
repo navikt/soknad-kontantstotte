@@ -2,7 +2,7 @@ import Element from 'nav-frontend-typografi/lib/element';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { IFamilieforhold, Svar } from '../../soknad/types';
-import { OppsummeringPanel } from './OppsummeringPanel';
+import { OppsummeringSteg } from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
 interface IFamilieforholdOppsummering {
@@ -15,7 +15,7 @@ const FamilieforholdOppsummering: React.StatelessComponent<FamilieforholdOppsumm
     familieforhold,
 }) => {
     return (
-        <OppsummeringPanel>
+        <OppsummeringSteg>
             <Element>
                 <FormattedMessage id={'familieforhold.tittel'} />
             </Element>
@@ -45,7 +45,7 @@ const FamilieforholdOppsummering: React.StatelessComponent<FamilieforholdOppsumm
                     />
                 </>
             )}
-        </OppsummeringPanel>
+        </OppsummeringSteg>
     );
 };
 

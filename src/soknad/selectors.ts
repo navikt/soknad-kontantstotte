@@ -5,6 +5,7 @@ import {
     IFamilieforhold,
     IKravTilSoker,
     ISoknadState,
+    IUtenlandskKontantstotte,
 } from './types';
 
 function selectFamilieforhold(state: IRootState): IFamilieforhold {
@@ -17,6 +18,10 @@ function selectArbeidsforhold(state: IRootState): IArbeidsforhold {
 
 function selectBarnehageplass(state: IRootState): IBarnehageplass {
     return state.soknad.barnehageplass;
+}
+
+function selectUtenlandskKontantstotte(state: IRootState): IUtenlandskKontantstotte {
+    return state.soknad.utenlandskKontantstotte;
 }
 
 function selectKravTilSoker(state: IRootState): IKravTilSoker {
@@ -43,6 +48,7 @@ export {
     selectArbeidsforhold,
     selectBarnehageplass,
     selectFamilieforhold,
+    selectUtenlandskKontantstotte,
     selectKravTilSoker,
     selectYtelserFraUtland,
     selectTilknytningTilUtland,

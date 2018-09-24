@@ -4,10 +4,9 @@ import { StegindikatorStegProps } from 'nav-frontend-stegindikator/lib/stegindik
 import { Sidetittel } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect, Dispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { selectAppSteg } from '../../app/selectors';
 import { IRootState } from '../../rootReducer';
-import { soknadNesteSteg } from '../../soknad/actions';
 import { ISteg, stegConfig } from '../../stegConfig';
 import Navigasjon from '../Navigering/Navigasjon';
 import Tilbakeknapp from '../Tilbakeknapp/Tilbakeknapp';
@@ -17,7 +16,7 @@ interface IOwnProps {
     className?: string;
     children: React.ReactNode;
     ikon?: React.ReactNode;
-    tittel?: string;
+    tittel?: React.ReactNode;
     hjelpetekstNokkel?: string;
 }
 
@@ -25,11 +24,7 @@ interface IMapStateToProps {
     aktivtSteg: number;
 }
 
-interface IMapDispatchToProps {
-    nesteSteg: () => void;
-}
-
-type Props = IOwnProps & IMapStateToProps & IMapDispatchToProps;
+type Props = IOwnProps & IMapStateToProps;
 
 class SideContainer extends React.Component<Props> {
     public render() {
@@ -99,13 +94,4 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
-    return {
-        nesteSteg: () => dispatch(soknadNesteSteg()),
-    };
-};
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SideContainer);
+export default connect(mapStateToProps)(SideContainer);

@@ -7,7 +7,7 @@ import {
     Svar,
     TilknytningTilUtlandVerdier,
 } from '../../soknad/types';
-import { OppsummeringPanel } from './OppsummeringPanel';
+import { OppsummeringSteg } from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
 interface ITilknytningTilUtlandOppsummeringProps {
@@ -48,7 +48,7 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
     );
 
     return (
-        <OppsummeringPanel>
+        <OppsummeringSteg>
             <Element>
                 <FormattedMessage id={'tilknytningTilUtland.tittel'} />
             </Element>
@@ -97,7 +97,7 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
                         }
                     />
                 )}
-        </OppsummeringPanel>
+        </OppsummeringSteg>
     );
 };
 

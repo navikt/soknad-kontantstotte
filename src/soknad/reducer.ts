@@ -35,8 +35,6 @@ const initialState: ISoknadState = {
     arbeidsforhold: {
         arbeiderIUtlandetEllerKontinentalsokkel: standardSvarInitialFelt,
         arbeiderIUtlandetEllerKontinentalsokkelForklaring: standardStringInitialFelt,
-        mottarKontantstotteFraAnnetEOS: standardSvarInitialFelt,
-        mottarKontantstotteFraAnnetEOSForklaring: standardStringInitialFelt,
         mottarYtelserFraUtlandet: standardSvarInitialFelt,
         mottarYtelserFraUtlandetForklaring: standardStringInitialFelt,
     },
@@ -49,6 +47,12 @@ const initialState: ISoknadState = {
         harSluttetIBarnehageAntallTimer: standardStringInitialFelt,
         harSluttetIBarnehageDato: standardStringInitialFelt,
         harSluttetIBarnehageKommune: standardStringInitialFelt,
+        skalBegynneIBarnehageAntallTimer: standardStringInitialFelt,
+        skalBegynneIBarnehageDato: standardStringInitialFelt,
+        skalBegynneIBarnehageKommune: standardStringInitialFelt,
+        skalSlutteIBarnehageAntallTimer: standardStringInitialFelt,
+        skalSlutteIBarnehageDato: standardStringInitialFelt,
+        skalSlutteIBarnehageKommune: standardStringInitialFelt,
     },
     familieforhold: {
         annenForelderFodselsnummer: standardStringInitialFelt,
@@ -67,11 +71,18 @@ const initialState: ISoknadState = {
         fodselsdato: standardStringInitialFelt,
         navn: standardStringInitialFelt,
     },
+    oppsummering: {
+        bekreftelse: standardSvarInitialFelt,
+    },
     tilknytningTilUtland: {
         annenForelderBoddEllerJobbetINorgeMinstFemAar: standardTilknytningTilUtlandVerdiInitialFelt,
         annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring: standardStringInitialFelt,
         boddEllerJobbetINorgeMinstFemAar: standardTilknytningTilUtlandVerdiInitialFelt,
         boddEllerJobbetINorgeMinstFemAarForklaring: standardStringInitialFelt,
+    },
+    utenlandskKontantstotte: {
+        mottarKontantstotteFraUtlandet: standardSvarInitialFelt,
+        mottarKontantstotteFraUtlandetTilleggsinfo: standardStringInitialFelt,
     },
     utenlandskeYtelser: {
         mottarAnnenForelderYtelserFraUtland: standardSvarInitialFelt,

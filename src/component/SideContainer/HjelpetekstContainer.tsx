@@ -2,7 +2,7 @@ import * as React from 'react';
 import ModalHjelpetekst from '../ModalHjelpetekst/ModalHjelpetekst';
 
 interface IHjelpetekstContainerProps {
-    tittel: string;
+    tittel: React.ReactNode;
     hjelpetekstNokkel: string;
 }
 

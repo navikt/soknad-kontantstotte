@@ -6,6 +6,7 @@ import {
     IFelt,
     ITilknytningTilUtland,
     IUtenlandskeYtelser,
+    IUtenlandskKontantstotte,
     Stegnavn,
     Svar,
     TilknytningTilUtlandVerdier,
@@ -32,13 +33,6 @@ function* sjekkValideringForArbeidsforhold(arbeidsforhold: IArbeidsforhold) {
         return true;
     }
 
-    if (arbeidsforhold.mottarKontantstotteFraAnnetEOS.verdi === Svar.JA) {
-        harFeil =
-            harFeil || arbeidsforhold.mottarKontantstotteFraAnnetEOSForklaring.verdi.length === 0;
-    } else if (arbeidsforhold.mottarKontantstotteFraAnnetEOS.verdi === Svar.UBESVART) {
-        return true;
-    }
-
     if (arbeidsforhold.mottarYtelserFraUtlandet.verdi === Svar.JA) {
         harFeil = harFeil || arbeidsforhold.mottarYtelserFraUtlandetForklaring.verdi.length === 0;
     } else if (arbeidsforhold.mottarYtelserFraUtlandet.verdi === Svar.UBESVART) {
@@ -58,13 +52,34 @@ function* sjekkValideringForBarnehageplass(barnehageplass: IBarnehageplass) {
                 return;
 
             case BarnehageplassVerdier.harBarnehageplass:
-                return;
+                if (
+                    barnehageplass.harBarnehageplassKommune.verdi.length > 0 &&
+                    barnehageplass.harBarnehageplassDato.verdi.length > 0 &&
+                    barnehageplass.harBarnehageplassAntallTimer.verdi.length > 0
+                ) {
+                    return;
+                }
+                break;
 
             case BarnehageplassVerdier.skalBegynneIBarnehage:
-                return;
+                if (
+                    barnehageplass.skalBegynneIBarnehageKommune.verdi.length > 0 &&
+                    barnehageplass.skalBegynneIBarnehageDato.verdi.length > 0 &&
+                    barnehageplass.skalBegynneIBarnehageAntallTimer.verdi.length > 0
+                ) {
+                    return;
+                }
+                break;
 
             case BarnehageplassVerdier.skalSlutteIBarnehage:
-                return;
+                if (
+                    barnehageplass.skalSlutteIBarnehageKommune.verdi.length > 0 &&
+                    barnehageplass.skalSlutteIBarnehageDato.verdi.length > 0 &&
+                    barnehageplass.skalSlutteIBarnehageAntallTimer.verdi.length > 0
+                ) {
+                    return;
+                }
+                break;
 
             case BarnehageplassVerdier.harSluttetIBarnehage:
                 if (
@@ -165,6 +180,23 @@ function* sjekkValideringForTilknytningTilUtland(
     return harFeil;
 }
 
+function* sjekkValideringForUtenlandskKontantstotte(
+    utenlandskKontantstotte: IUtenlandskKontantstotte
+) {
+    let harFeil =
+        utenlandskKontantstotte.mottarKontantstotteFraUtlandet.valideringsStatus !==
+        ValideringsStatus.OK;
+
+    if (utenlandskKontantstotte.mottarKontantstotteFraUtlandet.verdi === Svar.JA) {
+        harFeil =
+            harFeil ||
+            utenlandskKontantstotte.mottarKontantstotteFraUtlandetTilleggsinfo.valideringsStatus !==
+                ValideringsStatus.OK;
+    }
+
+    return harFeil;
+}
+
 export {
     sjekkValideringForSteg,
     sjekkValideringForArbeidsforhold,
@@ -172,4 +204,5 @@ export {
     sjekkValideringForFamilieforhold,
     sjekkValideringForTilknytningTilUtland,
     sjekkValideringForUtenlandskeYtelser,
+    sjekkValideringForUtenlandskKontantstotte,
 };

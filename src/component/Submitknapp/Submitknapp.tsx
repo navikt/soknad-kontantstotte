@@ -3,7 +3,6 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { selectAppSteg } from '../../app/selectors';
-import { sendInn } from '../../innsending/actions';
 import { selectSenderInn } from '../../innsending/selectors';
 import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg } from '../../soknad/actions';
@@ -20,7 +19,6 @@ interface IMapStateToProps {
 
 interface IMapDispatchToProps {
     nesteSteg: () => void;
-    sendSoknad: () => void;
 }
 
 type SubmitKnappProps = ISubmitKnappProps & IMapStateToProps & IMapDispatchToProps;
@@ -28,16 +26,14 @@ type SubmitKnappProps = ISubmitKnappProps & IMapStateToProps & IMapDispatchToPro
 const Submitknapp: React.StatelessComponent<SubmitKnappProps> = ({
     className,
     nesteSteg,
-    sendSoknad,
     senderinn,
     stegPosisjon,
 }) => {
     const erOppsummeringsSteg = stegConfig.oppsummering.stegIndeks === stegPosisjon;
     const label = erOppsummeringsSteg ? 'app.sendSoknad' : 'app.neste';
-    const onClick = erOppsummeringsSteg ? sendSoknad : nesteSteg;
 
     return (
-        <KnappBase spinner={senderinn} className={className} type="hoved" onClick={onClick}>
+        <KnappBase spinner={senderinn} className={className} type="hoved" onClick={nesteSteg}>
             <FormattedMessage id={label} />
         </KnappBase>
     );
@@ -53,9 +49,6 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         nesteSteg: () => dispatch(soknadNesteSteg()),
-        sendSoknad: () => {
-            dispatch(sendInn());
-        },
     };
 };
 
