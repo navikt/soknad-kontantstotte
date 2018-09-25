@@ -19,20 +19,20 @@ const Environment = (): IEnvUrls => {
         };
     } else if (window.location.hostname.indexOf('soknad-kontantstotte-t') > -1) {
         return {
-            apiUrl: 'https://soknad-kontantstotte-api-t.nav.no/api',
+            apiUrl: '/soknad-kontantstotte-api/api',
             loginUrl: 'https://loginservice-q.nav.no/login',
             saksoversikt: 'https://tjenester-t11.nav.no/saksoversikt/app',
         };
     } else if (window.location.hostname.indexOf('soknad-kontantstotte-q') > -1) {
         return {
-            apiUrl: 'https://soknad-kontantstotte-api-q.nav.no/api',
+            apiUrl: '/soknad-kontantstotte-api/api',
             loginUrl: 'https://loginservice-q.nav.no/login',
             saksoversikt: 'https://tjenester-q0.nav.no/saksoversikt/app',
         };
     }
 
     return {
-        apiUrl: 'https://soknad-kontantstotte-api.nav.no/api',
+        apiUrl: '/soknad-kontantstotte-api/api',
         loginUrl: 'https://loginservice.nav.no/login',
         saksoversikt: 'https://tjenester.nav.no/saksoversikt/app',
     };

@@ -1,0 +1,7 @@
+[
+  {
+    "contextPath": "/soknad-kontantstotte-api",
+    "baseUrl": "http://soknad-kontantstotte-api",
+    "requestRewrite": "REMOVE_CONTEXT_PATH"
+  }
+]
