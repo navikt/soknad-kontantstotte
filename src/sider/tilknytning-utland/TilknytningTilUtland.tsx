@@ -28,7 +28,7 @@ interface IMapDispatchToProps {
         feltnavn: Feltnavn,
         verdi: TilknytningTilUtlandVerdier
     ) => void;
-    settTilleggsinfoFelt: (feltnavn: Feltnavn, verdi: string) => void;
+    settForklaringsFelt: (feltnavn: Feltnavn, verdi: string) => void;
     nullstillNesteSteg: () => void;
 }
 
@@ -41,7 +41,7 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
     tilknytningTilUtland,
     nullstillNesteSteg,
     settTilknytningTilUtlandVerdiFelt,
-    settTilleggsinfoFelt,
+    settForklaringsFelt,
 }) => {
     const {
         boddEllerJobbetINorgeMinstFemAar,
@@ -60,7 +60,7 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
         >
             <BoddEllerJobbetINorgeSporsmal
                 settTilknytningTilUtlandVerdiFelt={settTilknytningTilUtlandVerdiFelt}
-                settForklaringsFelt={settTilleggsinfoFelt}
+                settForklaringsFelt={settForklaringsFelt}
                 intl={intl}
                 feltMedFeil={feltMedFeil.boddEllerJobbetINorgeMinstFemAar}
                 feltNavn={'boddEllerJobbetINorgeMinstFemAar'}
@@ -72,7 +72,7 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
             {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA && (
                 <BoddEllerJobbetINorgeSporsmal
                     settTilknytningTilUtlandVerdiFelt={settTilknytningTilUtlandVerdiFelt}
-                    settForklaringsFelt={settTilleggsinfoFelt}
+                    settForklaringsFelt={settForklaringsFelt}
                     intl={intl}
                     feltMedFeil={feltMedFeil.annenForelderBoddEllerJobbetINorgeMinstFemAar}
                     feltNavn={'annenForelderBoddEllerJobbetINorgeMinstFemAar'}
@@ -103,13 +103,13 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
         nullstillNesteSteg: () => {
             dispatch(soknadNullstillNesteSteg());
         },
+        settForklaringsFelt: (feltnavn: Feltnavn, verdi: string) => {
+            dispatch(soknadValiderFelt('tilknytningTilUtland', feltnavn, verdi));
+        },
         settTilknytningTilUtlandVerdiFelt: (
             feltnavn: Feltnavn,
             verdi: TilknytningTilUtlandVerdier
         ) => {
-            dispatch(soknadValiderFelt('tilknytningTilUtland', feltnavn, verdi));
-        },
-        settTilleggsinfoFelt: (feltnavn: Feltnavn, verdi: string) => {
             dispatch(soknadValiderFelt('tilknytningTilUtland', feltnavn, verdi));
         },
     };
