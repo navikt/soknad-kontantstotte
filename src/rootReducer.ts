@@ -11,7 +11,7 @@ import { ITogglesState, toggelsReducer } from './toggles/reducer';
 export interface IRootState {
     app: IAppState;
     innsending: IInnsendingState;
-    person: ISokerState;
+    soker: ISokerState;
     router: RouterState;
     soknad: ISoknadState;
     tekster: ITeksterState;
@@ -21,7 +21,7 @@ export interface IRootState {
 const rootReducer = combineReducers({
     app: appReducer,
     innsending: innsendingReducer,
-    person: sokerReducer,
+    soker: sokerReducer,
     soknad: soknadReducer,
     tekster: teksterReducer,
     toggles: toggelsReducer,
