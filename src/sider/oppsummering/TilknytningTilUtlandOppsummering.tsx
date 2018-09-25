@@ -18,22 +18,17 @@ interface ITilknytningTilUtlandOppsummeringProps {
 const hentTekstNokkelForTilknytningTilUtlandSvar: (
     svar: TilknytningTilUtlandVerdier
 ) => string = svar => {
-    let tekstNokkelForSvar: string = 'Ubesvart';
     switch (svar) {
         case TilknytningTilUtlandVerdier.jaINorge:
-            tekstNokkelForSvar = 'oppsummering.tilknytningTilUtland.svar.jaINorge';
-            break;
+            return 'oppsummering.tilknytningTilUtland.svar.jaINorge';
         case TilknytningTilUtlandVerdier.jaIEOS:
-            tekstNokkelForSvar = 'oppsummering.tilknytningTilUtland.svar.jaIEOS';
-            break;
+            return 'oppsummering.tilknytningTilUtland.svar.jaIEOS';
         case TilknytningTilUtlandVerdier.jaLeggerSammenPerioderEOS:
-            tekstNokkelForSvar = 'oppsummering.tilknytningTilUtland.svar.jaLeggerSammenPerioderEOS';
-            break;
+            return 'oppsummering.tilknytningTilUtland.svar.jaLeggerSammenPerioderEOS';
         case TilknytningTilUtlandVerdier.nei:
-            tekstNokkelForSvar = 'oppsummering.tilknytningTilUtland.svar.nei';
-            break;
+            return 'oppsummering.tilknytningTilUtland.svar.nei';
     }
-    return tekstNokkelForSvar;
+    return 'Ubesvart';
 };
 
 const TilknytningTilUtlandOppsummering: React.StatelessComponent<

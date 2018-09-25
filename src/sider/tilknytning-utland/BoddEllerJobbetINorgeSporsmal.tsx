@@ -1,6 +1,7 @@
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
+import { IFeil } from '../../common/lib/validation/types';
 import TilleggsinformasjonInput from '../../component/TilleggsinformasjonInput/TilleggsinformasjonInput';
 import { Feltnavn, IFelt, TilknytningTilUtlandVerdier } from '../../soknad/types';
 
@@ -12,11 +13,11 @@ interface IBoddEllerJobbetINorgeSporsmalProps {
     ) => void;
     settForklaringsFelt: (feltnavn: Feltnavn, verdi: string) => void;
     intl: InjectedIntl;
-    feltMedFeil: any;
+    feltFeil: IFeil | undefined;
     feltNavn: string;
     feltVerdi: TilknytningTilUtlandVerdier;
     forklaringFeltVerdi: IFelt;
-    forklaringFeltFeil: any;
+    forklaringFeltFeil: IFeil | undefined;
 }
 
 const BoddEllerJobbetINorgeSporsmal: React.StatelessComponent<
@@ -26,7 +27,7 @@ const BoddEllerJobbetINorgeSporsmal: React.StatelessComponent<
     settTilknytningTilUtlandVerdiFelt,
     settForklaringsFelt,
     intl,
-    feltMedFeil,
+    feltFeil,
     feltNavn,
     feltVerdi,
     forklaringFeltVerdi,
@@ -68,7 +69,7 @@ const BoddEllerJobbetINorgeSporsmal: React.StatelessComponent<
                         value: TilknytningTilUtlandVerdier.nei,
                     },
                 ]}
-                feil={feltMedFeil}
+                feil={feltFeil}
             />
 
             {(feltVerdi === TilknytningTilUtlandVerdier.jaLeggerSammenPerioderEOS ||
