@@ -12,6 +12,7 @@ interface IHarBarnehageplassInfo {
     feltMedFeil: IFeltFeil;
     harForsoktNesteSteg: boolean;
     settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => void;
+    visAdvarsel: boolean;
 }
 
 interface IMapStateToProps {
@@ -30,6 +31,7 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
     harForsoktNesteSteg,
     intl,
     settBarnehageplassVerdiFelt,
+    visAdvarsel,
 }) => {
     return (
         <SkjemaGruppe className={'barnehage__inputSkjemaGruppe'}>
@@ -66,6 +68,7 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                     className={`inputElement${harBarnehageplassAntallTimer.valideringsStatus ===
                         ValideringsStatus.ADVARSEL &&
                         harForsoktNesteSteg &&
+                        visAdvarsel &&
                         '--advarsel'}`}
                     label={intl.formatMessage({
                         id: 'barnehageplass.harBarnehageplass.antallTimer.sporsmal',

@@ -4,6 +4,8 @@ import { appNesteSteg, appSettHarForsoktNesteSteg } from '../app/actions';
 import { selectAppSteg, selectHarForsoktNesteSteg } from '../app/selectors';
 import { sendInn } from '../innsending/actions';
 import { ISteg, stegConfig } from '../stegConfig';
+import { isEnabled } from '../toggles/selectors';
+import { IToggleName } from '../toggles/types';
 import {
     ISoknadValiderFelt,
     ISoknadValiderSteg,
@@ -150,6 +152,7 @@ function* nullstillNesteStegSaga() {
 function* nesteStegSaga() {
     const appSteg = yield select(selectAppSteg);
     const soknadState: ISoknadState = yield select(selectSoknad);
+    const visAdvarsel: boolean = yield select(isEnabled, IToggleName.vis_advarsel);
 
     const tilSide: ISteg = Object.values(stegConfig).find(
         (side: ISteg) => side.stegIndeks === appSteg
@@ -192,7 +195,7 @@ function* nesteStegSaga() {
     const harAdvarsler = yield call(sjekkAdvarslerForSteg, tilSide.key as Stegnavn, soknadState);
 
     yield put(appSettHarForsoktNesteSteg(true));
-    if (!harFeil && !(!harForsoktNesteSteg && harAdvarsler)) {
+    if (visAdvarsel ? !harFeil && !(!harForsoktNesteSteg && harAdvarsler) : !harFeil) {
         if (tilSide.key === stegConfig.oppsummering.key) {
             yield put(sendInn());
         } else {
