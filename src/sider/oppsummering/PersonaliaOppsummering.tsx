@@ -4,24 +4,22 @@ import { FormattedMessage } from 'react-intl';
 import { OppsummeringSteg } from './OppsummeringSteg';
 
 interface IMapStateToProps {
-    person: {
-        navn: string;
+    soker: {
         fodselsnummer: string;
     };
 }
 
 type PersonaliaOgBarnProps = IMapStateToProps;
 
-const PersonaliaOppsummering: React.StatelessComponent<PersonaliaOgBarnProps> = ({ person }) => {
+const PersonaliaOppsummering: React.StatelessComponent<PersonaliaOgBarnProps> = ({ soker }) => {
     return (
         <OppsummeringSteg>
             <Element>
                 <FormattedMessage id="oppsummering.sokerKontantstotteAv.label" />
             </Element>
-            <Normaltekst>{person.navn}</Normaltekst>
             <Normaltekst>
                 <FormattedMessage id="oppsummering.fodselsnummer.label" />
-                {person.fodselsnummer}
+                {soker.fodselsnummer}
             </Normaltekst>
         </OppsummeringSteg>
     );

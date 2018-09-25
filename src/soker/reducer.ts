@@ -37,4 +37,4 @@ function sokerReducer(state = initialState, action: SokerActionTypes) {
     }
 }
 
-export { sokerReducer, ISokerState };
+export { sokerReducer, ISokerState, initialState };
