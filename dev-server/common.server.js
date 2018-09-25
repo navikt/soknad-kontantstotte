@@ -17,8 +17,12 @@ app.get('/soknad-kontantstotte-api/api/status/ping', function(req, res) {
     setTimeout(() => res.status(200).send(), delayMs);
 });
 
-app.get('/soknad-kontantstotte-api/api/feature', function(req, res) {
+app.get('/api/feature', function(req, res) {
     setTimeout(() => res.send(lesMockFil('toggles.json')), delayMs);
+});
+
+app.get('/soknad-kontantstotte-api/api/soker', function(req, res) {
+    setTimeout(() => res.send(lesMockFil('soker.json')), delayMs);
 });
 
 app.post('/soknad-kontantstotte-api/api/sendinn', function(req, res) {
