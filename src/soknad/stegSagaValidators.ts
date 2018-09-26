@@ -74,9 +74,14 @@ function* sjekkValideringForBarnehageplass(barnehageplass: IBarnehageplass) {
 
             case BarnehageplassVerdier.harBarnehageplass:
                 if (
-                    barnehageplass.harBarnehageplassKommune.verdi.length > 0 &&
-                    barnehageplass.harBarnehageplassDato.verdi.length > 0 &&
-                    barnehageplass.harBarnehageplassAntallTimer.verdi.length > 0
+                    barnehageplass.harBarnehageplassKommune.valideringsStatus ===
+                        ValideringsStatus.OK &&
+                    barnehageplass.harBarnehageplassDato.valideringsStatus ===
+                        ValideringsStatus.OK &&
+                    (barnehageplass.harBarnehageplassAntallTimer.valideringsStatus ===
+                        ValideringsStatus.OK ||
+                        barnehageplass.harBarnehageplassAntallTimer.valideringsStatus ===
+                            ValideringsStatus.ADVARSEL)
                 ) {
                     return;
                 }

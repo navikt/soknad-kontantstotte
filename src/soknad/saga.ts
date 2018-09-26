@@ -195,7 +195,7 @@ function* nesteStegSaga() {
     const harAdvarsler = yield call(sjekkAdvarslerForSteg, tilSide.key as Stegnavn, soknadState);
 
     yield put(appSettHarForsoktNesteSteg(true));
-    if (visAdvarsel ? !harFeil && !(!harForsoktNesteSteg && harAdvarsler) : !harFeil) {
+    if (visAdvarsel ? !harFeil && (harForsoktNesteSteg && !harAdvarsler) : !harFeil) {
         if (tilSide.key === stegConfig.oppsummering.key) {
             yield put(sendInn());
         } else {

@@ -50,6 +50,7 @@
     "feilmelding.generell.fodselsDato": "Fødselsdatoen har feil format. Gyldig format: dd.mm.yyyy.",
     "feilmelding.generell.fodselsnummer": "Fødselsnummeret har feil format. Gyldig format: 11 siffer.",
     "feilmelding.generell.navn": "Du må fylle inn navn",
+    "feilmelding.generell.tall": "Du må fylle inn et tall",
     "feilside.dittnav.lenke.tekst": "Gå til Ditt NAV",
     "feilside.forside.lenke.tekst": "Gå til forsiden nav.no",
     "kontantstotte.tittel": "Søknad om kontantstøtte",
