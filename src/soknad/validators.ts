@@ -64,6 +64,9 @@ const harFyltInnFodselsnummer = (felt: IFelt): IFelt => {
         : feil(felt, 'feilmelding.generell.fodselsnummer');
 };
 
+const harBekreftetOppsummering = (felt: IFelt): IFelt =>
+    harSvartJa(felt, 'oppsummering.bekreftelse.feilmelding');
+
 const harSvartMedFeilmelding = (felt: IFelt): IFelt =>
     harSvart(felt, 'feilmelding.generell.feilmelding');
 
@@ -76,6 +79,7 @@ const harSvartTekstMedFeilmelding = (felt: IFelt): IFelt =>
 const svarUtenValidering = (felt: IFelt): IFelt => ok(felt);
 
 export {
+    harBekreftetOppsummering,
     harSvart,
     harSvartMedFeilmelding,
     harSvartBarnehageplassVerdiMedFeilmelding,
