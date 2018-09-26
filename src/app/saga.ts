@@ -13,10 +13,11 @@ import {
     takeEvery,
     takeLatest,
 } from 'redux-saga/effects';
+import { sokerHent, SokerTypeKeys } from '../soker/actions';
 import { ISteg, stegConfig } from '../stegConfig';
 import { teksterHent, TeksterTypeKeys } from '../tekster/actions';
 import { ISprak } from '../tekster/types';
-import { togglesHent } from '../toggles/actions';
+import { ToggelsTypeKeys, togglesHent } from '../toggles/actions';
 import { appEndreStatus, appSettSteg, AppTypeKeys } from './actions';
 import { pingBackend } from './api';
 import { selectAppSteg } from './selectors';
@@ -46,20 +47,22 @@ function* autentiserBruker(): SagaIterator {
 
 function* forsteSidelastSaga(): SagaIterator {
     yield call(autentiserBruker);
+    yield put(togglesHent());
+    yield take([ToggelsTypeKeys.HENT_FEILET, ToggelsTypeKeys.HENT_OK]);
 
     const sprak = bestemSprakFraParams();
     yield put(teksterHent(sprak));
+    yield put(sokerHent());
 
-    yield all([take(TeksterTypeKeys.HENT_OK)]);
+    yield all([take(TeksterTypeKeys.HENT_OK), take(SokerTypeKeys.HENT_OK)]);
 
-    yield put(togglesHent());
     yield put(appEndreStatus(AppStatus.KLAR));
 }
 
 function* startAppSaga(): SagaIterator {
     yield put(appEndreStatus(AppStatus.STARTER));
     const startSaga = yield fork(forsteSidelastSaga);
-    yield take([TeksterTypeKeys.HENT_FEILET]);
+    yield take([TeksterTypeKeys.HENT_FEILET, SokerTypeKeys.HENT_FEILET]);
     yield cancel(startSaga);
     yield put(appEndreStatus(AppStatus.FEILSITUASJON));
 }
