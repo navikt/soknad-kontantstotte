@@ -5,6 +5,7 @@ import { connect, Dispatch } from 'react-redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import SoknadPanel from '../../component/SoknadPanel/SoknadPanel';
+import Veileder from '../../component/Veileder/Veileder';
 import { IRootState } from '../../rootReducer';
 import { selectSoker } from '../../soker/selectors';
 import { ISoker } from '../../soker/types';
@@ -48,6 +49,15 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
             className={'oppsummering'}
             tittel={<FormattedMessage id={'oppsummering.tittel'} />}
         >
+            <Veileder
+                content={
+                    <div>
+                        <h4>{intl.formatMessage({ id: 'oppsummering.veileder.tittel' })}</h4>
+                        <FormattedMessage id={'oppsummering.veileder.info'} />
+                    </div>
+                }
+                className={'oppsummering__veileder'}
+            />
             <SoknadPanel className={'oppsummering__panel'}>
                 {visFnr && <PersonaliaOppsummering soker={{ fodselsnummer: soker.innloggetSom }} />}
                 <KravTilSokerOppsummering />
