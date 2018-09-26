@@ -135,7 +135,6 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                                 BarnehageplassVerdier.harBarnehageplass && (
                                 <HarBarnehageplassInfo
                                     feltMedFeil={feltMedFeil}
-                                    harForsoktNesteSteg={harForsoktNesteSteg}
                                     visAdvarsel={visAdvarsel}
                                     intl={intl}
                                     settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
@@ -146,7 +145,6 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                             BarnehageplassVerdier.harBarnehageplass &&
                             harBarnehageplassAntallTimer.valideringsStatus ===
                                 ValideringsStatus.ADVARSEL &&
-                            harForsoktNesteSteg &&
                             visAdvarsel && (
                                 <Veileder
                                     posisjon={'høyre'}

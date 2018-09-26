@@ -10,7 +10,6 @@ import { BarnehageplassVerdier, Feltnavn, IFelt, ValideringsStatus } from '../..
 interface IHarBarnehageplassInfo {
     intl: InjectedIntl;
     feltMedFeil: IFeltFeil;
-    harForsoktNesteSteg: boolean;
     settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => void;
     visAdvarsel: boolean;
 }
@@ -28,7 +27,6 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
     harBarnehageplassAntallTimer,
     harBarnehageplassDato,
     harBarnehageplassKommune,
-    harForsoktNesteSteg,
     intl,
     settBarnehageplassVerdiFelt,
     visAdvarsel,
@@ -67,7 +65,6 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                 <Input
                     className={`inputElement${harBarnehageplassAntallTimer.valideringsStatus ===
                         ValideringsStatus.ADVARSEL &&
-                        harForsoktNesteSteg &&
                         visAdvarsel &&
                         '--advarsel'}`}
                     label={intl.formatMessage({

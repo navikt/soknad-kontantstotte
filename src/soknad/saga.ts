@@ -16,7 +16,6 @@ import {
 } from './actions';
 import { selectSoknad } from './selectors';
 import {
-    sjekkAdvarslerForSteg,
     sjekkValideringForArbeidIUtlandet,
     sjekkValideringForBarnehageplass,
     sjekkValideringForFamilieforhold,
@@ -152,7 +151,6 @@ function* nullstillNesteStegSaga() {
 function* nesteStegSaga() {
     const appSteg = yield select(selectAppSteg);
     const soknadState: ISoknadState = yield select(selectSoknad);
-    const visAdvarsel: boolean = yield select(isEnabled, IToggleName.vis_advarsel);
 
     const tilSide: ISteg = Object.values(stegConfig).find(
         (side: ISteg) => side.stegIndeks === appSteg
@@ -191,11 +189,8 @@ function* nesteStegSaga() {
             harFeil = yield call(sjekkValideringForSteg, tilSide.key as Stegnavn, soknadState);
     }
 
-    const harForsoktNesteSteg = yield select(selectHarForsoktNesteSteg);
-    const harAdvarsler = yield call(sjekkAdvarslerForSteg, tilSide.key as Stegnavn, soknadState);
-
     yield put(appSettHarForsoktNesteSteg(true));
-    if (visAdvarsel ? !harFeil && (harForsoktNesteSteg && !harAdvarsler) : !harFeil) {
+    if (!harFeil) {
         if (tilSide.key === stegConfig.oppsummering.key) {
             yield put(sendInn());
         } else {

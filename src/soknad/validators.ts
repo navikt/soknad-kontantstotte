@@ -76,7 +76,7 @@ const harFyltInnTall = (felt: IFelt): IFelt => {
         : feil(felt, 'feilmelding.generell.tall');
 };
 
-const harFyltInnGyldingAntallTimer = (felt: IFelt): IFelt => {
+const harFyltInnGyldigAntallTimer = (felt: IFelt): IFelt => {
     const timer = parseFloat(felt.verdi);
     switch (true) {
         case timer >= 0 && timer <= 33:
@@ -102,7 +102,7 @@ const svarUtenValidering = (felt: IFelt): IFelt => ok(felt);
 export {
     harFyltInnFodselsdato,
     harFyltInnFodselsnummer,
-    harFyltInnGyldingAntallTimer,
+    harFyltInnGyldigAntallTimer,
     harFyltInnNavn,
     harFyltInnTall,
     harSvart,
