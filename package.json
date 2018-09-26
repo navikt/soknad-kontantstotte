@@ -36,6 +36,8 @@
     "history": "4.7.2",
     "lodash.throttle": "4.1.1",
     "nav-datovelger": "1.1.8",
+    "nav-frontend-alertstriper": "1.0.27",
+    "nav-frontend-alertstriper-style": "0.2.48",
     "nav-frontend-chevron": "1.0.5",
     "nav-frontend-chevron-style": "0.3.4",
     "nav-frontend-core": "4.0.5",
