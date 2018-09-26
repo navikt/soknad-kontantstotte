@@ -1,0 +1,37 @@
+.innsending-feilet {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  &__ikon {
+    width: 4rem;
+  }
+
+  &__alertstripe {
+    margin: 1rem 1rem 0 1rem;
+  }
+
+  &__knapp {
+    margin: 1rem 1rem 0 1rem;
+    align-self: stretch;
+    text-align: center;
+  }
+}
+
+@media (min-width: 600px) {
+  .innsending-feilet {
+
+    &__ikon {
+      width: 5rem;
+    }
+
+    &__alertstripe {
+      margin-top: 2rem;
+    }
+
+    &__knapp {
+      align-self: initial;
+      margin-top: 4rem;
+    }
+  }
+}
