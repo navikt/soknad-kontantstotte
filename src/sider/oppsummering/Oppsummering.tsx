@@ -6,9 +6,13 @@ import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import SideContainer from '../../component/SideContainer/SideContainer';
 import SoknadPanel from '../../component/SoknadPanel/SoknadPanel';
 import { IRootState } from '../../rootReducer';
+import { selectSoker } from '../../soker/selectors';
+import { ISoker } from '../../soker/types';
 import { soknadValiderFelt } from '../../soknad/actions';
 import { selectSoknad } from '../../soknad/selectors';
 import { ISoknadState, Svar, ValideringsStatus } from '../../soknad/types';
+import { isEnabled } from '../../toggles/selectors';
+import { IToggleName } from '../../toggles/types';
 import ArbeidIUtlandetOppsummering from './ArbeidIUtlandetOppsummering';
 import BarnehageplassOppsummering from './BarnehageplassOppsummering';
 import { BarnOppsummering } from './BarnOppsummering';
@@ -19,8 +23,10 @@ import UtenlandskeYtelserOppsummering from './UtenlandskeYtelserOppsummering';
 import UtenlandskKontantstotteOppsummering from './UtenlandskKontantstotteOppsummering';
 
 interface IMapStateToProps {
+    soker: ISoker;
     soknad: ISoknadState;
     harForsoktNesteSteg: boolean;
+    visFnr: boolean;
 }
 
 interface IMapDispatchToProps {
@@ -33,7 +39,9 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
     harForsoktNesteSteg,
     intl,
     settBekreftelse,
+    soker,
     soknad,
+    visFnr,
 }) => {
     return (
         <SideContainer
@@ -41,7 +49,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
             tittel={<FormattedMessage id={'oppsummering.tittel'} />}
         >
             <SoknadPanel className={'oppsummering__panel'}>
-                <PersonaliaOppsummering person={{ navn: '', fodselsnummer: '' }} />
+                {visFnr && <PersonaliaOppsummering soker={{ fodselsnummer: soker.innloggetSom }} />}
                 <KravTilSokerOppsummering />
                 <BarnOppsummering barn={soknad.mineBarn} />
                 <BarnehageplassOppsummering barnehageplass={soknad.barnehageplass} />
@@ -80,7 +88,9 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
+        soker: selectSoker(state),
         soknad: selectSoknad(state),
+        visFnr: isEnabled(state, IToggleName.vis_innlogget_bruker),
     };
 };
 
