@@ -36,7 +36,7 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.sendKeys(find('.mine-barn__navn-input > input'), 'Mock McMockface');
             actions.sendKeys(find('.mine-barn__fodselsdato-input > input'), '01.01.2018');
             actions.click('.knapp.knapp--hoved');
-            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.waitForElementToShow('.familieforhold', 5000);
             actions.executeJS(disableHover);
         })
         .capture('barnehageplass', function(actions) {
