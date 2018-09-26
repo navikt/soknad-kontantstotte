@@ -1,11 +1,9 @@
 import { SagaIterator } from 'redux-saga';
 import { all, call, put, select, takeEvery } from 'redux-saga/effects';
 import { appNesteSteg, appSettHarForsoktNesteSteg } from '../app/actions';
-import { selectAppSteg, selectHarForsoktNesteSteg } from '../app/selectors';
+import { selectAppSteg } from '../app/selectors';
 import { sendInn } from '../innsending/actions';
 import { ISteg, stegConfig } from '../stegConfig';
-import { isEnabled } from '../toggles/selectors';
-import { IToggleName } from '../toggles/types';
 import {
     ISoknadValiderFelt,
     ISoknadValiderSteg,
