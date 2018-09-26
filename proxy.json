@@ -3,6 +3,6 @@
     "contextPath": "/soknad-kontantstotte-api",
     "baseUrl": "http://soknad-kontantstotte-api",
     "requestRewrite": "REMOVE_CONTEXT_PATH",
-    "pingRequestPath": "/api/status/ping"
+    "pingRequestPath": "/api/status/isAlive"
   }
 ]
