@@ -9,7 +9,7 @@ export const hentFeltMedFeil = (
 ): IFeltFeil => {
     const feltMedFeil = Object.entries(steg).reduce((accFeltMedFeil: IFeltFeil, [key, felt]) => {
         accFeltMedFeil[key] =
-            felt.valideringsStatus !== ValideringsStatus.OK && harForsoktNesteSteg
+            felt.valideringsStatus === ValideringsStatus.FEIL && harForsoktNesteSteg
                 ? {
                       feilmelding: intl.formatMessage({
                           id: felt.feilmeldingsNokkel,
