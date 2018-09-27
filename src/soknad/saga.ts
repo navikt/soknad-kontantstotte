@@ -45,7 +45,10 @@ function kjorValideringsFunksjoner(
     const validertFelt: IFelt = valideringsFunksjoner.reduce(
         (acc: IFelt, valideringsFunksjon) => {
             const nyttValidertFelt = valideringsFunksjon(felt);
-            return acc.valideringsStatus === ValideringsStatus.FEIL ? acc : nyttValidertFelt;
+            return acc.valideringsStatus === ValideringsStatus.FEIL ||
+                acc.valideringsStatus === ValideringsStatus.ADVARSEL
+                ? acc
+                : nyttValidertFelt;
         },
         { verdi: '', valideringsStatus: ValideringsStatus.IKKE_VALIDERT, feilmeldingsNokkel: '' }
     );
