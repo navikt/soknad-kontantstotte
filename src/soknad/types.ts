@@ -13,6 +13,14 @@ enum BarnehageplassVerdier {
     Ubesvart = 'Ubesvart',
 }
 
+enum TilknytningTilUtlandVerdier {
+    jaINorge = 'jaINorge',
+    jaIEOS = 'jaIEOS',
+    jaLeggerSammenPerioderEOS = 'jaLeggerSammenPerioderEOS',
+    nei = 'nei',
+    Ubesvart = 'Ubesvart',
+}
+
 enum ValideringsStatus {
     FEIL = 'FEIL',
     ADVARSEL = 'ADVARSEL',
@@ -21,7 +29,7 @@ enum ValideringsStatus {
 }
 
 interface IFelt {
-    verdi: Svar | BarnehageplassVerdier | string;
+    verdi: Svar | BarnehageplassVerdier | TilknytningTilUtlandVerdier | string;
     valideringsStatus: ValideringsStatus;
     feilmeldingsNokkel: string;
 }
@@ -35,6 +43,7 @@ interface ISoknadState {
     readonly kravTilSoker: IKravTilSoker;
     readonly utenlandskeYtelser: IUtenlandskeYtelser;
     readonly oppsummering: IOppsummering;
+    readonly tilknytningTilUtland: ITilknytningTilUtland;
 }
 
 interface IMineBarn {
@@ -97,6 +106,13 @@ interface IOppsummering {
     readonly bekreftelse: IFelt;
 }
 
+interface ITilknytningTilUtland {
+    readonly boddEllerJobbetINorgeMinstFemAar: IFelt;
+    readonly boddEllerJobbetINorgeMinstFemAarForklaring: IFelt;
+    readonly annenForelderBoddEllerJobbetINorgeMinstFemAar: IFelt;
+    readonly annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring: IFelt;
+}
+
 type minebarnFeltnavn = keyof IMineBarn;
 type familieforholdFeltnavn = keyof IFamilieforhold;
 type barnehageplassFeltnavn = keyof IBarnehageplass;
@@ -105,6 +121,7 @@ type utenlandskeYtelserFeltnavn = keyof IUtenlandskeYtelser;
 type arbeidIUtlandetFeltnavn = keyof IArbeidIUtlandet;
 type utenlandskKontantstotteFeltnavn = keyof IUtenlandskKontantstotte;
 type oppsummeringFeltnavn = keyof IOppsummering;
+type tilknytningTilUtlandFeltnavn = keyof ITilknytningTilUtland;
 
 type Stegnavn = keyof ISoknadState;
 type Feltnavn =
@@ -115,7 +132,8 @@ type Feltnavn =
     | arbeidIUtlandetFeltnavn
     | utenlandskeYtelserFeltnavn
     | utenlandskKontantstotteFeltnavn
-    | oppsummeringFeltnavn;
+    | oppsummeringFeltnavn
+    | tilknytningTilUtlandFeltnavn;
 
 export {
     minebarnFeltnavn,
@@ -125,7 +143,9 @@ export {
     kravTilSokerFeltnavn,
     utenlandskeYtelserFeltnavn,
     oppsummeringFeltnavn,
+    tilknytningTilUtlandFeltnavn,
     BarnehageplassVerdier,
+    TilknytningTilUtlandVerdier,
     Stegnavn,
     Feltnavn,
     IArbeidIUtlandet,
@@ -135,6 +155,7 @@ export {
     IUtenlandskKontantstotte,
     IKravTilSoker,
     IUtenlandskeYtelser,
+    ITilknytningTilUtland,
     ISoknadState,
     Svar,
     IFelt,

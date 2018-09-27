@@ -6,6 +6,7 @@ import {
     kravTilSokerFeltnavn,
     minebarnFeltnavn,
     oppsummeringFeltnavn,
+    tilknytningTilUtlandFeltnavn,
     utenlandskeYtelserFeltnavn,
     utenlandskKontantstotteFeltnavn,
 } from './types';
@@ -13,11 +14,14 @@ import {
     harBekreftetOppsummering,
     harFyltInnFodselsdato,
     harFyltInnFodselsnummer,
+    harFyltInnGyldigAntallTimer,
     harFyltInnNavn,
+    harFyltInnTall,
     harSvartBarnehageplassVerdiMedFeilmelding,
     harSvartJaMedFeilmelding,
     harSvartMedFeilmelding,
     harSvartTekstMedFeilmelding,
+    harSvartTilknytningTilUtlandVerdiMedFeilmelding,
 } from './validators';
 
 interface IValideringsConfig {
@@ -31,6 +35,9 @@ interface IValideringsConfig {
     utenlandskKontantstotte: {
         [felt in utenlandskKontantstotteFeltnavn]: Array<((felt: IFelt) => IFelt)>
     };
+    tilknytningTilUtland: {
+        [felt in tilknytningTilUtlandFeltnavn]: Array<((felt: IFelt) => IFelt)>
+    };
 }
 
 const valideringsConfig: IValideringsConfig = {
@@ -43,16 +50,32 @@ const valideringsConfig: IValideringsConfig = {
     barnehageplass: {
         barnBarnehageplassStatus: [harSvartBarnehageplassVerdiMedFeilmelding],
         harBarnehageplass: [harSvartMedFeilmelding],
-        harBarnehageplassAntallTimer: [harSvartTekstMedFeilmelding],
+        harBarnehageplassAntallTimer: [
+            harSvartTekstMedFeilmelding,
+            harFyltInnTall,
+            harFyltInnGyldigAntallTimer,
+        ],
         harBarnehageplassDato: [harSvartTekstMedFeilmelding],
         harBarnehageplassKommune: [harSvartTekstMedFeilmelding],
-        harSluttetIBarnehageAntallTimer: [harSvartTekstMedFeilmelding],
+        harSluttetIBarnehageAntallTimer: [
+            harSvartTekstMedFeilmelding,
+            harFyltInnTall,
+            harFyltInnGyldigAntallTimer,
+        ],
         harSluttetIBarnehageDato: [harSvartTekstMedFeilmelding],
         harSluttetIBarnehageKommune: [harSvartTekstMedFeilmelding],
-        skalBegynneIBarnehageAntallTimer: [harSvartTekstMedFeilmelding],
+        skalBegynneIBarnehageAntallTimer: [
+            harSvartTekstMedFeilmelding,
+            harFyltInnTall,
+            harFyltInnGyldigAntallTimer,
+        ],
         skalBegynneIBarnehageDato: [harSvartTekstMedFeilmelding],
         skalBegynneIBarnehageKommune: [harSvartTekstMedFeilmelding],
-        skalSlutteIBarnehageAntallTimer: [harSvartTekstMedFeilmelding],
+        skalSlutteIBarnehageAntallTimer: [
+            harSvartTekstMedFeilmelding,
+            harFyltInnTall,
+            harFyltInnGyldigAntallTimer,
+        ],
         skalSlutteIBarnehageDato: [harSvartTekstMedFeilmelding],
         skalSlutteIBarnehageKommune: [harSvartTekstMedFeilmelding],
     },
@@ -75,6 +98,14 @@ const valideringsConfig: IValideringsConfig = {
     },
     oppsummering: {
         bekreftelse: [harBekreftetOppsummering],
+    },
+    tilknytningTilUtland: {
+        annenForelderBoddEllerJobbetINorgeMinstFemAar: [
+            harSvartTilknytningTilUtlandVerdiMedFeilmelding,
+        ],
+        annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring: [harSvartTekstMedFeilmelding],
+        boddEllerJobbetINorgeMinstFemAar: [harSvartTilknytningTilUtlandVerdiMedFeilmelding],
+        boddEllerJobbetINorgeMinstFemAarForklaring: [harSvartTekstMedFeilmelding],
     },
     utenlandskKontantstotte: {
         mottarKontantstotteFraUtlandet: [harSvartMedFeilmelding],
