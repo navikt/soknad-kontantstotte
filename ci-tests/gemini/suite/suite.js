@@ -33,7 +33,7 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.click('h1');
             actions.executeJS(disableHover);
         })
-        .capture('familieforhold', function(actions, find) {
+        .capture('barnehageplass', function(actions, find) {
             actions.executeJS(enableHover);
             actions.sendKeys(find('.mine-barn__navn-input > input'), 'Mock McMockface');
             actions.sendKeys(find('.mine-barn__fodselsdato-input > input'), '01.01.2018');
@@ -42,7 +42,18 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.click('h1');
             actions.executeJS(disableHover);
         })
-        .capture('barnehageplass', function(actions) {
+        .capture('familieforhold', function(actions) {
+            actions.executeJS(enableHover);
+            actions.executeJS(function(window) {
+                window.document.querySelectorAll('[name="harBarnehageplass"]')[0].click();
+                window.document.querySelectorAll('[name="barnBarnehageplassStatus"]')[0].click();
+            });
+            actions.click('.knapp.knapp--hoved');
+            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.click('h1');
+            actions.executeJS(disableHover);
+        })
+        .capture('tilknytningTilUtland', function(actions) {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
                 window.document
@@ -57,8 +68,9 @@ gemini.suite('soknad-kontantstotte', suite => {
         .capture('arbeidIUtlandet', function(actions) {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
-                window.document.querySelectorAll('[name="harBarnehageplass"]')[0].click();
-                window.document.querySelectorAll('[name="barnBarnehageplassStatus"]')[0].click();
+                window.document
+                    .querySelectorAll('[name="boddEllerJobbetINorgeMinstFemAar"]')[0]
+                    .click();
             });
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
@@ -112,4 +124,13 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.click('h1');
             actions.executeJS(disableHover);
         });
+
+    gemini.suite('innsending-feilet', function(suite) {
+        suite
+            .setUrl('/innsending-feilet')
+            .setCaptureElements('body')
+            .capture('', function(actions) {
+                actions.waitForElementToShow('.innsending-feilet', 5000);
+            });
+    });
 });

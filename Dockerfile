@@ -1,4 +1,4 @@
-FROM repo.adeo.no:5443/pus/decorator:46.20180629.0918
+FROM repo.adeo.no:5443/pus/decorator:80.20180926.1033
 ENV APPLICATION_NAME=soknad-kontantstotte
 ENV HEADER_TYPE=WITHOUT_MENU
 ENV CONTEXT_PATH=/
