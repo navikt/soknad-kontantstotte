@@ -6,6 +6,7 @@ import {
     kravTilSokerFeltnavn,
     minebarnFeltnavn,
     oppsummeringFeltnavn,
+    tilknytningTilUtlandFeltnavn,
     utenlandskeYtelserFeltnavn,
     utenlandskKontantstotteFeltnavn,
 } from './types';
@@ -20,6 +21,7 @@ import {
     harSvartJaMedFeilmelding,
     harSvartMedFeilmelding,
     harSvartTekstMedFeilmelding,
+    harSvartTilknytningTilUtlandVerdiMedFeilmelding,
 } from './validators';
 
 interface IValideringsConfig {
@@ -32,6 +34,9 @@ interface IValideringsConfig {
     oppsummering: { [felt in oppsummeringFeltnavn]: Array<((felt: IFelt) => IFelt)> };
     utenlandskKontantstotte: {
         [felt in utenlandskKontantstotteFeltnavn]: Array<((felt: IFelt) => IFelt)>
+    };
+    tilknytningTilUtland: {
+        [felt in tilknytningTilUtlandFeltnavn]: Array<((felt: IFelt) => IFelt)>
     };
 }
 
@@ -93,6 +98,14 @@ const valideringsConfig: IValideringsConfig = {
     },
     oppsummering: {
         bekreftelse: [harBekreftetOppsummering],
+    },
+    tilknytningTilUtland: {
+        annenForelderBoddEllerJobbetINorgeMinstFemAar: [
+            harSvartTilknytningTilUtlandVerdiMedFeilmelding,
+        ],
+        annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring: [harSvartTekstMedFeilmelding],
+        boddEllerJobbetINorgeMinstFemAar: [harSvartTilknytningTilUtlandVerdiMedFeilmelding],
+        boddEllerJobbetINorgeMinstFemAarForklaring: [harSvartTekstMedFeilmelding],
     },
     utenlandskKontantstotte: {
         mottarKontantstotteFraUtlandet: [harSvartMedFeilmelding],
