@@ -9,22 +9,22 @@ const Veilederikon: React.StatelessComponent<IVeilderikonProps> = ({ morkBakgrun
         <svg version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <title>Veileder Ikon</title>
             <g fill="none" fillRule="evenodd">
-                <mask id="a" fill="white">
+                <mask id="veilderIkon-a" fill="white">
                     <circle cx="50" cy="50" r="50" />
                 </mask>
-                <g fill={morkBakgrunn ? '#a190b8' : '#C1B5D0'} mask="url(#a)">
+                <g fill={morkBakgrunn ? '#a190b8' : '#C1B5D0'} mask="url(#veilderIkon-a)">
                     <g transform="translate(-8)">
                         <polygon points="0 100 126 100 126 0 0 0" />
                     </g>
                 </g>
-                <g mask="url(#a)">
+                <g mask="url(#veilderIkon-a)">
                     <g transform="translate(15 8)">
                         <g transform="translate(2.0588 6.1875)">
                             <g transform="translate(8.7353)">
-                                <mask id="c" fill="white">
+                                <mask id="veilderIkon-c" fill="white">
                                     <path d="m48.496 69.038c-11.54 1.7752-11.262 3.85-24.231 3.85-13.034 0-12.788-2.107-24.24-4.0527-0.016291-0.40871-0.024523-41.245-0.024523-41.658 0-15.009 10.863-27.177 24.265-27.177 13.4 0 24.264 12.168 24.264 27.177 0 0.4816-0.011185 41.385-0.033279 41.861z" />
                                 </mask>
-                                <g fill="#F6B873" mask="url(#c)">
+                                <g fill="#F6B873" mask="url(#veilderIkon-c)">
                                     <g transform="translate(-9.7059 -.9625)">
                                         <rect width="67" height="76" />
                                     </g>
