@@ -6,8 +6,8 @@ case "$1" in
     "test")
         (
             set -e
-            docker-compose run --rm testcafe
-            docker-compose run --rm gemini test
+            docker-compose -p "$2" run --rm testcafe
+            docker-compose -p "$2" run --rm gemini test
             # docker-compose run --rm pa11y
             docker-compose down
         )
