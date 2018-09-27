@@ -53,6 +53,13 @@ function* sjekkValideringForArbeidIUtlandet(
     return harFeil;
 }
 
+const gyldigeVerdier = (felt: IFelt): boolean => {
+    return (
+        felt.valideringsStatus === ValideringsStatus.OK ||
+        felt.valideringsStatus === ValideringsStatus.ADVARSEL
+    );
+};
+
 function* sjekkValideringForBarnehageplass(barnehageplass: IBarnehageplass) {
     const barnehageplassStatus: BarnehageplassVerdier = barnehageplass.barnBarnehageplassStatus
         .verdi as BarnehageplassVerdier;
@@ -64,9 +71,9 @@ function* sjekkValideringForBarnehageplass(barnehageplass: IBarnehageplass) {
 
             case BarnehageplassVerdier.harBarnehageplass:
                 if (
-                    barnehageplass.harBarnehageplassKommune.verdi.length > 0 &&
-                    barnehageplass.harBarnehageplassDato.verdi.length > 0 &&
-                    barnehageplass.harBarnehageplassAntallTimer.verdi.length > 0
+                    gyldigeVerdier(barnehageplass.harBarnehageplassKommune) &&
+                    gyldigeVerdier(barnehageplass.harBarnehageplassDato) &&
+                    gyldigeVerdier(barnehageplass.harBarnehageplassAntallTimer)
                 ) {
                     return;
                 }
@@ -74,9 +81,9 @@ function* sjekkValideringForBarnehageplass(barnehageplass: IBarnehageplass) {
 
             case BarnehageplassVerdier.skalBegynneIBarnehage:
                 if (
-                    barnehageplass.skalBegynneIBarnehageKommune.verdi.length > 0 &&
-                    barnehageplass.skalBegynneIBarnehageDato.verdi.length > 0 &&
-                    barnehageplass.skalBegynneIBarnehageAntallTimer.verdi.length > 0
+                    gyldigeVerdier(barnehageplass.skalBegynneIBarnehageKommune) &&
+                    gyldigeVerdier(barnehageplass.skalBegynneIBarnehageDato) &&
+                    gyldigeVerdier(barnehageplass.skalBegynneIBarnehageAntallTimer)
                 ) {
                     return;
                 }
@@ -84,9 +91,9 @@ function* sjekkValideringForBarnehageplass(barnehageplass: IBarnehageplass) {
 
             case BarnehageplassVerdier.skalSlutteIBarnehage:
                 if (
-                    barnehageplass.skalSlutteIBarnehageKommune.verdi.length > 0 &&
-                    barnehageplass.skalSlutteIBarnehageDato.verdi.length > 0 &&
-                    barnehageplass.skalSlutteIBarnehageAntallTimer.verdi.length > 0
+                    gyldigeVerdier(barnehageplass.skalSlutteIBarnehageKommune) &&
+                    gyldigeVerdier(barnehageplass.skalSlutteIBarnehageDato) &&
+                    gyldigeVerdier(barnehageplass.skalSlutteIBarnehageAntallTimer)
                 ) {
                     return;
                 }
@@ -94,9 +101,9 @@ function* sjekkValideringForBarnehageplass(barnehageplass: IBarnehageplass) {
 
             case BarnehageplassVerdier.harSluttetIBarnehage:
                 if (
-                    barnehageplass.harSluttetIBarnehageKommune.verdi.length > 0 &&
-                    barnehageplass.harSluttetIBarnehageDato.verdi.length > 0 &&
-                    barnehageplass.harSluttetIBarnehageAntallTimer.verdi.length > 0
+                    gyldigeVerdier(barnehageplass.harSluttetIBarnehageKommune) &&
+                    gyldigeVerdier(barnehageplass.harSluttetIBarnehageDato) &&
+                    gyldigeVerdier(barnehageplass.harSluttetIBarnehageAntallTimer)
                 ) {
                     return;
                 }
