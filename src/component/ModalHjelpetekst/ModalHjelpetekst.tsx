@@ -43,9 +43,11 @@ class ModalHjelpetekst extends React.Component<IModalHjelpetekstProps, IModalHje
                     onRequestClose={this.closeModal}
                     className={modalClassName}
                 >
-                    <p>
-                        <FormattedHTMLMessage id={hjelpetekstNokkel} />
-                    </p>
+                    <div className={'modal-tekst-container'}>
+                        <p>
+                            <FormattedHTMLMessage id={hjelpetekstNokkel} />
+                        </p>
+                    </div>
                 </Modal>
             </div>
         );
