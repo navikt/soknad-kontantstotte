@@ -10,6 +10,7 @@ import {
     utenlandskKontantstotteFeltnavn,
 } from './types';
 import {
+    harBekreftetOppsummering,
     harFyltInnFodselsdato,
     harFyltInnFodselsnummer,
     harFyltInnGyldigAntallTimer,
@@ -91,7 +92,7 @@ const valideringsConfig: IValideringsConfig = {
         navn: [harFyltInnNavn],
     },
     oppsummering: {
-        bekreftelse: [harSvartMedFeilmelding],
+        bekreftelse: [harBekreftetOppsummering],
     },
     utenlandskKontantstotte: {
         mottarKontantstotteFraUtlandet: [harSvartMedFeilmelding],
