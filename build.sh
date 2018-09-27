@@ -66,7 +66,7 @@ function build_frontend {
 
 
 function ci_test {
-    ./ci-tests/scripts.sh test
+    ./ci-tests/scripts.sh test ${v}
 }
 
 function build_container {
