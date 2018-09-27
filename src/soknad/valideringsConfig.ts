@@ -12,7 +12,7 @@ import {
 } from './types';
 import {
     harBekreftetOppsummering,
-    harFyltInnFodselsdato,
+    harFyltInnDato,
     harFyltInnFodselsnummer,
     harFyltInnGyldigAntallTimer,
     harFyltInnNavn,
@@ -55,28 +55,28 @@ const valideringsConfig: IValideringsConfig = {
             harFyltInnTall,
             harFyltInnGyldigAntallTimer,
         ],
-        harBarnehageplassDato: [harSvartTekstMedFeilmelding, harFyltInnFodselsdato],
+        harBarnehageplassDato: [harSvartTekstMedFeilmelding, harFyltInnDato],
         harBarnehageplassKommune: [harSvartTekstMedFeilmelding],
         harSluttetIBarnehageAntallTimer: [
             harSvartTekstMedFeilmelding,
             harFyltInnTall,
             harFyltInnGyldigAntallTimer,
         ],
-        harSluttetIBarnehageDato: [harSvartTekstMedFeilmelding, harFyltInnFodselsdato],
+        harSluttetIBarnehageDato: [harSvartTekstMedFeilmelding, harFyltInnDato],
         harSluttetIBarnehageKommune: [harSvartTekstMedFeilmelding],
         skalBegynneIBarnehageAntallTimer: [
             harSvartTekstMedFeilmelding,
             harFyltInnTall,
             harFyltInnGyldigAntallTimer,
         ],
-        skalBegynneIBarnehageDato: [harSvartTekstMedFeilmelding, harFyltInnFodselsdato],
+        skalBegynneIBarnehageDato: [harSvartTekstMedFeilmelding, harFyltInnDato],
         skalBegynneIBarnehageKommune: [harSvartTekstMedFeilmelding],
         skalSlutteIBarnehageAntallTimer: [
             harSvartTekstMedFeilmelding,
             harFyltInnTall,
             harFyltInnGyldigAntallTimer,
         ],
-        skalSlutteIBarnehageDato: [harSvartTekstMedFeilmelding, harFyltInnFodselsdato],
+        skalSlutteIBarnehageDato: [harSvartTekstMedFeilmelding, harFyltInnDato],
         skalSlutteIBarnehageKommune: [harSvartTekstMedFeilmelding],
     },
     familieforhold: {
@@ -93,7 +93,7 @@ const valideringsConfig: IValideringsConfig = {
         skalBoMedBarnetINorgeNesteTolvMaaneder: [harSvartJaMedFeilmelding],
     },
     mineBarn: {
-        fodselsdato: [harSvartTekstMedFeilmelding, harFyltInnFodselsdato],
+        fodselsdato: [harSvartTekstMedFeilmelding, harFyltInnDato],
         navn: [harFyltInnNavn],
     },
     oppsummering: {
