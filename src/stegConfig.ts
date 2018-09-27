@@ -5,6 +5,7 @@ import Familieforhold from './sider/familieforhold/Familieforhold';
 import KravTilSoker from './sider/krav-til-soker/KravTilSoker';
 import MineBarn from './sider/mine-barn/MineBarn';
 import Oppsummering from './sider/oppsummering/Oppsummering';
+import TilknytningTilUtland from './sider/tilknytning-utland/TilknytningTilUtland';
 import UtenlandskKontantstotte from './sider/utenlandsk-kontantstotte/UtenlandskKontantstotte';
 import UtenlandskeYtelser from './sider/utenlandske-ytelser/UtenlandskeYtelser';
 import Veiledning from './sider/veiledning/Veiledning';
@@ -18,6 +19,7 @@ interface IStegConfig {
     barnehageplass: ISteg;
     arbeidIUtlandet: ISteg;
     utenlandskeYtelser: ISteg;
+    tilknytningTilUtland: ISteg;
     oppsummering: ISteg;
 }
 
@@ -48,41 +50,47 @@ const stegConfig: IStegConfig = {
         path: '/mine-barn',
         stegIndeks: 2,
     },
-    familieforhold: {
-        component: Familieforhold,
-        key: 'familieforhold',
-        path: '/familieforhold',
-        stegIndeks: 3,
-    },
     barnehageplass: {
         component: Barnehageplass,
         key: 'barnehageplass',
         path: '/barnehageplass',
+        stegIndeks: 3,
+    },
+    familieforhold: {
+        component: Familieforhold,
+        key: 'familieforhold',
+        path: '/familieforhold',
         stegIndeks: 4,
+    },
+    tilknytningTilUtland: {
+        component: TilknytningTilUtland,
+        key: 'tilknytningTilUtland',
+        path: '/tilknytning-utland',
+        stegIndeks: 5,
     },
     arbeidIUtlandet: {
         component: ArbeidIUtlandet,
         key: 'arbeidIUtlandet',
         path: '/arbeid-i-utlandet',
-        stegIndeks: 5,
+        stegIndeks: 6,
     },
     utenlandskeYtelser: {
         component: UtenlandskeYtelser,
         key: 'utenlandskeYtelser',
         path: '/utenlandske-ytelser',
-        stegIndeks: 6,
+        stegIndeks: 7,
     },
     utenlandskKontantstotte: {
         component: UtenlandskKontantstotte,
         key: 'utenlandskKontantstotte',
         path: '/utenlandsk-kontantstotte',
-        stegIndeks: 7,
+        stegIndeks: 8,
     },
     oppsummering: {
         component: Oppsummering,
         key: 'oppsummering',
         path: '/oppsummering',
-        stegIndeks: 8,
+        stegIndeks: 9,
     },
 };
 /* tslint:enable:object-literal-sort-keys */
