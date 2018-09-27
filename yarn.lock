@@ -4671,6 +4671,14 @@ nav-datovelger@1.1.8:
     react-day-picker "^7.1.4"
     react-dom "^16.2.0"
 
+nav-frontend-alertstriper-style@0.2.48:
+  version "0.2.48"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-alertstriper-style/-/nav-frontend-alertstriper-style-0.2.48.tgz#6db3ad71836c4745f06f7b397979eaa050e51060"
+
+nav-frontend-alertstriper@1.0.27:
+  version "1.0.27"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-alertstriper/-/nav-frontend-alertstriper-1.0.27.tgz#6733bece93edc52c753ed1a7e44492a38695bbf4"
+
 nav-frontend-chevron-style@0.3.4:
   version "0.3.4"
   resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-chevron-style/-/nav-frontend-chevron-style-0.3.4.tgz#e6b0d5e9ddd87af988e4e1a44fc7fcb1fbb70994"
