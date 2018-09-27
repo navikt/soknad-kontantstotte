@@ -18,6 +18,7 @@ import {
     sjekkValideringForBarnehageplass,
     sjekkValideringForFamilieforhold,
     sjekkValideringForSteg,
+    sjekkValideringForTilknytningTilUtland,
     sjekkValideringForUtenlandskeYtelser,
     sjekkValideringForUtenlandskKontantstotte,
 } from './stegSagaValidators';
@@ -32,6 +33,7 @@ import {
     minebarnFeltnavn,
     oppsummeringFeltnavn,
     Stegnavn,
+    tilknytningTilUtlandFeltnavn,
     utenlandskeYtelserFeltnavn,
     utenlandskKontantstotteFeltnavn,
     ValideringsStatus,
@@ -45,7 +47,10 @@ function kjorValideringsFunksjoner(
     const validertFelt: IFelt = valideringsFunksjoner.reduce(
         (acc: IFelt, valideringsFunksjon) => {
             const nyttValidertFelt = valideringsFunksjon(felt);
-            return acc.valideringsStatus === ValideringsStatus.FEIL ? acc : nyttValidertFelt;
+            return acc.valideringsStatus === ValideringsStatus.FEIL ||
+                acc.valideringsStatus === ValideringsStatus.ADVARSEL
+                ? acc
+                : nyttValidertFelt;
         },
         { verdi: '', valideringsStatus: ValideringsStatus.IKKE_VALIDERT, feilmeldingsNokkel: '' }
     );
@@ -116,6 +121,14 @@ function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
                 feltMedOppdatertVerdi
             );
             break;
+        case 'tilknytningTilUtland':
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.tilknytningTilUtland[
+                    action.feltnavn as tilknytningTilUtlandFeltnavn
+                ],
+                feltMedOppdatertVerdi
+            );
+            break;
     }
 
     yield put(soknadSettFelt(action.stegnavn, action.feltnavn, validertFelt));
@@ -178,6 +191,13 @@ function* nesteStegSaga() {
                 sjekkValideringForUtenlandskeYtelser,
                 soknadState.familieforhold,
                 soknadState.utenlandskeYtelser
+            );
+            break;
+        case 'tilknytningTilUtland':
+            harFeil = yield call(
+                sjekkValideringForTilknytningTilUtland,
+                soknadState.tilknytningTilUtland,
+                soknadState.familieforhold
             );
             break;
         default:

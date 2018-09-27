@@ -19,6 +19,7 @@ import { BarnOppsummering } from './BarnOppsummering';
 import FamilieforholdOppsummering from './FamilieforholdOppsummering';
 import KravTilSokerOppsummering from './KravTilSokerOppsummering';
 import PersonaliaOppsummering from './PersonaliaOppsummering';
+import TilknytningTilUtlandOppsummering from './TilknytningTilUtlandOppsummering';
 import UtenlandskeYtelserOppsummering from './UtenlandskeYtelserOppsummering';
 import UtenlandskKontantstotteOppsummering from './UtenlandskKontantstotteOppsummering';
 
@@ -54,6 +55,10 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
                 <BarnOppsummering barn={soknad.mineBarn} />
                 <BarnehageplassOppsummering barnehageplass={soknad.barnehageplass} />
                 <FamilieforholdOppsummering familieforhold={soknad.familieforhold} />
+                <TilknytningTilUtlandOppsummering
+                    familieforhold={soknad.familieforhold}
+                    tilknytningTilUtland={soknad.tilknytningTilUtland}
+                />
                 <ArbeidIUtlandetOppsummering
                     familieforhold={soknad.familieforhold}
                     arbeidIUtlandet={soknad.arbeidIUtlandet}
