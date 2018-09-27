@@ -4,10 +4,12 @@ import {
     IBarnehageplass,
     IFamilieforhold,
     IFelt,
+    ITilknytningTilUtland,
     IUtenlandskeYtelser,
     IUtenlandskKontantstotte,
     Stegnavn,
     Svar,
+    TilknytningTilUtlandVerdier,
     ValideringsStatus,
 } from './types';
 
@@ -156,6 +158,48 @@ function* sjekkValideringForUtenlandskeYtelser(
     return harFeil;
 }
 
+function* sjekkValideringForTilknytningTilUtland(
+    tilknytningTilUtland: ITilknytningTilUtland,
+    familieforhold: IFamilieforhold
+) {
+    let harFeil =
+        tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.valideringsStatus !==
+        ValideringsStatus.OK;
+
+    if (
+        tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.verdi ===
+            TilknytningTilUtlandVerdier.jaIEOS ||
+        tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.verdi ===
+            TilknytningTilUtlandVerdier.jaLeggerSammenPerioderEOS
+    ) {
+        harFeil =
+            harFeil ||
+            tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAarForklaring.valideringsStatus !==
+                ValideringsStatus.OK;
+    }
+
+    if (familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA) {
+        harFeil =
+            harFeil ||
+            tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.valideringsStatus !==
+                ValideringsStatus.OK;
+
+        if (
+            tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.verdi ===
+                TilknytningTilUtlandVerdier.jaIEOS ||
+            tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.verdi ===
+                TilknytningTilUtlandVerdier.jaLeggerSammenPerioderEOS
+        ) {
+            harFeil =
+                harFeil ||
+                tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring
+                    .valideringsStatus !== ValideringsStatus.OK;
+        }
+    }
+
+    return harFeil;
+}
+
 function* sjekkValideringForUtenlandskKontantstotte(
     utenlandskKontantstotte: IUtenlandskKontantstotte
 ) {
@@ -178,6 +222,7 @@ export {
     sjekkValideringForArbeidIUtlandet,
     sjekkValideringForBarnehageplass,
     sjekkValideringForFamilieforhold,
+    sjekkValideringForTilknytningTilUtland,
     sjekkValideringForUtenlandskeYtelser,
     sjekkValideringForUtenlandskKontantstotte,
 };

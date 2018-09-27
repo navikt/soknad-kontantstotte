@@ -1,5 +1,11 @@
 import { SoknadActionTypes, SoknadTypeKeys } from './actions';
-import { BarnehageplassVerdier, ISoknadState, Svar, ValideringsStatus } from './types';
+import {
+    BarnehageplassVerdier,
+    ISoknadState,
+    Svar,
+    TilknytningTilUtlandVerdier,
+    ValideringsStatus,
+} from './types';
 
 const standardSvarInitialFelt = {
     feilmeldingsNokkel: '',
@@ -17,6 +23,12 @@ const standardBarnehageplassVerdiInitialFelt = {
     feilmeldingsNokkel: '',
     valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
     verdi: BarnehageplassVerdier.Ubesvart,
+};
+
+const standardTilknytningTilUtlandVerdiInitialFelt = {
+    feilmeldingsNokkel: '',
+    valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+    verdi: TilknytningTilUtlandVerdier.Ubesvart,
 };
 
 const initialState: ISoknadState = {
@@ -61,6 +73,12 @@ const initialState: ISoknadState = {
     },
     oppsummering: {
         bekreftelse: standardSvarInitialFelt,
+    },
+    tilknytningTilUtland: {
+        annenForelderBoddEllerJobbetINorgeMinstFemAar: standardTilknytningTilUtlandVerdiInitialFelt,
+        annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring: standardStringInitialFelt,
+        boddEllerJobbetINorgeMinstFemAar: standardTilknytningTilUtlandVerdiInitialFelt,
+        boddEllerJobbetINorgeMinstFemAarForklaring: standardStringInitialFelt,
     },
     utenlandskKontantstotte: {
         mottarKontantstotteFraUtlandet: standardSvarInitialFelt,
