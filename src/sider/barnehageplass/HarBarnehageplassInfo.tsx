@@ -32,7 +32,7 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
     visAdvarsel,
 }) => {
     return (
-        <SkjemaGruppe className={'barnehage__inputSkjemaGruppe'}>
+        <SkjemaGruppe className={'soknad__inputSkjemaGruppe'}>
             <div className={'inputSkjemaGruppe__inner'}>
                 <Input
                     className={'inputElement'}
