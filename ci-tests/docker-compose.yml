@@ -29,7 +29,6 @@ services:
     cap_add:
       - SYS_ADMIN
   chrome:
-    container_name: chrome
     image: selenium/standalone-chrome:3.14.0
     ports:
       - 4444:4444
