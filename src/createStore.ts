@@ -11,13 +11,17 @@ const history = createBrowserHistory({
 });
 
 function configureStore() {
-    const logger = createLogger({
-        collapsed: true,
-    });
-
     const saga = createSagaMiddleware();
-    const middleware = applyMiddleware(routerMiddleware(history), saga, logger);
-    const createdStore = createStore(connectRouter(history)(rootReducer), middleware);
+    let middleware: any[] = [routerMiddleware(history), saga];
+
+    if (process.env.NODE_ENV === 'development') {
+        const logger = createLogger({
+            collapsed: true,
+        });
+        middleware = [...middleware, logger];
+    }
+    const appliedMiddleware = applyMiddleware(...middleware);
+    const createdStore = createStore(connectRouter(history)(rootReducer), appliedMiddleware);
 
     saga.run(rootSaga);
 
