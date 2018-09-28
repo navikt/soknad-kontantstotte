@@ -3,7 +3,6 @@ interface IToggles {
 }
 
 enum IToggleName {
-    vis_innlogget_bruker = 'kontantstotte.soker.fnr',
     vis_advarsel = 'kontantstotte.barnehageplass.advarsel',
 }
 
