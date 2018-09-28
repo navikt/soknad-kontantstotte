@@ -50,7 +50,7 @@ const JaNeiSporsmal: React.StatelessComponent<JaNeiSporsmalProps> = ({
                 name={felt}
                 validators={[
                     {
-                        failText: intl.formatMessage({ id: 'feilmelding.generell.fodselsDato' }),
+                        failText: intl.formatMessage({ id: 'feilmelding.generell.dato' }),
                         test: () => harSvartPaJaNeiSporsmal(verdi),
                     },
                 ]}

@@ -31,6 +31,13 @@ const hentTekstNokkelForTilknytningTilUtlandSvar: (
     return 'Ubesvart';
 };
 
+const skalViseForklaringsFelt: (svar: TilknytningTilUtlandVerdier) => boolean = svar => {
+    return (
+        svar === TilknytningTilUtlandVerdier.jaIEOS ||
+        svar === TilknytningTilUtlandVerdier.jaLeggerSammenPerioderEOS
+    );
+};
+
 const TilknytningTilUtlandOppsummering: React.StatelessComponent<
     ITilknytningTilUtlandOppsummeringProps
 > = ({ familieforhold, tilknytningTilUtland }) => {
@@ -55,7 +62,8 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
                 }
                 svar={<FormattedMessage id={boddEllerJobbetINorgeMinstFemAarSvar} />}
             />
-            {tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAarForklaring.verdi !== '' && (
+            {skalViseForklaringsFelt(tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar
+                .verdi as TilknytningTilUtlandVerdier) && (
                 <SporsmalSvar
                     sporsmal={
                         <FormattedMessage id={'oppsummering.tilknytningTilUtland.forklaring'} />
@@ -80,8 +88,9 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
             )}
 
             {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA &&
-                tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring
-                    .verdi !== '' && (
+                skalViseForklaringsFelt(tilknytningTilUtland
+                    .annenForelderBoddEllerJobbetINorgeMinstFemAar
+                    .verdi as TilknytningTilUtlandVerdier) && (
                     <SporsmalSvar
                         sporsmal={
                             <FormattedMessage id={'oppsummering.tilknytningTilUtland.forklaring'} />
