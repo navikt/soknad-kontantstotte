@@ -103,7 +103,6 @@ const harFyltInnGyldigAntallTimer = (felt: IFelt): IFelt => {
 const harBekreftetOppsummering = (felt: IFelt): IFelt =>
     harSvartJa(felt, 'oppsummering.bekreftelse.feilmelding');
 
-
 const harSvartMedFeilmelding = (felt: IFelt): IFelt =>
     harSvart(felt, 'feilmelding.generell.feilmelding');
 

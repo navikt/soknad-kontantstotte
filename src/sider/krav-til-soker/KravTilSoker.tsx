@@ -54,6 +54,7 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
                         </span>
                     </div>
                 }
+                className={'krav__veileder'}
             />
             <form>
                 <CheckboksPanelGruppe
