@@ -39,17 +39,30 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.click('h1');
             actions.executeJS(disableHover);
         })
-        .capture('mine-barn', function(actions) {
+        .capture('mine-barn-plain', function(actions) {
             actions.executeJS(enableHover);
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
             actions.click('h1');
             actions.executeJS(disableHover);
         })
-        .capture('barnehageplass', function(actions, find) {
+        .capture('mine-barn-feilet', function(actions) {
+            actions.executeJS(enableHover);
+            actions.click('.knapp.knapp--hoved');
+            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.click('h1');
+            actions.executeJS(disableHover);
+        })
+        .capture('mine-barn-utfylt', function(actions, find) {
             actions.executeJS(enableHover);
             actions.sendKeys(find('.mine-barn__navn-input > input'), 'Mock McMockface');
             actions.sendKeys(find('.mine-barn__fodselsdato-input > input'), '01.01.2018');
+            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.click('h1');
+            actions.executeJS(disableHover);
+        })
+        .capture('barnehageplass', function(actions) {
+            actions.executeJS(enableHover);
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
             actions.click('h1');
