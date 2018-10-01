@@ -17,17 +17,30 @@ gemini.suite('soknad-kontantstotte', suite => {
         .capture('veiledningsside', function(actions) {
             actions.waitForElementToShow('h1', 5000);
         })
-        .capture('krav-til-soker', function(actions) {
+        .capture('krav-til-soker-plain', function(actions) {
             actions.click('.knapp.knapp--hoved');
+            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.click('h1');
+            actions.executeJS(disableHover);
+        })
+        .capture('krav-til-soker-feilet', function(actions) {
+            actions.executeJS(enableHover);
+            actions.click('.knapp.knapp--hoved');
+            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.click('h1');
+            actions.executeJS(disableHover);
+        })
+        .capture('krav-til-soker-utfylt', function(actions) {
+            actions.executeJS(enableHover);
+            actions.executeJS(function(window) {
+                window.document.querySelectorAll('.inputPanel').forEach(e => e.click());
+            });
             actions.waitForElementToShow('.stegindikator', 5000);
             actions.click('h1');
             actions.executeJS(disableHover);
         })
         .capture('mine-barn', function(actions) {
             actions.executeJS(enableHover);
-            actions.executeJS(function(window) {
-                window.document.querySelectorAll('.inputPanel').forEach(e => e.click());
-            });
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
             actions.click('h1');
