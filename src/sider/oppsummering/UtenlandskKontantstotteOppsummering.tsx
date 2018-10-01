@@ -1,7 +1,7 @@
 import Element from 'nav-frontend-typografi/lib/element';
 import * as React from 'react';
-import { FormattedMessage, InjectedIntl } from 'react-intl';
-import { IUtenlandskKontantstotte } from '../../soknad/types';
+import { FormattedMessage } from 'react-intl';
+import { IUtenlandskKontantstotte, Svar } from '../../soknad/types';
 import { OppsummeringSteg } from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
@@ -29,9 +29,17 @@ const UtenlandskKontantstotteOppsummering: React.StatelessComponent<
                         id={'utenlandskKontantstotte.mottarKontantstotteFraUtlandet.sporsmal'}
                     />
                 }
-                svar={mottarKontantstotteFraUtlandet.verdi}
+                svar={
+                    <FormattedMessage
+                        id={
+                            mottarKontantstotteFraUtlandet.verdi === Svar.JA
+                                ? 'svar.ja'
+                                : 'svar.nei'
+                        }
+                    />
+                }
             />
-            {mottarKontantstotteFraUtlandet.verdi === 'JA' && (
+            {mottarKontantstotteFraUtlandet.verdi === Svar.JA && (
                 <SporsmalSvar
                     sporsmal={
                         <FormattedMessage

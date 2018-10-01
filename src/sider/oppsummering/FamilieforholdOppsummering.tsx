@@ -23,7 +23,15 @@ const FamilieforholdOppsummering: React.StatelessComponent<FamilieforholdOppsumm
                 sporsmal={
                     <FormattedMessage id={'familieforhold.borForeldreneSammenMedBarnet.sporsmal'} />
                 }
-                svar={familieforhold.borForeldreneSammenMedBarnet.verdi}
+                svar={
+                    <FormattedMessage
+                        id={
+                            familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA
+                                ? 'svar.ja'
+                                : 'svar.nei'
+                        }
+                    />
+                }
             />
             {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA && (
                 <>

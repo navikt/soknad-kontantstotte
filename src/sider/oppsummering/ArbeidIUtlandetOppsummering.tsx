@@ -34,7 +34,15 @@ const arbeidIUtlandetOppsummering: React.StatelessComponent<IArbeidIUtlandetOpps
                         id={'arbeidIUtlandet.arbeiderIUtlandetEllerKontinentalsokkel.sporsmal'}
                     />
                 }
-                svar={arbeiderIUtlandetEllerKontinentalsokkel.verdi}
+                svar={
+                    <FormattedMessage
+                        id={
+                            arbeiderIUtlandetEllerKontinentalsokkel.verdi === Svar.JA
+                                ? 'svar.ja'
+                                : 'svar.nei'
+                        }
+                    />
+                }
             />
             {arbeiderIUtlandetEllerKontinentalsokkel.verdi === Svar.JA && (
                 <SporsmalSvar
@@ -50,7 +58,15 @@ const arbeidIUtlandetOppsummering: React.StatelessComponent<IArbeidIUtlandetOpps
                             id={'arbeidIUtlandet.arbeiderAnnenForelderIUtlandet.sporsmal'}
                         />
                     }
-                    svar={arbeiderAnnenForelderIUtlandet.verdi}
+                    svar={
+                        <FormattedMessage
+                            id={
+                                arbeiderAnnenForelderIUtlandet.verdi === Svar.JA
+                                    ? 'svar.ja'
+                                    : 'svar.nei'
+                            }
+                        />
+                    }
                 />
             )}
             {borForeldreneSammenMedBarnet.verdi === Svar.JA &&

@@ -33,7 +33,11 @@ const utenlandskeYtelserOppsummering: React.StatelessComponent<
                         id={'oppsummering.utenlandskeYtelser.mottarYtelserFraUtland'}
                     />
                 }
-                svar={mottarYtelserFraUtland.verdi}
+                svar={
+                    <FormattedMessage
+                        id={mottarYtelserFraUtland.verdi === Svar.JA ? 'svar.ja' : 'svar.nei'}
+                    />
+                }
             />
             {mottarYtelserFraUtland.verdi === Svar.JA && (
                 <SporsmalSvar
@@ -53,7 +57,15 @@ const utenlandskeYtelserOppsummering: React.StatelessComponent<
                             }
                         />
                     }
-                    svar={mottarAnnenForelderYtelserFraUtland.verdi}
+                    svar={
+                        <FormattedMessage
+                            id={
+                                mottarAnnenForelderYtelserFraUtland.verdi === Svar.JA
+                                    ? 'svar.ja'
+                                    : 'svar.nei'
+                            }
+                        />
+                    }
                 />
             )}
             {borForeldreneSammenMedBarnet.verdi === Svar.JA &&
