@@ -2,6 +2,7 @@ import { Element } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { BarnehageplassVerdier, IBarnehageplass, Svar } from '../../soknad/types';
+import { JaNeiSvar } from './JaNeiSvar';
 import { OppsummeringSteg } from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
@@ -39,15 +40,7 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
             </Element>
             <SporsmalSvar
                 sporsmal={<FormattedMessage id={'oppsummering.barnehageplass.harBarnehageplass'} />}
-                svar={
-                    <FormattedMessage
-                        id={
-                            barnehageplass.harBarnehageplass.verdi === Svar.JA
-                                ? 'svar.ja'
-                                : 'svar.nei'
-                        }
-                    />
-                }
+                svar={<JaNeiSvar verdi={barnehageplass.harBarnehageplass.verdi} />}
             />
 
             <SporsmalSvar

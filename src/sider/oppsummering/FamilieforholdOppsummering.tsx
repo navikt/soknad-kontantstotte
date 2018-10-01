@@ -2,6 +2,7 @@ import Element from 'nav-frontend-typografi/lib/element';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { IFamilieforhold, Svar } from '../../soknad/types';
+import { JaNeiSvar } from './JaNeiSvar';
 import { OppsummeringSteg } from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
@@ -23,15 +24,7 @@ const FamilieforholdOppsummering: React.StatelessComponent<FamilieforholdOppsumm
                 sporsmal={
                     <FormattedMessage id={'familieforhold.borForeldreneSammenMedBarnet.sporsmal'} />
                 }
-                svar={
-                    <FormattedMessage
-                        id={
-                            familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA
-                                ? 'svar.ja'
-                                : 'svar.nei'
-                        }
-                    />
-                }
+                svar={<JaNeiSvar verdi={familieforhold.borForeldreneSammenMedBarnet.verdi} />}
             />
             {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA && (
                 <>
