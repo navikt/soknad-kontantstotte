@@ -41,14 +41,14 @@ function* sjekkValideringForArbeidIUtlandet(
     if (familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA) {
         harFeil =
             harFeil ||
-            arbeidIUtlandet.arbeiderIUtlandetEllerKontinentalsokkel.valideringsStatus !==
+            arbeidIUtlandet.arbeiderAnnenForelderIUtlandet.valideringsStatus !==
                 ValideringsStatus.OK;
 
-        if (arbeidIUtlandet.arbeiderIUtlandetEllerKontinentalsokkel.verdi === Svar.JA) {
+        if (arbeidIUtlandet.arbeiderAnnenForelderIUtlandet.verdi === Svar.JA) {
             harFeil =
                 harFeil ||
-                arbeidIUtlandet.arbeiderIUtlandetEllerKontinentalsokkelForklaring
-                    .valideringsStatus !== ValideringsStatus.OK;
+                arbeidIUtlandet.arbeiderAnnenForelderIUtlandetForklaring.valideringsStatus !==
+                    ValideringsStatus.OK;
         }
     }
 

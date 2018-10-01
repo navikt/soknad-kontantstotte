@@ -7,7 +7,7 @@ services:
       - ../dev-server:/var/server/
       - ../dist:/var/dist
     ports:
-      - 8000:8000
+      - 8000
     entrypoint:
       - node
       - /var/server/ci-server.js
@@ -31,7 +31,7 @@ services:
   chrome:
     image: selenium/standalone-chrome:3.14.0
     ports:
-      - 4444:4444
+      - 4444
   testcafe:
     image: testcafe/testcafe
     command: ["firefox", "/tests/*.ts"]
