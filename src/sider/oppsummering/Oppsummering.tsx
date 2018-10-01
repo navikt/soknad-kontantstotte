@@ -12,8 +12,6 @@ import { ISoker } from '../../soker/types';
 import { soknadValiderFelt } from '../../soknad/actions';
 import { selectSoknad } from '../../soknad/selectors';
 import { ISoknadState, Svar, ValideringsStatus } from '../../soknad/types';
-import { isEnabled } from '../../toggles/selectors';
-import { IToggleName } from '../../toggles/types';
 import ArbeidIUtlandetOppsummering from './ArbeidIUtlandetOppsummering';
 import BarnehageplassOppsummering from './BarnehageplassOppsummering';
 import { BarnOppsummering } from './BarnOppsummering';
@@ -28,7 +26,6 @@ interface IMapStateToProps {
     soker: ISoker;
     soknad: ISoknadState;
     harForsoktNesteSteg: boolean;
-    visFnr: boolean;
 }
 
 interface IMapDispatchToProps {
@@ -43,7 +40,6 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
     settBekreftelse,
     soker,
     soknad,
-    visFnr,
 }) => {
     return (
         <SideContainer
@@ -62,7 +58,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
                 className={'oppsummering__veileder'}
             />
             <SoknadPanel className={'oppsummering__panel'}>
-                {visFnr && <PersonaliaOppsummering soker={{ fodselsnummer: soker.innloggetSom }} />}
+                <PersonaliaOppsummering soker={{ fodselsnummer: soker.innloggetSom }} />
                 <KravTilSokerOppsummering />
                 <BarnOppsummering barn={soknad.mineBarn} />
                 <BarnehageplassOppsummering barnehageplass={soknad.barnehageplass} />
@@ -107,7 +103,6 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         soker: selectSoker(state),
         soknad: selectSoknad(state),
-        visFnr: isEnabled(state, IToggleName.vis_innlogget_bruker),
     };
 };
 
