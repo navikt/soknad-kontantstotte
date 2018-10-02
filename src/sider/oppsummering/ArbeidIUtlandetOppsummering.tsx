@@ -2,6 +2,7 @@ import Element from 'nav-frontend-typografi/lib/element';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { IArbeidIUtlandet, IFamilieforhold, Svar } from '../../soknad/types';
+import { JaNeiSvar } from './JaNeiSvar';
 import { OppsummeringSteg } from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
@@ -34,7 +35,7 @@ const arbeidIUtlandetOppsummering: React.StatelessComponent<IArbeidIUtlandetOpps
                         id={'arbeidIUtlandet.arbeiderIUtlandetEllerKontinentalsokkel.sporsmal'}
                     />
                 }
-                svar={arbeiderIUtlandetEllerKontinentalsokkel.verdi}
+                svar={<JaNeiSvar verdi={arbeiderIUtlandetEllerKontinentalsokkel.verdi} />}
             />
             {arbeiderIUtlandetEllerKontinentalsokkel.verdi === Svar.JA && (
                 <SporsmalSvar
@@ -50,7 +51,7 @@ const arbeidIUtlandetOppsummering: React.StatelessComponent<IArbeidIUtlandetOpps
                             id={'arbeidIUtlandet.arbeiderAnnenForelderIUtlandet.sporsmal'}
                         />
                     }
-                    svar={arbeiderAnnenForelderIUtlandet.verdi}
+                    svar={<JaNeiSvar verdi={arbeiderAnnenForelderIUtlandet.verdi} />}
                 />
             )}
             {borForeldreneSammenMedBarnet.verdi === Svar.JA &&

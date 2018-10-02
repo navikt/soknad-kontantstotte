@@ -2,6 +2,7 @@ import Element from 'nav-frontend-typografi/lib/element';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { IFamilieforhold, IUtenlandskeYtelser, Svar } from '../../soknad/types';
+import { JaNeiSvar } from './JaNeiSvar';
 import { OppsummeringSteg } from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
@@ -33,7 +34,7 @@ const utenlandskeYtelserOppsummering: React.StatelessComponent<
                         id={'oppsummering.utenlandskeYtelser.mottarYtelserFraUtland'}
                     />
                 }
-                svar={mottarYtelserFraUtland.verdi}
+                svar={<JaNeiSvar verdi={mottarYtelserFraUtland.verdi} />}
             />
             {mottarYtelserFraUtland.verdi === Svar.JA && (
                 <SporsmalSvar
@@ -53,7 +54,7 @@ const utenlandskeYtelserOppsummering: React.StatelessComponent<
                             }
                         />
                     }
-                    svar={mottarAnnenForelderYtelserFraUtland.verdi}
+                    svar={<JaNeiSvar verdi={mottarAnnenForelderYtelserFraUtland.verdi} />}
                 />
             )}
             {borForeldreneSammenMedBarnet.verdi === Svar.JA &&

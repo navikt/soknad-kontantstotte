@@ -1,3 +1,4 @@
+import * as classNames from 'classnames';
 import { Input, SkjemaGruppe } from 'nav-frontend-skjema';
 import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
@@ -63,10 +64,11 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                     feil={feltMedFeil.harBarnehageplassKommune}
                 />
                 <Input
-                    className={`inputElement${harBarnehageplassAntallTimer.valideringsStatus ===
-                        ValideringsStatus.ADVARSEL &&
-                        visAdvarsel &&
-                        '--advarsel'}`}
+                    className={classNames('inputElement', {
+                        'inputElement--advarsel':
+                            harBarnehageplassAntallTimer.valideringsStatus ===
+                                ValideringsStatus.ADVARSEL && visAdvarsel,
+                    })}
                     label={intl.formatMessage({
                         id: 'barnehageplass.harBarnehageplass.antallTimer.sporsmal',
                     })}
