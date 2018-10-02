@@ -1,7 +1,8 @@
 import { Element } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { BarnehageplassVerdier, IBarnehageplass } from '../../soknad/types';
+import { BarnehageplassVerdier, IBarnehageplass, Svar } from '../../soknad/types';
+import { JaNeiSvar } from './JaNeiSvar';
 import { OppsummeringSteg } from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
@@ -39,7 +40,7 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
             </Element>
             <SporsmalSvar
                 sporsmal={<FormattedMessage id={'oppsummering.barnehageplass.harBarnehageplass'} />}
-                svar={barnehageplass.harBarnehageplass.verdi}
+                svar={<JaNeiSvar verdi={barnehageplass.harBarnehageplass.verdi} />}
             />
 
             <SporsmalSvar
@@ -111,14 +112,6 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                     <SporsmalSvar
                         sporsmal={
                             <FormattedMessage
-                                id={'barnehageplass.harBarnehageplass.antallTimer.sporsmal'}
-                            />
-                        }
-                        svar={barnehageplass.harBarnehageplassAntallTimer.verdi}
-                    />
-                    <SporsmalSvar
-                        sporsmal={
-                            <FormattedMessage
                                 id={'barnehageplass.harBarnehageplass.dato.sporsmal'}
                             />
                         }
@@ -127,10 +120,18 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                     <SporsmalSvar
                         sporsmal={
                             <FormattedMessage
+                                id={'barnehageplass.harBarnehageplass.kommune.sporsmal'}
+                            />
+                        }
+                        svar={barnehageplass.harBarnehageplassKommune.verdi}
+                    />
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
                                 id={'barnehageplass.harBarnehageplass.antallTimer.sporsmal'}
                             />
                         }
-                        svar={barnehageplass.harBarnehageplass.verdi}
+                        svar={barnehageplass.harBarnehageplassAntallTimer.verdi}
                     />
                 </>
             )}
