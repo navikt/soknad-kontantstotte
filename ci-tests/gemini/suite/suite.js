@@ -55,7 +55,7 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.click('h1');
             actions.executeJS(disableHover);
         })
-        .capture('familieforhold', function(actions) {
+        .capture('familieforhold-plain', function(actions) {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
                 window.document.querySelectorAll('[name="harBarnehageplass"]')[0].click();
@@ -66,13 +66,25 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.click('h1');
             actions.executeJS(disableHover);
         })
-        .capture('tilknytningTilUtland', function(actions) {
+        .capture('familieforhold-feilmelding', function(actions) {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
                 window.document
-                    .querySelectorAll('[name="borForeldreneSammenMedBarnet"]')[0]
+                    .querySelectorAll('[name="borForeldreneSammenMedBarnet"]')[1]
                     .click();
             });
+            actions.click('.knapp.knapp--hoved');
+            actions.executeJS(disableHover);
+        })
+        .capture('familieforhold-utfylt', function(actions, find) {
+            actions.executeJS(enableHover);
+            actions.sendKeys(find('[name="annenForelder.navn"]'), 'Mockman McMockface');
+            actions.sendKeys(find('[name="annenforelder.fodselsnummer"]'), '00000000000');
+            actions.click('h1');
+            actions.executeJS(disableHover);
+        })
+        .capture('tilknytningTilUtland', function(actions) {
+            actions.executeJS(enableHover);
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
             actions.click('h1');
@@ -83,6 +95,9 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.executeJS(function(window) {
                 window.document
                     .querySelectorAll('[name="boddEllerJobbetINorgeMinstFemAar"]')[0]
+                    .click();
+                window.document
+                    .querySelectorAll('[name="annenForelderBoddEllerJobbetINorgeMinstFemAar"]')[0]
                     .click();
             });
             actions.click('.knapp.knapp--hoved');
@@ -96,6 +111,9 @@ gemini.suite('soknad-kontantstotte', suite => {
                 window.document
                     .querySelectorAll('[name="arbeiderIUtlandetEllerKontinentalsokkel"]')[0]
                     .click();
+                window.document
+                    .querySelectorAll('[name="arbeiderAnnenForelderIUtlandet"]')[0]
+                    .click();
             });
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
@@ -106,6 +124,9 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
                 window.document.querySelectorAll('[name="mottarYtelserFraUtland"]')[0].click();
+                window.document
+                    .querySelectorAll('[name="mottarAnnenForelderYtelserFraUtland"]')[0]
+                    .click();
             });
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
