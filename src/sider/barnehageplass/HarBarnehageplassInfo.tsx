@@ -12,7 +12,6 @@ interface IHarBarnehageplassInfo {
     intl: InjectedIntl;
     feltMedFeil: IFeltFeil;
     settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => void;
-    visAdvarsel: boolean;
 }
 
 interface IMapStateToProps {
@@ -30,7 +29,6 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
     harBarnehageplassKommune,
     intl,
     settBarnehageplassVerdiFelt,
-    visAdvarsel,
 }) => {
     return (
         <SkjemaGruppe className={'soknad__inputSkjemaGruppe'}>
@@ -67,7 +65,7 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                     className={classNames('inputElement', 'barnehageplass__antallTimer-input', {
                         'barnehageplass__antallTimer--advarsel':
                             harBarnehageplassAntallTimer.valideringsStatus ===
-                                ValideringsStatus.ADVARSEL && visAdvarsel,
+                            ValideringsStatus.ADVARSEL,
                     })}
                     label={intl.formatMessage({
                         id: 'barnehageplass.harBarnehageplass.antallTimer.sporsmal',
