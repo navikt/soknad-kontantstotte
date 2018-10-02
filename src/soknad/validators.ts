@@ -77,7 +77,7 @@ const harFyltInnDato = (felt: IFelt): IFelt => {
 };
 
 const harFyltInnFodselsnummer = (felt: IFelt): IFelt => {
-    return /^\d{11}/.test(felt.verdi.replace(' ', ''))
+    return /^\d{11}$/.test(felt.verdi.replace(' ', ''))
         ? ok(felt)
         : feil(felt, 'feilmelding.generell.fodselsnummer');
 };
