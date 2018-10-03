@@ -45,8 +45,18 @@ function* autentiserBruker(): SagaIterator {
     }
 }
 
+function fiksUtloggingsKnapp() {
+    const logginnKnapp = window.document.querySelector('#login');
+    const utloggingKnapp = window.document.querySelector('#logout');
+    if (logginnKnapp && utloggingKnapp) {
+        logginnKnapp.classList.add('hidden');
+        utloggingKnapp.classList.remove('hidden');
+    }
+}
+
 function* forsteSidelastSaga(): SagaIterator {
     yield call(autentiserBruker);
+    yield call(fiksUtloggingsKnapp);
     yield put(togglesHent());
     yield take([ToggelsTypeKeys.HENT_FEILET, ToggelsTypeKeys.HENT_OK]);
 
