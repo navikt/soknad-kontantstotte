@@ -71,7 +71,7 @@ const harFyltInnNavn = (felt: IFelt): IFelt => {
 };
 
 const harFyltInnDato = (felt: IFelt): IFelt => {
-    return /^\d{2}.\d{2}.\d{4}/.test(felt.verdi.replace(' ', ''))
+    return /^\d{2}\.\d{2}\.\d{4}/.test(felt.verdi.replace(' ', ''))
         ? ok(felt)
         : feil(felt, 'feilmelding.generell.dato');
 };
@@ -115,18 +115,18 @@ const harSvartTekstMedFeilmelding = (felt: IFelt): IFelt =>
 const svarUtenValidering = (felt: IFelt): IFelt => ok(felt);
 
 export {
+    harBekreftetOppsummering,
     harFyltInnDato,
     harFyltInnFodselsnummer,
     harFyltInnGyldigAntallTimer,
     harFyltInnNavn,
     harFyltInnTall,
-    harBekreftetOppsummering,
     harSvart,
     harSvartBarnehageplassVerdiMedFeilmelding,
-    harSvartTilknytningTilUtlandVerdiMedFeilmelding,
     harSvartJa,
     harSvartJaMedFeilmelding,
     harSvartMedFeilmelding,
     harSvartTekstMedFeilmelding,
+    harSvartTilknytningTilUtlandVerdiMedFeilmelding,
     svarUtenValidering,
 };
