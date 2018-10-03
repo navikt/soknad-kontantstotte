@@ -61,19 +61,48 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.click('h1');
             actions.executeJS(disableHover);
         })
-        .capture('barnehageplass', function(actions) {
+        .capture('barnehageplass_plain', function(actions) {
             actions.executeJS(enableHover);
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
             actions.click('h1');
             actions.executeJS(disableHover);
         })
-        .capture('familieforhold', function(actions) {
+        .capture('barnehageplass_feilet', function(actions) {
+            actions.executeJS(enableHover);
+            actions.click('.knapp.knapp--hoved');
+            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.click('h1');
+            actions.waitForElementToShow('.skjemaelement__feilmelding', 5000);
+            actions.executeJS(disableHover);
+        })
+        .capture('barnehageplass_advarsel', function(actions, find) {
             actions.executeJS(enableHover);
             actions.executeJS(function(window) {
-                window.document.querySelectorAll('[name="harBarnehageplass"]')[0].click();
+                window.document.querySelectorAll('[name="harBarnehageplass"]')[1].click();
                 window.document.querySelectorAll('[name="barnBarnehageplassStatus"]')[0].click();
             });
+            actions.sendKeys(find('.barnehageplass__antallTimer-input input'), '50');
+            actions.click('h1');
+            actions.waitForElementToShow('.barnehageplass__antallTimer--advarsel', 5000);
+            actions.executeJS(disableHover);
+        })
+        .capture('barnehageplass_utfylt', function(actions, find) {
+            actions.executeJS(enableHover);
+            actions.executeJS(function(window) {
+                window.document.querySelectorAll('[name="harBarnehageplass"]')[1].click();
+                window.document.querySelectorAll('[name="barnBarnehageplassStatus"]')[0].click();
+            });
+            actions.sendKeys(find('.barnehageplass__dato-input input'), '20.12.2018');
+            actions.sendKeys(find('.barnehageplass__kommune-input input'), 'Oslo');
+            actions.sendKeys(find('.barnehageplass__antallTimer-input input'), '\b\b');
+            actions.sendKeys(find('.barnehageplass__antallTimer-input input'), '20');
+            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.click('h1');
+            actions.executeJS(disableHover);
+        })
+        .capture('familieforhold', function(actions) {
+            actions.executeJS(enableHover);
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.stegindikator', 5000);
             actions.click('h1');

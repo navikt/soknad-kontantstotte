@@ -20,8 +20,6 @@ import {
     Svar,
     ValideringsStatus,
 } from '../../soknad/types';
-import { isEnabled } from '../../toggles/selectors';
-import { IToggleName } from '../../toggles/types';
 import BarnehageplassHarSluttetInfo from './BarnehageplassHarSluttetInfo';
 import BarnehageplassSkalBegynneInfo from './BarnehageplassSkalBegynneInfo';
 import BarnehageplassSkalSlutteInfo from './BarnehageplassSkalSlutteInfo';
@@ -37,7 +35,6 @@ interface IMapDispatchToProps {
 interface IMapStateToProps {
     barnehageplass: IBarnehageplass;
     harForsoktNesteSteg: boolean;
-    visAdvarsel: boolean;
 }
 
 type BarnehageplassSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
@@ -49,7 +46,6 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     nullstillNesteSteg,
     settBarnehageplassVerdiFelt,
     settSvarFelt,
-    visAdvarsel,
 }) => {
     const {
         barnBarnehageplassStatus,
@@ -135,7 +131,6 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                                 BarnehageplassVerdier.harBarnehageplass && (
                                 <HarBarnehageplassInfo
                                     feltMedFeil={feltMedFeil}
-                                    visAdvarsel={visAdvarsel}
                                     intl={intl}
                                     settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
                                 />
@@ -144,8 +139,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                         {barnBarnehageplassStatus.verdi ===
                             BarnehageplassVerdier.harBarnehageplass &&
                             harBarnehageplassAntallTimer.valideringsStatus ===
-                                ValideringsStatus.ADVARSEL &&
-                            visAdvarsel && (
+                                ValideringsStatus.ADVARSEL && (
                                 <Veileder
                                     posisjon={'høyre'}
                                     className={'barnehage__advarsel'}
@@ -184,7 +178,6 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         barnehageplass: selectBarnehageplass(state),
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
-        visAdvarsel: isEnabled(state, IToggleName.vis_advarsel),
     };
 };
 
