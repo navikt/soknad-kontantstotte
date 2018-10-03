@@ -12,7 +12,6 @@ interface IHarBarnehageplassInfo {
     intl: InjectedIntl;
     feltMedFeil: IFeltFeil;
     settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => void;
-    visAdvarsel: boolean;
 }
 
 interface IMapStateToProps {
@@ -30,13 +29,12 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
     harBarnehageplassKommune,
     intl,
     settBarnehageplassVerdiFelt,
-    visAdvarsel,
 }) => {
     return (
         <SkjemaGruppe className={'soknad__inputSkjemaGruppe'}>
             <div className={'inputSkjemaGruppe__inner'}>
                 <Input
-                    className={'inputElement'}
+                    className={classNames('inputElement', 'barnehageplass__dato-input')}
                     label={intl.formatMessage({
                         id: 'barnehageplass.harBarnehageplass.dato.sporsmal',
                     })}
@@ -50,7 +48,7 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                     feil={feltMedFeil.harBarnehageplassDato}
                 />
                 <Input
-                    className={'inputElement'}
+                    className={classNames('inputElement', 'barnehageplass__kommune-input')}
                     label={intl.formatMessage({
                         id: 'barnehageplass.harBarnehageplass.kommune.sporsmal',
                     })}
@@ -64,10 +62,10 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                     feil={feltMedFeil.harBarnehageplassKommune}
                 />
                 <Input
-                    className={classNames('inputElement', {
-                        'inputElement--advarsel':
+                    className={classNames('inputElement', 'barnehageplass__antallTimer-input', {
+                        'barnehageplass__antallTimer--advarsel':
                             harBarnehageplassAntallTimer.valideringsStatus ===
-                                ValideringsStatus.ADVARSEL && visAdvarsel,
+                            ValideringsStatus.ADVARSEL,
                     })}
                     label={intl.formatMessage({
                         id: 'barnehageplass.harBarnehageplass.antallTimer.sporsmal',
