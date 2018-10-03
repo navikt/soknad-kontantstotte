@@ -48,20 +48,6 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                     feil={feltMedFeil.harBarnehageplassDato}
                 />
                 <Input
-                    className={classNames('inputElement', 'barnehageplass__kommune-input')}
-                    label={intl.formatMessage({
-                        id: 'barnehageplass.harBarnehageplass.kommune.sporsmal',
-                    })}
-                    onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                        settBarnehageplassVerdiFelt(
-                            'harBarnehageplassKommune' as Feltnavn,
-                            event.target.value as BarnehageplassVerdier
-                        )
-                    }
-                    defaultValue={harBarnehageplassKommune.verdi}
-                    feil={feltMedFeil.harBarnehageplassKommune}
-                />
-                <Input
                     className={classNames('inputElement', 'barnehageplass__antallTimer-input', {
                         'barnehageplass__antallTimer--advarsel':
                             harBarnehageplassAntallTimer.valideringsStatus ===
@@ -78,6 +64,20 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                     }
                     defaultValue={harBarnehageplassAntallTimer.verdi}
                     feil={feltMedFeil.harBarnehageplassAntallTimer}
+                />
+                <Input
+                    className={classNames('inputElement', 'barnehageplass__kommune-input')}
+                    label={intl.formatMessage({
+                        id: 'barnehageplass.harBarnehageplass.kommune.sporsmal',
+                    })}
+                    onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        settBarnehageplassVerdiFelt(
+                            'harBarnehageplassKommune' as Feltnavn,
+                            event.target.value as BarnehageplassVerdier
+                        )
+                    }
+                    defaultValue={harBarnehageplassKommune.verdi}
+                    feil={feltMedFeil.harBarnehageplassKommune}
                 />
             </div>
         </SkjemaGruppe>
