@@ -71,9 +71,22 @@ const harFyltInnNavn = (felt: IFelt): IFelt => {
 };
 
 const harFyltInnDato = (felt: IFelt): IFelt => {
-    return /^\d{2}.\d{2}.\d{4}/.test(felt.verdi.replace(' ', ''))
+    return /^\d{2}\.\d{2}\.\d{4}/.test(felt.verdi.replace(' ', ''))
         ? ok(felt)
         : feil(felt, 'feilmelding.generell.dato');
+};
+
+const harGyldigDato = (felt: IFelt): IFelt => {
+    const splittetFelt = felt.verdi.split('.').map(tall => parseInt(tall, 10));
+
+    let gyldigDato = splittetFelt[0] >= 0 && splittetFelt[0] <= 31;
+    gyldigDato = gyldigDato && (splittetFelt[1] >= 0 && splittetFelt[1] <= 12);
+    gyldigDato =
+        gyldigDato &&
+        (splittetFelt[2] >= new Date().getFullYear() - 150 &&
+            splittetFelt[2] <= new Date().getFullYear());
+
+    return gyldigDato ? ok(felt) : feil(felt, 'feilmelding.generell.gyldigDato');
 };
 
 const harFyltInnFodselsnummer = (felt: IFelt): IFelt => {
@@ -115,18 +128,19 @@ const harSvartTekstMedFeilmelding = (felt: IFelt): IFelt =>
 const svarUtenValidering = (felt: IFelt): IFelt => ok(felt);
 
 export {
+    harBekreftetOppsummering,
     harFyltInnDato,
     harFyltInnFodselsnummer,
     harFyltInnGyldigAntallTimer,
     harFyltInnNavn,
     harFyltInnTall,
-    harBekreftetOppsummering,
+    harGyldigDato,
     harSvart,
     harSvartBarnehageplassVerdiMedFeilmelding,
-    harSvartTilknytningTilUtlandVerdiMedFeilmelding,
     harSvartJa,
     harSvartJaMedFeilmelding,
     harSvartMedFeilmelding,
     harSvartTekstMedFeilmelding,
+    harSvartTilknytningTilUtlandVerdiMedFeilmelding,
     svarUtenValidering,
 };
