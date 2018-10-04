@@ -1,6 +1,8 @@
 import { push } from 'connected-react-router';
 import { SagaIterator } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { appEndreStatus } from '../app/actions';
+import { AppStatus } from '../app/types';
 import { selectSoknad } from '../soknad/selectors';
 import { selectValgtSprak } from '../tekster/selectors';
 import { InnsendingTypeKeys, sendInnFeilet, sendInnOk } from './actions';
@@ -32,6 +34,7 @@ function* sendInnSaga(): SagaIterator {
         yield put(push('/kvittering'));
     } catch (error) {
         yield put(sendInnFeilet());
+        yield put(appEndreStatus(AppStatus.FEILSITUASJON));
         yield put(push('/innsending-feilet'));
     }
 }

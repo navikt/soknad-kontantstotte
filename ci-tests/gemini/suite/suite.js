@@ -206,7 +206,7 @@ gemini.suite('soknad-kontantstotte', suite => {
             .setUrl('/innsending-feilet')
             .setCaptureElements('body')
             .capture('', function(actions) {
-                actions.waitForElementToShow('.innsending-feilet', 5000);
+                actions.waitForElementToShow('.feilside', 5000);
             });
     });
 });
