@@ -14,26 +14,28 @@ interface IBoddEllerJobbetINorgeSporsmalProps {
         verdi: TilknytningTilUtlandVerdier
     ) => void;
     settForklaringsFelt: (feltnavn: Feltnavn, verdi: string) => void;
-    intl: InjectedIntl;
     feltFeil: IFeil | undefined;
     feltNavn: string;
     feltVerdi: TilknytningTilUtlandVerdier;
-    forklaringFeltVerdi: IFelt;
     forklaringFeltFeil: IFeil | undefined;
+    forklaringFeltVerdi: IFelt;
+    intl: InjectedIntl;
+    visTilknytningTilUtlandAdvarsel: boolean;
 }
 
 const BoddEllerJobbetINorgeSporsmal: React.StatelessComponent<
     IBoddEllerJobbetINorgeSporsmalProps
 > = ({
-    nullstillNeste,
-    settTilknytningTilUtlandVerdiFelt,
-    settForklaringsFelt,
-    intl,
     feltFeil,
     feltNavn,
     feltVerdi,
-    forklaringFeltVerdi,
     forklaringFeltFeil,
+    forklaringFeltVerdi,
+    intl,
+    nullstillNeste,
+    settForklaringsFelt,
+    settTilknytningTilUtlandVerdiFelt,
+    visTilknytningTilUtlandAdvarsel,
 }) => {
     return (
         <form>
@@ -88,24 +90,25 @@ const BoddEllerJobbetINorgeSporsmal: React.StatelessComponent<
                 />
             )}
 
-            {feltVerdi === TilknytningTilUtlandVerdier.nei && (
-                <Veileder
-                    posisjon={'høyre'}
-                    className={'tilknytning-til-utland__advarsel'}
-                    tekst={
-                        <FormattedMessage
-                            id={
-                                feltNavn === 'boddEllerJobbetINorgeMinstFemAar'
-                                    ? 'tilknytningTilUtland.advarsel.nei.soker'
-                                    : 'tilknytningTilUtland.advarsel.nei.annenForelder'
-                            }
-                        />
-                    }
-                    type={'advarsel'}
-                >
-                    <Veilederikon morkBakgrunn={true} />
-                </Veileder>
-            )}
+            {feltVerdi === TilknytningTilUtlandVerdier.nei &&
+                visTilknytningTilUtlandAdvarsel && (
+                    <Veileder
+                        posisjon={'høyre'}
+                        className={'tilknytning-til-utland__advarsel'}
+                        tekst={
+                            <FormattedMessage
+                                id={
+                                    feltNavn === 'boddEllerJobbetINorgeMinstFemAar'
+                                        ? 'tilknytningTilUtland.advarsel.nei.soker'
+                                        : 'tilknytningTilUtland.advarsel.nei.annenForelder'
+                                }
+                            />
+                        }
+                        type={'advarsel'}
+                    >
+                        <Veilederikon morkBakgrunn={true} />
+                    </Veileder>
+                )}
         </form>
     );
 };

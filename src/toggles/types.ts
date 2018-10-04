@@ -4,6 +4,7 @@ interface IToggles {
 
 enum IToggleName {
     vis_advarsel = 'kontantstotte.barnehageplass.advarsel',
+    vis_advarsel_tilknytningTilUtland = 'kontantstotte.tilknytningTilUtland.advarsel',
 }
 
 const allTogglesOff = (): IToggles => {
