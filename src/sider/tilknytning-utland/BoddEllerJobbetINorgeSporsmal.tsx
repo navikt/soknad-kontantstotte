@@ -1,7 +1,9 @@
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
+import Veileder from 'nav-frontend-veileder';
 import * as React from 'react';
-import { InjectedIntl } from 'react-intl';
+import { FormattedMessage, InjectedIntl } from 'react-intl';
 import { IFeil } from '../../common/lib/validation/types';
+import Veilederikon from '../../component/Ikoner/Veilederikon';
 import TilleggsinformasjonInput from '../../component/TilleggsinformasjonInput/TilleggsinformasjonInput';
 import { Feltnavn, IFelt, TilknytningTilUtlandVerdier } from '../../soknad/types';
 
@@ -12,26 +14,28 @@ interface IBoddEllerJobbetINorgeSporsmalProps {
         verdi: TilknytningTilUtlandVerdier
     ) => void;
     settForklaringsFelt: (feltnavn: Feltnavn, verdi: string) => void;
-    intl: InjectedIntl;
     feltFeil: IFeil | undefined;
     feltNavn: string;
     feltVerdi: TilknytningTilUtlandVerdier;
-    forklaringFeltVerdi: IFelt;
     forklaringFeltFeil: IFeil | undefined;
+    forklaringFeltVerdi: IFelt;
+    intl: InjectedIntl;
+    visTilknytningTilUtlandAdvarsel: boolean;
 }
 
 const BoddEllerJobbetINorgeSporsmal: React.StatelessComponent<
     IBoddEllerJobbetINorgeSporsmalProps
 > = ({
-    nullstillNeste,
-    settTilknytningTilUtlandVerdiFelt,
-    settForklaringsFelt,
-    intl,
     feltFeil,
     feltNavn,
     feltVerdi,
-    forklaringFeltVerdi,
     forklaringFeltFeil,
+    forklaringFeltVerdi,
+    intl,
+    nullstillNeste,
+    settForklaringsFelt,
+    settTilknytningTilUtlandVerdiFelt,
+    visTilknytningTilUtlandAdvarsel,
 }) => {
     return (
         <form>
@@ -85,6 +89,26 @@ const BoddEllerJobbetINorgeSporsmal: React.StatelessComponent<
                     feil={forklaringFeltFeil}
                 />
             )}
+
+            {feltVerdi === TilknytningTilUtlandVerdier.nei &&
+                visTilknytningTilUtlandAdvarsel && (
+                    <Veileder
+                        posisjon={'høyre'}
+                        className={'tilknytning-til-utland__advarsel'}
+                        tekst={
+                            <FormattedMessage
+                                id={
+                                    feltNavn === 'boddEllerJobbetINorgeMinstFemAar'
+                                        ? 'tilknytningTilUtland.advarsel.nei.soker'
+                                        : 'tilknytningTilUtland.advarsel.nei.annenForelder'
+                                }
+                            />
+                        }
+                        type={'advarsel'}
+                    >
+                        <Veilederikon morkBakgrunn={true} />
+                    </Veileder>
+                )}
         </form>
     );
 };

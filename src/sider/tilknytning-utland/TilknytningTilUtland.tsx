@@ -15,12 +15,15 @@ import {
     Svar,
     TilknytningTilUtlandVerdier,
 } from '../../soknad/types';
+import { isEnabled } from '../../toggles/selectors';
+import { IToggleName } from '../../toggles/types';
 import BoddEllerJobbetINorgeSporsmal from './BoddEllerJobbetINorgeSporsmal';
 
 interface IMapStateToProps {
     familieforhold: IFamilieforhold;
-    tilknytningTilUtland: ITilknytningTilUtland;
     harForsoktNesteSteg: boolean;
+    tilknytningTilUtland: ITilknytningTilUtland;
+    visTilknytningTilUtlandAdvarsel: boolean;
 }
 
 interface IMapDispatchToProps {
@@ -35,13 +38,14 @@ interface IMapDispatchToProps {
 type TilknytningTilUtland = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
 const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
-    intl,
     familieforhold,
     harForsoktNesteSteg,
-    tilknytningTilUtland,
+    intl,
     nullstillNesteSteg,
-    settTilknytningTilUtlandVerdiFelt,
     settForklaringsFelt,
+    settTilknytningTilUtlandVerdiFelt,
+    tilknytningTilUtland,
+    visTilknytningTilUtlandAdvarsel,
 }) => {
     const {
         boddEllerJobbetINorgeMinstFemAar,
@@ -54,6 +58,7 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
 
     return (
         <SideContainer
+            className={'tilknytning-til-utland'}
             tittel={intl.formatMessage({ id: 'tilknytningTilUtland.tittel' })}
             ikon={<TimeglassIkon />}
             hjelpetekstNokkel={'tilknytningTilUtland.hjelpetekst'}
@@ -68,6 +73,7 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
                 forklaringFeltVerdi={boddEllerJobbetINorgeMinstFemAarForklaring}
                 forklaringFeltFeil={feltMedFeil.boddEllerJobbetINorgeMinstFemAarForklaring}
                 nullstillNeste={nullstillNesteSteg}
+                visTilknytningTilUtlandAdvarsel={visTilknytningTilUtlandAdvarsel}
             />
             {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA && (
                 <BoddEllerJobbetINorgeSporsmal
@@ -84,6 +90,7 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
                         feltMedFeil.annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring
                     }
                     nullstillNeste={nullstillNesteSteg}
+                    visTilknytningTilUtlandAdvarsel={visTilknytningTilUtlandAdvarsel}
                 />
             )}
         </SideContainer>
@@ -95,6 +102,10 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
         familieforhold: selectFamilieforhold(state),
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         tilknytningTilUtland: selectTilknytningTilUtland(state),
+        visTilknytningTilUtlandAdvarsel: isEnabled(
+            state,
+            IToggleName.vis_advarsel_tilknytningTilUtland
+        ),
     };
 };
 
