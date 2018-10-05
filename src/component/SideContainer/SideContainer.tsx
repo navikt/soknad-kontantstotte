@@ -42,7 +42,6 @@ class SideContainer extends React.Component<Props> {
                 <Sidetittel className={'side-container__soknadtittel'}>
                     <FormattedMessage id={'kontantstotte.tittel'} />
                 </Sidetittel>
-                <div>test</div>
 
                 <div className={'side-container'}>
                     <TilpassetStegindikator aktivtSteg={aktivtSteg} />
