@@ -14,7 +14,7 @@ case "$1" in
         errorCode=$?
         if [ $errorCode -ne 0 ]; then
             docker-compose -p "$2" down
-            docker run -v `pwd`/reports:/upload/files navikt/docker-directory-upload:1.0.0 https://repo.adeo.no/repository/raw/nais/soknad-kontantstotte/
+            docker run -v `pwd`/reports:/upload/files navikt/docker-directory-uploader:1.0.0 https://repo.adeo.no/repository/raw/nais/soknad-kontantstotte/
             echo "Se feilrapport fra Gemini på https://repo.adeo.no/repository/raw/nais/soknad-kontantstotte/gemini/index.html"
             exit $errorCode
         fi
