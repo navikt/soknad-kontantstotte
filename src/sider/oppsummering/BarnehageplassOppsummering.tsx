@@ -112,9 +112,8 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                     />
                 </>
             )}
-            {(barnehageplass.barnBarnehageplassStatus.verdi ===
-                BarnehageplassVerdier.harBarnehageplass ||
-                true) && (
+            {barnehageplass.barnBarnehageplassStatus.verdi ===
+                BarnehageplassVerdier.harBarnehageplass && (
                 <>
                     <SporsmalSvar
                         sporsmal={
