@@ -8,10 +8,6 @@ interface IMobilStegindikatorProps {
 const styles = {
     stegIndikator(antallSteg: number, aktivtSteg: number) {
         return {
-            backgroundColor: '#634689',
-            borderRadius: '10px',
-            height: '6px',
-            marginTop: '-6px',
             width: (100 / antallSteg) * aktivtSteg + '%',
         };
     },
@@ -32,7 +28,10 @@ const MobilStegindikator: React.StatelessComponent<IMobilStegindikatorProps> = (
                 style={styles.tallIndikator(antallSteg, aktivtSteg)}
             >{`${aktivtSteg}/${antallSteg}`}</span>
             <div className={'tilpasset-stegindikator__kompakt__full-bredde'} />
-            <div style={styles.stegIndikator(antallSteg, aktivtSteg)} />
+            <div
+                className={'tilpasset-stegindikator__kompakt__stegindikator'}
+                style={styles.stegIndikator(antallSteg, aktivtSteg)}
+            />
         </div>
     );
 };
