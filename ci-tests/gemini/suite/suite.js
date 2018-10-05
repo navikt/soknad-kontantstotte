@@ -200,13 +200,4 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.click('h1');
             actions.executeJS(disableHover);
         });
-
-    gemini.suite('innsending-feilet', function(suite) {
-        suite
-            .setUrl('/innsending-feilet')
-            .setCaptureElements('body')
-            .capture('', function(actions) {
-                actions.waitForElementToShow('.feilside', 5000);
-            });
-    });
 });

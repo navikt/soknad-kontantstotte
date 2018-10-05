@@ -11,20 +11,21 @@ interface IMapStateToProps {
     status: AppStatus;
 }
 
-const InnsendingFeilet: React.StatelessComponent<IMapStateToProps> = ({ status }) => {
+const GenerellFeilside: React.StatelessComponent<IMapStateToProps> = ({ status }) => {
     if (status === AppStatus.FEILSITUASJON) {
         return (
             <Feilside
                 ikon={<InnsendingFeiletIkon />}
                 tekster={{
-                    feilmelding: 'feilside.innsending.feilmelding',
-                    knapp: 'feilside.innsending.knapp',
-                    tittel: 'feilside.innsending.tittel',
+                    feilmelding: 'feilside.generell.feilmelding',
+                    knapp: 'feilside.generell.knapp',
+                    tittel: 'feilside.generell.tittel',
                 }}
             />
         );
+    } else {
+        return <Redirect to={'/'} />;
     }
-    return <Redirect to={'/'} />;
 };
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
@@ -33,4 +34,4 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     };
 };
 
-export default connect(mapStateToProps)(InnsendingFeilet);
+export default connect(mapStateToProps)(GenerellFeilside);

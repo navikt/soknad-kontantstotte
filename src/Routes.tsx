@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import GenerellFeilside from './sider/feilsider/GenerellFeilside';
 import InnsendingFeilet from './sider/feilsider/InnsendingFeilet';
 import SidenFinnesIkke from './sider/feilsider/SidenFinnesIkke';
 import Kvittering from './sider/kvittering/Kvittering';
@@ -20,6 +21,7 @@ const Routes: React.StatelessComponent<{}> = () => {
                 path="/innsending-feilet"
                 exact={true}
             />
+            <Route component={GenerellFeilside} key={'feilside'} path={'/feilside'} exact={true} />
             <Route component={SidenFinnesIkke} key={'siden-finnes-ikke'} />
         </Switch>
     );
