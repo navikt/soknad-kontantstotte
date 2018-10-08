@@ -117,7 +117,6 @@ gemini.suite('soknad-kontantstotte', suite => {
             });
             actions.click('.knapp.knapp--hoved');
             actions.click('h1');
-            actions.wait(500);
             actions.executeJS(disableHover);
         })
         .capture('familieforhold-utfylt', function(actions, find) {
