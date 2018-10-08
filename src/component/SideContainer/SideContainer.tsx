@@ -1,15 +1,13 @@
 import * as classNames from 'classnames';
-import Stegindikator from 'nav-frontend-stegindikator/lib/stegindikator';
-import { StegindikatorStegProps } from 'nav-frontend-stegindikator/lib/stegindikator-steg';
 import { Sidetittel } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { selectAppSteg } from '../../app/selectors';
 import { IRootState } from '../../rootReducer';
-import { ISteg, stegConfig } from '../../stegConfig';
 import Navigasjon from '../Navigering/Navigasjon';
 import Tilbakeknapp from '../Tilbakeknapp/Tilbakeknapp';
+import TilpassetStegindikator from '../TilpassetStegindikator/TilpassetStegindikator';
 import HjelpetekstContainer from './HjelpetekstContainer';
 
 interface IOwnProps {
@@ -37,15 +35,6 @@ class SideContainer extends React.Component<Props> {
             hjelpetekstNokkel,
         } = this.props;
 
-        const indikatorsteg: StegindikatorStegProps[] = Object.values(stegConfig)
-            .filter((steg: ISteg) => steg.stegIndeks !== 0)
-            .map((steg: ISteg) => {
-                return {
-                    aktiv: aktivtSteg === steg.stegIndeks,
-                    index: steg.stegIndeks,
-                    label: steg.key,
-                };
-            });
         const displayTilbakeKnapp = aktivtSteg !== 1;
 
         return (
@@ -55,13 +44,7 @@ class SideContainer extends React.Component<Props> {
                 </Sidetittel>
 
                 <div className={'side-container'}>
-                    <Stegindikator
-                        steg={indikatorsteg}
-                        autoResponsiv={true}
-                        visLabel={false}
-                        kompakt={false}
-                        aktivtSteg={aktivtSteg - 1} // -1 pga Stegindikator er 0-indeksert
-                    />
+                    <TilpassetStegindikator aktivtSteg={aktivtSteg} />
 
                     {displayTilbakeKnapp && <Tilbakeknapp posisjon={'oppe'} />}
                     {ikon && <div className={'side-container__ikon'}>{ikon}</div>}

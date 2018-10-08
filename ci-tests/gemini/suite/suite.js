@@ -19,14 +19,14 @@ gemini.suite('soknad-kontantstotte', suite => {
         })
         .capture('krav-til-soker-plain', function(actions) {
             actions.click('.knapp.knapp--hoved');
-            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.waitForElementToShow('.tilpasset-stegindikator', 5000);
             actions.click('h1');
             actions.executeJS(disableHover);
         })
         .capture('krav-til-soker-feilet', function(actions) {
             actions.executeJS(enableHover);
             actions.click('.knapp.knapp--hoved');
-            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.waitForElementToShow('.tilpasset-stegindikator', 5000);
             actions.click('h1');
             actions.executeJS(disableHover);
         })
@@ -35,21 +35,21 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.executeJS(function(window) {
                 window.document.querySelectorAll('.inputPanel').forEach(e => e.click());
             });
-            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.waitForElementToShow('.tilpasset-stegindikator', 5000);
             actions.click('h1');
             actions.executeJS(disableHover);
         })
         .capture('mine-barn-plain', function(actions) {
             actions.executeJS(enableHover);
             actions.click('.knapp.knapp--hoved');
-            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.waitForElementToShow('.tilpasset-stegindikator', 5000);
             actions.click('h1');
             actions.executeJS(disableHover);
         })
         .capture('mine-barn-feilet', function(actions) {
             actions.executeJS(enableHover);
             actions.click('.knapp.knapp--hoved');
-            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.waitForElementToShow('.tilpasset-stegindikator', 5000);
             actions.click('h1');
             actions.executeJS(disableHover);
         })
@@ -57,21 +57,21 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.executeJS(enableHover);
             actions.sendKeys(find('.mine-barn__navn-input > input'), 'Mock McMockface');
             actions.sendKeys(find('.mine-barn__fodselsdato-input > input'), '01.01.2018');
-            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.waitForElementToShow('.tilpasset-stegindikator', 5000);
             actions.click('h1');
             actions.executeJS(disableHover);
         })
         .capture('barnehageplass_plain', function(actions) {
             actions.executeJS(enableHover);
             actions.click('.knapp.knapp--hoved');
-            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.waitForElementToShow('.tilpasset-stegindikator', 5000);
             actions.click('h1');
             actions.executeJS(disableHover);
         })
         .capture('barnehageplass_feilet', function(actions) {
             actions.executeJS(enableHover);
             actions.click('.knapp.knapp--hoved');
-            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.waitForElementToShow('.tilpasset-stegindikator', 5000);
             actions.click('h1');
             actions.waitForElementToShow('.skjemaelement__feilmelding', 5000);
             actions.executeJS(disableHover);
@@ -97,14 +97,14 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.sendKeys(find('.barnehageplass__kommune-input input'), 'Oslo');
             actions.sendKeys(find('.barnehageplass__antallTimer-input input'), '\b\b');
             actions.sendKeys(find('.barnehageplass__antallTimer-input input'), '20');
-            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.waitForElementToShow('.tilpasset-stegindikator', 5000);
             actions.click('h1');
             actions.executeJS(disableHover);
         })
         .capture('familieforhold-plain', function(actions) {
             actions.executeJS(enableHover);
             actions.click('.knapp.knapp--hoved');
-            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.waitForElementToShow('.tilpasset-stegindikator', 5000);
             actions.click('h1');
             actions.executeJS(disableHover);
         })
@@ -128,7 +128,7 @@ gemini.suite('soknad-kontantstotte', suite => {
         .capture('tilknytningTilUtland', function(actions) {
             actions.executeJS(enableHover);
             actions.click('.knapp.knapp--hoved');
-            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.waitForElementToShow('.tilpasset-stegindikator', 5000);
             actions.click('h1');
             actions.executeJS(disableHover);
         })
@@ -143,7 +143,7 @@ gemini.suite('soknad-kontantstotte', suite => {
                     .click();
             });
             actions.click('.knapp.knapp--hoved');
-            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.waitForElementToShow('.tilpasset-stegindikator', 5000);
             actions.click('h1');
             actions.executeJS(disableHover);
         })
@@ -158,7 +158,7 @@ gemini.suite('soknad-kontantstotte', suite => {
                     .click();
             });
             actions.click('.knapp.knapp--hoved');
-            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.waitForElementToShow('.tilpasset-stegindikator', 5000);
             actions.click('h1');
             actions.executeJS(disableHover);
         })
@@ -171,7 +171,7 @@ gemini.suite('soknad-kontantstotte', suite => {
                     .click();
             });
             actions.click('.knapp.knapp--hoved');
-            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.waitForElementToShow('.tilpasset-stegindikator', 5000);
             actions.click('h1');
             actions.executeJS(disableHover);
         })
@@ -183,7 +183,7 @@ gemini.suite('soknad-kontantstotte', suite => {
                     .click();
             });
             actions.click('.knapp.knapp--hoved');
-            actions.waitForElementToShow('.stegindikator', 5000);
+            actions.waitForElementToShow('.tilpasset-stegindikator', 5000);
             actions.click('h1');
             actions.executeJS(disableHover);
         })
