@@ -1,24 +1,22 @@
 module.exports = {
     rootUrl: 'http://ci-test-server:8000',
+    gridUrl: 'http://chrome:4444/wd/hub',
     screenshotsDir: './baseline',
 
     browsers: {
         chrome_large: {
-            gridUrl: 'http://chrome:4444/wd/hub',
             desiredCapabilities: {
                 browserName: 'chrome',
             },
             windowSize: '1600x10000',
         },
         chrome_medium: {
-            gridUrl: 'http://chrome:4444/wd/hub',
             desiredCapabilities: {
                 browserName: 'chrome',
             },
             windowSize: '800x10000',
         },
         chrome_small: {
-            gridUrl: 'http://chrome:4444/wd/hub',
             desiredCapabilities: {
                 browserName: 'chrome',
                 chromeOptions: {

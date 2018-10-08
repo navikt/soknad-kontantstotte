@@ -65,6 +65,7 @@ function* startAppSaga(): SagaIterator {
     yield take([TeksterTypeKeys.HENT_FEILET, SokerTypeKeys.HENT_FEILET]);
     yield cancel(startSaga);
     yield put(appEndreStatus(AppStatus.FEILSITUASJON));
+    yield put(push('/feilside'));
 }
 
 function* urlEndretSaga(action: ILocationChangeAction): SagaIterator {

@@ -1,32 +1,36 @@
-import { AlertStripeAdvarselSolid } from 'nav-frontend-alertstriper';
-import { Sidetittel } from 'nav-frontend-typografi';
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { selectAppStatus } from '../../app/selectors';
+import { AppStatus } from '../../app/types';
 import { InnsendingFeiletIkon } from '../../component/Ikoner/InnsendingFeiletIkon';
+import { IRootState } from '../../rootReducer';
+import Feilside from './Feilside';
 
-const InnsendingFeilet = () => {
-    return (
-        <div className={'innsending-feilet'}>
-            <Sidetittel className={'side-container__soknadtittel'}>
-                <FormattedMessage id={'kontantstotte.tittel'} />
-            </Sidetittel>
-            <div className={'innsending-feilet__ikon'}>
-                <InnsendingFeiletIkon />
-            </div>
+interface IMapStateToProps {
+    status: AppStatus;
+}
 
-            <h3 className={'typo-innholdstittel'}>
-                <FormattedMessage id={'feilside.innsending.tittel'} />
-            </h3>
-
-            <AlertStripeAdvarselSolid className={'innsending-feilet__alertstripe'}>
-                <FormattedMessage id={'feilside.innsending.feilmelding'} />
-            </AlertStripeAdvarselSolid>
-
-            <a href={'/'} className={'innsending-feilet__knapp knapp knapp--standard'}>
-                <FormattedMessage id={'feilside.innsending.knapp'} />
-            </a>
-        </div>
-    );
+const InnsendingFeilet: React.StatelessComponent<IMapStateToProps> = ({ status }) => {
+    if (status === AppStatus.FEILSITUASJON) {
+        return (
+            <Feilside
+                ikon={<InnsendingFeiletIkon />}
+                tekster={{
+                    feilmelding: 'feilside.innsending.feilmelding',
+                    knapp: 'feilside.innsending.knapp',
+                    tittel: 'feilside.innsending.tittel',
+                }}
+            />
+        );
+    }
+    return <Redirect to={'/'} />;
 };
 
-export default InnsendingFeilet;
+const mapStateToProps = (state: IRootState): IMapStateToProps => {
+    return {
+        status: selectAppStatus(state),
+    };
+};
+
+export default connect(mapStateToProps)(InnsendingFeilet);
