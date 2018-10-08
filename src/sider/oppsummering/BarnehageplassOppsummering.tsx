@@ -1,12 +1,7 @@
 import { Element } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import {
-    BarnehageplassVerdier,
-    IBarnehageplass,
-    Svar,
-    ValideringsStatus,
-} from '../../soknad/types';
+import { BarnehageplassVerdier, IBarnehageplass, ValideringsStatus } from '../../soknad/types';
 import { JaNeiSvar } from './JaNeiSvar';
 import OppsummeringsAdvarsel from './OppsummeringsAdvarsel';
 import { OppsummeringSteg } from './OppsummeringSteg';
@@ -14,10 +9,12 @@ import { SporsmalSvar } from './SporsmalSvar';
 
 interface IBarnehageplassOppsummeringProps {
     barnehageplass: IBarnehageplass;
+    visOppsummeringAdvarsel: boolean;
 }
 
 const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsummeringProps> = ({
     barnehageplass,
+    visOppsummeringAdvarsel,
 }) => {
     let barnBarnehageplassStatusSvar = 'Ubesvart';
 
@@ -132,11 +129,12 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                         svar={barnehageplass.harBarnehageplassAntallTimer.verdi}
                     />
                     {barnehageplass.harBarnehageplassAntallTimer.valideringsStatus ===
-                        ValideringsStatus.ADVARSEL && (
-                        <OppsummeringsAdvarsel
-                            meldingsNokkel={'advarsel.barnehageplass.timerIBarnehage'}
-                        />
-                    )}
+                        ValideringsStatus.ADVARSEL &&
+                        visOppsummeringAdvarsel && (
+                            <OppsummeringsAdvarsel
+                                meldingsNokkel={'advarsel.barnehageplass.timerIBarnehage'}
+                            />
+                        )}
                     <SporsmalSvar
                         sporsmal={
                             <FormattedMessage
