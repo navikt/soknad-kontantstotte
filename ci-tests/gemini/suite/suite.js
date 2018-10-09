@@ -28,6 +28,7 @@ gemini.suite('soknad-kontantstotte', suite => {
             actions.click('.knapp.knapp--hoved');
             actions.waitForElementToShow('.tilpasset-stegindikator', 5000);
             actions.click('h1');
+            actions.waitForElementToShow('.skjemaelement__feilmelding', 5000);
             actions.executeJS(disableHover);
         })
         .capture('krav-til-soker-utfylt', function(actions) {
@@ -117,6 +118,7 @@ gemini.suite('soknad-kontantstotte', suite => {
             });
             actions.click('.knapp.knapp--hoved');
             actions.click('h1');
+            actions.waitForElementToShow('.skjemaelement__feilmelding', 5000);
             actions.executeJS(disableHover);
         })
         .capture('familieforhold-utfylt', function(actions, find) {
