@@ -21,6 +21,7 @@ import {
     harSvartJaMedFeilmelding,
     harSvartMedFeilmelding,
     harSvartTekstMedFeilmelding,
+    harSvartTekstUnderAntallTegnMedFeilmelding,
     harSvartTilknytningTilUtlandVerdiMedFeilmelding,
 } from './validators';
 
@@ -43,9 +44,15 @@ interface IValideringsConfig {
 const valideringsConfig: IValideringsConfig = {
     arbeidIUtlandet: {
         arbeiderAnnenForelderIUtlandet: [harSvartMedFeilmelding],
-        arbeiderAnnenForelderIUtlandetForklaring: [harSvartTekstMedFeilmelding],
+        arbeiderAnnenForelderIUtlandetForklaring: [
+            harSvartTekstMedFeilmelding,
+            harSvartTekstUnderAntallTegnMedFeilmelding,
+        ],
         arbeiderIUtlandetEllerKontinentalsokkel: [harSvartMedFeilmelding],
-        arbeiderIUtlandetEllerKontinentalsokkelForklaring: [harSvartTekstMedFeilmelding],
+        arbeiderIUtlandetEllerKontinentalsokkelForklaring: [
+            harSvartTekstMedFeilmelding,
+            harSvartTekstUnderAntallTegnMedFeilmelding,
+        ],
     },
     barnehageplass: {
         barnBarnehageplassStatus: [harSvartBarnehageplassVerdiMedFeilmelding],
@@ -103,19 +110,34 @@ const valideringsConfig: IValideringsConfig = {
         annenForelderBoddEllerJobbetINorgeMinstFemAar: [
             harSvartTilknytningTilUtlandVerdiMedFeilmelding,
         ],
-        annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring: [harSvartTekstMedFeilmelding],
+        annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring: [
+            harSvartTekstMedFeilmelding,
+            harSvartTekstUnderAntallTegnMedFeilmelding,
+        ],
         boddEllerJobbetINorgeMinstFemAar: [harSvartTilknytningTilUtlandVerdiMedFeilmelding],
-        boddEllerJobbetINorgeMinstFemAarForklaring: [harSvartTekstMedFeilmelding],
+        boddEllerJobbetINorgeMinstFemAarForklaring: [
+            harSvartTekstMedFeilmelding,
+            harSvartTekstUnderAntallTegnMedFeilmelding,
+        ],
     },
     utenlandskKontantstotte: {
         mottarKontantstotteFraUtlandet: [harSvartMedFeilmelding],
-        mottarKontantstotteFraUtlandetTilleggsinfo: [harSvartTekstMedFeilmelding],
+        mottarKontantstotteFraUtlandetTilleggsinfo: [
+            harSvartTekstMedFeilmelding,
+            harSvartTekstUnderAntallTegnMedFeilmelding,
+        ],
     },
     utenlandskeYtelser: {
         mottarAnnenForelderYtelserFraUtland: [harSvartMedFeilmelding],
-        mottarAnnenForelderYtelserFraUtlandForklaring: [harSvartTekstMedFeilmelding],
+        mottarAnnenForelderYtelserFraUtlandForklaring: [
+            harSvartTekstMedFeilmelding,
+            harSvartTekstUnderAntallTegnMedFeilmelding,
+        ],
         mottarYtelserFraUtland: [harSvartMedFeilmelding],
-        mottarYtelserFraUtlandForklaring: [harSvartTekstMedFeilmelding],
+        mottarYtelserFraUtlandForklaring: [
+            harSvartTekstMedFeilmelding,
+            harSvartTekstUnderAntallTegnMedFeilmelding,
+        ],
     },
 };
 

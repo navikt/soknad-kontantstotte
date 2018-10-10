@@ -12,6 +12,8 @@ import { ISoker } from '../../soker/types';
 import { soknadValiderFelt } from '../../soknad/actions';
 import { selectSoknad } from '../../soknad/selectors';
 import { ISoknadState, Svar, ValideringsStatus } from '../../soknad/types';
+import { isEnabled } from '../../toggles/selectors';
+import { IToggleName } from '../../toggles/types';
 import ArbeidIUtlandetOppsummering from './ArbeidIUtlandetOppsummering';
 import BarnehageplassOppsummering from './BarnehageplassOppsummering';
 import { BarnOppsummering } from './BarnOppsummering';
@@ -21,8 +23,6 @@ import PersonaliaOppsummering from './PersonaliaOppsummering';
 import TilknytningTilUtlandOppsummering from './TilknytningTilUtlandOppsummering';
 import UtenlandskeYtelserOppsummering from './UtenlandskeYtelserOppsummering';
 import UtenlandskKontantstotteOppsummering from './UtenlandskKontantstotteOppsummering';
-import { isEnabled } from '../../toggles/selectors';
-import { IToggleName } from '../../toggles/types';
 
 interface IMapStateToProps {
     soker: ISoker;
