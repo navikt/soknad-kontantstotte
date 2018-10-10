@@ -1,0 +1,15 @@
+{
+  "name": "vrt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "23.6.0",
+    "jest-image-snapshot": "2.5.0"
+  }
+}

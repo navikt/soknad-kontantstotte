@@ -11,6 +11,13 @@ services:
     entrypoint:
       - node
       - /var/server/ci-server.js
+  jest-image-snapshot:
+    build: ./jest-image-snapshot
+    depends_on:
+      - ci-test-server
+    volumes:
+      - ./jest-image-snapshot/tests:/app/tests
+      - ./jest-image-snapshot/baseline:/app/baseline
   gemini:
     image: repo.adeo.no:5443/soknad/soknad-docker-gemini:1.0.0
     depends_on:
