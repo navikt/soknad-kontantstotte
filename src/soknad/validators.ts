@@ -1,3 +1,4 @@
+import { ANTALL_LOVLIGE_TEGN_I_TEKSTFELT } from '../common/utils';
 import {
     BarnehageplassVerdier,
     IFelt,
@@ -64,6 +65,12 @@ const harSvartTekst = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
     return felt.verdi.length > 0 ? ok(felt) : feil(felt, feilmeldingsNokkel);
 };
 
+const harSvartTekstUnderAntallTegn = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
+    return felt.verdi.length < ANTALL_LOVLIGE_TEGN_I_TEKSTFELT
+        ? ok(felt)
+        : feil(felt, feilmeldingsNokkel);
+};
+
 const harFyltInnNavn = (felt: IFelt): IFelt => {
     return felt.verdi.replace(' ', '').length > 0
         ? ok(felt)
@@ -112,6 +119,9 @@ const harSvartJaMedFeilmelding = (felt: IFelt): IFelt =>
 const harSvartTekstMedFeilmelding = (felt: IFelt): IFelt =>
     harSvartTekst(felt, 'feilmelding.generell.feilmelding');
 
+const harSvartTekstUnderAntallTegnMedFeilmelding = (felt: IFelt): IFelt =>
+    harSvartTekstUnderAntallTegn(felt, 'feilmelding.generell.forMangeTegn');
+
 const svarUtenValidering = (felt: IFelt): IFelt => ok(felt);
 
 export {
@@ -127,6 +137,7 @@ export {
     harSvartJaMedFeilmelding,
     harSvartMedFeilmelding,
     harSvartTekstMedFeilmelding,
+    harSvartTekstUnderAntallTegnMedFeilmelding,
     harSvartTilknytningTilUtlandVerdiMedFeilmelding,
     svarUtenValidering,
 };
