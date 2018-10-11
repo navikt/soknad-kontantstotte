@@ -21,11 +21,15 @@ describe('soknad-kontantstotte', () => {
             await page.goto('http://ci-test-server:8000');
         });
 
-        test('veiledning', async () => {
-            await page.waitFor('h1');
-            await page.waitFor(30000);
-            await takeSnapshot(`veiledning-${name}`, page);
-        });
+        test(
+            'veiledning',
+            async () => {
+                await page.waitFor('h1');
+                await page.waitFor(30000);
+                await takeSnapshot(`veiledning-${name}`, page);
+            },
+            60000
+        );
 
         test('krav-til-soker', async () => {
             await page.click('.knapp.knapp--hoved');
