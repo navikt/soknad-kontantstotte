@@ -6,12 +6,7 @@ case "$1" in
     "test")
         (
             set -e
-            docker-compose -p "$2" build jest-image-snapshot
-            docker-compose -p "$2" run jest-image-snapshot
-            #docker-compose -p "$2" run --rm testcafe
-            #docker-compose -p "$2" up -d chrome
-            #docker-compose -p "$2" run --rm gemini test
-            # docker-compose run --rm pa11y
+            docker-compose -p "$2" run --rm jest-image-snapshot test
             docker-compose -p "$2" down
         )
         errorCode=$?
@@ -23,7 +18,7 @@ case "$1" in
         fi
         ;;
     "capture")
-        docker-compose run --rm gemini capture
+        docker-compose run --rm jest-image-snapshot update
         docker-compose down
         ;;
 esac
