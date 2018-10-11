@@ -23,6 +23,7 @@ describe('soknad-kontantstotte', () => {
 
         test('veiledning', async () => {
             await page.waitFor('h1');
+            await page.waitFor(30000);
             await takeSnapshot(`veiledning-${name}`, page);
         });
 
