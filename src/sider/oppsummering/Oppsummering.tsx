@@ -12,6 +12,8 @@ import { ISoker } from '../../soker/types';
 import { soknadValiderFelt } from '../../soknad/actions';
 import { selectSoknad } from '../../soknad/selectors';
 import { ISoknadState, Svar, ValideringsStatus } from '../../soknad/types';
+import { isEnabled } from '../../toggles/selectors';
+import { IToggleName } from '../../toggles/types';
 import ArbeidIUtlandetOppsummering from './ArbeidIUtlandetOppsummering';
 import BarnehageplassOppsummering from './BarnehageplassOppsummering';
 import { BarnOppsummering } from './BarnOppsummering';
@@ -26,6 +28,7 @@ interface IMapStateToProps {
     soker: ISoker;
     soknad: ISoknadState;
     harForsoktNesteSteg: boolean;
+    visOppsummeringAdvarsel: boolean;
 }
 
 interface IMapDispatchToProps {
@@ -40,6 +43,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
     settBekreftelse,
     soker,
     soknad,
+    visOppsummeringAdvarsel,
 }) => {
     return (
         <SideContainer
@@ -61,7 +65,10 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
                 <PersonaliaOppsummering soker={{ fodselsnummer: soker.innloggetSom }} />
                 <KravTilSokerOppsummering />
                 <BarnOppsummering barn={soknad.mineBarn} />
-                <BarnehageplassOppsummering barnehageplass={soknad.barnehageplass} />
+                <BarnehageplassOppsummering
+                    barnehageplass={soknad.barnehageplass}
+                    visOppsummeringAdvarsel={visOppsummeringAdvarsel}
+                />
                 <FamilieforholdOppsummering familieforhold={soknad.familieforhold} />
                 <TilknytningTilUtlandOppsummering
                     familieforhold={soknad.familieforhold}
@@ -103,6 +110,7 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         soker: selectSoker(state),
         soknad: selectSoknad(state),
+        visOppsummeringAdvarsel: isEnabled(state, IToggleName.vis_oppsummering_advarsel),
     };
 };
 

@@ -1,17 +1,20 @@
 import { Element } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { BarnehageplassVerdier, IBarnehageplass, Svar } from '../../soknad/types';
+import { BarnehageplassVerdier, IBarnehageplass, ValideringsStatus } from '../../soknad/types';
 import { JaNeiSvar } from './JaNeiSvar';
+import OppsummeringsAdvarsel from './OppsummeringsAdvarsel';
 import { OppsummeringSteg } from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
 interface IBarnehageplassOppsummeringProps {
     barnehageplass: IBarnehageplass;
+    visOppsummeringAdvarsel: boolean;
 }
 
 const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsummeringProps> = ({
     barnehageplass,
+    visOppsummeringAdvarsel,
 }) => {
     let barnBarnehageplassStatusSvar = 'Ubesvart';
 
@@ -61,18 +64,18 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                     <SporsmalSvar
                         sporsmal={
                             <FormattedMessage
-                                id={'barnehageplass.harSluttetIBarnehage.kommune.sporsmal'}
-                            />
-                        }
-                        svar={barnehageplass.harSluttetIBarnehageKommune.verdi}
-                    />
-                    <SporsmalSvar
-                        sporsmal={
-                            <FormattedMessage
                                 id={'barnehageplass.harSluttetIBarnehage.antallTimer.sporsmal'}
                             />
                         }
                         svar={barnehageplass.harSluttetIBarnehageAntallTimer.verdi}
+                    />
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.harSluttetIBarnehage.kommune.sporsmal'}
+                            />
+                        }
+                        svar={barnehageplass.harSluttetIBarnehageKommune.verdi}
                     />
                 </>
             )}
@@ -91,18 +94,18 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                     <SporsmalSvar
                         sporsmal={
                             <FormattedMessage
-                                id={'barnehageplass.skalSlutteIBarnehage.kommune.sporsmal'}
-                            />
-                        }
-                        svar={barnehageplass.skalSlutteIBarnehageKommune.verdi}
-                    />
-                    <SporsmalSvar
-                        sporsmal={
-                            <FormattedMessage
                                 id={'barnehageplass.skalSlutteIBarnehage.antallTimer.sporsmal'}
                             />
                         }
                         svar={barnehageplass.skalSlutteIBarnehageAntallTimer.verdi}
+                    />
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.skalSlutteIBarnehage.kommune.sporsmal'}
+                            />
+                        }
+                        svar={barnehageplass.skalSlutteIBarnehageKommune.verdi}
                     />
                 </>
             )}
@@ -120,18 +123,25 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                     <SporsmalSvar
                         sporsmal={
                             <FormattedMessage
-                                id={'barnehageplass.harBarnehageplass.kommune.sporsmal'}
-                            />
-                        }
-                        svar={barnehageplass.harBarnehageplassKommune.verdi}
-                    />
-                    <SporsmalSvar
-                        sporsmal={
-                            <FormattedMessage
                                 id={'barnehageplass.harBarnehageplass.antallTimer.sporsmal'}
                             />
                         }
                         svar={barnehageplass.harBarnehageplassAntallTimer.verdi}
+                    />
+                    {barnehageplass.harBarnehageplassAntallTimer.valideringsStatus ===
+                        ValideringsStatus.ADVARSEL &&
+                        visOppsummeringAdvarsel && (
+                            <OppsummeringsAdvarsel
+                                meldingsNokkel={'advarsel.barnehageplass.timerIBarnehage'}
+                            />
+                        )}
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.harBarnehageplass.kommune.sporsmal'}
+                            />
+                        }
+                        svar={barnehageplass.harBarnehageplassKommune.verdi}
                     />
                 </>
             )}
@@ -150,18 +160,18 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                     <SporsmalSvar
                         sporsmal={
                             <FormattedMessage
-                                id={'barnehageplass.skalBegynneIBarnehage.kommune.sporsmal'}
-                            />
-                        }
-                        svar={barnehageplass.skalBegynneIBarnehageKommune.verdi}
-                    />
-                    <SporsmalSvar
-                        sporsmal={
-                            <FormattedMessage
                                 id={'barnehageplass.skalBegynneIBarnehage.antallTimer.sporsmal'}
                             />
                         }
                         svar={barnehageplass.skalBegynneIBarnehageAntallTimer.verdi}
+                    />
+                    <SporsmalSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.skalBegynneIBarnehage.kommune.sporsmal'}
+                            />
+                        }
+                        svar={barnehageplass.skalBegynneIBarnehageKommune.verdi}
                     />
                 </>
             )}

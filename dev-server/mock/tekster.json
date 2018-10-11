@@ -49,6 +49,7 @@
     "feilmelding.generell.dato": "Datoen har feil format. Gyldig format: dd.mm.yyyy.",
     "feilmelding.generell.feilmelding": "Du må svare på spørsmålet.",
     "feilmelding.generell.feilmeldingCheckbox": "For å kunne gå videre må du oppfylle alle kriteriene.",
+    "feilmelding.generell.forMangeTegn": "Du har fylt inn for mange tegn",
     "feilmelding.generell.fodselsnummer": "Fødselsnummeret har feil format. Gyldig format: 11 siffer.",
     "feilmelding.generell.navn": "Du må fylle inn navn",
     "feilmelding.generell.tall": "Du må fylle inn et tall",
