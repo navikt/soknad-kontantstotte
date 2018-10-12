@@ -143,11 +143,11 @@ describe('soknad-kontantstotte', () => {
             await page.click('[name="mottarKontantstotteFraUtlandet"][value="NEI"]');
             await page.click('.knapp.knapp--hoved');
             await page.waitFor('.oppsummering');
-            await page.click('.oppsummering__bekreftelse');
             await takeSnapshot(`oppsummering-${name}`, page);
         });
 
         test('kvittering', async () => {
+            await page.click('.oppsummering__bekreftelse');
             await page.click('.knapp.knapp--hoved');
             await page.waitFor('.kvittering__tittel');
             await takeSnapshot(`kvittering-${name}`, page);
