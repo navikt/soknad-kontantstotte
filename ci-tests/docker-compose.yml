@@ -12,21 +12,13 @@ services:
       - node
       - /var/server/ci-server.js
   jest-image-snapshot:
-    image: repo.adeo.no:5443/soknad/soknad-docker-jest-image-snapshot:0.0.2
+    image: navikt/docker-jest-image-snapshot:1.0.0
     depends_on:
       - ci-test-server
     volumes:
       - ./jest-image-snapshot/tests:/app/tests
       - ./jest-image-snapshot/baseline:/app/baseline
       - ./reports:/app/reports
-  gemini:
-    image: repo.adeo.no:5443/soknad/soknad-docker-gemini:1.0.0
-    depends_on:
-      - ci-test-server
-      - chrome
-    volumes:
-      - ./gemini:/var/gemini/
-      - ./reports/:/reports/
   pa11y:
     image: repo.adeo.no:5443/soknad/soknad-docker-pa11y:1.0.0
     depends_on:
@@ -36,10 +28,6 @@ services:
       - ./reports/:/reports/
     cap_add:
       - SYS_ADMIN
-  chrome:
-    image: selenium/standalone-chrome:3.14.0
-    ports:
-      - 4444
   testcafe:
     image: testcafe/testcafe
     command: ["firefox", "/tests/*.ts"]
