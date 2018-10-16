@@ -13,6 +13,7 @@ interface ISendInn extends Action {
 }
 
 interface ISendInnOk extends Action {
+    innsendtDato: string;
     type: InnsendingTypeKeys.SENDINN_OK;
 }
 
@@ -26,8 +27,9 @@ function sendInn(): ISendInn {
     };
 }
 
-function sendInnOk(): ISendInnOk {
+function sendInnOk(dato: string): ISendInnOk {
     return {
+        innsendtDato: dato,
         type: InnsendingTypeKeys.SENDINN_OK,
     };
 }
