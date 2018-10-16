@@ -22,7 +22,10 @@ const formaterDato = (dato: string) => {
     const aar = datoObjekt.getFullYear();
     const timer =
         datoObjekt.getHours() < 10 ? '0' + datoObjekt.getHours().toString() : datoObjekt.getHours();
-    const minutter = datoObjekt.getMinutes();
+    const minutter =
+        datoObjekt.getMinutes() < 10
+            ? '0' + datoObjekt.getMinutes().toString()
+            : datoObjekt.getMinutes();
 
     return `${dag}. ${maned} ${aar} kl. ${timer}:${minutter}`;
 };
