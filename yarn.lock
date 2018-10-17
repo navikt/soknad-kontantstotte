@@ -40,6 +40,20 @@
   resolved "https://repo.adeo.no/repository/npm-public/@types/lodash/-/lodash-4.14.112.tgz#4a8d8e5716b97a1ac01fe1931ad1e4cba719de5a"
   integrity sha512-jDD7sendv3V7iwyRXSlECOR8HCtMN2faVA9ngLdHHihSVIwY7nbfsKl2kA6fimUDU1i5l/zgpG3aevwWnN3zCQ==
 
+"@types/moment-timezone@0.5.9":
+  version "0.5.9"
+  resolved "https://repo.adeo.no/repository/npm-public/@types/moment-timezone/-/moment-timezone-0.5.9.tgz#1a34ef6ba2e4578b9ca399ed5eec57525ad1d4a7"
+  integrity sha512-tBf1QR8xAayQfI1xD+SMSNDMxi+aCYKEhjgVXTZt3sgxS2XusNX3jM6jJbFoY/ar1CK/PaYJoPkWs/mwcwgOqw==
+  dependencies:
+    moment ">=2.14.0"
+
+"@types/moment@2.13.0":
+  version "2.13.0"
+  resolved "https://repo.adeo.no/repository/npm-public/@types/moment/-/moment-2.13.0.tgz#604ebd189bc3bc34a1548689404e61a2a4aac896"
+  integrity sha1-YE69GJvDvDShVIaJQE5hoqSqyJY=
+  dependencies:
+    moment "*"
+
 "@types/node@*":
   version "10.5.2"
   resolved "https://repo.adeo.no/repository/npm-public/@types/node/-/node-10.5.2.tgz#f19f05314d5421fe37e74153254201a7bf00a707"
@@ -5310,7 +5324,14 @@ moment-duration-format@^2.2.2:
   resolved "https://repo.adeo.no/repository/npm-public/moment-duration-format/-/moment-duration-format-2.2.2.tgz#b957612de26016c9ad9eb6087c054573e5127779"
   integrity sha1-uVdhLeJgFsmtnrYIfAVFc+USd3k=
 
-moment@^2.10.3, moment@^2.14.1, moment@^2.21.0:
+moment-timezone@0.5.21:
+  version "0.5.21"
+  resolved "https://repo.adeo.no/repository/npm-public/moment-timezone/-/moment-timezone-0.5.21.tgz#3cba247d84492174dbf71de2a9848fa13207b845"
+  integrity sha512-j96bAh4otsgj3lKydm3K7kdtA3iKf2m6MY2iSYCzCm5a1zmHo1g+aK3068dDEeocLZQIS9kU8bsdQHLqEvgW0A==
+  dependencies:
+    moment ">= 2.9.0"
+
+moment@*, moment@2.22.2, "moment@>= 2.9.0", moment@>=2.14.0, moment@^2.10.3, moment@^2.14.1, moment@^2.21.0:
   version "2.22.2"
   resolved "https://repo.adeo.no/repository/npm-public/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
   integrity sha1-PCV/mDn8DpP/UxSWMiOeuQeD/2Y=
