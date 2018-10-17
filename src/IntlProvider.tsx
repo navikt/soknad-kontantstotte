@@ -1,3 +1,4 @@
+import * as moment from 'moment-timezone';
 import * as React from 'react';
 import { addLocaleData, IntlProvider as Provider } from 'react-intl';
 import * as nb from 'react-intl/locale-data/nb';
@@ -22,6 +23,9 @@ interface IMapStateToProps {
 type Props = IOwnProps & IMapStateToProps;
 
 const IntlProvider: React.StatelessComponent<Props> = ({ children, tekster, valgtSprak }) => {
+    moment.locale(valgtSprak);
+    moment.tz(moment.tz.guess());
+
     return (
         <Provider
             key={Object.keys(tekster).length}
