@@ -15,7 +15,7 @@ function sendInnSoknad(soknad: object) {
             withCredentials: true,
         })
         .then(response => {
-            return moment(response.data).format('LLL');
+            return moment(response.data.innsendtDato).format('LLL');
         });
 }
 

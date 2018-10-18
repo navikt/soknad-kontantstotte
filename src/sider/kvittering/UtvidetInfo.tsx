@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import SuksessIkon from '../../component/Ikoner/Suksessikon';
 import Environment from '../../Environment';
 import { IRootState } from '../../rootReducer';
+import { isEnabled } from '../../toggles/selectors';
+import { IToggleName } from '../../toggles/types';
 
 interface IUtvidedInfoProps {
     intl: InjectedIntl;
@@ -13,11 +15,12 @@ interface IUtvidedInfoProps {
 
 interface IMapStateToProps {
     innsendtDato: string;
+    visInnsendtDato: boolean;
 }
 
 type Props = IMapStateToProps & IUtvidedInfoProps;
 
-const UtvidetInfo: React.StatelessComponent<Props> = ({ intl, innsendtDato }) => {
+const UtvidetInfo: React.StatelessComponent<Props> = ({ intl, innsendtDato, visInnsendtDato }) => {
     return (
         <PanelBase className="kvittering__panel" border={true}>
             <table className="kvittering__utvidettabell" cellSpacing="0">
@@ -36,7 +39,8 @@ const UtvidetInfo: React.StatelessComponent<Props> = ({ intl, innsendtDato }) =>
                                 {intl.formatMessage({
                                     id: 'kvittering.soknadSendt',
                                 })}
-                                {' ' + innsendtDato + '.'}
+
+                                {visInnsendtDato && ' ' + innsendtDato + '.'}
                             </span>
                         </td>
                     </tr>
@@ -74,6 +78,7 @@ const UtvidetInfo: React.StatelessComponent<Props> = ({ intl, innsendtDato }) =>
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         innsendtDato: state.innsending.innsendtDato,
+        visInnsendtDato: isEnabled(state, IToggleName.vis_innsendt_dato_kvittering),
     };
 };
 
