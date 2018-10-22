@@ -60,7 +60,12 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
                         id={'oppsummering.tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar'}
                     />
                 }
-                svar={<FormattedMessage id={boddEllerJobbetINorgeMinstFemAarSvar} />}
+                svar={
+                    <FormattedMessage
+                        id={boddEllerJobbetINorgeMinstFemAarSvar}
+                        values={{ person: 'jeg' }}
+                    />
+                }
             />
             {skalViseForklaringsFelt(tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar
                 .verdi as TilknytningTilUtlandVerdier) && (
@@ -82,7 +87,10 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
                         />
                     }
                     svar={
-                        <FormattedMessage id={annenForelderBoddEllerJobbetINorgeMinstFemAarSvar} />
+                        <FormattedMessage
+                            id={annenForelderBoddEllerJobbetINorgeMinstFemAarSvar}
+                            values={{ person: 'den andre forelderen' }}
+                        />
                     }
                 />
             )}

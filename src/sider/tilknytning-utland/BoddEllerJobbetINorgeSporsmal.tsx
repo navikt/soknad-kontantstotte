@@ -37,6 +37,7 @@ const BoddEllerJobbetINorgeSporsmal: React.StatelessComponent<
     settTilknytningTilUtlandVerdiFelt,
     visTilknytningTilUtlandAdvarsel,
 }) => {
+    const person = feltNavn.includes('annenForelder') ? 'den andre forelderen' : 'jeg';
     return (
         <form>
             <RadioPanelGruppe
@@ -63,13 +64,19 @@ const BoddEllerJobbetINorgeSporsmal: React.StatelessComponent<
                         value: TilknytningTilUtlandVerdier.jaIEOS,
                     },
                     {
-                        label: intl.formatMessage({
-                            id: 'tilknytningTilUtland.svar.jaLeggerSammenPerioderEOS',
-                        }),
+                        label: intl.formatMessage(
+                            {
+                                id: 'tilknytningTilUtland.svar.jaLeggerSammenPerioderEOS',
+                            },
+                            { person }
+                        ),
                         value: TilknytningTilUtlandVerdier.jaLeggerSammenPerioderEOS,
                     },
                     {
-                        label: intl.formatMessage({ id: 'tilknytningTilUtland.svar.nei' }),
+                        label: intl.formatMessage(
+                            { id: 'tilknytningTilUtland.svar.nei' },
+                            { person }
+                        ),
                         value: TilknytningTilUtlandVerdier.nei,
                     },
                 ]}
