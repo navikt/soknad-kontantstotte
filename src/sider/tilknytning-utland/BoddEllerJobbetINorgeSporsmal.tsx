@@ -15,10 +15,10 @@ interface IBoddEllerJobbetINorgeSporsmalProps {
     ) => void;
     settForklaringsFelt: (feltnavn: Feltnavn, verdi: string) => void;
     feltFeil: IFeil | undefined;
-    feltNavn: string;
     feltVerdi: TilknytningTilUtlandVerdier;
     forklaringFeltFeil: IFeil | undefined;
     forklaringFeltVerdi: IFelt;
+    gjelderAnnenForelder: boolean;
     intl: InjectedIntl;
     visTilknytningTilUtlandAdvarsel: boolean;
 }
@@ -27,21 +27,26 @@ const BoddEllerJobbetINorgeSporsmal: React.StatelessComponent<
     IBoddEllerJobbetINorgeSporsmalProps
 > = ({
     feltFeil,
-    feltNavn,
     feltVerdi,
     forklaringFeltFeil,
     forklaringFeltVerdi,
+    gjelderAnnenForelder,
     intl,
     nullstillNeste,
     settForklaringsFelt,
     settTilknytningTilUtlandVerdiFelt,
     visTilknytningTilUtlandAdvarsel,
 }) => {
+    const feltNavn = gjelderAnnenForelder
+        ? 'annenForelderBoddEllerJobbetINorgeMinstFemAar'
+        : 'boddEllerJobbetINorgeMinstFemAar';
     return (
         <form>
             <RadioPanelGruppe
                 legend={intl.formatMessage({
-                    id: 'tilknytningTilUtland.' + feltNavn + '.sporsmal',
+                    id: gjelderAnnenForelder
+                        ? 'tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.sporsmal'
+                        : 'tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.sporsmal',
                 })}
                 name={feltNavn}
                 className={'soknad__inputPanelGruppe'}
@@ -64,7 +69,7 @@ const BoddEllerJobbetINorgeSporsmal: React.StatelessComponent<
                     },
                     {
                         label: intl.formatMessage({
-                            id: feltNavn.includes('annenForelder')
+                            id: gjelderAnnenForelder
                                 ? 'tilknytningTilUtland.svar.annenForelder.jaLeggerSammenPerioderEOS'
                                 : 'tilknytningTilUtland.svar.soker.jaLeggerSammenPerioderEOS',
                         }),
@@ -72,7 +77,7 @@ const BoddEllerJobbetINorgeSporsmal: React.StatelessComponent<
                     },
                     {
                         label: intl.formatMessage({
-                            id: feltNavn.includes('annenForelder')
+                            id: gjelderAnnenForelder
                                 ? 'tilknytningTilUtland.svar.annenForelder.nei'
                                 : 'tilknytningTilUtland.svar.soker.nei',
                         }),
@@ -104,9 +109,9 @@ const BoddEllerJobbetINorgeSporsmal: React.StatelessComponent<
                         tekst={
                             <FormattedMessage
                                 id={
-                                    feltNavn === 'boddEllerJobbetINorgeMinstFemAar'
-                                        ? 'tilknytningTilUtland.advarsel.nei.soker'
-                                        : 'tilknytningTilUtland.advarsel.nei.annenForelder'
+                                    gjelderAnnenForelder
+                                        ? 'tilknytningTilUtland.advarsel.nei.annenForelder'
+                                        : 'tilknytningTilUtland.advarsel.nei.soker'
                                 }
                             />
                         }
