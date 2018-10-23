@@ -21,17 +21,17 @@ const hentTekstNokkelForTilknytningTilUtlandSvar: (
 ) => string = (svar, erAnnenForelder) => {
     switch (svar) {
         case TilknytningTilUtlandVerdier.jaINorge:
-            return 'oppsummering.tilknytningTilUtland.svar.jaINorge';
+            return 'tilknytningTilUtland.svar.jaINorge';
         case TilknytningTilUtlandVerdier.jaIEOS:
-            return 'oppsummering.tilknytningTilUtland.svar.jaIEOS';
+            return 'tilknytningTilUtland.svar.jaIEOS';
         case TilknytningTilUtlandVerdier.jaLeggerSammenPerioderEOS:
             return erAnnenForelder
-                ? 'oppsummering.tilknytningTilUtland.svar.annenForelder.jaLeggerSammenPerioderEOS'
-                : 'oppsummering.tilknytningTilUtland.svar.soker.jaLeggerSammenPerioderEOS';
+                ? 'tilknytningTilUtland.svar.annenForelder.jaLeggerSammenPerioderEOS'
+                : 'tilknytningTilUtland.svar.soker.jaLeggerSammenPerioderEOS';
         case TilknytningTilUtlandVerdier.nei:
             return erAnnenForelder
-                ? 'oppsummering.tilknytningTilUtland.svar.annenForelder.nei'
-                : 'oppsummering.tilknytningTilUtland.svar.soker.nei';
+                ? 'tilknytningTilUtland.svar.annenForelder.nei'
+                : 'tilknytningTilUtland.svar.soker.nei';
     }
     return 'Ubesvart';
 };
@@ -64,7 +64,7 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
             <SporsmalSvar
                 sporsmal={
                     <FormattedMessage
-                        id={'oppsummering.tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar'}
+                        id={'tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.sporsmal'}
                     />
                 }
                 svar={<FormattedMessage id={boddEllerJobbetINorgeMinstFemAarSvar} />}
@@ -73,7 +73,7 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
                 .verdi as TilknytningTilUtlandVerdier) && (
                 <SporsmalSvar
                     sporsmal={
-                        <FormattedMessage id={'oppsummering.tilknytningTilUtland.forklaring'} />
+                        <FormattedMessage id={'tilknytningTilUtland.forklaring.hjelpetekst'} />
                     }
                     svar={tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAarForklaring.verdi}
                 />
@@ -84,7 +84,7 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
                     sporsmal={
                         <FormattedMessage
                             id={
-                                'oppsummering.tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar'
+                                'tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.sporsmal'
                             }
                         />
                     }
@@ -100,7 +100,7 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
                     .verdi as TilknytningTilUtlandVerdier) && (
                     <SporsmalSvar
                         sporsmal={
-                            <FormattedMessage id={'oppsummering.tilknytningTilUtland.forklaring'} />
+                            <FormattedMessage id={'tilknytningTilUtland.forklaring.hjelpetekst'} />
                         }
                         svar={
                             tilknytningTilUtland
