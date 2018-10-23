@@ -16,17 +16,22 @@ interface ITilknytningTilUtlandOppsummeringProps {
 }
 
 const hentTekstNokkelForTilknytningTilUtlandSvar: (
-    svar: TilknytningTilUtlandVerdier
-) => string = svar => {
+    svar: TilknytningTilUtlandVerdier,
+    erAnnenForelder: boolean
+) => string = (svar, erAnnenForelder) => {
     switch (svar) {
         case TilknytningTilUtlandVerdier.jaINorge:
             return 'oppsummering.tilknytningTilUtland.svar.jaINorge';
         case TilknytningTilUtlandVerdier.jaIEOS:
             return 'oppsummering.tilknytningTilUtland.svar.jaIEOS';
         case TilknytningTilUtlandVerdier.jaLeggerSammenPerioderEOS:
-            return 'oppsummering.tilknytningTilUtland.svar.jaLeggerSammenPerioderEOS';
+            return erAnnenForelder
+                ? 'oppsummering.tilknytningTilUtland.svar.annenForelder.jaLeggerSammenPerioderEOS'
+                : 'oppsummering.tilknytningTilUtland.svar.soker.jaLeggerSammenPerioderEOS';
         case TilknytningTilUtlandVerdier.nei:
-            return 'oppsummering.tilknytningTilUtland.svar.nei';
+            return erAnnenForelder
+                ? 'oppsummering.tilknytningTilUtland.svar.annenForelder.nei'
+                : 'oppsummering.tilknytningTilUtland.svar.soker.nei';
     }
     return 'Ubesvart';
 };
@@ -42,11 +47,13 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
     ITilknytningTilUtlandOppsummeringProps
 > = ({ familieforhold, tilknytningTilUtland }) => {
     const boddEllerJobbetINorgeMinstFemAarSvar = hentTekstNokkelForTilknytningTilUtlandSvar(
-        tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.verdi as TilknytningTilUtlandVerdier
+        tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.verdi as TilknytningTilUtlandVerdier,
+        false
     );
     const annenForelderBoddEllerJobbetINorgeMinstFemAarSvar = hentTekstNokkelForTilknytningTilUtlandSvar(
         tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar
-            .verdi as TilknytningTilUtlandVerdier
+            .verdi as TilknytningTilUtlandVerdier,
+        true
     );
 
     return (
@@ -60,12 +67,7 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
                         id={'oppsummering.tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar'}
                     />
                 }
-                svar={
-                    <FormattedMessage
-                        id={boddEllerJobbetINorgeMinstFemAarSvar}
-                        values={{ person: 'jeg' }}
-                    />
-                }
+                svar={<FormattedMessage id={boddEllerJobbetINorgeMinstFemAarSvar} />}
             />
             {skalViseForklaringsFelt(tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar
                 .verdi as TilknytningTilUtlandVerdier) && (
@@ -87,10 +89,7 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
                         />
                     }
                     svar={
-                        <FormattedMessage
-                            id={annenForelderBoddEllerJobbetINorgeMinstFemAarSvar}
-                            values={{ person: 'den andre forelderen' }}
-                        />
+                        <FormattedMessage id={annenForelderBoddEllerJobbetINorgeMinstFemAarSvar} />
                     }
                 />
             )}
