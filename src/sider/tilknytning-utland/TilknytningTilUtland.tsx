@@ -68,10 +68,10 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
                 settForklaringsFelt={settForklaringsFelt}
                 intl={intl}
                 feltFeil={feltMedFeil.boddEllerJobbetINorgeMinstFemAar}
-                feltNavn={'boddEllerJobbetINorgeMinstFemAar'}
                 feltVerdi={boddEllerJobbetINorgeMinstFemAar.verdi as TilknytningTilUtlandVerdier}
                 forklaringFeltVerdi={boddEllerJobbetINorgeMinstFemAarForklaring}
                 forklaringFeltFeil={feltMedFeil.boddEllerJobbetINorgeMinstFemAarForklaring}
+                gjelderAnnenForelder={false}
                 nullstillNeste={nullstillNesteSteg}
                 visTilknytningTilUtlandAdvarsel={visTilknytningTilUtlandAdvarsel}
             />
@@ -81,7 +81,6 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
                     settForklaringsFelt={settForklaringsFelt}
                     intl={intl}
                     feltFeil={feltMedFeil.annenForelderBoddEllerJobbetINorgeMinstFemAar}
-                    feltNavn={'annenForelderBoddEllerJobbetINorgeMinstFemAar'}
                     feltVerdi={
                         annenForelderBoddEllerJobbetINorgeMinstFemAar.verdi as TilknytningTilUtlandVerdier
                     }
@@ -89,6 +88,7 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
                     forklaringFeltFeil={
                         feltMedFeil.annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring
                     }
+                    gjelderAnnenForelder={true}
                     nullstillNeste={nullstillNesteSteg}
                     visTilknytningTilUtlandAdvarsel={visTilknytningTilUtlandAdvarsel}
                 />
