@@ -6,13 +6,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = merge.strategy({
     'entry.soknad-kontantstotte': 'prepend',
-    'module.rules': 'append'
+    'module.rules': 'append',
 })(common, {
     mode: 'production',
     entry: {
-        'soknad-kontantstotte': [
-            'babel-polyfill'
-        ]},
+        'soknad-kontantstotte': ['babel-polyfill', 'url-search-params-polyfill'],
+    },
     devtool: 'source-map',
     module: {
         rules: [
@@ -23,8 +22,8 @@ const config = merge.strategy({
                     {
                         loader: 'css-loader',
                         options: {
-                            importLoaders: 2
-                        }
+                            importLoaders: 2,
+                        },
                     },
                     { loader: 'postcss-loader' },
                     {
@@ -32,28 +31,28 @@ const config = merge.strategy({
                         options: {
                             globalVars: {
                                 coreModulePath: '"~"',
-                                nodeModulesPath: '"~"'
-                            }
-                        }
-                    }
-                ]
-            }
-        ]
+                                nodeModulesPath: '"~"',
+                            },
+                        },
+                    },
+                ],
+            },
+        ],
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production')
+            'process.env.NODE_ENV': JSON.stringify('production'),
         }),
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
         new UglifyJSPlugin({
-            sourceMap: true
+            sourceMap: true,
         }),
         new MiniCssExtractPlugin({
             filename: 'soknad-kontantstotte.css',
             allChunks: true,
-        })
-    ]
+        }),
+    ],
 });
 
 module.exports = config;
