@@ -16,17 +16,22 @@ interface ITilknytningTilUtlandOppsummeringProps {
 }
 
 const hentTekstNokkelForTilknytningTilUtlandSvar: (
-    svar: TilknytningTilUtlandVerdier
-) => string = svar => {
+    svar: TilknytningTilUtlandVerdier,
+    erAnnenForelder: boolean
+) => string = (svar, erAnnenForelder) => {
     switch (svar) {
         case TilknytningTilUtlandVerdier.jaINorge:
-            return 'oppsummering.tilknytningTilUtland.svar.jaINorge';
+            return 'tilknytningTilUtland.svar.jaINorge';
         case TilknytningTilUtlandVerdier.jaIEOS:
-            return 'oppsummering.tilknytningTilUtland.svar.jaIEOS';
+            return 'tilknytningTilUtland.svar.jaIEOS';
         case TilknytningTilUtlandVerdier.jaLeggerSammenPerioderEOS:
-            return 'oppsummering.tilknytningTilUtland.svar.jaLeggerSammenPerioderEOS';
+            return erAnnenForelder
+                ? 'tilknytningTilUtland.svar.annenForelder.jaLeggerSammenPerioderEOS'
+                : 'tilknytningTilUtland.svar.soker.jaLeggerSammenPerioderEOS';
         case TilknytningTilUtlandVerdier.nei:
-            return 'oppsummering.tilknytningTilUtland.svar.nei';
+            return erAnnenForelder
+                ? 'tilknytningTilUtland.svar.annenForelder.nei'
+                : 'tilknytningTilUtland.svar.soker.nei';
     }
     return 'Ubesvart';
 };
@@ -42,11 +47,13 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
     ITilknytningTilUtlandOppsummeringProps
 > = ({ familieforhold, tilknytningTilUtland }) => {
     const boddEllerJobbetINorgeMinstFemAarSvar = hentTekstNokkelForTilknytningTilUtlandSvar(
-        tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.verdi as TilknytningTilUtlandVerdier
+        tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.verdi as TilknytningTilUtlandVerdier,
+        false
     );
     const annenForelderBoddEllerJobbetINorgeMinstFemAarSvar = hentTekstNokkelForTilknytningTilUtlandSvar(
         tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar
-            .verdi as TilknytningTilUtlandVerdier
+            .verdi as TilknytningTilUtlandVerdier,
+        true
     );
 
     return (
@@ -57,7 +64,7 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
             <SporsmalSvar
                 sporsmal={
                     <FormattedMessage
-                        id={'oppsummering.tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar'}
+                        id={'tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.sporsmal'}
                     />
                 }
                 svar={<FormattedMessage id={boddEllerJobbetINorgeMinstFemAarSvar} />}
@@ -66,7 +73,7 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
                 .verdi as TilknytningTilUtlandVerdier) && (
                 <SporsmalSvar
                     sporsmal={
-                        <FormattedMessage id={'oppsummering.tilknytningTilUtland.forklaring'} />
+                        <FormattedMessage id={'tilknytningTilUtland.forklaring.hjelpetekst'} />
                     }
                     svar={tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAarForklaring.verdi}
                 />
@@ -77,7 +84,7 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
                     sporsmal={
                         <FormattedMessage
                             id={
-                                'oppsummering.tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar'
+                                'tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.sporsmal'
                             }
                         />
                     }
@@ -93,7 +100,7 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
                     .verdi as TilknytningTilUtlandVerdier) && (
                     <SporsmalSvar
                         sporsmal={
-                            <FormattedMessage id={'oppsummering.tilknytningTilUtland.forklaring'} />
+                            <FormattedMessage id={'tilknytningTilUtland.forklaring.hjelpetekst'} />
                         }
                         svar={
                             tilknytningTilUtland
