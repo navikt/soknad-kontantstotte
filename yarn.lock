@@ -5975,7 +5975,7 @@ react-router-dom@4.2.2:
     react-router "^4.2.0"
     warning "^3.0.0"
 
-react-router@^4.2.0:
+react-router@4.3.1, react-router@^4.2.0:
   version "4.3.1"
   resolved "https://repo.adeo.no/repository/npm-public/react-router/-/react-router-4.3.1.tgz#aada4aef14c809cb2e686b05cee4742234506c4e"
   dependencies:

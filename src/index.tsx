@@ -5,6 +5,7 @@ import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import App from './App';
 import { appStart } from './app/actions';
+import ScrollToTop from './component/ScrollToTop/ScrollToTop';
 import { history, store } from './createStore';
 import IntlProvider from './IntlProvider';
 
@@ -18,7 +19,9 @@ const renderApp = (Component: React.ComponentType<{}>) => {
             <Provider store={store}>
                 <IntlProvider>
                     <ConnectedRouter history={history}>
-                        <Component />
+                        <ScrollToTop>
+                            <Component />
+                        </ScrollToTop>
                     </ConnectedRouter>
                 </IntlProvider>
             </Provider>
