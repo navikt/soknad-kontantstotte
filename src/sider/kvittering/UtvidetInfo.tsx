@@ -1,3 +1,4 @@
+import * as moment from 'moment-timezone';
 import Lenke from 'nav-frontend-lenker';
 import PanelBase from 'nav-frontend-paneler';
 import * as React from 'react';
@@ -14,7 +15,7 @@ interface IUtvidedInfoProps {
 }
 
 interface IMapStateToProps {
-    innsendtDato: string;
+    innsendtDato: moment.Moment;
     visInnsendtDato: boolean;
 }
 
@@ -40,7 +41,7 @@ const UtvidetInfo: React.StatelessComponent<Props> = ({ intl, innsendtDato, visI
                                     id: 'kvittering.soknadSendt',
                                 })}
 
-                                {visInnsendtDato && ' ' + innsendtDato + '.'}
+                                {visInnsendtDato && ' ' + innsendtDato.format('LLL') + '.'}
                             </span>
                         </td>
                     </tr>

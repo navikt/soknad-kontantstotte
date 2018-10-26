@@ -1,12 +1,13 @@
+import * as moment from 'moment-timezone';
 import { InnsendingActionTypes, InnsendingTypeKeys } from './actions';
 
 interface IInnsendingState {
-    readonly innsendtDato: string;
+    readonly innsendtDato: moment.Moment;
     readonly senderinn: boolean;
 }
 
 const initialState: IInnsendingState = {
-    innsendtDato: '',
+    innsendtDato: moment(),
     senderinn: false,
 };
 
