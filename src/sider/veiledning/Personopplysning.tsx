@@ -43,9 +43,6 @@ class Personopplysning extends React.Component<
                     className={'personopplysning__modal'}
                 >
                     <div className={'personopplysning__innhold'}>
-                        <div className={'personopplysning__ikon'}>
-                            <Filikon />
-                        </div>
                         <FormattedHTMLMessage id={'veiledningsside.personopplysning.innhold'} />
                         <Knapp className={'personopplysning__knapp'} onClick={this.closeModal}>
                             <FormattedMessage id={'veiledningsside.personopplysning.knapp'} />
