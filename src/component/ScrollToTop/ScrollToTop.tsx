@@ -11,14 +11,14 @@ class ScrollToTop extends React.Component<RouteComponentProps<RouteProps>> {
         if (this.props.location !== prevProps.location) {
             window.scrollTo(0, 0);
             if (this.node.current) {
-                this.node.current.focus();
+                this.node.current.blur();
             }
         }
     }
 
     public render() {
         return (
-            <div ref={this.node} tabIndex={-1}>
+            <div ref={this.node} tabIndex={-1} className={'scrollToTop'}>
                 {this.props.children}
             </div>
         );
