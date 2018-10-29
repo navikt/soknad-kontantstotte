@@ -1,15 +1,27 @@
+import * as moment from 'moment-timezone';
 import Lenke from 'nav-frontend-lenker';
 import PanelBase from 'nav-frontend-paneler';
 import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
+import { connect } from 'react-redux';
 import SuksessIkon from '../../component/Ikoner/Suksessikon';
 import Environment from '../../Environment';
+import { IRootState } from '../../rootReducer';
+import { isEnabled } from '../../toggles/selectors';
+import { IToggleName } from '../../toggles/types';
 
 interface IUtvidedInfoProps {
     intl: InjectedIntl;
 }
 
-const UtvidetInfo: React.StatelessComponent<IUtvidedInfoProps> = ({ intl }) => {
+interface IMapStateToProps {
+    innsendtDato: moment.Moment;
+    visInnsendtDato: boolean;
+}
+
+type Props = IMapStateToProps & IUtvidedInfoProps;
+
+const UtvidetInfo: React.StatelessComponent<Props> = ({ intl, innsendtDato, visInnsendtDato }) => {
     return (
         <PanelBase className="kvittering__panel" border={true}>
             <table className="kvittering__utvidettabell" cellSpacing="0">
@@ -28,6 +40,8 @@ const UtvidetInfo: React.StatelessComponent<IUtvidedInfoProps> = ({ intl }) => {
                                 {intl.formatMessage({
                                     id: 'kvittering.soknadSendt',
                                 })}
+
+                                {visInnsendtDato && ' ' + innsendtDato.format('LLL') + '.'}
                             </span>
                         </td>
                     </tr>
@@ -62,4 +76,11 @@ const UtvidetInfo: React.StatelessComponent<IUtvidedInfoProps> = ({ intl }) => {
     );
 };
 
-export default UtvidetInfo;
+const mapStateToProps = (state: IRootState): IMapStateToProps => {
+    return {
+        innsendtDato: state.innsending.innsendtDato,
+        visInnsendtDato: isEnabled(state, IToggleName.vis_innsendt_dato_kvittering),
+    };
+};
+
+export default connect(mapStateToProps)(UtvidetInfo);

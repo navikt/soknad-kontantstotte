@@ -1,3 +1,4 @@
+import * as moment from 'moment-timezone';
 import { Action } from 'redux';
 
 enum InnsendingTypeKeys {
@@ -13,6 +14,7 @@ interface ISendInn extends Action {
 }
 
 interface ISendInnOk extends Action {
+    innsendtDato: moment.Moment;
     type: InnsendingTypeKeys.SENDINN_OK;
 }
 
@@ -26,8 +28,9 @@ function sendInn(): ISendInn {
     };
 }
 
-function sendInnOk(): ISendInnOk {
+function sendInnOk(dato: moment.Moment): ISendInnOk {
     return {
+        innsendtDato: dato,
         type: InnsendingTypeKeys.SENDINN_OK,
     };
 }

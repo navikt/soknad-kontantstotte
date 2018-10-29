@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as moment from 'moment-timezone';
 import Environment from '../Environment';
 
 function sendInnSoknad(soknad: object) {
@@ -9,9 +10,13 @@ function sendInnSoknad(soknad: object) {
             type: 'application/json',
         })
     );
-    return axios.post(`${Environment().apiUrl}/sendinn`, formData, {
-        withCredentials: true,
-    });
+    return axios
+        .post(`${Environment().apiUrl}/sendinn`, formData, {
+            withCredentials: true,
+        })
+        .then(response => {
+            return moment(response.data.innsendtDato);
+        });
 }
 
 export { sendInnSoknad };
