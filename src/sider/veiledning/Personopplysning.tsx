@@ -2,7 +2,6 @@ import { Knapp } from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
 import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import Filikon from '../../component/Ikoner/Filikon';
 
 Modal.setAppElement('#app');
 
