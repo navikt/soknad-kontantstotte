@@ -4,4 +4,8 @@ function selectSenderInn(state: IRootState) {
     return state.innsending.senderinn;
 }
 
-export { selectSenderInn };
+function selectInnsendtDato(state: IRootState) {
+    return state.innsending.innsendtDato;
+}
+
+export { selectSenderInn, selectInnsendtDato };
