@@ -6,7 +6,9 @@ import {
     ITilknytningTilUtland,
     Svar,
     TilknytningTilUtlandVerdier,
+    ValideringsStatus,
 } from '../../soknad/types';
+import OppsummeringsAdvarsel from './OppsummeringsAdvarsel';
 import { OppsummeringSteg } from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
@@ -69,6 +71,10 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
                 }
                 svar={<FormattedMessage id={boddEllerJobbetINorgeMinstFemAarSvar} />}
             />
+            {tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.valideringsStatus ===
+                ValideringsStatus.ADVARSEL && (
+                <OppsummeringsAdvarsel meldingsNokkel={'tilknytningTilUtland.advarsel.nei.soker'} />
+            )}
             {skalViseForklaringsFelt(tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar
                 .verdi as TilknytningTilUtlandVerdier) && (
                 <SporsmalSvar
@@ -93,6 +99,13 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
                     }
                 />
             )}
+            {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA &&
+                tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar
+                    .valideringsStatus === ValideringsStatus.ADVARSEL && (
+                    <OppsummeringsAdvarsel
+                        meldingsNokkel={'tilknytningTilUtland.advarsel.nei.annenForelder'}
+                    />
+                )}
 
             {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA &&
                 skalViseForklaringsFelt(tilknytningTilUtland

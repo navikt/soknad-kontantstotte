@@ -1,5 +1,5 @@
 {
-    "kontantstotte.tilknytningTilUtland.advarsel": false,
-    "kontantstotte.oppsummering.advarsel": false,
+    "kontantstotte.tilknytningTilUtland.advarsel": true,
+    "kontantstotte.oppsummering.advarsel": true,
     "kontantstotte.kvittering.innsendtDato": false
 }

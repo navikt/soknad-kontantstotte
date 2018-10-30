@@ -11,6 +11,7 @@ import {
     utenlandskKontantstotteFeltnavn,
 } from './types';
 import {
+    annenForelderHarIkkeSvartNeiTilknytningTilUtland,
     harBekreftetOppsummering,
     harFyltInnDato,
     harFyltInnFodselsnummer,
@@ -23,6 +24,7 @@ import {
     harSvartTekstMedFeilmelding,
     harSvartTekstUnderAntallTegnMedFeilmelding,
     harSvartTilknytningTilUtlandVerdiMedFeilmelding,
+    sokerHarIkkeSvartNeiTilknytningTilUtland,
 } from './validators';
 
 interface IValideringsConfig {
@@ -109,12 +111,16 @@ const valideringsConfig: IValideringsConfig = {
     tilknytningTilUtland: {
         annenForelderBoddEllerJobbetINorgeMinstFemAar: [
             harSvartTilknytningTilUtlandVerdiMedFeilmelding,
+            annenForelderHarIkkeSvartNeiTilknytningTilUtland,
         ],
         annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring: [
             harSvartTekstMedFeilmelding,
             harSvartTekstUnderAntallTegnMedFeilmelding,
         ],
-        boddEllerJobbetINorgeMinstFemAar: [harSvartTilknytningTilUtlandVerdiMedFeilmelding],
+        boddEllerJobbetINorgeMinstFemAar: [
+            harSvartTilknytningTilUtlandVerdiMedFeilmelding,
+            sokerHarIkkeSvartNeiTilknytningTilUtland,
+        ],
         boddEllerJobbetINorgeMinstFemAarForklaring: [
             harSvartTekstMedFeilmelding,
             harSvartTekstUnderAntallTegnMedFeilmelding,

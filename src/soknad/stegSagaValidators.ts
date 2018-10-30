@@ -163,8 +163,8 @@ function* sjekkValideringForTilknytningTilUtland(
     familieforhold: IFamilieforhold
 ) {
     let harFeil =
-        tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.valideringsStatus !==
-        ValideringsStatus.OK;
+        tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.valideringsStatus ===
+        ValideringsStatus.FEIL;
 
     if (
         tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.verdi ===
@@ -181,8 +181,8 @@ function* sjekkValideringForTilknytningTilUtland(
     if (familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA) {
         harFeil =
             harFeil ||
-            tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.valideringsStatus !==
-                ValideringsStatus.OK;
+            tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.valideringsStatus ===
+                ValideringsStatus.FEIL;
 
         if (
             tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.verdi ===
