@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps, RouteProps, withRouter } from 'react-router';
 
-class ScrollToTop extends React.Component<RouteComponentProps<RouteProps>> {
+class ScrollTilToppen extends React.Component<RouteComponentProps<RouteProps>> {
     private node: React.RefObject<HTMLDivElement>;
     constructor(props: RouteComponentProps<RouteProps>) {
         super(props);
@@ -18,11 +18,11 @@ class ScrollToTop extends React.Component<RouteComponentProps<RouteProps>> {
 
     public render() {
         return (
-            <div ref={this.node} tabIndex={-1} className={'scrollToTop'}>
+            <div ref={this.node} tabIndex={-1} className={'scrollTilToppen'}>
                 {this.props.children}
             </div>
         );
     }
 }
 
-export default withRouter(ScrollToTop);
+export default withRouter(ScrollTilToppen);
