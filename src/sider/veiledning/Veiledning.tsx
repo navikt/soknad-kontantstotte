@@ -2,7 +2,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { Element, Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import Veileder from 'nav-frontend-veileder';
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { appNesteSteg } from '../../app/actions';
 import Veilederikon from '../../component/Ikoner/Veilederikon';
@@ -45,6 +45,9 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({ nesteSteg }) =>
                 <FormattedMessage id={'veiledningsside.info'} />
             </Normaltekst>
             <Personopplysning className={'veiledning__personopplysning'} />
+            <Normaltekst className={'veiledning__info'}>
+                <FormattedHTMLMessage id={'veiledningsside.vilkaar.info'} />
+            </Normaltekst>
             <Hovedknapp className={'veiledning__knapp'} onClick={nesteSteg}>
                 <FormattedMessage id={'veiledningsside.knapp'} />
             </Hovedknapp>
