@@ -7,6 +7,7 @@ import { IFeltFeil } from '../../common/lib/validation/types';
 import { IRootState } from '../../rootReducer';
 import { selectBarnehageplass } from '../../soknad/selectors';
 import { BarnehageplassVerdier, Feltnavn, IFelt, ValideringsStatus } from '../../soknad/types';
+import AdvarselIkon from '../../component/Ikoner/AdvarselIkon';
 
 interface IHarBarnehageplassInfo {
     intl: InjectedIntl;
@@ -48,14 +49,19 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                     feil={feltMedFeil.harBarnehageplassDato}
                 />
                 <Input
-                    className={classNames('inputElement', 'barnehageplass__antallTimer-input', {
-                        'barnehageplass__antallTimer--advarsel':
+                    className={classNames('inputElement', 'barnehageplass__antallTimer-input')}
+                    label={
+                        (intl.formatMessage({
+                            id: 'barnehageplass.harBarnehageplass.antallTimer.sporsmal',
+                        }) &&
                             harBarnehageplassAntallTimer.valideringsStatus ===
-                            ValideringsStatus.ADVARSEL,
-                    })}
-                    label={intl.formatMessage({
-                        id: 'barnehageplass.harBarnehageplass.antallTimer.sporsmal',
-                    })}
+                                ValideringsStatus.ADVARSEL && (
+                                <AdvarselIkon style={{ flex: 'none', marginRight: '1rem' }} />
+                            )) ||
+                        intl.formatMessage({
+                            id: 'barnehageplass.harBarnehageplass.antallTimer.sporsmal',
+                        })
+                    }
                     onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
                         settBarnehageplassVerdiFelt(
                             'harBarnehageplassAntallTimer' as Feltnavn,
@@ -65,6 +71,9 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                     defaultValue={harBarnehageplassAntallTimer.verdi}
                     feil={feltMedFeil.harBarnehageplassAntallTimer}
                 />
+                {harBarnehageplassAntallTimer.valideringsStatus === ValideringsStatus.ADVARSEL && (
+                    <AdvarselIkon style={{ flex: 'none', marginRight: '1rem' }} />
+                )}
                 <Input
                     className={classNames('inputElement', 'barnehageplass__kommune-input')}
                     label={intl.formatMessage({
