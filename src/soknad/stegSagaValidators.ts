@@ -162,9 +162,7 @@ function* sjekkValideringForTilknytningTilUtland(
     tilknytningTilUtland: ITilknytningTilUtland,
     familieforhold: IFamilieforhold
 ) {
-    let harFeil =
-        tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.valideringsStatus !==
-        ValideringsStatus.OK;
+    let harFeil = !gyldigeVerdier(tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar);
 
     if (
         tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.verdi ===
@@ -181,8 +179,7 @@ function* sjekkValideringForTilknytningTilUtland(
     if (familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA) {
         harFeil =
             harFeil ||
-            tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.valideringsStatus !==
-                ValideringsStatus.OK;
+            !gyldigeVerdier(tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar);
 
         if (
             tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.verdi ===
