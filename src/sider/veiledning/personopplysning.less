@@ -1,6 +1,5 @@
 .personopplysning {
   &__modal {
-    overflow: visible;
     width: 100%;
     margin-left: 1rem;
     margin-right: 1rem;
@@ -11,12 +10,8 @@
     flex-direction: column;
     padding-right: 1rem;
     padding-left: 1rem;
-  }
-
-  &__ikon {
-    width: 5rem;
-    align-self: center;
-    margin-top: -3.5rem;
+    overflow-y: scroll;
+    height: 100%;
   }
 
   &__knapp {
@@ -39,4 +34,11 @@
       padding-right: 3rem;
     }
   }
+}
+
+.ReactModal__Body--open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
 }

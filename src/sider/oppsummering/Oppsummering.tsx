@@ -29,6 +29,7 @@ interface IMapStateToProps {
     soknad: ISoknadState;
     harForsoktNesteSteg: boolean;
     visOppsummeringAdvarsel: boolean;
+    visTilknytningTilUtlandAdvarsel: boolean;
 }
 
 interface IMapDispatchToProps {
@@ -44,6 +45,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
     soker,
     soknad,
     visOppsummeringAdvarsel,
+    visTilknytningTilUtlandAdvarsel,
 }) => {
     return (
         <SideContainer
@@ -73,6 +75,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
                 <TilknytningTilUtlandOppsummering
                     familieforhold={soknad.familieforhold}
                     tilknytningTilUtland={soknad.tilknytningTilUtland}
+                    visAdvarsel={visTilknytningTilUtlandAdvarsel}
                 />
                 <ArbeidIUtlandetOppsummering
                     familieforhold={soknad.familieforhold}
@@ -111,6 +114,10 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
         soker: selectSoker(state),
         soknad: selectSoknad(state),
         visOppsummeringAdvarsel: isEnabled(state, IToggleName.vis_oppsummering_advarsel),
+        visTilknytningTilUtlandAdvarsel: isEnabled(
+            state,
+            IToggleName.vis_advarsel_tilknytningTilUtland
+        ),
     };
 };
 
