@@ -69,6 +69,7 @@ function* startAppSaga(): SagaIterator {
 }
 
 function* urlEndretSaga(action: ILocationChangeAction): SagaIterator {
+    //window.scrollTo(0,0);
     const appSteg = yield select(selectAppSteg);
     const naavaerendeSide = Object.values(stegConfig).find(
         (side: ISteg) => side.path === action.payload.location.pathname
