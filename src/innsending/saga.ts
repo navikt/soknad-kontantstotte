@@ -29,8 +29,8 @@ function* mapStateToModel(): object {
 function* sendInnSaga(): SagaIterator {
     try {
         const soknad = yield call(mapStateToModel);
-        yield call(sendInnSoknad, soknad);
-        yield put(sendInnOk());
+        const dato = yield call(sendInnSoknad, soknad);
+        yield put(sendInnOk(dato));
         yield put(push('/kvittering'));
     } catch (error) {
         yield put(sendInnFeilet());

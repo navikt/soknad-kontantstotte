@@ -26,7 +26,7 @@ app.get('/soknad-kontantstotte-api/api/soker', function(req, res) {
 });
 
 app.post('/soknad-kontantstotte-api/api/sendinn', function(req, res) {
-    setTimeout(() => res.status(204).send(), delayMs);
+    setTimeout(() => res.send(lesMockFil('innsending-respons.json')), delayMs);
 });
 
 module.exports = app;

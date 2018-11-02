@@ -6,52 +6,51 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const config = {
     entry: {
-        'soknad-kontantstotte': [
-            './src/index.tsx'
-        ]
+        'soknad-kontantstotte': ['./src/index.tsx'],
     },
     devtool: 'source-map',
     output: {
         path: path.join(__dirname, 'dist'),
         filename: '[name].[chunkhash].js',
-        publicPath: '/'
+        publicPath: '/',
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     },
     module: {
         rules: [
             {
                 test: /\.(ts|tsx)$/,
                 loader: 'tslint-loader',
-                enforce: 'pre'
+                enforce: 'pre',
             },
             {
                 test: /\.(js|ts|tsx)$/,
                 loader: 'ts-loader',
                 exclude: /node_modules/,
                 options: {
-                    transpileOnly: true
-                }
-            }
-        ]
+                    transpileOnly: true,
+                },
+            },
+        ],
     },
     optimization: {
         splitChunks: {
-            chunks: 'all'
+            chunks: 'all',
         },
-        runtimeChunk: true
+        runtimeChunk: true,
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'src/index.html'),
             inject: 'body',
-            alwaysWriteToDisk: true
+            alwaysWriteToDisk: true,
         }),
         new TypeScriptTypeChecker(),
         new webpack.NoEmitOnErrorsPlugin(),
-        new OptimizeCssAssetsPlugin()
-    ]
+        new OptimizeCssAssetsPlugin(),
+        new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /nb|nn|en/),
+    ],
 };
 
 module.exports = config;
