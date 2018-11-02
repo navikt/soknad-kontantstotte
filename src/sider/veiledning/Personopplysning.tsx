@@ -2,7 +2,6 @@ import { Knapp } from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
 import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import Filikon from '../../component/Ikoner/Filikon';
 
 Modal.setAppElement('#app');
 
@@ -43,9 +42,6 @@ class Personopplysning extends React.Component<
                     className={'personopplysning__modal'}
                 >
                     <div className={'personopplysning__innhold'}>
-                        <div className={'personopplysning__ikon'}>
-                            <Filikon />
-                        </div>
                         <FormattedHTMLMessage id={'veiledningsside.personopplysning.innhold'} />
                         <Knapp className={'personopplysning__knapp'} onClick={this.closeModal}>
                             <FormattedMessage id={'veiledningsside.personopplysning.knapp'} />

@@ -29,6 +29,7 @@ class ModalHjelpetekst extends React.Component<IModalHjelpetekstProps, IModalHje
         return (
             <div className={className}>
                 <button
+                    name={'hjelpetekst'}
                     type="button"
                     className={'hjelpetekst__apneknapp'}
                     onClick={this.openModal}
