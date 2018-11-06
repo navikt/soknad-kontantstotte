@@ -107,6 +107,18 @@ const harFyltInnGyldigAntallTimer = (felt: IFelt): IFelt => {
     }
 };
 
+const sokerHarIkkeSvartNeiTilknytningTilUtland = (felt: IFelt): IFelt => {
+    return felt.verdi !== TilknytningTilUtlandVerdier.nei
+        ? ok(felt)
+        : advarsel(felt, 'tilknytningTilUtland.advarsel.nei.soker');
+};
+
+const annenForelderHarIkkeSvartNeiTilknytningTilUtland = (felt: IFelt): IFelt => {
+    return felt.verdi !== TilknytningTilUtlandVerdier.nei
+        ? ok(felt)
+        : advarsel(felt, 'tilknytningTilUtland.advarsel.nei.annenForelder');
+};
+
 const harBekreftetOppsummering = (felt: IFelt): IFelt =>
     harSvartJa(felt, 'oppsummering.bekreftelse.feilmelding');
 
@@ -125,6 +137,7 @@ const harSvartTekstUnderAntallTegnMedFeilmelding = (felt: IFelt): IFelt =>
 const svarUtenValidering = (felt: IFelt): IFelt => ok(felt);
 
 export {
+    annenForelderHarIkkeSvartNeiTilknytningTilUtland,
     harBekreftetOppsummering,
     harFyltInnDato,
     harFyltInnFodselsnummer,
@@ -139,5 +152,6 @@ export {
     harSvartTekstMedFeilmelding,
     harSvartTekstUnderAntallTegnMedFeilmelding,
     harSvartTilknytningTilUtlandVerdiMedFeilmelding,
+    sokerHarIkkeSvartNeiTilknytningTilUtland,
     svarUtenValidering,
 };
