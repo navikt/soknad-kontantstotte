@@ -79,7 +79,14 @@ describe('soknad-kontantstotte', () => {
             await takeSnapshot(`barnehageplass-plain-${name}`, page);
         });
 
+        test('barnehageplass-hjelpetekst', async () => {
+            await page.click('.hjelpetekst__apneknapp');
+            await page.waitFor('.modal-tekst-container');
+            await takeSnapshot(`barnehageplass-hjelpetekst-${name}`, page);
+        });
+
         test('barnehageplass-feilmelding', async () => {
+            await page.click('.knapp.knapp--flat');
             await page.click('.knapp.knapp--hoved');
             await page.waitFor('.skjemaelement__feilmelding');
             await takeSnapshot(`barnehageplass-feilmelding-${name}`, page);
