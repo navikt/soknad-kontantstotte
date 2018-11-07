@@ -48,32 +48,29 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                     defaultValue={harBarnehageplassDato.verdi}
                     feil={feltMedFeil.harBarnehageplassDato}
                 />
-                <Input
-                    className={classNames('inputElement', 'barnehageplass__antallTimer-input')}
-                    label={
-                        (intl.formatMessage({
+                <div className={'inputElement barnehageplass__antallTimer--container'}>
+                    <Input
+                        className={classNames('barnehageplass__antallTimer--input')}
+                        label={intl.formatMessage({
                             id: 'barnehageplass.harBarnehageplass.antallTimer.sporsmal',
-                        }) &&
-                            harBarnehageplassAntallTimer.valideringsStatus ===
-                                ValideringsStatus.ADVARSEL && (
-                                <AdvarselIkon style={{ flex: 'none', marginRight: '1rem' }} />
-                            )) ||
-                        intl.formatMessage({
-                            id: 'barnehageplass.harBarnehageplass.antallTimer.sporsmal',
-                        })
-                    }
-                    onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                        settBarnehageplassVerdiFelt(
-                            'harBarnehageplassAntallTimer' as Feltnavn,
-                            event.target.value as BarnehageplassVerdier
-                        )
-                    }
-                    defaultValue={harBarnehageplassAntallTimer.verdi}
-                    feil={feltMedFeil.harBarnehageplassAntallTimer}
-                />
-                {harBarnehageplassAntallTimer.valideringsStatus === ValideringsStatus.ADVARSEL && (
-                    <AdvarselIkon style={{ flex: 'none', marginRight: '1rem' }} />
-                )}
+                        })}
+                        onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
+                            settBarnehageplassVerdiFelt(
+                                'harBarnehageplassAntallTimer' as Feltnavn,
+                                event.target.value as BarnehageplassVerdier
+                            )
+                        }
+                        defaultValue={harBarnehageplassAntallTimer.verdi}
+                        feil={feltMedFeil.harBarnehageplassAntallTimer}
+                    />
+                    {harBarnehageplassAntallTimer.valideringsStatus ===
+                        ValideringsStatus.ADVARSEL && (
+                        <AdvarselIkon
+                            className={'barnehageplass__antallTimer--advarsel'}
+                            style={{}}
+                        />
+                    )}
+                </div>
                 <Input
                     className={classNames('inputElement', 'barnehageplass__kommune-input')}
                     label={intl.formatMessage({
