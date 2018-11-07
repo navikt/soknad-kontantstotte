@@ -36,6 +36,7 @@ describe('soknad-kontantstotte', () => {
         test('krav-til-soker-plain', async () => {
             await page.click('.knapp.avbrytmodal__fortsettknapp.knapp--standard');
             await page.waitFor('.krav');
+            await page.click('h1');
             await takeSnapshot(`krav-til-soker-plain-${name}`, page);
         });
 
