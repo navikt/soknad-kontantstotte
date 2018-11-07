@@ -87,7 +87,8 @@ describe('soknad-kontantstotte', () => {
         });
 
         test('barnehageplass-feilmelding', async () => {
-            await page.click('.knapp.knapp--flat');
+            await page.click('.lukknapp.lukknapp--overstHjorne');
+            await page.waitFor('.barnehage');
             await page.click('.knapp.knapp--hoved');
             await page.waitFor('.skjemaelement__feilmelding');
             await takeSnapshot(`barnehageplass-feilmelding-${name}`, page);
