@@ -50,7 +50,7 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                 />
                 <div className={'inputElement barnehageplass__antallTimer--container'}>
                     <Input
-                        className={classNames('barnehageplass__antallTimer--input')}
+                        className={classNames('barnehageplass__antallTimer-input')}
                         label={intl.formatMessage({
                             id: 'barnehageplass.harBarnehageplass.antallTimer.sporsmal',
                         })}
