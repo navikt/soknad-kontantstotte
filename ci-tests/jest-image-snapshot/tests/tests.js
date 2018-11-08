@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 
-const large = { width: 1600, height: 500 };
+const large = { width: 1600, height: 450 };
 const medium = { width: 800, height: 500 };
 const small = { width: 320, height: 500 };
 
