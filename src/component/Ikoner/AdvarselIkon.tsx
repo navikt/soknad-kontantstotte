@@ -1,10 +1,12 @@
 import * as React from 'react';
 interface IAdvarselIkon {
     style: {};
+    className?: string;
 }
-const AdvarselIkon: React.StatelessComponent<IAdvarselIkon> = ({ style }) => {
+const AdvarselIkon: React.StatelessComponent<IAdvarselIkon> = ({ style, className }) => {
     return (
         <svg
+            className={className}
             style={style}
             enableBackground="new 0 0 60 60"
             width={24}

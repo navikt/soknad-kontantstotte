@@ -7,6 +7,7 @@ import { IFeltFeil } from '../../common/lib/validation/types';
 import { IRootState } from '../../rootReducer';
 import { selectBarnehageplass } from '../../soknad/selectors';
 import { BarnehageplassVerdier, Feltnavn, IFelt, ValideringsStatus } from '../../soknad/types';
+import AdvarselIkon from '../../component/Ikoner/AdvarselIkon';
 
 interface IHarBarnehageplassInfo {
     intl: InjectedIntl;
@@ -47,24 +48,29 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                     defaultValue={harBarnehageplassDato.verdi}
                     feil={feltMedFeil.harBarnehageplassDato}
                 />
-                <Input
-                    className={classNames('inputElement', 'barnehageplass__antallTimer-input', {
-                        'barnehageplass__antallTimer--advarsel':
-                            harBarnehageplassAntallTimer.valideringsStatus ===
-                            ValideringsStatus.ADVARSEL,
-                    })}
-                    label={intl.formatMessage({
-                        id: 'barnehageplass.harBarnehageplass.antallTimer.sporsmal',
-                    })}
-                    onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                        settBarnehageplassVerdiFelt(
-                            'harBarnehageplassAntallTimer' as Feltnavn,
-                            event.target.value as BarnehageplassVerdier
-                        )
-                    }
-                    defaultValue={harBarnehageplassAntallTimer.verdi}
-                    feil={feltMedFeil.harBarnehageplassAntallTimer}
-                />
+                <div className={'inputElement barnehageplass__antallTimer--container'}>
+                    <Input
+                        className={classNames('barnehageplass__antallTimer-input')}
+                        label={intl.formatMessage({
+                            id: 'barnehageplass.harBarnehageplass.antallTimer.sporsmal',
+                        })}
+                        onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
+                            settBarnehageplassVerdiFelt(
+                                'harBarnehageplassAntallTimer' as Feltnavn,
+                                event.target.value as BarnehageplassVerdier
+                            )
+                        }
+                        defaultValue={harBarnehageplassAntallTimer.verdi}
+                        feil={feltMedFeil.harBarnehageplassAntallTimer}
+                    />
+                    {harBarnehageplassAntallTimer.valideringsStatus ===
+                        ValideringsStatus.ADVARSEL && (
+                        <AdvarselIkon
+                            className={'barnehageplass__antallTimer--advarsel'}
+                            style={{}}
+                        />
+                    )}
+                </div>
                 <Input
                     className={classNames('inputElement', 'barnehageplass__kommune-input')}
                     label={intl.formatMessage({
