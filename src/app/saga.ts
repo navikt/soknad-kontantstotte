@@ -67,7 +67,6 @@ function* startAppSaga(): SagaIterator {
         fortrolig_adresse: take([SokerTypeKeys.HENT_FORTROLIG_ADRESSE]),
         hentFeilet: take([TeksterTypeKeys.HENT_FEILET, SokerTypeKeys.HENT_FEILET]),
     });
-    // yield take([TeksterTypeKeys.HENT_FEILET, SokerTypeKeys.HENT_FEILET, SokerTypeKeys.HENT_FORTROLIG_ADRESSE]);
     yield cancel(startSaga);
     yield put(appEndreStatus(AppStatus.FEILSITUASJON));
     if (fortrolig_adresse) {
