@@ -5,6 +5,7 @@ import InnsendingFeilet from './sider/feilsider/InnsendingFeilet';
 import SidenFinnesIkke from './sider/feilsider/SidenFinnesIkke';
 import Kvittering from './sider/kvittering/Kvittering';
 import { ISteg, stegConfig } from './stegConfig';
+import FortroligAdresse from './sider/feilsider/FortroligAdresse';
 
 const Routes: React.StatelessComponent<{}> = () => {
     return (
@@ -15,6 +16,11 @@ const Routes: React.StatelessComponent<{}> = () => {
                 }
             )}
             <Route component={Kvittering} key="kvittering" path="/kvittering" exact={true} />
+            <Route
+                component={FortroligAdresse}
+                key={'fortrolig-adresse'}
+                path={'/fortrolig-adresse'}
+            />
             <Route
                 component={InnsendingFeilet}
                 key="innsending-feilet"

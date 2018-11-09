@@ -1,7 +1,9 @@
 import { Action } from 'redux';
 import { ISoker } from './types';
+import { func } from 'prop-types';
 
 enum SokerTypeKeys {
+    HENT_FORTROLIG_ADRESSE = 'SOKER_HENT_FORTROLIG_ADRESSE',
     HENT = 'SOKER_HENT',
     HENT_OK = 'SOKER_HENT_OK',
     HENT_FEILET = 'SOKER_HENT_FEILET',
@@ -20,6 +22,10 @@ interface ISokerHentOk extends Action {
 
 interface ISokerHentFeilet extends Action {
     type: SokerTypeKeys.HENT_FEILET;
+}
+
+interface ISokerHentFortroligAdresse extends Action {
+    type: SokerTypeKeys.HENT_FORTROLIG_ADRESSE;
 }
 
 function sokerHent(): ISokerHent {
@@ -41,4 +47,17 @@ function sokerHentFeilet(): ISokerHentFeilet {
     };
 }
 
-export { SokerActionTypes, sokerHent, sokerHentFeilet, sokerHentOk, SokerTypeKeys };
+function sokerHentFortroligAdresse(): ISokerHentFortroligAdresse {
+    return {
+        type: SokerTypeKeys.HENT_FORTROLIG_ADRESSE,
+    };
+}
+
+export {
+    SokerActionTypes,
+    sokerHent,
+    sokerHentFeilet,
+    sokerHentOk,
+    sokerHentFortroligAdresse,
+    SokerTypeKeys,
+};

@@ -1,6 +1,6 @@
 import { SagaIterator } from 'redux-saga';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { sokerHentFeilet, sokerHentOk, SokerTypeKeys } from './actions';
+import { sokerHentFeilet, sokerHentFortroligAdresse, sokerHentOk, SokerTypeKeys } from './actions';
 import { fetchSoker } from './api';
 
 function* fetchSokerSaga(): SagaIterator {
@@ -8,7 +8,11 @@ function* fetchSokerSaga(): SagaIterator {
         const soker = yield call(fetchSoker);
         yield put(sokerHentOk(soker));
     } catch (err) {
-        yield put(sokerHentFeilet());
+        if (err.response.status === 403) {
+            yield put(sokerHentFortroligAdresse());
+        } else {
+            yield put(sokerHentFeilet());
+        }
     }
 }
 

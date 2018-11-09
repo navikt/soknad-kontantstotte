@@ -22,7 +22,7 @@ app.get('/api/feature', function(req, res) {
 });
 
 app.get('/soknad-kontantstotte-api/api/soker', function(req, res) {
-    setTimeout(() => res.send(lesMockFil('soker.json')), delayMs);
+    setTimeout(() => res.status(200).send(lesMockFil('soker.json')), delayMs);
 });
 
 app.post('/soknad-kontantstotte-api/api/sendinn', function(req, res) {

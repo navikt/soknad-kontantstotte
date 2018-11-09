@@ -5,6 +5,7 @@ import { SagaIterator } from 'redux-saga';
 import {
     all,
     call,
+    race,
     cancel,
     fork,
     put,
@@ -62,10 +63,18 @@ function* forsteSidelastSaga(): SagaIterator {
 function* startAppSaga(): SagaIterator {
     yield put(appEndreStatus(AppStatus.STARTER));
     const startSaga = yield fork(forsteSidelastSaga);
-    yield take([TeksterTypeKeys.HENT_FEILET, SokerTypeKeys.HENT_FEILET]);
+    const { fortrolig_adresse, hentFeilet } = yield race({
+        fortrolig_adresse: take([SokerTypeKeys.HENT_FORTROLIG_ADRESSE]),
+        hentFeilet: take([TeksterTypeKeys.HENT_FEILET, SokerTypeKeys.HENT_FEILET]),
+    });
+    // yield take([TeksterTypeKeys.HENT_FEILET, SokerTypeKeys.HENT_FEILET, SokerTypeKeys.HENT_FORTROLIG_ADRESSE]);
     yield cancel(startSaga);
     yield put(appEndreStatus(AppStatus.FEILSITUASJON));
-    yield put(push('/feilside'));
+    if (fortrolig_adresse) {
+        yield put(push('/fortrolig-adresse'));
+    } else {
+        yield put(push('/feilside'));
+    }
 }
 
 function* urlEndretSaga(action: ILocationChangeAction): SagaIterator {
