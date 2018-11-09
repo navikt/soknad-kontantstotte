@@ -1,8 +1,8 @@
 const puppeteer = require('puppeteer');
 
-const large = { width: 1600, height: 100 };
-const medium = { width: 800, height: 100 };
-const small = { width: 320, height: 100 };
+const large = { width: 1600, height: 450 };
+const medium = { width: 800, height: 500 };
+const small = { width: 320, height: 500 };
 
 const config = [['large', large], ['medium', medium], ['small', small]];
 
@@ -26,9 +26,17 @@ describe('soknad-kontantstotte', () => {
             await takeSnapshot(`veiledning-${name}`, page);
         });
 
-        test('krav-til-soker-plain', async () => {
+        test('avbrytmodal', async () => {
             await page.click('.knapp.knapp--hoved');
             await page.waitFor('.krav');
+            await page.click('.knapp.knapp--flat');
+            await takeSnapshot(`avbrytmodal-${name}`, page);
+        });
+
+        test('krav-til-soker-plain', async () => {
+            await page.click('.knapp.avbrytmodal__fortsettknapp.knapp--standard');
+            await page.waitFor('.krav');
+            await page.click('h1');
             await takeSnapshot(`krav-til-soker-plain-${name}`, page);
         });
 
@@ -72,7 +80,15 @@ describe('soknad-kontantstotte', () => {
             await takeSnapshot(`barnehageplass-plain-${name}`, page);
         });
 
+        test('barnehageplass-hjelpetekst', async () => {
+            await page.click('.hjelpetekst__apneknapp');
+            await page.waitFor('.modal-tekst-container');
+            await takeSnapshot(`barnehageplass-hjelpetekst-${name}`, page);
+        });
+
         test('barnehageplass-feilmelding', async () => {
+            await page.click('.lukknapp.lukknapp--overstHjorne');
+            await page.waitFor('.barnehage');
             await page.click('.knapp.knapp--hoved');
             await page.waitFor('.skjemaelement__feilmelding');
             await takeSnapshot(`barnehageplass-feilmelding-${name}`, page);
