@@ -8,13 +8,14 @@ import { Redirect } from 'react-router-dom';
 import { selectAppStatus } from '../../app/selectors';
 import { AppStatus } from '../../app/types';
 import Veilederikon from '../../component/Ikoner/Veilederikon';
+import Environment from '../../Environment';
 import { IRootState } from '../../rootReducer';
 
 interface IMapStateToProps {
     status: AppStatus;
 }
 
-const InnsendingFeilet: React.StatelessComponent<IMapStateToProps> = ({ status }) => {
+const FortroligAdresse: React.StatelessComponent<IMapStateToProps> = ({ status }) => {
     if (status === AppStatus.FEILSITUASJON) {
         return (
             <div className={'veiledning'}>
@@ -45,11 +46,7 @@ const InnsendingFeilet: React.StatelessComponent<IMapStateToProps> = ({ status }
                 <Normaltekst className={'veiledning__info'}>
                     <FormattedMessage id={'fortrolig.adresse.info'} />
                 </Normaltekst>
-                <a
-                    href={
-                        'https://www.nav.no/no/Person/Skjemaer-for-privatpersoner/skjemaveileder/vedlegg?key=235029&languagecode=53&veiledertype=privatperson'
-                    }
-                >
+                <a href={Environment().saksoversikt}>
                     <Hovedknapp className={'veiledning__knapp'}>
                         <FormattedMessage id={'fortrolig.adresse.knapp'} />
                     </Hovedknapp>
@@ -66,4 +63,4 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     };
 };
 
-export default connect(mapStateToProps)(InnsendingFeilet);
+export default connect(mapStateToProps)(FortroligAdresse);
