@@ -4,10 +4,10 @@ import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { IFeltFeil } from '../../common/lib/validation/types';
+import AdvarselIkon from '../../component/Ikoner/AdvarselIkon';
 import { IRootState } from '../../rootReducer';
 import { selectBarnehageplass } from '../../soknad/selectors';
 import { BarnehageplassVerdier, Feltnavn, IFelt, ValideringsStatus } from '../../soknad/types';
-import AdvarselIkon from '../../component/Ikoner/AdvarselIkon';
 
 interface IHarBarnehageplassInfo {
     intl: InjectedIntl;
