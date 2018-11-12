@@ -1,16 +1,16 @@
 .soknad__inputPanelGruppe {
     margin-top: 1.25rem;
-    
+
     & .inputPanelGruppe__inner {
         margin-top: .5rem;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
 
-        & :first-child {
+        & > :first-child {
             margin: 0;
         }
-        & :not(:first-child) {
+        & > :not(:first-child) {
             margin: .5rem 0 0 0;
         }
     }
@@ -25,10 +25,10 @@
             width: calc(100%/2 - .25rem);
         }
         & .inputPanelGruppe__inner {
-            & :nth-child(-n+2) {
+            & > :nth-child(-n+2) {
                 margin: 0;
             }
-            & :nth-child(n+3) {
+            & > :nth-child(n+3) {
                 margin: .5rem 0 0 0;
             }
         }
