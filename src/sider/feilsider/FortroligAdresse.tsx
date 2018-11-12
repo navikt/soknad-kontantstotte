@@ -1,18 +1,14 @@
+import { Hovedknapp } from 'nav-frontend-knapper';
+import { Element, Normaltekst, Sidetittel } from 'nav-frontend-typografi';
+import Veileder from 'nav-frontend-veileder';
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { selectAppStatus } from '../../app/selectors';
 import { AppStatus } from '../../app/types';
-import { InnsendingFeiletIkon } from '../../component/Ikoner/InnsendingFeiletIkon';
-import { IRootState } from '../../rootReducer';
-import Feilside from './Feilside';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import Modal from 'nav-frontend-modal';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
-import Veileder from 'nav-frontend-veileder';
-import { Element, Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import Veilederikon from '../../component/Ikoner/Veilederikon';
-import { Personopplysning } from '../veiledning/Personopplysning';
+import { IRootState } from '../../rootReducer';
 
 interface IMapStateToProps {
     status: AppStatus;

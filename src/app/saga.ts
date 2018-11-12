@@ -5,10 +5,10 @@ import { SagaIterator } from 'redux-saga';
 import {
     all,
     call,
-    race,
     cancel,
     fork,
     put,
+    race,
     select,
     take,
     takeEvery,

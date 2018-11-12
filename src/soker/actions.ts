@@ -1,6 +1,5 @@
 import { Action } from 'redux';
 import { ISoker } from './types';
-import { func } from 'prop-types';
 
 enum SokerTypeKeys {
     HENT_FORTROLIG_ADRESSE = 'SOKER_HENT_FORTROLIG_ADRESSE',

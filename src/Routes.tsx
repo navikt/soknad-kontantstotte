@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import FortroligAdresse from './sider/feilsider/FortroligAdresse';
 import GenerellFeilside from './sider/feilsider/GenerellFeilside';
 import InnsendingFeilet from './sider/feilsider/InnsendingFeilet';
 import SidenFinnesIkke from './sider/feilsider/SidenFinnesIkke';
 import Kvittering from './sider/kvittering/Kvittering';
 import { ISteg, stegConfig } from './stegConfig';
-import FortroligAdresse from './sider/feilsider/FortroligAdresse';
 
 const Routes: React.StatelessComponent<{}> = () => {
     return (
