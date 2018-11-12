@@ -1,21 +1,29 @@
 .navigasjon {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin: 0 auto;
+    justify-content: center;
+    margin: 2.5rem auto 0;
     max-width: 50rem;
-    padding: 2rem 0;
+
+    & :not(:first-child) {
+        margin-left: .5rem;
+    }
 
     &__knapp {
-        width: 15rem;
+        width: 10.75rem;
+        height: 2.5rem;
+        padding: 0;
     }
 
     @media (max-width: 750px) {
-        padding-top: 1rem;
+        margin: 2rem auto 0;
+
+        & :not(:first-child) {
+            margin: .5rem 0 0 0;
+        }
 
         &__knapp {
             width: 100%;
-            margin: 0 1rem 1rem 1rem;
         }
     }
 }

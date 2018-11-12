@@ -2,14 +2,16 @@
     &__sporsmal {
         display: flex;
         flex-wrap: wrap;
-    }
+        margin-top: .5rem;
+        justify-content: space-between;
 
-    & .skjemaelement {
-        width: calc(100%/2 - 1rem);
-        margin: .5rem;
+        .skjemaelement {
+            width: calc(100%/2 - .25rem);
 
-        @media (max-width: 600px) {
-            width: 100%;
+            @media (max-width: 600px) {
+                margin: .5rem 0 0;
+                width: 100%;
+            }
         }
     }
 }
