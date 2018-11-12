@@ -1,5 +1,6 @@
 .kvittering {
     &__ikon-container {
+        margin-top: .5rem;
         text-align: center;
     }
 
@@ -10,15 +11,16 @@
 
     &__tittel {
         text-align: center;
-        margin-bottom: 3.125rem;
+        margin: .5rem auto 2rem;
     }
 
     &__panel {
+        margin: 0 1rem;
         max-width: 40rem;
-        margin-left: auto;
-        margin-right: auto;
         margin-bottom: 3.125rem;
-        border-color:rgb(6, 137, 58);
+        border-color: rgb(6, 137, 58);
+        border-style: solid;
+        border-width: 1px;
         padding: 0px 1rem;
     }
 
@@ -39,5 +41,11 @@
         flex-shrink: 0;
         align-items: center;
         border-right: 1px solid rgb(183, 177, 169);
+    }
+}
+
+@media (min-width: 600px) {
+    .kvittering__panel {
+        margin: 0 auto;
     }
 }

@@ -1,8 +1,12 @@
 .tilbakeknapp {
-    width: 15rem;
+    width: 10.75rem;
 
+    &__nede {
+        margin-left: 1.25rem;
+    }
     &__oppe {
-        display: none
+        display: none;
+        position: absolute;
     }
 
     &__ikon {
@@ -12,16 +16,16 @@
 
     @media (max-width: 750px) {
         &__nede {
-            display: none
+            display: none;
         }
         
         &__oppe {
             display: unset;
             font-style: normal;
             font-weight: 300;
-            padding: 1rem 0 0 .5rem;
+            padding: 1rem 0 0 0;
             text-transform: capitalize;	
-            width: 6rem;
+            width: 5rem;
         }
     }
 }

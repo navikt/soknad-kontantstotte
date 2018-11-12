@@ -1,5 +1,5 @@
 import * as classNames from 'classnames';
-import { Sidetittel } from 'nav-frontend-typografi';
+import { Undertittel } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -39,9 +39,9 @@ class SideContainer extends React.Component<Props> {
 
         return (
             <div>
-                <Sidetittel className={'side-container__soknadtittel'}>
+                <Undertittel className={'side-container__soknadtittel'}>
                     <FormattedMessage id={'kontantstotte.tittel'} />
-                </Sidetittel>
+                </Undertittel>
 
                 <div className={'side-container'}>
                     <TilpassetStegindikator aktivtSteg={aktivtSteg} />
