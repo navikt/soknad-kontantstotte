@@ -22,7 +22,7 @@ describe('soknad-kontantstotte', () => {
         });
 
         test('veiledning', async () => {
-            await page.waitFor('h1');
+            await page.waitFor('.typo-sidetittel');
             await takeSnapshot(`veiledning-${name}`, page);
         });
 
@@ -36,7 +36,7 @@ describe('soknad-kontantstotte', () => {
         test('krav-til-soker-plain', async () => {
             await page.click('.knapp.avbrytmodal__fortsettknapp.knapp--standard');
             await page.waitFor('.krav');
-            await page.click('h1');
+            await page.click('.typo-undertittel');
             await takeSnapshot(`krav-til-soker-plain-${name}`, page);
         });
 
@@ -51,7 +51,7 @@ describe('soknad-kontantstotte', () => {
             for (const inputPanel of inputPanels) {
                 await inputPanel.click();
             }
-            await page.click('h1');
+            await page.click('.typo-undertittel');
             await takeSnapshot(`krav-til-soker-utfylt-${name}`, page);
         });
 
@@ -70,7 +70,7 @@ describe('soknad-kontantstotte', () => {
         test('mine-barn-utfylt', async () => {
             await page.type('.mine-barn__navn-input > input', 'Mock McMockface');
             await page.type('.mine-barn__fodselsdato-input > input', '01.01.2018');
-            await page.click('h1');
+            await page.click('.typo-undertittel');
             await takeSnapshot(`mine-barn-utfylt-${name}`, page);
         });
 
@@ -102,7 +102,7 @@ describe('soknad-kontantstotte', () => {
             await page.type('.barnehageplass__kommune-input input', 'Oslo');
             await page.type('.barnehageplass__antallTimer-input input', '50');
 
-            await page.click('h1');
+            await page.click('.typo-undertittel');
             await takeSnapshot(`barnehageplass-utfylt-${name}`, page);
         });
 
@@ -122,7 +122,7 @@ describe('soknad-kontantstotte', () => {
         test('familieforhold-utfylt', async () => {
             await page.type('[name="annenForelder.navn"]', 'Mockman McMockface');
             await page.type('[name="annenforelder.fodselsnummer"]', '00000000000');
-            await page.click('h1');
+            await page.click('.typo-undertittel');
             await takeSnapshot(`familieforhold-utfylt-${name}`, page);
         });
 

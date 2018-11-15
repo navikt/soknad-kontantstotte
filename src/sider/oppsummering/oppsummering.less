@@ -6,7 +6,7 @@
   align-items: center;
 
   &__veileder {
-    width: 95%;
+    width: 100%;
     margin-top: 2rem;
   }
 
@@ -17,6 +17,10 @@
   &__panel {
     margin-top: 2rem;
     width: 100%;
+
+    & .oppsummering-steg {
+      margin: .5rem 0 0 0;
+    }
   }
 
   &__svar {
@@ -26,7 +30,7 @@
   }
 
   &__bekreftelse {
-    margin: 1rem 1rem 0 1rem;
+    margin-top: .5rem;
   }
 
   &__advarsel {
@@ -38,17 +42,8 @@
 
 @media (min-width: 750px) {
   .oppsummering {
-    &__veileder {
-      width: 70%;
-    }
-
-    &__panel {
-      width: 70%;
-    }
-
-    &__bekreftelse {
-      margin: 1rem 0 0 0;
-      width: 70%;
+    &__veileder, &__panel, &__bekreftelse {
+      width: 100%;
     }
   }
 }
