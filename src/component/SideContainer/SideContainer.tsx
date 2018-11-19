@@ -56,7 +56,12 @@ class SideContainer extends React.Component<Props> {
                         />
                     ) : (
                         tittel && (
-                            <h3 className={'typo-innholdstittel side-container__sidetittel'}>
+                            <h3
+                                className={classNames(
+                                    'typo-innholdstittel side-container__sidetittel',
+                                    className
+                                )}
+                            >
                                 {tittel}
                             </h3>
                         )
