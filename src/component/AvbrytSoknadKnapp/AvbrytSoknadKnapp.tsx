@@ -16,6 +16,7 @@ interface IMapStateToProps {
 type AvbrytSoknadKnappProps = IAvbrytSoknadKnappProps & IMapStateToProps;
 
 const loggMetrikkerOgAvbryt = (steg: number) => {
+    /* tslint:disable */
     if (window.frontendlogger) {
         window.frontendlogger.event(
             'soknad-kontantstotte-status',
@@ -23,6 +24,7 @@ const loggMetrikkerOgAvbryt = (steg: number) => {
             { status: 'avbrutt', steg: steg }
         );
     }
+    /* tslint:enable */
 
     window.location.href = 'https://tjenester.nav.no/dittnav/innlogget';
 };
