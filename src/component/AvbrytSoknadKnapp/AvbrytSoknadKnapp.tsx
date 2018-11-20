@@ -5,6 +5,12 @@ import { connect } from 'react-redux';
 import { selectAppSteg } from '../../app/selectors';
 import { IRootState } from '../../rootReducer';
 
+declare global {
+    interface Window {
+        frontendlogger: any;
+    }
+}
+
 interface IAvbrytSoknadKnappProps {
     className?: string;
 }
@@ -16,7 +22,6 @@ interface IMapStateToProps {
 type AvbrytSoknadKnappProps = IAvbrytSoknadKnappProps & IMapStateToProps;
 
 const loggMetrikkerOgAvbryt = (steg: number) => {
-    /* tslint:disable */
     if (window.frontendlogger) {
         window.frontendlogger.event(
             'soknad-kontantstotte-status',
@@ -24,7 +29,6 @@ const loggMetrikkerOgAvbryt = (steg: number) => {
             { status: 'avbrutt', steg: steg }
         );
     }
-    /* tslint:enable */
 
     window.location.href = 'https://tjenester.nav.no/dittnav/innlogget';
 };
