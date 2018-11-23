@@ -46,7 +46,7 @@ const FortroligAdresse: React.StatelessComponent<IMapStateToProps> = ({ status }
                 <Normaltekst className={'veiledning__info'}>
                     <FormattedMessage id={'fortrolig.adresse.info'} />
                 </Normaltekst>
-                <a href={Environment().saksoversikt}>
+                <a href={Environment().papirsoknad}>
                     <Hovedknapp className={'veiledning__knapp'}>
                         <FormattedMessage id={'fortrolig.adresse.knapp'} />
                     </Hovedknapp>
