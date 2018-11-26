@@ -17,7 +17,7 @@ const App: React.StatelessComponent<Props> = ({ status }) => {
     switch (status) {
         case AppStatus.IKKE_STARTET:
         case AppStatus.STARTER:
-            return <Spinner type={'XXL'} />;
+            return <Spinner className={'app__spinner'} type={'XXL'} />;
         default:
             return <Routes />;
     }
