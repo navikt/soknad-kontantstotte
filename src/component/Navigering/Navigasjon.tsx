@@ -53,7 +53,7 @@ class Navigasjon extends React.Component<NavigasjonProps, INavigasjonState> {
                     </div>
                     <a href={'https://tjenester.nav.no/dittnav/innlogget'}>
                         <Fareknapp className={'avbrytmodal__avbrytknapp'}>
-                            <FormattedMessage id={'app.avbryt'} />
+                            <FormattedMessage id={'app.avbrytmodal.avbryt'} />
                         </Fareknapp>
                     </a>
 
