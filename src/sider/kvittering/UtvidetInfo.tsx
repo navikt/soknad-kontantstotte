@@ -52,7 +52,12 @@ const UtvidetInfo: React.StatelessComponent<Props> = ({ intl, innsendtDato, visI
                                 {intl.formatMessage({
                                     id: 'kvittering.soknadLokasjon',
                                 })}{' '}
-                                <Lenke href={Environment().saksoversikt} children={'Dine sider'} />
+                                <Lenke
+                                    href={Environment().saksoversikt}
+                                    children={intl.formatMessage({
+                                        id: 'kvittering.saksoversikt.lenke.tekst',
+                                    })}
+                                />
                             </span>
                         </td>
                     </tr>
