@@ -23,6 +23,7 @@ import { appEndreStatus, appSettSteg, AppTypeKeys } from './actions';
 import { pingBackend } from './api';
 import { selectAppSteg } from './selectors';
 import { AppStatus, ILocationChangeAction } from './types';
+import { barnHent, BarnTypeKeys } from '../barn/actions';
 
 const redirectTilLogin = () => {
     window.location.href = Environment().loginUrl + '?redirect=' + window.location.href;
@@ -54,8 +55,13 @@ function* forsteSidelastSaga(): SagaIterator {
     const sprak = bestemSprakFraParams();
     yield put(teksterHent(sprak));
     yield put(sokerHent());
+    yield put(barnHent());
 
-    yield all([take(TeksterTypeKeys.HENT_OK), take(SokerTypeKeys.HENT_OK)]);
+    yield all([
+        take(TeksterTypeKeys.HENT_OK),
+        take(SokerTypeKeys.HENT_OK),
+        take(BarnTypeKeys.HENT_OK),
+    ]);
 
     yield put(appEndreStatus(AppStatus.KLAR));
 }

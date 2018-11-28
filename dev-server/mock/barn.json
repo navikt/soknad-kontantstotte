@@ -1,0 +1,22 @@
+[
+  {
+    "fulltnavn" : "Barn1 McMockface",
+    "fodselsdato" : "01.01.2018",
+    "fodselsnummer"  : "11111111111"
+  },
+  {
+    "fulltnavn" : "Barn2 McMockface",
+    "fodselsdato" : "02.02.2018",
+    "fodselsnummer" : "22222222222"
+  },
+  {
+    "fulltnavn" : "Barn3 McMockface",
+    "fodselsdato" : "03.03.2018",
+    "fodselsnummer" : "33333333333"
+  },
+  {
+    "fulltnavn" : "Barn4 McMockface",
+    "fodselsdato" : "04.04.2018",
+    "fodselsnummer" : "44444444444"
+  }
+]

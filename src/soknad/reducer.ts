@@ -69,6 +69,7 @@ const initialState: ISoknadState = {
     },
     mineBarn: {
         fodselsdato: standardStringInitialFelt,
+        fodselsnummer: standardStringInitialFelt,
         navn: standardStringInitialFelt,
     },
     oppsummering: {
