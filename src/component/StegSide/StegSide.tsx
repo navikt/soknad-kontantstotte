@@ -1,7 +1,7 @@
 import * as classNames from 'classnames';
 import { Undertittel } from 'nav-frontend-typografi';
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, InjectedIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { selectAppSteg } from '../../app/selectors';
 import { IRootState } from '../../rootReducer';
@@ -15,6 +15,7 @@ interface IOwnProps {
     children: React.ReactNode;
     ikon?: React.ReactNode;
     tittel?: React.ReactNode;
+    intl?: InjectedIntl;
     hjelpetekstNokkel?: string;
 }
 
@@ -24,7 +25,18 @@ interface IMapStateToProps {
 
 type Props = IOwnProps & IMapStateToProps;
 
-class SideContainer extends React.Component<Props> {
+class StegSide extends React.Component<Props> {
+    public componentDidMount() {
+        if (this.props.intl) {
+            document.title =
+                this.props.intl.formatMessage({
+                    id: 'app.tittel.steg',
+                }) +
+                ' ' +
+                this.props.aktivtSteg;
+        }
+    }
+
     public render() {
         const {
             aktivtSteg,
@@ -82,4 +94,4 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     };
 };
 
-export default connect(mapStateToProps)(SideContainer);
+export default connect(mapStateToProps)(StegSide);

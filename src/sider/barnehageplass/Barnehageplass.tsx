@@ -9,7 +9,7 @@ import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { hentFeltMedFeil } from '../../common/utils';
 import Barnehageikon from '../../component/Ikoner/BarnehageIkon';
 import Veilederikon from '../../component/Ikoner/Veilederikon';
-import SideContainer from '../../component/SideContainer/SideContainer';
+import SideContainer from '../../component/StegSide/StegSide';
 import { IRootState } from '../../rootReducer';
 import { soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
@@ -60,6 +60,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
             ikon={<Barnehageikon />}
             tittel={intl.formatMessage({ id: 'barnehageplass.tittel' })}
             hjelpetekstNokkel={'barnehageplass.hjelpetekst'}
+            intl={intl}
         >
             <p className={classNames('typo-ingress', 'barnehage__ingress')}>
                 {intl.formatMessage({ id: 'barnehageplass.ingress' })}
