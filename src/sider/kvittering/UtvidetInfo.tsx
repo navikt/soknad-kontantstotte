@@ -70,7 +70,7 @@ const UtvidetInfo: React.StatelessComponent<Props> = ({ intl, innsendtDato, visI
                                 })}{' '}
                                 <Lenke
                                     href="https://www.nav.no/no/NAV+og+samfunn/Om+NAV/Saksbehandlingstider+i+NAV"
-                                    children={'saksbehandlertidene'}
+                                    children={'saksbehandlingstidene'}
                                 />
                             </span>
                         </td>
