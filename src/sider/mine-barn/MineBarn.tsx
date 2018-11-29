@@ -63,7 +63,7 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
             ikon={<BarnIkon />}
             tittel={intl.formatMessage({ id: 'barn.tittel' })}
         >
-            {barn.length >= Infinity ? (
+            {barn.length < 1 ? (
                 <form>
                     <legend className={'skjema__legend'}>
                         {intl.formatMessage({ id: 'barn.subtittel' })}
