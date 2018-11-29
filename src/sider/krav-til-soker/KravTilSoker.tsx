@@ -47,11 +47,13 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
                                 id: 'startside.krav.velkomstMelding',
                             })}
                         </h4>
-                        <span>
-                            {intl.formatMessage({
-                                id: 'startside.krav.veileder',
-                            })}
-                        </span>
+                        <span
+                            dangerouslySetInnerHTML={{
+                                __html: intl.formatMessage({
+                                    id: 'startside.krav.veileder',
+                                }),
+                            }}
+                        />
                     </div>
                 }
                 className={'krav__veileder'}
