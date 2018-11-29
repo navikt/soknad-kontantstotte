@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { hentFeltMedFeil } from '../../common/utils';
 import UtenlandskeYtelserIkon from '../../component/Ikoner/UtenlandskeYtelserIkon';
-import SideContainer from '../../component/SideContainer/SideContainer';
+import SideContainer from '../../component/StegSide/StegSide';
 import TilleggsinformasjonInput from '../../component/TilleggsinformasjonInput/TilleggsinformasjonInput';
 import { IRootState } from '../../rootReducer';
 import { soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
@@ -53,6 +53,7 @@ const UtenlandskeYtelser: React.StatelessComponent<UtenlandskeYtelserProps> = ({
             ikon={<UtenlandskeYtelserIkon />}
             tittel={intl.formatMessage({ id: 'utenlandskeYtelser.tittel' })}
             hjelpetekstNokkel={'utenlandskeYtelser.hjelpetekst'}
+            intl={intl}
         >
             <form>
                 <RadioPanelGruppe

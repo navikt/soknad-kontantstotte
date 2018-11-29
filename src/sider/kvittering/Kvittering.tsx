@@ -6,6 +6,11 @@ import UtvidetInfo from './UtvidetInfo';
 
 type KvitteringProps = InjectedIntlProps;
 const Kvittering: React.StatelessComponent<KvitteringProps> = ({ intl }) => {
+    if (intl) {
+        document.title = intl.formatMessage({
+            id: 'app.tittel.kvittering',
+        });
+    }
     return (
         <div>
             <Sidetittel className={'side-container__soknadtittel'}>

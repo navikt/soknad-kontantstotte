@@ -5,7 +5,7 @@ import { connect, Dispatch } from 'react-redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { hentFeltMedFeil } from '../../common/utils';
 import FlaskeIkon from '../../component/Ikoner/FlaskeIkon';
-import SideContainer from '../../component/SideContainer/SideContainer';
+import SideContainer from '../../component/StegSide/StegSide';
 import TilleggsinformasjonInput from '../../component/TilleggsinformasjonInput/TilleggsinformasjonInput';
 import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg, soknadValiderFelt } from '../../soknad/actions';
@@ -43,6 +43,7 @@ const UtenlandskKontantstotte: React.StatelessComponent<UtenlandskKontantstotteS
             ikon={<FlaskeIkon />}
             tittel={intl.formatMessage({ id: 'utenlandskKontantstotte.tittel' })}
             hjelpetekstNokkel={'utenlandskKontantstotte.hjelpetekst'}
+            intl={intl}
         >
             <form>
                 <RadioPanelGruppe

@@ -5,7 +5,7 @@ import { connect, Dispatch } from 'react-redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { hentFeltMedFeil } from '../../common/utils';
 import BorSammenIkon from '../../component/Ikoner/BorSammenIkon';
-import SideContainer from '../../component/SideContainer/SideContainer';
+import SideContainer from '../../component/StegSide/StegSide';
 import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg, soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectFamilieforhold } from '../../soknad/selectors';
@@ -42,6 +42,7 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
             ikon={<BorSammenIkon />}
             tittel={intl.formatMessage({ id: 'familieforhold.tittel' })}
             hjelpetekstNokkel={'familieforhold.hjelpetekst'}
+            intl={intl}
         >
             <form>
                 <RadioPanelGruppe
