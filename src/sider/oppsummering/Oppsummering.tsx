@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
-import SideContainer from '../../component/SideContainer/SideContainer';
+import SideContainer from '../../component/StegSide/StegSide';
 import SoknadPanel from '../../component/SoknadPanel/SoknadPanel';
 import Veileder from '../../component/Veileder/Veileder';
 import { IRootState } from '../../rootReducer';
@@ -51,6 +51,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
         <SideContainer
             className={'oppsummering'}
             tittel={<FormattedMessage id={'oppsummering.tittel'} />}
+            intl={intl}
         >
             <Veileder
                 content={

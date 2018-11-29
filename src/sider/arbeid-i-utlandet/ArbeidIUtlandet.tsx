@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { hentFeltMedFeil } from '../../common/utils';
 import ArbeidIUtlandetIkon from '../../component/Ikoner/ArbeidIUtlandetIkon';
-import SideContainer from '../../component/SideContainer/SideContainer';
+import SideContainer from '../../component/StegSide/StegSide';
 import TilleggsinformasjonInput from '../../component/TilleggsinformasjonInput/TilleggsinformasjonInput';
 import { IRootState } from '../../rootReducer';
 import { soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
@@ -52,6 +52,7 @@ const ArbeidIUtlandet: React.StatelessComponent<ArbeidIUtlandetProps> = ({
         <SideContainer
             ikon={<ArbeidIUtlandetIkon />}
             tittel={intl.formatMessage({ id: 'arbeidIUtlandet.tittel' })}
+            intl={intl}
         >
             <form>
                 <RadioPanelGruppe
