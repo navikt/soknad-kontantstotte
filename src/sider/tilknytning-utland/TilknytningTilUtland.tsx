@@ -4,7 +4,7 @@ import { connect, Dispatch } from 'react-redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { hentFeltMedFeil } from '../../common/utils';
 import TimeglassIkon from '../../component/Ikoner/TimeglassIkon';
-import SideContainer from '../../component/SideContainer/SideContainer';
+import SideContainer from '../../component/StegSide/StegSide';
 import { IRootState } from '../../rootReducer';
 import { soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
 import { selectFamilieforhold, selectTilknytningTilUtland } from '../../soknad/selectors';
@@ -62,6 +62,7 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
             tittel={intl.formatMessage({ id: 'tilknytningTilUtland.tittel' })}
             ikon={<TimeglassIkon />}
             hjelpetekstNokkel={'tilknytningTilUtland.hjelpetekst'}
+            intl={intl}
         >
             <BoddEllerJobbetINorgeSporsmal
                 settTilknytningTilUtlandVerdiFelt={settTilknytningTilUtlandVerdiFelt}

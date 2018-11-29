@@ -6,12 +6,20 @@ import { AppStatus } from '../../app/types';
 import { InnsendingFeiletIkon } from '../../component/Ikoner/InnsendingFeiletIkon';
 import { IRootState } from '../../rootReducer';
 import Feilside from './Feilside';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 
 interface IMapStateToProps {
     status: AppStatus;
 }
+type InnsendingFeiletProps = IMapStateToProps & InjectedIntlProps;
 
-const InnsendingFeilet: React.StatelessComponent<IMapStateToProps> = ({ status }) => {
+const InnsendingFeilet: React.StatelessComponent<InnsendingFeiletProps> = ({ status, intl }) => {
+    console.log('INTL: ' + intl);
+    if (intl) {
+        document.title = intl.formatMessage({
+            id: 'app.tittel.feilside.innsending',
+        });
+    }
     if (status === AppStatus.FEILSITUASJON) {
         return (
             <Feilside
@@ -33,4 +41,4 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     };
 };
 
-export default connect(mapStateToProps)(InnsendingFeilet);
+export default injectIntl(connect(mapStateToProps)(InnsendingFeilet));

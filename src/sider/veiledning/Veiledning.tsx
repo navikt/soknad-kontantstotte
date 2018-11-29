@@ -14,7 +14,13 @@ interface IMapDispatchToProps {
 
 type VeiledningProps = IMapDispatchToProps & InjectedIntlProps;
 
-const Veiledning: React.StatelessComponent<VeiledningProps> = ({ nesteSteg }) => {
+const Veiledning: React.StatelessComponent<VeiledningProps> = ({ nesteSteg, intl }) => {
+    if (intl) {
+        document.title = intl.formatMessage({
+            id: 'app.tittel.veiledning',
+        });
+    }
+
     return (
         <div className={'veiledning'}>
             <div className={'veiledning__veileder-container'}>
