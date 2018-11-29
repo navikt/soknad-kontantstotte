@@ -12,7 +12,7 @@ type FortsettKnappProps = IFortsettKnappProps;
 const Fortsettknapp: React.StatelessComponent<FortsettKnappProps> = ({ className, closeModal }) => {
     return (
         <KnappBase className={className} onClick={closeModal} type={'standard'}>
-            <FormattedMessage id={'app.fortsett'} />
+            <FormattedMessage id={'app.avbrytmodal.fortsett'} />
         </KnappBase>
     );
 };

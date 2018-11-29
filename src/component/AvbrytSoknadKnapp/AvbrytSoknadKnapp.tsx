@@ -23,11 +23,7 @@ type AvbrytSoknadKnappProps = IAvbrytSoknadKnappProps & IMapStateToProps;
 
 const loggMetrikkerOgAvbryt = (steg: number) => {
     if (window.frontendlogger) {
-        window.frontendlogger.event(
-            'soknad-kontantstotte-status',
-            {},
-            { status: 'avbrutt', steg: steg }
-        );
+        window.frontendlogger.event('soknad-kontantstotte-status', {}, { status: 'avbrutt', steg });
     }
 
     window.location.href = 'https://tjenester.nav.no/dittnav/innlogget';
@@ -39,7 +35,7 @@ const AvbrytSoknadKnapp: React.StatelessComponent<AvbrytSoknadKnappProps> = ({
 }) => {
     return (
         <Fareknapp className={className} onClick={() => loggMetrikkerOgAvbryt(steg)}>
-            <FormattedMessage id={'app.avbryt'} />
+            <FormattedMessage id={'app.avbrytmodal.avbryt'} />
         </Fareknapp>
     );
 };
