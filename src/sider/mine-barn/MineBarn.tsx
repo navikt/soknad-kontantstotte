@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { hentFeltMedFeil } from '../../common/utils';
 import BarnIkon from '../../component/Ikoner/BarnIkon';
-import SideContainer from '../../component/SideContainer/SideContainer';
+import SideContainer from '../../component/StegSide/StegSide';
 import { IRootState } from '../../rootReducer';
 import { soknadValiderFelt } from '../../soknad/actions';
 import { selectMineBarn } from '../../soknad/selectors';
@@ -37,6 +37,7 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
             className={'mine-barn'}
             ikon={<BarnIkon />}
             tittel={intl.formatMessage({ id: 'barn.tittel' })}
+            intl={intl}
         >
             <form>
                 <legend className={'skjema__legend'}>
