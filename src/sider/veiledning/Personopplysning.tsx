@@ -3,7 +3,7 @@ import Modal from 'nav-frontend-modal';
 import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 
-Modal.setAppElement('body');
+Modal.setAppElement('#pagewrapper');
 
 interface IPersonopplysningModalProps {
     className: string;
@@ -35,6 +35,8 @@ class Personopplysning extends React.Component<
                     <FormattedMessage id={'veiledningsside.personopplysning.lenke'} />
                 </a>
                 <Modal
+                    role={'dialog'}
+                    aria-modal={'true'}
                     isOpen={this.state.isOpen}
                     onRequestClose={this.closeModal}
                     contentLabel={'personopplysning'}
