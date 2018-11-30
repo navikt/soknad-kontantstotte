@@ -155,15 +155,26 @@ describe('soknad-kontantstotte', () => {
             await takeSnapshot(`utenlandske-kontantstotte-plain-${name}`, page);
         });
 
-        test('oppsummering', async () => {
+        test('oppsummering-plain', async () => {
             await page.click('[name="mottarKontantstotteFraUtlandet"][value="NEI"]');
             await page.click('.knapp.knapp--hoved');
             await page.waitFor('.oppsummering');
-            await takeSnapshot(`oppsummering-${name}`, page);
+            await takeSnapshot(`oppsummering-plain-${name}`, page);
+        });
+
+        test('oppsummering-feilmelding', async () => {
+            await page.click('.knapp.knapp--hoved');
+            await page.waitFor('.skjemaelement__feilmelding');
+            await takeSnapshot(`oppsummering-feilmelding-${name}`, page);
+        });
+
+        test('oppsummering-utfylt', async () => {
+            await page.click('.oppsummering__bekreftelse');
+            await page.click('.typo-undertittel');
+            await takeSnapshot(`oppsummering-utfylt-${name}`, page);
         });
 
         test('kvittering', async () => {
-            await page.click('.oppsummering__bekreftelse');
             await page.click('.knapp.knapp--hoved');
             await page.waitFor('.kvittering__tittel');
             await takeSnapshot(`kvittering-${name}`, page);
