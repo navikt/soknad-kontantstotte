@@ -3,7 +3,7 @@ import Modal from 'nav-frontend-modal';
 import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 
-Modal.setAppElement('#app');
+Modal.setAppElement('body');
 
 interface IPersonopplysningModalProps {
     className: string;
