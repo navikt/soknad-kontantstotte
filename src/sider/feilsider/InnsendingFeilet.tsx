@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { selectAppStatus } from '../../app/selectors';
@@ -6,7 +7,6 @@ import { AppStatus } from '../../app/types';
 import { InnsendingFeiletIkon } from '../../component/Ikoner/InnsendingFeiletIkon';
 import { IRootState } from '../../rootReducer';
 import Feilside from './Feilside';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
 
 interface IMapStateToProps {
     status: AppStatus;
@@ -14,7 +14,6 @@ interface IMapStateToProps {
 type InnsendingFeiletProps = IMapStateToProps & InjectedIntlProps;
 
 const InnsendingFeilet: React.StatelessComponent<InnsendingFeiletProps> = ({ status, intl }) => {
-    console.log('INTL: ' + intl);
     if (intl) {
         document.title = intl.formatMessage({
             id: 'app.tittel.feilside.innsending',
