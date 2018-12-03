@@ -30,17 +30,13 @@ const utenlandskeYtelserOppsummering: React.StatelessComponent<
             </Element>
             <SporsmalSvar
                 sporsmal={
-                    <FormattedMessage
-                        id={'oppsummering.utenlandskeYtelser.mottarYtelserFraUtland'}
-                    />
+                    <FormattedMessage id={'utenlandskeYtelser.mottarYtelserFraUtland.sporsmal'} />
                 }
                 svar={<JaNeiSvar verdi={mottarYtelserFraUtland.verdi} />}
             />
             {mottarYtelserFraUtland.verdi === Svar.JA && (
                 <SporsmalSvar
-                    sporsmal={
-                        <FormattedMessage id={'oppsummering.utenlandskeYtelser.forklaring.label'} />
-                    }
+                    sporsmal={<FormattedMessage id={'utenlandskeYtelser.forklaring.hjelpetekst'} />}
                     svar={mottarYtelserFraUtlandForklaring.verdi}
                 />
             )}
@@ -49,9 +45,7 @@ const utenlandskeYtelserOppsummering: React.StatelessComponent<
                 <SporsmalSvar
                     sporsmal={
                         <FormattedMessage
-                            id={
-                                'oppsummering.utenlandskeYtelser.mottarAnnenForelderYtelserFraUtland'
-                            }
+                            id={'utenlandskeYtelser.mottarAnnenForelderYtelserFraUtland.sporsmal'}
                         />
                     }
                     svar={<JaNeiSvar verdi={mottarAnnenForelderYtelserFraUtland.verdi} />}
@@ -61,9 +55,7 @@ const utenlandskeYtelserOppsummering: React.StatelessComponent<
                 mottarAnnenForelderYtelserFraUtland.verdi === Svar.JA && (
                     <SporsmalSvar
                         sporsmal={
-                            <FormattedMessage
-                                id={'oppsummering.utenlandskeYtelser.forklaring.label'}
-                            />
+                            <FormattedMessage id={'utenlandskeYtelser.forklaring.hjelpetekst'} />
                         }
                         svar={mottarAnnenForelderYtelserFraUtlandForklaring.verdi}
                     />

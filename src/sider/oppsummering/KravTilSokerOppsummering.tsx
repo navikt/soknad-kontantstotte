@@ -11,31 +11,27 @@ const KravTilSokerOppsummering: React.StatelessComponent<{}> = () => {
             </Element>
 
             <Normaltekst className={'oppsummering__svar'}>
-                <FormattedMessage id={'oppsummering.kravtilsoker.norskStatsborger'} />
+                <FormattedMessage id={'startside.krav.norskStatsborger'} />
             </Normaltekst>
 
             <Normaltekst className={'oppsummering__svar'}>
-                <FormattedMessage
-                    id={'oppsummering.kravtilsoker.boddEllerJobbetINorgeSisteFemAar'}
-                />
+                <FormattedMessage id={'startside.krav.boddEllerJobbetINorgeSisteFemAar'} />
             </Normaltekst>
 
             <Normaltekst className={'oppsummering__svar'}>
-                <FormattedMessage id={'oppsummering.kravtilsoker.borSammenMedBarnet'} />
+                <FormattedMessage id={'startside.krav.borSammenMedBarnet'} />
             </Normaltekst>
 
             <Normaltekst className={'oppsummering__svar'}>
-                <FormattedMessage id={'oppsummering.kravtilsoker.barnIkkeHjemme'} />
+                <FormattedMessage id={'startside.krav.barnIkkeHjemme'} />
             </Normaltekst>
 
             <Normaltekst className={'oppsummering__svar'}>
-                <FormattedMessage id={'oppsummering.kravtilsoker.ikkeAvtaltDeltBosted'} />
+                <FormattedMessage id={'startside.krav.ikkeAvtaltDeltBosted'} />
             </Normaltekst>
 
             <Normaltekst className={'oppsummering__svar'}>
-                <FormattedMessage
-                    id={'oppsummering.kravtilsoker.skalBoMedBarnetINorgeNesteTolvMaaneder'}
-                />
+                <FormattedMessage id={'startside.krav.skalBoMedBarnetINorgeNesteTolvMaaneder'} />
             </Normaltekst>
         </OppsummeringSteg>
     );
