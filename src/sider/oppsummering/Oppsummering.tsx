@@ -102,7 +102,11 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
             {harForsoktNesteSteg &&
                 soknad.oppsummering.bekreftelse.valideringsStatus !== ValideringsStatus.OK && (
                     <FormattedMessage id={soknad.oppsummering.bekreftelse.feilmeldingsNokkel}>
-                        {txt => <div className={'skjemaelement__feilmelding'}>{txt}</div>}
+                        {txt => (
+                            <div role="alert" className={'skjemaelement__feilmelding'}>
+                                {txt}
+                            </div>
+                        )}
                     </FormattedMessage>
                 )}
         </SideContainer>
