@@ -62,6 +62,7 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                         }
                         defaultValue={harBarnehageplassAntallTimer.verdi}
                         feil={feltMedFeil.harBarnehageplassAntallTimer}
+                        pattern={'[0-9]*'}
                     />
                     {harBarnehageplassAntallTimer.valideringsStatus ===
                         ValideringsStatus.ADVARSEL && (
