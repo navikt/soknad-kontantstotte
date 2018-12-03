@@ -23,7 +23,6 @@ import PersonaliaOppsummering from './PersonaliaOppsummering';
 import TilknytningTilUtlandOppsummering from './TilknytningTilUtlandOppsummering';
 import UtenlandskeYtelserOppsummering from './UtenlandskeYtelserOppsummering';
 import UtenlandskKontantstotteOppsummering from './UtenlandskKontantstotteOppsummering';
-import { Feilmelding } from './Feilmelding';
 
 interface IMapStateToProps {
     soker: ISoker;
@@ -102,7 +101,13 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
             />
             {harForsoktNesteSteg &&
                 soknad.oppsummering.bekreftelse.valideringsStatus !== ValideringsStatus.OK && (
-                    <Feilmelding tekstnokkel={soknad.oppsummering.bekreftelse.feilmeldingsNokkel} />
+                    <FormattedMessage id={soknad.oppsummering.bekreftelse.feilmeldingsNokkel}>
+                        {txt => (
+                            <div role="alert" className={'skjemaelement__feilmelding'}>
+                                {txt}
+                            </div>
+                        )}
+                    </FormattedMessage>
                 )}
         </SideContainer>
     );
