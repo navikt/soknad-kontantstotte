@@ -3,8 +3,8 @@ import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, Dispatch } from 'react-redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
-import SideContainer from '../../component/SideContainer/SideContainer';
 import SoknadPanel from '../../component/SoknadPanel/SoknadPanel';
+import SideContainer from '../../component/StegSide/StegSide';
 import Veileder from '../../component/Veileder/Veileder';
 import { IRootState } from '../../rootReducer';
 import { selectSoker } from '../../soker/selectors';
@@ -51,6 +51,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
         <SideContainer
             className={'oppsummering'}
             tittel={<FormattedMessage id={'oppsummering.tittel'} />}
+            intl={intl}
         >
             <Veileder
                 content={
@@ -101,7 +102,11 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
             {harForsoktNesteSteg &&
                 soknad.oppsummering.bekreftelse.valideringsStatus !== ValideringsStatus.OK && (
                     <FormattedMessage id={soknad.oppsummering.bekreftelse.feilmeldingsNokkel}>
-                        {txt => <div className={'skjemaelement__feilmelding'}>{txt}</div>}
+                        {txt => (
+                            <div role="alert" className={'skjemaelement__feilmelding'}>
+                                {txt}
+                            </div>
+                        )}
                     </FormattedMessage>
                 )}
         </SideContainer>

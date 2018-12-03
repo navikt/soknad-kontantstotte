@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { IFeil } from '../../common/lib/validation/types';
 import { hentFeltMedFeil } from '../../common/utils';
-import SideContainer from '../../component/SideContainer/SideContainer';
+import SideContainer from '../../component/StegSide/StegSide';
 import Veileder from '../../component/Veileder/Veileder';
 import { IRootState } from '../../rootReducer';
 import { soknadValiderFelt } from '../../soknad/actions';
@@ -38,7 +38,7 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
     );
 
     return (
-        <SideContainer className={'krav'}>
+        <SideContainer className={'krav'} intl={intl}>
             <Veileder
                 content={
                     <div>
@@ -47,11 +47,13 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
                                 id: 'startside.krav.velkomstMelding',
                             })}
                         </h4>
-                        <span>
-                            {intl.formatMessage({
-                                id: 'startside.krav.veileder',
-                            })}
-                        </span>
+                        <span
+                            dangerouslySetInnerHTML={{
+                                __html: intl.formatMessage({
+                                    id: 'startside.krav.veileder',
+                                }),
+                            }}
+                        />
                     </div>
                 }
                 className={'krav__veileder'}

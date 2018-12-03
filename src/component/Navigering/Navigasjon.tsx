@@ -1,14 +1,12 @@
-import { Fareknapp } from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
+import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 import * as React from 'react';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import Avbrytknapp from '../Avbrytknapp/Avbrytknapp';
+import AvbrytSoknadKnapp from '../AvbrytSoknadKnapp/AvbrytSoknadKnapp';
 import Fortsettknapp from '../Fortsettknapp/Fortsettknapp';
 import Submitknapp from '../Submitknapp/Submitknapp';
 import Tilbakeknapp from '../Tilbakeknapp/Tilbakeknapp';
-
-import InjectedIntlProps = ReactIntl.InjectedIntlProps;
-import Normaltekst from 'nav-frontend-typografi/lib/normaltekst';
 
 interface INavigasjonState {
     modalIsOpen: boolean;
@@ -51,11 +49,7 @@ class Navigasjon extends React.Component<NavigasjonProps, INavigasjonState> {
                             <FormattedMessage id={'app.avbrytmodal.tekst'} />
                         </Normaltekst>
                     </div>
-                    <a href={'https://tjenester.nav.no/dittnav/innlogget'}>
-                        <Fareknapp className={'avbrytmodal__avbrytknapp'}>
-                            <FormattedMessage id={'app.avbryt'} />
-                        </Fareknapp>
-                    </a>
+                    <AvbrytSoknadKnapp className={'avbrytmodal__avbrytknapp'} />
 
                     <Fortsettknapp
                         className={'avbrytmodal__fortsettknapp'}
