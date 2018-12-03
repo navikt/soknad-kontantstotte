@@ -12,7 +12,7 @@ interface INavigasjonState {
     modalIsOpen: boolean;
 }
 
-Modal.setAppElement('#pagewrapper');
+Modal.setAppElement('#app');
 
 /* tslint:disable */
 interface INavigasjonsProps {}
