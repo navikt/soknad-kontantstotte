@@ -3,7 +3,11 @@ import Modal from 'nav-frontend-modal';
 import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 
-Modal.setAppElement('#app');
+if (document.getElementById('pagewrapper')) {
+    Modal.setAppElement('#pagewrapper');
+} else {
+    Modal.setAppElement('#app');
+}
 
 interface IPersonopplysningModalProps {
     className: string;
@@ -31,18 +35,35 @@ class Personopplysning extends React.Component<
     public render() {
         return (
             <div className={this.props.className + ' personopplysning'}>
-                <a onClick={this.openModal} className={'lenke'}>
-                    <FormattedMessage id={'veiledningsside.personopplysning.lenke'} />
-                </a>
+                <button
+                    onClick={this.openModal}
+                    aria-haspopup={'dialog'}
+                    className={'personopplysning__lenkeknapp'}
+                >
+                    <FormattedMessage id={'veiledningsside.personopplysning.lenke'}>
+                        {lenketekst => (
+                            <span className={'personopplysning__lenketekst'}>{lenketekst}</span>
+                        )}
+                    </FormattedMessage>
+                </button>
                 <Modal
+                    role={'dialog'}
+                    aria-modal={'true'}
                     isOpen={this.state.isOpen}
                     onRequestClose={this.closeModal}
                     contentLabel={'personopplysning'}
                     closeButton={false}
                     className={'personopplysning__modal'}
                 >
-                    <div className={'personopplysning__innhold'}>
-                        <FormattedHTMLMessage id={'veiledningsside.personopplysning.innhold'} />
+                    <div
+                        className={'personopplysning__innhold'}
+                        role={'document'}
+                        tabIndex={0}
+                        aria-describedby={'description_personopplysning_modal'}
+                    >
+                        <div id="description_personopplysning_modal">
+                            <FormattedHTMLMessage id={'veiledningsside.personopplysning.innhold'} />
+                        </div>
                         <Knapp className={'personopplysning__knapp'} onClick={this.closeModal}>
                             <FormattedMessage id={'veiledningsside.personopplysning.knapp'} />
                         </Knapp>

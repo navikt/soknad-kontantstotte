@@ -12,7 +12,11 @@ interface INavigasjonState {
     modalIsOpen: boolean;
 }
 
-Modal.setAppElement('#app');
+if (document.getElementById('pagewrapper')) {
+    Modal.setAppElement('#pagewrapper');
+} else {
+    Modal.setAppElement('#app');
+}
 
 /* tslint:disable */
 interface INavigasjonsProps {}
@@ -39,6 +43,8 @@ class Navigasjon extends React.Component<NavigasjonProps, INavigasjonState> {
                 <Tilbakeknapp posisjon={'nede'} />
                 <Avbrytknapp className={'navigasjon__knapp'} openModal={this.openModal} />
                 <Modal
+                    role={'dialog'}
+                    aria-modal={'true'}
                     className={'avbrytmodal'}
                     isOpen={this.state.modalIsOpen}
                     contentLabel={intl.formatMessage({ id: 'app.avbrytmodal.tekst' })}
