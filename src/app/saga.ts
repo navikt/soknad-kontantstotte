@@ -23,6 +23,9 @@ import { appEndreStatus, appPingOk, appSettSteg, AppTypeKeys } from './actions';
 import { pingBackend } from './api';
 import { selectAppSteg } from './selectors';
 import { AppStatus, ILocationChangeAction } from './types';
+import { barnHent, BarnTypeKeys } from '../barn/actions';
+import { isEnabled } from '../toggles/selectors';
+import { IToggleName } from '../toggles/types';
 
 const redirectTilLogin = () => {
     window.location.href = Environment().loginUrl + '?redirect=' + window.location.href;
@@ -56,7 +59,17 @@ function* forsteSidelastSaga(): SagaIterator {
     yield put(teksterHent(sprak));
     yield put(sokerHent());
 
-    yield all([take(TeksterTypeKeys.HENT_OK), take(SokerTypeKeys.HENT_OK)]);
+    const isTpsMineBarnEnabled = yield select(isEnabled, IToggleName.bruk_tps_mineBarn);
+    if (isTpsMineBarnEnabled) {
+        yield put(barnHent());
+        yield all([
+            take(TeksterTypeKeys.HENT_OK),
+            take(SokerTypeKeys.HENT_OK),
+            take(BarnTypeKeys.HENT_OK),
+        ]);
+    } else {
+        yield all([take(TeksterTypeKeys.HENT_OK), take(SokerTypeKeys.HENT_OK)]);
+    }
 
     yield put(appEndreStatus(AppStatus.KLAR));
 }

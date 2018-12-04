@@ -4,6 +4,7 @@ import {
     IBarnehageplass,
     IFamilieforhold,
     IFelt,
+    IMineBarn,
     ITilknytningTilUtland,
     IUtenlandskeYtelser,
     IUtenlandskKontantstotte,
@@ -13,6 +14,10 @@ import {
     ValideringsStatus,
 } from './types';
 
+import { select } from 'redux-saga/effects';
+import { isEnabled } from '../toggles/selectors';
+import { IToggleName } from '../toggles/types';
+
 function harListeMedFeltFeil(feltForSteg: IFelt[]): boolean {
     return feltForSteg.reduce((acc: boolean, felt: IFelt) => {
         return acc || felt.valideringsStatus !== ValideringsStatus.OK;
@@ -21,6 +26,22 @@ function harListeMedFeltFeil(feltForSteg: IFelt[]): boolean {
 
 function* sjekkValideringForSteg(stegnavn: Stegnavn, soknadState: any) {
     return harListeMedFeltFeil(Object.values(soknadState[stegnavn]));
+}
+
+function* sjekkValideringForMineBarn(mineBarn: IMineBarn) {
+    const isTpsMineBarnEnabled = yield select(isEnabled, IToggleName.bruk_tps_mineBarn);
+    if (isTpsMineBarnEnabled) {
+        return (
+            mineBarn.fodselsnummer.valideringsStatus !== ValideringsStatus.OK ||
+            mineBarn.fodselsdato.valideringsStatus !== ValideringsStatus.OK ||
+            mineBarn.navn.valideringsStatus !== ValideringsStatus.OK
+        );
+    } else {
+        return (
+            mineBarn.fodselsdato.valideringsStatus !== ValideringsStatus.OK ||
+            mineBarn.navn.valideringsStatus !== ValideringsStatus.OK
+        );
+    }
 }
 
 function* sjekkValideringForArbeidIUtlandet(
@@ -219,6 +240,7 @@ export {
     sjekkValideringForArbeidIUtlandet,
     sjekkValideringForBarnehageplass,
     sjekkValideringForFamilieforhold,
+    sjekkValideringForMineBarn,
     sjekkValideringForTilknytningTilUtland,
     sjekkValideringForUtenlandskeYtelser,
     sjekkValideringForUtenlandskKontantstotte,

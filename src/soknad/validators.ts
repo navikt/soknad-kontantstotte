@@ -134,6 +134,12 @@ const harSvartTekstMedFeilmelding = (felt: IFelt): IFelt =>
 const harSvartTekstUnderAntallTegnMedFeilmelding = (felt: IFelt): IFelt =>
     harSvartTekstUnderAntallTegn(felt, 'feilmelding.generell.forMangeTegn');
 
+const harValgtBarn = (felt: IFelt): IFelt => {
+    return felt.verdi.replace(' ', '').length > 0
+        ? ok(felt)
+        : feil(felt, 'feilmelding.generell.feilmelding');
+};
+
 const svarUtenValidering = (felt: IFelt): IFelt => ok(felt);
 
 export {
@@ -152,6 +158,7 @@ export {
     harSvartTekstMedFeilmelding,
     harSvartTekstUnderAntallTegnMedFeilmelding,
     harSvartTilknytningTilUtlandVerdiMedFeilmelding,
+    harValgtBarn,
     sokerHarIkkeSvartNeiTilknytningTilUtland,
     svarUtenValidering,
 };

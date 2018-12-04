@@ -17,6 +17,7 @@ import {
     sjekkValideringForArbeidIUtlandet,
     sjekkValideringForBarnehageplass,
     sjekkValideringForFamilieforhold,
+    sjekkValideringForMineBarn,
     sjekkValideringForSteg,
     sjekkValideringForTilknytningTilUtland,
     sjekkValideringForUtenlandskeYtelser,
@@ -173,6 +174,9 @@ function* nesteStegSaga() {
                 soknadState.familieforhold,
                 soknadState.arbeidIUtlandet
             );
+            break;
+        case 'mineBarn':
+            harFeil = yield call(sjekkValideringForMineBarn, soknadState.mineBarn);
             break;
         case 'barnehageplass':
             harFeil = yield call(sjekkValideringForBarnehageplass, soknadState.barnehageplass);

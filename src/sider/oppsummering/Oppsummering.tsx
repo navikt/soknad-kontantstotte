@@ -118,7 +118,7 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         soker: selectSoker(state),
         soknad: selectSoknad(state),
-        visOppsummeringAdvarsel: isEnabled(state, IToggleName.vis_oppsummering_advarsel),
+        visOppsummeringAdvarsel: isEnabled(state, IToggleName.vis_advarsel_oppsummering),
         visTilknytningTilUtlandAdvarsel: isEnabled(
             state,
             IToggleName.vis_advarsel_tilknytningTilUtland
