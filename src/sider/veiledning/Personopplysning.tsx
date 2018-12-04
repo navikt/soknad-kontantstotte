@@ -3,10 +3,10 @@ import Modal from 'nav-frontend-modal';
 import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 
-if (process.env.NODE_ENV === 'development') {
-    Modal.setAppElement('#app');
-} else {
+if (document.getElementById('pagewrapper')) {
     Modal.setAppElement('#pagewrapper');
+} else {
+    Modal.setAppElement('#app');
 }
 
 interface IPersonopplysningModalProps {

@@ -12,10 +12,10 @@ interface INavigasjonState {
     modalIsOpen: boolean;
 }
 
-if (process.env.NODE_ENV === 'development') {
-    Modal.setAppElement('#app');
-} else {
+if (document.getElementById('pagewrapper')) {
     Modal.setAppElement('#pagewrapper');
+} else {
+    Modal.setAppElement('#app');
 }
 
 /* tslint:disable */
