@@ -40,7 +40,11 @@ class Personopplysning extends React.Component<
                     aria-haspopup={'dialog'}
                     className={'personopplysning__lenkeknapp'}
                 >
-                    <FormattedMessage id={'veiledningsside.personopplysning.lenke'} />
+                    <FormattedMessage id={'veiledningsside.personopplysning.lenke'}>
+                        {lenketekst => (
+                            <span className={'personopplysning__lenketekst'}>{lenketekst}</span>
+                        )}
+                    </FormattedMessage>
                 </button>
                 <Modal
                     role={'dialog'}
