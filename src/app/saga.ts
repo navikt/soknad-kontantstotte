@@ -19,7 +19,7 @@ import { ISteg, stegConfig } from '../stegConfig';
 import { teksterHent, TeksterTypeKeys } from '../tekster/actions';
 import { ISprak } from '../tekster/types';
 import { ToggelsTypeKeys, togglesHent } from '../toggles/actions';
-import { appEndreStatus, appSettSteg, AppTypeKeys } from './actions';
+import { appEndreStatus, appPingOk, appSettSteg, AppTypeKeys } from './actions';
 import { pingBackend } from './api';
 import { selectAppSteg } from './selectors';
 import { AppStatus, ILocationChangeAction } from './types';
@@ -38,16 +38,17 @@ const bestemSprakFraParams = (): ISprak => {
 function* autentiserBruker(): SagaIterator {
     try {
         yield call(pingBackend);
+        yield put(appPingOk());
     } catch (error) {
         if (error.response.status === 401) {
-            redirectTilLogin();
-            return;
+            yield call(redirectTilLogin);
         }
     }
 }
 
 function* forsteSidelastSaga(): SagaIterator {
-    yield call(autentiserBruker);
+    yield fork(autentiserBruker);
+    yield take([AppTypeKeys.PING_OK]);
     yield put(togglesHent());
     yield take([ToggelsTypeKeys.HENT_FEILET, ToggelsTypeKeys.HENT_OK]);
 

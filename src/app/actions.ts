@@ -8,6 +8,7 @@ enum AppTypeKeys {
     FORRIGE_STEG = 'APP_FORRIGE_STEG',
     SETT_STEG = 'APP_SETT_STEG',
     SETT_HAR_FORSOKT_NESTE_STEG = 'APP_SETT_HAR_FORSOKT_NESTE_STEG',
+    PING_OK = 'APP_PING_OK',
 }
 
 type AppActionTypes =
@@ -38,6 +39,10 @@ interface IAppForrigeSteg extends Action {
 interface IAppSettSteg extends Action {
     type: AppTypeKeys.SETT_STEG;
     steg: number;
+}
+
+interface IAppPingOk extends Action {
+    type: AppTypeKeys.PING_OK;
 }
 
 interface IAppSettHarForsoktNesteSteg extends Action {
@@ -84,6 +89,12 @@ function appSettHarForsoktNesteSteg(harForsoktNesteSteg: boolean): IAppSettHarFo
     };
 }
 
+function appPingOk(): IAppPingOk {
+    return {
+        type: AppTypeKeys.PING_OK,
+    };
+}
+
 export {
     AppTypeKeys,
     AppActionTypes,
@@ -93,4 +104,5 @@ export {
     appStart,
     appSettSteg,
     appSettHarForsoktNesteSteg,
+    appPingOk,
 };
