@@ -35,9 +35,13 @@ class Personopplysning extends React.Component<
     public render() {
         return (
             <div className={this.props.className + ' personopplysning'}>
-                <a onClick={this.openModal} aria-haspopup={'dialog'} className={'lenke'}>
+                <button
+                    onClick={this.openModal}
+                    aria-haspopup={'dialog'}
+                    className={'personopplysning__lenkeknapp'}
+                >
                     <FormattedMessage id={'veiledningsside.personopplysning.lenke'} />
-                </a>
+                </button>
                 <Modal
                     role={'dialog'}
                     aria-modal={'true'}
