@@ -40,8 +40,7 @@ function* autentiserBruker(): SagaIterator {
         yield call(pingBackend);
     } catch (error) {
         if (error.response.status === 401) {
-            redirectTilLogin();
-            return;
+            yield call(redirectTilLogin);
         }
     }
 }
