@@ -59,6 +59,7 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
                     }
                     defaultValue={skalSlutteIBarnehageAntallTimer.verdi}
                     feil={feltMedFeil.skalSlutteIBarnehageAntallTimer}
+                    pattern={'[0-9]*'}
                 />
                 <Input
                     className={'inputElement'}

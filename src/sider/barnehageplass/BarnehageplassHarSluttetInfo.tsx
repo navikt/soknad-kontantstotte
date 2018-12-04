@@ -59,6 +59,7 @@ const BarnehageplassHarSluttetInfo: React.StatelessComponent<BarnehageplassHarSl
                     }
                     defaultValue={harSluttetIBarnehageAntallTimer.verdi}
                     feil={feltMedFeil.harSluttetIBarnehageAntallTimer}
+                    pattern={'[0-9]*'}
                 />
                 <Input
                     className={'inputElement'}
