@@ -45,7 +45,8 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
                 }}
                 defaultValue={familieforhold.annenForelderFodselsnummer.verdi}
                 feil={feltMedFeil.annenForelderFodselsnummer}
-                pattern={'[0-9]*'}
+                type={'tel'}
+                autoComplete={'off'}
             />
         </SoknadPanel>
     );
