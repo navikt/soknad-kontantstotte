@@ -32,6 +32,7 @@ class ModalHjelpetekst extends React.Component<IModalHjelpetekstProps, IModalHje
                     name={'hjelpetekst'}
                     type="button"
                     className={'hjelpetekst__apneknapp'}
+                    aria-haspopup={'dialog'}
                     onClick={this.openModal}
                     onMouseEnter={this.setHover(true)}
                     onMouseLeave={this.setHover(false)}
@@ -39,12 +40,13 @@ class ModalHjelpetekst extends React.Component<IModalHjelpetekstProps, IModalHje
                     <Anchor hover={this.state.hover} className={'hjelpetekst__anchor'} />
                 </button>
                 <Modal
+                    role={'dialog'}
                     isOpen={this.state.modalIsOpen}
                     contentLabel={ariaContentLabel}
                     onRequestClose={this.closeModal}
                     className={modalClassName}
                 >
-                    <div className={'modal-tekst-container'}>
+                    <div className={'modal-tekst-container'} tabIndex={0} role={'document'}>
                         <p>
                             <FormattedHTMLMessage id={hjelpetekstNokkel} />
                         </p>
