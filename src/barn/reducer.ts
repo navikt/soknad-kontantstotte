@@ -10,7 +10,6 @@ const initialState: IBarnState = {
     barn: [
         {
             fodselsdato: '',
-            fodselsnummer: '',
             fulltnavn: '',
         },
     ],

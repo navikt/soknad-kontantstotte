@@ -1,12 +1,10 @@
 [
   {
     "fulltnavn" : "Barn1 McMockface",
-    "fodselsdato" : "01.01.2018",
-    "fodselsnummer"  : "11111111111"
+    "fodselsdato" : "01.01.2018"
   },
   {
     "fulltnavn" : "Barn2 McMockface",
-    "fodselsdato" : "02.02.2018",
-    "fodselsnummer" : "22222222222"
+    "fodselsdato" : "02.02.2018"
   }
 ]

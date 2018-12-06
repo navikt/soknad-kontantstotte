@@ -30,7 +30,6 @@ interface IMapStateToProps {
 interface IMapDispatchToProps {
     settBarnNavn: (navn: string) => void;
     settBarnFodselsdato: (fodselsdato: string) => void;
-    settBarnFodselsnummer: (fodselsnummer: string) => void;
 }
 
 interface IRadioContent {
@@ -45,7 +44,6 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
     barn,
     harForsoktNesteSteg,
     settBarnFodselsdato,
-    settBarnFodselsnummer,
     settBarnNavn,
     valgtBarn,
     intl,
@@ -57,8 +55,8 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
         return { label, value };
     }
 
-    const radioButtons = barn.map((b: IBarn) =>
-        radioBtn(b.fulltnavn + ' (' + b.fodselsdato + ' )', b.fodselsnummer)
+    const radioButtons = Array.from(barn).map((b: IBarn) =>
+        radioBtn(b.fulltnavn + ' (' + b.fodselsdato + ' )', b.fulltnavn)
     );
 
     return (
@@ -75,21 +73,19 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                         name={'mine-barn__sporsmal'}
                         className={'soknad__inputPanelGruppe'}
                         onChange={(evt: {}, value: string) => {
-                            let nyttValgtBarn = barn.find(b => b.fodselsnummer === value);
+                            let nyttValgtBarn = barn.find(b => b.fulltnavn === value);
                             if (nyttValgtBarn == null) {
                                 nyttValgtBarn = {
                                     fulltnavn: '',
                                     fodselsdato: '',
-                                    fodselsnummer: '',
                                 };
                             }
                             settBarnNavn(nyttValgtBarn.fulltnavn);
                             settBarnFodselsdato(nyttValgtBarn.fodselsdato);
-                            settBarnFodselsnummer(nyttValgtBarn.fodselsnummer);
                         }}
-                        checked={valgtBarn.fodselsnummer.verdi}
+                        checked={valgtBarn.navn.verdi}
                         radios={radioButtons}
-                        feil={feltMedFeil.fodselsnummer}
+                        feil={feltMedFeil.navn}
                     />
                 </form>
             ) : (
@@ -137,8 +133,6 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         settBarnFodselsdato: (fodselsdato: string) =>
             dispatch(soknadValiderFelt('mineBarn', 'fodselsdato', fodselsdato)),
-        settBarnFodselsnummer: (fodselsnummer: string) =>
-            dispatch(soknadValiderFelt('mineBarn', 'fodselsnummer', fodselsnummer)),
         settBarnNavn: (navn: string) => dispatch(soknadValiderFelt('mineBarn', 'navn', navn)),
     };
 };

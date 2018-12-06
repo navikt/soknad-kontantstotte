@@ -24,7 +24,6 @@ import {
     harSvartTekstMedFeilmelding,
     harSvartTekstUnderAntallTegnMedFeilmelding,
     harSvartTilknytningTilUtlandVerdiMedFeilmelding,
-    harValgtBarn,
     sokerHarIkkeSvartNeiTilknytningTilUtland,
 } from './validators';
 
@@ -104,7 +103,6 @@ const valideringsConfig: IValideringsConfig = {
     },
     mineBarn: {
         fodselsdato: [harSvartTekstMedFeilmelding, harFyltInnDato],
-        fodselsnummer: [harValgtBarn],
         navn: [harFyltInnNavn],
     },
     oppsummering: {
