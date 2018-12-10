@@ -62,7 +62,7 @@ class ModalHjelpetekst extends React.Component<IModalHjelpetekstProps, IModalHje
         );
     }
 
-    private openModal() {
+    private openModal = () => {
         const footer = document.querySelector('body > .hodefot');
         if (footer) {
             footer.setAttribute('aria-hidden', 'true');
@@ -70,9 +70,9 @@ class ModalHjelpetekst extends React.Component<IModalHjelpetekstProps, IModalHje
         this.setState({
             isOpen: true,
         });
-    }
+    };
 
-    private closeModal() {
+    private closeModal = () => {
         const footer = document.querySelector('body > .hodefot');
         if (footer) {
             footer.removeAttribute('aria-hidden');
@@ -80,7 +80,7 @@ class ModalHjelpetekst extends React.Component<IModalHjelpetekstProps, IModalHje
         this.setState({
             isOpen: false,
         });
-    }
+    };
 
     private setHover = (value: boolean) => {
         return () => this.setState({ hover: value });
