@@ -74,12 +74,20 @@ class Personopplysning extends React.Component<
     }
 
     private openModal() {
+        const footer = document.querySelector('body > .hodefot');
+        if (footer) {
+            footer.setAttribute('aria-hidden', 'true');
+        }
         this.setState({
             isOpen: true,
         });
     }
 
     private closeModal() {
+        const footer = document.querySelector('body > .hodefot');
+        if (footer) {
+            footer.removeAttribute('aria-hidden');
+        }
         this.setState({
             isOpen: false,
         });

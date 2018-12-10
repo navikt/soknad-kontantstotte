@@ -9,7 +9,7 @@ import Submitknapp from '../Submitknapp/Submitknapp';
 import Tilbakeknapp from '../Tilbakeknapp/Tilbakeknapp';
 
 interface INavigasjonState {
-    modalIsOpen: boolean;
+    isOpen: boolean;
 }
 
 if (document.getElementById('pagewrapper')) {
@@ -28,7 +28,7 @@ class Navigasjon extends React.Component<NavigasjonProps, INavigasjonState> {
     constructor(props: NavigasjonProps) {
         super(props);
         this.state = {
-            modalIsOpen: false,
+            isOpen: false,
         };
         this.closeModal = this.closeModal.bind(this);
         this.openModal = this.openModal.bind(this);
@@ -46,7 +46,7 @@ class Navigasjon extends React.Component<NavigasjonProps, INavigasjonState> {
                     role={'dialog'}
                     aria-modal={'true'}
                     className={'avbrytmodal'}
-                    isOpen={this.state.modalIsOpen}
+                    isOpen={this.state.isOpen}
                     contentLabel={intl.formatMessage({ id: 'app.avbrytmodal.tekst' })}
                     onRequestClose={this.closeModal}
                 >
@@ -67,14 +67,22 @@ class Navigasjon extends React.Component<NavigasjonProps, INavigasjonState> {
     }
 
     private openModal() {
+        const footer = document.querySelector('body > .hodefot');
+        if (footer) {
+            footer.setAttribute('aria-hidden', 'true');
+        }
         this.setState({
-            modalIsOpen: true,
+            isOpen: true,
         });
     }
 
     private closeModal() {
+        const footer = document.querySelector('body > .hodefot');
+        if (footer) {
+            footer.removeAttribute('aria-hidden');
+        }
         this.setState({
-            modalIsOpen: false,
+            isOpen: false,
         });
     }
 }

@@ -3,8 +3,14 @@ import * as React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
 import Anchor from './Anchor';
 
+if (document.getElementById('pagewrapper')) {
+    Modal.setAppElement('#pagewrapper');
+} else {
+    Modal.setAppElement('#app');
+}
+
 interface IModalHjelpetekstState {
-    modalIsOpen: boolean;
+    isOpen: boolean;
     hover: boolean;
 }
 
@@ -20,7 +26,7 @@ class ModalHjelpetekst extends React.Component<IModalHjelpetekstProps, IModalHje
         super(props);
         this.state = {
             hover: false,
-            modalIsOpen: false,
+            isOpen: false,
         };
     }
 
@@ -41,7 +47,7 @@ class ModalHjelpetekst extends React.Component<IModalHjelpetekstProps, IModalHje
                 </button>
                 <Modal
                     role={'dialog'}
-                    isOpen={this.state.modalIsOpen}
+                    isOpen={this.state.isOpen}
                     contentLabel={ariaContentLabel}
                     onRequestClose={this.closeModal}
                     className={modalClassName}
@@ -56,13 +62,25 @@ class ModalHjelpetekst extends React.Component<IModalHjelpetekstProps, IModalHje
         );
     }
 
-    private openModal = () => {
-        this.setState({ modalIsOpen: true });
-    };
+    private openModal() {
+        const footer = document.querySelector('body > .hodefot');
+        if (footer) {
+            footer.setAttribute('aria-hidden', 'true');
+        }
+        this.setState({
+            isOpen: true,
+        });
+    }
 
-    private closeModal = () => {
-        this.setState({ modalIsOpen: false });
-    };
+    private closeModal() {
+        const footer = document.querySelector('body > .hodefot');
+        if (footer) {
+            footer.removeAttribute('aria-hidden');
+        }
+        this.setState({
+            isOpen: false,
+        });
+    }
 
     private setHover = (value: boolean) => {
         return () => this.setState({ hover: value });
