@@ -68,8 +68,12 @@ describe('soknad-kontantstotte', () => {
         });
 
         test('mine-barn-utfylt', async () => {
-            await page.type('.mine-barn__navn-input > input', 'Mock McMockface');
-            await page.type('.mine-barn__fodselsdato-input > input', '01.01.2018');
+            if ((await page.$('.inputPanelGruppe')) !== null) {
+                await page.click('[name="mine-barn__sporsmal"][value="11111111111"]');
+            } else {
+                await page.type('.mine-barn__navn-input > input', 'Mock McMockface');
+                await page.type('.mine-barn__fodselsdato-input > input', '01.01.2018');
+            }
             await page.click('.typo-undertittel');
             await takeSnapshot(`mine-barn-utfylt-${name}`, page);
         });

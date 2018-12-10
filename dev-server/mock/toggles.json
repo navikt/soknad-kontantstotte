@@ -1,5 +1,6 @@
 {
     "kontantstotte.tilknytningTilUtland.advarsel": false,
     "kontantstotte.oppsummering.advarsel": false,
-    "kontantstotte.kvittering.innsendtDato": false
+    "kontantstotte.kvittering.innsendtDato": false,
+    "kontantstotte.bruk.tps.integrasjon.barn": false
 }
