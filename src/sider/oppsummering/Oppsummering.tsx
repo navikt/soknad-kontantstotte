@@ -56,9 +56,6 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
             <Veileder
                 content={
                     <div>
-                        <h4 className={'oppsummering__veileder-tittel'}>
-                            {intl.formatMessage({ id: 'oppsummering.veileder.tittel' })}
-                        </h4>
                         <FormattedMessage id={'oppsummering.veileder.info'} />
                     </div>
                 }
