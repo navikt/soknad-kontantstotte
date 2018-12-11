@@ -11,11 +11,17 @@ import Veilederikon from '../../component/Ikoner/Veilederikon';
 import Environment from '../../Environment';
 import { IRootState } from '../../rootReducer';
 
+interface IOwnProps {
+    feilsidemelding: string;
+}
+
 interface IMapStateToProps {
     status: AppStatus;
 }
 
-const FortroligAdresse: React.StatelessComponent<IMapStateToProps> = ({ status }) => {
+type Props = IOwnProps & IMapStateToProps;
+
+const PapirsoknadFeilside: React.StatelessComponent<Props> = ({ status, feilsidemelding }) => {
     if (status === AppStatus.FEILSITUASJON) {
         return (
             <div className={'veiledning'}>
@@ -28,10 +34,10 @@ const FortroligAdresse: React.StatelessComponent<IMapStateToProps> = ({ status }
                         tekst={
                             <div className={'veiledning__veileder-snakkeboble'}>
                                 <Element>
-                                    <FormattedMessage id={'fortrolig.adresse.veileder.hei'} />
+                                    <FormattedMessage id={'papirsoknad.feilmelding.veileder.hei'} />
                                 </Element>
                                 <Normaltekst>
-                                    <FormattedMessage id={'fortrolig.adresse.veileder.melding'} />
+                                    <FormattedMessage id={feilsidemelding} />
                                 </Normaltekst>
                             </div>
                         }
@@ -41,14 +47,14 @@ const FortroligAdresse: React.StatelessComponent<IMapStateToProps> = ({ status }
                 </div>
 
                 <Sidetittel className={'veiledning__sidetittel'}>
-                    <FormattedMessage id={'fortrolig.adresse.tittel'} />
+                    <FormattedMessage id={'papirsoknad.feilmelding.tittel'} />
                 </Sidetittel>
                 <Normaltekst className={'veiledning__info'}>
-                    <FormattedMessage id={'fortrolig.adresse.info'} />
+                    <FormattedMessage id={'papirsoknad.feilmelding.info'} />
                 </Normaltekst>
                 <a href={Environment().papirsoknad}>
                     <Hovedknapp className={'veiledning__knapp'}>
-                        <FormattedMessage id={'fortrolig.adresse.knapp'} />
+                        <FormattedMessage id={'papirsoknad.feilmelding.knapp'} />
                     </Hovedknapp>
                 </a>
             </div>
@@ -63,4 +69,4 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     };
 };
 
-export default connect(mapStateToProps)(FortroligAdresse);
+export default connect(mapStateToProps)(PapirsoknadFeilside);
