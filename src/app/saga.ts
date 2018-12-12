@@ -19,7 +19,7 @@ import { ISteg, stegConfig } from '../stegConfig';
 import { teksterHent, TeksterTypeKeys } from '../tekster/actions';
 import { ISprak } from '../tekster/types';
 import { ToggelsTypeKeys, togglesHent } from '../toggles/actions';
-import { appEndreStatus, appPingOk, appSettSteg, AppTypeKeys } from './actions';
+import { appEndreStatus, appPingOk, appSettSteg, AppTypeKeys, IAppGaaTilSteg } from './actions';
 import { pingBackend } from './api';
 import { selectAppSteg } from './selectors';
 import { AppStatus, ILocationChangeAction } from './types';
@@ -127,11 +127,16 @@ function* forrigeStegSaga(): SagaIterator {
     yield call(tilStegSaga, appSteg - 1);
 }
 
+function* gaaTilStegSaga(action: IAppGaaTilSteg): SagaIterator {
+    yield call(tilStegSaga, action.steg);
+}
+
 function* appSaga(): SagaIterator {
     yield takeLatest(AppTypeKeys.START_APP, startAppSaga);
     yield takeEvery(LOCATION_CHANGE, urlEndretSaga);
     yield takeEvery(AppTypeKeys.NESTE_STEG, nesteStegSaga);
     yield takeEvery(AppTypeKeys.FORRIGE_STEG, forrigeStegSaga);
+    yield takeEvery(AppTypeKeys.GAA_TIL_STEG, gaaTilStegSaga);
 }
 
 export { appSaga };

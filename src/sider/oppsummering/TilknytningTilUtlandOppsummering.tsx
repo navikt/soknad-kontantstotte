@@ -8,8 +8,9 @@ import {
     TilknytningTilUtlandVerdier,
     ValideringsStatus,
 } from '../../soknad/types';
+import { stegConfig } from '../../stegConfig';
 import OppsummeringsAdvarsel from './OppsummeringsAdvarsel';
-import { OppsummeringSteg } from './OppsummeringSteg';
+import OppsummeringSteg from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
 interface ITilknytningTilUtlandOppsummeringProps {
@@ -60,7 +61,7 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
     );
 
     return (
-        <OppsummeringSteg>
+        <OppsummeringSteg stegIndeks={stegConfig.tilknytningTilUtland.stegIndeks}>
             <Element>
                 <FormattedMessage id={'tilknytningTilUtland.tittel'} />
             </Element>

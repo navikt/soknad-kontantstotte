@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { IMineBarn } from '../../soknad/types';
-import { OppsummeringSteg } from './OppsummeringSteg';
+import { stegConfig } from '../../stegConfig';
+import OppsummeringSteg from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
 interface IBarnOppsummeringProps {
@@ -10,7 +11,7 @@ interface IBarnOppsummeringProps {
 
 const BarnOppsummering: React.StatelessComponent<IBarnOppsummeringProps> = ({ barn }) => {
     return (
-        <OppsummeringSteg>
+        <OppsummeringSteg stegIndeks={stegConfig.mineBarn.stegIndeks}>
             <SporsmalSvar
                 sporsmal={<FormattedMessage id={'barn.tittel'} />}
                 svar={`${barn.navn.verdi} - ${barn.fodselsdato.verdi}`}

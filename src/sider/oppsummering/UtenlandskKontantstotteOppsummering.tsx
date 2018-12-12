@@ -2,8 +2,9 @@ import Element from 'nav-frontend-typografi/lib/element';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { IUtenlandskKontantstotte, Svar } from '../../soknad/types';
+import { stegConfig } from '../../stegConfig';
 import { JaNeiSvar } from './JaNeiSvar';
-import { OppsummeringSteg } from './OppsummeringSteg';
+import OppsummeringSteg from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
 interface IUtenlandskKontantstotteOppsummeringProps {
@@ -20,7 +21,7 @@ const UtenlandskKontantstotteOppsummering: React.StatelessComponent<
         mottarKontantstotteFraUtlandetTilleggsinfo,
     } = utenlandskKontantstotte;
     return (
-        <OppsummeringSteg>
+        <OppsummeringSteg stegIndeks={stegConfig.utenlandskKontantstotte.stegIndeks}>
             <Element>
                 <FormattedMessage id={'utenlandskKontantstotte.tittel'} />
             </Element>
