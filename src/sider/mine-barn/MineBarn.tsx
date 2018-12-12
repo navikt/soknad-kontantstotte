@@ -55,8 +55,17 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
         return { label, value };
     }
 
+    function formaterNavn(upperCaseNavn: string): string {
+        const deltNavn = upperCaseNavn.toLowerCase().split(' ');
+        let fulltNavn = '';
+        for (const navn of deltNavn) {
+            fulltNavn += navn.charAt(0).toUpperCase() + navn.slice(1) + ' ';
+        }
+        return fulltNavn.slice(0, -1);
+    }
+
     const radioButtons = Array.from(barn).map((b: IBarn) =>
-        radioBtn(b.fulltnavn + ' (' + b.fodselsdato + ' )', b.fulltnavn)
+        radioBtn(formaterNavn(b.fulltnavn) + ' (' + b.fodselsdato + ' )', b.fulltnavn)
     );
 
     return (
