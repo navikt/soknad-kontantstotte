@@ -15,6 +15,7 @@ import {
     takeLatest,
 } from 'redux-saga/effects';
 import { barnHent, BarnTypeKeys } from '../barn/actions';
+import { selectBarn } from '../barn/selectors';
 import { sokerHent, SokerTypeKeys } from '../soker/actions';
 import { ISteg, stegConfig } from '../stegConfig';
 import { teksterHent, TeksterTypeKeys } from '../tekster/actions';
@@ -67,11 +68,17 @@ function* forsteSidelastSaga(): SagaIterator {
             take(SokerTypeKeys.HENT_OK),
             take(BarnTypeKeys.HENT_OK),
         ]);
+        const barn = yield select(selectBarn);
+        if (barn.length === 0) {
+            yield put(appEndreStatus(AppStatus.FEILSITUASJON));
+            yield put(push('/ingen-barn'));
+        } else {
+            yield put(appEndreStatus(AppStatus.KLAR));
+        }
     } else {
         yield all([take(TeksterTypeKeys.HENT_OK), take(SokerTypeKeys.HENT_OK)]);
+        yield put(appEndreStatus(AppStatus.KLAR));
     }
-
-    yield put(appEndreStatus(AppStatus.KLAR));
 }
 
 function* startAppSaga(): SagaIterator {
