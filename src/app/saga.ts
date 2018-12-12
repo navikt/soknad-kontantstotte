@@ -14,18 +14,18 @@ import {
     takeEvery,
     takeLatest,
 } from 'redux-saga/effects';
+import { barnHent, BarnTypeKeys } from '../barn/actions';
 import { sokerHent, SokerTypeKeys } from '../soker/actions';
 import { ISteg, stegConfig } from '../stegConfig';
 import { teksterHent, TeksterTypeKeys } from '../tekster/actions';
 import { ISprak } from '../tekster/types';
 import { ToggelsTypeKeys, togglesHent } from '../toggles/actions';
+import { isEnabled } from '../toggles/selectors';
+import { IToggleName } from '../toggles/types';
 import { appEndreStatus, appPingOk, appSettSteg, AppTypeKeys, IAppGaaTilSteg } from './actions';
 import { pingBackend } from './api';
 import { selectAppSteg } from './selectors';
 import { AppStatus, ILocationChangeAction } from './types';
-import { barnHent, BarnTypeKeys } from '../barn/actions';
-import { isEnabled } from '../toggles/selectors';
-import { IToggleName } from '../toggles/types';
 
 const redirectTilLogin = () => {
     window.location.href = Environment().loginUrl + '?redirect=' + window.location.href;

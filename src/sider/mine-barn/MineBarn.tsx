@@ -1,21 +1,20 @@
-import { Input } from 'nav-frontend-skjema';
+import { Input, RadioPanelGruppe } from 'nav-frontend-skjema';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
+import { selectBarn } from '../../barn/selectors';
+import { IBarn } from '../../barn/types';
 import { hentFeltMedFeil } from '../../common/utils';
 import BarnIkon from '../../component/Ikoner/BarnIkon';
 import SideContainer from '../../component/StegSide/StegSide';
 import { IRootState } from '../../rootReducer';
+import { selectSoker } from '../../soker/selectors';
+import { ISoker } from '../../soker/types';
 import { soknadValiderFelt } from '../../soknad/actions';
 import { selectMineBarn } from '../../soknad/selectors';
 import { IMineBarn } from '../../soknad/types';
-import { selectBarn } from '../../barn/selectors';
-import { IBarn } from '../../barn/types';
-import { ISoker } from '../../soker/types';
-import { selectSoker } from '../../soker/selectors';
-import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import { isEnabled } from '../../toggles/selectors';
 import { IToggleName } from '../../toggles/types';
 
@@ -76,8 +75,8 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                             let nyttValgtBarn = barn.find(b => b.fulltnavn === value);
                             if (nyttValgtBarn == null) {
                                 nyttValgtBarn = {
-                                    fulltnavn: '',
                                     fodselsdato: '',
+                                    fulltnavn: '',
                                 };
                             }
                             settBarnNavn(nyttValgtBarn.fulltnavn);
