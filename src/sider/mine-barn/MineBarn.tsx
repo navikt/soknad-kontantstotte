@@ -1,4 +1,5 @@
-import { Input, RadioPanelGruppe } from 'nav-frontend-skjema';
+import { Input } from 'nav-frontend-skjema';
+import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
