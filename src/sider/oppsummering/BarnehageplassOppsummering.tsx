@@ -2,9 +2,10 @@ import { Element } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { BarnehageplassVerdier, IBarnehageplass, ValideringsStatus } from '../../soknad/types';
+import { stegConfig } from '../../stegConfig';
 import { JaNeiSvar } from './JaNeiSvar';
 import OppsummeringsAdvarsel from './OppsummeringsAdvarsel';
-import { OppsummeringSteg } from './OppsummeringSteg';
+import OppsummeringSteg from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
 interface IBarnehageplassOppsummeringProps {
@@ -37,7 +38,7 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
     }
 
     return (
-        <OppsummeringSteg>
+        <OppsummeringSteg stegIndeks={stegConfig.barnehageplass.stegIndeks}>
             <Element>
                 <FormattedMessage id={'barnehageplass.tittel'} />
             </Element>

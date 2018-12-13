@@ -14,19 +14,19 @@ import {
     takeEvery,
     takeLatest,
 } from 'redux-saga/effects';
+import { barnHent, BarnTypeKeys } from '../barn/actions';
+import { selectBarn } from '../barn/selectors';
 import { sokerHent, SokerTypeKeys } from '../soker/actions';
 import { ISteg, stegConfig } from '../stegConfig';
 import { teksterHent, TeksterTypeKeys } from '../tekster/actions';
 import { ISprak } from '../tekster/types';
 import { ToggelsTypeKeys, togglesHent } from '../toggles/actions';
-import { appEndreStatus, appPingOk, appSettSteg, AppTypeKeys } from './actions';
+import { isEnabled } from '../toggles/selectors';
+import { IToggleName } from '../toggles/types';
+import { appEndreStatus, appPingOk, appSettSteg, AppTypeKeys, IAppGaaTilSteg } from './actions';
 import { pingBackend } from './api';
 import { selectAppSteg } from './selectors';
 import { AppStatus, ILocationChangeAction } from './types';
-import { barnHent, BarnTypeKeys } from '../barn/actions';
-import { isEnabled } from '../toggles/selectors';
-import { IToggleName } from '../toggles/types';
-import { selectBarn } from '../barn/selectors';
 
 const redirectTilLogin = () => {
     window.location.href = Environment().loginUrl + '?redirect=' + window.location.href;
@@ -134,11 +134,16 @@ function* forrigeStegSaga(): SagaIterator {
     yield call(tilStegSaga, appSteg - 1);
 }
 
+function* gaaTilStegSaga(action: IAppGaaTilSteg): SagaIterator {
+    yield call(tilStegSaga, action.steg);
+}
+
 function* appSaga(): SagaIterator {
     yield takeLatest(AppTypeKeys.START_APP, startAppSaga);
     yield takeEvery(LOCATION_CHANGE, urlEndretSaga);
     yield takeEvery(AppTypeKeys.NESTE_STEG, nesteStegSaga);
     yield takeEvery(AppTypeKeys.FORRIGE_STEG, forrigeStegSaga);
+    yield takeEvery(AppTypeKeys.GAA_TIL_STEG, gaaTilStegSaga);
 }
 
 export { appSaga };

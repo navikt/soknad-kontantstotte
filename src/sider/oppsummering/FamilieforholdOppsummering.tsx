@@ -2,8 +2,9 @@ import Element from 'nav-frontend-typografi/lib/element';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { IFamilieforhold, Svar } from '../../soknad/types';
+import { stegConfig } from '../../stegConfig';
 import { JaNeiSvar } from './JaNeiSvar';
-import { OppsummeringSteg } from './OppsummeringSteg';
+import OppsummeringSteg from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
 interface IFamilieforholdOppsummering {
@@ -16,7 +17,7 @@ const FamilieforholdOppsummering: React.StatelessComponent<FamilieforholdOppsumm
     familieforhold,
 }) => {
     return (
-        <OppsummeringSteg>
+        <OppsummeringSteg stegIndeks={stegConfig.familieforhold.stegIndeks}>
             <Element>
                 <FormattedMessage id={'familieforhold.tittel'} />
             </Element>

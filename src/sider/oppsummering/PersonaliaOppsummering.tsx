@@ -1,7 +1,7 @@
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { OppsummeringSteg } from './OppsummeringSteg';
+import OppsummeringSteg from './OppsummeringSteg';
 
 interface IMapStateToProps {
     soker: {

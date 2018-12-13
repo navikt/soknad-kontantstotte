@@ -2,8 +2,9 @@ import Element from 'nav-frontend-typografi/lib/element';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { IArbeidIUtlandet, IFamilieforhold, Svar } from '../../soknad/types';
+import { stegConfig } from '../../stegConfig';
 import { JaNeiSvar } from './JaNeiSvar';
-import { OppsummeringSteg } from './OppsummeringSteg';
+import OppsummeringSteg from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
 interface IArbeidIUtlandetOppsummeringProps {
@@ -25,7 +26,7 @@ const arbeidIUtlandetOppsummering: React.StatelessComponent<IArbeidIUtlandetOpps
     const { borForeldreneSammenMedBarnet } = familieforhold;
 
     return (
-        <OppsummeringSteg>
+        <OppsummeringSteg stegIndeks={stegConfig.arbeidIUtlandet.stegIndeks}>
             <Element>
                 <FormattedMessage id={'arbeidIUtlandet.tittel'} />
             </Element>

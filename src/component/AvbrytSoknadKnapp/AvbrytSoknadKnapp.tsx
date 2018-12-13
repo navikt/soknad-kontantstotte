@@ -6,9 +6,11 @@ import { selectAppSteg } from '../../app/selectors';
 import { IRootState } from '../../rootReducer';
 
 declare global {
+    /* tslint:disable:interface-name */
     interface Window {
         frontendlogger: any;
     }
+    /* tslint:enable:interface-name */
 }
 
 interface IAvbrytSoknadKnappProps {
