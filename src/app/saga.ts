@@ -26,6 +26,7 @@ import { AppStatus, ILocationChangeAction } from './types';
 import { barnHent, BarnTypeKeys } from '../barn/actions';
 import { isEnabled } from '../toggles/selectors';
 import { IToggleName } from '../toggles/types';
+import { selectBarn } from '../barn/selectors';
 
 const redirectTilLogin = () => {
     window.location.href = Environment().loginUrl + '?redirect=' + window.location.href;
@@ -67,11 +68,17 @@ function* forsteSidelastSaga(): SagaIterator {
             take(SokerTypeKeys.HENT_OK),
             take(BarnTypeKeys.HENT_OK),
         ]);
+        const barn = yield select(selectBarn);
+        if (barn.length === 0) {
+            yield put(appEndreStatus(AppStatus.FEILSITUASJON));
+            yield put(push('/ingen-barn'));
+        } else {
+            yield put(appEndreStatus(AppStatus.KLAR));
+        }
     } else {
         yield all([take(TeksterTypeKeys.HENT_OK), take(SokerTypeKeys.HENT_OK)]);
+        yield put(appEndreStatus(AppStatus.KLAR));
     }
-
-    yield put(appEndreStatus(AppStatus.KLAR));
 }
 
 function* startAppSaga(): SagaIterator {
