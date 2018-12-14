@@ -1,6 +1,6 @@
 import { InjectedIntl } from 'react-intl';
-import { IFeltFeil } from '../common/lib/validation/types';
 import { ValideringsStatus } from '../soknad/types';
+import { IFeltFeil } from './types';
 
 export const ANTALL_LOVLIGE_TEGN_I_TEKSTFELT = 500;
 
