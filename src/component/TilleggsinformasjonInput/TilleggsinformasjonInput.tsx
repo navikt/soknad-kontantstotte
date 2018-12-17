@@ -1,7 +1,7 @@
 import PanelBase from 'nav-frontend-paneler';
 import { TextareaControlled } from 'nav-frontend-skjema';
 import * as React from 'react';
-import { IFeil } from '../../common/lib/validation/types';
+import { IFeil } from '../../common/types';
 import { ANTALL_LOVLIGE_TEGN_I_TEKSTFELT } from '../../common/utils';
 import { IFelt } from '../../soknad/types';
 
