@@ -47,6 +47,7 @@ const BarnehageplassskalBegynneInfo: React.StatelessComponent<
                     }
                     defaultValue={skalBegynneIBarnehageDato.verdi}
                     feil={feltMedFeil.skalBegynneIBarnehageDato}
+                    maxLength={20}
                 />
                 <Input
                     className={'inputElement'}
@@ -63,6 +64,7 @@ const BarnehageplassskalBegynneInfo: React.StatelessComponent<
                     feil={feltMedFeil.skalBegynneIBarnehageAntallTimer}
                     type={'tel'}
                     autoComplete={'off'}
+                    maxLength={2}
                 />
                 <Input
                     className={'inputElement'}
@@ -77,6 +79,7 @@ const BarnehageplassskalBegynneInfo: React.StatelessComponent<
                     }
                     defaultValue={skalBegynneIBarnehageKommune.verdi}
                     feil={feltMedFeil.skalBegynneIBarnehageKommune}
+                    maxLength={50}
                 />
             </div>
         </SkjemaGruppe>
