@@ -9,6 +9,8 @@ interface ISokerState {
 const initialState: ISokerState = {
     henter: false,
     soker: {
+        fornavn: '',
+        fulltnavn: '',
         innloggetSom: '',
     },
 };
