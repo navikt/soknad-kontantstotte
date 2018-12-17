@@ -6,15 +6,21 @@ import { FormattedHTMLMessage, FormattedMessage, InjectedIntlProps, injectIntl }
 import { connect, Dispatch } from 'react-redux';
 import { appNesteSteg } from '../../app/actions';
 import Veilederikon from '../../component/Ikoner/Veilederikon';
+import { IRootState } from '../../rootReducer';
+import { selectSoker } from '../../soker/selectors';
 import { Personopplysning } from './Personopplysning';
+
+interface IMapStateToProps {
+    fornavn: string;
+}
 
 interface IMapDispatchToProps {
     nesteSteg: () => void;
 }
 
-type VeiledningProps = IMapDispatchToProps & InjectedIntlProps;
+type VeiledningProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
-const Veiledning: React.StatelessComponent<VeiledningProps> = ({ nesteSteg, intl }) => {
+const Veiledning: React.StatelessComponent<VeiledningProps> = ({ fornavn, nesteSteg, intl }) => {
     if (intl) {
         document.title = intl.formatMessage({
             id: 'app.tittel.veiledning',
@@ -32,7 +38,8 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({ nesteSteg, intl
                     tekst={
                         <div className={'veiledning__veileder-snakkeboble'}>
                             <Element>
-                                <FormattedMessage id={'veiledningsside.veileder.hei'} />
+                                <FormattedMessage id={'veiledningsside.veileder.hei'} />{' '}
+                                <span className={'veiledning__veileder-navn'}>{fornavn}</span>!
                             </Element>
                             <Normaltekst>
                                 <FormattedMessage id={'veiledningsside.veileder.melding'} />
@@ -61,6 +68,12 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({ nesteSteg, intl
     );
 };
 
+const mapStateToProps = (state: IRootState): IMapStateToProps => {
+    return {
+        fornavn: selectSoker(state).fornavn.toLocaleLowerCase(),
+    };
+};
+
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         nesteSteg: () => dispatch(appNesteSteg()),
@@ -68,6 +81,6 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
 };
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(injectIntl(Veiledning));
