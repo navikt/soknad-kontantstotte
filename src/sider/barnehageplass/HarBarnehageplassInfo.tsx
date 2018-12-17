@@ -3,7 +3,7 @@ import { Input, SkjemaGruppe } from 'nav-frontend-skjema';
 import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import { IFeltFeil } from '../../common/lib/validation/types';
+import { IFeltFeil } from '../../common/types';
 import AdvarselIkon from '../../component/Ikoner/AdvarselIkon';
 import { IRootState } from '../../rootReducer';
 import { selectBarnehageplass } from '../../soknad/selectors';

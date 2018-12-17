@@ -2,7 +2,7 @@ import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import Veileder from 'nav-frontend-veileder';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntl } from 'react-intl';
-import { IFeil } from '../../common/lib/validation/types';
+import { IFeil } from '../../common/types';
 import Veilederikon from '../../component/Ikoner/Veilederikon';
 import TilleggsinformasjonInput from '../../component/TilleggsinformasjonInput/TilleggsinformasjonInput';
 import { Feltnavn, IFelt, TilknytningTilUtlandVerdier } from '../../soknad/types';
