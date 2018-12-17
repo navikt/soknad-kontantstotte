@@ -3111,119 +3111,119 @@ nav-frontend-chevron-style@0.3.4:
   version "0.3.4"
   resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-chevron-style/-/nav-frontend-chevron-style-0.3.4.tgz#e6b0d5e9ddd87af988e4e1a44fc7fcb1fbb70994"
 
-nav-frontend-chevron@1.0.5:
-  version "1.0.5"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-chevron/-/nav-frontend-chevron-1.0.5.tgz#7f590b3683755c3f09669df5ffbd1f4e105195ff"
+nav-frontend-chevron@1.0.6:
+  version "1.0.6"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-chevron/-/nav-frontend-chevron-1.0.6.tgz#e83825609b8b2f0729b4ea2e8df27f8dc2c66147"
 
 nav-frontend-core@4.0.5, nav-frontend-core@^4.0.2:
   version "4.0.5"
   resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-core/-/nav-frontend-core-4.0.5.tgz#309c9de6a5146e8e93b3f52d4fc42cc309acdca1"
 
-nav-frontend-hjelpetekst-style@0.3.13:
-  version "0.3.13"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-hjelpetekst-style/-/nav-frontend-hjelpetekst-style-0.3.13.tgz#64f9ba789dbb60f7167c6cf0625d980a5508f37c"
+nav-frontend-hjelpetekst-style@0.3.25:
+  version "0.3.25"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-hjelpetekst-style/-/nav-frontend-hjelpetekst-style-0.3.25.tgz#718f036017582a4ce147d4685bcb14be8ce1dce1"
 
-nav-frontend-hjelpetekst@1.0.14:
-  version "1.0.14"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-hjelpetekst/-/nav-frontend-hjelpetekst-1.0.14.tgz#917049409ea8c227cfca5214fc61332b35eb5099"
+nav-frontend-hjelpetekst@1.0.27:
+  version "1.0.27"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-hjelpetekst/-/nav-frontend-hjelpetekst-1.0.27.tgz#728f8290f3a96b844d203ab0b6f50d42c38b69dd"
 
-nav-frontend-ikoner-assets@0.2.27:
-  version "0.2.27"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-ikoner-assets/-/nav-frontend-ikoner-assets-0.2.27.tgz#5e42f1456c798b82655284fba1a1736cfbfce5a9"
+nav-frontend-ikoner-assets@0.2.29:
+  version "0.2.29"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-ikoner-assets/-/nav-frontend-ikoner-assets-0.2.29.tgz#32435457f8a51086de7d426212c60d0e7ba36934"
 
 nav-frontend-js-utils@1.0.6:
   version "1.0.6"
   resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-js-utils/-/nav-frontend-js-utils-1.0.6.tgz#e3320dffd377239ccfaf22da7f4886d3b79303df"
 
-nav-frontend-knapper-style@0.3.9:
-  version "0.3.9"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-knapper-style/-/nav-frontend-knapper-style-0.3.9.tgz#798d5deaa0184ab8e88c6860fc59edfaca4abb44"
+nav-frontend-knapper-style@0.3.19:
+  version "0.3.19"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-knapper-style/-/nav-frontend-knapper-style-0.3.19.tgz#d1ae0ff6e7cfec339dc794ec0e193ca3c3a3d2f6"
 
-nav-frontend-knapper@1.0.10:
-  version "1.0.10"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-knapper/-/nav-frontend-knapper-1.0.10.tgz#f6ea921cac1b9e17d111d679943d22008d63e660"
+nav-frontend-knapper@1.0.21:
+  version "1.0.21"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-knapper/-/nav-frontend-knapper-1.0.21.tgz#71fe041ec27b758cf91e7c6b10a0c6f93346d518"
 
-nav-frontend-lenker-style@0.2.6:
-  version "0.2.6"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-lenker-style/-/nav-frontend-lenker-style-0.2.6.tgz#c937610f845a8b5a2b3109674499fbce9f5ee122"
+nav-frontend-lenker-style@0.2.16:
+  version "0.2.16"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-lenker-style/-/nav-frontend-lenker-style-0.2.16.tgz#130e233529dabcaccd5f8ca6265fd1386b67f8fa"
 
 nav-frontend-lenker@1.0.18:
   version "1.0.18"
   resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-lenker/-/nav-frontend-lenker-1.0.18.tgz#ff9cb78b160f7f6ce8fb46dfce370c908640423c"
 
-nav-frontend-lukknapp-style@0.2.7:
-  version "0.2.7"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-lukknapp-style/-/nav-frontend-lukknapp-style-0.2.7.tgz#a3f54e68641ea77087e2fc6b8703b992e8acdf28"
+nav-frontend-lukknapp-style@0.2.16:
+  version "0.2.16"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-lukknapp-style/-/nav-frontend-lukknapp-style-0.2.16.tgz#d7057337f085f100a1781351185dcd8c77507fea"
 
-nav-frontend-lukknapp@1.0.6:
-  version "1.0.6"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-lukknapp/-/nav-frontend-lukknapp-1.0.6.tgz#af702f8adb078eb8b50e3d84baf67ce70c680c52"
+nav-frontend-lukknapp@1.0.16:
+  version "1.0.16"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-lukknapp/-/nav-frontend-lukknapp-1.0.16.tgz#0c7668254d972a48cc4d98deee6e781b719d4a72"
 
-nav-frontend-modal-style@0.3.12:
-  version "0.3.12"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-modal-style/-/nav-frontend-modal-style-0.3.12.tgz#789586f2e289d6b3a1f88ab4b6c8e8e4d39132a0"
+nav-frontend-modal-style@0.3.23:
+  version "0.3.23"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-modal-style/-/nav-frontend-modal-style-0.3.23.tgz#913184fe7e94540414cad91e052308a934afbaac"
 
-nav-frontend-modal@1.0.7:
-  version "1.0.7"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-modal/-/nav-frontend-modal-1.0.7.tgz#bc6e0ca1822aafb117beb87259be8d4fa6079715"
+nav-frontend-modal@1.0.19:
+  version "1.0.19"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-modal/-/nav-frontend-modal-1.0.19.tgz#672fbd8bf056935172dcce5bc148e7afa451ef10"
 
-nav-frontend-paneler-style@0.3.9:
-  version "0.3.9"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-paneler-style/-/nav-frontend-paneler-style-0.3.9.tgz#c0f519a258f19e707dc31669db1421c3c1f50aad"
+nav-frontend-paneler-style@0.3.11:
+  version "0.3.11"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-paneler-style/-/nav-frontend-paneler-style-0.3.11.tgz#bec1af552cfa921ca0bf4898dbaf1c377ab4b31a"
 
-nav-frontend-paneler@1.0.7:
-  version "1.0.7"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-paneler/-/nav-frontend-paneler-1.0.7.tgz#48d7e77326090cda78d3c027ec6d172390295396"
-
-nav-frontend-skjema-style@1.0.4:
-  version "1.0.4"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-skjema-style/-/nav-frontend-skjema-style-1.0.4.tgz#c8dbde79e84c3f26a66dcc8be23d9fc090a86a6e"
-
-nav-frontend-skjema@1.0.34:
-  version "1.0.34"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-skjema/-/nav-frontend-skjema-1.0.34.tgz#ef1f1ac6c391fa6d306f442356573e46fad9b89c"
-
-nav-frontend-spinner-style@0.2.4:
-  version "0.2.4"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-spinner-style/-/nav-frontend-spinner-style-0.2.4.tgz#2c851f5bd4ffe21b2802a9b2f16fade1506a961a"
-
-nav-frontend-spinner@1.0.10:
+nav-frontend-paneler@1.0.10:
   version "1.0.10"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-spinner/-/nav-frontend-spinner-1.0.10.tgz#7d8275e047b4ec1fa7089eea465a21112b3f1a18"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-paneler/-/nav-frontend-paneler-1.0.10.tgz#dadcb256c2e98b7935b1ae8c325843c73bec44dc"
 
-nav-frontend-stegindikator-style@1.0.3:
-  version "1.0.3"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-stegindikator-style/-/nav-frontend-stegindikator-style-1.0.3.tgz#f2a260689a49106fcaa06fc1f1d1755e9690e1b6"
+nav-frontend-skjema-style@1.0.30:
+  version "1.0.30"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-skjema-style/-/nav-frontend-skjema-style-1.0.30.tgz#ff6e3b0fdbb3159abecc641afcbc1c54c1ebb2d3"
 
-nav-frontend-stegindikator@0.0.15:
-  version "0.0.15"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-stegindikator/-/nav-frontend-stegindikator-0.0.15.tgz#addcf0873793ac36ee41c993c4d4d593f47fd9bd"
+nav-frontend-skjema@1.0.49:
+  version "1.0.49"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-skjema/-/nav-frontend-skjema-1.0.49.tgz#1f5f9f6f911193f87a6725253a64412323daa3b1"
 
-nav-frontend-typografi-style@1.0.9:
-  version "1.0.9"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-typografi-style/-/nav-frontend-typografi-style-1.0.9.tgz#68e23f1e287b5e361b26466c29bb587df44f960b"
+nav-frontend-spinner-style@0.2.5:
+  version "0.2.5"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-spinner-style/-/nav-frontend-spinner-style-0.2.5.tgz#c782c63589776e768a45d6049047b1a60b6805be"
+
+nav-frontend-spinner@1.0.12:
+  version "1.0.12"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-spinner/-/nav-frontend-spinner-1.0.12.tgz#9e0e51069a06730ac9e95491894866ca3937260b"
+
+nav-frontend-stegindikator-style@1.0.13:
+  version "1.0.13"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-stegindikator-style/-/nav-frontend-stegindikator-style-1.0.13.tgz#fc878cc51e4b4030bb485bb6952dfffc5afdfcb2"
+
+nav-frontend-stegindikator@0.0.27:
+  version "0.0.27"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-stegindikator/-/nav-frontend-stegindikator-0.0.27.tgz#dfeaf843cd8e850e66ece0ad93a8af944c88fe84"
+
+nav-frontend-typografi-style@1.0.10:
+  version "1.0.10"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-typografi-style/-/nav-frontend-typografi-style-1.0.10.tgz#bc67c16c8956198726844c1d53c5af3a0954af89"
   dependencies:
     nav-frontend-core "^4.0.2"
 
-nav-frontend-typografi@2.0.5:
-  version "2.0.5"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-typografi/-/nav-frontend-typografi-2.0.5.tgz#9bd255c98f61d2d46122b6426d9b46e144b6ad0e"
+nav-frontend-typografi@2.0.6:
+  version "2.0.6"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-typografi/-/nav-frontend-typografi-2.0.6.tgz#1dff22b7a6e75aff33b22408fb0a2cbc015a56df"
 
-nav-frontend-veileder-style@2.0.1:
-  version "2.0.1"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-veileder-style/-/nav-frontend-veileder-style-2.0.1.tgz#7eef42ae11f2d3bac6fbcb1dc2d81041eefa9062"
+nav-frontend-veileder-style@2.0.2:
+  version "2.0.2"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-veileder-style/-/nav-frontend-veileder-style-2.0.2.tgz#fe8fc565018bdd886e3606ce3e0905edecef2901"
 
-nav-frontend-veileder@2.0.1:
-  version "2.0.1"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-veileder/-/nav-frontend-veileder-2.0.1.tgz#6804fe14a17a081ca2ee7a32c38b9daf7b3a6280"
+nav-frontend-veileder@2.0.2:
+  version "2.0.2"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-veileder/-/nav-frontend-veileder-2.0.2.tgz#60ca73b43d2906a08de16cebf757ee949be1507b"
 
-nav-frontend-veilederpanel-style@0.0.8:
-  version "0.0.8"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-veilederpanel-style/-/nav-frontend-veilederpanel-style-0.0.8.tgz#59e2bc3306e824bd48f5ee303bb29bfdbc9b6b35"
+nav-frontend-veilederpanel-style@0.0.10:
+  version "0.0.10"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-veilederpanel-style/-/nav-frontend-veilederpanel-style-0.0.10.tgz#7588be00b6328bfd1a5e5828316efbf088048240"
 
-nav-frontend-veilederpanel@0.1.1:
-  version "0.1.1"
-  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-veilederpanel/-/nav-frontend-veilederpanel-0.1.1.tgz#54155a3965689e72a2bfd14683ce180de91a2552"
+nav-frontend-veilederpanel@0.1.3:
+  version "0.1.3"
+  resolved "https://repo.adeo.no/repository/npm-public/nav-frontend-veilederpanel/-/nav-frontend-veilederpanel-0.1.3.tgz#f6a06a22cbc32a20f43f989c4642d1fa89fa8421"
 
 needle@^2.2.1:
   version "2.2.4"
