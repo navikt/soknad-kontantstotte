@@ -34,6 +34,7 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
                 }}
                 defaultValue={familieforhold.annenForelderNavn.verdi}
                 feil={feltMedFeil.annenForelderNavn}
+                maxLength={50}
             />
             <Input
                 name="annenforelder.fodselsnummer"
@@ -47,6 +48,7 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
                 feil={feltMedFeil.annenForelderFodselsnummer}
                 type={'tel'}
                 autoComplete={'off'}
+                maxLength={11}
             />
         </SoknadPanel>
     );

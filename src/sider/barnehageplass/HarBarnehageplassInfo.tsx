@@ -47,6 +47,7 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                     }
                     defaultValue={harBarnehageplassDato.verdi}
                     feil={feltMedFeil.harBarnehageplassDato}
+                    maxLength={10}
                 />
                 <div className={'inputElement barnehageplass__antallTimer--container'}>
                     <Input
@@ -64,6 +65,7 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                         feil={feltMedFeil.harBarnehageplassAntallTimer}
                         type={'tel'}
                         autoComplete={'off'}
+                        maxLength={2}
                     />
                     {harBarnehageplassAntallTimer.valideringsStatus ===
                         ValideringsStatus.ADVARSEL && (
@@ -86,6 +88,7 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                     }
                     defaultValue={harBarnehageplassKommune.verdi}
                     feil={feltMedFeil.harBarnehageplassKommune}
+                    maxLength={50}
                 />
             </div>
         </SkjemaGruppe>

@@ -45,6 +45,7 @@ const BarnehageplassHarSluttetInfo: React.StatelessComponent<BarnehageplassHarSl
                     }
                     defaultValue={harSluttetIBarnehageDato.verdi}
                     feil={feltMedFeil.harSluttetIBarnehageDato}
+                    maxLength={10}
                 />
                 <Input
                     className={'inputElement'}
@@ -61,6 +62,7 @@ const BarnehageplassHarSluttetInfo: React.StatelessComponent<BarnehageplassHarSl
                     feil={feltMedFeil.harSluttetIBarnehageAntallTimer}
                     type={'tel'}
                     autoComplete={'off'}
+                    maxLength={2}
                 />
                 <Input
                     className={'inputElement'}
@@ -75,6 +77,7 @@ const BarnehageplassHarSluttetInfo: React.StatelessComponent<BarnehageplassHarSl
                     }
                     defaultValue={harSluttetIBarnehageKommune.verdi}
                     feil={feltMedFeil.harSluttetIBarnehageKommune}
+                    maxLength={50}
                 />
             </div>
         </SkjemaGruppe>
