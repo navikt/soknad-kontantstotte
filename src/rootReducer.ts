@@ -1,4 +1,5 @@
-import { RouterState } from 'connected-react-router';
+import { connectRouter, RouterState } from 'connected-react-router';
+import { History } from 'history';
 import { combineReducers } from 'redux';
 import { appReducer, IAppState } from './app/reducer';
 import { barnReducer, IBarnState } from './barn/reducer';
@@ -20,14 +21,16 @@ export interface IRootState {
     toggles: ITogglesState;
 }
 
-const rootReducer = combineReducers({
-    app: appReducer,
-    barn: barnReducer,
-    innsending: innsendingReducer,
-    soker: sokerReducer,
-    soknad: soknadReducer,
-    tekster: teksterReducer,
-    toggles: toggelsReducer,
-});
+const rootReducer = (history: History) =>
+    combineReducers({
+        app: appReducer,
+        barn: barnReducer,
+        innsending: innsendingReducer,
+        router: connectRouter(history),
+        soker: sokerReducer,
+        soknad: soknadReducer,
+        tekster: teksterReducer,
+        toggles: toggelsReducer,
+    });
 
 export { rootReducer };
