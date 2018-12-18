@@ -62,7 +62,7 @@ const BarnehageplassHarSluttetInfo: React.StatelessComponent<BarnehageplassHarSl
                     feil={feltMedFeil.harSluttetIBarnehageAntallTimer}
                     type={'tel'}
                     autoComplete={'off'}
-                    maxLength={2}
+                    maxLength={5}
                 />
                 <Input
                     className={'inputElement'}
