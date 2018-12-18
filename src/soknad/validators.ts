@@ -66,7 +66,7 @@ const harSvartTekst = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
 };
 
 const harSvartTekstUnderAntallTegn = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
-    return felt.verdi.length < ANTALL_LOVLIGE_TEGN_I_TEKSTFELT
+    return felt.verdi.length <= ANTALL_LOVLIGE_TEGN_I_TEKSTFELT
         ? ok(felt)
         : feil(felt, feilmeldingsNokkel);
 };
