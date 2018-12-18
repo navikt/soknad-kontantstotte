@@ -45,7 +45,7 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
                     }
                     defaultValue={skalSlutteIBarnehageDato.verdi}
                     feil={feltMedFeil.skalSlutteIBarnehageDato}
-                    maxLength={20}
+                    maxLength={10}
                 />
                 <Input
                     className={'inputElement'}

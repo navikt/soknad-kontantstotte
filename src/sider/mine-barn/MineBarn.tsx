@@ -112,7 +112,7 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                             }
                             defaultValue={valgtBarn.fodselsdato.verdi}
                             feil={feltMedFeil.fodselsdato}
-                            maxLength={20}
+                            maxLength={10}
                         />
                     </div>
                 </form>

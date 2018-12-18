@@ -47,7 +47,7 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                     }
                     defaultValue={harBarnehageplassDato.verdi}
                     feil={feltMedFeil.harBarnehageplassDato}
-                    maxLength={20}
+                    maxLength={10}
                 />
                 <div className={'inputElement barnehageplass__antallTimer--container'}>
                     <Input

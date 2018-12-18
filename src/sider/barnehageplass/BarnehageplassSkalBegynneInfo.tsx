@@ -47,7 +47,7 @@ const BarnehageplassskalBegynneInfo: React.StatelessComponent<
                     }
                     defaultValue={skalBegynneIBarnehageDato.verdi}
                     feil={feltMedFeil.skalBegynneIBarnehageDato}
-                    maxLength={20}
+                    maxLength={10}
                 />
                 <Input
                     className={'inputElement'}

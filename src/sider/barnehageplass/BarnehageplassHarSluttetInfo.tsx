@@ -45,7 +45,7 @@ const BarnehageplassHarSluttetInfo: React.StatelessComponent<BarnehageplassHarSl
                     }
                     defaultValue={harSluttetIBarnehageDato.verdi}
                     feil={feltMedFeil.harSluttetIBarnehageDato}
-                    maxLength={20}
+                    maxLength={10}
                 />
                 <Input
                     className={'inputElement'}
