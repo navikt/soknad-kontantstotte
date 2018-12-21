@@ -1,10 +1,17 @@
 [
   {
-    "fulltnavn" : "Barn1 McMockface",
-    "fodselsdato" : "01.01.2018"
+    "fulltnavn" : "NAVNESEN JENTEBARN",
+    "fodselsdato" : "01.01.2018",
+    "erFlerling": false
   },
   {
-    "fulltnavn" : "Barn2 McMockface",
-    "fodselsdato" : "02.02.2018"
+    "fulltnavn" : "NAVNESEN GUTTEBARN",
+    "fodselsdato" : "02.01.2018",
+    "erFlerling": false
+  },
+  {
+  "fulltnavn" : "JENTEBARN OG GUTTEBARN",
+  "fodselsdato" : "01.01.2018 og 02.01.2018",
+  "erFlerling": true
   }
 ]
