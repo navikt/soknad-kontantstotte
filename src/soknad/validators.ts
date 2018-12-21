@@ -6,6 +6,7 @@ import {
     TilknytningTilUtlandVerdier,
     ValideringsStatus,
 } from './types';
+import { string } from 'prop-types';
 
 export const harTekstomradeInnhold = (verdi?: string): boolean => {
     return verdi ? verdi.length > 0 : false;
@@ -78,9 +79,16 @@ const harFyltInnNavn = (felt: IFelt): IFelt => {
 };
 
 const harFyltInnDato = (felt: IFelt): IFelt => {
-    return /^\d{2}\.\d{2}\.\d{4}$/.test(felt.verdi.replace(' ', ''))
-        ? ok(felt)
-        : feil(felt, 'feilmelding.generell.dato');
+    const datoer = felt.verdi
+        .replace('og', ',')
+        .replace(/ /g, '')
+        .split(',');
+    for (const dato of datoer) {
+        if (!/^\d{2}\.\d{2}\.\d{4}$/.test(dato)) {
+            return feil(felt, 'feilmelding.generell.dato');
+        }
+    }
+    return ok(felt);
 };
 
 const harFyltInnFodselsnummer = (felt: IFelt): IFelt => {

@@ -76,6 +76,7 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                             let nyttValgtBarn = barn.find(b => b.fulltnavn === value);
                             if (nyttValgtBarn == null) {
                                 nyttValgtBarn = {
+                                    erFlerling: false,
                                     fodselsdato: '',
                                     fulltnavn: '',
                                 };
