@@ -6,6 +6,7 @@ import OppsummeringSteg from './OppsummeringSteg';
 interface IMapStateToProps {
     soker: {
         fodselsnummer: string;
+        navn: string;
     };
 }
 
@@ -17,6 +18,7 @@ const PersonaliaOppsummering: React.StatelessComponent<PersonaliaOgBarnProps> = 
             <Element>
                 <FormattedMessage id="oppsummering.sokerKontantstotteAv.label" />
             </Element>
+            <Normaltekst>{soker.navn}</Normaltekst>
             <Normaltekst>
                 <FormattedMessage id="oppsummering.fodselsnummer.label" />
                 {soker.fodselsnummer}
