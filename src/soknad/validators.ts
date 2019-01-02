@@ -6,7 +6,6 @@ import {
     TilknytningTilUtlandVerdier,
     ValideringsStatus,
 } from './types';
-import { string } from 'prop-types';
 
 export const harTekstomradeInnhold = (verdi?: string): boolean => {
     return verdi ? verdi.length > 0 : false;
