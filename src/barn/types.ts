@@ -1,6 +1,6 @@
 interface IBarn {
     fulltnavn: string;
     fodselsdato: string;
-    erFlerling: boolean;
+    erFlerling: string;
 }
 export { IBarn };

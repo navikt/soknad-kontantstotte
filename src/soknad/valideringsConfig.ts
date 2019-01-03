@@ -25,6 +25,7 @@ import {
     harSvartTekstUnderAntallTegnMedFeilmelding,
     harSvartTilknytningTilUtlandVerdiMedFeilmelding,
     sokerHarIkkeSvartNeiTilknytningTilUtland,
+    svarUtenValidering,
 } from './validators';
 
 interface IValideringsConfig {
@@ -102,6 +103,7 @@ const valideringsConfig: IValideringsConfig = {
         skalBoMedBarnetINorgeNesteTolvMaaneder: [harSvartJaMedFeilmelding],
     },
     mineBarn: {
+        erFlerling: [svarUtenValidering],
         fodselsdato: [harSvartTekstMedFeilmelding, harFyltInnDato],
         navn: [harFyltInnNavn],
     },

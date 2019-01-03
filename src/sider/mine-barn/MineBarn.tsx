@@ -15,7 +15,7 @@ import { selectSoker } from '../../soker/selectors';
 import { ISoker } from '../../soker/types';
 import { soknadValiderFelt } from '../../soknad/actions';
 import { selectMineBarn } from '../../soknad/selectors';
-import { IMineBarn } from '../../soknad/types';
+import { IMineBarn, Svar } from '../../soknad/types';
 import { isEnabled } from '../../toggles/selectors';
 import { IToggleName } from '../../toggles/types';
 
@@ -30,6 +30,7 @@ interface IMapStateToProps {
 interface IMapDispatchToProps {
     settBarnNavn: (navn: string) => void;
     settBarnFodselsdato: (fodselsdato: string) => void;
+    settBarnFlerlingStatus: (flerlingStatus: string) => void;
 }
 
 interface IRadioContent {
@@ -45,6 +46,7 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
     harForsoktNesteSteg,
     settBarnFodselsdato,
     settBarnNavn,
+    settBarnFlerlingStatus,
     valgtBarn,
     intl,
     brukTpsMineBarn,
@@ -76,13 +78,14 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                             let nyttValgtBarn = barn.find(b => b.fulltnavn === value);
                             if (nyttValgtBarn == null) {
                                 nyttValgtBarn = {
-                                    erFlerling: false,
+                                    erFlerling: '',
                                     fodselsdato: '',
                                     fulltnavn: '',
                                 };
                             }
                             settBarnNavn(nyttValgtBarn.fulltnavn);
                             settBarnFodselsdato(nyttValgtBarn.fodselsdato);
+                            settBarnFlerlingStatus(nyttValgtBarn.erFlerling ? Svar.JA : Svar.NEI);
                         }}
                         checked={valgtBarn.navn.verdi}
                         radios={radioButtons}
@@ -91,6 +94,7 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                 </form>
             ) : (
                 <form>
+                    {settBarnFlerlingStatus(Svar.NEI)}
                     <legend className={'skjema__legend'}>
                         {intl.formatMessage({ id: 'barn.subtittel' })}
                     </legend>
@@ -134,6 +138,8 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
+        settBarnFlerlingStatus: (flerlingStatus: string) =>
+            dispatch(soknadValiderFelt('mineBarn', 'erFlerling', flerlingStatus)),
         settBarnFodselsdato: (fodselsdato: string) =>
             dispatch(soknadValiderFelt('mineBarn', 'fodselsdato', fodselsdato)),
         settBarnNavn: (navn: string) => dispatch(soknadValiderFelt('mineBarn', 'navn', navn)),

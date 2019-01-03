@@ -1,11 +1,21 @@
-import { Sidetittel } from 'nav-frontend-typografi';
 import * as React from 'react';
+
+import AlertStripe from 'nav-frontend-alertstriper';
+import { Sidetittel } from 'nav-frontend-typografi';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { connect } from 'react-redux';
+import { IRootState } from '../../rootReducer';
+import { selectMineBarn } from '../../soknad/selectors';
+import { IMineBarn, Svar } from '../../soknad/types';
 import KvitteringIkon from './ikoner/KvitteringIkon';
 import UtvidetInfo from './UtvidetInfo';
 
-type KvitteringProps = InjectedIntlProps;
-const Kvittering: React.StatelessComponent<KvitteringProps> = ({ intl }) => {
+interface IMapStateToProps {
+    barn: IMineBarn;
+}
+
+type KvitteringProps = InjectedIntlProps & IMapStateToProps;
+const Kvittering: React.StatelessComponent<KvitteringProps> = ({ intl, barn }) => {
     if (intl) {
         document.title = intl.formatMessage({
             id: 'app.tittel.kvittering',
@@ -27,8 +37,19 @@ const Kvittering: React.StatelessComponent<KvitteringProps> = ({ intl }) => {
             </h3>
 
             <UtvidetInfo intl={intl} />
+            {barn.erFlerling.verdi === Svar.JA && (
+                <AlertStripe className="kvittering__advarsel" type="info">
+                    <FormattedMessage id={'advarsel.flerebarn'} />
+                </AlertStripe>
+            )}
         </div>
     );
 };
 
-export default injectIntl(Kvittering);
+const mapStateToProps = (state: IRootState): IMapStateToProps => {
+    return {
+        barn: selectMineBarn(state),
+    };
+};
+
+export default injectIntl(connect(mapStateToProps)(Kvittering));

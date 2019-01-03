@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { IMineBarn } from '../../soknad/types';
+import { IMineBarn, Svar } from '../../soknad/types';
 import { stegConfig } from '../../stegConfig';
+import OppsummeringsAdvarsel from './OppsummeringsAdvarsel';
 import OppsummeringSteg from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
 
@@ -16,6 +17,9 @@ const BarnOppsummering: React.StatelessComponent<IBarnOppsummeringProps> = ({ ba
                 sporsmal={<FormattedMessage id={'barn.tittel'} />}
                 svar={`${barn.navn.verdi} - ${barn.fodselsdato.verdi}`}
             />
+            {barn.erFlerling.verdi === Svar.JA && (
+                <OppsummeringsAdvarsel meldingsNokkel={'advarsel.flerebarn'} />
+            )}
         </OppsummeringSteg>
     );
 };
