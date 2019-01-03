@@ -64,7 +64,7 @@ const BarnehageplassskalBegynneInfo: React.StatelessComponent<
                     feil={feltMedFeil.skalBegynneIBarnehageAntallTimer}
                     type={'tel'}
                     autoComplete={'off'}
-                    maxLength={2}
+                    maxLength={5}
                 />
                 <Input
                     className={'inputElement'}

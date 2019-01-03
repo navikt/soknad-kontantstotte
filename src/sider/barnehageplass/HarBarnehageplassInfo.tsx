@@ -65,7 +65,7 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                         feil={feltMedFeil.harBarnehageplassAntallTimer}
                         type={'tel'}
                         autoComplete={'off'}
-                        maxLength={2}
+                        maxLength={5}
                     />
                     {harBarnehageplassAntallTimer.valideringsStatus ===
                         ValideringsStatus.ADVARSEL && (

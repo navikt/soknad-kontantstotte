@@ -1,7 +1,8 @@
 import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
-import { connect, Dispatch } from 'react-redux';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import SoknadPanel from '../../component/SoknadPanel/SoknadPanel';
 import SideContainer from '../../component/StegSide/StegSide';

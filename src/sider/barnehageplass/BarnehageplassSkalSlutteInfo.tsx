@@ -62,7 +62,7 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
                     feil={feltMedFeil.skalSlutteIBarnehageAntallTimer}
                     type={'tel'}
                     autoComplete={'off'}
-                    maxLength={2}
+                    maxLength={5}
                 />
                 <Input
                     className={'inputElement'}

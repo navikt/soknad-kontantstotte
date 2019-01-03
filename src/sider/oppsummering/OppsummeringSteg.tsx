@@ -1,7 +1,8 @@
 import Knapp from 'nav-frontend-knapper/lib/knapp';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect, Dispatch } from 'react-redux';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import { appGaaTilSteg } from '../../app/actions';
 
 interface IOppsummeringStegProps {
