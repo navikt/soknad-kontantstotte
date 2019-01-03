@@ -69,9 +69,9 @@ describe('soknad-kontantstotte', () => {
 
         test('mine-barn-utfylt', async () => {
             if ((await page.$('.inputPanelGruppe')) !== null) {
-                await page.click('[name="mine-barn__sporsmal"][value="11111111111"]');
+                await page.click('[name="mine-barn__sporsmal"][value="NAVNESEN JENTEBARN"]');
             } else {
-                await page.type('.mine-barn__navn-input > input', 'Mock McMockface');
+                await page.type('.mine-barn__navn-input > input', 'NAVNESEN JENTEBARN');
                 await page.type('.mine-barn__fodselsdato-input > input', '01.01.2018');
             }
             await page.click('.typo-undertittel');

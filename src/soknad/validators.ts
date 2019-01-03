@@ -78,9 +78,16 @@ const harFyltInnNavn = (felt: IFelt): IFelt => {
 };
 
 const harFyltInnDato = (felt: IFelt): IFelt => {
-    return /^\d{2}\.\d{2}\.\d{4}$/.test(felt.verdi.replace(' ', ''))
-        ? ok(felt)
-        : feil(felt, 'feilmelding.generell.dato');
+    const datoer = felt.verdi
+        .replace('og', ',')
+        .replace(/ /g, '')
+        .split(',');
+    for (const dato of datoer) {
+        if (!/^\d{2}\.\d{2}\.\d{4}$/.test(dato)) {
+            return feil(felt, 'feilmelding.generell.dato');
+        }
+    }
+    return ok(felt);
 };
 
 const harFyltInnFodselsnummer = (felt: IFelt): IFelt => {
