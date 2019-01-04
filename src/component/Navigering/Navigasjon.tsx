@@ -39,9 +39,12 @@ class Navigasjon extends React.Component<NavigasjonProps, INavigasjonState> {
 
         return (
             <div className={'navigasjon'}>
-                <Submitknapp className={'navigasjon__knapp'} />
+                <Avbrytknapp
+                    className={'navigasjon__knapp navigasjon__knapp--avbryt'}
+                    openModal={this.openModal}
+                />
                 <Tilbakeknapp posisjon={'nede'} />
-                <Avbrytknapp className={'navigasjon__knapp'} openModal={this.openModal} />
+                <Submitknapp className={'navigasjon__knapp navigasjon__knapp--neste'} />
                 <Modal
                     role={'dialog'}
                     aria-modal={'true'}
