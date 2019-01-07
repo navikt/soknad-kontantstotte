@@ -85,7 +85,9 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                             }
                             settBarnNavn(nyttValgtBarn.fulltnavn);
                             settBarnFodselsdato(nyttValgtBarn.fodselsdato);
-                            settBarnFlerlingStatus(nyttValgtBarn.erFlerling ? Svar.JA : Svar.NEI);
+                            settBarnFlerlingStatus(
+                                JSON.parse(nyttValgtBarn.erFlerling) ? Svar.JA : Svar.NEI
+                            );
                         }}
                         checked={valgtBarn.navn.verdi}
                         radios={radioButtons}
