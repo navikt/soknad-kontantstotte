@@ -1,4 +1,4 @@
-import { connectRouter, routerMiddleware } from 'connected-react-router';
+import { routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import { applyMiddleware, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
@@ -21,7 +21,7 @@ function configureStore() {
         middleware = [...middleware, logger];
     }
     const appliedMiddleware = applyMiddleware(...middleware);
-    const createdStore = createStore(connectRouter(history)(rootReducer), appliedMiddleware);
+    const createdStore = createStore(rootReducer(history), appliedMiddleware);
 
     saga.run(rootSaga);
 

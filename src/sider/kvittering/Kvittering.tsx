@@ -1,4 +1,4 @@
-import { Sidetittel } from 'nav-frontend-typografi';
+import { Undertittel } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import KvitteringIkon from './ikoner/KvitteringIkon';
@@ -13,9 +13,9 @@ const Kvittering: React.StatelessComponent<KvitteringProps> = ({ intl }) => {
     }
     return (
         <div>
-            <Sidetittel className={'side-container__soknadtittel'}>
+            <Undertittel className={'side-container__soknadtittel'}>
                 <FormattedMessage id={'kontantstotte.tittel'} />
-            </Sidetittel>
+            </Undertittel>
             <div className="kvittering__ikon-container">
                 <KvitteringIkon className="kvittering__ikon" />
             </div>

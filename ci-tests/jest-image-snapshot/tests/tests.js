@@ -173,7 +173,7 @@ describe('soknad-kontantstotte', () => {
         });
 
         test('oppsummering-utfylt', async () => {
-            await page.click('.inputPanel__field');
+            await page.click('.skjemaelement__input.checkboks');
             await page.click('.typo-undertittel');
             await page.waitFor(2000);
             await takeSnapshot(`oppsummering-utfylt-${name}`, page);

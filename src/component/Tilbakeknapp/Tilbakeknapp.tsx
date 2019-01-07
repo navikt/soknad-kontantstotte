@@ -3,7 +3,8 @@ import NavFrontendChevron from 'nav-frontend-chevron';
 import KnappBase from 'nav-frontend-knapper';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect, Dispatch } from 'react-redux';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import { appForrigeSteg } from '../../app/actions';
 
 interface ITilbakeknappProps {

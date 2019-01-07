@@ -1,7 +1,8 @@
 import KnappBase from 'nav-frontend-knapper';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect, Dispatch } from 'react-redux';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import { selectAppSteg } from '../../app/selectors';
 import { selectSenderInn } from '../../innsending/selectors';
 import { IRootState } from '../../rootReducer';
