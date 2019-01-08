@@ -1,7 +1,8 @@
+import AlertStripe from 'nav-frontend-alertstriper';
 import { Input } from 'nav-frontend-skjema';
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { FormattedHTMLMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
@@ -121,6 +122,11 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                         />
                     </div>
                 </form>
+            )}
+            {valgtBarn.erFlerling.verdi === Svar.JA && (
+                <AlertStripe className="mine-barn__advarsel" type="info">
+                    <FormattedHTMLMessage id={'advarsel.flerebarn.medlink'} />
+                </AlertStripe>
             )}
         </SideContainer>
     );

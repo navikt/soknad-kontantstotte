@@ -39,7 +39,7 @@ const Kvittering: React.StatelessComponent<KvitteringProps> = ({ intl, barn }) =
             <UtvidetInfo intl={intl} />
             {barn.erFlerling.verdi === Svar.JA && (
                 <AlertStripe className="kvittering__advarsel" type="info">
-                    <FormattedMessage id={'advarsel.flerebarn'} />
+                    <FormattedMessage id={'advarsel.flerebarn.utenlink'} />
                 </AlertStripe>
             )}
         </div>
