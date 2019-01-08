@@ -1,3 +1,4 @@
+import AlertStripe from 'nav-frontend-alertstriper';
 import { Input } from 'nav-frontend-skjema';
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
@@ -121,6 +122,17 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
                         />
                     </div>
                 </form>
+            )}
+            {valgtBarn.erFlerling.verdi === Svar.JA && (
+                <AlertStripe className="mine-barn__advarsel" type="info">
+                    <span
+                        dangerouslySetInnerHTML={{
+                            __html: intl.formatMessage({
+                                id: 'advarsel.flerebarn.medlink',
+                            }),
+                        }}
+                    />
+                </AlertStripe>
             )}
         </SideContainer>
     );
