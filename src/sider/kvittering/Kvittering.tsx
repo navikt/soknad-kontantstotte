@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import AlertStripe from 'nav-frontend-alertstriper';
-import { Sidetittel } from 'nav-frontend-typografi';
+import { Undertittel } from 'nav-frontend-typografi';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { IRootState } from '../../rootReducer';
@@ -23,9 +23,9 @@ const Kvittering: React.StatelessComponent<KvitteringProps> = ({ intl, barn }) =
     }
     return (
         <div>
-            <Sidetittel className={'side-container__soknadtittel'}>
+            <Undertittel className={'side-container__soknadtittel'}>
                 <FormattedMessage id={'kontantstotte.tittel'} />
-            </Sidetittel>
+            </Undertittel>
             <div className="kvittering__ikon-container">
                 <KvitteringIkon className="kvittering__ikon" />
             </div>
