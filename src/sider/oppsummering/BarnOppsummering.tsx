@@ -18,7 +18,7 @@ const BarnOppsummering: React.StatelessComponent<IBarnOppsummeringProps> = ({ ba
                 svar={`${barn.navn.verdi} - ${barn.fodselsdato.verdi}`}
             />
             {barn.erFlerling.verdi === Svar.JA && (
-                <OppsummeringsAdvarsel meldingsNokkel={'advarsel.flerebarn'} />
+                <OppsummeringsAdvarsel meldingsNokkel={'advarsel.flerebarn.utenlink'} />
             )}
         </OppsummeringSteg>
     );
