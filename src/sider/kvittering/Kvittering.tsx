@@ -1,12 +1,11 @@
 import * as React from 'react';
 
-import AlertStripe from 'nav-frontend-alertstriper';
 import { Undertittel } from 'nav-frontend-typografi';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { IRootState } from '../../rootReducer';
 import { selectMineBarn } from '../../soknad/selectors';
-import { IMineBarn, Svar } from '../../soknad/types';
+import { IMineBarn } from '../../soknad/types';
 import KvitteringIkon from './ikoner/KvitteringIkon';
 import UtvidetInfo from './UtvidetInfo';
 
@@ -15,7 +14,7 @@ interface IMapStateToProps {
 }
 
 type KvitteringProps = InjectedIntlProps & IMapStateToProps;
-const Kvittering: React.StatelessComponent<KvitteringProps> = ({ intl, barn }) => {
+const Kvittering: React.StatelessComponent<KvitteringProps> = ({ intl }) => {
     if (intl) {
         document.title = intl.formatMessage({
             id: 'app.tittel.kvittering',
@@ -37,11 +36,6 @@ const Kvittering: React.StatelessComponent<KvitteringProps> = ({ intl, barn }) =
             </h3>
 
             <UtvidetInfo intl={intl} />
-            {barn.erFlerling.verdi === Svar.JA && (
-                <AlertStripe className="kvittering__advarsel" type="info">
-                    <FormattedMessage id={'advarsel.flerebarn.utenlink'} />
-                </AlertStripe>
-            )}
         </div>
     );
 };
