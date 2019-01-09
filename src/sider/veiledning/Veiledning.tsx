@@ -56,12 +56,9 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({ fornavn, nesteS
                 <FormattedMessage id={'kontantstotte.tittel'} />
             </Sidetittel>
             <Normaltekst className={'veiledning__info'}>
-                <FormattedMessage id={'veiledningsside.info'} />
-            </Normaltekst>
-            <Personopplysning className={'veiledning__personopplysning'} />
-            <Normaltekst className={'veiledning__info'}>
                 <FormattedHTMLMessage id={'veiledningsside.vilkaar.info'} />
             </Normaltekst>
+            <Personopplysning className={'veiledning__personopplysning'} />
             <Hovedknapp className={'veiledning__knapp'} onClick={nesteSteg}>
                 <FormattedMessage id={'veiledningsside.knapp'} />
             </Hovedknapp>
