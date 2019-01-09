@@ -1,6 +1,6 @@
 import CheckboksPanelGruppe from 'nav-frontend-skjema/lib/checkboks-panel-gruppe';
 import * as React from 'react';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { FormattedHTMLMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
@@ -42,13 +42,7 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
             <Veileder
                 content={
                     <div>
-                        <span
-                            dangerouslySetInnerHTML={{
-                                __html: intl.formatMessage({
-                                    id: 'startside.krav.veileder',
-                                }),
-                            }}
-                        />
+                        <FormattedHTMLMessage id={'startside.krav.veileder'} />
                     </div>
                 }
                 className={'krav__veileder'}
