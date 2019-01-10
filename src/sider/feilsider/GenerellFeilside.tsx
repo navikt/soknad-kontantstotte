@@ -26,7 +26,6 @@ const GenerellFeilside: React.StatelessComponent<GenerellFeilsideProps> = ({ sta
                 ikon={<InnsendingFeiletIkon />}
                 tekster={{
                     feilmelding: 'feilside.generell.feilmelding',
-                    knapp: 'feilside.generell.knapp',
                     tittel: 'feilside.generell.tittel',
                 }}
             />
