@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { selectAppStatus } from '../../app/selectors';
 import { AppStatus } from '../../app/types';
-import { InnsendingFeiletIkon } from '../../component/Ikoner/InnsendingFeiletIkon';
+import Veilederikon from '../../component/Ikoner/Veilederikon';
+import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
 import Feilside from './Feilside';
 
@@ -22,12 +23,12 @@ const InnsendingFeilet: React.StatelessComponent<InnsendingFeiletProps> = ({ sta
     if (status === AppStatus.FEILSITUASJON) {
         return (
             <Feilside
-                ikon={<InnsendingFeiletIkon />}
+                ikon={<Veilederikon />}
                 tekster={{
                     feilmelding: 'feilside.innsending.feilmelding',
-                    knapp: 'feilside.innsending.knapp',
                     tittel: 'feilside.innsending.tittel',
                 }}
+                knapp={<Submitknapp className={'feilside__knapp knapp--standard'} />}
             />
         );
     }
