@@ -3,7 +3,8 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { selectAppSteg } from '../../app/selectors';
+import { selectAppStatus, selectAppSteg } from '../../app/selectors';
+import { AppStatus } from '../../app/types';
 import { selectSenderInn } from '../../innsending/selectors';
 import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg } from '../../soknad/actions';
@@ -15,6 +16,7 @@ interface ISubmitKnappProps {
 
 interface IMapStateToProps {
     senderinn: boolean;
+    status: AppStatus;
     stegPosisjon: number;
 }
 
@@ -28,10 +30,17 @@ const Submitknapp: React.StatelessComponent<SubmitKnappProps> = ({
     className,
     nesteSteg,
     senderinn,
+    status,
     stegPosisjon,
 }) => {
     const erOppsummeringsSteg = stegConfig.oppsummering.stegIndeks === stegPosisjon;
-    const label = erOppsummeringsSteg ? 'app.sendSoknad' : 'app.neste';
+    const innsendingFeilet = erOppsummeringsSteg && status === AppStatus.FEILSITUASJON;
+
+    const label = innsendingFeilet
+        ? 'app.sendSoknad.gjenta'
+        : erOppsummeringsSteg
+        ? 'app.sendSoknad'
+        : 'app.neste';
 
     return (
         <KnappBase spinner={senderinn} className={className} type="hoved" onClick={nesteSteg}>
@@ -43,6 +52,7 @@ const Submitknapp: React.StatelessComponent<SubmitKnappProps> = ({
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         senderinn: selectSenderInn(state),
+        status: selectAppStatus(state),
         stegPosisjon: selectAppSteg(state),
     };
 };

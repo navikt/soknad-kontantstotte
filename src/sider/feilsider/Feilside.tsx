@@ -7,12 +7,12 @@ interface IFeilside {
     ikon: React.ReactNode;
     tekster: {
         feilmelding: string;
-        knapp: string;
         tittel: string;
     };
+    knapp?: React.ReactNode;
 }
 
-const Feilside: React.StatelessComponent<IFeilside> = ({ ikon, tekster }) => {
+const Feilside: React.StatelessComponent<IFeilside> = ({ ikon, tekster, knapp }) => {
     return (
         <div className={'feilside'}>
             <Sidetittel className={'side-container__soknadtittel'}>
@@ -36,9 +36,16 @@ const Feilside: React.StatelessComponent<IFeilside> = ({ ikon, tekster }) => {
                 />
             </AlertStripeAdvarselSolid>
 
-            <a href={'/'} className={'feilside__knapp knapp knapp--standard'}>
-                <FormattedMessage id={tekster.knapp} defaultMessage={'Start på nytt'} />
-            </a>
+            {knapp !== undefined ? (
+                knapp
+            ) : (
+                <a href={'/'} className={'feilside__knapp knapp knapp--standard'}>
+                    <FormattedMessage
+                        id={'feilside.generell.knapp'}
+                        defaultMessage={'Start på nytt'}
+                    />
+                </a>
+            )}
         </div>
     );
 };
