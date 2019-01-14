@@ -6,7 +6,7 @@ enum IToggleName {
     vis_advarsel_oppsummering = 'kontantstotte.oppsummering.advarsel',
     vis_advarsel_tilknytningTilUtland = 'kontantstotte.tilknytningTilUtland.advarsel',
     vis_innsendt_dato_kvittering = 'kontantstotte.kvittering.innsendtDato',
-    bruk_tps_mineBarn = 'kontantstotte.bruk.tps.integrasjon.barn',
+    legg_til_barn = 'kontantstotte.leggtilbarn',
 }
 
 const allTogglesOff = (): IToggles => {
