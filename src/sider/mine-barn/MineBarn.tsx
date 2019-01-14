@@ -25,7 +25,7 @@ interface IMapStateToProps {
     soker: ISoker;
     harForsoktNesteSteg: boolean;
     valgtBarn: IMineBarn;
-    brukTpsMineBarn: boolean;
+    brukLeggTilBarn: boolean;
 }
 
 interface IMapDispatchToProps {
@@ -50,7 +50,7 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
     settBarnFlerlingStatus,
     valgtBarn,
     intl,
-    brukTpsMineBarn,
+    brukLeggTilBarn,
 }) => {
     const feltMedFeil = hentFeltMedFeil(valgtBarn, harForsoktNesteSteg, intl);
 
@@ -69,7 +69,7 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
             tittel={intl.formatMessage({ id: 'barn.tittel' })}
             intl={intl}
         >
-            {brukTpsMineBarn ? (
+            {!brukLeggTilBarn ? (
                 <form>
                     <RadioPanelGruppe
                         legend={intl.formatMessage({ id: 'barn.subtittel' })}
@@ -135,7 +135,7 @@ const MineBarn: React.StatelessComponent<MineBarnSideProps> = ({
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         barn: selectBarn(state),
-        brukTpsMineBarn: isEnabled(state, IToggleName.bruk_tps_mineBarn),
+        brukLeggTilBarn: isEnabled(state, IToggleName.legg_til_barn),
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         soker: selectSoker(state),
         valgtBarn: selectMineBarn(state),

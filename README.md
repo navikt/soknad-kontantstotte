@@ -11,6 +11,8 @@ Søknadsdialog for ny kontantstøtte-søknad
 
 For å bygge en prodversjon kjør `yarn build`
 
+Test med backend lokalt ved å kjøre [_soknad-kontantstotte-proxy_](https://github.com/navikt/soknad-kontantstotte-proxy), [_soknad-kontantstotte-api_](https://github.com/navikt/soknad-kontantstotte-api) og `yarn start:proxy`.
+
 # Bygging på egen maskin
 
 `./build.sh` 
