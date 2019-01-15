@@ -21,8 +21,6 @@ import { ISteg, stegConfig } from '../stegConfig';
 import { teksterHent, TeksterTypeKeys } from '../tekster/actions';
 import { ISprak } from '../tekster/types';
 import { ToggelsTypeKeys, togglesHent } from '../toggles/actions';
-import { isEnabled } from '../toggles/selectors';
-import { IToggleName } from '../toggles/types';
 import { appEndreStatus, appPingOk, appSettSteg, AppTypeKeys, IAppGaaTilSteg } from './actions';
 import { pingBackend } from './api';
 import { selectAppSteg } from './selectors';
@@ -60,23 +58,17 @@ function* forsteSidelastSaga(): SagaIterator {
     yield put(teksterHent(sprak));
     yield put(sokerHent());
 
-    const isTpsMineBarnEnabled = yield select(isEnabled, IToggleName.bruk_tps_mineBarn);
-    if (isTpsMineBarnEnabled) {
-        yield put(barnHent());
-        yield all([
-            take(TeksterTypeKeys.HENT_OK),
-            take(SokerTypeKeys.HENT_OK),
-            take(BarnTypeKeys.HENT_OK),
-        ]);
-        const barn = yield select(selectBarn);
-        if (barn.length === 0) {
-            yield put(appEndreStatus(AppStatus.FEILSITUASJON));
-            yield put(push('/ingen-barn'));
-        } else {
-            yield put(appEndreStatus(AppStatus.KLAR));
-        }
+    yield put(barnHent());
+    yield all([
+        take(TeksterTypeKeys.HENT_OK),
+        take(SokerTypeKeys.HENT_OK),
+        take(BarnTypeKeys.HENT_OK),
+    ]);
+    const barn = yield select(selectBarn);
+    if (barn.length === 0) {
+        yield put(appEndreStatus(AppStatus.FEILSITUASJON));
+        yield put(push('/ingen-barn'));
     } else {
-        yield all([take(TeksterTypeKeys.HENT_OK), take(SokerTypeKeys.HENT_OK)]);
         yield put(appEndreStatus(AppStatus.KLAR));
     }
 }
