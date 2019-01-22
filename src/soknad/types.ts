@@ -50,6 +50,7 @@ interface IMineBarn {
     readonly navn: IFelt;
     readonly fodselsdato: IFelt;
     readonly erFlerling: IFelt;
+    readonly erBrukerOpprettet: IFelt;
 }
 
 interface IFamilieforhold {

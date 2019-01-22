@@ -103,6 +103,7 @@ const valideringsConfig: IValideringsConfig = {
         skalBoMedBarnetINorgeNesteTolvMaaneder: [harSvartJaMedFeilmelding],
     },
     mineBarn: {
+        erBrukerOpprettet: [svarUtenValidering],
         erFlerling: [svarUtenValidering],
         fodselsdato: [harSvartTekstMedFeilmelding, harFyltInnDato],
         navn: [harFyltInnNavn],

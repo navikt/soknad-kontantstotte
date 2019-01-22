@@ -68,6 +68,7 @@ const initialState: ISoknadState = {
         skalBoMedBarnetINorgeNesteTolvMaaneder: standardSvarInitialFelt,
     },
     mineBarn: {
+        erBrukerOpprettet: standardSvarInitialFelt,
         erFlerling: standardSvarInitialFelt,
         fodselsdato: standardStringInitialFelt,
         navn: standardStringInitialFelt,
