@@ -12,6 +12,7 @@ const initialState: IBarnState = {
             erFlerling: '',
             fodselsdato: '',
             fulltnavn: '',
+            index: '',
         },
     ],
     henter: false,
@@ -27,7 +28,7 @@ function barnReducer(state = initialState, action: BarnActionTypes) {
         case BarnTypeKeys.HENT_OK:
             return {
                 ...state,
-                barn: action.barn,
+                barn: action.barn.map((b, i) => ({ ...b, index: `${i}` })),
                 henter: false,
             };
         case BarnTypeKeys.HENT_FEILET: {

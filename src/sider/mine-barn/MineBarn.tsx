@@ -58,8 +58,8 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
             };
         }
 
-        const radioButtons = Array.from(props.barn).map((b: IBarn, index) =>
-            radioBtn(b.fulltnavn + ' (' + b.fodselsdato + ' )', `${index}`)
+        const radioButtons = Array.from(props.barn).map((b: IBarn) =>
+            radioBtn(b.fulltnavn + ' (' + b.fodselsdato + ' )', b.index)
         );
 
         if (props.brukLeggTilBarn) {
@@ -124,12 +124,13 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
                                 return;
                             }
 
-                            let nyttValgtBarn = barn[parseInt(value, 10)];
+                            let nyttValgtBarn = barn.find(b => b.index === value);
                             if (nyttValgtBarn == null) {
                                 nyttValgtBarn = {
                                     erFlerling: '',
                                     fodselsdato: '',
                                     fulltnavn: '',
+                                    index: '',
                                 };
                             }
                             settBarnNavn(nyttValgtBarn.fulltnavn);

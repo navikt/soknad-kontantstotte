@@ -1,6 +1,8 @@
 interface IBarn {
-    fulltnavn: string;
-    fodselsdato: string;
     erFlerling: string;
+    fodselsdato: string;
+    fulltnavn: string;
+    index: string;
 }
+
 export { IBarn };

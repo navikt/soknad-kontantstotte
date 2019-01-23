@@ -47,10 +47,10 @@ interface ISoknadState {
 }
 
 interface IMineBarn {
-    readonly navn: IFelt;
-    readonly fodselsdato: IFelt;
-    readonly erFlerling: IFelt;
     readonly erBrukerOpprettet: IFelt;
+    readonly erFlerling: IFelt;
+    readonly fodselsdato: IFelt;
+    readonly navn: IFelt;
 }
 
 interface IFamilieforhold {
