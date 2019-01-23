@@ -13,8 +13,6 @@ import { ISoker } from '../../soker/types';
 import { soknadValiderFelt } from '../../soknad/actions';
 import { selectSoknad } from '../../soknad/selectors';
 import { ISoknadState, Svar, ValideringsStatus } from '../../soknad/types';
-import { isEnabled } from '../../toggles/selectors';
-import { IToggleName } from '../../toggles/types';
 import ArbeidIUtlandetOppsummering from './ArbeidIUtlandetOppsummering';
 import BarnehageplassOppsummering from './BarnehageplassOppsummering';
 import { BarnOppsummering } from './BarnOppsummering';
@@ -29,7 +27,6 @@ interface IMapStateToProps {
     soker: ISoker;
     soknad: ISoknadState;
     harForsoktNesteSteg: boolean;
-    visTilknytningTilUtlandAdvarsel: boolean;
 }
 
 interface IMapDispatchToProps {
@@ -44,7 +41,6 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
     settBekreftelse,
     soker,
     soknad,
-    visTilknytningTilUtlandAdvarsel,
 }) => {
     return (
         <SideContainer
@@ -71,7 +67,6 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
                 <TilknytningTilUtlandOppsummering
                     familieforhold={soknad.familieforhold}
                     tilknytningTilUtland={soknad.tilknytningTilUtland}
-                    visAdvarsel={visTilknytningTilUtlandAdvarsel}
                 />
                 <ArbeidIUtlandetOppsummering
                     familieforhold={soknad.familieforhold}
@@ -113,10 +108,6 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         soker: selectSoker(state),
         soknad: selectSoknad(state),
-        visTilknytningTilUtlandAdvarsel: isEnabled(
-            state,
-            IToggleName.vis_advarsel_tilknytningTilUtland
-        ),
     };
 };
 

@@ -16,7 +16,6 @@ import { SporsmalSvar } from './SporsmalSvar';
 interface ITilknytningTilUtlandOppsummeringProps {
     familieforhold: IFamilieforhold;
     tilknytningTilUtland: ITilknytningTilUtland;
-    visAdvarsel: boolean;
 }
 
 const hentTekstNokkelForTilknytningTilUtlandSvar: (
@@ -49,7 +48,7 @@ const skalViseForklaringsFelt: (svar: TilknytningTilUtlandVerdier) => boolean = 
 
 const TilknytningTilUtlandOppsummering: React.StatelessComponent<
     ITilknytningTilUtlandOppsummeringProps
-> = ({ familieforhold, tilknytningTilUtland, visAdvarsel }) => {
+> = ({ familieforhold, tilknytningTilUtland }) => {
     const boddEllerJobbetINorgeMinstFemAarSvar = hentTekstNokkelForTilknytningTilUtlandSvar(
         tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.verdi as TilknytningTilUtlandVerdier,
         false
@@ -74,12 +73,9 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
                 svar={<FormattedMessage id={boddEllerJobbetINorgeMinstFemAarSvar} />}
             />
             {tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.valideringsStatus ===
-                ValideringsStatus.ADVARSEL &&
-                visAdvarsel && (
-                    <OppsummeringsAdvarsel
-                        meldingsNokkel={'tilknytningTilUtland.advarsel.nei.soker'}
-                    />
-                )}
+                ValideringsStatus.ADVARSEL && (
+                <OppsummeringsAdvarsel meldingsNokkel={'tilknytningTilUtland.advarsel.nei.soker'} />
+            )}
             {skalViseForklaringsFelt(tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar
                 .verdi as TilknytningTilUtlandVerdier) && (
                 <SporsmalSvar
@@ -106,8 +102,7 @@ const TilknytningTilUtlandOppsummering: React.StatelessComponent<
             )}
             {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA &&
                 tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar
-                    .valideringsStatus === ValideringsStatus.ADVARSEL &&
-                visAdvarsel && (
+                    .valideringsStatus === ValideringsStatus.ADVARSEL && (
                     <OppsummeringsAdvarsel
                         meldingsNokkel={'tilknytningTilUtland.advarsel.nei.annenForelder'}
                     />
