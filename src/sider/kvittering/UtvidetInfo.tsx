@@ -7,8 +7,6 @@ import { connect } from 'react-redux';
 import SuksessIkon from '../../component/Ikoner/Suksessikon';
 import Environment from '../../Environment';
 import { IRootState } from '../../rootReducer';
-import { isEnabled } from '../../toggles/selectors';
-import { IToggleName } from '../../toggles/types';
 
 interface IUtvidedInfoProps {
     intl: InjectedIntl;
@@ -16,12 +14,11 @@ interface IUtvidedInfoProps {
 
 interface IMapStateToProps {
     innsendtDato: moment.Moment;
-    visInnsendtDato: boolean;
 }
 
 type Props = IMapStateToProps & IUtvidedInfoProps;
 
-const UtvidetInfo: React.StatelessComponent<Props> = ({ intl, innsendtDato, visInnsendtDato }) => {
+const UtvidetInfo: React.StatelessComponent<Props> = ({ intl, innsendtDato }) => {
     return (
         <PanelBase className="kvittering__panel" border={true}>
             <table className="kvittering__utvidettabell" cellSpacing="0">
@@ -37,11 +34,10 @@ const UtvidetInfo: React.StatelessComponent<Props> = ({ intl, innsendtDato, visI
                         </td>
                         <td>
                             <span className="typo-normal">
-                                {intl.formatMessage({
-                                    id: 'kvittering.soknadSendt',
-                                })}
-
-                                {visInnsendtDato && ' ' + innsendtDato.format('LLL') + '.'}
+                                {intl.formatMessage({ id: 'kvittering.soknadSendt' }) +
+                                    ' ' +
+                                    innsendtDato.format('LLL') +
+                                    '.'}
                             </span>
                         </td>
                     </tr>
@@ -84,7 +80,6 @@ const UtvidetInfo: React.StatelessComponent<Props> = ({ intl, innsendtDato, visI
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         innsendtDato: state.innsending.innsendtDato,
-        visInnsendtDato: isEnabled(state, IToggleName.vis_innsendt_dato_kvittering),
     };
 };
 

@@ -3,7 +3,6 @@ interface IToggles {
 }
 
 enum IToggleName {
-    vis_innsendt_dato_kvittering = 'kontantstotte.kvittering.innsendtDato',
     legg_til_barn = 'kontantstotte.leggtilbarn',
 }
 
