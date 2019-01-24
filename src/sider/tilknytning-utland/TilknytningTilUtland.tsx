@@ -16,15 +16,12 @@ import {
     Svar,
     TilknytningTilUtlandVerdier,
 } from '../../soknad/types';
-import { isEnabled } from '../../toggles/selectors';
-import { IToggleName } from '../../toggles/types';
 import BoddEllerJobbetINorgeSporsmal from './BoddEllerJobbetINorgeSporsmal';
 
 interface IMapStateToProps {
     familieforhold: IFamilieforhold;
     harForsoktNesteSteg: boolean;
     tilknytningTilUtland: ITilknytningTilUtland;
-    visTilknytningTilUtlandAdvarsel: boolean;
 }
 
 interface IMapDispatchToProps {
@@ -46,7 +43,6 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
     settForklaringsFelt,
     settTilknytningTilUtlandVerdiFelt,
     tilknytningTilUtland,
-    visTilknytningTilUtlandAdvarsel,
 }) => {
     const {
         boddEllerJobbetINorgeMinstFemAar,
@@ -75,7 +71,6 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
                 forklaringFeltFeil={feltMedFeil.boddEllerJobbetINorgeMinstFemAarForklaring}
                 gjelderAnnenForelder={false}
                 nullstillNeste={nullstillNesteSteg}
-                visTilknytningTilUtlandAdvarsel={visTilknytningTilUtlandAdvarsel}
             />
             {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA && (
                 <BoddEllerJobbetINorgeSporsmal
@@ -92,7 +87,6 @@ const TilknytningTilUtland: React.StatelessComponent<TilknytningTilUtland> = ({
                     }
                     gjelderAnnenForelder={true}
                     nullstillNeste={nullstillNesteSteg}
-                    visTilknytningTilUtlandAdvarsel={visTilknytningTilUtlandAdvarsel}
                 />
             )}
         </SideContainer>
@@ -104,10 +98,6 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
         familieforhold: selectFamilieforhold(state),
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         tilknytningTilUtland: selectTilknytningTilUtland(state),
-        visTilknytningTilUtlandAdvarsel: isEnabled(
-            state,
-            IToggleName.vis_advarsel_tilknytningTilUtland
-        ),
     };
 };
 

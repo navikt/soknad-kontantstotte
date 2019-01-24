@@ -3,9 +3,6 @@ interface IToggles {
 }
 
 enum IToggleName {
-    vis_advarsel_oppsummering = 'kontantstotte.oppsummering.advarsel',
-    vis_advarsel_tilknytningTilUtland = 'kontantstotte.tilknytningTilUtland.advarsel',
-    vis_innsendt_dato_kvittering = 'kontantstotte.kvittering.innsendtDato',
     legg_til_barn = 'kontantstotte.leggtilbarn',
 }
 

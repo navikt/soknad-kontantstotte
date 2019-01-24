@@ -20,7 +20,6 @@ interface IBoddEllerJobbetINorgeSporsmalProps {
     forklaringFeltVerdi: IFelt;
     gjelderAnnenForelder: boolean;
     intl: InjectedIntl;
-    visTilknytningTilUtlandAdvarsel: boolean;
 }
 
 const BoddEllerJobbetINorgeSporsmal: React.StatelessComponent<
@@ -35,7 +34,6 @@ const BoddEllerJobbetINorgeSporsmal: React.StatelessComponent<
     nullstillNeste,
     settForklaringsFelt,
     settTilknytningTilUtlandVerdiFelt,
-    visTilknytningTilUtlandAdvarsel,
 }) => {
     const feltNavn = gjelderAnnenForelder
         ? 'annenForelderBoddEllerJobbetINorgeMinstFemAar'
@@ -101,25 +99,24 @@ const BoddEllerJobbetINorgeSporsmal: React.StatelessComponent<
                 />
             )}
 
-            {feltVerdi === TilknytningTilUtlandVerdier.nei &&
-                visTilknytningTilUtlandAdvarsel && (
-                    <Veileder
-                        posisjon={'høyre'}
-                        className={'tilknytning-til-utland__advarsel'}
-                        tekst={
-                            <FormattedMessage
-                                id={
-                                    gjelderAnnenForelder
-                                        ? 'tilknytningTilUtland.advarsel.nei.annenForelder'
-                                        : 'tilknytningTilUtland.advarsel.nei.soker'
-                                }
-                            />
-                        }
-                        type={'advarsel'}
-                    >
-                        <Veilederikon morkBakgrunn={true} />
-                    </Veileder>
-                )}
+            {feltVerdi === TilknytningTilUtlandVerdier.nei && (
+                <Veileder
+                    posisjon={'høyre'}
+                    className={'tilknytning-til-utland__advarsel'}
+                    tekst={
+                        <FormattedMessage
+                            id={
+                                gjelderAnnenForelder
+                                    ? 'tilknytningTilUtland.advarsel.nei.annenForelder'
+                                    : 'tilknytningTilUtland.advarsel.nei.soker'
+                            }
+                        />
+                    }
+                    type={'advarsel'}
+                >
+                    <Veilederikon morkBakgrunn={true} />
+                </Veileder>
+            )}
         </form>
     );
 };

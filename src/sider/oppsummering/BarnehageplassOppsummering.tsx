@@ -10,12 +10,10 @@ import { SporsmalSvar } from './SporsmalSvar';
 
 interface IBarnehageplassOppsummeringProps {
     barnehageplass: IBarnehageplass;
-    visOppsummeringAdvarsel: boolean;
 }
 
 const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsummeringProps> = ({
     barnehageplass,
-    visOppsummeringAdvarsel,
 }) => {
     let barnBarnehageplassStatusSvar = 'Ubesvart';
 
@@ -130,12 +128,11 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                         svar={barnehageplass.harBarnehageplassAntallTimer.verdi}
                     />
                     {barnehageplass.harBarnehageplassAntallTimer.valideringsStatus ===
-                        ValideringsStatus.ADVARSEL &&
-                        visOppsummeringAdvarsel && (
-                            <OppsummeringsAdvarsel
-                                meldingsNokkel={'advarsel.barnehageplass.timerIBarnehage'}
-                            />
-                        )}
+                        ValideringsStatus.ADVARSEL && (
+                        <OppsummeringsAdvarsel
+                            meldingsNokkel={'advarsel.barnehageplass.timerIBarnehage'}
+                        />
+                    )}
                     <SporsmalSvar
                         sporsmal={
                             <FormattedMessage
