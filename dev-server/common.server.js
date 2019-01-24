@@ -10,7 +10,15 @@ function lesMockFil(filnavn) {
 }
 
 app.get('/soknad-kontantstotte-api/api/tekster/nb', function(req, res) {
-    setTimeout(() => res.send(lesMockFil('tekster.json')), delayMs);
+    setTimeout(() => res.send(lesMockFil('tekster-nb.json')), delayMs);
+});
+
+app.get('/soknad-kontantstotte-api/api/tekster/nn', function(req, res) {
+    setTimeout(() => res.send(lesMockFil('tekster-nn.json')), delayMs);
+});
+
+app.get('/soknad-kontantstotte-api/api/tekster/en', function(req, res) {
+    setTimeout(() => res.send(lesMockFil('tekster-en.json')), delayMs);
 });
 
 app.get('/soknad-kontantstotte-api/api/status/ping', function(req, res) {

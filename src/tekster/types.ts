@@ -5,5 +5,6 @@ interface ITekster {
 enum ISprak {
     nb = 'nb',
     nn = 'nn',
+    en = 'en',
 }
 export { ITekster, ISprak };

@@ -1,4 +1,5 @@
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Select } from 'nav-frontend-skjema';
 import { Element, Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import Veileder from 'nav-frontend-veileder';
 import * as React from 'react';
@@ -9,19 +10,42 @@ import { appNesteSteg } from '../../app/actions';
 import Veilederikon from '../../component/Ikoner/Veilederikon';
 import { IRootState } from '../../rootReducer';
 import { selectSoker } from '../../soker/selectors';
+import { teksterHent } from '../../tekster/actions';
+import { ISprak } from '../../tekster/types';
+import { isEnabled } from '../../toggles/selectors';
+import { IToggleName } from '../../toggles/types';
 import { Personopplysning } from './Personopplysning';
 
 interface IMapStateToProps {
     fornavn: string;
+    visSprakvalg: boolean;
 }
 
 interface IMapDispatchToProps {
+    oppdaterTekster: (sprak: string) => void;
     nesteSteg: () => void;
+}
+
+function sprakMap(sprak: string) {
+    switch (sprak) {
+        case 'en':
+            return ISprak.en;
+        case 'nn':
+            return ISprak.nn;
+        default:
+            return ISprak.nb;
+    }
 }
 
 type VeiledningProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
-const Veiledning: React.StatelessComponent<VeiledningProps> = ({ fornavn, nesteSteg, intl }) => {
+const Veiledning: React.StatelessComponent<VeiledningProps> = ({
+    fornavn,
+    nesteSteg,
+    visSprakvalg,
+    oppdaterTekster,
+    intl,
+}) => {
     if (intl) {
         document.title = intl.formatMessage({
             id: 'app.tittel.veiledning',
@@ -30,6 +54,21 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({ fornavn, nesteS
 
     return (
         <div className={'veiledning'}>
+            {visSprakvalg && (
+                <Select
+                    label="Språk"
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                        oppdaterTekster(e.target.value)
+                    }
+                >
+                    <option value="nb" key="nb">
+                        Bokmål
+                    </option>
+                    <option value="nn" key="nn">
+                        Nynorsk
+                    </option>
+                </Select>
+            )}
             <div className={'veiledning__veileder-container'}>
                 <Veileder
                     posisjon={'topp'}
@@ -69,12 +108,14 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({ fornavn, nesteS
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         fornavn: selectSoker(state).fornavn.toLocaleLowerCase(),
+        visSprakvalg: isEnabled(state, IToggleName.vis_sprakvalg),
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         nesteSteg: () => dispatch(appNesteSteg()),
+        oppdaterTekster: (sprak: string) => dispatch(teksterHent(sprakMap(sprak))),
     };
 };
 
