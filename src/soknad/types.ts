@@ -168,6 +168,7 @@ export {
     ISoknadState,
     Svar,
     IFelt,
+    IVeiledning,
     utenlandskKontantstotteFeltnavn,
     ValideringsStatus,
 };
