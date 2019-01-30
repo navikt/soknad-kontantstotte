@@ -7,7 +7,6 @@ import { ILastOppVedleggRespons, lastOppVedlegg } from './api';
 import { IVedlegg } from './types';
 
 function* lastOppVedleggSaga(action: IVedleggLastOpp): SagaIterator {
-    yield call(console.log, action.filer);
     try {
         const responses: ILastOppVedleggRespons[] = yield all(
             action.filer.map((fil: File) => call(lastOppVedlegg, fil))
@@ -31,7 +30,7 @@ function* lastOppVedleggSaga(action: IVedleggLastOpp): SagaIterator {
 
         yield put(soknadSettFelt(action.stegnavn, action.feltnavn, vedleggFelt));
     } catch (e) {
-        console.log('noe gikk galt: ', e);
+        console.error('noe gikk galt: ', e);
     }
 }
 
