@@ -22,6 +22,7 @@ import PersonaliaOppsummering from './PersonaliaOppsummering';
 import TilknytningTilUtlandOppsummering from './TilknytningTilUtlandOppsummering';
 import UtenlandskeYtelserOppsummering from './UtenlandskeYtelserOppsummering';
 import UtenlandskKontantstotteOppsummering from './UtenlandskKontantstotteOppsummering';
+import { VeiledningOppsummering } from './VeiledningOppsummering';
 
 interface IMapStateToProps {
     soker: ISoker;
@@ -60,6 +61,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
                 <PersonaliaOppsummering
                     soker={{ fodselsnummer: soker.innloggetSom, navn: soker.fulltnavn }}
                 />
+                <VeiledningOppsummering />
                 <KravTilSokerOppsummering />
                 <BarnOppsummering barn={soknad.mineBarn} />
                 <BarnehageplassOppsummering barnehageplass={soknad.barnehageplass} />
