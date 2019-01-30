@@ -3,20 +3,26 @@ import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { IFeltFeil } from '../../common/types';
+import { Vedlegg } from '../../component/Vedlegg';
 import { IRootState } from '../../rootReducer';
 import { selectBarnehageplass } from '../../soknad/selectors';
-import { BarnehageplassVerdier, Feltnavn, IFelt } from '../../soknad/types';
+import { BarnehageplassVerdier, Feltnavn, IFelt, IVedleggFelt } from '../../soknad/types';
+import { isEnabled } from '../../toggles/selectors';
+import { IToggleName } from '../../toggles/types';
 
 interface IBarnehageplassSkalSlutteInfo {
     intl: InjectedIntl;
     feltMedFeil: IFeltFeil;
     settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => void;
+    lastOppVedlegg: (feltnavn: Feltnavn, filer: File[]) => void;
 }
 
 interface IMapStateToProps {
     skalSlutteIBarnehageAntallTimer: IFelt;
     skalSlutteIBarnehageDato: IFelt;
     skalSlutteIBarnehageKommune: IFelt;
+    skalSlutteIBarnehageVedlegg: IVedleggFelt;
+    brukVedlegg: boolean;
 }
 
 type BarnehageplassSkalSlutteInfoProps = IBarnehageplassSkalSlutteInfo & IMapStateToProps;
@@ -28,6 +34,9 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
     skalSlutteIBarnehageAntallTimer,
     skalSlutteIBarnehageDato,
     skalSlutteIBarnehageKommune,
+    skalSlutteIBarnehageVedlegg,
+    brukVedlegg,
+    lastOppVedlegg,
 }) => {
     return (
         <SkjemaGruppe className={'soknad__inputSkjemaGruppe'}>
@@ -79,6 +88,19 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
                     feil={feltMedFeil.skalSlutteIBarnehageKommune}
                     maxLength={50}
                 />
+                {brukVedlegg && (
+                    <Vedlegg
+                        vedlegg={skalSlutteIBarnehageVedlegg.verdi}
+                        onChange={evt => {
+                            if (evt.target.files) {
+                                lastOppVedlegg(
+                                    'skalSlutteIBarnehageVedlegg',
+                                    Array.from(evt.target.files)
+                                );
+                            }
+                        }}
+                    />
+                )}
             </div>
         </SkjemaGruppe>
     );
@@ -86,10 +108,12 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
+        brukVedlegg: isEnabled(state, IToggleName.bruk_vedlegg),
         skalSlutteIBarnehageAntallTimer: selectBarnehageplass(state)
             .skalSlutteIBarnehageAntallTimer,
         skalSlutteIBarnehageDato: selectBarnehageplass(state).skalSlutteIBarnehageDato,
         skalSlutteIBarnehageKommune: selectBarnehageplass(state).skalSlutteIBarnehageKommune,
+        skalSlutteIBarnehageVedlegg: selectBarnehageplass(state).skalSlutteIBarnehageVedlegg,
     };
 };
 

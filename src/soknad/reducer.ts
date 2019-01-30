@@ -2,6 +2,7 @@ import { SoknadActionTypes, SoknadTypeKeys } from './actions';
 import {
     BarnehageplassVerdier,
     ISoknadState,
+    IVedleggFelt,
     Svar,
     TilknytningTilUtlandVerdier,
     ValideringsStatus,
@@ -31,6 +32,12 @@ const standardTilknytningTilUtlandVerdiInitialFelt = {
     verdi: TilknytningTilUtlandVerdier.Ubesvart,
 };
 
+const standardVedleggInitialFelt: IVedleggFelt = {
+    feilmeldingsNokkel: '',
+    valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
+    verdi: [],
+};
+
 const initialState: ISoknadState = {
     arbeidIUtlandet: {
         arbeiderAnnenForelderIUtlandet: standardSvarInitialFelt,
@@ -53,6 +60,7 @@ const initialState: ISoknadState = {
         skalSlutteIBarnehageAntallTimer: standardStringInitialFelt,
         skalSlutteIBarnehageDato: standardStringInitialFelt,
         skalSlutteIBarnehageKommune: standardStringInitialFelt,
+        skalSlutteIBarnehageVedlegg: standardVedleggInitialFelt,
     },
     familieforhold: {
         annenForelderFodselsnummer: standardStringInitialFelt,

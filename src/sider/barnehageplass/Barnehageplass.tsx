@@ -21,21 +21,23 @@ import {
     Svar,
     ValideringsStatus,
 } from '../../soknad/types';
+import { vedleggLastOpp } from '../../vedlegg/actions';
 import BarnehageplassHarSluttetInfo from './BarnehageplassHarSluttetInfo';
 import BarnehageplassSkalBegynneInfo from './BarnehageplassSkalBegynneInfo';
 import BarnehageplassSkalSlutteInfo from './BarnehageplassSkalSlutteInfo';
 import BarnehageplassStatus from './BarnehageplassStatus';
 import HarBarnehageplassInfo from './HarBarnehageplassInfo';
 
+interface IMapStateToProps {
+    barnehageplass: IBarnehageplass;
+    harForsoktNesteSteg: boolean;
+}
+
 interface IMapDispatchToProps {
     nullstillNesteSteg: () => void;
     settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => void;
     settSvarFelt: (feltnavn: Feltnavn, verdi: Svar) => void;
-}
-
-interface IMapStateToProps {
-    barnehageplass: IBarnehageplass;
-    harForsoktNesteSteg: boolean;
+    lastOppVedlegg: (feltnavn: Feltnavn, filer: File[]) => void;
 }
 
 type BarnehageplassSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
@@ -47,6 +49,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     nullstillNesteSteg,
     settBarnehageplassVerdiFelt,
     settSvarFelt,
+    lastOppVedlegg,
 }) => {
     const {
         barnBarnehageplassStatus,
@@ -119,6 +122,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                                     intl={intl}
                                     feltMedFeil={feltMedFeil}
                                     settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
+                                    lastOppVedlegg={lastOppVedlegg}
                                 />
                             )}
                             {barnBarnehageplassStatus.verdi ===
@@ -162,8 +166,18 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     );
 };
 
+const mapStateToProps = (state: IRootState): IMapStateToProps => {
+    return {
+        barnehageplass: selectBarnehageplass(state),
+        harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
+    };
+};
+
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
+        lastOppVedlegg: (feltnavn: Feltnavn, filer: File[]) => {
+            dispatch(vedleggLastOpp('barnehageplass', feltnavn, filer));
+        },
         nullstillNesteSteg: () => {
             dispatch(soknadNullstillNesteSteg());
         },
@@ -173,13 +187,6 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
         settSvarFelt: (feltnavn: Feltnavn, verdi: Svar) => {
             dispatch(soknadValiderFelt('barnehageplass', feltnavn, verdi));
         },
-    };
-};
-
-const mapStateToProps = (state: IRootState): IMapStateToProps => {
-    return {
-        barnehageplass: selectBarnehageplass(state),
-        harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
     };
 };
 

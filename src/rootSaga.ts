@@ -6,6 +6,7 @@ import { sokerSaga } from './soker/saga';
 import { soknadSaga } from './soknad/saga';
 import { teksterSaga } from './tekster/saga';
 import { togglesSaga } from './toggles/saga';
+import { vedleggSaga } from './vedlegg/saga';
 
 function* rootSaga() {
     yield all([
@@ -16,6 +17,7 @@ function* rootSaga() {
         togglesSaga(),
         innsendingSaga(),
         soknadSaga(),
+        vedleggSaga(),
     ]);
 }
 

@@ -1,44 +1,29 @@
 import * as React from 'react';
+import { IVedlegg } from '../../vedlegg/types';
 import VedleggKnapp from './VedleggKnapp';
 
 interface IVedleggProps {
-    onChange: () => void;
+    onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
+    vedlegg: IVedlegg[];
 }
 
-interface IVedleggState {
-    filer: File[];
-}
-
-class Vedlegg extends React.Component<IVedleggProps, IVedleggState> {
+class Vedlegg extends React.Component<IVedleggProps> {
     constructor(props: IVedleggProps) {
         super(props);
-
-        this.state = {
-            filer: [],
-        };
-
-        this.handleChange = this.handleChange.bind(this);
     }
 
     public render() {
+        const { onChange, vedlegg } = this.props;
         return (
             <div>
-                <VedleggKnapp onChange={this.handleChange} />
+                <VedleggKnapp onChange={onChange} />
                 <div>
-                    {this.state.filer.map(f => {
-                        return <span key={f.name}>{f.name}</span>;
+                    {vedlegg.map(f => {
+                        return <span key={f.filnavn}>{f.filnavn}</span>;
                     })}
                 </div>
             </div>
         );
-    }
-
-    private handleChange(evt: React.ChangeEvent<HTMLInputElement>) {
-        if (evt.target.files) {
-            this.setState({
-                filer: Array.from(evt.target.files),
-            });
-        }
     }
 }
 

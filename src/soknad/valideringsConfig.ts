@@ -88,6 +88,7 @@ const valideringsConfig: IValideringsConfig = {
         ],
         skalSlutteIBarnehageDato: [harSvartTekstMedFeilmelding, harFyltInnDato],
         skalSlutteIBarnehageKommune: [harSvartTekstMedFeilmelding],
+        skalSlutteIBarnehageVedlegg: [svarUtenValidering],
     },
     familieforhold: {
         annenForelderFodselsnummer: [harSvartTekstMedFeilmelding, harFyltInnFodselsnummer],

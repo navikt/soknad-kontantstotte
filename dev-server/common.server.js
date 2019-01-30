@@ -1,9 +1,11 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const multer = require('multer');
 
 const delayMs = 1000;
 const app = express();
+const upload = multer();
 
 function lesMockFil(filnavn) {
     return fs.readFileSync(path.join(__dirname, '/mock/' + filnavn), 'UTF-8');
@@ -31,6 +33,16 @@ app.get('/soknad-kontantstotte-api/api/barn', function(req, res) {
 
 app.post('/soknad-kontantstotte-api/api/sendinn', function(req, res) {
     setTimeout(() => res.send(lesMockFil('innsending-respons.json')), delayMs);
+});
+
+app.post('/soknad-kontantstotte-api/api/vedlegg/', upload.single('file'), function(req, res) {
+    const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (Math.random() * 16) | 0,
+            v = c === 'x' ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+    });
+
+    res.send({ vedleggsId: uuid, filnavn: req.file.originalname });
 });
 
 module.exports = app;

@@ -19,7 +19,10 @@ class VedleggKnapp extends React.Component<IVedleggKnappProps> {
                 <input
                     id={'test'}
                     type={'file'}
-                    accept={'image/png,image/jpg,image/jpeg,application/pdf'}
+                    accept={
+                        'image/png, image/jpg, image/jpeg, application/pdf, .jpg, .jpeg, .png, .pdf'
+                    }
+                    multiple={true}
                     style={{
                         display: 'none',
                     }}

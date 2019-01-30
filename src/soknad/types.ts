@@ -1,3 +1,5 @@
+import { IVedlegg } from '../vedlegg/types';
+
 enum Svar {
     JA = 'JA',
     NEI = 'NEI',
@@ -30,6 +32,12 @@ enum ValideringsStatus {
 
 interface IFelt {
     verdi: Svar | BarnehageplassVerdier | TilknytningTilUtlandVerdier | string;
+    valideringsStatus: ValideringsStatus;
+    feilmeldingsNokkel: string;
+}
+
+interface IVedleggFelt {
+    verdi: IVedlegg[];
     valideringsStatus: ValideringsStatus;
     feilmeldingsNokkel: string;
 }
@@ -76,6 +84,7 @@ interface IBarnehageplass {
     readonly skalSlutteIBarnehageAntallTimer: IFelt;
     readonly skalSlutteIBarnehageDato: IFelt;
     readonly skalSlutteIBarnehageKommune: IFelt;
+    readonly skalSlutteIBarnehageVedlegg: IVedleggFelt;
     readonly harBarnehageplassAntallTimer: IFelt;
     readonly harBarnehageplassDato: IFelt;
     readonly harBarnehageplassKommune: IFelt;
@@ -161,6 +170,7 @@ export {
     ISoknadState,
     Svar,
     IFelt,
+    IVedleggFelt,
     utenlandskKontantstotteFeltnavn,
     ValideringsStatus,
 };
