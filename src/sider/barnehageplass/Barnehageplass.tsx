@@ -21,7 +21,7 @@ import {
     Svar,
     ValideringsStatus,
 } from '../../soknad/types';
-import { vedleggLastOpp } from '../../vedlegg/actions';
+import { vedleggLastOpp, vedleggSlett } from '../../vedlegg/actions';
 import BarnehageplassHarSluttetInfo from './BarnehageplassHarSluttetInfo';
 import BarnehageplassSkalBegynneInfo from './BarnehageplassSkalBegynneInfo';
 import BarnehageplassSkalSlutteInfo from './BarnehageplassSkalSlutteInfo';
@@ -38,6 +38,7 @@ interface IMapDispatchToProps {
     settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => void;
     settSvarFelt: (feltnavn: Feltnavn, verdi: Svar) => void;
     lastOppVedlegg: (feltnavn: Feltnavn, filer: File[]) => void;
+    slettVedlegg: (feltnavn: Feltnavn, filreferanse: string) => void;
 }
 
 type BarnehageplassSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
@@ -50,6 +51,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     settBarnehageplassVerdiFelt,
     settSvarFelt,
     lastOppVedlegg,
+    slettVedlegg,
 }) => {
     const {
         barnBarnehageplassStatus,
@@ -123,6 +125,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                                     feltMedFeil={feltMedFeil}
                                     settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
                                     lastOppVedlegg={lastOppVedlegg}
+                                    slettVedlegg={slettVedlegg}
                                 />
                             )}
                             {barnBarnehageplassStatus.verdi ===
@@ -174,18 +177,22 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
+    const STEGNAVN = 'barnehageplass';
     return {
         lastOppVedlegg: (feltnavn: Feltnavn, filer: File[]) => {
-            dispatch(vedleggLastOpp('barnehageplass', feltnavn, filer));
+            dispatch(vedleggLastOpp(STEGNAVN, feltnavn, filer));
         },
         nullstillNesteSteg: () => {
             dispatch(soknadNullstillNesteSteg());
         },
         settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => {
-            dispatch(soknadValiderFelt('barnehageplass', feltnavn, verdi));
+            dispatch(soknadValiderFelt(STEGNAVN, feltnavn, verdi));
         },
         settSvarFelt: (feltnavn: Feltnavn, verdi: Svar) => {
-            dispatch(soknadValiderFelt('barnehageplass', feltnavn, verdi));
+            dispatch(soknadValiderFelt(STEGNAVN, feltnavn, verdi));
+        },
+        slettVedlegg: (feltnavn: Feltnavn, filref: string) => {
+            dispatch(vedleggSlett(STEGNAVN, feltnavn, filref));
         },
     };
 };

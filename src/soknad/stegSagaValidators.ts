@@ -7,14 +7,15 @@ import {
     ITilknytningTilUtland,
     IUtenlandskeYtelser,
     IUtenlandskKontantstotte,
+    IVedleggFelt,
     Stegnavn,
     Svar,
     TilknytningTilUtlandVerdier,
     ValideringsStatus,
 } from './types';
 
-function harListeMedFeltFeil(feltForSteg: IFelt[]): boolean {
-    return feltForSteg.reduce((acc: boolean, felt: IFelt) => {
+function harListeMedFeltFeil(feltForSteg: Array<IFelt | IVedleggFelt>): boolean {
+    return feltForSteg.reduce((acc: boolean, felt: IFelt | IVedleggFelt) => {
         return acc || felt.valideringsStatus !== ValideringsStatus.OK;
     }, false);
 }

@@ -42,6 +42,10 @@ interface IVedleggFelt {
     feilmeldingsNokkel: string;
 }
 
+interface ISteg {
+    [key: string]: IFelt | IVedleggFelt;
+}
+
 interface ISoknadState {
     readonly mineBarn: IMineBarn;
     readonly familieforhold: IFamilieforhold;
@@ -54,25 +58,25 @@ interface ISoknadState {
     readonly tilknytningTilUtland: ITilknytningTilUtland;
 }
 
-interface IMineBarn {
+interface IMineBarn extends ISteg {
     readonly erBrukerOpprettet: IFelt;
     readonly erFlerling: IFelt;
     readonly fodselsdato: IFelt;
     readonly navn: IFelt;
 }
 
-interface IFamilieforhold {
+interface IFamilieforhold extends ISteg {
     readonly borForeldreneSammenMedBarnet: IFelt;
     readonly annenForelderNavn: IFelt;
     readonly annenForelderFodselsnummer: IFelt;
 }
 
-interface IUtenlandskKontantstotte {
+interface IUtenlandskKontantstotte extends ISteg {
     readonly mottarKontantstotteFraUtlandet: IFelt;
     readonly mottarKontantstotteFraUtlandetTilleggsinfo: IFelt;
 }
 
-interface IBarnehageplass {
+interface IBarnehageplass extends ISteg {
     readonly harBarnehageplass: IFelt;
     readonly barnBarnehageplassStatus: IFelt;
     readonly harSluttetIBarnehageAntallTimer: IFelt;
@@ -90,7 +94,7 @@ interface IBarnehageplass {
     readonly harBarnehageplassKommune: IFelt;
 }
 
-interface IKravTilSoker {
+interface IKravTilSoker extends ISteg {
     readonly norskStatsborger: IFelt;
     readonly boddEllerJobbetINorgeSisteFemAar: IFelt;
     readonly borSammenMedBarnet: IFelt;
@@ -99,25 +103,25 @@ interface IKravTilSoker {
     readonly skalBoMedBarnetINorgeNesteTolvMaaneder: IFelt;
 }
 
-interface IArbeidIUtlandet {
+interface IArbeidIUtlandet extends ISteg {
     readonly arbeiderIUtlandetEllerKontinentalsokkel: IFelt;
     readonly arbeiderIUtlandetEllerKontinentalsokkelForklaring: IFelt;
     readonly arbeiderAnnenForelderIUtlandet: IFelt;
     readonly arbeiderAnnenForelderIUtlandetForklaring: IFelt;
 }
 
-interface IUtenlandskeYtelser {
+interface IUtenlandskeYtelser extends ISteg {
     readonly mottarYtelserFraUtland: IFelt;
     readonly mottarYtelserFraUtlandForklaring: IFelt;
     readonly mottarAnnenForelderYtelserFraUtland: IFelt;
     readonly mottarAnnenForelderYtelserFraUtlandForklaring: IFelt;
 }
 
-interface IOppsummering {
+interface IOppsummering extends ISteg {
     readonly bekreftelse: IFelt;
 }
 
-interface ITilknytningTilUtland {
+interface ITilknytningTilUtland extends ISteg {
     readonly boddEllerJobbetINorgeMinstFemAar: IFelt;
     readonly boddEllerJobbetINorgeMinstFemAarForklaring: IFelt;
     readonly annenForelderBoddEllerJobbetINorgeMinstFemAar: IFelt;

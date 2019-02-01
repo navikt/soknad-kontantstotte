@@ -12,6 +12,7 @@ interface IVedleggProps {
     id?: string;
     label: React.ReactNode;
     onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
+    onDelete: (filreferanse: string) => void;
     vedlegg: IVedlegg[];
 }
 
@@ -21,7 +22,7 @@ class Vedlegg extends React.Component<IVedleggProps> {
     }
 
     public render() {
-        const { className, id, label, onChange, vedlegg } = this.props;
+        const { className, id, label, onChange, vedlegg, onDelete } = this.props;
 
         const inputId = id || name || guid();
 
@@ -29,7 +30,7 @@ class Vedlegg extends React.Component<IVedleggProps> {
             <div className={cls(className)}>
                 <label className={'skjemaelement__label'}>{label}</label>
                 <VedleggKnapp onChange={onChange} inputId={inputId} />
-                <VedleggForhandsvisning vedlegg={vedlegg} />
+                <VedleggForhandsvisning vedlegg={vedlegg} onDelete={onDelete} />
             </div>
         );
     }

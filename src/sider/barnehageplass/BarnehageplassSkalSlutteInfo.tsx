@@ -15,6 +15,7 @@ interface IBarnehageplassSkalSlutteInfo {
     feltMedFeil: IFeltFeil;
     settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => void;
     lastOppVedlegg: (feltnavn: Feltnavn, filer: File[]) => void;
+    slettVedlegg: (feltnavn: Feltnavn, filreferanse: string) => void;
 }
 
 interface IMapStateToProps {
@@ -37,6 +38,7 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
     skalSlutteIBarnehageVedlegg,
     brukVedlegg,
     lastOppVedlegg,
+    slettVedlegg,
 }) => {
     return (
         <SkjemaGruppe className={'soknad__inputSkjemaGruppe'}>
@@ -101,6 +103,9 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
                                 );
                             }
                         }}
+                        onDelete={(filreferanse: string) =>
+                            slettVedlegg('skalSlutteIBarnehageVedlegg', filreferanse)
+                        }
                     />
                 )}
             </div>

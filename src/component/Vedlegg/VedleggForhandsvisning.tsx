@@ -1,18 +1,26 @@
+import Lukknapp from 'nav-frontend-lukknapp';
 import * as React from 'react';
 import { Document, Page } from 'react-pdf';
 import { IVedlegg } from '../../vedlegg/types';
 
 interface IVedleggForhandsvisning {
     vedlegg: IVedlegg[];
+    onDelete: (filreferanse: string) => void;
 }
 
-const VedleggForhandsvisning: React.FunctionComponent<IVedleggForhandsvisning> = ({ vedlegg }) => {
+const VedleggForhandsvisning: React.FunctionComponent<IVedleggForhandsvisning> = ({
+    vedlegg,
+    onDelete,
+}) => {
     return (
         <ul className={'vedlegg-forhandsvisning__liste'}>
             {vedlegg.map(v => {
                 const erPdf = v.filnavn.indexOf('.pdf') !== -1;
                 return (
                     <li key={v.filreferanse} className={'vedlegg-forhandsvisning__element'}>
+                        <Lukknapp type={'button'} onClick={() => onDelete(v.filreferanse)}>
+                            {'Slett vedlegg: ' + v.filnavn}
+                        </Lukknapp>
                         <a
                             target={'_blank'}
                             rel={'noopener noreferer'}
