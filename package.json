@@ -76,6 +76,7 @@
     "react-dom": "16.6.3",
     "react-intl": "2.7.2",
     "react-modal": "3.7.1",
+    "react-pdf": "4.0.2",
     "react-redux": "6.0.0",
     "react-router-dom": "4.3.1",
     "redux": "4.0.1",

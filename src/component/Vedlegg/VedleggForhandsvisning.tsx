@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Document, Page } from 'react-pdf';
 import { IVedlegg } from '../../vedlegg/types';
 
 interface IVedleggForhandsvisning {
@@ -19,11 +20,12 @@ const VedleggForhandsvisning: React.FunctionComponent<IVedleggForhandsvisning> =
                         >
                             <div className={'vedlegg-forhandsvisning__bilde-container'}>
                                 {erPdf ? (
-                                    <embed
+                                    <Document
                                         className={'vedlegg-forhandsvisning__pdf'}
-                                        src={window.URL.createObjectURL(v.fil)}
-                                        type={'application/pdf'}
-                                    />
+                                        file={v.fil}
+                                    >
+                                        <Page pageNumber={1} width={222} />
+                                    </Document>
                                 ) : (
                                     <img
                                         className={'vedlegg-forhandsvisning__bilde'}
