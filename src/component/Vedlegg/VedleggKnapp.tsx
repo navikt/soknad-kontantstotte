@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 interface IVedleggKnappProps {
     onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
+    inputId: string;
 }
 
 class VedleggKnapp extends React.Component<IVedleggKnappProps> {
@@ -11,13 +12,13 @@ class VedleggKnapp extends React.Component<IVedleggKnappProps> {
     }
 
     public render() {
-        const { onChange } = this.props;
+        const { onChange, inputId } = this.props;
 
         return (
-            <label htmlFor="test" className={'knapp knapp--hoved'}>
+            <label htmlFor={inputId} className={'knapp knapp--hoved'}>
                 <FormattedMessage id={'app.lastopp.vedlegg'} />
                 <input
-                    id={'test'}
+                    id={inputId}
                     type={'file'}
                     accept={
                         'image/png, image/jpg, image/jpeg, application/pdf, .jpg, .jpeg, .png, .pdf'
