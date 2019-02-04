@@ -18,7 +18,11 @@ const VedleggForhandsvisning: React.FunctionComponent<IVedleggForhandsvisning> =
                 const erPdf = v.filnavn.indexOf('.pdf') !== -1;
                 return (
                     <li key={v.filreferanse} className={'vedlegg-forhandsvisning__element'}>
-                        <Lukknapp type={'button'} onClick={() => onDelete(v.filreferanse)}>
+                        <Lukknapp
+                            type={'button'}
+                            className={'vedlegg-forhandsvisning__slett-knapp'}
+                            onClick={() => onDelete(v.filreferanse)}
+                        >
                             {'Slett vedlegg: ' + v.filnavn}
                         </Lukknapp>
                         <a
