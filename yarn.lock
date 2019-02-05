@@ -567,6 +567,10 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   version "1.0.0"
   resolved "https://repo.adeo.no/repository/npm-public/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
 
+bowser@2.1.0:
+  version "2.1.0"
+  resolved "https://repo.adeo.no/repository/npm-public/bowser/-/bowser-2.1.0.tgz#76cc094f97578ba4858fb4359445ee1317d1be6f"
+
 brace-expansion@^1.1.7:
   version "1.1.11"
   resolved "https://repo.adeo.no/repository/npm-public/brace-expansion/-/brace-expansion-1.1.11.tgz#3c7fcbf529d87226f3d2f52b966ff5271eb441dd"
