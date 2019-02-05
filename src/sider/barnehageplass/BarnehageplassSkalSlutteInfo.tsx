@@ -94,6 +94,7 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
                     <Vedlegg
                         label={'Bekreftelse på oppsigelse'}
                         className={'barnehage__vedlegg'}
+                        feil={feltMedFeil.skalSlutteIBarnehageVedlegg}
                         vedlegg={skalSlutteIBarnehageVedlegg.verdi}
                         onChange={evt => {
                             if (evt.target.files) {

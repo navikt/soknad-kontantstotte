@@ -1,5 +1,8 @@
 import * as classNames from 'classnames';
 import { guid } from 'nav-frontend-js-utils';
+import SkjemaelementFeilmelding, {
+    SkjemaelementFeil,
+} from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
 import * as React from 'react';
 import { IVedlegg } from '../../vedlegg/types';
 import { VedleggForhandsvisning } from './VedleggForhandsvisning';
@@ -14,6 +17,7 @@ interface IVedleggProps {
     onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
     onDelete: (filreferanse: string) => void;
     vedlegg: IVedlegg[];
+    feil?: SkjemaelementFeil;
 }
 
 class Vedlegg extends React.Component<IVedleggProps> {
@@ -22,7 +26,7 @@ class Vedlegg extends React.Component<IVedleggProps> {
     }
 
     public render() {
-        const { className, id, label, onChange, vedlegg, onDelete } = this.props;
+        const { className, id, label, onChange, vedlegg, onDelete, feil } = this.props;
 
         const inputId = id || name || guid();
 
@@ -31,6 +35,7 @@ class Vedlegg extends React.Component<IVedleggProps> {
                 <label className={'skjemaelement__label'}>{label}</label>
                 <VedleggKnapp onChange={onChange} inputId={inputId} />
                 <VedleggForhandsvisning vedlegg={vedlegg} onDelete={onDelete} />
+                <SkjemaelementFeilmelding feil={feil} />
             </div>
         );
     }

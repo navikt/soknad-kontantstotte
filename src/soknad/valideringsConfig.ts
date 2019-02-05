@@ -3,6 +3,7 @@ import {
     barnehageplassFeltnavn,
     familieforholdFeltnavn,
     IFelt,
+    IVedleggFelt,
     kravTilSokerFeltnavn,
     minebarnFeltnavn,
     oppsummeringFeltnavn,
@@ -18,6 +19,7 @@ import {
     harFyltInnGyldigAntallTimer,
     harFyltInnNavn,
     harFyltInnTall,
+    harLastetOppVedlegg,
     harSvartBarnehageplassVerdiMedFeilmelding,
     harSvartJaMedFeilmelding,
     harSvartMedFeilmelding,
@@ -28,18 +30,18 @@ import {
     svarUtenValidering,
 } from './validators';
 
+export type ValideringsFunksjoner = (felt: IFelt & IVedleggFelt) => IFelt | IVedleggFelt;
+
 interface IValideringsConfig {
-    arbeidIUtlandet: { [felt in arbeidIUtlandetFeltnavn]: Array<(felt: IFelt) => IFelt> };
-    barnehageplass: { [felt in barnehageplassFeltnavn]: Array<(felt: IFelt) => IFelt> };
-    familieforhold: { [felt in familieforholdFeltnavn]: Array<(felt: IFelt) => IFelt> };
-    kravTilSoker: { [felt in kravTilSokerFeltnavn]: Array<(felt: IFelt) => IFelt> };
-    mineBarn: { [felt in minebarnFeltnavn]: Array<(felt: IFelt) => IFelt> };
-    utenlandskeYtelser: { [felt in utenlandskeYtelserFeltnavn]: Array<(felt: IFelt) => IFelt> };
-    oppsummering: { [felt in oppsummeringFeltnavn]: Array<(felt: IFelt) => IFelt> };
-    utenlandskKontantstotte: {
-        [felt in utenlandskKontantstotteFeltnavn]: Array<(felt: IFelt) => IFelt>
-    };
-    tilknytningTilUtland: { [felt in tilknytningTilUtlandFeltnavn]: Array<(felt: IFelt) => IFelt> };
+    arbeidIUtlandet: { [felt in arbeidIUtlandetFeltnavn]: ValideringsFunksjoner[] };
+    barnehageplass: { [felt in barnehageplassFeltnavn]: ValideringsFunksjoner[] };
+    familieforhold: { [felt in familieforholdFeltnavn]: ValideringsFunksjoner[] };
+    kravTilSoker: { [felt in kravTilSokerFeltnavn]: ValideringsFunksjoner[] };
+    mineBarn: { [felt in minebarnFeltnavn]: ValideringsFunksjoner[] };
+    utenlandskeYtelser: { [felt in utenlandskeYtelserFeltnavn]: ValideringsFunksjoner[] };
+    oppsummering: { [felt in oppsummeringFeltnavn]: ValideringsFunksjoner[] };
+    utenlandskKontantstotte: { [felt in utenlandskKontantstotteFeltnavn]: ValideringsFunksjoner[] };
+    tilknytningTilUtland: { [felt in tilknytningTilUtlandFeltnavn]: ValideringsFunksjoner[] };
 }
 
 const valideringsConfig: IValideringsConfig = {
@@ -86,7 +88,7 @@ const valideringsConfig: IValideringsConfig = {
         ],
         skalSlutteIBarnehageDato: [harSvartTekstMedFeilmelding, harFyltInnDato],
         skalSlutteIBarnehageKommune: [harSvartTekstMedFeilmelding],
-        skalSlutteIBarnehageVedlegg: [svarUtenValidering],
+        skalSlutteIBarnehageVedlegg: [harLastetOppVedlegg],
     },
     familieforhold: {
         annenForelderFodselsnummer: [harSvartTekstMedFeilmelding, harFyltInnFodselsnummer],

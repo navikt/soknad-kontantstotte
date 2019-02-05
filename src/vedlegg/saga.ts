@@ -37,7 +37,19 @@ function* lastOppVedleggSaga(action: IVedleggLastOpp): SagaIterator {
 
         yield put(soknadSettFelt(action.stegnavn, action.feltnavn, vedleggFelt));
     } catch (e) {
-        console.error('noe gikk galt: ', e);
+        const eksisterendeFelt: IVedleggFelt = yield select(
+            selectFelt,
+            action.stegnavn,
+            action.feltnavn
+        );
+
+        const vedleggFelt: IVedleggFelt = {
+            feilmeldingsNokkel: 'feilmelding.generell.vedlegg.opplasting',
+            valideringsStatus: ValideringsStatus.FEIL,
+            verdi: eksisterendeFelt.verdi,
+        };
+
+        yield put(soknadSettFelt(action.stegnavn, action.feltnavn, vedleggFelt));
     }
 }
 

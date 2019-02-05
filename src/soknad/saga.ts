@@ -29,6 +29,7 @@ import {
     Feltnavn,
     IFelt,
     ISoknadState,
+    IVedleggFelt,
     kravTilSokerFeltnavn,
     minebarnFeltnavn,
     oppsummeringFeltnavn,
@@ -38,14 +39,14 @@ import {
     utenlandskKontantstotteFeltnavn,
     ValideringsStatus,
 } from './types';
-import valideringsConfig from './valideringsConfig';
+import valideringsConfig, { ValideringsFunksjoner } from './valideringsConfig';
 
 function kjorValideringsFunksjoner(
-    valideringsFunksjoner: Array<((felt: IFelt) => IFelt)>,
-    felt: IFelt
-): IFelt {
-    const validertFelt: IFelt = valideringsFunksjoner.reduce(
-        (acc: IFelt, valideringsFunksjon) => {
+    valideringsFunksjoner: ValideringsFunksjoner[],
+    felt: IFelt & IVedleggFelt
+): IFelt | IVedleggFelt {
+    const validertFelt: IFelt | IVedleggFelt = valideringsFunksjoner.reduce(
+        (acc: IFelt | IVedleggFelt, valideringsFunksjon) => {
             const nyttValidertFelt = valideringsFunksjon(felt);
             return acc.valideringsStatus === ValideringsStatus.FEIL ||
                 acc.valideringsStatus === ValideringsStatus.ADVARSEL
@@ -65,10 +66,10 @@ function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
         verdi: action.verdi,
     };
 
-    let validertFelt: IFelt = {
+    let validertFelt: IFelt | IVedleggFelt = {
         feilmeldingsNokkel: '',
         valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
-        verdi: '',
+        verdi: action.verdi,
     };
     switch (action.stegnavn) {
         case 'arbeidIUtlandet':
