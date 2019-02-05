@@ -21,9 +21,18 @@ describe('soknad-kontantstotte', () => {
             await page.goto('http://ci-test-server:8000');
         });
 
-        test('veiledning', async () => {
+        test('veiledning-feilmelding', async () => {
             await page.waitFor('.typo-sidetittel');
-            await takeSnapshot(`veiledning-${name}`, page);
+            await page.click('.knapp.knapp--hoved');
+            await page.waitFor('.skjemaelement__feilmelding');
+            await takeSnapshot(`veiledning-feilmelding-${name}`, page);
+        });
+
+        test('veiledning-utfylt', async () => {
+            await page.click('.skjemaelement__input.checkboks');
+            await page.waitFor('.typo-sidetittel');
+            await page.waitFor(2000);
+            await takeSnapshot(`veiledning-utfylt-${name}`, page);
         });
 
         test('avbrytmodal', async () => {
