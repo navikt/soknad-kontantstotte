@@ -17,6 +17,7 @@ type GenerellFeilsideProps = IMapStateToProps & InjectedIntlProps;
 const GenerellFeilside: React.StatelessComponent<GenerellFeilsideProps> = ({ status, intl }) => {
     if (intl) {
         document.title = intl.formatMessage({
+            defaultMessage: 'Søknad om kontantstøtte - Feilside',
             id: 'app.tittel.feilside',
         });
     }

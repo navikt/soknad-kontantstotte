@@ -15,7 +15,7 @@ class VedleggKnapp extends React.Component<IVedleggKnappProps> {
         const { onChange, inputId } = this.props;
 
         return (
-            <label htmlFor={inputId} className={'knapp knapp--standard'}>
+            <label htmlFor={inputId} className={'knapp knapp--standard vedlegg__knapp'}>
                 <FormattedMessage id={'app.lastopp.vedlegg'} />
                 <input
                     id={inputId}

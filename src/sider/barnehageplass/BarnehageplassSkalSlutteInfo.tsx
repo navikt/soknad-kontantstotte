@@ -92,7 +92,12 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
                 />
                 {brukVedlegg && (
                     <Vedlegg
-                        label={'Bekreftelse på oppsigelse'}
+                        sporsmal={intl.formatMessage({
+                            id: 'barnehageplass.skalSlutteIBarnehage.vedlegg.sporsmal',
+                        })}
+                        label={intl.formatMessage({
+                            id: 'barnehageplass.skalSlutteIBarnehage.vedlegg.label',
+                        })}
                         className={'barnehage__vedlegg'}
                         feil={feltMedFeil.skalSlutteIBarnehageVedlegg}
                         vedlegg={skalSlutteIBarnehageVedlegg.verdi}
