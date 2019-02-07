@@ -42,7 +42,7 @@ app.post('/soknad-kontantstotte-api/api/vedlegg/', upload.single('file'), functi
         return v.toString(16);
     });
 
-    res.send({ vedleggsId: uuid, filnavn: req.file.originalname });
+    setTimeout(() => res.send({ vedleggsId: uuid, filnavn: req.file.originalname }), delayMs);
 });
 
 module.exports = app;

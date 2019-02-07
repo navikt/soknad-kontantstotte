@@ -9,6 +9,31 @@ import { IVedlegg } from './types';
 
 function* lastOppVedleggSaga(action: IVedleggLastOpp): SagaIterator {
     try {
+        const eksisterendeFelt: IVedleggFelt = yield select(
+            selectFelt,
+            action.stegnavn,
+            action.feltnavn
+        );
+
+        const midlertidigFiler = action.filer.map(
+            (fil: File, i): IVedlegg => {
+                return {
+                    fil,
+                    filnavn: '',
+                    filreferanse: `midlertidig-ref-${i}`,
+                    isLoading: true,
+                };
+            }
+        );
+
+        const midlertidigFelt: IVedleggFelt = {
+            feilmeldingsNokkel: eksisterendeFelt.feilmeldingsNokkel,
+            valideringsStatus: eksisterendeFelt.valideringsStatus,
+            verdi: eksisterendeFelt.verdi.concat(midlertidigFiler),
+        };
+
+        yield put(soknadSettFelt(action.stegnavn, action.feltnavn, midlertidigFelt));
+
         const responses: ILastOppVedleggRespons[] = yield all(
             action.filer.map((fil: File) => call(lastOppVedlegg, fil))
         );
@@ -19,14 +44,9 @@ function* lastOppVedleggSaga(action: IVedleggLastOpp): SagaIterator {
                     fil,
                     filnavn: responses[i].filnavn,
                     filreferanse: responses[i].vedleggsId,
+                    isLoading: false,
                 };
             }
-        );
-
-        const eksisterendeFelt: IVedleggFelt = yield select(
-            selectFelt,
-            action.stegnavn,
-            action.feltnavn
         );
 
         const vedleggFelt: IVedleggFelt = {
