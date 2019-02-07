@@ -33,6 +33,7 @@ const Submitknapp: React.StatelessComponent<SubmitKnappProps> = ({
     status,
     stegPosisjon,
 }) => {
+    const erVeiledningsSteg = stegConfig.veiledning.stegIndeks === stegPosisjon;
     const erOppsummeringsSteg = stegConfig.oppsummering.stegIndeks === stegPosisjon;
     const innsendingFeilet = erOppsummeringsSteg && status === AppStatus.FEILSITUASJON;
 
@@ -40,6 +41,8 @@ const Submitknapp: React.StatelessComponent<SubmitKnappProps> = ({
         ? 'app.sendSoknad.gjenta'
         : erOppsummeringsSteg
         ? 'app.sendSoknad'
+        : erVeiledningsSteg
+        ? 'veiledningsside.knapp'
         : 'app.neste';
 
     return (
