@@ -8,6 +8,7 @@ import * as React from 'react';
 import { IVedlegg } from '../../vedlegg/types';
 import { VedleggForhandsvisning } from './VedleggForhandsvisning';
 import VedleggKnapp from './VedleggKnapp';
+import { VedleggListe } from './VedleggListe';
 
 const cls = (className?: string) => classNames('skjemaelement', className);
 
@@ -20,6 +21,7 @@ interface IVedleggProps {
     onDelete: (filreferanse: string) => void;
     sporsmal: React.ReactNode;
     vedlegg: IVedlegg[];
+    visning: 'liste' | 'forhåndsvisning';
 }
 
 class Vedlegg extends React.Component<IVedleggProps> {
@@ -28,7 +30,17 @@ class Vedlegg extends React.Component<IVedleggProps> {
     }
 
     public render() {
-        const { className, id, label, onChange, vedlegg, onDelete, feil, sporsmal } = this.props;
+        const {
+            className,
+            id,
+            label,
+            onChange,
+            vedlegg,
+            onDelete,
+            feil,
+            sporsmal,
+            visning,
+        } = this.props;
 
         const inputId = id || name || guid();
 
@@ -37,7 +49,10 @@ class Vedlegg extends React.Component<IVedleggProps> {
                 <Element className={'vedlegg__sporsmal'}>{sporsmal}</Element>
                 <p className={'skjemaelement__label vedlegg__label'}>{label}</p>
                 <VedleggKnapp onChange={onChange} inputId={inputId} />
-                <VedleggForhandsvisning vedlegg={vedlegg} onDelete={onDelete} />
+                {visning === 'liste' && <VedleggListe vedlegg={vedlegg} onDelete={onDelete} />}
+                {visning === 'forhåndsvisning' && (
+                    <VedleggForhandsvisning vedlegg={vedlegg} onDelete={onDelete} />
+                )}
                 <SkjemaelementFeilmelding feil={feil} />
             </div>
         );

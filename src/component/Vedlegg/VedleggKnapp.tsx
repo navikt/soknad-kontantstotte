@@ -16,7 +16,7 @@ class VedleggKnapp extends React.Component<IVedleggKnappProps> {
 
         return (
             <label htmlFor={inputId} className={'knapp knapp--standard vedlegg__knapp'}>
-                <FormattedMessage id={'app.lastopp.vedlegg'} />
+                <FormattedMessage id={'app.vedlegg.lastopp'} />
                 <input
                     id={inputId}
                     type={'file'}

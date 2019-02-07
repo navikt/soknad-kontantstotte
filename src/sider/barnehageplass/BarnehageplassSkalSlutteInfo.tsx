@@ -101,6 +101,7 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
                         className={'barnehage__vedlegg'}
                         feil={feltMedFeil.skalSlutteIBarnehageVedlegg}
                         vedlegg={skalSlutteIBarnehageVedlegg.verdi}
+                        visning={'liste'}
                         onChange={evt => {
                             if (evt.target.files) {
                                 lastOppVedlegg(
