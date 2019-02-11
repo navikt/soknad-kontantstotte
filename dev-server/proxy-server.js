@@ -6,6 +6,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('../webpack.dev');
 const path = require('path');
 const fs = require('fs');
+const url = require('url');
 
 const port = 8000;
 const app = express();
@@ -22,8 +23,9 @@ app.use(
     '/soknad-kontantstotte-api/api/',
     proxy('localhost:8080', {
         proxyReqPathResolver: function(req) {
-            return `/api${require('url').parse(req.url).path}`;
+            return `/api${url.parse(req.url).path}`;
         },
+        parseReqBody: false,
     })
 );
 
