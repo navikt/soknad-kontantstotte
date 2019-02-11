@@ -3,6 +3,8 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { IVedlegg } from '../../vedlegg/types';
+import BindersIkon from '../Ikoner/BindersIkon';
+import SoppelbotteIkon from '../Ikoner/SoppelbotteIkon';
 
 interface IVedleggListe {
     vedlegg: IVedlegg[];
@@ -22,6 +24,7 @@ const VedleggListe: React.FunctionComponent<IVedleggListe> = ({ vedlegg, onDelet
                             <NavFrontendSpinner />
                         ) : (
                             <>
+                                <BindersIkon className={'vedlegg-liste__binders-ikon'} />
                                 <a
                                     className={'nav-frontend-lenker'}
                                     target={'_blank'}
@@ -46,6 +49,9 @@ const VedleggListe: React.FunctionComponent<IVedleggListe> = ({ vedlegg, onDelet
                                     className={'knapp knapp--flat vedlegg-liste__slett-knapp'}
                                     onClick={() => onDelete(v.filreferanse)}
                                 >
+                                    <SoppelbotteIkon
+                                        className={'vedlegg-liste__soppelbotte-ikon'}
+                                    />
                                     <FormattedMessage id={'app.vedlegg.slett'} />
                                 </button>
                             </>
