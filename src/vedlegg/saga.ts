@@ -66,7 +66,7 @@ function* lastOppVedleggSaga(action: IVedleggLastOpp): SagaIterator {
         const vedleggFelt: IVedleggFelt = {
             feilmeldingsNokkel: 'feilmelding.generell.vedlegg.opplasting',
             valideringsStatus: ValideringsStatus.FEIL,
-            verdi: eksisterendeFelt.verdi,
+            verdi: eksisterendeFelt.verdi.filter((vedlegg: IVedlegg) => !vedlegg.isLoading),
         };
 
         yield put(soknadSettFelt(action.stegnavn, action.feltnavn, vedleggFelt));
