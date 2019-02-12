@@ -1,4 +1,5 @@
 import * as Bowser from 'bowser';
+import { Flatknapp } from 'nav-frontend-knapper';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -26,7 +27,7 @@ const VedleggListe: React.FunctionComponent<IVedleggListe> = ({ vedlegg, onDelet
                             <>
                                 <BindersIkon className={'vedlegg-liste__binders-ikon'} />
                                 <a
-                                    className={'nav-frontend-lenker'}
+                                    className={'nav-frontend-lenker vedlegg-liste__lenke'}
                                     target={'_blank'}
                                     rel={'noopener noreferer'}
                                     href={
@@ -45,15 +46,15 @@ const VedleggListe: React.FunctionComponent<IVedleggListe> = ({ vedlegg, onDelet
                                     {v.filnavn}
                                 </a>
 
-                                <button
-                                    className={'knapp knapp--flat vedlegg-liste__slett-knapp'}
+                                <Flatknapp
+                                    className={'vedlegg-liste__slett-knapp'}
                                     onClick={() => onDelete(v.filreferanse)}
                                 >
                                     <SoppelbotteIkon
                                         className={'vedlegg-liste__soppelbotte-ikon'}
                                     />
                                     <FormattedMessage id={'app.vedlegg.slett'} />
-                                </button>
+                                </Flatknapp>
                             </>
                         )}
                     </li>

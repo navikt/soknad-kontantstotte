@@ -9,20 +9,25 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 0.5rem;
   }
 
   &__binders-ikon {
+    stroke: @navMorkGra;
+    align-self: flex-start;
     height: 1.5rem;
     width: 1.5rem;
+    margin: 0.4rem 1rem 0 0;
+  }
+
+  &__lenke {
+    align-self: flex-start;
+    flex-grow: 1;
+    margin-top: 0.4rem;
   }
 
   &__slett-knapp {
-    border: none;
     text-transform: none;
-
-    &:hover, &:focus, &:active {
-      border: none;
-    }
   }
 
   &__soppelbotte-ikon {
