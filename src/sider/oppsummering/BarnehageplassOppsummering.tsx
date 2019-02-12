@@ -7,15 +7,18 @@ import { JaNeiSvar } from './JaNeiSvar';
 import OppsummeringsAdvarsel from './OppsummeringsAdvarsel';
 import OppsummeringSteg from './OppsummeringSteg';
 import { SporsmalSvar } from './SporsmalSvar';
+import { VedleggSvar } from './VedleggSvar';
 
 interface IBarnehageplassOppsummeringProps {
     barnehageplass: IBarnehageplass;
     visOppsummeringAdvarsel: boolean;
+    brukVedlegg: boolean;
 }
 
 const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsummeringProps> = ({
     barnehageplass,
     visOppsummeringAdvarsel,
+    brukVedlegg,
 }) => {
     let barnBarnehageplassStatusSvar = 'Ubesvart';
 
@@ -108,6 +111,16 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                         }
                         svar={barnehageplass.skalSlutteIBarnehageKommune.verdi}
                     />
+                    {brukVedlegg && (
+                        <VedleggSvar
+                            sporsmal={
+                                <FormattedMessage
+                                    id={'barnehageplass.skalSlutteIBarnehage.vedlegg.sporsmal'}
+                                />
+                            }
+                            vedlegg={barnehageplass.skalSlutteIBarnehageVedlegg.verdi}
+                        />
+                    )}
                 </>
             )}
             {barnehageplass.barnBarnehageplassStatus.verdi ===

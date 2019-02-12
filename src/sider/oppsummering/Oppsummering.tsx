@@ -31,6 +31,7 @@ interface IMapStateToProps {
     harForsoktNesteSteg: boolean;
     visOppsummeringAdvarsel: boolean;
     visTilknytningTilUtlandAdvarsel: boolean;
+    brukVedlegg: boolean;
 }
 
 interface IMapDispatchToProps {
@@ -47,6 +48,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
     soknad,
     visOppsummeringAdvarsel,
     visTilknytningTilUtlandAdvarsel,
+    brukVedlegg,
 }) => {
     return (
         <SideContainer
@@ -71,6 +73,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
                 <BarnehageplassOppsummering
                     barnehageplass={soknad.barnehageplass}
                     visOppsummeringAdvarsel={visOppsummeringAdvarsel}
+                    brukVedlegg={brukVedlegg}
                 />
                 <FamilieforholdOppsummering familieforhold={soknad.familieforhold} />
                 <TilknytningTilUtlandOppsummering
@@ -115,6 +118,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
+        brukVedlegg: isEnabled(state, IToggleName.bruk_vedlegg),
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         soker: selectSoker(state),
         soknad: selectSoknad(state),
