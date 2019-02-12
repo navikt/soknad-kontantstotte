@@ -1,4 +1,5 @@
 import { Action } from 'redux';
+import { IVedlegg } from '../vedlegg/types';
 import { Feltnavn, IFelt, IVedleggFelt, Stegnavn } from './types';
 
 enum SoknadTypeKeys {
@@ -7,12 +8,18 @@ enum SoknadTypeKeys {
     SETT_FELT = 'SOKNAD_SETT_FELT',
     VALIDER_STEG = 'SOKNAD_VALIDER_STEG',
     VALIDER_FELT = 'SOKNAD_VALIDER_FELT',
+    LEGG_TIL_VEDLEGG = 'SOKNAD_LEGG_TIL_VEDLEGG',
+    FJERN_VEDLEGG = 'SOKNAD_FJERN_VEDLEGG',
+    ERSTATT_VEDLEGG = 'SOKNAD_ERSTATT_VEDLEGG',
 }
 
 type SoknadActionTypes = ISoknadValiderFelt &
     ISoknadValiderSteg &
     ISoknadNesteSteg &
     ISoknadNullstillNesteSteg &
+    ISoknadLeggTilVedlegg &
+    ISoknadFjernVedlegg &
+    ISoknadErstattVedlegg &
     ISoknadSettFelt;
 
 interface ISoknadValiderFelt extends Action {
@@ -40,6 +47,28 @@ interface ISoknadNesteSteg extends Action {
 
 interface ISoknadNullstillNesteSteg extends Action {
     type: SoknadTypeKeys.NULLSTILL_NESTE_STEG;
+}
+
+interface ISoknadLeggTilVedlegg extends Action {
+    feltnavn: Feltnavn;
+    stegnavn: Stegnavn;
+    type: SoknadTypeKeys.LEGG_TIL_VEDLEGG;
+    vedlegg: IVedlegg;
+}
+
+interface ISoknadFjernVedlegg extends Action {
+    feltnavn: Feltnavn;
+    filreferanse: string;
+    stegnavn: Stegnavn;
+    type: SoknadTypeKeys.FJERN_VEDLEGG;
+}
+
+interface ISoknadErstattVedlegg extends Action {
+    feltnavn: Feltnavn;
+    filreferanse: string;
+    stegnavn: Stegnavn;
+    type: SoknadTypeKeys.ERSTATT_VEDLEGG;
+    vedlegg: IVedlegg;
 }
 
 function soknadValiderFelt(stegnavn: Stegnavn, feltnavn: Feltnavn, verdi: any): ISoknadValiderFelt {
@@ -83,14 +112,58 @@ function soknadNullstillNesteSteg(): ISoknadNullstillNesteSteg {
     };
 }
 
+function soknadLeggTilVedlegg(
+    stegnavn: Stegnavn,
+    feltnavn: Feltnavn,
+    vedlegg: IVedlegg
+): ISoknadLeggTilVedlegg {
+    return {
+        feltnavn,
+        stegnavn,
+        type: SoknadTypeKeys.LEGG_TIL_VEDLEGG,
+        vedlegg,
+    };
+}
+
+function soknadFjernVedlegg(
+    stegnavn: Stegnavn,
+    feltnavn: Feltnavn,
+    filreferanse: string
+): ISoknadFjernVedlegg {
+    return {
+        feltnavn,
+        filreferanse,
+        stegnavn,
+        type: SoknadTypeKeys.FJERN_VEDLEGG,
+    };
+}
+
+function soknadErstattVedlegg(
+    stegnavn: Stegnavn,
+    feltnavn: Feltnavn,
+    filreferanse: string,
+    vedlegg: IVedlegg
+): ISoknadErstattVedlegg {
+    return {
+        feltnavn,
+        filreferanse,
+        stegnavn,
+        type: SoknadTypeKeys.ERSTATT_VEDLEGG,
+        vedlegg,
+    };
+}
+
 export {
-    SoknadActionTypes,
-    soknadValiderFelt,
-    soknadValiderSteg,
-    SoknadTypeKeys,
-    soknadNesteSteg,
-    soknadNullstillNesteSteg,
     ISoknadValiderFelt,
     ISoknadValiderSteg,
+    SoknadActionTypes,
+    soknadErstattVedlegg,
+    soknadFjernVedlegg,
+    soknadLeggTilVedlegg,
+    soknadNesteSteg,
+    soknadNullstillNesteSteg,
     soknadSettFelt,
+    SoknadTypeKeys,
+    soknadValiderFelt,
+    soknadValiderSteg,
 };

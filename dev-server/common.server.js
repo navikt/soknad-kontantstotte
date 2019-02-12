@@ -41,8 +41,15 @@ app.post('/soknad-kontantstotte-api/api/vedlegg/', upload.single('file'), functi
             v = c === 'x' ? r : (r & 0x3) | 0x8;
         return v.toString(16);
     });
+    const randomDelay = Math.random() * (3000 - delayMs) + delayMs;
+    const sizeLimit = 20 * 1024 * 1024; // 20mb
 
-    setTimeout(() => res.send({ vedleggsId: uuid, filnavn: req.file.originalname }), delayMs);
+    if (req.file.size > sizeLimit) {
+        setTimeout(() => res.status(413).send(), randomDelay);
+        return;
+    }
+
+    setTimeout(() => res.send({ vedleggsId: uuid, filnavn: req.file.originalname }), randomDelay);
 });
 
 module.exports = app;

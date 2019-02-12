@@ -12,7 +12,11 @@ import Barnehageikon from '../../component/Ikoner/BarnehageIkon';
 import Veilederikon from '../../component/Ikoner/Veilederikon';
 import SideContainer from '../../component/StegSide/StegSide';
 import { IRootState } from '../../rootReducer';
-import { soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
+import {
+    soknadFjernVedlegg,
+    soknadNullstillNesteSteg,
+    soknadValiderFelt,
+} from '../../soknad/actions';
 import { selectBarnehageplass } from '../../soknad/selectors';
 import {
     BarnehageplassVerdier,
@@ -21,7 +25,7 @@ import {
     Svar,
     ValideringsStatus,
 } from '../../soknad/types';
-import { vedleggLastOpp, vedleggSlett } from '../../vedlegg/actions';
+import { vedleggLastOpp } from '../../vedlegg/actions';
 import BarnehageplassHarSluttetInfo from './BarnehageplassHarSluttetInfo';
 import BarnehageplassSkalBegynneInfo from './BarnehageplassSkalBegynneInfo';
 import BarnehageplassSkalSlutteInfo from './BarnehageplassSkalSlutteInfo';
@@ -192,7 +196,7 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
             dispatch(soknadValiderFelt(STEGNAVN, feltnavn, verdi));
         },
         slettVedlegg: (feltnavn: Feltnavn, filref: string) => {
-            dispatch(vedleggSlett(STEGNAVN, feltnavn, filref));
+            dispatch(soknadFjernVedlegg(STEGNAVN, feltnavn, filref));
         },
     };
 };
