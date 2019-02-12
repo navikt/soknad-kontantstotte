@@ -13,11 +13,12 @@ import Veilederikon from '../../component/Ikoner/Veilederikon';
 import SideContainer from '../../component/StegSide/StegSide';
 import { IRootState } from '../../rootReducer';
 import { soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
-import { selectBarnehageplass } from '../../soknad/selectors';
+import { selectBarnehageplass, selectMineBarn } from '../../soknad/selectors';
 import {
     BarnehageplassVerdier,
     Feltnavn,
     IBarnehageplass,
+    IMineBarn,
     Svar,
     ValideringsStatus,
 } from '../../soknad/types';
@@ -36,6 +37,7 @@ interface IMapDispatchToProps {
 interface IMapStateToProps {
     barnehageplass: IBarnehageplass;
     harForsoktNesteSteg: boolean;
+    mineBarn: IMineBarn;
 }
 
 type BarnehageplassSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
@@ -44,6 +46,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     barnehageplass,
     harForsoktNesteSteg,
     intl,
+    mineBarn,
     nullstillNesteSteg,
     settBarnehageplassVerdiFelt,
     settSvarFelt,
@@ -54,6 +57,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
         harBarnehageplassAntallTimer,
     } = barnehageplass;
     const feltMedFeil = hentFeltMedFeil(barnehageplass, harForsoktNesteSteg, intl);
+    const brukFlertall = mineBarn.erFlerling.verdi === Svar.JA;
 
     return (
         <SideContainer
@@ -69,9 +73,11 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
 
             <form>
                 <RadioPanelGruppe
-                    legend={intl.formatMessage({
-                        id: 'barnehageplass.harPlass',
-                    })}
+                    legend={intl.formatMessage(
+                        brukFlertall
+                            ? { id: 'barnehageplass.harPlass.flertall' }
+                            : { id: 'barnehageplass.harPlass' }
+                    )}
                     name={'harBarnehageplass'}
                     className={'soknad__inputPanelGruppe'}
                     onChange={(evt: {}, value: string) => {
@@ -97,6 +103,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                                 feltMedFeil={feltMedFeil}
                                 harBarnehageplass={harBarnehageplass}
                                 intl={intl}
+                                brukFlertall={brukFlertall}
                                 settBarnehageplassVerdiFelt={(
                                     feltnavn: Feltnavn,
                                     value: BarnehageplassVerdier
@@ -109,6 +116,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                                 BarnehageplassVerdier.harSluttetIBarnehage && (
                                 <BarnehageplassHarSluttetInfo
                                     intl={intl}
+                                    brukFlertall={brukFlertall}
                                     feltMedFeil={feltMedFeil}
                                     settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
                                 />
@@ -117,6 +125,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                                 BarnehageplassVerdier.skalSlutteIBarnehage && (
                                 <BarnehageplassSkalSlutteInfo
                                     intl={intl}
+                                    brukFlertall={brukFlertall}
                                     feltMedFeil={feltMedFeil}
                                     settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
                                 />
@@ -125,6 +134,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                                 BarnehageplassVerdier.skalBegynneIBarnehage && (
                                 <BarnehageplassSkalBegynneInfo
                                     intl={intl}
+                                    brukFlertall={brukFlertall}
                                     feltMedFeil={feltMedFeil}
                                     settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
                                 />
@@ -134,6 +144,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                                 <HarBarnehageplassInfo
                                     feltMedFeil={feltMedFeil}
                                     intl={intl}
+                                    brukFlertall={brukFlertall}
                                     settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
                                 />
                             )}
@@ -180,6 +191,7 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         barnehageplass: selectBarnehageplass(state),
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
+        mineBarn: selectMineBarn(state),
     };
 };
 

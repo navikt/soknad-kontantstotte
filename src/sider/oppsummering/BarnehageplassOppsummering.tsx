@@ -10,10 +10,12 @@ import { SporsmalSvar } from './SporsmalSvar';
 
 interface IBarnehageplassOppsummeringProps {
     barnehageplass: IBarnehageplass;
+    brukFlertall: boolean;
 }
 
 const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsummeringProps> = ({
     barnehageplass,
+    brukFlertall,
 }) => {
     let barnBarnehageplassStatusSvar = 'Ubesvart';
 
@@ -41,12 +43,28 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                 <FormattedMessage id={'barnehageplass.tittel'} />
             </Element>
             <SporsmalSvar
-                sporsmal={<FormattedMessage id={'oppsummering.barnehageplass.harBarnehageplass'} />}
+                sporsmal={
+                    <FormattedMessage
+                        id={
+                            brukFlertall
+                                ? 'barnehageplass.harPlass.flertall'
+                                : 'barnehageplass.harPlass'
+                        }
+                    />
+                }
                 svar={<JaNeiSvar verdi={barnehageplass.harBarnehageplass.verdi} />}
             />
 
             <SporsmalSvar
-                sporsmal={<FormattedMessage id={'barnehageplass.barnBarnehageplassStatus'} />}
+                sporsmal={
+                    <FormattedMessage
+                        id={
+                            brukFlertall
+                                ? 'barnehageplass.barnBarnehageplassStatus.flertall'
+                                : 'barnehageplass.barnBarnehageplassStatus'
+                        }
+                    />
+                }
                 svar={<FormattedMessage id={barnBarnehageplassStatusSvar} />}
             />
             {barnehageplass.barnBarnehageplassStatus.verdi ===
@@ -55,7 +73,11 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                     <SporsmalSvar
                         sporsmal={
                             <FormattedMessage
-                                id={'barnehageplass.harSluttetIBarnehage.dato.sporsmal'}
+                                id={
+                                    brukFlertall
+                                        ? 'barnehageplass.harSluttetIBarnehage.dato.sporsmal.flertall'
+                                        : 'barnehageplass.harSluttetIBarnehage.dato.sporsmal'
+                                }
                             />
                         }
                         svar={barnehageplass.harSluttetIBarnehageDato.verdi}
@@ -63,7 +85,11 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                     <SporsmalSvar
                         sporsmal={
                             <FormattedMessage
-                                id={'barnehageplass.harSluttetIBarnehage.antallTimer.sporsmal'}
+                                id={
+                                    brukFlertall
+                                        ? 'barnehageplass.harSluttetIBarnehage.antallTimer.sporsmal.flertall'
+                                        : 'barnehageplass.harSluttetIBarnehage.antallTimer.sporsmal'
+                                }
                             />
                         }
                         svar={barnehageplass.harSluttetIBarnehageAntallTimer.verdi}
@@ -85,7 +111,11 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                     <SporsmalSvar
                         sporsmal={
                             <FormattedMessage
-                                id={'barnehageplass.skalSlutteIBarnehage.dato.sporsmal'}
+                                id={
+                                    brukFlertall
+                                        ? 'barnehageplass.skalSlutteIBarnehage.dato.sporsmal.flertall'
+                                        : 'barnehageplass.skalSlutteIBarnehage.dato.sporsmal'
+                                }
                             />
                         }
                         svar={barnehageplass.skalSlutteIBarnehageDato.verdi}
@@ -93,7 +123,11 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                     <SporsmalSvar
                         sporsmal={
                             <FormattedMessage
-                                id={'barnehageplass.skalSlutteIBarnehage.antallTimer.sporsmal'}
+                                id={
+                                    brukFlertall
+                                        ? 'barnehageplass.skalSlutteIBarnehage.antallTimer.sporsmal.flertall'
+                                        : 'barnehageplass.skalSlutteIBarnehage.antallTimer.sporsmal'
+                                }
                             />
                         }
                         svar={barnehageplass.skalSlutteIBarnehageAntallTimer.verdi}
@@ -114,7 +148,11 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                     <SporsmalSvar
                         sporsmal={
                             <FormattedMessage
-                                id={'barnehageplass.harBarnehageplass.dato.sporsmal'}
+                                id={
+                                    brukFlertall
+                                        ? 'barnehageplass.harBarnehageplass.dato.sporsmal.flertall'
+                                        : 'barnehageplass.harBarnehageplass.dato.sporsmal'
+                                }
                             />
                         }
                         svar={barnehageplass.harBarnehageplassDato.verdi}
@@ -122,7 +160,11 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                     <SporsmalSvar
                         sporsmal={
                             <FormattedMessage
-                                id={'barnehageplass.harBarnehageplass.antallTimer.sporsmal'}
+                                id={
+                                    brukFlertall
+                                        ? 'barnehageplass.harBarnehageplass.antallTimer.sporsmal.flertall'
+                                        : 'barnehageplass.harBarnehageplass.antallTimer.sporsmal'
+                                }
                             />
                         }
                         svar={barnehageplass.harBarnehageplassAntallTimer.verdi}
@@ -130,7 +172,11 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                     {barnehageplass.harBarnehageplassAntallTimer.valideringsStatus ===
                         ValideringsStatus.ADVARSEL && (
                         <OppsummeringsAdvarsel
-                            meldingsNokkel={'advarsel.barnehageplass.timerIBarnehage'}
+                            meldingsNokkel={
+                                brukFlertall
+                                    ? 'advarsel.barnehageplass.timerIBarnehage.flertall'
+                                    : 'advarsel.barnehageplass.timerIBarnehage'
+                            }
                         />
                     )}
                     <SporsmalSvar
@@ -150,7 +196,11 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                     <SporsmalSvar
                         sporsmal={
                             <FormattedMessage
-                                id={'barnehageplass.skalBegynneIBarnehage.dato.sporsmal'}
+                                id={
+                                    brukFlertall
+                                        ? 'barnehageplass.skalBegynneIBarnehage.dato.sporsmal.flertall'
+                                        : 'barnehageplass.skalBegynneIBarnehage.dato.sporsmal'
+                                }
                             />
                         }
                         svar={barnehageplass.skalBegynneIBarnehageDato.verdi}
@@ -158,7 +208,11 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                     <SporsmalSvar
                         sporsmal={
                             <FormattedMessage
-                                id={'barnehageplass.skalBegynneIBarnehage.antallTimer.sporsmal'}
+                                id={
+                                    brukFlertall
+                                        ? 'barnehageplass.skalBegynneIBarnehage.antallTimer.sporsmal.flertall'
+                                        : 'barnehageplass.skalBegynneIBarnehage.antallTimer.sporsmal'
+                                }
                             />
                         }
                         svar={barnehageplass.skalBegynneIBarnehageAntallTimer.verdi}

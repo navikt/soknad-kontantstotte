@@ -43,6 +43,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
     soker,
     soknad,
 }) => {
+    const brukFlertall = soknad.mineBarn.erFlerling.verdi === 'JA';
     return (
         <SideContainer
             className={'oppsummering'}
@@ -64,7 +65,10 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
                 <VeiledningOppsummering />
                 <KravTilSokerOppsummering />
                 <BarnOppsummering barn={soknad.mineBarn} />
-                <BarnehageplassOppsummering barnehageplass={soknad.barnehageplass} />
+                <BarnehageplassOppsummering
+                    barnehageplass={soknad.barnehageplass}
+                    brukFlertall={brukFlertall}
+                />
                 <FamilieforholdOppsummering familieforhold={soknad.familieforhold} />
                 <TilknytningTilUtlandOppsummering
                     familieforhold={soknad.familieforhold}

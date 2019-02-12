@@ -9,6 +9,7 @@ import { BarnehageplassVerdier, Feltnavn, IFelt } from '../../soknad/types';
 
 interface IBarnehageplassskalBegynneInfo {
     intl: InjectedIntl;
+    brukFlertall: boolean;
     feltMedFeil: IFeltFeil;
     settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => void;
 }
@@ -25,6 +26,7 @@ const BarnehageplassskalBegynneInfo: React.StatelessComponent<
     BarnehageplassskalBegynneInfoProps
 > = ({
     intl,
+    brukFlertall,
     feltMedFeil,
     settBarnehageplassVerdiFelt,
     skalBegynneIBarnehageAntallTimer,
@@ -36,9 +38,11 @@ const BarnehageplassskalBegynneInfo: React.StatelessComponent<
             <div className={'inputSkjemaGruppe__inner'}>
                 <Input
                     className={'inputElement'}
-                    label={intl.formatMessage({
-                        id: 'barnehageplass.skalBegynneIBarnehage.dato.sporsmal',
-                    })}
+                    label={intl.formatMessage(
+                        brukFlertall
+                            ? { id: 'barnehageplass.skalBegynneIBarnehage.dato.sporsmal.flertall' }
+                            : { id: 'barnehageplass.skalBegynneIBarnehage.dato.sporsmal' }
+                    )}
                     onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
                         settBarnehageplassVerdiFelt(
                             'skalBegynneIBarnehageDato' as Feltnavn,
@@ -51,9 +55,14 @@ const BarnehageplassskalBegynneInfo: React.StatelessComponent<
                 />
                 <Input
                     className={'inputElement'}
-                    label={intl.formatMessage({
-                        id: 'barnehageplass.skalBegynneIBarnehage.antallTimer.sporsmal',
-                    })}
+                    label={intl.formatMessage(
+                        brukFlertall
+                            ? {
+                                  id:
+                                      'barnehageplass.skalBegynneIBarnehage.antallTimer.sporsmal.flertall',
+                              }
+                            : { id: 'barnehageplass.skalBegynneIBarnehage.antallTimer.sporsmal' }
+                    )}
                     onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
                         settBarnehageplassVerdiFelt(
                             'skalBegynneIBarnehageAntallTimer' as Feltnavn,

@@ -6,6 +6,7 @@ import { BarnehageplassVerdier, Feltnavn, IFelt, Svar } from '../../soknad/types
 
 interface IBarnehageplassStatus {
     intl: InjectedIntl;
+    brukFlertall: boolean;
     barnBarnehageplassStatus: IFelt;
     harBarnehageplass: IFelt;
     feltMedFeil: IFeltFeil;
@@ -19,13 +20,16 @@ const BarnehageplassStatus: React.StatelessComponent<BarnehageplassStatusProps> 
     feltMedFeil,
     harBarnehageplass,
     intl,
+    brukFlertall,
     settBarnehageplassVerdiFelt,
 }) => {
     return (
         <RadioPanelGruppe
-            legend={intl.formatMessage({
-                id: 'barnehageplass.barnBarnehageplassStatus',
-            })}
+            legend={intl.formatMessage(
+                brukFlertall
+                    ? { id: 'barnehageplass.barnBarnehageplassStatus.flertall' }
+                    : { id: 'barnehageplass.barnBarnehageplassStatus' }
+            )}
             name={'barnBarnehageplassStatus'}
             onChange={(evt: {}, value: string) => {
                 settBarnehageplassVerdiFelt(
