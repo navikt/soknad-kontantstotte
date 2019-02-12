@@ -1,7 +1,6 @@
 import * as moment from 'moment-timezone';
 import * as React from 'react';
 import { addLocaleData, IntlProvider as Provider } from 'react-intl';
-import * as en from 'react-intl/locale-data/en';
 import * as nb from 'react-intl/locale-data/nb';
 import * as nn from 'react-intl/locale-data/nn';
 import { connect } from 'react-redux';
@@ -9,7 +8,6 @@ import { IRootState } from './rootReducer';
 import { selectTekster, selectValgtSprak } from './tekster/selectors';
 import { ISprak, ITekster } from './tekster/types';
 
-addLocaleData(en);
 addLocaleData(nb);
 addLocaleData(nn);
 

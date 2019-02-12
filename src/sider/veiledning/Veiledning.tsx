@@ -33,8 +33,6 @@ interface IMapDispatchToProps {
 
 function sprakMap(sprak: string) {
     switch (sprak) {
-        case 'en':
-            return ISprak.en;
         case 'nn':
             return ISprak.nn;
         default:
