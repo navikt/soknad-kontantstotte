@@ -1,5 +1,8 @@
+import { push } from 'connected-react-router';
 import { SagaIterator } from 'redux-saga';
 import { all, call, put, select, takeEvery } from 'redux-saga/effects';
+import { appEndreStatus } from '../app/actions';
+import { AppStatus } from '../app/types';
 import {
     soknadErstattVedlegg,
     soknadFjernVedlegg,
@@ -11,6 +14,12 @@ import { Feltnavn, Stegnavn, ValideringsStatus } from '../soknad/types';
 import { IVedleggLastOpp, VedleggTypeKeys } from './actions';
 import { ILastOppVedleggRespons, lastOppVedlegg } from './api';
 import { IVedlegg } from './types';
+
+enum Status {
+    OK,
+    VEDLEGG_FOR_STORT,
+    SYSTEMFEIL,
+}
 
 function* lastOppEnkeltVedleggSaga(
     stegnavn: Stegnavn,
@@ -42,22 +51,35 @@ function* lastOppEnkeltVedleggSaga(
 
         yield put(soknadErstattVedlegg(stegnavn, feltnavn, tempRef, oppdatertVedlegg));
 
-        return response;
+        return Status.OK;
     } catch (e) {
         yield put(soknadFjernVedlegg(stegnavn, feltnavn, tempRef));
 
-        return {
-            status: e.response.status,
-        };
+        if (e.response.status === 413) {
+            return Status.VEDLEGG_FOR_STORT;
+        }
+
+        return Status.SYSTEMFEIL;
     }
 }
 
 function* lastOppVedleggSaga(action: IVedleggLastOpp): SagaIterator {
-    const responses = yield all(
+    const opplastingStatus: Status[] = yield all(
         action.filer.map((fil: File) =>
             call(lastOppEnkeltVedleggSaga, action.stegnavn, action.feltnavn, fil)
         )
     );
+
+    for (const status of opplastingStatus) {
+        switch (status) {
+            case Status.SYSTEMFEIL:
+                yield put(appEndreStatus(AppStatus.FEILSITUASJON));
+                yield put(push('/vedlegg-opplasting-feilet'));
+                return;
+            case Status.VEDLEGG_FOR_STORT:
+                console.log('må gjøre noe lurt her');
+        }
+    }
 }
 
 function* vedleggSaga(): SagaIterator {
