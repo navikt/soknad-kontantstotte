@@ -59,7 +59,7 @@ interface ISoknadState {
     readonly tilknytningTilUtland: ITilknytningTilUtland;
 }
 
-interface IVeiledning {
+interface IVeiledning extends ISteg {
     readonly bekreftelse: IFelt;
 }
 
