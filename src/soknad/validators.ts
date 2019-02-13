@@ -143,6 +143,9 @@ const annenForelderHarIkkeSvartNeiTilknytningTilUtland = (felt: IFelt): IFelt =>
 const harBekreftetOppsummering = (felt: IFelt): IFelt =>
     harSvartJa(felt, 'oppsummering.bekreftelse.feilmelding');
 
+const harBekreftetVeiledning = (felt: IFelt): IFelt =>
+    harSvartJa(felt, 'veiledningsside.bekreftelse.feilmelding');
+
 const harSvartMedFeilmelding = (felt: IFelt): IFelt =>
     harSvart(felt, 'feilmelding.generell.feilmelding');
 
@@ -164,6 +167,7 @@ const svarUtenValidering = (felt: IFelt): IFelt => ok(felt);
 export {
     annenForelderHarIkkeSvartNeiTilknytningTilUtland,
     harBekreftetOppsummering,
+    harBekreftetVeiledning,
     harFyltInnDato,
     harFyltInnFodselsnummer,
     harFyltInnGyldigAntallTimer,

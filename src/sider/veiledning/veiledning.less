@@ -46,19 +46,22 @@
     display: block;
     width: 90%;
   }
+
+  &__bekreftelse {
+    margin-top: 1.25rem;
+    width: 90%;
+  }
 }
 
 @media (min-width: 600px) {
   .veiledning {
+
     &__sidetittel {
       width: initial;
     }
 
-    &__info {
-      width: 65%;
-    }
-
-    &__personopplysning {
+    &__info, &__personopplysning, &__bekreftelse  {
+      max-width: 38rem;
       width: 65%;
     }
 

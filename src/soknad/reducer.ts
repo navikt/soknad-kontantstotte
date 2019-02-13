@@ -100,6 +100,9 @@ const initialState: ISoknadState = {
         mottarYtelserFraUtland: standardSvarInitialFelt,
         mottarYtelserFraUtlandForklaring: standardStringInitialFelt,
     },
+    veiledning: {
+        bekreftelse: standardSvarInitialFelt,
+    },
 };
 
 function soknadReducer(state = initialState, action: SoknadActionTypes) {

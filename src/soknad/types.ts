@@ -47,6 +47,7 @@ interface ISteg {
 }
 
 interface ISoknadState {
+    readonly veiledning: IVeiledning;
     readonly mineBarn: IMineBarn;
     readonly familieforhold: IFamilieforhold;
     readonly arbeidIUtlandet: IArbeidIUtlandet;
@@ -56,6 +57,10 @@ interface ISoknadState {
     readonly utenlandskeYtelser: IUtenlandskeYtelser;
     readonly oppsummering: IOppsummering;
     readonly tilknytningTilUtland: ITilknytningTilUtland;
+}
+
+interface IVeiledning {
+    readonly bekreftelse: IFelt;
 }
 
 interface IMineBarn extends ISteg {
@@ -128,6 +133,7 @@ interface ITilknytningTilUtland extends ISteg {
     readonly annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring: IFelt;
 }
 
+type veiledningFeltnavn = keyof IVeiledning;
 type minebarnFeltnavn = keyof IMineBarn;
 type familieforholdFeltnavn = keyof IFamilieforhold;
 type barnehageplassFeltnavn = keyof IBarnehageplass;
@@ -140,6 +146,7 @@ type tilknytningTilUtlandFeltnavn = keyof ITilknytningTilUtland;
 
 type Stegnavn = keyof ISoknadState;
 type Feltnavn =
+    | veiledningFeltnavn
     | minebarnFeltnavn
     | familieforholdFeltnavn
     | barnehageplassFeltnavn
@@ -151,6 +158,7 @@ type Feltnavn =
     | tilknytningTilUtlandFeltnavn;
 
 export {
+    veiledningFeltnavn,
     minebarnFeltnavn,
     familieforholdFeltnavn,
     arbeidIUtlandetFeltnavn,
@@ -174,6 +182,7 @@ export {
     ISoknadState,
     Svar,
     IFelt,
+    IVeiledning,
     IVedleggFelt,
     utenlandskKontantstotteFeltnavn,
     ValideringsStatus,

@@ -10,10 +10,12 @@ import {
     tilknytningTilUtlandFeltnavn,
     utenlandskeYtelserFeltnavn,
     utenlandskKontantstotteFeltnavn,
+    veiledningFeltnavn,
 } from './types';
 import {
     annenForelderHarIkkeSvartNeiTilknytningTilUtland,
     harBekreftetOppsummering,
+    harBekreftetVeiledning,
     harFyltInnDato,
     harFyltInnFodselsnummer,
     harFyltInnGyldigAntallTimer,
@@ -42,6 +44,7 @@ interface IValideringsConfig {
     oppsummering: { [felt in oppsummeringFeltnavn]: ValideringsFunksjoner[] };
     utenlandskKontantstotte: { [felt in utenlandskKontantstotteFeltnavn]: ValideringsFunksjoner[] };
     tilknytningTilUtland: { [felt in tilknytningTilUtlandFeltnavn]: ValideringsFunksjoner[] };
+    veiledning: { [felt in veiledningFeltnavn]: Array<(felt: IFelt) => IFelt> };
 }
 
 const valideringsConfig: IValideringsConfig = {
@@ -148,6 +151,9 @@ const valideringsConfig: IValideringsConfig = {
             harSvartTekstMedFeilmelding,
             harSvartTekstUnderAntallTegnMedFeilmelding,
         ],
+    },
+    veiledning: {
+        bekreftelse: [harBekreftetVeiledning],
     },
 };
 

@@ -38,6 +38,7 @@ import {
     utenlandskeYtelserFeltnavn,
     utenlandskKontantstotteFeltnavn,
     ValideringsStatus,
+    veiledningFeltnavn,
 } from './types';
 import valideringsConfig, { ValideringsFunksjoner } from './valideringsConfig';
 
@@ -72,6 +73,12 @@ function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
         verdi: action.verdi,
     };
     switch (action.stegnavn) {
+        case 'veiledning':
+            validertFelt = kjorValideringsFunksjoner(
+                valideringsConfig.veiledning[action.feltnavn as veiledningFeltnavn],
+                feltMedOppdatertVerdi
+            );
+            break;
         case 'arbeidIUtlandet':
             validertFelt = kjorValideringsFunksjoner(
                 valideringsConfig.arbeidIUtlandet[action.feltnavn as arbeidIUtlandetFeltnavn],
