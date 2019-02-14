@@ -5,15 +5,15 @@ import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import Veilederikon from '../../component/Ikoner/Veilederikon';
+import Submitknapp from '../../component/Submitknapp/Submitknapp';
 import { IRootState } from '../../rootReducer';
 import { selectSoker } from '../../soker/selectors';
-import { Personopplysning } from './Personopplysning';
-import { ISoknadState, Svar, ValideringsStatus } from '../../soknad/types';
 import { soknadValiderFelt } from '../../soknad/actions';
 import { selectSoknad } from '../../soknad/selectors';
-import { selectHarForsoktNesteSteg } from '../../app/selectors';
-import Submitknapp from '../../component/Submitknapp/Submitknapp';
+import { ISoknadState, Svar, ValideringsStatus } from '../../soknad/types';
+import { Personopplysning } from './Personopplysning';
 
 interface IMapStateToProps {
     fornavn: string;

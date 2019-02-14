@@ -55,7 +55,7 @@ function* lastOppEnkeltVedleggSaga(
     } catch (e) {
         yield put(soknadFjernVedlegg(stegnavn, feltnavn, tempRef));
 
-        if (e.response.status === 413) {
+        if (!!e.response && e.response.status === 413) {
             return Status.VEDLEGG_FOR_STORT;
         }
 
