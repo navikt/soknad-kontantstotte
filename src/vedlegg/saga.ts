@@ -1,6 +1,6 @@
 import { push } from 'connected-react-router';
 import { SagaIterator } from 'redux-saga';
-import { all, call, put, select, takeEvery } from 'redux-saga/effects';
+import { all, call, delay, put, select, takeEvery } from 'redux-saga/effects';
 import { appEndreStatus } from '../app/actions';
 import { AppStatus } from '../app/types';
 import {
@@ -15,10 +15,13 @@ import { IVedleggLastOpp, VedleggTypeKeys } from './actions';
 import { ILastOppVedleggRespons, lastOppVedlegg } from './api';
 import { IVedlegg } from './types';
 
+const SIZE_LIMIT = 20 * 1024 * 1024; // 20MB
+
 enum Status {
     OK,
     VEDLEGG_FOR_STORT,
     SYSTEMFEIL,
+    NETTVERKS_FEIL,
 }
 
 function* lastOppEnkeltVedleggSaga(
@@ -40,6 +43,15 @@ function* lastOppEnkeltVedleggSaga(
     yield put(soknadLeggTilVedlegg(stegnavn, feltnavn, midlertidigVedlegg));
 
     try {
+        if (fil.size > SIZE_LIMIT) {
+            yield delay(2000);
+            throw {
+                response: {
+                    status: 413,
+                },
+            };
+        }
+
         const response: ILastOppVedleggRespons = yield call(lastOppVedlegg, fil);
 
         const oppdatertVedlegg: IVedlegg = {
@@ -59,6 +71,10 @@ function* lastOppEnkeltVedleggSaga(
             return Status.VEDLEGG_FOR_STORT;
         }
 
+        if (!!e.request && e.request.status === 0) {
+            return Status.NETTVERKS_FEIL;
+        }
+
         return Status.SYSTEMFEIL;
     }
 }
@@ -76,8 +92,12 @@ function* lastOppVedleggSaga(action: IVedleggLastOpp): SagaIterator {
                 yield put(appEndreStatus(AppStatus.FEILSITUASJON));
                 yield put(push('/vedlegg-opplasting-feilet'));
                 return;
+            case Status.NETTVERKS_FEIL:
+                console.log('Nettverks feil');
+                break;
             case Status.VEDLEGG_FOR_STORT:
                 console.log('må gjøre noe lurt her');
+                break;
         }
     }
 }
