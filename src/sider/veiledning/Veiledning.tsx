@@ -1,4 +1,4 @@
-import { BekreftCheckboksPanel } from 'nav-frontend-skjema';
+import { BekreftCheckboksPanel, Select } from 'nav-frontend-skjema';
 import { Element, Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import Veileder from 'nav-frontend-veileder';
 import * as React from 'react';
@@ -8,6 +8,10 @@ import { Dispatch } from 'redux';
 import Veilederikon from '../../component/Ikoner/Veilederikon';
 import { IRootState } from '../../rootReducer';
 import { selectSoker } from '../../soker/selectors';
+import { teksterHent } from '../../tekster/actions';
+import { ISprak } from '../../tekster/types';
+import { isEnabled } from '../../toggles/selectors';
+import { IToggleName } from '../../toggles/types';
 import { Personopplysning } from './Personopplysning';
 import { ISoknadState, Svar, ValideringsStatus } from '../../soknad/types';
 import { soknadValiderFelt } from '../../soknad/actions';
@@ -19,18 +23,31 @@ interface IMapStateToProps {
     fornavn: string;
     soknad: ISoknadState;
     harForsoktNesteSteg: boolean;
+    visSprakvalg: boolean;
 }
 
 interface IMapDispatchToProps {
+    oppdaterTekster: (sprak: string) => void;
     settBekreftelse: (verdi: Svar) => void;
+}
+
+function sprakMap(sprak: string) {
+    switch (sprak) {
+        case 'nn':
+            return ISprak.nn;
+        default:
+            return ISprak.nb;
+    }
 }
 
 type VeiledningProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
 const Veiledning: React.StatelessComponent<VeiledningProps> = ({
-    fornavn,
     intl,
+    fornavn,
     settBekreftelse,
+    visSprakvalg,
+    oppdaterTekster,
     soknad,
     harForsoktNesteSteg,
 }) => {
@@ -42,6 +59,22 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({
 
     return (
         <div className={'veiledning'}>
+            {visSprakvalg && (
+                <Select
+                    className={'veiledning__sprakvalg'}
+                    label=""
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                        oppdaterTekster(e.target.value)
+                    }
+                >
+                    <option value="nb" key="nb">
+                        Bokmål
+                    </option>
+                    <option value="nn" key="nn">
+                        Nynorsk
+                    </option>
+                </Select>
+            )}
             <div className={'veiledning__veileder-container'}>
                 <Veileder
                     posisjon={'topp'}
@@ -103,11 +136,13 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
         fornavn: selectSoker(state).fornavn.toLocaleLowerCase(),
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         soknad: selectSoknad(state),
+        visSprakvalg: isEnabled(state, IToggleName.vis_sprakvalg),
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
+        oppdaterTekster: (sprak: string) => dispatch(teksterHent(sprakMap(sprak))),
         settBekreftelse: (verdi: Svar) =>
             dispatch(soknadValiderFelt('veiledning', 'bekreftelse', verdi)),
     };
