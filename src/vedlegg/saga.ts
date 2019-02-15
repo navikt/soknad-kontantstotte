@@ -80,25 +80,33 @@ function* lastOppEnkeltVedleggSaga(
 }
 
 function* lastOppVedleggSaga(action: IVedleggLastOpp): SagaIterator {
-    const opplastingStatus: Status[] = yield all(
+    const opplastingStatusForAlleVedlegg: Status[] = yield all(
         action.filer.map((fil: File) =>
             call(lastOppEnkeltVedleggSaga, action.stegnavn, action.feltnavn, fil)
         )
     );
 
-    for (const status of opplastingStatus) {
-        switch (status) {
-            case Status.SYSTEMFEIL:
-                yield put(appEndreStatus(AppStatus.FEILSITUASJON));
-                yield put(push('/vedlegg-opplasting-feilet'));
-                return;
-            case Status.NETTVERKS_FEIL:
-                console.log('Nettverks feil');
-                break;
-            case Status.VEDLEGG_FOR_STORT:
-                console.log('må gjøre noe lurt her');
-                break;
+    const fellesStatus = opplastingStatusForAlleVedlegg.reduce((acc, cur) => {
+        if (acc === Status.SYSTEMFEIL || cur === Status.SYSTEMFEIL) {
+            return Status.SYSTEMFEIL;
+        } else if (acc === Status.NETTVERKS_FEIL || cur === Status.NETTVERKS_FEIL) {
+            return Status.NETTVERKS_FEIL;
+        } else {
+            return cur;
         }
+    });
+
+    switch (fellesStatus) {
+        case Status.SYSTEMFEIL:
+            yield put(appEndreStatus(AppStatus.FEILSITUASJON));
+            yield put(push('/vedlegg-opplasting-feilet'));
+            return;
+        case Status.NETTVERKS_FEIL:
+            console.log('Nettverks feil');
+            break;
+        case Status.VEDLEGG_FOR_STORT:
+            console.log('Vedlegg for stort');
+            break;
     }
 }
 

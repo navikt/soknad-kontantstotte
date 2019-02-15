@@ -2,6 +2,7 @@ import { Input, SkjemaGruppe } from 'nav-frontend-skjema';
 import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
 import { connect } from 'react-redux';
+import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { IFeltFeil } from '../../common/types';
 import { Vedlegg } from '../../component/Vedlegg';
 import { IRootState } from '../../rootReducer';
@@ -19,6 +20,7 @@ interface IBarnehageplassSkalSlutteInfo {
 }
 
 interface IMapStateToProps {
+    harForsoktNesteSteg: boolean;
     skalSlutteIBarnehageAntallTimer: IFelt;
     skalSlutteIBarnehageDato: IFelt;
     skalSlutteIBarnehageKommune: IFelt;
@@ -36,6 +38,7 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
     skalSlutteIBarnehageDato,
     skalSlutteIBarnehageKommune,
     skalSlutteIBarnehageVedlegg,
+    harForsoktNesteSteg,
     brukVedlegg,
     lastOppVedlegg,
     slettVedlegg,
@@ -99,9 +102,12 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
                             id: 'barnehageplass.skalSlutteIBarnehage.vedlegg.label',
                         })}
                         className={'barnehage__vedlegg'}
-                        feil={feltMedFeil.skalSlutteIBarnehageVedlegg}
+                        harForsoktNesteSteg={harForsoktNesteSteg}
+                        feil={{
+                            meldingsNokkel: skalSlutteIBarnehageVedlegg.feilmeldingsNokkel,
+                            status: skalSlutteIBarnehageVedlegg.valideringsStatus,
+                        }}
                         vedlegg={skalSlutteIBarnehageVedlegg.verdi}
-                        visning={'liste'}
                         onChange={evt => {
                             if (evt.target.files) {
                                 lastOppVedlegg(
@@ -123,6 +129,7 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         brukVedlegg: isEnabled(state, IToggleName.bruk_vedlegg),
+        harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         skalSlutteIBarnehageAntallTimer: selectBarnehageplass(state)
             .skalSlutteIBarnehageAntallTimer,
         skalSlutteIBarnehageDato: selectBarnehageplass(state).skalSlutteIBarnehageDato,

@@ -5,23 +5,30 @@ import SkjemaelementFeilmelding, {
 } from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
 import { Element } from 'nav-frontend-typografi';
 import * as React from 'react';
+import { selectHarForsoktNesteSteg } from '../../app/selectors';
+import { ValideringsStatus } from '../../soknad/types';
 import { IVedlegg } from '../../vedlegg/types';
 import { VedleggForhandsvisning } from './VedleggForhandsvisning';
 import VedleggKnapp from './VedleggKnapp';
 import { VedleggListe } from './VedleggListe';
+import { FormattedMessage } from 'react-intl';
 
 const cls = (className?: string) => classNames('skjemaelement', className);
 
 interface IVedleggProps {
     className?: string;
-    feil?: SkjemaelementFeil;
+    feil: {
+        status: string;
+        meldingsNokkel: string;
+    };
+    harForsoktNesteSteg: boolean;
     id?: string;
     label: React.ReactNode;
     onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
     onDelete: (filreferanse: string) => void;
     sporsmal: React.ReactNode;
     vedlegg: IVedlegg[];
-    visning: 'liste' | 'forhåndsvisning';
+    visning?: 'liste' | 'forhåndsvisning';
 }
 
 class Vedlegg extends React.Component<IVedleggProps> {
@@ -39,7 +46,8 @@ class Vedlegg extends React.Component<IVedleggProps> {
             onDelete,
             feil,
             sporsmal,
-            visning,
+            harForsoktNesteSteg,
+            visning = 'liste',
         } = this.props;
 
         const inputId = id || name || guid();
@@ -53,7 +61,11 @@ class Vedlegg extends React.Component<IVedleggProps> {
                 {visning === 'forhåndsvisning' && (
                     <VedleggForhandsvisning vedlegg={vedlegg} onDelete={onDelete} />
                 )}
-                <SkjemaelementFeilmelding feil={feil} />
+                {feil.status === ValideringsStatus.FEIL && harForsoktNesteSteg && (
+                    <SkjemaelementFeilmelding
+                        feil={{ feilmelding: <FormattedMessage id={feil.meldingsNokkel} /> }}
+                    />
+                )}
             </div>
         );
     }
