@@ -7,7 +7,6 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { ValideringsStatus } from '../../soknad/types';
 import { IVedlegg } from '../../vedlegg/types';
-import { VedleggForhandsvisning } from './VedleggForhandsvisning';
 import VedleggKnapp from './VedleggKnapp';
 import { VedleggListe } from './VedleggListe';
 
@@ -26,7 +25,6 @@ interface IVedleggProps {
     onDelete: (filreferanse: string) => void;
     sporsmal: React.ReactNode;
     vedlegg: IVedlegg[];
-    visning?: 'liste' | 'forhåndsvisning';
 }
 
 class Vedlegg extends React.Component<IVedleggProps> {
@@ -45,7 +43,6 @@ class Vedlegg extends React.Component<IVedleggProps> {
             feil,
             sporsmal,
             harForsoktNesteSteg,
-            visning = 'liste',
         } = this.props;
 
         const inputId = id || name || guid();
@@ -61,10 +58,7 @@ class Vedlegg extends React.Component<IVedleggProps> {
                         className={'vedlegg__advarsel'}
                     />
                 )}
-                {visning === 'liste' && <VedleggListe vedlegg={vedlegg} onDelete={onDelete} />}
-                {visning === 'forhåndsvisning' && (
-                    <VedleggForhandsvisning vedlegg={vedlegg} onDelete={onDelete} />
-                )}
+                <VedleggListe vedlegg={vedlegg} onDelete={onDelete} />
                 {feil.status === ValideringsStatus.FEIL && harForsoktNesteSteg && (
                     <SkjemaelementFeilmelding
                         feil={{ feilmelding: <FormattedMessage id={feil.meldingsNokkel} /> }}
