@@ -19,6 +19,7 @@
     "app.tittel.veiledning": "Søknad om kontantstøtte",
     "app.vedlegg.lastopp": "Last opp vedlegg",
     "app.vedlegg.slett": "Slett vedlegg",
+    "app.vedlegg.valgt": "Valgt vedlegg ({storrelse} MB)",
     "arbeidIUtlandet.arbeiderAnnenForelderIUtlandet.sporsmal": "Arbeider den andre forelderen i utlandet, på utenlandsk skip eller på utenlandsk kontinentalsokkel?",
     "arbeidIUtlandet.arbeiderIUtlandetEllerKontinentalsokkel.sporsmal": "Arbeider du i utlandet, på utenlandsk skip eller på utenlandsk kontinentalsokkel?",
     "arbeidIUtlandet.forklaring.hjelpetekst": "Oppgi land, utenlandsk id-nummer, adresse i landene og perioder",
