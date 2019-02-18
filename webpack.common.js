@@ -32,6 +32,10 @@ const config = {
                     transpileOnly: true,
                 },
             },
+            {
+                test: /\.svg$/,
+                loader: 'url-loader',
+            },
         ],
     },
     optimization: {

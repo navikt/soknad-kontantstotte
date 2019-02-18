@@ -69,10 +69,7 @@ const VedleggListe: React.FunctionComponent<IVedleggListe> = ({ vedlegg, onDelet
                                         className={'vedlegg-liste__slett-knapp'}
                                         onClick={() => onDelete(v.filreferanse)}
                                     >
-                                        <SoppelbotteIkon
-                                            className={'vedlegg-liste__soppelbotte-ikon'}
-                                        />
-                                        <FormattedMessage id={'app.vedlegg.slett'} />
+                                        <></>
                                     </Flatknapp>
                                 </>
                             )}
