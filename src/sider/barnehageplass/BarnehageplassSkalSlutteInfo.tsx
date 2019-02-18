@@ -127,14 +127,14 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
 };
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
+    const barnehageplass = selectBarnehageplass(state);
     return {
         brukVedlegg: isEnabled(state, IToggleName.bruk_vedlegg),
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
-        skalSlutteIBarnehageAntallTimer: selectBarnehageplass(state)
-            .skalSlutteIBarnehageAntallTimer,
-        skalSlutteIBarnehageDato: selectBarnehageplass(state).skalSlutteIBarnehageDato,
-        skalSlutteIBarnehageKommune: selectBarnehageplass(state).skalSlutteIBarnehageKommune,
-        skalSlutteIBarnehageVedlegg: selectBarnehageplass(state).skalSlutteIBarnehageVedlegg,
+        skalSlutteIBarnehageAntallTimer: barnehageplass.skalSlutteIBarnehageAntallTimer,
+        skalSlutteIBarnehageDato: barnehageplass.skalSlutteIBarnehageDato,
+        skalSlutteIBarnehageKommune: barnehageplass.skalSlutteIBarnehageKommune,
+        skalSlutteIBarnehageVedlegg: barnehageplass.skalSlutteIBarnehageVedlegg,
     };
 };
 

@@ -1,17 +1,15 @@
 import * as classNames from 'classnames';
+import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import { guid } from 'nav-frontend-js-utils';
-import SkjemaelementFeilmelding, {
-    SkjemaelementFeil,
-} from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
+import SkjemaelementFeilmelding from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
 import { Element } from 'nav-frontend-typografi';
 import * as React from 'react';
-import { selectHarForsoktNesteSteg } from '../../app/selectors';
+import { FormattedMessage } from 'react-intl';
 import { ValideringsStatus } from '../../soknad/types';
 import { IVedlegg } from '../../vedlegg/types';
 import { VedleggForhandsvisning } from './VedleggForhandsvisning';
 import VedleggKnapp from './VedleggKnapp';
 import { VedleggListe } from './VedleggListe';
-import { FormattedMessage } from 'react-intl';
 
 const cls = (className?: string) => classNames('skjemaelement', className);
 
@@ -57,6 +55,12 @@ class Vedlegg extends React.Component<IVedleggProps> {
                 <Element className={'vedlegg__sporsmal'}>{sporsmal}</Element>
                 <p className={'skjemaelement__label vedlegg__label'}>{label}</p>
                 <VedleggKnapp onChange={onChange} inputId={inputId} />
+                {feil.status === ValideringsStatus.ADVARSEL && (
+                    <AlertStripeInfo
+                        children={<FormattedMessage id={feil.meldingsNokkel} />}
+                        className={'vedlegg__advarsel'}
+                    />
+                )}
                 {visning === 'liste' && <VedleggListe vedlegg={vedlegg} onDelete={onDelete} />}
                 {visning === 'forhåndsvisning' && (
                     <VedleggForhandsvisning vedlegg={vedlegg} onDelete={onDelete} />

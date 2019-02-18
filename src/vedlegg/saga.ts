@@ -10,7 +10,7 @@ import {
     soknadSettFelt,
 } from '../soknad/actions';
 import { selectFelt } from '../soknad/selectors';
-import { Feltnavn, Stegnavn, ValideringsStatus } from '../soknad/types';
+import { Feltnavn, IVedleggFelt, Stegnavn, ValideringsStatus } from '../soknad/types';
 import { IVedleggLastOpp, VedleggTypeKeys } from './actions';
 import { ILastOppVedleggRespons, lastOppVedlegg } from './api';
 import { IVedlegg } from './types';
@@ -91,21 +91,46 @@ function* lastOppVedleggSaga(action: IVedleggLastOpp): SagaIterator {
             return Status.SYSTEMFEIL;
         } else if (acc === Status.NETTVERKS_FEIL || cur === Status.NETTVERKS_FEIL) {
             return Status.NETTVERKS_FEIL;
+        } else if (acc === Status.VEDLEGG_FOR_STORT || cur === Status.VEDLEGG_FOR_STORT) {
+            return Status.VEDLEGG_FOR_STORT;
         } else {
             return cur;
         }
     });
 
+    const felt: IVedleggFelt = yield select(selectFelt, action.stegnavn, action.feltnavn);
+
     switch (fellesStatus) {
         case Status.SYSTEMFEIL:
             yield put(appEndreStatus(AppStatus.FEILSITUASJON));
             yield put(push('/vedlegg-opplasting-feilet'));
-            return;
+            break;
         case Status.NETTVERKS_FEIL:
-            console.log('Nettverks feil');
+            yield put(
+                soknadSettFelt(action.stegnavn, action.feltnavn, {
+                    ...felt,
+                    feilmeldingsNokkel: 'feilmelding.generell.vedlegg.nettverk',
+                    valideringsStatus: ValideringsStatus.ADVARSEL,
+                })
+            );
             break;
         case Status.VEDLEGG_FOR_STORT:
-            console.log('Vedlegg for stort');
+            yield put(
+                soknadSettFelt(action.stegnavn, action.feltnavn, {
+                    ...felt,
+                    feilmeldingsNokkel: 'feilmelding.generell.vedlegg.forStort',
+                    valideringsStatus: ValideringsStatus.ADVARSEL,
+                })
+            );
+            break;
+        case Status.OK:
+            yield put(
+                soknadSettFelt(action.stegnavn, action.feltnavn, {
+                    ...felt,
+                    feilmeldingsNokkel: '',
+                    valideringsStatus: ValideringsStatus.OK,
+                })
+            );
             break;
     }
 }
