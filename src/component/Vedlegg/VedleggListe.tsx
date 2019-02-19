@@ -6,7 +6,6 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { IVedlegg } from '../../vedlegg/types';
 import BindersIkon from '../Ikoner/BindersIkon';
-import SoppelbotteIkon from '../Ikoner/SoppelbotteIkon';
 
 interface IVedleggListe {
     vedlegg: IVedlegg[];
