@@ -40,10 +40,10 @@ import {
     ValideringsStatus,
     veiledningFeltnavn,
 } from './types';
-import valideringsConfig, { ValideringsFunksjoner } from './valideringsConfig';
+import valideringsConfig, { ValideringsFunksjon } from './valideringsConfig';
 
 function kjorValideringsFunksjoner(
-    valideringsFunksjoner: ValideringsFunksjoner[],
+    valideringsFunksjoner: ValideringsFunksjon[],
     felt: IFelt & IVedleggFelt
 ): IFelt | IVedleggFelt {
     const validertFelt: IFelt | IVedleggFelt = valideringsFunksjoner.reduce(

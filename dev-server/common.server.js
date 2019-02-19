@@ -46,7 +46,7 @@ app.post('/soknad-kontantstotte-api/api/vedlegg/', upload.single('file'), functi
         return v.toString(16);
     });
     const randomDelay = Math.random() * (3000 - delayMs) + delayMs;
-    const sizeLimit = 20 * 1024 * 1024; // 20mb
+    const sizeLimit = 20 * 1000 * 1000; // 20mb
 
     // Out of memory
     if (req.file.size > sizeLimit * 3) {

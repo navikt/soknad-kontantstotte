@@ -31,15 +31,15 @@ enum ValideringsStatus {
 }
 
 interface IFelt {
-    verdi: Svar | BarnehageplassVerdier | TilknytningTilUtlandVerdier | string;
-    valideringsStatus: ValideringsStatus;
     feilmeldingsNokkel: string;
+    valideringsStatus: ValideringsStatus;
+    verdi: Svar | BarnehageplassVerdier | TilknytningTilUtlandVerdier | string;
 }
 
 interface IVedleggFelt {
-    verdi: IVedlegg[];
-    valideringsStatus: ValideringsStatus;
     feilmeldingsNokkel: string;
+    valideringsStatus: ValideringsStatus;
+    verdi: IVedlegg[];
 }
 
 interface ISteg {

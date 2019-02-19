@@ -32,19 +32,19 @@ import {
     svarUtenValidering,
 } from './validators';
 
-export type ValideringsFunksjoner = (felt: IFelt & IVedleggFelt) => IFelt | IVedleggFelt;
+export type ValideringsFunksjon = (felt: IFelt & IVedleggFelt) => IFelt | IVedleggFelt;
 
 interface IValideringsConfig {
-    arbeidIUtlandet: { [felt in arbeidIUtlandetFeltnavn]: ValideringsFunksjoner[] };
-    barnehageplass: { [felt in barnehageplassFeltnavn]: ValideringsFunksjoner[] };
-    familieforhold: { [felt in familieforholdFeltnavn]: ValideringsFunksjoner[] };
-    kravTilSoker: { [felt in kravTilSokerFeltnavn]: ValideringsFunksjoner[] };
-    mineBarn: { [felt in minebarnFeltnavn]: ValideringsFunksjoner[] };
-    utenlandskeYtelser: { [felt in utenlandskeYtelserFeltnavn]: ValideringsFunksjoner[] };
-    oppsummering: { [felt in oppsummeringFeltnavn]: ValideringsFunksjoner[] };
-    utenlandskKontantstotte: { [felt in utenlandskKontantstotteFeltnavn]: ValideringsFunksjoner[] };
-    tilknytningTilUtland: { [felt in tilknytningTilUtlandFeltnavn]: ValideringsFunksjoner[] };
-    veiledning: { [felt in veiledningFeltnavn]: Array<(felt: IFelt) => IFelt> };
+    arbeidIUtlandet: { [felt in arbeidIUtlandetFeltnavn]: ValideringsFunksjon[] };
+    barnehageplass: { [felt in barnehageplassFeltnavn]: ValideringsFunksjon[] };
+    familieforhold: { [felt in familieforholdFeltnavn]: ValideringsFunksjon[] };
+    kravTilSoker: { [felt in kravTilSokerFeltnavn]: ValideringsFunksjon[] };
+    mineBarn: { [felt in minebarnFeltnavn]: ValideringsFunksjon[] };
+    utenlandskeYtelser: { [felt in utenlandskeYtelserFeltnavn]: ValideringsFunksjon[] };
+    oppsummering: { [felt in oppsummeringFeltnavn]: ValideringsFunksjon[] };
+    utenlandskKontantstotte: { [felt in utenlandskKontantstotteFeltnavn]: ValideringsFunksjon[] };
+    tilknytningTilUtland: { [felt in tilknytningTilUtlandFeltnavn]: ValideringsFunksjon[] };
+    veiledning: { [felt in veiledningFeltnavn]: ValideringsFunksjon[] };
 }
 
 const valideringsConfig: IValideringsConfig = {

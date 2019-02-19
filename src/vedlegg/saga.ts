@@ -15,7 +15,7 @@ import { IVedleggLastOpp, VedleggTypeKeys } from './actions';
 import { ILastOppVedleggRespons, lastOppVedlegg } from './api';
 import { IVedlegg } from './types';
 
-const SIZE_LIMIT = 20 * 1024 * 1024; // 20MB
+const SIZE_LIMIT = 20 * 1000 * 1000; // 20MB
 
 enum Status {
     OK,
