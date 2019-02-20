@@ -23,11 +23,14 @@ import TilknytningTilUtlandOppsummering from './TilknytningTilUtlandOppsummering
 import UtenlandskeYtelserOppsummering from './UtenlandskeYtelserOppsummering';
 import UtenlandskKontantstotteOppsummering from './UtenlandskKontantstotteOppsummering';
 import { VeiledningOppsummering } from './VeiledningOppsummering';
+import { IToggleName } from '../../toggles/types';
+import { isEnabled } from '../../toggles/selectors';
 
 interface IMapStateToProps {
     soker: ISoker;
     soknad: ISoknadState;
     harForsoktNesteSteg: boolean;
+    visStatsborgerskap: boolean;
 }
 
 interface IMapDispatchToProps {
@@ -42,6 +45,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
     settBekreftelse,
     soker,
     soknad,
+    visStatsborgerskap,
 }) => {
     const brukFlertall = soknad.mineBarn.erFlerling.verdi === 'JA';
     return (
@@ -60,7 +64,12 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
             />
             <SoknadPanel className={'oppsummering__panel'}>
                 <PersonaliaOppsummering
-                    soker={{ fodselsnummer: soker.innloggetSom, navn: soker.fulltnavn }}
+                    soker={{
+                        fodselsnummer: soker.innloggetSom,
+                        navn: soker.fulltnavn,
+                        statsborgerskap: soker.statsborgerskap,
+                    }}
+                    visStatsborgerskap={visStatsborgerskap}
                 />
                 <VeiledningOppsummering />
                 <KravTilSokerOppsummering />
@@ -114,6 +123,7 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         soker: selectSoker(state),
         soknad: selectSoknad(state),
+        visStatsborgerskap: isEnabled(state, IToggleName.vis_statsborgerskap),
     };
 };
 

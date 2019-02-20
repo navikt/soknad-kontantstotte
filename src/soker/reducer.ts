@@ -12,6 +12,7 @@ const initialState: ISokerState = {
         fornavn: '',
         fulltnavn: '',
         innloggetSom: '',
+        statsborgerskap: '',
     },
 };
 
