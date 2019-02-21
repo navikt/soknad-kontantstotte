@@ -42,8 +42,10 @@ interface IVedleggFelt {
     verdi: IVedlegg[];
 }
 
+type FeltTyper = IFelt | IVedleggFelt;
+
 interface ISteg {
-    [key: string]: IFelt | IVedleggFelt;
+    [key: string]: FeltTyper;
 }
 
 interface ISoknadState {
@@ -186,4 +188,5 @@ export {
     IVedleggFelt,
     utenlandskKontantstotteFeltnavn,
     ValideringsStatus,
+    FeltTyper,
 };

@@ -1,6 +1,7 @@
 import { ANTALL_LOVLIGE_TEGN_I_TEKSTFELT } from '../common/utils';
 import {
     BarnehageplassVerdier,
+    FeltTyper,
     IFelt,
     IVedleggFelt,
     Svar,
@@ -10,7 +11,7 @@ import {
 
 function ok(felt: IFelt): IFelt;
 function ok(felt: IVedleggFelt): IVedleggFelt;
-function ok(felt: IFelt | IVedleggFelt) {
+function ok(felt: FeltTyper) {
     return {
         feilmeldingsNokkel: '',
         valideringsStatus: ValideringsStatus.OK,
@@ -20,7 +21,7 @@ function ok(felt: IFelt | IVedleggFelt) {
 
 function advarsel(felt: IFelt, advarselNokkel: string): IFelt;
 function advarsel(felt: IVedleggFelt, advarselNokkel: string): IVedleggFelt;
-function advarsel(felt: IFelt | IVedleggFelt, advarselNokkel: string) {
+function advarsel(felt: FeltTyper, advarselNokkel: string) {
     return {
         feilmeldingsNokkel: advarselNokkel,
         valideringsStatus: ValideringsStatus.ADVARSEL,
@@ -30,7 +31,7 @@ function advarsel(felt: IFelt | IVedleggFelt, advarselNokkel: string) {
 
 function feil(felt: IFelt, feilmeldingsNokkel: string): IFelt;
 function feil(felt: IVedleggFelt, feilmeldingsNokkel: string): IVedleggFelt;
-function feil(felt: IFelt | IVedleggFelt, feilmeldingsNokkel: string) {
+function feil(felt: FeltTyper, feilmeldingsNokkel: string) {
     return {
         feilmeldingsNokkel,
         valideringsStatus: ValideringsStatus.FEIL,

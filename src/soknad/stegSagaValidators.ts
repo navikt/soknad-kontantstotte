@@ -1,5 +1,6 @@
 import {
     BarnehageplassVerdier,
+    FeltTyper,
     IArbeidIUtlandet,
     IBarnehageplass,
     IFamilieforhold,
@@ -7,15 +8,14 @@ import {
     ITilknytningTilUtland,
     IUtenlandskeYtelser,
     IUtenlandskKontantstotte,
-    IVedleggFelt,
     Stegnavn,
     Svar,
     TilknytningTilUtlandVerdier,
     ValideringsStatus,
 } from './types';
 
-function harListeMedFeltFeil(feltForSteg: Array<IFelt | IVedleggFelt>): boolean {
-    return feltForSteg.reduce((acc: boolean, felt: IFelt | IVedleggFelt) => {
+function harListeMedFeltFeil(feltForSteg: FeltTyper[]): boolean {
+    return feltForSteg.reduce((acc: boolean, felt: FeltTyper) => {
         return acc || felt.valideringsStatus !== ValideringsStatus.OK;
     }, false);
 }

@@ -27,6 +27,7 @@ import {
     barnehageplassFeltnavn,
     familieforholdFeltnavn,
     Feltnavn,
+    FeltTyper,
     IFelt,
     ISoknadState,
     IVedleggFelt,
@@ -45,9 +46,9 @@ import valideringsConfig, { ValideringsFunksjon } from './valideringsConfig';
 function kjorValideringsFunksjoner(
     valideringsFunksjoner: ValideringsFunksjon[],
     felt: IFelt & IVedleggFelt
-): IFelt | IVedleggFelt {
-    const validertFelt: IFelt | IVedleggFelt = valideringsFunksjoner.reduce(
-        (acc: IFelt | IVedleggFelt, valideringsFunksjon) => {
+): FeltTyper {
+    const validertFelt: FeltTyper = valideringsFunksjoner.reduce(
+        (acc: FeltTyper, valideringsFunksjon) => {
             const nyttValidertFelt = valideringsFunksjon(felt);
             return acc.valideringsStatus === ValideringsStatus.FEIL ||
                 acc.valideringsStatus === ValideringsStatus.ADVARSEL
@@ -67,7 +68,7 @@ function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
         verdi: action.verdi,
     };
 
-    let validertFelt: IFelt | IVedleggFelt = {
+    let validertFelt: FeltTyper = {
         feilmeldingsNokkel: '',
         valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
         verdi: action.verdi,

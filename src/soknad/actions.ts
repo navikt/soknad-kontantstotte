@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { IVedlegg } from '../vedlegg/types';
-import { Feltnavn, IFelt, IVedleggFelt, Stegnavn } from './types';
+import { Feltnavn, FeltTyper, Stegnavn } from './types';
 
 enum SoknadTypeKeys {
     NESTE_STEG = 'SOKNAD_NESTE_STEG',
@@ -35,7 +35,7 @@ interface ISoknadValiderSteg extends Action {
 }
 
 interface ISoknadSettFelt extends Action {
-    felt: IFelt | IVedleggFelt;
+    felt: FeltTyper;
     feltnavn: Feltnavn;
     stegnavn: Stegnavn;
     type: SoknadTypeKeys.SETT_FELT;
@@ -87,11 +87,7 @@ function soknadValiderSteg(stegnavn: Stegnavn): ISoknadValiderSteg {
     };
 }
 
-function soknadSettFelt(
-    stegnavn: Stegnavn,
-    feltnavn: Feltnavn,
-    felt: IFelt | IVedleggFelt
-): ISoknadSettFelt {
+function soknadSettFelt(stegnavn: Stegnavn, feltnavn: Feltnavn, felt: FeltTyper): ISoknadSettFelt {
     return {
         felt,
         feltnavn,
