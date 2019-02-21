@@ -12,7 +12,7 @@ import {
     soknadValiderFelt,
     soknadValiderSteg,
 } from './actions';
-import { selectSoknad } from './selectors';
+import { selectFelt, selectSoknad } from './selectors';
 import {
     sjekkValideringForArbeidIUtlandet,
     sjekkValideringForBarnehageplass,
@@ -61,9 +61,9 @@ function kjorValideringsFunksjoner(
 }
 
 function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
-    const soknadState = yield select(selectSoknad);
+    const felt = yield select(selectFelt, action.stegnavn, action.feltnavn);
     const feltMedOppdatertVerdi = {
-        ...soknadState[action.stegnavn][action.feltnavn],
+        ...felt,
         verdi: action.verdi,
     };
 
@@ -72,6 +72,7 @@ function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
         valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
         verdi: action.verdi,
     };
+
     switch (action.stegnavn) {
         case 'veiledning':
             validertFelt = kjorValideringsFunksjoner(

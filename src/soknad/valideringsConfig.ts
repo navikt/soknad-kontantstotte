@@ -32,7 +32,10 @@ import {
     svarUtenValidering,
 } from './validators';
 
-export type ValideringsFunksjon = (felt: IFelt & IVedleggFelt) => IFelt | IVedleggFelt;
+type ValiderIFelt = (felt: IFelt) => IFelt;
+type ValiderIVedleggFelt = (felt: IVedleggFelt) => IVedleggFelt;
+
+export type ValideringsFunksjon = ValiderIFelt | ValiderIVedleggFelt;
 
 interface IValideringsConfig {
     arbeidIUtlandet: { [felt in arbeidIUtlandetFeltnavn]: ValideringsFunksjon[] };

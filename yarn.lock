@@ -5230,9 +5230,10 @@ typescript-tuple@^2.1.0:
   dependencies:
     typescript-compare "^0.0.2"
 
-typescript@3.2.2:
-  version "3.2.2"
-  resolved "https://repo.adeo.no/repository/npm-public/typescript/-/typescript-3.2.2.tgz#fe8101c46aa123f8353523ebdcf5730c2ae493e5"
+typescript@3.3.3:
+  version "3.3.3"
+  resolved "https://repo.adeo.no/repository/npm-public/typescript/-/typescript-3.3.3.tgz#f1657fc7daa27e1a8930758ace9ae8da31403221"
+  integrity sha512-Y21Xqe54TBVp+VDSNbuDYdGw0BpoR/Q6wo/+35M8PAU0vipahnyduJWirxxdxjsAkS7hue53x2zp8gz7F05u0A==
 
 uglify-js@3.4.x, uglify-js@^3.0.0:
   version "3.4.9"

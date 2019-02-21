@@ -1,5 +1,4 @@
 import { ANTALL_LOVLIGE_TEGN_I_TEKSTFELT } from '../common/utils';
-import { IVedlegg } from '../vedlegg/types';
 import {
     BarnehageplassVerdier,
     IFelt,
@@ -8,22 +7,6 @@ import {
     TilknytningTilUtlandVerdier,
     ValideringsStatus,
 } from './types';
-
-export const harTekstomradeInnhold = (verdi?: string): boolean => {
-    return verdi ? verdi.length > 0 : false;
-};
-
-export const erDatoSatt = (verdi?: string): boolean => {
-    return harTekstomradeInnhold(verdi);
-};
-
-export const harSvartPaJaNeiSporsmal = (svar: Svar): boolean => {
-    return svar !== Svar.UBESVART;
-};
-
-export const harHuketAvPaCheckbox = (svar: Svar): boolean => {
-    return svar === Svar.JA;
-};
 
 function ok(felt: IFelt): IFelt;
 function ok(felt: IVedleggFelt): IVedleggFelt;
