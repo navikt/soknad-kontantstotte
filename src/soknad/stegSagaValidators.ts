@@ -1,5 +1,6 @@
 import {
     BarnehageplassVerdier,
+    FeltTyper,
     IArbeidIUtlandet,
     IBarnehageplass,
     IFamilieforhold,
@@ -13,8 +14,8 @@ import {
     ValideringsStatus,
 } from './types';
 
-function harListeMedFeltFeil(feltForSteg: IFelt[]): boolean {
-    return feltForSteg.reduce((acc: boolean, felt: IFelt) => {
+function harListeMedFeltFeil(feltForSteg: FeltTyper[]): boolean {
+    return feltForSteg.reduce((acc: boolean, felt: FeltTyper) => {
         return acc || felt.valideringsStatus !== ValideringsStatus.OK;
     }, false);
 }

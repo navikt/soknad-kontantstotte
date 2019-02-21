@@ -1,45 +1,43 @@
 import { ANTALL_LOVLIGE_TEGN_I_TEKSTFELT } from '../common/utils';
 import {
     BarnehageplassVerdier,
+    FeltTyper,
     IFelt,
+    IVedleggFelt,
     Svar,
     TilknytningTilUtlandVerdier,
     ValideringsStatus,
 } from './types';
 
-export const harTekstomradeInnhold = (verdi?: string): boolean => {
-    return verdi ? verdi.length > 0 : false;
-};
+function ok(felt: IFelt): IFelt;
+function ok(felt: IVedleggFelt): IVedleggFelt;
+function ok(felt: FeltTyper) {
+    return {
+        feilmeldingsNokkel: '',
+        valideringsStatus: ValideringsStatus.OK,
+        verdi: felt.verdi,
+    };
+}
 
-export const erDatoSatt = (verdi?: string): boolean => {
-    return harTekstomradeInnhold(verdi);
-};
+function advarsel(felt: IFelt, advarselNokkel: string): IFelt;
+function advarsel(felt: IVedleggFelt, advarselNokkel: string): IVedleggFelt;
+function advarsel(felt: FeltTyper, advarselNokkel: string) {
+    return {
+        feilmeldingsNokkel: advarselNokkel,
+        valideringsStatus: ValideringsStatus.ADVARSEL,
+        verdi: felt.verdi,
+    };
+}
 
-export const harSvartPaJaNeiSporsmal = (svar: Svar): boolean => {
-    return svar !== Svar.UBESVART;
-};
-
-export const harHuketAvPaCheckbox = (svar: Svar): boolean => {
-    return svar === Svar.JA;
-};
-
-const ok = (felt: IFelt): IFelt => ({
-    feilmeldingsNokkel: '',
-    valideringsStatus: ValideringsStatus.OK,
-    verdi: felt.verdi,
-});
-
-const advarsel = (felt: IFelt, advarselNokkel: string): IFelt => ({
-    feilmeldingsNokkel: advarselNokkel,
-    valideringsStatus: ValideringsStatus.ADVARSEL,
-    verdi: felt.verdi,
-});
-
-const feil = (felt: IFelt, feilmeldingsNokkel: string): IFelt => ({
-    feilmeldingsNokkel,
-    valideringsStatus: ValideringsStatus.FEIL,
-    verdi: felt.verdi,
-});
+function feil(felt: IFelt, feilmeldingsNokkel: string): IFelt;
+function feil(felt: IVedleggFelt, feilmeldingsNokkel: string): IVedleggFelt;
+function feil(felt: FeltTyper, feilmeldingsNokkel: string) {
+    return {
+        feilmeldingsNokkel,
+        valideringsStatus: ValideringsStatus.FEIL,
+        verdi: felt.verdi,
+    };
+}
 
 const harSvart = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
     return felt.verdi !== Svar.UBESVART ? ok(felt) : feil(felt, feilmeldingsNokkel);
@@ -144,6 +142,10 @@ const harSvartTekstMedFeilmelding = (felt: IFelt): IFelt =>
 const harSvartTekstUnderAntallTegnMedFeilmelding = (felt: IFelt): IFelt =>
     harSvartTekstUnderAntallTegn(felt, 'feilmelding.generell.forMangeTegn');
 
+const harLastetOppVedlegg = (felt: IVedleggFelt): IVedleggFelt => {
+    return !!felt.verdi.length ? ok(felt) : feil(felt, 'feilmelding.generell.vedlegg.mangler');
+};
+
 const svarUtenValidering = (felt: IFelt): IFelt => ok(felt);
 
 export {
@@ -155,6 +157,7 @@ export {
     harFyltInnGyldigAntallTimer,
     harFyltInnNavn,
     harFyltInnTall,
+    harLastetOppVedlegg,
     harSvart,
     harSvartBarnehageplassVerdiMedFeilmelding,
     harSvartJa,

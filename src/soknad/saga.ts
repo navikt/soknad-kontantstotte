@@ -12,7 +12,7 @@ import {
     soknadValiderFelt,
     soknadValiderSteg,
 } from './actions';
-import { selectSoknad } from './selectors';
+import { selectFelt, selectSoknad } from './selectors';
 import {
     sjekkValideringForArbeidIUtlandet,
     sjekkValideringForBarnehageplass,
@@ -27,8 +27,10 @@ import {
     barnehageplassFeltnavn,
     familieforholdFeltnavn,
     Feltnavn,
+    FeltTyper,
     IFelt,
     ISoknadState,
+    IVedleggFelt,
     kravTilSokerFeltnavn,
     minebarnFeltnavn,
     oppsummeringFeltnavn,
@@ -39,14 +41,14 @@ import {
     ValideringsStatus,
     veiledningFeltnavn,
 } from './types';
-import valideringsConfig from './valideringsConfig';
+import valideringsConfig, { ValideringsFunksjon } from './valideringsConfig';
 
 function kjorValideringsFunksjoner(
-    valideringsFunksjoner: Array<((felt: IFelt) => IFelt)>,
-    felt: IFelt
-): IFelt {
-    const validertFelt: IFelt = valideringsFunksjoner.reduce(
-        (acc: IFelt, valideringsFunksjon) => {
+    valideringsFunksjoner: ValideringsFunksjon[],
+    felt: IFelt & IVedleggFelt
+): FeltTyper {
+    const validertFelt: FeltTyper = valideringsFunksjoner.reduce(
+        (acc: FeltTyper, valideringsFunksjon) => {
             const nyttValidertFelt = valideringsFunksjon(felt);
             return acc.valideringsStatus === ValideringsStatus.FEIL ||
                 acc.valideringsStatus === ValideringsStatus.ADVARSEL
@@ -60,17 +62,18 @@ function kjorValideringsFunksjoner(
 }
 
 function* validerFeltSaga(action: ISoknadValiderFelt): SagaIterator {
-    const soknadState = yield select(selectSoknad);
+    const felt = yield select(selectFelt, action.stegnavn, action.feltnavn);
     const feltMedOppdatertVerdi = {
-        ...soknadState[action.stegnavn][action.feltnavn],
+        ...felt,
         verdi: action.verdi,
     };
 
-    let validertFelt: IFelt = {
+    let validertFelt: FeltTyper = {
         feilmeldingsNokkel: '',
         valideringsStatus: ValideringsStatus.IKKE_VALIDERT,
-        verdi: '',
+        verdi: action.verdi,
     };
+
     switch (action.stegnavn) {
         case 'veiledning':
             validertFelt = kjorValideringsFunksjoner(

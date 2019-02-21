@@ -1,11 +1,15 @@
 import { IRootState } from '../rootReducer';
 import {
+    Feltnavn,
     IArbeidIUtlandet,
     IBarnehageplass,
     IFamilieforhold,
+    IFelt,
     IKravTilSoker,
     ISoknadState,
     IUtenlandskKontantstotte,
+    IVedleggFelt,
+    Stegnavn,
 } from './types';
 
 function selectFamilieforhold(state: IRootState): IFamilieforhold {
@@ -44,6 +48,12 @@ function selectSoknad(state: IRootState): ISoknadState {
     return state.soknad;
 }
 
+function selectFelt(state: IRootState, stegnavn: Stegnavn, feltnavn: Feltnavn): IFelt;
+function selectFelt(state: IRootState, stegnavn: Stegnavn, feltnavn: Feltnavn): IVedleggFelt;
+function selectFelt(state: IRootState, stegnavn: Stegnavn, feltnavn: Feltnavn) {
+    return state.soknad[stegnavn][feltnavn];
+}
+
 export {
     selectArbeidIUtlandet,
     selectBarnehageplass,
@@ -54,4 +64,5 @@ export {
     selectTilknytningTilUtland,
     selectSoknad,
     selectMineBarn,
+    selectFelt,
 };

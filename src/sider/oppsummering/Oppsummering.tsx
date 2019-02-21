@@ -13,6 +13,8 @@ import { ISoker } from '../../soker/types';
 import { soknadValiderFelt } from '../../soknad/actions';
 import { selectSoknad } from '../../soknad/selectors';
 import { ISoknadState, Svar, ValideringsStatus } from '../../soknad/types';
+import { isEnabled } from '../../toggles/selectors';
+import { IToggleName } from '../../toggles/types';
 import ArbeidIUtlandetOppsummering from './ArbeidIUtlandetOppsummering';
 import BarnehageplassOppsummering from './BarnehageplassOppsummering';
 import { BarnOppsummering } from './BarnOppsummering';
@@ -23,14 +25,13 @@ import TilknytningTilUtlandOppsummering from './TilknytningTilUtlandOppsummering
 import UtenlandskeYtelserOppsummering from './UtenlandskeYtelserOppsummering';
 import UtenlandskKontantstotteOppsummering from './UtenlandskKontantstotteOppsummering';
 import { VeiledningOppsummering } from './VeiledningOppsummering';
-import { IToggleName } from '../../toggles/types';
-import { isEnabled } from '../../toggles/selectors';
 
 interface IMapStateToProps {
     soker: ISoker;
     soknad: ISoknadState;
     harForsoktNesteSteg: boolean;
     visStatsborgerskap: boolean;
+    brukVedlegg: boolean;
 }
 
 interface IMapDispatchToProps {
@@ -46,6 +47,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
     soker,
     soknad,
     visStatsborgerskap,
+    brukVedlegg,
 }) => {
     const brukFlertall = soknad.mineBarn.erFlerling.verdi === 'JA';
     return (
@@ -77,6 +79,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
                 <BarnehageplassOppsummering
                     barnehageplass={soknad.barnehageplass}
                     brukFlertall={brukFlertall}
+                    brukVedlegg={brukVedlegg}
                 />
                 <FamilieforholdOppsummering familieforhold={soknad.familieforhold} />
                 <TilknytningTilUtlandOppsummering
@@ -120,6 +123,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
+        brukVedlegg: isEnabled(state, IToggleName.bruk_vedlegg),
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         soker: selectSoker(state),
         soknad: selectSoknad(state),

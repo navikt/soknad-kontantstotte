@@ -6,6 +6,7 @@ case "$1" in
     "test")
         (
             set -e
+            docker-compose -p "$2" build
             docker-compose -p "$2" run --rm jest-image-snapshot test
             docker-compose -p "$2" down
         )

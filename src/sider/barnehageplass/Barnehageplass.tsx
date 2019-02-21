@@ -12,7 +12,11 @@ import Barnehageikon from '../../component/Ikoner/BarnehageIkon';
 import Veilederikon from '../../component/Ikoner/Veilederikon';
 import SideContainer from '../../component/StegSide/StegSide';
 import { IRootState } from '../../rootReducer';
-import { soknadNullstillNesteSteg, soknadValiderFelt } from '../../soknad/actions';
+import {
+    soknadFjernVedlegg,
+    soknadNullstillNesteSteg,
+    soknadValiderFelt,
+} from '../../soknad/actions';
 import { selectBarnehageplass, selectMineBarn } from '../../soknad/selectors';
 import {
     BarnehageplassVerdier,
@@ -22,22 +26,25 @@ import {
     Svar,
     ValideringsStatus,
 } from '../../soknad/types';
+import { vedleggLastOpp } from '../../vedlegg/actions';
 import BarnehageplassHarSluttetInfo from './BarnehageplassHarSluttetInfo';
 import BarnehageplassSkalBegynneInfo from './BarnehageplassSkalBegynneInfo';
 import BarnehageplassSkalSlutteInfo from './BarnehageplassSkalSlutteInfo';
 import BarnehageplassStatus from './BarnehageplassStatus';
 import HarBarnehageplassInfo from './HarBarnehageplassInfo';
 
-interface IMapDispatchToProps {
-    nullstillNesteSteg: () => void;
-    settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => void;
-    settSvarFelt: (feltnavn: Feltnavn, verdi: Svar) => void;
-}
-
 interface IMapStateToProps {
     barnehageplass: IBarnehageplass;
     harForsoktNesteSteg: boolean;
     mineBarn: IMineBarn;
+}
+
+interface IMapDispatchToProps {
+    nullstillNesteSteg: () => void;
+    settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => void;
+    settSvarFelt: (feltnavn: Feltnavn, verdi: Svar) => void;
+    lastOppVedlegg: (feltnavn: Feltnavn, filer: File[]) => void;
+    slettVedlegg: (feltnavn: Feltnavn, filreferanse: string) => void;
 }
 
 type BarnehageplassSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
@@ -50,6 +57,8 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     nullstillNesteSteg,
     settBarnehageplassVerdiFelt,
     settSvarFelt,
+    lastOppVedlegg,
+    slettVedlegg,
 }) => {
     const {
         barnBarnehageplassStatus,
@@ -128,6 +137,8 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                                     brukFlertall={brukFlertall}
                                     feltMedFeil={feltMedFeil}
                                     settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
+                                    lastOppVedlegg={lastOppVedlegg}
+                                    slettVedlegg={slettVedlegg}
                                 />
                             )}
                             {barnBarnehageplassStatus.verdi ===
@@ -173,25 +184,32 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
-    return {
-        nullstillNesteSteg: () => {
-            dispatch(soknadNullstillNesteSteg());
-        },
-        settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => {
-            dispatch(soknadValiderFelt('barnehageplass', feltnavn, verdi));
-        },
-        settSvarFelt: (feltnavn: Feltnavn, verdi: Svar) => {
-            dispatch(soknadValiderFelt('barnehageplass', feltnavn, verdi));
-        },
-    };
-};
-
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         barnehageplass: selectBarnehageplass(state),
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         mineBarn: selectMineBarn(state),
+    };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
+    const STEGNAVN = 'barnehageplass';
+    return {
+        lastOppVedlegg: (feltnavn: Feltnavn, filer: File[]) => {
+            dispatch(vedleggLastOpp(STEGNAVN, feltnavn, filer));
+        },
+        nullstillNesteSteg: () => {
+            dispatch(soknadNullstillNesteSteg());
+        },
+        settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => {
+            dispatch(soknadValiderFelt(STEGNAVN, feltnavn, verdi));
+        },
+        settSvarFelt: (feltnavn: Feltnavn, verdi: Svar) => {
+            dispatch(soknadValiderFelt(STEGNAVN, feltnavn, verdi));
+        },
+        slettVedlegg: (feltnavn: Feltnavn, filref: string) => {
+            dispatch(soknadFjernVedlegg(STEGNAVN, feltnavn, filref));
+        },
     };
 };
 

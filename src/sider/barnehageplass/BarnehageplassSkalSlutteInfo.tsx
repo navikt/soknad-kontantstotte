@@ -2,22 +2,31 @@ import { Input, SkjemaGruppe } from 'nav-frontend-skjema';
 import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
 import { connect } from 'react-redux';
+import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { IFeltFeil } from '../../common/types';
+import { Vedlegg } from '../../component/Vedlegg';
 import { IRootState } from '../../rootReducer';
 import { selectBarnehageplass } from '../../soknad/selectors';
-import { BarnehageplassVerdier, Feltnavn, IFelt } from '../../soknad/types';
+import { BarnehageplassVerdier, Feltnavn, IFelt, IVedleggFelt } from '../../soknad/types';
+import { isEnabled } from '../../toggles/selectors';
+import { IToggleName } from '../../toggles/types';
 
 interface IBarnehageplassSkalSlutteInfo {
     intl: InjectedIntl;
     brukFlertall: boolean;
     feltMedFeil: IFeltFeil;
     settBarnehageplassVerdiFelt: (feltnavn: Feltnavn, verdi: BarnehageplassVerdier) => void;
+    lastOppVedlegg: (feltnavn: Feltnavn, filer: File[]) => void;
+    slettVedlegg: (feltnavn: Feltnavn, filreferanse: string) => void;
 }
 
 interface IMapStateToProps {
+    harForsoktNesteSteg: boolean;
     skalSlutteIBarnehageAntallTimer: IFelt;
     skalSlutteIBarnehageDato: IFelt;
     skalSlutteIBarnehageKommune: IFelt;
+    skalSlutteIBarnehageVedlegg: IVedleggFelt;
+    brukVedlegg: boolean;
 }
 
 type BarnehageplassSkalSlutteInfoProps = IBarnehageplassSkalSlutteInfo & IMapStateToProps;
@@ -30,6 +39,11 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
     skalSlutteIBarnehageAntallTimer,
     skalSlutteIBarnehageDato,
     skalSlutteIBarnehageKommune,
+    skalSlutteIBarnehageVedlegg,
+    harForsoktNesteSteg,
+    brukVedlegg,
+    lastOppVedlegg,
+    slettVedlegg,
 }) => {
     return (
         <SkjemaGruppe className={'soknad__inputSkjemaGruppe'}>
@@ -88,17 +102,48 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
                     feil={feltMedFeil.skalSlutteIBarnehageKommune}
                     maxLength={50}
                 />
+                {brukVedlegg && (
+                    <Vedlegg
+                        sporsmal={intl.formatMessage({
+                            id: 'barnehageplass.skalSlutteIBarnehage.vedlegg.sporsmal',
+                        })}
+                        label={intl.formatMessage({
+                            id: 'barnehageplass.skalSlutteIBarnehage.vedlegg.label',
+                        })}
+                        className={'barnehage__vedlegg'}
+                        harForsoktNesteSteg={harForsoktNesteSteg}
+                        feil={{
+                            meldingsNokkel: skalSlutteIBarnehageVedlegg.feilmeldingsNokkel,
+                            status: skalSlutteIBarnehageVedlegg.valideringsStatus,
+                        }}
+                        vedlegg={skalSlutteIBarnehageVedlegg.verdi}
+                        onChange={evt => {
+                            if (evt.target.files) {
+                                lastOppVedlegg(
+                                    'skalSlutteIBarnehageVedlegg',
+                                    Array.from(evt.target.files)
+                                );
+                            }
+                        }}
+                        onDelete={(filreferanse: string) =>
+                            slettVedlegg('skalSlutteIBarnehageVedlegg', filreferanse)
+                        }
+                    />
+                )}
             </div>
         </SkjemaGruppe>
     );
 };
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
+    const barnehageplass = selectBarnehageplass(state);
     return {
-        skalSlutteIBarnehageAntallTimer: selectBarnehageplass(state)
-            .skalSlutteIBarnehageAntallTimer,
-        skalSlutteIBarnehageDato: selectBarnehageplass(state).skalSlutteIBarnehageDato,
-        skalSlutteIBarnehageKommune: selectBarnehageplass(state).skalSlutteIBarnehageKommune,
+        brukVedlegg: isEnabled(state, IToggleName.bruk_vedlegg),
+        harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
+        skalSlutteIBarnehageAntallTimer: barnehageplass.skalSlutteIBarnehageAntallTimer,
+        skalSlutteIBarnehageDato: barnehageplass.skalSlutteIBarnehageDato,
+        skalSlutteIBarnehageKommune: barnehageplass.skalSlutteIBarnehageKommune,
+        skalSlutteIBarnehageVedlegg: barnehageplass.skalSlutteIBarnehageVedlegg,
     };
 };
 

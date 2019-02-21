@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import GenerellFeilside from './sider/feilsider/GenerellFeilside';
 import InnsendingFeilet from './sider/feilsider/InnsendingFeilet';
 import SidenFinnesIkke from './sider/feilsider/SidenFinnesIkke';
+import VedleggOpplastingFeilet from './sider/feilsider/VedleggOpplastingFeilet';
 import Kvittering from './sider/kvittering/Kvittering';
 import { ISteg, stegConfig } from './stegConfig';
 
@@ -36,6 +37,12 @@ const Routes: React.StatelessComponent<{}> = () => {
                     />
                 )}
                 path={'/ingen-barn'}
+            />
+            <Route
+                component={VedleggOpplastingFeilet}
+                key={'vedlegg-opplasting-feilet'}
+                path={'/vedlegg-opplasting-feilet'}
+                exact={true}
             />
             <Route
                 component={InnsendingFeilet}
