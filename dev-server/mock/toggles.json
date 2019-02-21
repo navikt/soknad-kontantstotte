@@ -1,5 +1,6 @@
 {
     "kontantstotte.leggtilbarn": false,
     "kontantstotte.bruk.vedlegg": true,
-    "kontantstotte.sprakvalg": false
+    "kontantstotte.sprakvalg": false,
+    "kontantstotte.visStatsborgerskap": false
 }
