@@ -105,6 +105,16 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                         }
                         svar={barnehageplass.harSluttetIBarnehageKommune.verdi}
                     />
+                    {brukVedlegg && (
+                        <VedleggSvar
+                            sporsmal={
+                                <FormattedMessage
+                                    id={'barnehageplass.skalSlutteIBarnehage.vedlegg.sporsmal'}
+                                />
+                            }
+                            vedlegg={barnehageplass.harSluttetIBarnehageVedlegg.verdi}
+                        />
+                    )}
                 </>
             )}
 

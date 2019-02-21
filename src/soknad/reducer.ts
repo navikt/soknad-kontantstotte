@@ -54,6 +54,7 @@ const initialState: ISoknadState = {
         harSluttetIBarnehageAntallTimer: standardStringInitialFelt,
         harSluttetIBarnehageDato: standardStringInitialFelt,
         harSluttetIBarnehageKommune: standardStringInitialFelt,
+        harSluttetIBarnehageVedlegg: standardVedleggInitialFelt,
         skalBegynneIBarnehageAntallTimer: standardStringInitialFelt,
         skalBegynneIBarnehageDato: standardStringInitialFelt,
         skalBegynneIBarnehageKommune: standardStringInitialFelt,

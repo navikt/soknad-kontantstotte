@@ -80,6 +80,7 @@ const valideringsConfig: IValideringsConfig = {
         ],
         harSluttetIBarnehageDato: [harSvartTekstMedFeilmelding, harFyltInnDato],
         harSluttetIBarnehageKommune: [harSvartTekstMedFeilmelding],
+        harSluttetIBarnehageVedlegg: [harLastetOppVedlegg],
         skalBegynneIBarnehageAntallTimer: [
             harSvartTekstMedFeilmelding,
             harFyltInnTall,

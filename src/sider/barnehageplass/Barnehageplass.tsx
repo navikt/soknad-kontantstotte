@@ -128,6 +128,8 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                                     brukFlertall={brukFlertall}
                                     feltMedFeil={feltMedFeil}
                                     settBarnehageplassVerdiFelt={settBarnehageplassVerdiFelt}
+                                    lastOppVedlegg={lastOppVedlegg}
+                                    slettVedlegg={slettVedlegg}
                                 />
                             )}
                             {barnBarnehageplassStatus.verdi ===
