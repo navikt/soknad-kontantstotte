@@ -89,6 +89,7 @@ interface IBarnehageplass extends ISteg {
     readonly harSluttetIBarnehageAntallTimer: IFelt;
     readonly harSluttetIBarnehageDato: IFelt;
     readonly harSluttetIBarnehageKommune: IFelt;
+    readonly harSluttetIBarnehageVedlegg: IVedleggFelt;
     readonly skalBegynneIBarnehageAntallTimer: IFelt;
     readonly skalBegynneIBarnehageDato: IFelt;
     readonly skalBegynneIBarnehageKommune: IFelt;
