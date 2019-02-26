@@ -21,7 +21,10 @@ function* mapStateToModel(): object {
                     if (isIVedleggFelt(felt)) {
                         return {
                             ...accFelt,
-                            [feltKey]: felt.verdi.map((v: IVedlegg) => v.filreferanse),
+                            [feltKey]: felt.verdi.map((v: IVedlegg) => ({
+                                filnavn: v.filnavn,
+                                filreferanse: v.filreferanse,
+                            })),
                         };
                     }
                     return { ...accFelt, [feltKey]: felt.verdi };
