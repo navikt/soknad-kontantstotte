@@ -5,29 +5,32 @@ import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import Veilederikon from '../../component/Ikoner/Veilederikon';
+import Submitknapp from '../../component/Submitknapp/Submitknapp';
+import { landHent } from '../../land/actions';
 import { IRootState } from '../../rootReducer';
 import { selectSoker } from '../../soker/selectors';
+import { soknadValiderFelt } from '../../soknad/actions';
+import { selectSoknad } from '../../soknad/selectors';
+import { ISoknadState, Svar, ValideringsStatus } from '../../soknad/types';
 import { teksterHent } from '../../tekster/actions';
+import { selectValgtSprak } from '../../tekster/selectors';
 import { ISprak } from '../../tekster/types';
 import { isEnabled } from '../../toggles/selectors';
 import { IToggleName } from '../../toggles/types';
 import { Personopplysning } from './Personopplysning';
-import { ISoknadState, Svar, ValideringsStatus } from '../../soknad/types';
-import { soknadValiderFelt } from '../../soknad/actions';
-import { selectSoknad } from '../../soknad/selectors';
-import { selectHarForsoktNesteSteg } from '../../app/selectors';
-import Submitknapp from '../../component/Submitknapp/Submitknapp';
 
 interface IMapStateToProps {
     fornavn: string;
     soknad: ISoknadState;
     harForsoktNesteSteg: boolean;
     visSprakvalg: boolean;
+    valgtSprak: ISprak;
 }
 
 interface IMapDispatchToProps {
-    oppdaterTekster: (sprak: string) => void;
+    oppdaterSprak: (sprak: ISprak) => void;
     settBekreftelse: (verdi: Svar) => void;
 }
 
@@ -45,9 +48,10 @@ type VeiledningProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProp
 const Veiledning: React.StatelessComponent<VeiledningProps> = ({
     intl,
     fornavn,
+    oppdaterSprak,
+    valgtSprak,
     settBekreftelse,
     visSprakvalg,
-    oppdaterTekster,
     soknad,
     harForsoktNesteSteg,
 }) => {
@@ -64,13 +68,14 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({
                     className={'veiledning__sprakvalg'}
                     label=""
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                        oppdaterTekster(e.target.value)
+                        oppdaterSprak(sprakMap(e.target.value))
                     }
+                    value={valgtSprak}
                 >
-                    <option value="nb" key="nb">
+                    <option value="nb" key={ISprak.nb}>
                         Bokmål
                     </option>
-                    <option value="nn" key="nn">
+                    <option value="nn" key={ISprak.nn}>
                         Nynorsk
                     </option>
                 </Select>
@@ -136,13 +141,17 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
         fornavn: selectSoker(state).fornavn.toLocaleLowerCase(),
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         soknad: selectSoknad(state),
+        valgtSprak: selectValgtSprak(state),
         visSprakvalg: isEnabled(state, IToggleName.vis_sprakvalg),
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        oppdaterTekster: (sprak: string) => dispatch(teksterHent(sprakMap(sprak))),
+        oppdaterSprak: (sprak: ISprak) => {
+            dispatch(teksterHent(sprak));
+            dispatch(landHent(sprak));
+        },
         settBekreftelse: (verdi: Svar) =>
             dispatch(soknadValiderFelt('veiledning', 'bekreftelse', verdi)),
     };

@@ -16,6 +16,7 @@ import {
 } from 'redux-saga/effects';
 import { barnHent, BarnTypeKeys } from '../barn/actions';
 import { selectBarn } from '../barn/selectors';
+import { landHent, LandTypeKeys } from '../land/actions';
 import { sokerHent, SokerTypeKeys } from '../soker/actions';
 import { ISteg, stegConfig } from '../stegConfig';
 import { teksterHent, TeksterTypeKeys } from '../tekster/actions';
@@ -56,11 +57,13 @@ function* forsteSidelastSaga(): SagaIterator {
 
     const sprak = bestemSprakFraParams();
     yield put(teksterHent(sprak));
+    yield put(landHent(sprak));
     yield put(sokerHent());
 
     yield put(barnHent());
     yield all([
         take(TeksterTypeKeys.HENT_OK),
+        take(LandTypeKeys.HENT_OK),
         take(SokerTypeKeys.HENT_OK),
         take(BarnTypeKeys.HENT_OK),
     ]);
@@ -78,7 +81,11 @@ function* startAppSaga(): SagaIterator {
     const startSaga = yield fork(forsteSidelastSaga);
     const { fortrolig_adresse, hentFeilet } = yield race({
         fortrolig_adresse: take([SokerTypeKeys.HENT_FORTROLIG_ADRESSE]),
-        hentFeilet: take([TeksterTypeKeys.HENT_FEILET, SokerTypeKeys.HENT_FEILET]),
+        hentFeilet: take([
+            TeksterTypeKeys.HENT_FEILET,
+            LandTypeKeys.HENT_FEILET,
+            SokerTypeKeys.HENT_FEILET,
+        ]),
     });
     yield cancel(startSaga);
     yield put(appEndreStatus(AppStatus.FEILSITUASJON));

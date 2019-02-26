@@ -4,6 +4,8 @@ import { addLocaleData, IntlProvider as Provider } from 'react-intl';
 import * as nb from 'react-intl/locale-data/nb';
 import * as nn from 'react-intl/locale-data/nn';
 import { connect } from 'react-redux';
+import { selectLand } from './land/selectors';
+import { ILand } from './land/types';
 import { IRootState } from './rootReducer';
 import { selectTekster, selectValgtSprak } from './tekster/selectors';
 import { ISprak, ITekster } from './tekster/types';
@@ -17,22 +19,19 @@ interface IOwnProps {
 
 interface IMapStateToProps {
     tekster: ITekster;
+    land: ILand;
     valgtSprak: ISprak;
 }
 
 type Props = IOwnProps & IMapStateToProps;
 
-const IntlProvider: React.StatelessComponent<Props> = ({ children, tekster, valgtSprak }) => {
+const IntlProvider: React.StatelessComponent<Props> = ({ children, land, tekster, valgtSprak }) => {
     moment.locale(valgtSprak);
     moment.tz(moment.tz.guess());
+    const teksterSamlet = { ...land, ...tekster };
 
     return (
-        <Provider
-            key={Object.keys(tekster).length}
-            messages={tekster}
-            defaultLocale={ISprak.nb}
-            locale={valgtSprak}
-        >
+        <Provider messages={teksterSamlet} defaultLocale={ISprak.nb} locale={valgtSprak}>
             {children}
         </Provider>
     );
@@ -40,6 +39,7 @@ const IntlProvider: React.StatelessComponent<Props> = ({ children, tekster, valg
 
 function mapStateTorProps(state: IRootState): IMapStateToProps {
     return {
+        land: selectLand(state),
         tekster: selectTekster(state),
         valgtSprak: selectValgtSprak(state),
     };

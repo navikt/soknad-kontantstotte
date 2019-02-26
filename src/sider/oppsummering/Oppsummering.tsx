@@ -7,12 +7,16 @@ import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import SoknadPanel from '../../component/SoknadPanel/SoknadPanel';
 import SideContainer from '../../component/StegSide/StegSide';
 import Veileder from '../../component/Veileder/Veileder';
+import { selectLand } from '../../land/selectors';
+import { ILand } from '../../land/types';
 import { IRootState } from '../../rootReducer';
 import { selectSoker } from '../../soker/selectors';
 import { ISoker } from '../../soker/types';
 import { soknadValiderFelt } from '../../soknad/actions';
 import { selectSoknad } from '../../soknad/selectors';
 import { ISoknadState, Svar, ValideringsStatus } from '../../soknad/types';
+import { isEnabled } from '../../toggles/selectors';
+import { IToggleName } from '../../toggles/types';
 import ArbeidIUtlandetOppsummering from './ArbeidIUtlandetOppsummering';
 import BarnehageplassOppsummering from './BarnehageplassOppsummering';
 import { BarnOppsummering } from './BarnOppsummering';
@@ -23,10 +27,9 @@ import TilknytningTilUtlandOppsummering from './TilknytningTilUtlandOppsummering
 import UtenlandskeYtelserOppsummering from './UtenlandskeYtelserOppsummering';
 import UtenlandskKontantstotteOppsummering from './UtenlandskKontantstotteOppsummering';
 import { VeiledningOppsummering } from './VeiledningOppsummering';
-import { IToggleName } from '../../toggles/types';
-import { isEnabled } from '../../toggles/selectors';
 
 interface IMapStateToProps {
+    land: ILand;
     soker: ISoker;
     soknad: ISoknadState;
     harForsoktNesteSteg: boolean;
@@ -42,6 +45,7 @@ type OppsummeringSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIn
 const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
     harForsoktNesteSteg,
     intl,
+    land,
     settBekreftelse,
     soker,
     soknad,
@@ -121,6 +125,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
+        land: selectLand(state),
         soker: selectSoker(state),
         soknad: selectSoknad(state),
         visStatsborgerskap: isEnabled(state, IToggleName.vis_statsborgerskap),

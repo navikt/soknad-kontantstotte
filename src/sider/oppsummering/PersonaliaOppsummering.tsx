@@ -31,7 +31,7 @@ const PersonaliaOppsummering: React.StatelessComponent<PersonaliaOgBarnProps> = 
             {visStatsborgerskap && (
                 <Normaltekst>
                     <FormattedMessage id="oppsummering.statsborgerskap.label" />
-                    {soker.statsborgerskap}
+                    <FormattedMessage id={soker.statsborgerskap} />
                 </Normaltekst>
             )}
         </OppsummeringSteg>
