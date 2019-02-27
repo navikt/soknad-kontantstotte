@@ -4,7 +4,9 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { appEndreStatus } from '../app/actions';
 import { AppStatus } from '../app/types';
 import { selectSoknad } from '../soknad/selectors';
+import { isIVedleggFelt } from '../soknad/types';
 import { selectValgtSprak } from '../tekster/selectors';
+import { IVedlegg } from '../vedlegg/types';
 import { InnsendingTypeKeys, sendInnFeilet, sendInnOk } from './actions';
 import { sendInnSoknad } from './api';
 
@@ -16,6 +18,15 @@ function* mapStateToModel(): object {
             ...acc,
             [stegKey]: {
                 ...Object.entries(steg).reduce((accFelt: object, [feltKey, felt]) => {
+                    if (isIVedleggFelt(felt)) {
+                        return {
+                            ...accFelt,
+                            [feltKey]: felt.verdi.map((v: IVedlegg) => ({
+                                filnavn: v.filnavn,
+                                filreferanse: v.filreferanse,
+                            })),
+                        };
+                    }
                     return { ...accFelt, [feltKey]: felt.verdi };
                 }, {}),
             },

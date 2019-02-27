@@ -44,6 +44,10 @@ interface IVedleggFelt {
 
 type FeltTyper = IFelt | IVedleggFelt;
 
+function isIVedleggFelt(felt: FeltTyper): felt is IVedleggFelt {
+    return Array.isArray((felt as IVedleggFelt).verdi);
+}
+
 interface ISteg {
     [key: string]: FeltTyper;
 }
@@ -190,4 +194,5 @@ export {
     utenlandskKontantstotteFeltnavn,
     ValideringsStatus,
     FeltTyper,
+    isIVedleggFelt,
 };
