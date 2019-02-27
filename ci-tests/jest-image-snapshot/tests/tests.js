@@ -30,7 +30,7 @@ describe('soknad-kontantstotte', () => {
 
         test('veiledning-utfylt', async () => {
             await page.click('.skjemaelement__input.checkboks');
-            await page.waitFor('.typo-sidetittel');
+            await page.click('.typo-sidetittel');
             await page.waitFor(2000);
             await takeSnapshot(`veiledning-utfylt-${name}`, page);
         });
@@ -193,9 +193,70 @@ describe('soknad-kontantstotte', () => {
             await page.waitFor('.kvittering__tittel');
             await takeSnapshot(`kvittering-${name}`, page);
         });
+
+        test('sprak-tekster', async () => {
+            await page.goto('http://ci-test-server:8000');
+            await page.waitFor('.typo-sidetittel');
+            await page.select('select', 'nn');
+            await page.waitFor(1000);
+            await takeSnapshot(`sprak-tekster-${name}`, page);
+        }, 8000);
+
+        test('sprak-land', async () => {
+            veiledningTilOppsummering(page);
+            await page.waitFor('.oppsummering');
+            await takeSnapshot(`sprak-land-${name}`, page);
+        });
     });
 
     afterAll(async () => {
         await browser.close();
     });
 });
+
+async function veiledningTilOppsummering(page) {
+    // Veiledning
+    await page.click('.skjemaelement__input.checkboks');
+    await page.click('.knapp.knapp--hoved');
+
+    // Krav til søker
+    const inputPanels = await page.$$('.inputPanel');
+    for (const inputPanel of inputPanels) {
+        await inputPanel.click();
+    }
+    await page.click('.knapp.knapp--hoved');
+
+    // Mine barn
+    if ((await page.$('.inputPanelGruppe')) !== null) {
+        await page.click('[name="mine-barn__sporsmal"][value="JENTEBARN OG GUTTEBARN"]');
+    } else {
+        await page.type('.mine-barn__navn-input > input', 'NAVNESEN JENTEBARN');
+        await page.type('.mine-barn__fodselsdato-input > input', '01.01.2018');
+    }
+    await page.click('.knapp.knapp--hoved');
+
+    // Barnehageplass
+    await page.click('[name="harBarnehageplass"][value="NEI"]');
+    await page.click('[name="barnBarnehageplassStatus"][value="garIkkeIBarnehage"]');
+    await page.click('.knapp.knapp--hoved');
+
+    // Familieforhold
+    await page.click('[name="borForeldreneSammenMedBarnet"][value="NEI"]');
+    await page.click('.knapp.knapp--hoved');
+
+    // Tilknytning til utland
+    await page.click('[name="boddEllerJobbetINorgeMinstFemAar"][value="jaINorge"]');
+    await page.click('.knapp.knapp--hoved');
+
+    // Arbeid i utlandet
+    await page.click('[name="arbeiderIUtlandetEllerKontinentalsokkel"][value="NEI"]');
+    await page.click('.knapp.knapp--hoved');
+
+    // Utenlandske ytelser
+    await page.click('[name="mottarYtelserFraUtland"][value="NEI"]');
+    await page.click('.knapp.knapp--hoved');
+
+    // Kontantstøtte utlandet
+    await page.click('[name="mottarKontantstotteFraUtlandet"][value="NEI"]');
+    await page.click('.knapp.knapp--hoved');
+}
