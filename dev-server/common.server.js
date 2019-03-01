@@ -11,28 +11,12 @@ function lesMockFil(filnavn) {
     return fs.readFileSync(path.join(__dirname, '/mock/' + filnavn), 'UTF-8');
 }
 
-app.get('/soknad-kontantstotte-api/api/tekster/nb', function(req, res) {
-    setTimeout(() => res.send(lesMockFil('tekster-nb.json')), delayMs);
-});
-
-app.get('/soknad-kontantstotte-api/api/tekster/nn', function(req, res) {
-    setTimeout(() => res.send(lesMockFil('tekster-nn.json')), delayMs);
-});
-
 app.get('/soknad-kontantstotte-api/api/tekster', function(req, res) {
-    setTimeout(() => res.send(lesMockFil('tekster-alle.json')), delayMs);
-});
-
-app.get('/soknad-kontantstotte-api/api/land/nb', function(req, res) {
-    setTimeout(() => res.send(lesMockFil('land-nb.json')), delayMs);
-});
-
-app.get('/soknad-kontantstotte-api/api/land/nn', function(req, res) {
-    setTimeout(() => res.send(lesMockFil('land-nn.json')), delayMs);
+    setTimeout(() => res.send(lesMockFil('tekster.json')), delayMs);
 });
 
 app.get('/soknad-kontantstotte-api/api/land', function(req, res) {
-    setTimeout(() => res.send(lesMockFil('land-alle.json')), delayMs);
+    setTimeout(() => res.send(lesMockFil('land.json')), delayMs);
 });
 
 app.get('/soknad-kontantstotte-api/api/status/ping', function(req, res) {
