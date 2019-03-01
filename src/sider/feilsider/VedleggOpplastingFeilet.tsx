@@ -4,36 +4,37 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { selectAppStatus } from '../../app/selectors';
 import { AppStatus } from '../../app/types';
-import { InnsendingFeiletIkon } from '../../component/Ikoner/InnsendingFeiletIkon';
+import Veilederikon from '../../component/Ikoner/Veilederikon';
 import { IRootState } from '../../rootReducer';
 import Feilside from './Feilside';
 
 interface IMapStateToProps {
     status: AppStatus;
 }
+type VedleggOpplastingFeiletProps = IMapStateToProps & InjectedIntlProps;
 
-type GenerellFeilsideProps = IMapStateToProps & InjectedIntlProps;
-
-const GenerellFeilside: React.StatelessComponent<GenerellFeilsideProps> = ({ status, intl }) => {
+const VedleggOpplastingFeilet: React.FunctionComponent<VedleggOpplastingFeiletProps> = ({
+    status,
+    intl,
+}) => {
     if (intl) {
         document.title = intl.formatMessage({
-            defaultMessage: 'Søknad om kontantstøtte - Feilside',
-            id: 'app.tittel.feilside',
+            id: 'app.tittel.feilside.opplasting',
         });
     }
     if (status === AppStatus.FEILSITUASJON) {
         return (
             <Feilside
-                ikon={<InnsendingFeiletIkon />}
+                ikon={<Veilederikon />}
                 tekster={{
-                    feilmelding: 'feilside.generell.feilmelding',
-                    tittel: 'feilside.generell.tittel',
+                    feilmelding: 'feilside.opplasting.feilmelding',
+                    tittel: 'feilside.opplasting.tittel',
                 }}
+                knapp={<></>}
             />
         );
-    } else {
-        return <Redirect to={'/'} />;
     }
+    return <Redirect to={'/'} />;
 };
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
@@ -42,4 +43,4 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     };
 };
 
-export default injectIntl(connect(mapStateToProps)(GenerellFeilside));
+export default injectIntl(connect(mapStateToProps)(VedleggOpplastingFeilet));

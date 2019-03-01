@@ -1,3 +1,5 @@
+import { IVedlegg } from '../vedlegg/types';
+
 enum Svar {
     JA = 'JA',
     NEI = 'NEI',
@@ -29,9 +31,25 @@ enum ValideringsStatus {
 }
 
 interface IFelt {
-    verdi: Svar | BarnehageplassVerdier | TilknytningTilUtlandVerdier | string;
-    valideringsStatus: ValideringsStatus;
     feilmeldingsNokkel: string;
+    valideringsStatus: ValideringsStatus;
+    verdi: Svar | BarnehageplassVerdier | TilknytningTilUtlandVerdier | string;
+}
+
+interface IVedleggFelt {
+    feilmeldingsNokkel: string;
+    valideringsStatus: ValideringsStatus;
+    verdi: IVedlegg[];
+}
+
+type FeltTyper = IFelt | IVedleggFelt;
+
+function isIVedleggFelt(felt: FeltTyper): felt is IVedleggFelt {
+    return Array.isArray((felt as IVedleggFelt).verdi);
+}
+
+interface ISteg {
+    [key: string]: FeltTyper;
 }
 
 interface ISoknadState {
@@ -47,45 +65,48 @@ interface ISoknadState {
     readonly tilknytningTilUtland: ITilknytningTilUtland;
 }
 
-interface IVeiledning {
+interface IVeiledning extends ISteg {
     readonly bekreftelse: IFelt;
 }
 
-interface IMineBarn {
-    readonly navn: IFelt;
-    readonly fodselsdato: IFelt;
+interface IMineBarn extends ISteg {
+    readonly erBrukerOpprettet: IFelt;
     readonly erFlerling: IFelt;
+    readonly fodselsdato: IFelt;
+    readonly navn: IFelt;
 }
 
-interface IFamilieforhold {
+interface IFamilieforhold extends ISteg {
     readonly borForeldreneSammenMedBarnet: IFelt;
     readonly annenForelderNavn: IFelt;
     readonly annenForelderFodselsnummer: IFelt;
 }
 
-interface IUtenlandskKontantstotte {
+interface IUtenlandskKontantstotte extends ISteg {
     readonly mottarKontantstotteFraUtlandet: IFelt;
     readonly mottarKontantstotteFraUtlandetTilleggsinfo: IFelt;
 }
 
-interface IBarnehageplass {
+interface IBarnehageplass extends ISteg {
     readonly harBarnehageplass: IFelt;
     readonly barnBarnehageplassStatus: IFelt;
     readonly harSluttetIBarnehageAntallTimer: IFelt;
     readonly harSluttetIBarnehageDato: IFelt;
     readonly harSluttetIBarnehageKommune: IFelt;
+    readonly harSluttetIBarnehageVedlegg: IVedleggFelt;
     readonly skalBegynneIBarnehageAntallTimer: IFelt;
     readonly skalBegynneIBarnehageDato: IFelt;
     readonly skalBegynneIBarnehageKommune: IFelt;
     readonly skalSlutteIBarnehageAntallTimer: IFelt;
     readonly skalSlutteIBarnehageDato: IFelt;
     readonly skalSlutteIBarnehageKommune: IFelt;
+    readonly skalSlutteIBarnehageVedlegg: IVedleggFelt;
     readonly harBarnehageplassAntallTimer: IFelt;
     readonly harBarnehageplassDato: IFelt;
     readonly harBarnehageplassKommune: IFelt;
 }
 
-interface IKravTilSoker {
+interface IKravTilSoker extends ISteg {
     readonly norskStatsborger: IFelt;
     readonly boddEllerJobbetINorgeSisteFemAar: IFelt;
     readonly borSammenMedBarnet: IFelt;
@@ -94,25 +115,25 @@ interface IKravTilSoker {
     readonly skalBoMedBarnetINorgeNesteTolvMaaneder: IFelt;
 }
 
-interface IArbeidIUtlandet {
+interface IArbeidIUtlandet extends ISteg {
     readonly arbeiderIUtlandetEllerKontinentalsokkel: IFelt;
     readonly arbeiderIUtlandetEllerKontinentalsokkelForklaring: IFelt;
     readonly arbeiderAnnenForelderIUtlandet: IFelt;
     readonly arbeiderAnnenForelderIUtlandetForklaring: IFelt;
 }
 
-interface IUtenlandskeYtelser {
+interface IUtenlandskeYtelser extends ISteg {
     readonly mottarYtelserFraUtland: IFelt;
     readonly mottarYtelserFraUtlandForklaring: IFelt;
     readonly mottarAnnenForelderYtelserFraUtland: IFelt;
     readonly mottarAnnenForelderYtelserFraUtlandForklaring: IFelt;
 }
 
-interface IOppsummering {
+interface IOppsummering extends ISteg {
     readonly bekreftelse: IFelt;
 }
 
-interface ITilknytningTilUtland {
+interface ITilknytningTilUtland extends ISteg {
     readonly boddEllerJobbetINorgeMinstFemAar: IFelt;
     readonly boddEllerJobbetINorgeMinstFemAarForklaring: IFelt;
     readonly annenForelderBoddEllerJobbetINorgeMinstFemAar: IFelt;
@@ -169,6 +190,9 @@ export {
     Svar,
     IFelt,
     IVeiledning,
+    IVedleggFelt,
     utenlandskKontantstotteFeltnavn,
     ValideringsStatus,
+    FeltTyper,
+    isIVedleggFelt,
 };
