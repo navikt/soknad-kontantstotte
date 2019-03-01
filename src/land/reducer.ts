@@ -1,17 +1,14 @@
-import { ISprak } from '../app/types';
 import { LandActionTypes, LandTypeKeys } from './actions';
-import { ILand } from './types';
+import { ILandBundle } from './types';
 
 interface ILandState {
     readonly henter: boolean;
-    readonly land: ILand;
-    readonly valgtSprak: ISprak;
+    readonly land: ILandBundle;
 }
 
 const initialState: ILandState = {
     henter: false,
     land: {},
-    valgtSprak: ISprak.nb,
 };
 
 function landReducer(state = initialState, action: LandActionTypes) {
@@ -20,7 +17,6 @@ function landReducer(state = initialState, action: LandActionTypes) {
             return {
                 ...state,
                 henter: true,
-                valgtSprak: action.valgtSprak,
             };
         case LandTypeKeys.HENT_OK:
             return {

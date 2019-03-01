@@ -31,18 +31,11 @@ import {
     IAppSettSprak,
 } from './actions';
 import { pingBackend } from './api';
-import { selectAppSteg, selectValgtSprak } from './selectors';
-import { AppStatus, ILocationChangeAction, ISprak } from './types';
+import { selectAppSteg } from './selectors';
+import { AppStatus, ILocationChangeAction } from './types';
 
 const redirectTilLogin = () => {
     window.location.href = Environment().loginUrl + '?redirect=' + window.location.href;
-};
-
-const bestemSprakFraParams = (): ISprak => {
-    const sprakParams = new URLSearchParams(window.location.search);
-    const sprak = sprakParams.get('sprak');
-
-    return Object.values(ISprak).includes(sprak) ? (sprak as ISprak) : ISprak.nb;
 };
 
 function* autentiserBruker(): SagaIterator {
@@ -62,9 +55,8 @@ function* forsteSidelastSaga(): SagaIterator {
     yield put(togglesHent());
     yield take([ToggelsTypeKeys.HENT_FEILET, ToggelsTypeKeys.HENT_OK]);
 
-    const sprak = bestemSprakFraParams();
-    yield put(teksterHent(sprak));
-    yield put(landHent(sprak));
+    yield put(teksterHent());
+    yield put(landHent());
     yield put(sokerHent());
 
     yield put(barnHent());
@@ -86,7 +78,7 @@ function* forsteSidelastSaga(): SagaIterator {
 function* startAppSaga(): SagaIterator {
     yield put(appEndreStatus(AppStatus.STARTER));
     const startSaga = yield fork(forsteSidelastSaga);
-    const { fortrolig_adresse, hentFeilet } = yield race({
+    const { fortrolig_adresse } = yield race({
         fortrolig_adresse: take([SokerTypeKeys.HENT_FORTROLIG_ADRESSE]),
         hentFeilet: take([
             TeksterTypeKeys.HENT_FEILET,

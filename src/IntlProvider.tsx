@@ -4,13 +4,13 @@ import { addLocaleData, IntlProvider as Provider } from 'react-intl';
 import * as nb from 'react-intl/locale-data/nb';
 import * as nn from 'react-intl/locale-data/nn';
 import { connect } from 'react-redux';
-import { ISprak } from './app/types';
 import { selectValgtSprak } from './app/selectors';
+import { ISprak } from './app/types';
 import { selectLand } from './land/selectors';
-import { ILand } from './land/types';
+import { ILandBundle } from './land/types';
 import { IRootState } from './rootReducer';
 import { selectTekster } from './tekster/selectors';
-import { ITekster } from './tekster/types';
+import { ITeksterBundle } from './tekster/types';
 
 addLocaleData(nb);
 addLocaleData(nn);
@@ -20,8 +20,8 @@ interface IOwnProps {
 }
 
 interface IMapStateToProps {
-    tekster: ITekster;
-    land: ILand;
+    tekster: ITeksterBundle;
+    land: ILandBundle;
     valgtSprak: ISprak;
 }
 
@@ -30,10 +30,16 @@ type Props = IOwnProps & IMapStateToProps;
 const IntlProvider: React.StatelessComponent<Props> = ({ children, land, tekster, valgtSprak }) => {
     moment.locale(valgtSprak);
     moment.tz(moment.tz.guess());
-    const teksterSamlet = { ...land, ...tekster };
+
+    const landPaSprak = new Map(Object.entries(land)).get(valgtSprak);
+    const teksterPaSprak = new Map(Object.entries(tekster)).get(valgtSprak);
 
     return (
-        <Provider messages={teksterSamlet} defaultLocale={ISprak.nb} locale={valgtSprak}>
+        <Provider
+            messages={{ ...landPaSprak, ...teksterPaSprak }}
+            defaultLocale={ISprak.nb}
+            locale={valgtSprak}
+        >
             {children}
         </Provider>
     );

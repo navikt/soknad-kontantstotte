@@ -1,6 +1,5 @@
 import { Action } from 'redux';
-import { ISprak } from '../app/types';
-import { ILand } from './types';
+import { ILandBundle } from './types';
 
 enum LandTypeKeys {
     HENT = 'LAND_HENT',
@@ -12,26 +11,24 @@ type LandActionTypes = ILandHent | ILandHentOK | ILandHentFeilet;
 
 interface ILandHent extends Action {
     type: LandTypeKeys.HENT;
-    valgtSprak: ISprak;
 }
 
 interface ILandHentOK extends Action {
     type: LandTypeKeys.HENT_OK;
-    land: ILand;
+    land: ILandBundle;
 }
 
 interface ILandHentFeilet extends Action {
     type: LandTypeKeys.HENT_FEILET;
 }
 
-function landHent(valgtSprak: ISprak): ILandHent {
+function landHent(): ILandHent {
     return {
         type: LandTypeKeys.HENT,
-        valgtSprak,
     };
 }
 
-function landHentOk(land: ILand): ILandHentOK {
+function landHentOk(land: ILandBundle): ILandHentOK {
     return {
         land,
         type: LandTypeKeys.HENT_OK,

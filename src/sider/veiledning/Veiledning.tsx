@@ -5,22 +5,19 @@ import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { selectHarForsoktNesteSteg } from '../../app/selectors';
+import { appVelgSprak } from '../../app/actions';
+import { selectHarForsoktNesteSteg, selectValgtSprak } from '../../app/selectors';
+import { ISprak } from '../../app/types';
 import Veilederikon from '../../component/Ikoner/Veilederikon';
 import Submitknapp from '../../component/Submitknapp/Submitknapp';
-import { landHent } from '../../land/actions';
 import { IRootState } from '../../rootReducer';
 import { selectSoker } from '../../soker/selectors';
 import { soknadValiderFelt } from '../../soknad/actions';
 import { selectSoknad } from '../../soknad/selectors';
 import { ISoknadState, Svar, ValideringsStatus } from '../../soknad/types';
-import { teksterHent } from '../../tekster/actions';
-import { selectValgtSprak } from '../../app/selectors';
-import { ISprak } from '../../app/types';
 import { isEnabled } from '../../toggles/selectors';
 import { IToggleName } from '../../toggles/types';
 import { Personopplysning } from './Personopplysning';
-import { appVelgSprak } from '../../app/actions';
 
 interface IMapStateToProps {
     fornavn: string;
@@ -151,8 +148,6 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         oppdaterSprak: (sprak: ISprak) => {
             dispatch(appVelgSprak(sprak));
-            dispatch(teksterHent(sprak));
-            dispatch(landHent(sprak));
         },
         settBekreftelse: (verdi: Svar) =>
             dispatch(soknadValiderFelt('veiledning', 'bekreftelse', verdi)),

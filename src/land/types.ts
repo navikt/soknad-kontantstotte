@@ -1,4 +1,4 @@
-interface ILandTekster {
+interface ILandBundle {
     [language: string]: ILand;
 }
 
@@ -6,4 +6,4 @@ interface ILand {
     [key: string]: string;
 }
 
-export { ILandTekster, ILand };
+export { ILandBundle };

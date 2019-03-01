@@ -1,13 +1,11 @@
 import { SagaIterator } from 'redux-saga';
-import { call, put, select, takeEvery } from 'redux-saga/effects';
-import { selectValgtSprak } from '../app/selectors';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import { landHentFeilet, landHentOk, LandTypeKeys } from './actions';
 import { fetchLand } from './api';
 
 function* fetchLandSaga(): SagaIterator {
     try {
-        const valgtSprak = yield select(selectValgtSprak);
-        const land = yield call(fetchLand, valgtSprak);
+        const land = yield call(fetchLand);
         yield put(landHentOk(land));
     } catch (err) {
         yield put(landHentFeilet());

@@ -7,8 +7,6 @@ import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import SoknadPanel from '../../component/SoknadPanel/SoknadPanel';
 import SideContainer from '../../component/StegSide/StegSide';
 import Veileder from '../../component/Veileder/Veileder';
-import { selectLand } from '../../land/selectors';
-import { ILand } from '../../land/types';
 import { IRootState } from '../../rootReducer';
 import { selectSoker } from '../../soker/selectors';
 import { ISoker } from '../../soker/types';
@@ -29,7 +27,6 @@ import UtenlandskKontantstotteOppsummering from './UtenlandskKontantstotteOppsum
 import { VeiledningOppsummering } from './VeiledningOppsummering';
 
 interface IMapStateToProps {
-    land: ILand;
     soker: ISoker;
     soknad: ISoknadState;
     harForsoktNesteSteg: boolean;
@@ -45,7 +42,6 @@ type OppsummeringSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIn
 const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
     harForsoktNesteSteg,
     intl,
-    land,
     settBekreftelse,
     soker,
     soknad,
@@ -125,7 +121,6 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
-        land: selectLand(state),
         soker: selectSoker(state),
         soknad: selectSoknad(state),
         visStatsborgerskap: isEnabled(state, IToggleName.vis_statsborgerskap),
