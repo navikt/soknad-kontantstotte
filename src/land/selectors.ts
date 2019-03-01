@@ -4,8 +4,4 @@ function selectLand(state: IRootState) {
     return state.land.land;
 }
 
-function selectValgtSprak(state: IRootState) {
-    return state.land.valgtSprak;
-}
-
-export { selectLand, selectValgtSprak };
+export { selectLand };

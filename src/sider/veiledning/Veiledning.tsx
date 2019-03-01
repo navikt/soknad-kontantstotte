@@ -15,11 +15,12 @@ import { soknadValiderFelt } from '../../soknad/actions';
 import { selectSoknad } from '../../soknad/selectors';
 import { ISoknadState, Svar, ValideringsStatus } from '../../soknad/types';
 import { teksterHent } from '../../tekster/actions';
-import { selectValgtSprak } from '../../tekster/selectors';
-import { ISprak } from '../../tekster/types';
+import { selectValgtSprak } from '../../app/selectors';
+import { ISprak } from '../../app/types';
 import { isEnabled } from '../../toggles/selectors';
 import { IToggleName } from '../../toggles/types';
 import { Personopplysning } from './Personopplysning';
+import { appVelgSprak } from '../../app/actions';
 
 interface IMapStateToProps {
     fornavn: string;
@@ -149,6 +150,7 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         oppdaterSprak: (sprak: ISprak) => {
+            dispatch(appVelgSprak(sprak));
             dispatch(teksterHent(sprak));
             dispatch(landHent(sprak));
         },

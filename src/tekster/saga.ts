@@ -2,7 +2,7 @@ import { SagaIterator } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { teksterHentFeilet, teksterHentOk, TeksterTypeKeys } from './actions';
 import { fetchTekster } from './api';
-import { selectValgtSprak } from './selectors';
+import { selectValgtSprak } from '../app/selectors';
 
 function* fetchTeksterSaga(): SagaIterator {
     try {

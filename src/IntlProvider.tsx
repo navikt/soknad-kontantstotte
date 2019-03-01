@@ -4,11 +4,13 @@ import { addLocaleData, IntlProvider as Provider } from 'react-intl';
 import * as nb from 'react-intl/locale-data/nb';
 import * as nn from 'react-intl/locale-data/nn';
 import { connect } from 'react-redux';
+import { ISprak } from './app/types';
+import { selectValgtSprak } from './app/selectors';
 import { selectLand } from './land/selectors';
 import { ILand } from './land/types';
 import { IRootState } from './rootReducer';
-import { selectTekster, selectValgtSprak } from './tekster/selectors';
-import { ISprak, ITekster } from './tekster/types';
+import { selectTekster } from './tekster/selectors';
+import { ITekster } from './tekster/types';
 
 addLocaleData(nb);
 addLocaleData(nn);

@@ -4,7 +4,7 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { appEndreStatus } from '../app/actions';
 import { AppStatus } from '../app/types';
 import { selectSoknad } from '../soknad/selectors';
-import { selectValgtSprak } from '../tekster/selectors';
+import { selectValgtSprak } from '../app/selectors';
 import { InnsendingTypeKeys, sendInnFeilet, sendInnOk } from './actions';
 import { sendInnSoknad } from './api';
 

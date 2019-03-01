@@ -1,16 +1,14 @@
 import { TeksterActionTypes, TeksterTypeKeys } from './actions';
-import { ISprak, ITekster } from './types';
+import { ITekster } from './types';
 
 interface ITeksterState {
     readonly henter: boolean;
     readonly tekster: ITekster;
-    readonly valgtSprak: ISprak;
 }
 
 const initialState: ITeksterState = {
     henter: false,
     tekster: {},
-    valgtSprak: ISprak.nb,
 };
 
 function teksterReducer(state = initialState, action: TeksterActionTypes) {

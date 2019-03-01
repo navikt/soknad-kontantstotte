@@ -20,12 +20,19 @@ import { landHent, LandTypeKeys } from '../land/actions';
 import { sokerHent, SokerTypeKeys } from '../soker/actions';
 import { ISteg, stegConfig } from '../stegConfig';
 import { teksterHent, TeksterTypeKeys } from '../tekster/actions';
-import { ISprak } from '../tekster/types';
 import { ToggelsTypeKeys, togglesHent } from '../toggles/actions';
-import { appEndreStatus, appPingOk, appSettSteg, AppTypeKeys, IAppGaaTilSteg } from './actions';
+import {
+    appEndreStatus,
+    appPingOk,
+    appSettSprak,
+    appSettSteg,
+    AppTypeKeys,
+    IAppGaaTilSteg,
+    IAppSettSprak,
+} from './actions';
 import { pingBackend } from './api';
-import { selectAppSteg } from './selectors';
-import { AppStatus, ILocationChangeAction } from './types';
+import { selectAppSteg, selectValgtSprak } from './selectors';
+import { AppStatus, ILocationChangeAction, ISprak } from './types';
 
 const redirectTilLogin = () => {
     window.location.href = Environment().loginUrl + '?redirect=' + window.location.href;
@@ -137,12 +144,17 @@ function* gaaTilStegSaga(action: IAppGaaTilSteg): SagaIterator {
     yield call(tilStegSaga, action.steg);
 }
 
+function* settSprakSaga(action: IAppSettSprak) {
+    yield put(appSettSprak(action.valgtSprak));
+}
+
 function* appSaga(): SagaIterator {
     yield takeLatest(AppTypeKeys.START_APP, startAppSaga);
     yield takeEvery(LOCATION_CHANGE, urlEndretSaga);
     yield takeEvery(AppTypeKeys.NESTE_STEG, nesteStegSaga);
     yield takeEvery(AppTypeKeys.FORRIGE_STEG, forrigeStegSaga);
     yield takeEvery(AppTypeKeys.GAA_TIL_STEG, gaaTilStegSaga);
+    yield takeEvery(AppTypeKeys.VELG_SPRAK, settSprakSaga);
 }
 
 export { appSaga };

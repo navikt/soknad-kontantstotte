@@ -1,5 +1,6 @@
+import { ISprak } from '../app/types';
 import { LandActionTypes, LandTypeKeys } from './actions';
-import { ILand, ISprak } from './types';
+import { ILand } from './types';
 
 interface ILandState {
     readonly henter: boolean;

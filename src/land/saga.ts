@@ -1,8 +1,8 @@
 import { SagaIterator } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { selectValgtSprak } from '../app/selectors';
 import { landHentFeilet, landHentOk, LandTypeKeys } from './actions';
 import { fetchLand } from './api';
-import { selectValgtSprak } from './selectors';
 
 function* fetchLandSaga(): SagaIterator {
     try {

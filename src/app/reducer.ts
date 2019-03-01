@@ -1,16 +1,18 @@
 import { AppActionTypes, AppTypeKeys } from './actions';
-import { AppStatus } from './types';
+import { AppStatus, ISprak } from './types';
 
 interface IAppState {
     harForsoktNesteSteg: boolean;
     status: AppStatus;
     steg: number;
+    valgtSprak: ISprak;
 }
 
 const initialState: IAppState = {
     harForsoktNesteSteg: false,
     status: AppStatus.IKKE_STARTET,
     steg: 0,
+    valgtSprak: ISprak.nb,
 };
 
 function appReducer(state: IAppState = initialState, action: AppActionTypes) {
@@ -30,6 +32,11 @@ function appReducer(state: IAppState = initialState, action: AppActionTypes) {
             return {
                 ...state,
                 harForsoktNesteSteg: action.harForsoktNesteSteg,
+            };
+        case AppTypeKeys.SETT_SPRAK:
+            return {
+                ...state,
+                valgtSprak: action.valgtSprak,
             };
         default:
             return state;

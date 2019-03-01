@@ -1,5 +1,6 @@
 import { Action } from 'redux';
-import { ISprak, ITekster } from './types';
+import { ITekster } from './types';
+import { ISprak } from '../app/types';
 
 enum TeksterTypeKeys {
     HENT = 'TEKSTER_HENT',

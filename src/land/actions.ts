@@ -1,5 +1,6 @@
 import { Action } from 'redux';
-import { ILand, ISprak } from './types';
+import { ISprak } from '../app/types';
+import { ILand } from './types';
 
 enum LandTypeKeys {
     HENT = 'LAND_HENT',

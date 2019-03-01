@@ -1,9 +1,9 @@
+interface ILandTekster {
+    [language: string]: ILand;
+}
+
 interface ILand {
     [key: string]: string;
 }
 
-enum ISprak {
-    nb = 'nb',
-    nn = 'nn',
-}
-export { ILand, ISprak };
+export { ILandTekster, ILand };
