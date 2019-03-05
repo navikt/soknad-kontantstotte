@@ -4,6 +4,7 @@ import { combineReducers } from 'redux';
 import { appReducer, IAppState } from './app/reducer';
 import { barnReducer, IBarnState } from './barn/reducer';
 import { IInnsendingState, innsendingReducer } from './innsending/reducer';
+import { ILandState, landReducer } from './land/reducer';
 import { ISokerState, sokerReducer } from './soker/reducer';
 import { soknadReducer } from './soknad/reducer';
 import { ISoknadState } from './soknad/types';
@@ -14,6 +15,7 @@ export interface IRootState {
     app: IAppState;
     barn: IBarnState;
     innsending: IInnsendingState;
+    land: ILandState;
     soker: ISokerState;
     router: RouterState;
     soknad: ISoknadState;
@@ -26,6 +28,7 @@ const rootReducer = (history: History) =>
         app: appReducer,
         barn: barnReducer,
         innsending: innsendingReducer,
+        land: landReducer,
         router: connectRouter(history),
         soker: sokerReducer,
         soknad: soknadReducer,

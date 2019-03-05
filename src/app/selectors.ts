@@ -12,4 +12,8 @@ function selectHarForsoktNesteSteg(state: IRootState) {
     return state.app.harForsoktNesteSteg;
 }
 
-export { selectAppStatus, selectAppSteg, selectHarForsoktNesteSteg };
+function selectValgtSprak(state: IRootState) {
+    return state.app.valgtSprak;
+}
+
+export { selectAppStatus, selectAppSteg, selectHarForsoktNesteSteg, selectValgtSprak };

@@ -1,16 +1,14 @@
 import { TeksterActionTypes, TeksterTypeKeys } from './actions';
-import { ISprak, ITekster } from './types';
+import { ITeksterBundle } from './types';
 
 interface ITeksterState {
     readonly henter: boolean;
-    readonly tekster: ITekster;
-    readonly valgtSprak: ISprak;
+    readonly tekster: ITeksterBundle;
 }
 
 const initialState: ITeksterState = {
     henter: false,
     tekster: {},
-    valgtSprak: ISprak.nb,
 };
 
 function teksterReducer(state = initialState, action: TeksterActionTypes) {
@@ -19,7 +17,6 @@ function teksterReducer(state = initialState, action: TeksterActionTypes) {
             return {
                 ...state,
                 henter: true,
-                valgtSprak: action.valgtSprak,
             };
         case TeksterTypeKeys.HENT_OK:
             return {

@@ -12,4 +12,9 @@ interface ILocationChangeAction {
     payload: RouterState;
 }
 
-export { AppStatus, ILocationChangeAction };
+enum ISprak {
+    nb = 'nb',
+    nn = 'nn',
+}
+
+export { AppStatus, ILocationChangeAction, ISprak };

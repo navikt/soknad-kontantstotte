@@ -16,25 +16,26 @@ import {
 } from 'redux-saga/effects';
 import { barnHent, BarnTypeKeys } from '../barn/actions';
 import { selectBarn } from '../barn/selectors';
+import { landHent, LandTypeKeys } from '../land/actions';
 import { sokerHent, SokerTypeKeys } from '../soker/actions';
 import { ISteg, stegConfig } from '../stegConfig';
 import { teksterHent, TeksterTypeKeys } from '../tekster/actions';
-import { ISprak } from '../tekster/types';
 import { ToggelsTypeKeys, togglesHent } from '../toggles/actions';
-import { appEndreStatus, appPingOk, appSettSteg, AppTypeKeys, IAppGaaTilSteg } from './actions';
+import {
+    appEndreStatus,
+    appPingOk,
+    appSettSprak,
+    appSettSteg,
+    AppTypeKeys,
+    IAppGaaTilSteg,
+    IAppSettSprak,
+} from './actions';
 import { pingBackend } from './api';
 import { selectAppSteg } from './selectors';
 import { AppStatus, ILocationChangeAction } from './types';
 
 const redirectTilLogin = () => {
     window.location.href = Environment().loginUrl + '?redirect=' + window.location.href;
-};
-
-const bestemSprakFraParams = (): ISprak => {
-    const sprakParams = new URLSearchParams(window.location.search);
-    const sprak = sprakParams.get('sprak');
-
-    return Object.values(ISprak).includes(sprak) ? (sprak as ISprak) : ISprak.nb;
 };
 
 function* autentiserBruker(): SagaIterator {
@@ -54,13 +55,14 @@ function* forsteSidelastSaga(): SagaIterator {
     yield put(togglesHent());
     yield take([ToggelsTypeKeys.HENT_FEILET, ToggelsTypeKeys.HENT_OK]);
 
-    const sprak = bestemSprakFraParams();
-    yield put(teksterHent(sprak));
+    yield put(teksterHent());
+    yield put(landHent());
     yield put(sokerHent());
 
     yield put(barnHent());
     yield all([
         take(TeksterTypeKeys.HENT_OK),
+        take(LandTypeKeys.HENT_OK),
         take(SokerTypeKeys.HENT_OK),
         take(BarnTypeKeys.HENT_OK),
     ]);
@@ -76,9 +78,13 @@ function* forsteSidelastSaga(): SagaIterator {
 function* startAppSaga(): SagaIterator {
     yield put(appEndreStatus(AppStatus.STARTER));
     const startSaga = yield fork(forsteSidelastSaga);
-    const { fortrolig_adresse, hentFeilet } = yield race({
+    const { fortrolig_adresse } = yield race({
         fortrolig_adresse: take([SokerTypeKeys.HENT_FORTROLIG_ADRESSE]),
-        hentFeilet: take([TeksterTypeKeys.HENT_FEILET, SokerTypeKeys.HENT_FEILET]),
+        hentFeilet: take([
+            TeksterTypeKeys.HENT_FEILET,
+            LandTypeKeys.HENT_FEILET,
+            SokerTypeKeys.HENT_FEILET,
+        ]),
     });
     yield cancel(startSaga);
     yield put(appEndreStatus(AppStatus.FEILSITUASJON));
@@ -130,12 +136,17 @@ function* gaaTilStegSaga(action: IAppGaaTilSteg): SagaIterator {
     yield call(tilStegSaga, action.steg);
 }
 
+function* settSprakSaga(action: IAppSettSprak) {
+    yield put(appSettSprak(action.valgtSprak));
+}
+
 function* appSaga(): SagaIterator {
     yield takeLatest(AppTypeKeys.START_APP, startAppSaga);
     yield takeEvery(LOCATION_CHANGE, urlEndretSaga);
     yield takeEvery(AppTypeKeys.NESTE_STEG, nesteStegSaga);
     yield takeEvery(AppTypeKeys.FORRIGE_STEG, forrigeStegSaga);
     yield takeEvery(AppTypeKeys.GAA_TIL_STEG, gaaTilStegSaga);
+    yield takeEvery(AppTypeKeys.VELG_SPRAK, settSprakSaga);
 }
 
 export { appSaga };

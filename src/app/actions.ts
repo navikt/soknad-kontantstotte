@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { AppStatus } from './types';
+import { AppStatus, ISprak } from './types';
 
 enum AppTypeKeys {
     ENDRE_STATUS = 'APP_ENDRE_STATUS',
@@ -10,6 +10,8 @@ enum AppTypeKeys {
     GAA_TIL_STEG = 'APP_GAA_TIL_STEG',
     SETT_HAR_FORSOKT_NESTE_STEG = 'APP_SETT_HAR_FORSOKT_NESTE_STEG',
     PING_OK = 'APP_PING_OK',
+    VELG_SPRAK = 'APP_VELG_SPRAK',
+    SETT_SPRAK = 'APP_SETT_SPRAK',
 }
 
 type AppActionTypes =
@@ -18,7 +20,9 @@ type AppActionTypes =
     | IAppNesteSteg
     | IAppForrigeSteg
     | IAppSettSteg
-    | IAppSettHarForsoktNesteSteg;
+    | IAppSettHarForsoktNesteSteg
+    | IAppSettSprak
+    | IAppVelgSprak;
 
 interface IAppEndreStatus extends Action {
     status: AppStatus;
@@ -54,6 +58,16 @@ interface IAppPingOk extends Action {
 interface IAppSettHarForsoktNesteSteg extends Action {
     type: AppTypeKeys.SETT_HAR_FORSOKT_NESTE_STEG;
     harForsoktNesteSteg: boolean;
+}
+
+interface IAppSettSprak extends Action {
+    valgtSprak: ISprak;
+    type: AppTypeKeys.SETT_SPRAK;
+}
+
+interface IAppVelgSprak extends Action {
+    valgtSprak: ISprak;
+    type: AppTypeKeys.VELG_SPRAK;
 }
 
 function appEndreStatus(status: AppStatus): IAppEndreStatus {
@@ -108,6 +122,20 @@ function appPingOk(): IAppPingOk {
     };
 }
 
+function appVelgSprak(valgtSprak: ISprak): IAppVelgSprak {
+    return {
+        type: AppTypeKeys.VELG_SPRAK,
+        valgtSprak,
+    };
+}
+
+function appSettSprak(valgtSprak: ISprak): IAppSettSprak {
+    return {
+        type: AppTypeKeys.SETT_SPRAK,
+        valgtSprak,
+    };
+}
+
 export {
     AppTypeKeys,
     AppActionTypes,
@@ -118,6 +146,9 @@ export {
     appGaaTilSteg,
     appSettSteg,
     appSettHarForsoktNesteSteg,
+    appSettSprak,
+    appVelgSprak,
     appPingOk,
     IAppGaaTilSteg,
+    IAppSettSprak,
 };
