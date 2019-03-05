@@ -12,14 +12,6 @@ const KravTilSokerOppsummering: React.StatelessComponent<{}> = () => {
             </Element>
 
             <Normaltekst className={'oppsummering__svar'}>
-                <FormattedMessage id={'startside.krav.norskStatsborger'} />
-            </Normaltekst>
-
-            <Normaltekst className={'oppsummering__svar'}>
-                <FormattedMessage id={'startside.krav.boddEllerJobbetINorgeSisteFemAar'} />
-            </Normaltekst>
-
-            <Normaltekst className={'oppsummering__svar'}>
                 <FormattedMessage id={'startside.krav.borSammenMedBarnet'} />
             </Normaltekst>
 

@@ -49,24 +49,8 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
             />
             <form>
                 <CheckboksPanelGruppe
-                    className={'soknad__inputPanelGruppe'}
                     legend={''}
                     checkboxes={[
-                        {
-                            checked: kravTilSoker.norskStatsborger.verdi === Svar.JA,
-                            label: intl.formatMessage({
-                                id: 'startside.krav.norskStatsborger',
-                            }),
-                            value: 'norskStatsborger',
-                        },
-                        {
-                            checked:
-                                kravTilSoker.boddEllerJobbetINorgeSisteFemAar.verdi === Svar.JA,
-                            label: intl.formatMessage({
-                                id: 'startside.krav.boddEllerJobbetINorgeSisteFemAar',
-                            }),
-                            value: 'boddEllerJobbetINorgeSisteFemAar',
-                        },
                         {
                             checked: kravTilSoker.borSammenMedBarnet.verdi === Svar.JA,
                             label: intl.formatMessage({
