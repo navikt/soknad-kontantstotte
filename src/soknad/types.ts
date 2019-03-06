@@ -107,8 +107,6 @@ interface IBarnehageplass extends ISteg {
 }
 
 interface IKravTilSoker extends ISteg {
-    readonly norskStatsborger: IFelt;
-    readonly boddEllerJobbetINorgeSisteFemAar: IFelt;
     readonly borSammenMedBarnet: IFelt;
     readonly barnIkkeHjemme: IFelt;
     readonly ikkeAvtaltDeltBosted: IFelt;

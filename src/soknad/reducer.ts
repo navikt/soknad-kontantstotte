@@ -70,10 +70,8 @@ const initialState: ISoknadState = {
     },
     kravTilSoker: {
         barnIkkeHjemme: standardSvarInitialFelt,
-        boddEllerJobbetINorgeSisteFemAar: standardSvarInitialFelt,
         borSammenMedBarnet: standardSvarInitialFelt,
         ikkeAvtaltDeltBosted: standardSvarInitialFelt,
-        norskStatsborger: standardSvarInitialFelt,
         skalBoMedBarnetINorgeNesteTolvMaaneder: standardSvarInitialFelt,
     },
     mineBarn: {

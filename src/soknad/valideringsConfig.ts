@@ -104,10 +104,8 @@ const valideringsConfig: IValideringsConfig = {
     },
     kravTilSoker: {
         barnIkkeHjemme: [harSvartJaMedFeilmelding],
-        boddEllerJobbetINorgeSisteFemAar: [harSvartJaMedFeilmelding],
         borSammenMedBarnet: [harSvartJaMedFeilmelding],
         ikkeAvtaltDeltBosted: [harSvartJaMedFeilmelding],
-        norskStatsborger: [harSvartJaMedFeilmelding],
         skalBoMedBarnetINorgeNesteTolvMaaneder: [harSvartJaMedFeilmelding],
     },
     mineBarn: {
