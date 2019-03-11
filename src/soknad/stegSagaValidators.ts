@@ -56,7 +56,7 @@ function* sjekkValideringForArbeidIUtlandet(
     return harFeil;
 }
 
-const gyldigeVerdier = (felt: IFelt): boolean => {
+const gyldigeVerdier = (felt: FeltTyper): boolean => {
     return (
         felt.valideringsStatus === ValideringsStatus.OK ||
         felt.valideringsStatus === ValideringsStatus.ADVARSEL
@@ -96,7 +96,8 @@ function* sjekkValideringForBarnehageplass(barnehageplass: IBarnehageplass) {
                 if (
                     gyldigeVerdier(barnehageplass.skalSlutteIBarnehageKommune) &&
                     gyldigeVerdier(barnehageplass.skalSlutteIBarnehageDato) &&
-                    gyldigeVerdier(barnehageplass.skalSlutteIBarnehageAntallTimer)
+                    gyldigeVerdier(barnehageplass.skalSlutteIBarnehageAntallTimer) &&
+                    gyldigeVerdier(barnehageplass.skalSlutteIBarnehageVedlegg)
                 ) {
                     return;
                 }
@@ -106,7 +107,8 @@ function* sjekkValideringForBarnehageplass(barnehageplass: IBarnehageplass) {
                 if (
                     gyldigeVerdier(barnehageplass.harSluttetIBarnehageKommune) &&
                     gyldigeVerdier(barnehageplass.harSluttetIBarnehageDato) &&
-                    gyldigeVerdier(barnehageplass.harSluttetIBarnehageAntallTimer)
+                    gyldigeVerdier(barnehageplass.harSluttetIBarnehageAntallTimer) &&
+                    gyldigeVerdier(barnehageplass.harSluttetIBarnehageVedlegg)
                 ) {
                     return;
                 }
