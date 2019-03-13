@@ -1,3 +1,4 @@
+import { keyCodes } from 'nav-frontend-js-utils';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -15,7 +16,16 @@ class VedleggKnapp extends React.Component<IVedleggKnappProps> {
         const { onChange, inputId } = this.props;
 
         return (
-            <label htmlFor={inputId} className={'knapp knapp--standard vedlegg__knapp'}>
+            <label
+                htmlFor={inputId}
+                className={'knapp knapp--standard vedlegg__knapp'}
+                tabIndex={0}
+                onKeyDown={evt => {
+                    if (evt.keyCode === keyCodes.space) {
+                        document.getElementById(inputId)!.click();
+                    }
+                }}
+            >
                 <FormattedMessage id={'app.vedlegg.lastopp'} />
                 <input
                     id={inputId}
