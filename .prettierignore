@@ -2,3 +2,4 @@
 *.less
 README.md
 docker-compose.yml
+app-config.yaml
