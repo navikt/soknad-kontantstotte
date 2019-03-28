@@ -15,15 +15,12 @@ import { selectSoker } from '../../soker/selectors';
 import { soknadValiderFelt } from '../../soknad/actions';
 import { selectSoknad } from '../../soknad/selectors';
 import { ISoknadState, Svar, ValideringsStatus } from '../../soknad/types';
-import { isEnabled } from '../../toggles/selectors';
-import { IToggleName } from '../../toggles/types';
 import { Personopplysning } from './Personopplysning';
 
 interface IMapStateToProps {
     fornavn: string;
     soknad: ISoknadState;
     harForsoktNesteSteg: boolean;
-    visSprakvalg: boolean;
     valgtSprak: ISprak;
 }
 
@@ -49,7 +46,6 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({
     oppdaterSprak,
     valgtSprak,
     settBekreftelse,
-    visSprakvalg,
     soknad,
     harForsoktNesteSteg,
 }) => {
@@ -61,23 +57,21 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({
 
     return (
         <div className={'veiledning'}>
-            {visSprakvalg && (
-                <Select
-                    className={'veiledning__sprakvalg'}
-                    label=""
-                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                        oppdaterSprak(sprakMap(e.target.value))
-                    }
-                    value={valgtSprak}
-                >
-                    <option value="nb" key={ISprak.nb}>
-                        Bokmål
-                    </option>
-                    <option value="nn" key={ISprak.nn}>
-                        Nynorsk
-                    </option>
-                </Select>
-            )}
+            <Select
+                className={'veiledning__sprakvalg'}
+                label=""
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                    oppdaterSprak(sprakMap(e.target.value))
+                }
+                value={valgtSprak}
+            >
+                <option value="nb" key={ISprak.nb}>
+                    Bokmål
+                </option>
+                <option value="nn" key={ISprak.nn}>
+                    Nynorsk
+                </option>
+            </Select>
             <div className={'veiledning__veileder-container'}>
                 <Veileder
                     posisjon={'topp'}
@@ -140,7 +134,6 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         soknad: selectSoknad(state),
         valgtSprak: selectValgtSprak(state),
-        visSprakvalg: isEnabled(state, IToggleName.vis_sprakvalg),
     };
 };
 
