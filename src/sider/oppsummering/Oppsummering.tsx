@@ -30,7 +30,6 @@ interface IMapStateToProps {
     soker: ISoker;
     soknad: ISoknadState;
     harForsoktNesteSteg: boolean;
-    visStatsborgerskap: boolean;
     brukVedlegg: boolean;
 }
 
@@ -46,7 +45,6 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
     settBekreftelse,
     soker,
     soknad,
-    visStatsborgerskap,
     brukVedlegg,
 }) => {
     const brukFlertall = soknad.mineBarn.erFlerling.verdi === 'JA';
@@ -71,7 +69,6 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
                         navn: soker.fulltnavn,
                         statsborgerskap: soker.statsborgerskap,
                     }}
-                    visStatsborgerskap={visStatsborgerskap}
                 />
                 <VeiledningOppsummering />
                 <KravTilSokerOppsummering />
@@ -127,7 +124,6 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         soker: selectSoker(state),
         soknad: selectSoknad(state),
-        visStatsborgerskap: isEnabled(state, IToggleName.vis_statsborgerskap),
     };
 };
 

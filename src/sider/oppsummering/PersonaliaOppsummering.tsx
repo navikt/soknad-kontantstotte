@@ -9,15 +9,11 @@ interface IMapStateToProps {
         navn: string;
         statsborgerskap: string;
     };
-    visStatsborgerskap: boolean;
 }
 
 type PersonaliaOgBarnProps = IMapStateToProps;
 
-const PersonaliaOppsummering: React.StatelessComponent<PersonaliaOgBarnProps> = ({
-    soker,
-    visStatsborgerskap,
-}) => {
+const PersonaliaOppsummering: React.StatelessComponent<PersonaliaOgBarnProps> = ({ soker }) => {
     return (
         <OppsummeringSteg>
             <Element>
@@ -28,12 +24,10 @@ const PersonaliaOppsummering: React.StatelessComponent<PersonaliaOgBarnProps> = 
                 <FormattedMessage id="oppsummering.fodselsnummer.label" />
                 {soker.fodselsnummer}
             </Normaltekst>
-            {visStatsborgerskap && (
-                <Normaltekst>
-                    <FormattedMessage id="oppsummering.statsborgerskap.label" />
-                    <FormattedMessage id={soker.statsborgerskap} />
-                </Normaltekst>
-            )}
+            <Normaltekst>
+                <FormattedMessage id="oppsummering.statsborgerskap.label" />
+                <FormattedMessage id={soker.statsborgerskap} />
+            </Normaltekst>
         </OppsummeringSteg>
     );
 };
