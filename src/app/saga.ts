@@ -149,4 +149,4 @@ function* appSaga(): SagaIterator {
     yield takeEvery(AppTypeKeys.VELG_SPRAK, settSprakSaga);
 }
 
-export { appSaga };
+export { appSaga, forsteSidelastSaga, autentiserBruker };

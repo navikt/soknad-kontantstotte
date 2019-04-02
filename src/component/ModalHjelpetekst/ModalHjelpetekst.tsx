@@ -3,12 +3,6 @@ import * as React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
 import Anchor from './Anchor';
 
-if (document.getElementById('pagewrapper')) {
-    Modal.setAppElement('#pagewrapper');
-} else {
-    Modal.setAppElement('#app');
-}
-
 interface IModalHjelpetekstState {
     isOpen: boolean;
     hover: boolean;
