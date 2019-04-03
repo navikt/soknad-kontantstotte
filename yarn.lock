@@ -287,17 +287,17 @@
     "@types/istanbul-lib-coverage" "^2.0.0"
     "@types/yargs" "^12.0.9"
 
-"@redux-saga/core@^1.0.1":
-  version "1.0.1"
-  resolved "https://repo.adeo.no/repository/npm-public/@redux-saga/core/-/core-1.0.1.tgz#d75e6435316c3503a4630334b4e1d027858171c3"
-  integrity sha512-e/rvF5jA/2BBLHwQWIwRVSbD8ylQAUXp0zaCUJrfDQmsKGY2VJbcUdSgkM4rxRss9d4U/c2Oa0D9o5geDCup0w==
+"@redux-saga/core@^1.0.2":
+  version "1.0.2"
+  resolved "https://repo.adeo.no/repository/npm-public/@redux-saga/core/-/core-1.0.2.tgz#4336a5bb4253e5ca69681c25a863fbbc03ea6d88"
+  integrity sha512-AsJYcpuYfM1cmxJvfhXs9HAFSZVEG17TMsLPlXH7+Hq5a5ZP4GqcbtijEmS2AC7NR5lLJHy8csxpqz22PeW5dw==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@redux-saga/deferred" "^1.0.1"
     "@redux-saga/delay-p" "^1.0.1"
-    "@redux-saga/is" "^1.0.1"
+    "@redux-saga/is" "^1.0.2"
     "@redux-saga/symbols" "^1.0.1"
-    "@redux-saga/types" "^1.0.0"
+    "@redux-saga/types" "^1.0.2"
     redux ">=0.10 <5"
     typescript-tuple "^2.1.0"
 
@@ -313,13 +313,13 @@
   dependencies:
     "@redux-saga/symbols" "^1.0.1"
 
-"@redux-saga/is@^1.0.1":
-  version "1.0.1"
-  resolved "https://repo.adeo.no/repository/npm-public/@redux-saga/is/-/is-1.0.1.tgz#ad57536e45a46559704423a64032462797a0d014"
-  integrity sha512-hOm7MyvGToJX6aeYkKmoL88a/7bzD8PXP1yPfELEgrKeiN5oBvMTbZ0LNU3boM3HJcYuiyjZED9qw12YpmXGAA==
+"@redux-saga/is@^1.0.2":
+  version "1.0.2"
+  resolved "https://repo.adeo.no/repository/npm-public/@redux-saga/is/-/is-1.0.2.tgz#7f4be014c97061898d7efb11d6c9de31e943ed38"
+  integrity sha512-WnaUOwYvPK2waWjzebT4uhL8zY76XNkzzpJ2EQJe8bN1tByvAjvT7MuJZTSshOhdHL5PsRO0MsH224XIXBJidQ==
   dependencies:
     "@redux-saga/symbols" "^1.0.1"
-    "@redux-saga/types" "^1.0.0"
+    "@redux-saga/types" "^1.0.2"
 
 "@redux-saga/symbols@^1.0.1":
   version "1.0.1"
@@ -333,11 +333,6 @@
   dependencies:
     "@redux-saga/symbols" "^1.0.1"
     "@redux-saga/types" "^1.0.2"
-
-"@redux-saga/types@^1.0.0":
-  version "1.0.0"
-  resolved "https://repo.adeo.no/repository/npm-public/@redux-saga/types/-/types-1.0.0.tgz#9342b7eb52ed3c903e122841407d4984b7338339"
-  integrity sha512-9I7ejD0kASU3H8gD6Wv8Y3F9VabNdvjE8apkGfSphCAjt46snJKjt79CnHdxo1xkTE0qMEZzmYmZ8hnIYDydhw==
 
 "@redux-saga/types@^1.0.2":
   version "1.0.2"
@@ -3083,11 +3078,6 @@ har-validator@~5.1.0:
     ajv "^6.5.5"
     har-schema "^2.0.0"
 
-harmony-reflect@^1.4.6:
-  version "1.6.1"
-  resolved "https://repo.adeo.no/repository/npm-public/harmony-reflect/-/harmony-reflect-1.6.1.tgz#c108d4f2bb451efef7a37861fdbdae72c9bdefa9"
-  integrity sha512-WJTeyp0JzGtHcuMsi7rw2VwtkvLa+JyfEKJCFyfcS0+CDkjQ5lHPu7zEhFZP+PDSRrEgXa5Ah0l1MbgbE41XjA==
-
 has-ansi@^2.0.0:
   version "2.0.0"
   resolved "https://repo.adeo.no/repository/npm-public/has-ansi/-/has-ansi-2.0.0.tgz#34f5049ce1ecdf2b0649af3ef24e45ed35416d91"
@@ -3349,13 +3339,6 @@ icss-utils@^4.0.0:
   integrity sha512-bA/xGiwWM17qjllIs9X/y0EjsB7e0AV08F3OL8UPsoNkNRibIuu8f1eKTnQ8QO1DteKKTxTUAn+IEWUToIwGOA==
   dependencies:
     postcss "^7.0.5"
-
-identity-obj-proxy@3.0.0:
-  version "3.0.0"
-  resolved "https://repo.adeo.no/repository/npm-public/identity-obj-proxy/-/identity-obj-proxy-3.0.0.tgz#94d2bda96084453ef36fbc5aaec37e0f79f1fc14"
-  integrity sha1-lNK9qWCERT7zb7xarsN+D3nx/BQ=
-  dependencies:
-    harmony-reflect "^1.4.6"
 
 ieee754@^1.1.4:
   version "1.1.12"
@@ -3933,13 +3916,6 @@ jest-config@^24.6.0:
     micromatch "^3.1.10"
     pretty-format "^24.6.0"
     realpath-native "^1.1.0"
-
-jest-css-modules@2.0.0:
-  version "2.0.0"
-  resolved "https://repo.adeo.no/repository/npm-public/jest-css-modules/-/jest-css-modules-2.0.0.tgz#d96b91026e292e1b5c6e7def9860de7fc734975d"
-  integrity sha512-/QRMT6rJEqOnqpQao3+DZbsCi4DRi6hNp3uSZB7OiFD/+h0qdkoRwNk15sPj9DVXqehuDEprLcNS8i6eTAOj2w==
-  dependencies:
-    identity-obj-proxy "3.0.0"
 
 jest-diff@^24.6.0:
   version "24.6.0"
@@ -6454,12 +6430,12 @@ redux-logger@3.0.6:
   dependencies:
     deep-diff "^0.3.5"
 
-redux-saga@1.0.1:
-  version "1.0.1"
-  resolved "https://repo.adeo.no/repository/npm-public/redux-saga/-/redux-saga-1.0.1.tgz#5f5c6803882bc5c7c8dd558562e8392ef15e3ffe"
-  integrity sha512-XAp0OliRaoBCk/qynMfvXnTtC1WXrEpSqMwPKtOZHXVbQFekdcei/Eln/w0L7m3NcNxYQSlWwdUoffWzB1oAAQ==
+redux-saga@1.0.2:
+  version "1.0.2"
+  resolved "https://repo.adeo.no/repository/npm-public/redux-saga/-/redux-saga-1.0.2.tgz#0599703f975438f1b2f9d2b9a965ec58f0fdfcd7"
+  integrity sha512-dHV256by3eF2AnBPx1l3HqazQFkErZ82HDXgh4jSRpT72OrX31wyg8DA1q8+0HvENRfJAyhT/4qT5yH/vVqFfw==
   dependencies:
-    "@redux-saga/core" "^1.0.1"
+    "@redux-saga/core" "^1.0.2"
 
 redux@4.0.1, "redux@>=0.10 <5", redux@^4.0.0:
   version "4.0.1"
