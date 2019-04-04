@@ -1,6 +1,6 @@
 import { cloneableGenerator, SagaIteratorClone } from '@redux-saga/testing-utils';
 import { push } from 'connected-react-router';
-import { all, fork, put, select, take } from 'redux-saga/effects';
+import { all, cancel, fork, put, race, select, take } from 'redux-saga/effects';
 import { barnHent, BarnTypeKeys } from '../barn/actions';
 import { selectBarn } from '../barn/selectors';
 import { IBarn } from '../barn/types';
@@ -9,7 +9,7 @@ import { sokerHent, SokerTypeKeys } from '../soker/actions';
 import { teksterHent, TeksterTypeKeys } from '../tekster/actions';
 import { ToggelsTypeKeys, togglesHent } from '../toggles/actions';
 import { appEndreStatus, AppTypeKeys } from './actions';
-import { autentiserBruker, forsteSidelastSaga } from './saga';
+import { autentiserBruker, forsteSidelastSaga, startAppSaga } from './saga';
 import { AppStatus } from './types';
 
 describe('app - saga', () => {
@@ -96,6 +96,70 @@ describe('app - saga', () => {
 
             test('går til /ingen-barn siden', () => {
                 expect(clone.next().value).toEqual(put(push('/ingen-barn')));
+            });
+        });
+    });
+
+    describe('startAppSaga', () => {
+        let saga: SagaIteratorClone;
+
+        beforeAll(() => {
+            saga = cloneableGenerator(startAppSaga)();
+        });
+
+        test('endrer status til STARTER', () => {
+            expect(saga.next().value).toEqual(put(appEndreStatus(AppStatus.STARTER)));
+        });
+
+        test('starter forsteSidelastSaga', () => {
+            expect(saga.next().value).toEqual(fork(forsteSidelastSaga));
+        });
+
+        test('venter på at et av kallene fra forsteSidelastSaga skal feile', () => {
+            expect(saga.next().value).toEqual(
+                race({
+                    fortrolig_adresse: take([SokerTypeKeys.HENT_FORTROLIG_ADRESSE]),
+                    hentFeilet: take([
+                        TeksterTypeKeys.HENT_FEILET,
+                        LandTypeKeys.HENT_FEILET,
+                        SokerTypeKeys.HENT_FEILET,
+                        BarnTypeKeys.HENT_FEILET,
+                    ]),
+                })
+            );
+        });
+
+        describe('med fortroligAdresse', () => {
+            let clone: SagaIteratorClone;
+
+            beforeAll(() => {
+                clone = saga.clone();
+            });
+
+            test('avbryt forsteSidelastSaga og endre app status', () => {
+                expect(clone.next({ fortrolig_adresse: true }).value).toEqual(cancel());
+                expect(clone.next().value).toEqual(put(appEndreStatus(AppStatus.FEILSITUASJON)));
+            });
+
+            test('sender bruker til fortrolig-adresse siden', () => {
+                expect(clone.next().value).toEqual(put(push('/fortrolig-adresse')));
+            });
+        });
+
+        describe('uten fortroligAdresse', () => {
+            let clone: SagaIteratorClone;
+
+            beforeAll(() => {
+                clone = saga.clone();
+            });
+
+            test('avbryt forsteSidelastSaga', () => {
+                expect(clone.next({}).value).toEqual(cancel());
+                expect(clone.next().value).toEqual(put(appEndreStatus(AppStatus.FEILSITUASJON)));
+            });
+
+            test('sender bruker til fortrolig-adresse siden', () => {
+                expect(clone.next().value).toEqual(put(push('/feilside')));
             });
         });
     });
