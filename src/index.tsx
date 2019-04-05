@@ -1,4 +1,5 @@
 import { ConnectedRouter } from 'connected-react-router';
+import Modal from 'nav-frontend-modal';
 import * as React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
@@ -9,6 +10,12 @@ import { history, store } from './createStore';
 import IntlProvider from './IntlProvider';
 
 import './index.less';
+
+if (document.getElementById('pagewrapper')) {
+    Modal.setAppElement('#pagewrapper');
+} else {
+    Modal.setAppElement('#app');
+}
 
 const rootElement = document.getElementById('app');
 

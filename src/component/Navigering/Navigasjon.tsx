@@ -12,12 +12,6 @@ interface INavigasjonState {
     isOpen: boolean;
 }
 
-if (document.getElementById('pagewrapper')) {
-    Modal.setAppElement('#pagewrapper');
-} else {
-    Modal.setAppElement('#app');
-}
-
 /* tslint:disable */
 interface INavigasjonsProps {}
 /* tslint:enable */

@@ -64,6 +64,9 @@ function build_frontend {
     build_command yarn build
 }
 
+function unit_test {
+    build_command yarn test:unit
+}
 
 function ci_test {
     ./ci-tests/scripts.sh test ${v}
@@ -83,8 +86,8 @@ function publish_container() {
     docker push ${TAG}
 }
 
-
 install_packages
+unit_test
 build_frontend
 ci_test
 create_version_file

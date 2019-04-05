@@ -84,6 +84,7 @@ function* startAppSaga(): SagaIterator {
             TeksterTypeKeys.HENT_FEILET,
             LandTypeKeys.HENT_FEILET,
             SokerTypeKeys.HENT_FEILET,
+            BarnTypeKeys.HENT_FEILET,
         ]),
     });
     yield cancel(startSaga);
@@ -149,4 +150,4 @@ function* appSaga(): SagaIterator {
     yield takeEvery(AppTypeKeys.VELG_SPRAK, settSprakSaga);
 }
 
-export { appSaga };
+export { appSaga, forsteSidelastSaga, autentiserBruker, startAppSaga };
