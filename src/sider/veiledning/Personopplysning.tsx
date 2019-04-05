@@ -3,12 +3,6 @@ import Modal from 'nav-frontend-modal';
 import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 
-if (document.getElementById('pagewrapper')) {
-    Modal.setAppElement('#pagewrapper');
-} else {
-    Modal.setAppElement('#app');
-}
-
 interface IPersonopplysningModalProps {
     className: string;
 }

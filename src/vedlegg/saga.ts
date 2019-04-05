@@ -139,4 +139,4 @@ function* vedleggSaga(): SagaIterator {
     yield takeEvery(VedleggTypeKeys.LAST_OPP, lastOppVedleggSaga);
 }
 
-export { vedleggSaga };
+export { vedleggSaga, lastOppVedleggSaga, lastOppEnkeltVedleggSaga, Status };
