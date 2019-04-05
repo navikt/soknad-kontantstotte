@@ -1,7 +1,8 @@
 import { SagaIterator } from 'redux-saga';
 import { all, call, put, select, takeEvery } from 'redux-saga/effects';
-import { appNesteSteg, appSettHarForsoktNesteSteg } from '../app/actions';
+import { appEndreStatus, appNesteSteg, appSettHarForsoktNesteSteg } from '../app/actions';
 import { selectAppSteg } from '../app/selectors';
+import { AppStatus } from '../app/types';
 import { sendInn } from '../innsending/actions';
 import { ISteg, stegConfig } from '../stegConfig';
 import { isEnabled } from '../toggles/selectors';
@@ -225,6 +226,7 @@ function* nesteStegSaga() {
     if (!harFeil) {
         if (tilSide.key === stegConfig.oppsummering.key) {
             yield put(sendInn());
+            yield put(appEndreStatus(AppStatus.SENDT_INN));
         } else {
             yield put(appNesteSteg());
         }

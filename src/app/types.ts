@@ -5,6 +5,7 @@ enum AppStatus {
     STARTER = 'STARTER',
     KLAR = 'KLAR',
     FEILSITUASJON = 'FEILSITUASJON',
+    SENDT_INN = 'SENDT_INN',
 }
 
 interface ILocationChangeAction {
