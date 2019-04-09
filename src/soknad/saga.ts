@@ -5,8 +5,6 @@ import { selectAppSteg } from '../app/selectors';
 import { AppStatus } from '../app/types';
 import { sendInn } from '../innsending/actions';
 import { ISteg, stegConfig } from '../stegConfig';
-import { isEnabled } from '../toggles/selectors';
-import { IToggleName } from '../toggles/types';
 import {
     ISoknadValiderFelt,
     ISoknadValiderSteg,
@@ -188,12 +186,7 @@ function* nesteStegSaga() {
             );
             break;
         case 'barnehageplass':
-            const brukVedlegg = yield select(isEnabled, IToggleName.bruk_vedlegg);
-            harFeil = yield call(
-                sjekkValideringForBarnehageplass,
-                soknadState.barnehageplass,
-                brukVedlegg
-            );
+            harFeil = yield call(sjekkValideringForBarnehageplass, soknadState.barnehageplass);
             break;
         case 'familieforhold':
             harFeil = yield call(sjekkValideringForFamilieforhold, soknadState.familieforhold);
