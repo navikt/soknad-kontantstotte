@@ -12,13 +12,11 @@ import { VedleggSvar } from './VedleggSvar';
 interface IBarnehageplassOppsummeringProps {
     barnehageplass: IBarnehageplass;
     brukFlertall: boolean;
-    brukVedlegg: boolean;
 }
 
 const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsummeringProps> = ({
     barnehageplass,
     brukFlertall,
-    brukVedlegg,
 }) => {
     let barnBarnehageplassStatusSvar = 'Ubesvart';
 
@@ -105,16 +103,15 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                         }
                         svar={barnehageplass.harSluttetIBarnehageKommune.verdi}
                     />
-                    {brukVedlegg && (
-                        <VedleggSvar
-                            sporsmal={
-                                <FormattedMessage
-                                    id={'barnehageplass.skalSlutteIBarnehage.vedlegg.sporsmal'}
-                                />
-                            }
-                            vedlegg={barnehageplass.harSluttetIBarnehageVedlegg.verdi}
-                        />
-                    )}
+
+                    <VedleggSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.skalSlutteIBarnehage.vedlegg.sporsmal'}
+                            />
+                        }
+                        vedlegg={barnehageplass.harSluttetIBarnehageVedlegg.verdi}
+                    />
                 </>
             )}
 
@@ -153,16 +150,15 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                         }
                         svar={barnehageplass.skalSlutteIBarnehageKommune.verdi}
                     />
-                    {brukVedlegg && (
-                        <VedleggSvar
-                            sporsmal={
-                                <FormattedMessage
-                                    id={'barnehageplass.skalSlutteIBarnehage.vedlegg.sporsmal'}
-                                />
-                            }
-                            vedlegg={barnehageplass.skalSlutteIBarnehageVedlegg.verdi}
-                        />
-                    )}
+
+                    <VedleggSvar
+                        sporsmal={
+                            <FormattedMessage
+                                id={'barnehageplass.skalSlutteIBarnehage.vedlegg.sporsmal'}
+                            />
+                        }
+                        vedlegg={barnehageplass.skalSlutteIBarnehageVedlegg.verdi}
+                    />
                 </>
             )}
             {barnehageplass.barnBarnehageplassStatus.verdi ===

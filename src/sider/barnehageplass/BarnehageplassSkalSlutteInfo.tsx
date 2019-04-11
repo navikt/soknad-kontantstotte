@@ -8,8 +8,6 @@ import { Vedlegg } from '../../component/Vedlegg';
 import { IRootState } from '../../rootReducer';
 import { selectBarnehageplass } from '../../soknad/selectors';
 import { BarnehageplassVerdier, Feltnavn, IFelt, IVedleggFelt } from '../../soknad/types';
-import { isEnabled } from '../../toggles/selectors';
-import { IToggleName } from '../../toggles/types';
 
 interface IBarnehageplassSkalSlutteInfo {
     intl: InjectedIntl;
@@ -26,7 +24,6 @@ interface IMapStateToProps {
     skalSlutteIBarnehageDato: IFelt;
     skalSlutteIBarnehageKommune: IFelt;
     skalSlutteIBarnehageVedlegg: IVedleggFelt;
-    brukVedlegg: boolean;
 }
 
 type BarnehageplassSkalSlutteInfoProps = IBarnehageplassSkalSlutteInfo & IMapStateToProps;
@@ -41,7 +38,6 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
     skalSlutteIBarnehageKommune,
     skalSlutteIBarnehageVedlegg,
     harForsoktNesteSteg,
-    brukVedlegg,
     lastOppVedlegg,
     slettVedlegg,
 }) => {
@@ -102,34 +98,32 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
                     feil={feltMedFeil.skalSlutteIBarnehageKommune}
                     maxLength={50}
                 />
-                {brukVedlegg && (
-                    <Vedlegg
-                        sporsmal={intl.formatMessage({
-                            id: 'barnehageplass.skalSlutteIBarnehage.vedlegg.sporsmal',
-                        })}
-                        label={intl.formatMessage({
-                            id: 'barnehageplass.skalSlutteIBarnehage.vedlegg.label',
-                        })}
-                        className={'barnehage__vedlegg'}
-                        harForsoktNesteSteg={harForsoktNesteSteg}
-                        feil={{
-                            meldingsNokkel: skalSlutteIBarnehageVedlegg.feilmeldingsNokkel,
-                            status: skalSlutteIBarnehageVedlegg.valideringsStatus,
-                        }}
-                        vedlegg={skalSlutteIBarnehageVedlegg.verdi}
-                        onChange={evt => {
-                            if (evt.target.files) {
-                                lastOppVedlegg(
-                                    'skalSlutteIBarnehageVedlegg',
-                                    Array.from(evt.target.files)
-                                );
-                            }
-                        }}
-                        onDelete={(filreferanse: string) =>
-                            slettVedlegg('skalSlutteIBarnehageVedlegg', filreferanse)
+                <Vedlegg
+                    sporsmal={intl.formatMessage({
+                        id: 'barnehageplass.skalSlutteIBarnehage.vedlegg.sporsmal',
+                    })}
+                    label={intl.formatMessage({
+                        id: 'barnehageplass.skalSlutteIBarnehage.vedlegg.label',
+                    })}
+                    className={'barnehage__vedlegg'}
+                    harForsoktNesteSteg={harForsoktNesteSteg}
+                    feil={{
+                        meldingsNokkel: skalSlutteIBarnehageVedlegg.feilmeldingsNokkel,
+                        status: skalSlutteIBarnehageVedlegg.valideringsStatus,
+                    }}
+                    vedlegg={skalSlutteIBarnehageVedlegg.verdi}
+                    onChange={evt => {
+                        if (evt.target.files) {
+                            lastOppVedlegg(
+                                'skalSlutteIBarnehageVedlegg',
+                                Array.from(evt.target.files)
+                            );
                         }
-                    />
-                )}
+                    }}
+                    onDelete={(filreferanse: string) =>
+                        slettVedlegg('skalSlutteIBarnehageVedlegg', filreferanse)
+                    }
+                />
             </div>
         </SkjemaGruppe>
     );
@@ -138,7 +132,6 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     const barnehageplass = selectBarnehageplass(state);
     return {
-        brukVedlegg: isEnabled(state, IToggleName.bruk_vedlegg),
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         skalSlutteIBarnehageAntallTimer: barnehageplass.skalSlutteIBarnehageAntallTimer,
         skalSlutteIBarnehageDato: barnehageplass.skalSlutteIBarnehageDato,

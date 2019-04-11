@@ -63,7 +63,7 @@ const gyldigeVerdier = (felt: FeltTyper): boolean => {
     );
 };
 
-function* sjekkValideringForBarnehageplass(barnehageplass: IBarnehageplass, brukVedlegg: boolean) {
+function* sjekkValideringForBarnehageplass(barnehageplass: IBarnehageplass) {
     const barnehageplassStatus: BarnehageplassVerdier = barnehageplass.barnBarnehageplassStatus
         .verdi as BarnehageplassVerdier;
 
@@ -97,7 +97,7 @@ function* sjekkValideringForBarnehageplass(barnehageplass: IBarnehageplass, bruk
                     gyldigeVerdier(barnehageplass.skalSlutteIBarnehageKommune) &&
                     gyldigeVerdier(barnehageplass.skalSlutteIBarnehageDato) &&
                     gyldigeVerdier(barnehageplass.skalSlutteIBarnehageAntallTimer) &&
-                    (!brukVedlegg || gyldigeVerdier(barnehageplass.skalSlutteIBarnehageVedlegg))
+                    gyldigeVerdier(barnehageplass.skalSlutteIBarnehageVedlegg)
                 ) {
                     return;
                 }
@@ -108,7 +108,7 @@ function* sjekkValideringForBarnehageplass(barnehageplass: IBarnehageplass, bruk
                     gyldigeVerdier(barnehageplass.harSluttetIBarnehageKommune) &&
                     gyldigeVerdier(barnehageplass.harSluttetIBarnehageDato) &&
                     gyldigeVerdier(barnehageplass.harSluttetIBarnehageAntallTimer) &&
-                    (!brukVedlegg || gyldigeVerdier(barnehageplass.harSluttetIBarnehageVedlegg))
+                    gyldigeVerdier(barnehageplass.harSluttetIBarnehageVedlegg)
                 ) {
                     return;
                 }
