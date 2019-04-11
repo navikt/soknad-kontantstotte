@@ -174,7 +174,7 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
                 </form>
 
                 {valgtBarn.erFlerling.verdi === Svar.JA && (
-                    <AlertStripe className="mine-barn__advarsel" type="info">
+                    <AlertStripe className="mine-barn__advarsel" type="advarsel">
                         <FormattedHTMLMessage id={'advarsel.flerebarn.medlink'} />
                     </AlertStripe>
                 )}
