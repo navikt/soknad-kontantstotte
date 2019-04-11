@@ -4,7 +4,6 @@ interface IToggles {
 
 enum IToggleName {
     legg_til_barn = 'kontantstotte.leggtilbarn',
-    bruk_vedlegg = 'kontantstotte.bruk.vedlegg',
 }
 
 const allTogglesOff = (): IToggles => {
