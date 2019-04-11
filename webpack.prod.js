@@ -1,12 +1,13 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TeserPlugin = require('terser-webpack-plugin');
 
 const config = merge.strategy({
     'entry.soknad-kontantstotte': 'prepend',
     'module.rules': 'append',
+    optimization: 'append',
 })(common, {
     mode: 'production',
     entry: {
@@ -39,15 +40,19 @@ const config = merge.strategy({
             },
         ],
     },
+    optimization: {
+        minimizer: [
+            new TeserPlugin({
+                sourceMap: true,
+            }),
+        ],
+    },
     plugins: [
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production'),
         }),
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
-        new UglifyJSPlugin({
-            sourceMap: true,
-        }),
         new MiniCssExtractPlugin({
             filename: 'soknad-kontantstotte.css',
             allChunks: true,

@@ -3,8 +3,8 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { selectAppStatus, selectAppSteg } from '../../app/selectors';
-import { AppStatus } from '../../app/types';
+import { selectAppStatus, selectAppSteg, selectValgtSprak } from '../../app/selectors';
+import { AppStatus, ISprak } from '../../app/types';
 import { selectSenderInn } from '../../innsending/selectors';
 import { IRootState } from '../../rootReducer';
 import { soknadNesteSteg } from '../../soknad/actions';
@@ -18,6 +18,7 @@ interface IMapStateToProps {
     senderinn: boolean;
     status: AppStatus;
     stegPosisjon: number;
+    valgtSprak: ISprak;
 }
 
 interface IMapDispatchToProps {
@@ -57,6 +58,7 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
         senderinn: selectSenderInn(state),
         status: selectAppStatus(state),
         stegPosisjon: selectAppSteg(state),
+        valgtSprak: selectValgtSprak(state),
     };
 };
 
