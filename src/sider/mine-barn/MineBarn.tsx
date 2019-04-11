@@ -1,5 +1,4 @@
 import AlertStripe from 'nav-frontend-alertstriper';
-import { Input, SkjemaGruppe } from 'nav-frontend-skjema';
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
 import { FormattedHTMLMessage, InjectedIntlProps, injectIntl } from 'react-intl';
@@ -17,85 +16,65 @@ import { ISoker } from '../../soker/types';
 import { soknadValiderFelt } from '../../soknad/actions';
 import { selectMineBarn } from '../../soknad/selectors';
 import { IMineBarn, Svar } from '../../soknad/types';
-import { isEnabled } from '../../toggles/selectors';
-import { IToggleName } from '../../toggles/types';
-
-interface IMapStateToProps {
-    barn: IBarn[];
-    soker: ISoker;
-    harForsoktNesteSteg: boolean;
-    valgtBarn: IMineBarn;
-    brukLeggTilBarn: boolean;
-}
-
-interface IMapDispatchToProps {
-    settBarnNavn: (navn: string) => void;
-    settBarnFodselsdato: (fodselsdato: string) => void;
-    settBarnFlerlingStatus: (flerlingStatus: Svar) => void;
-    settBarnBrukerOpprettet: (brukerOpprettetStatus: Svar) => void;
-}
 
 interface IRadioContent {
     label: string;
     value: string;
 }
 
+interface IMapStateToProps {
+    barn: IBarn[];
+    soker: ISoker;
+    harForsoktNesteSteg: boolean;
+    valgtBarn: IMineBarn;
+}
+
+interface IMapDispatchToProps {
+    settBarnNavn: (navn: string) => void;
+    settBarnFodselsdato: (fodselsdato: string) => void;
+    settBarnFlerlingStatus: (flerlingStatus: Svar) => void;
+}
+
 type MineBarnSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
 
 interface IMineBarnState {
-    radioButtons: IRadioContent[];
+    vanligeBarn: IRadioContent[];
+    flerlinger: IRadioContent[];
     selected: string;
 }
 
 class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
     constructor(props: MineBarnSideProps) {
         super(props);
+        this.handleChange = this.handleChange.bind(this);
 
-        function radioBtn(label: string, value: string): IRadioContent {
+        function barnTilRadioButton(b: IBarn): IRadioContent {
             return {
-                label,
-                value,
+                label: b.fulltnavn + ' (' + b.fodselsdato + ' )',
+                value: b.index,
             };
         }
 
-        const radioButtons = Array.from(props.barn).map((b: IBarn) =>
-            radioBtn(b.fulltnavn + ' (' + b.fodselsdato + ' )', b.index)
-        );
-
-        if (props.brukLeggTilBarn) {
-            radioButtons.push({
-                label: 'Legg til',
-                value: `${props.barn.length}`,
-            });
+        function erFlerling(b: IBarn) {
+            return b.erFlerling;
         }
 
-        let selected = props.barn.findIndex(
+        const vanligeBarn = props.barn.filter(b => !erFlerling(b)).map(barnTilRadioButton);
+        const flerlinger = props.barn.filter(erFlerling).map(barnTilRadioButton);
+
+        const selected = props.barn.findIndex(
             (barn: IBarn) => barn.fulltnavn === props.valgtBarn.navn.verdi
         );
-        if (selected === -1) {
-            selected =
-                props.valgtBarn.erBrukerOpprettet.verdi === Svar.JA ? props.barn.length : selected;
-        }
 
         this.state = {
-            radioButtons,
+            flerlinger,
             selected: `${selected}`,
+            vanligeBarn,
         };
     }
 
     public render() {
-        const {
-            soker,
-            barn,
-            harForsoktNesteSteg,
-            settBarnBrukerOpprettet,
-            settBarnFodselsdato,
-            settBarnNavn,
-            settBarnFlerlingStatus,
-            valgtBarn,
-            intl,
-            brukLeggTilBarn,
-        } = this.props;
+        const { harForsoktNesteSteg, valgtBarn, intl } = this.props;
 
         const feltMedFeil = hentFeltMedFeil(valgtBarn, harForsoktNesteSteg, intl);
 
@@ -108,68 +87,23 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
             >
                 <form>
                     <RadioPanelGruppe
-                        legend={intl.formatMessage({ id: 'barn.subtittel' })}
+                        legend={intl.formatMessage({ id: 'barn.subtittel.vanlig' })}
                         name={'mine-barn__sporsmal'}
-                        className={'soknad__inputPanelGruppe'}
-                        onChange={(evt: {}, value: string) => {
-                            this.setState({
-                                selected: value,
-                            });
-
-                            if (value === `${barn.length}`) {
-                                settBarnNavn('');
-                                settBarnFodselsdato('');
-                                settBarnBrukerOpprettet(Svar.JA);
-                                settBarnFlerlingStatus(Svar.NEI);
-                                return;
-                            }
-
-                            let nyttValgtBarn = barn.find(b => b.index === value);
-                            if (nyttValgtBarn == null) {
-                                nyttValgtBarn = {
-                                    erFlerling: '',
-                                    fodselsdato: '',
-                                    fulltnavn: '',
-                                    index: '',
-                                };
-                            }
-                            settBarnNavn(nyttValgtBarn.fulltnavn);
-                            settBarnFodselsdato(nyttValgtBarn.fodselsdato);
-                            settBarnFlerlingStatus(nyttValgtBarn.erFlerling ? Svar.JA : Svar.NEI);
-                            settBarnBrukerOpprettet(Svar.NEI);
-                        }}
+                        onChange={this.handleChange}
                         checked={this.state.selected}
-                        radios={this.state.radioButtons}
-                        feil={feltMedFeil.navn}
+                        radios={this.state.vanligeBarn}
+                        feil={feltMedFeil.fodselsdato}
                     />
-                    {brukLeggTilBarn && valgtBarn.erBrukerOpprettet.verdi === Svar.JA && (
-                        <SkjemaGruppe>
-                            <legend className={'skjema__legend'}>
-                                {intl.formatMessage({ id: 'barn.subtittel' })}
-                            </legend>
-                            <div className={'mine-barn__sporsmal'}>
-                                <Input
-                                    className={'mine-barn__navn-input'}
-                                    label={intl.formatMessage({ id: 'barn.navn' })}
-                                    onBlur={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                        settBarnNavn(event.target.value);
-                                    }}
-                                    defaultValue={valgtBarn.navn.verdi}
-                                    feil={feltMedFeil.navn}
-                                    maxLength={50}
-                                />
-                                <Input
-                                    className={'mine-barn__fodselsdato-input'}
-                                    label={intl.formatMessage({ id: 'barn.fodselsdato' })}
-                                    onBlur={(event: React.ChangeEvent<HTMLInputElement>) =>
-                                        settBarnFodselsdato(event.target.value)
-                                    }
-                                    defaultValue={valgtBarn.fodselsdato.verdi}
-                                    feil={feltMedFeil.fodselsdato}
-                                    maxLength={10}
-                                />
-                            </div>
-                        </SkjemaGruppe>
+
+                    {this.state.flerlinger.length > 0 && (
+                        <RadioPanelGruppe
+                            legend={intl.formatMessage({ id: 'barn.subtittel.flerling' })}
+                            name={'mine-barn__sporsmal'}
+                            onChange={this.handleChange}
+                            checked={this.state.selected}
+                            radios={this.state.flerlinger}
+                            feil={feltMedFeil.fodselsdato}
+                        />
                     )}
                 </form>
 
@@ -181,12 +115,25 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
             </SideContainer>
         );
     }
+
+    private handleChange(evt: {}, value: string) {
+        this.setState({
+            selected: value,
+        });
+
+        const nyttValgtBarn = this.props.barn.find(b => b.index === value);
+        if (nyttValgtBarn == null) {
+            return;
+        }
+        this.props.settBarnNavn(nyttValgtBarn.fulltnavn);
+        this.props.settBarnFodselsdato(nyttValgtBarn.fodselsdato);
+        this.props.settBarnFlerlingStatus(nyttValgtBarn.erFlerling ? Svar.JA : Svar.NEI);
+    }
 }
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         barn: selectBarn(state),
-        brukLeggTilBarn: isEnabled(state, IToggleName.legg_til_barn),
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         soker: selectSoker(state),
         valgtBarn: selectMineBarn(state),
@@ -195,8 +142,6 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
-        settBarnBrukerOpprettet: (brukerOpprettetStatus: Svar) =>
-            dispatch(soknadValiderFelt('mineBarn', 'erBrukerOpprettet', brukerOpprettetStatus)),
         settBarnFlerlingStatus: (flerlingStatus: Svar) =>
             dispatch(soknadValiderFelt('mineBarn', 'erFlerling', flerlingStatus)),
         settBarnFodselsdato: (fodselsdato: string) =>
