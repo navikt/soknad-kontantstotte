@@ -1,5 +1,5 @@
 interface IBarn {
-    erFlerling: string;
+    erFlerling: boolean;
     fodselsdato: string;
     fulltnavn: string;
     index: string;

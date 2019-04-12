@@ -73,7 +73,7 @@ describe('app - saga', () => {
             beforeAll(() => {
                 clone = saga.clone();
                 barn = {
-                    erFlerling: '',
+                    erFlerling: false,
                     fodselsdato: '01.01.2020',
                     fulltnavn: 'Mock',
                     index: '1',

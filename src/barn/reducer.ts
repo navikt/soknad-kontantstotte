@@ -9,7 +9,7 @@ interface IBarnState {
 const initialState: IBarnState = {
     barn: [
         {
-            erFlerling: '',
+            erFlerling: false,
             fodselsdato: '',
             fulltnavn: '',
             index: '',
