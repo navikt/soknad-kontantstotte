@@ -18,7 +18,7 @@ import { selectMineBarn } from '../../soknad/selectors';
 import { IMineBarn, Svar } from '../../soknad/types';
 
 interface IRadioContent {
-    label: string;
+    label: React.ReactNode;
     value: string;
 }
 
@@ -50,7 +50,12 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
 
         function barnTilRadioButton(b: IBarn): IRadioContent {
             return {
-                label: b.fulltnavn + ' (' + b.fodselsdato + ' )',
+                label: (
+                    <div>
+                        <div className={'mine-barn__barn-navn'}>{b.fulltnavn}</div>
+                        <div>{b.fodselsdato}</div>
+                    </div>
+                ),
                 value: b.index,
             };
         }
