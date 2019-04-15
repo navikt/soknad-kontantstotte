@@ -1,20 +1,13 @@
 import { BarnActionTypes, BarnTypeKeys } from './actions';
-import { IBarn } from './types';
+import { IBarnContainer } from './types';
 
 interface IBarnState {
-    readonly barn: IBarn[];
+    readonly barn: IBarnContainer[];
     readonly henter: boolean;
 }
 
 const initialState: IBarnState = {
-    barn: [
-        {
-            erFlerling: false,
-            fodselsdato: '',
-            fulltnavn: '',
-            index: '',
-        },
-    ],
+    barn: [],
     henter: false,
 };
 
@@ -28,7 +21,7 @@ function barnReducer(state = initialState, action: BarnActionTypes) {
         case BarnTypeKeys.HENT_OK:
             return {
                 ...state,
-                barn: action.barn.map((b, i) => ({ ...b, index: `${i}` })),
+                barn: action.barn,
                 henter: false,
             };
         case BarnTypeKeys.HENT_FEILET: {

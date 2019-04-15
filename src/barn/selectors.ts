@@ -1,7 +1,7 @@
 import { IRootState } from '../rootReducer';
-import { IBarn } from './types';
+import { IBarnContainer } from './types';
 
-function selectBarn(state: IRootState): IBarn[] {
+function selectBarn(state: IRootState): IBarnContainer[] {
     return state.barn.barn;
 }
 
