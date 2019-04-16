@@ -1,8 +1,8 @@
 import { BarnActionTypes, BarnTypeKeys } from './actions';
-import { IBarnContainer } from './types';
+import { IBarn } from './types';
 
 interface IBarnState {
-    readonly barn: IBarnContainer[];
+    readonly barn: IBarn[];
     readonly henter: boolean;
 }
 

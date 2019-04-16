@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { selectBarn } from '../../barn/selectors';
-import { IBarnContainer } from '../../barn/types';
+import { IBarn } from '../../barn/types';
 import { hentFeltMedFeil } from '../../common/utils';
 import BarnIkon from '../../component/Ikoner/BarnIkon';
 import SideContainer from '../../component/StegSide/StegSide';
@@ -21,7 +21,7 @@ interface IRadioContent {
 }
 
 interface IMapStateToProps {
-    barn: IBarnContainer[];
+    barn: IBarn[];
     harForsoktNesteSteg: boolean;
     valgtBarn: IMineBarn;
 }
@@ -45,7 +45,7 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
         super(props);
         this.handleChange = this.handleChange.bind(this);
 
-        function barnTilRadioButton(barn: IBarnContainer): IRadioContent {
+        function barnTilRadioButton(barn: IBarn): IRadioContent {
             return {
                 label: barn.barn.map(b => {
                     return (
@@ -59,7 +59,7 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
             };
         }
 
-        const erFlerling = (b: IBarnContainer) => b.erFlerling;
+        const erFlerling = (b: IBarn) => b.erFlerling;
 
         const vanligeBarn = props.barn.filter(b => !erFlerling(b)).map(barnTilRadioButton);
         const flerlinger = props.barn.filter(erFlerling).map(barnTilRadioButton);

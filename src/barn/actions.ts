@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { IBarnContainer } from './types';
+import { IBarn } from './types';
 
 enum BarnTypeKeys {
     HENT = 'BARN_HENT',
@@ -15,7 +15,7 @@ interface IBarnHent extends Action {
 
 interface IBarnHentOk extends Action {
     type: BarnTypeKeys.HENT_OK;
-    barn: IBarnContainer[];
+    barn: IBarn[];
 }
 
 interface IBarnHentFeilet extends Action {
@@ -28,7 +28,7 @@ function barnHent(): IBarnHent {
     };
 }
 
-function barnHentOk(barn: IBarnContainer[]): IBarnHentOk {
+function barnHentOk(barn: IBarn[]): IBarnHentOk {
     return {
         barn,
         type: BarnTypeKeys.HENT_OK,

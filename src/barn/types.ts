@@ -1,12 +1,12 @@
-interface IBarnContainer {
-    barn: IBarn[];
+interface IBarn {
+    barn: IBarnDTO[];
     erFlerling: boolean;
     index: number;
 }
 
-interface IBarn {
+interface IBarnDTO {
     fodselsdato: string;
     fulltnavn: string;
 }
 
-export { IBarnContainer, IBarn };
+export { IBarn, IBarnDTO };

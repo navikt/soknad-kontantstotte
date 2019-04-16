@@ -3,9 +3,9 @@ import { SagaIterator } from 'redux-saga';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { barnHentFeilet, barnHentOk, BarnTypeKeys } from './actions';
 import { fetchBarn } from './api';
-import { IBarn, IBarnContainer } from './types';
+import { IBarn, IBarnDTO } from './types';
 
-function genererFlerling(barn: IBarn[]): IBarn[][] {
+function genererFlerling(barn: IBarnDTO[]): IBarnDTO[][] {
     const powerSet = genererPowerSet(barn);
     const flerlinger = powerSet.filter(erEttBarnEllerFlerling);
     return flerlinger.sort((a, b) => a.length - b.length);
@@ -14,17 +14,17 @@ function genererFlerling(barn: IBarn[]): IBarn[][] {
 /**
  * https://github.com/trekhleb/javascript-algorithms/blob/master/src/algorithms/sets/power-set/bwPowerSet.js
  */
-function genererPowerSet(barn: IBarn[]): IBarn[][] {
+function genererPowerSet<T>(arr: T[]): T[][] {
     const subSets = [];
 
-    const numberOfCombinations = 2 ** barn.length;
+    const numberOfCombinations = 2 ** arr.length;
 
     for (let combinationIndex = 0; combinationIndex < numberOfCombinations; combinationIndex++) {
         const subSet = [];
-        for (let setElementIndex = 0; setElementIndex < barn.length; setElementIndex++) {
+        for (let setElementIndex = 0; setElementIndex < arr.length; setElementIndex++) {
             // tslint:disable:no-bitwise
             if (combinationIndex & (1 << setElementIndex)) {
-                subSet.push(barn[setElementIndex]);
+                subSet.push(arr[setElementIndex]);
             }
         }
         subSets.push(subSet);
@@ -33,13 +33,13 @@ function genererPowerSet(barn: IBarn[]): IBarn[][] {
     return subSets;
 }
 
-function erEttBarnEllerFlerling(set: IBarn[]) {
+function erEttBarnEllerFlerling(set: IBarnDTO[]) {
     if (set.length === 0) {
         return false;
     } else if (set.length === 1) {
         return true;
     }
-    const fodsesldatoMoments = set.map((barn: IBarn) => moment(barn.fodselsdato, 'DD.MM.YYYY'));
+    const fodsesldatoMoments = set.map((barn: IBarnDTO) => moment(barn.fodselsdato, 'DD.MM.YYYY'));
     const min = moment.min(fodsesldatoMoments);
     const max = moment.max(fodsesldatoMoments);
 
@@ -51,18 +51,16 @@ function erEttBarnEllerFlerling(set: IBarn[]) {
 
 function* fetchBarnSaga(): SagaIterator {
     try {
-        const barn: IBarn[] = yield call(fetchBarn);
-        const barnOgFlerlinger = yield call(genererFlerling, barn);
+        const barnDTO: IBarnDTO[] = yield call(fetchBarn);
+        const barnOgFlerlinger = yield call(genererFlerling, barnDTO);
 
-        const barnContainere: IBarnContainer[] = barnOgFlerlinger.map(
-            (b: IBarn[], index: number) => {
-                return {
-                    barn: b,
-                    erFlerling: b.length > 1,
-                    index,
-                };
-            }
-        );
+        const barnContainere: IBarn[] = barnOgFlerlinger.map((b: IBarnDTO[], index: number) => {
+            return {
+                barn: b,
+                erFlerling: b.length > 1,
+                index,
+            };
+        });
 
         yield put(barnHentOk(barnContainere));
     } catch (err) {
@@ -74,4 +72,4 @@ function* barnSaga(): SagaIterator {
     yield takeEvery(BarnTypeKeys.HENT, fetchBarnSaga);
 }
 
-export { fetchBarnSaga, barnSaga };
+export { fetchBarnSaga, barnSaga, genererFlerling, genererPowerSet, erEttBarnEllerFlerling };
