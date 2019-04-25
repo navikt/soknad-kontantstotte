@@ -11,8 +11,6 @@ import { hentFeltMedFeil } from '../../common/utils';
 import BarnIkon from '../../component/Ikoner/BarnIkon';
 import SideContainer from '../../component/StegSide/StegSide';
 import { IRootState } from '../../rootReducer';
-import { selectSoker } from '../../soker/selectors';
-import { ISoker } from '../../soker/types';
 import { soknadValiderFelt } from '../../soknad/actions';
 import { selectMineBarn } from '../../soknad/selectors';
 import { IMineBarn, Svar } from '../../soknad/types';
@@ -24,7 +22,6 @@ interface IRadioContent {
 
 interface IMapStateToProps {
     barn: IBarn[];
-    soker: ISoker;
     harForsoktNesteSteg: boolean;
     valgtBarn: IMineBarn;
 }
@@ -48,32 +45,28 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
         super(props);
         this.handleChange = this.handleChange.bind(this);
 
-        function barnTilRadioButton(b: IBarn): IRadioContent {
+        function barnTilRadioButton(barn: IBarn): IRadioContent {
             return {
-                label: (
-                    <div>
-                        <div className={'mine-barn__barn-navn'}>{b.fulltnavn}</div>
-                        <div>{b.fodselsdato}</div>
-                    </div>
-                ),
-                value: b.index,
+                label: barn.barn.map(b => {
+                    return (
+                        <div key={b.fulltnavn}>
+                            <div className={'mine-barn__barn-navn'}>{b.fulltnavn}</div>
+                            <div>{b.fodselsdato}</div>
+                        </div>
+                    );
+                }),
+                value: `${barn.index}`,
             };
         }
 
-        function erFlerling(b: IBarn) {
-            return b.erFlerling;
-        }
+        const erFlerling = (b: IBarn) => b.erFlerling;
 
         const vanligeBarn = props.barn.filter(b => !erFlerling(b)).map(barnTilRadioButton);
         const flerlinger = props.barn.filter(erFlerling).map(barnTilRadioButton);
 
-        const selected = props.barn.findIndex(
-            (barn: IBarn) => barn.fulltnavn === props.valgtBarn.navn.verdi
-        );
-
         this.state = {
             flerlinger,
-            selected: `${selected}`,
+            selected: '',
             vanligeBarn,
         };
     }
@@ -122,16 +115,29 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
     }
 
     private handleChange(evt: {}, value: string) {
-        this.setState({
-            selected: value,
-        });
+        this.setState({ selected: value });
 
-        const nyttValgtBarn = this.props.barn.find(b => b.index === value);
+        const nyttValgtBarn = this.props.barn.find(b => `${b.index}` === value);
+
         if (nyttValgtBarn == null) {
             return;
         }
-        this.props.settBarnNavn(nyttValgtBarn.fulltnavn);
-        this.props.settBarnFodselsdato(nyttValgtBarn.fodselsdato);
+
+        const joinBarnFelter = (acc: string, cur: string, index: number, arr: string[]) => {
+            if (index === arr.length - 1) {
+                return acc + cur;
+            }
+            if (index === arr.length - 2) {
+                return acc + `${cur} ${this.props.intl.formatMessage({ id: 'barn.og' })} `;
+            }
+            return acc + `${cur}, `;
+        };
+
+        const navn = nyttValgtBarn.barn.map(b => b.fulltnavn).reduce(joinBarnFelter, '');
+        const fodselsdato = nyttValgtBarn.barn.map(b => b.fodselsdato).reduce(joinBarnFelter, '');
+
+        this.props.settBarnNavn(navn);
+        this.props.settBarnFodselsdato(fodselsdato);
         this.props.settBarnFlerlingStatus(nyttValgtBarn.erFlerling ? Svar.JA : Svar.NEI);
     }
 }
@@ -140,7 +146,6 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         barn: selectBarn(state),
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
-        soker: selectSoker(state),
         valgtBarn: selectMineBarn(state),
     };
 };

@@ -3,7 +3,7 @@ import { push } from 'connected-react-router';
 import { all, cancel, fork, put, race, select, take } from 'redux-saga/effects';
 import { barnHent, BarnTypeKeys } from '../barn/actions';
 import { selectBarn } from '../barn/selectors';
-import { IBarn } from '../barn/types';
+import { IBarnDTO } from '../barn/types';
 import { landHent, LandTypeKeys } from '../land/actions';
 import { sokerHent, SokerTypeKeys } from '../soker/actions';
 import { teksterHent, TeksterTypeKeys } from '../tekster/actions';
@@ -69,14 +69,12 @@ describe('app - saga', () => {
         });
 
         describe('har barn flyt', () => {
-            let barn: IBarn;
+            let barn: IBarnDTO;
             beforeAll(() => {
                 clone = saga.clone();
                 barn = {
-                    erFlerling: false,
                     fodselsdato: '01.01.2020',
                     fulltnavn: 'Mock',
-                    index: '1',
                 };
             });
 

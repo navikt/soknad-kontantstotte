@@ -1,8 +1,12 @@
 interface IBarn {
+    barn: IBarnDTO[];
     erFlerling: boolean;
-    fodselsdato: string;
-    fulltnavn: string;
-    index: string;
+    index: number;
 }
 
-export { IBarn };
+interface IBarnDTO {
+    fodselsdato: string;
+    fulltnavn: string;
+}
+
+export { IBarn, IBarnDTO };

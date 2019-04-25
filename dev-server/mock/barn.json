@@ -1,17 +1,10 @@
 [
   {
     "fulltnavn" : "NAVNESEN JENTEBARN",
-    "fodselsdato" : "01.01.2018",
-    "erFlerling": false
+    "fodselsdato" : "01.01.2018"
   },
   {
     "fulltnavn" : "NAVNESEN GUTTEBARN",
-    "fodselsdato" : "02.01.2018",
-    "erFlerling": false
-  },
-  {
-  "fulltnavn" : "JENTEBARN OG GUTTEBARN",
-  "fodselsdato" : "01.01.2018 og 02.01.2018",
-  "erFlerling": true
+    "fodselsdato" : "03.01.2018"
   }
 ]
