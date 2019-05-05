@@ -14,7 +14,9 @@
     "test:unit": "jest",
     "test:unit-watch": "jest --watch",
     "test:ci": "./ci-tests/scripts.sh test",
-    "test:ci-capture": "./ci-tests/scripts.sh capture"
+    "test:ci-capture": "./ci-tests/scripts.sh capture",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "husky": {
     "hooks": {
@@ -83,7 +85,8 @@
     "react-router-dom": "5.0.0",
     "redux": "4.0.1",
     "redux-saga": "1.0.2",
-    "url-search-params-polyfill": "5.1.0"
+    "url-search-params-polyfill": "5.1.0",
+    "snyk": "^1.161.1"
   },
   "resolutions": {
     "@types/react": "16.8.13"
@@ -137,5 +140,6 @@
     "webpack-env": "0.8.0",
     "webpack-hot-middleware": "2.24.3",
     "webpack-merge": "4.2.1"
-  }
+  },
+  "snyk": true
 }
