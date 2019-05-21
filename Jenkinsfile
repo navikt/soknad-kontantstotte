@@ -11,6 +11,5 @@ node() {
       sh "docker build -t repo.adeo.no:5443/soknad-kontantstotte:$tagName -f Dockerfile ./ --build-arg HTTPS_PROXY='' --build-arg HTTP_PROXY=''"
       sh "docker tag repo.adeo.no:5443/soknad-kontantstotte:$tagName repo.adeo.no:5443/soknad-kontantstotte:latest"
       sh "docker push repo.adeo.no:5443/soknad-kontantstotte:$tagName"
-      sh "docker push repo.adeo.no:5443/soknad-kontantstotte:latest"
     }
 }
