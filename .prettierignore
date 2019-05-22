@@ -1,5 +1,6 @@
 *.json
 *.less
 README.md
-docker-compose.yml
-app-config.yaml
+*.yml
+*.yaml
+Jenkinsfile
