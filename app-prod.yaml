@@ -53,7 +53,3 @@ spec:
     value: soknad-kontantstotte.nav.no
   - name: LOADBALANCER_SOKNAD_KONTANTSTOTTE_POOLNAME
     value: na
-  - name: APP_NAME
-    value: soknad-kontantstotte
-  - name: FASIT_ENVIRONMENT_NAME
-    value: p
