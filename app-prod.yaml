@@ -26,7 +26,7 @@ spec:
     enabled: true
   resources:
     limits:
-      cpu: 3
+      cpu: "3"
       memory: 786Mi
     requests:
       memory: 512Mi
