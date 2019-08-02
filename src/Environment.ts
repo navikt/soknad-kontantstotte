@@ -9,7 +9,7 @@ const Environment = (): IEnvUrls => {
     if (process.env.NODE_ENV === 'development') {
         return {
             apiUrl: '/soknad-kontantstotte-api/api',
-            loginUrl: 'http://localhost:8080/api/local/cookie',
+            loginUrl: 'http://localhost:8080/local/cookie',
             papirsoknad:
                 'https://www.nav.no/no/Person/Skjemaer-for-privatpersoner/skjemaveileder/vedlegg?key=235029&veiledertype=privatperson&method=mail',
             saksoversikt: 'https://tjenester.nav.no/saksoversikt/app',
@@ -17,7 +17,7 @@ const Environment = (): IEnvUrls => {
     } else if (window.location.hostname.indexOf('ci-test-server') > -1) {
         return {
             apiUrl: '/soknad-kontantstotte-api/api',
-            loginUrl: 'http://localhost:8080/api/local/cookie',
+            loginUrl: 'http://localhost:8080/local/cookie',
             papirsoknad:
                 'https://www.nav.no/no/Person/Skjemaer-for-privatpersoner/skjemaveileder/vedlegg?key=235029&veiledertype=privatperson&method=mail',
             saksoversikt: 'https://tjenester.nav.no/saksoversikt/app',
