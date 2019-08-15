@@ -105,7 +105,7 @@ const harFyltInnGyldigAntallTimer = (felt: IFelt): IFelt => {
     switch (true) {
         case timer >= 0 && timer <= 33:
             return ok(felt);
-        case timer >= 33 && timer <= 50:
+        case timer >= 33 && timer <= 80:
             return advarsel(felt, 'advarsel.barnehageplass.timerIBarnehage');
         default:
             return feil(felt, 'feilmelding.barnehageplass.timerIBarnehage');
