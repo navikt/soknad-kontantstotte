@@ -48,6 +48,8 @@ jobs:
     docker:
       - image: circleci/node:10
     steps:
+      - attach_workspace:
+          at: /home/circleci/project
       - run:
           name: Kjører jest tester
           command: |

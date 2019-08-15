@@ -5,7 +5,7 @@ services:
     build: ci-test-server
     volumes:
       - ../dev-server:/var/server/
-      - ../dist:/var/dist
+      - ../development:/var/development
     ports:
       - 8000
     entrypoint:
@@ -19,19 +19,3 @@ services:
       - ./jest-image-snapshot/tests:/app/tests
       - ./jest-image-snapshot/baseline:/app/baseline
       - ./reports:/app/reports
-  pa11y:
-    image: repo.adeo.no:5443/soknad/soknad-docker-pa11y:1.0.0
-    depends_on:
-      - ci-test-server
-    volumes:
-      - ./pa11y/:/var/pa11y/
-      - ./reports/:/reports/
-    cap_add:
-      - SYS_ADMIN
-  testcafe:
-    image: testcafe/testcafe
-    command: ["firefox", "/tests/*.ts"]
-    depends_on:
-      - ci-test-server
-    volumes:
-      - ./testcafe/:/tests
