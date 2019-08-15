@@ -133,7 +133,7 @@ jobs:
               --team=${TEAM} \
               --version=${VERSION} \
               --key=/home/circleci/project/github.key.pem \
-              --resource=./build_n_deploy/naiserator/naiserator_dev.yaml
+              --resource=./build_n_deploy/naiserator/app-preprod.yaml
 
   deploy_prod:
       executor: nais-deployer
@@ -154,7 +154,7 @@ jobs:
               --team=${TEAM} \
               --version=${VERSION} \
               --key=/home/circleci/project/github.key.pem \
-              --resource=./build_n_deploy/naiserator/naiserator_prod.yaml
+              --resource=./build_n_deploy/naiserator/app-prod.yaml
 
 workflows:
   version: 2
