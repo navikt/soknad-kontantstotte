@@ -3,6 +3,7 @@ const merge = require('webpack-merge');
 const common = require('./webpack.common');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TeserPlugin = require('terser-webpack-plugin');
+const path = require('path');
 
 const config = merge.strategy({
     'entry.soknad-kontantstotte': 'prepend',
@@ -12,6 +13,10 @@ const config = merge.strategy({
     mode: 'production',
     entry: {
         'soknad-kontantstotte': ['babel-polyfill', 'url-search-params-polyfill'],
+    },
+    output: {
+        path: path.join(__dirname, '../../production'),
+        filename: '[name].[hash].js',
     },
     devtool: 'source-map',
     module: {

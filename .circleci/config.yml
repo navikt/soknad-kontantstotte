@@ -1,0 +1,188 @@
+version: 2.1
+orbs:
+  nais: 'navikt/nais-deployment@1.1.0'
+
+executors:
+  nais-deployer:
+    environment:
+      TEAM: teamfamilie
+    docker:
+      - image: navikt/deployment-cli:latest
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Generate version number, github token and docker image tags
+          command: |
+            export VERSION="$(node -p "require('./package').version")-$CIRCLE_SHA1"
+            echo "export VERSION="$(node -p "require('./package').version")-$CIRCLE_SHA1"" >> properties.env
+            echo "export DOCKER_TAG=\"$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$VERSION\"" >> properties.env
+            cat properties.env >> $BASH_ENV
+      - restore_cache:
+          key: yarn-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          key: yarn-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/node_modules
+      - run:
+          name: Bygger test
+          command: |
+            yarn build:dev
+      - run:
+          name: Bygger produksjon
+          command: |
+            yarn build
+      - persist_to_workspace:
+          root: /home/circleci/project
+          paths:
+            - .
+ 
+  test-unit:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - attach_workspace:
+          at: /home/circleci/project
+      - run:
+          name: Kjører jest tester
+          command: |
+            yarn test:unit
+
+  test-ci:
+    machine: true
+    steps:
+      - attach_workspace:
+          at: /home/circleci/project
+      - run:
+          name: Kjører ci tester
+          command: |
+            ./ci-tests/scripts.sh test
+      - store_artifacts:
+          path: /ci-tests/reports
+          destination: reports
+
+  deploy_docker:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - attach_workspace:
+          at: /home/circleci/project
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Set up environment variables
+          command: cat /home/circleci/project/properties.env >> $BASH_ENV
+      - run:
+          name: Slett test resources
+          command: rm -rf development
+      - run:
+          name: Bygger Docker image
+          command: |
+            echo $DOCKER_TAG $VERSION
+            docker build -t $DOCKER_TAG .
+      - run:
+          name: Docker push
+          command: |
+            echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_LOGIN" --password-stdin 
+            echo "Pushing with tag $DOCKER_TAG"
+            docker push $DOCKER_TAG
+      - persist_to_workspace:
+          root: /home/circleci/project
+          paths:
+            - properties.env
+
+  deploy_dev:
+      executor: nais-deployer
+      steps:
+        - attach_workspace:
+            at: /home/circleci/project
+        - checkout
+        - run:
+            name: Set up environment variables
+            command: cat /home/circleci/project/properties.env >> $BASH_ENV
+        - run:
+            name: Create github deployment for stable test
+            command: |
+              deployment-cli deploy create \
+              --cluster=dev-sbs \
+              --repository=$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME \
+              --appid=${GITHUB_APP_ID} \
+              --key-base64=${GITHUB_PRIVATE_KEY} \
+              --team=${TEAM} \
+              --version=${VERSION} \
+              --resource=./build_n_deploy/naiserator/app-preprod.yaml
+
+  deploy_prod:
+      executor: nais-deployer
+      steps:
+        - attach_workspace:
+            at: /home/circleci/project
+        - checkout
+        - run:
+            name: Set up environment variables
+            command: cat /home/circleci/project/properties.env >> $BASH_ENV
+        - run:
+            name: Create github deployment for production
+            command: |
+              deployment-cli deploy create \
+              --cluster=prod-sbs \
+              --repository=$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME \
+              --appid=${GITHUB_APP_ID} \
+              --key-base64=${GITHUB_PRIVATE_KEY} \
+              --team=${TEAM} \
+              --version=${VERSION} \
+              --resource=./build_n_deploy/naiserator/app-prod.yaml
+
+workflows:
+  version: 2
+  build_n_deploy:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /^v[0-9]+\.[0-9]+$/
+      - test-unit:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^v[0-9]+\.[0-9]+$/
+      - test-ci:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^v[0-9]+\.[0-9]+$/
+      - deploy_docker:
+          context: NAIS deployment
+          requires:
+            - test-unit
+            - test-ci
+          filters:
+            tags:
+              only: /^v[0-9]+\.[0-9]+$/
+      - deploy_dev:
+          context: familie-ci
+          requires:
+            - deploy_docker
+          filters:
+            tags:
+              only: /^.*/
+            branches:
+              only: /.*/
+      - deploy_prod:
+          context: familie-ci
+          requires:
+            - deploy_docker
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v[0-9]+\.[0-9]+$/

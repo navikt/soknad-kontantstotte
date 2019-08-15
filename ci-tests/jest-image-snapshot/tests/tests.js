@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const puppeteer = require('puppeteer');
 
 const large = { width: 1600, height: 450 };

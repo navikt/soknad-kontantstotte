@@ -17,7 +17,9 @@ const config = merge.strategy({
         ],
     },
     output: {
+        path: path.join(__dirname, '../../development'),
         filename: '[name].[hash].js',
+        globalObject: 'this',
     },
     module: {
         rules: [

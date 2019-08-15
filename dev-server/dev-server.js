@@ -2,7 +2,7 @@ const app = require('./common.server');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-const config = require('../webpack.dev');
+const config = require('../build_n_deploy/webpack/webpack.dev');
 const path = require('path');
 
 const port = 8000;
