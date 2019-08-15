@@ -2,7 +2,7 @@ version: '3'
 
 services:
   ci-test-server:
-    build: ci-test-server
+    image: navikt/node-express:1.0.0
     volumes:
       - ../dev-server:/var/server/
       - ../development:/var/development
