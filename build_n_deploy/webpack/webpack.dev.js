@@ -1,25 +1,32 @@
+const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TeserPlugin = require('terser-webpack-plugin');
 
 const config = merge.strategy({
     'entry.soknad-kontantstotte': 'prepend',
     'module.rules': 'append',
-    optimization: 'append',
 })(common, {
-    mode: 'production',
+    mode: 'development',
     entry: {
-        'soknad-kontantstotte': ['babel-polyfill', 'url-search-params-polyfill'],
+        'soknad-kontantstotte': [
+            'babel-polyfill',
+            'url-search-params-polyfill',
+            'react-hot-loader/patch',
+            'webpack-hot-middleware/client?reload=true',
+        ],
     },
-    devtool: 'source-map',
+    output: {
+        path: path.join(__dirname, '../../development'),
+        filename: '[name].[hash].js',
+        globalObject: 'this',
+    },
     module: {
         rules: [
             {
                 test: /\.less$/,
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    { loader: 'style-loader' },
                     {
                         loader: 'css-loader',
                         options: {
@@ -40,23 +47,12 @@ const config = merge.strategy({
             },
         ],
     },
-    optimization: {
-        minimizer: [
-            new TeserPlugin({
-                sourceMap: true,
-            }),
-        ],
-    },
+    devtool: 'inline-source-map',
     plugins: [
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production'),
+            'process.env.NODE_ENV': JSON.stringify('development'),
         }),
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.NoEmitOnErrorsPlugin(),
-        new MiniCssExtractPlugin({
-            filename: 'soknad-kontantstotte.css',
-            allChunks: true,
-        }),
+        new webpack.HotModuleReplacementPlugin(),
     ],
 });
 

@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "yarn build:prod",
-    "build:dev": "webpack --config ./webpack.dev.js",
-    "build:prod": "webpack --config ./webpack.prod.js",
+    "build:dev": "webpack --config ./build_n_deploy/webpack/webpack.dev.js",
+    "build:prod": "webpack --config ./build_n_deploy/webpack/webpack.prod.js",
     "prettier": "prettier --config .prettierrc --write 'src/**/*.tsx' 'src/**/*.ts'",
     "start": "node ./dev-server/dev-server",
     "start:proxy": "node ./dev-server/proxy-server",

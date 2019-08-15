@@ -9,11 +9,6 @@ const config = {
         'soknad-kontantstotte': ['./src/index.tsx'],
     },
     devtool: 'source-map',
-    output: {
-        path: path.join(__dirname, 'dist'),
-        filename: '[name].[chunkhash].js',
-        publicPath: '/',
-    },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     },
@@ -46,7 +41,7 @@ const config = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'src/index.html'),
+            template: path.join(__dirname, '../../src/index.html'),
             inject: 'body',
             alwaysWriteToDisk: true,
         }),

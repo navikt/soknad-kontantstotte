@@ -1,30 +1,31 @@
-const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TeserPlugin = require('terser-webpack-plugin');
+const path = require('path');
 
 const config = merge.strategy({
     'entry.soknad-kontantstotte': 'prepend',
     'module.rules': 'append',
+    optimization: 'append',
 })(common, {
-    mode: 'development',
+    mode: 'production',
     entry: {
-        'soknad-kontantstotte': [
-            'babel-polyfill',
-            'url-search-params-polyfill',
-            'react-hot-loader/patch',
-            'webpack-hot-middleware/client?reload=true',
-        ],
+        'soknad-kontantstotte': ['babel-polyfill', 'url-search-params-polyfill'],
     },
     output: {
+        path: path.join(__dirname, '../../production'),
         filename: '[name].[hash].js',
+        publicPath: '/assets/',
     },
+    devtool: 'source-map',
     module: {
         rules: [
             {
                 test: /\.less$/,
                 use: [
-                    { loader: 'style-loader' },
+                    MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
                         options: {
@@ -45,12 +46,23 @@ const config = merge.strategy({
             },
         ],
     },
-    devtool: 'inline-source-map',
+    optimization: {
+        minimizer: [
+            new TeserPlugin({
+                sourceMap: true,
+            }),
+        ],
+    },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('development'),
+            'process.env.NODE_ENV': JSON.stringify('production'),
         }),
-        new webpack.HotModuleReplacementPlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
+        new MiniCssExtractPlugin({
+            filename: 'soknad-kontantstotte.css',
+            allChunks: true,
+        }),
     ],
 });
 

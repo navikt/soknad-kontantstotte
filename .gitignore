@@ -1,5 +1,7 @@
 node_modules
 dist
+development
+production
 .DS_Store
 VERSION
 yarn-error.log
