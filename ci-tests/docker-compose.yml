@@ -2,10 +2,10 @@ version: '3'
 
 services:
   ci-test-server:
-    image: navikt/node-express:1.0.0
+    build: ci-test-server
     volumes:
       - ../dev-server:/var/server/
-      - ../development:/var/development
+      - ../development:/var/development/
     ports:
       - 8000
     entrypoint:

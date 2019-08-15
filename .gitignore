@@ -5,7 +5,7 @@ production
 .DS_Store
 VERSION
 yarn-error.log
-ci-tests/reports/*
+ci-tests/reports
 
 # Fra https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
 
