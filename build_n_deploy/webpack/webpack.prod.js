@@ -17,7 +17,6 @@ const config = merge.strategy({
     output: {
         path: path.join(__dirname, '../../production'),
         filename: '[name].[hash].js',
-        publicPath: '/assets/',
     },
     devtool: 'source-map',
     module: {
