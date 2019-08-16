@@ -5,27 +5,27 @@ describe('barn - saga', () => {
         it('returnerer alle barna', () => {
             expect(
                 genererFlerling([
-                    { fulltnavn: 'test', fødselsdato: '01.01.2018' },
-                    { fulltnavn: 'test1', fødselsdato: '01.01.2016' },
+                    { fulltnavn: 'test', fødselsnummer: '00000000001', fødselsdato: '01.01.2018' },
+                    { fulltnavn: 'test1', fødselsnummer: '00000000001', fødselsdato: '01.01.2016' },
                 ])
             ).toEqual([
-                [{ fulltnavn: 'test', fødselsdato: '01.01.2018' }],
-                [{ fulltnavn: 'test1', fødselsdato: '01.01.2016' }],
+                [{ fulltnavn: 'test', fødselsnummer: '00000000001', fødselsdato: '01.01.2018' }],
+                [{ fulltnavn: 'test1', fødselsnummer: '00000000002', fødselsdato: '01.01.2016' }],
             ]);
         });
 
         it('returnerer alle flerlinger', () => {
             expect(
                 genererFlerling([
-                    { fulltnavn: 'test', fødselsdato: '01.01.2018' },
-                    { fulltnavn: 'test1', fødselsdato: '01.01.2018' },
+                    { fulltnavn: 'test', fødselsnummer: '00000000001', fødselsdato: '01.01.2018' },
+                    { fulltnavn: 'test1', fødselsnummer: '00000000002', fødselsdato: '01.01.2018' },
                 ])
             ).toEqual([
-                [{ fulltnavn: 'test', fødselsdato: '01.01.2018' }],
-                [{ fulltnavn: 'test1', fødselsdato: '01.01.2018' }],
+                [{ fulltnavn: 'test', fødselsnummer: '00000000001', fødselsdato: '01.01.2018' }],
+                [{ fulltnavn: 'test1', fødselsnummer: '00000000002', fødselsdato: '01.01.2018' }],
                 [
-                    { fulltnavn: 'test', fødselsdato: '01.01.2018' },
-                    { fulltnavn: 'test1', fødselsdato: '01.01.2018' },
+                    { fulltnavn: 'test', fødselsnummer: '00000000001', fødselsdato: '01.01.2018' },
+                    { fulltnavn: 'test1', fødselsnummer: '00000000002', fødselsdato: '01.01.2018' },
                 ],
             ]);
         });
@@ -56,15 +56,17 @@ describe('barn - saga', () => {
 
         it('returnerer true med ett barn', () => {
             expect(
-                erEttBarnEllerFlerling([{ fulltnavn: 'test', fødselsdato: '01.01.2018' }])
+                erEttBarnEllerFlerling([
+                    { fulltnavn: 'test', fødselsnummer: '00000000001', fødselsdato: '01.01.2018' },
+                ])
             ).toEqual(true);
         });
 
         it('returnerer false med to barn født mer enn to dager fra hverandre', () => {
             expect(
                 erEttBarnEllerFlerling([
-                    { fulltnavn: 'test', fødselsdato: '01.01.2018' },
-                    { fulltnavn: 'test', fødselsdato: '04.01.2018' },
+                    { fulltnavn: 'test', fødselsnummer: '00000000001', fødselsdato: '01.01.2018' },
+                    { fulltnavn: 'test', fødselsnummer: '00000000002', fødselsdato: '04.01.2018' },
                 ])
             ).toEqual(false);
         });
@@ -72,8 +74,8 @@ describe('barn - saga', () => {
         it('returnerer true med to barn født mindre enn to dager fra hverandre', () => {
             expect(
                 erEttBarnEllerFlerling([
-                    { fulltnavn: 'test', fødselsdato: '01.01.2018' },
-                    { fulltnavn: 'test', fødselsdato: '03.01.2018' },
+                    { fulltnavn: 'test', fødselsnummer: '00000000001', fødselsdato: '01.01.2018' },
+                    { fulltnavn: 'test', fødselsnummer: '00000000002', fødselsdato: '03.01.2018' },
                 ])
             ).toEqual(true);
         });
@@ -81,10 +83,10 @@ describe('barn - saga', () => {
         it('returnerer true med mange barn født mindre enn to dager fra hverandre', () => {
             expect(
                 erEttBarnEllerFlerling([
-                    { fulltnavn: 'test', fødselsdato: '01.01.2018' },
-                    { fulltnavn: 'test1', fødselsdato: '01.01.2018' },
-                    { fulltnavn: 'test2', fødselsdato: '01.01.2018' },
-                    { fulltnavn: 'test3', fødselsdato: '01.01.2018' },
+                    { fulltnavn: 'test', fødselsnummer: '00000000001', fødselsdato: '01.01.2018' },
+                    { fulltnavn: 'test1', fødselsnummer: '00000000002', fødselsdato: '01.01.2018' },
+                    { fulltnavn: 'test2', fødselsnummer: '00000000003', fødselsdato: '01.01.2018' },
+                    { fulltnavn: 'test3', fødselsnummer: '00000000004', fødselsdato: '01.01.2018' },
                 ])
             ).toEqual(true);
         });
@@ -92,10 +94,10 @@ describe('barn - saga', () => {
         it('returnerer false med mange barn født mer enn to dager fra hverandre', () => {
             expect(
                 erEttBarnEllerFlerling([
-                    { fulltnavn: 'test', fødselsdato: '01.01.2018' },
-                    { fulltnavn: 'test1', fødselsdato: '01.01.2018' },
-                    { fulltnavn: 'test2', fødselsdato: '01.01.2018' },
-                    { fulltnavn: 'test3', fødselsdato: '04.01.2018' },
+                    { fulltnavn: 'test', fødselsnummer: '00000000001', fødselsdato: '01.01.2018' },
+                    { fulltnavn: 'test1', fødselsnummer: '00000000002', fødselsdato: '01.01.2018' },
+                    { fulltnavn: 'test2', fødselsnummer: '00000000003', fødselsdato: '01.01.2018' },
+                    { fulltnavn: 'test3', fødselsnummer: '00000000004', fødselsdato: '04.01.2018' },
                 ])
             ).toEqual(false);
         });

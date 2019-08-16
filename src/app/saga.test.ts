@@ -73,8 +73,9 @@ describe('app - saga', () => {
             beforeAll(() => {
                 clone = saga.clone();
                 barn = {
-                    fødselsdato: '01.01.2020',
                     fulltnavn: 'Mock',
+                    fødselsdato: '01.01.2020',
+                    fødselsnummer: '11111111111',
                 };
             });
 

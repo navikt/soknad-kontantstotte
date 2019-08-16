@@ -111,6 +111,7 @@ const valideringsConfig: IValideringsConfig = {
     mineBarn: {
         erFlerling: [svarUtenValidering],
         fødselsdato: [harSvartTekstMedFeilmelding, harFyltInnDato],
+        fødselsnummer: [svarUtenValidering],
         navn: [harFyltInnNavn],
     },
     oppsummering: {

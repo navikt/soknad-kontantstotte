@@ -72,6 +72,7 @@ interface IVeiledning extends ISteg {
 interface IMineBarn extends ISteg {
     readonly erFlerling: IFelt;
     readonly fødselsdato: IFelt;
+    readonly fødselsnummer: IFelt;
     readonly navn: IFelt;
 }
 

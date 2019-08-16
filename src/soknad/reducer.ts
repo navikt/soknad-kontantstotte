@@ -77,6 +77,7 @@ const initialState: ISoknadState = {
     mineBarn: {
         erFlerling: standardSvarInitialFelt,
         fødselsdato: standardStringInitialFelt,
+        fødselsnummer: standardStringInitialFelt,
         navn: standardStringInitialFelt,
     },
     oppsummering: {

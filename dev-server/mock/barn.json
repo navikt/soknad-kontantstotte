@@ -1,9 +1,11 @@
 [
   {
+    "fødselsnummer": "11111111111",
     "fulltnavn" : "NAVNESEN JENTEBARN",
     "fødselsdato" : "01.01.2018"
   },
   {
+    "fødselsnummer": "22222222222",
     "fulltnavn" : "NAVNESEN GUTTEBARN",
     "fødselsdato" : "03.01.2018"
   }
