@@ -39,9 +39,9 @@ function erEttBarnEllerFlerling(set: IBarnDTO[]) {
     } else if (set.length === 1) {
         return true;
     }
-    const fodsesldatoMoments = set.map((barn: IBarnDTO) => moment(barn.fodselsdato, 'DD.MM.YYYY'));
-    const min = moment.min(fodsesldatoMoments);
-    const max = moment.max(fodsesldatoMoments);
+    const fødselsdatoMoments = set.map((barn: IBarnDTO) => moment(barn.fødselsdato, 'DD.MM.YYYY'));
+    const min = moment.min(fødselsdatoMoments);
+    const max = moment.max(fødselsdatoMoments);
 
     const granularity = 'days';
     const inclusivity = '[]';

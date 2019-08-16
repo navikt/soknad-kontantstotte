@@ -5,7 +5,7 @@ interface IBarn {
 }
 
 interface IBarnDTO {
-    fodselsdato: string;
+    fødselsdato: string;
     fulltnavn: string;
 }
 

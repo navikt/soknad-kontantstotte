@@ -15,7 +15,7 @@ const BarnOppsummering: React.StatelessComponent<IBarnOppsummeringProps> = ({ ba
         <OppsummeringSteg stegIndeks={stegConfig.mineBarn.stegIndeks}>
             <SporsmalSvar
                 sporsmal={<FormattedMessage id={'barn.tittel'} />}
-                svar={`${barn.navn.verdi} - ${barn.fodselsdato.verdi}`}
+                svar={`${barn.navn.verdi} - ${barn.fødselsdato.verdi}`}
             />
             {barn.erFlerling.verdi === Svar.JA && (
                 <OppsummeringsAdvarsel meldingsNokkel={'advarsel.flerebarn.utenlink'} />

@@ -9,7 +9,7 @@ interface IProps {
     familieforhold: IFamilieforhold;
     harForsoktNesteSteg: boolean;
     settAnnenForelderNavn: (navn: string) => void;
-    settAnnenForelderFodselsnummer: (personnummer: string) => void;
+    settAnnenForelderFødselsnummer: (personnummer: string) => void;
 }
 
 type AnnenForelderInfoProps = IProps & InjectedIntlProps;
@@ -19,7 +19,7 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
     intl,
     harForsoktNesteSteg,
     settAnnenForelderNavn,
-    settAnnenForelderFodselsnummer,
+    settAnnenForelderFødselsnummer,
 }) => {
     const feltMedFeil = hentFeltMedFeil(familieforhold, harForsoktNesteSteg, intl);
     return (
@@ -37,15 +37,15 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
                 maxLength={50}
             />
             <Input
-                name="annenforelder.fodselsnummer"
+                name="annenforelder.fødselsnummer"
                 label={intl.formatMessage({
-                    id: 'familieforhold.annenForelder.fodselsnummer.placeholder',
+                    id: 'familieforhold.annenForelder.fødselsnummer.placeholder',
                 })}
                 onBlur={(event: React.SyntheticEvent<EventTarget>) => {
-                    settAnnenForelderFodselsnummer((event.target as HTMLInputElement).value);
+                    settAnnenForelderFødselsnummer((event.target as HTMLInputElement).value);
                 }}
-                defaultValue={familieforhold.annenForelderFodselsnummer.verdi}
-                feil={feltMedFeil.annenForelderFodselsnummer}
+                defaultValue={familieforhold.annenForelderFødselsnummer.verdi}
+                feil={feltMedFeil.annenForelderFødselsnummer}
                 type={'tel'}
                 autoComplete={'off'}
                 maxLength={11}

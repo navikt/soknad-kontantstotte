@@ -21,7 +21,7 @@ interface IMapStateToProps {
 interface IMapDispatchToProps {
     settBorForeldreneSammenMedBarnetOgNullstillNeste: (verdi: Svar) => void;
     settAnnenForelderNavn: (navn: string) => void;
-    settAnnenForelderFodselsnummer: (personnummer: string) => void;
+    settAnnenForelderFødselsnummer: (personnummer: string) => void;
     nesteSteg: () => void;
 }
 
@@ -85,8 +85,8 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
 const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         nesteSteg: () => dispatch(soknadNesteSteg()),
-        settAnnenForelderFodselsnummer: personnr => {
-            dispatch(soknadValiderFelt('familieforhold', 'annenForelderFodselsnummer', personnr));
+        settAnnenForelderFødselsnummer: personnr => {
+            dispatch(soknadValiderFelt('familieforhold', 'annenForelderFødselsnummer', personnr));
         },
         settAnnenForelderNavn: navn => {
             dispatch(soknadValiderFelt('familieforhold', 'annenForelderNavn', navn));

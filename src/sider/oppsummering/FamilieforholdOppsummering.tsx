@@ -40,10 +40,10 @@ const FamilieforholdOppsummering: React.StatelessComponent<FamilieforholdOppsumm
                     <SporsmalSvar
                         sporsmal={
                             <FormattedMessage
-                                id={'oppsummering.familieforhold.annenForelderFodselsnummer.label'}
+                                id={'oppsummering.familieforhold.annenForelderFødselsnummer.label'}
                             />
                         }
-                        svar={familieforhold.annenForelderFodselsnummer.verdi}
+                        svar={familieforhold.annenForelderFødselsnummer.verdi}
                     />
                 </>
             )}

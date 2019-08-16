@@ -17,7 +17,7 @@ import {
     harBekreftetOppsummering,
     harBekreftetVeiledning,
     harFyltInnDato,
-    harFyltInnFodselsnummer,
+    harFyltInnFødselsnummer,
     harFyltInnGyldigAntallTimer,
     harFyltInnNavn,
     harFyltInnTall,
@@ -98,7 +98,7 @@ const valideringsConfig: IValideringsConfig = {
         skalSlutteIBarnehageVedlegg: [harLastetOppVedlegg],
     },
     familieforhold: {
-        annenForelderFodselsnummer: [harSvartTekstMedFeilmelding, harFyltInnFodselsnummer],
+        annenForelderFødselsnummer: [harSvartTekstMedFeilmelding, harFyltInnFødselsnummer],
         annenForelderNavn: [harFyltInnNavn],
         borForeldreneSammenMedBarnet: [harSvartMedFeilmelding],
     },
@@ -110,7 +110,7 @@ const valideringsConfig: IValideringsConfig = {
     },
     mineBarn: {
         erFlerling: [svarUtenValidering],
-        fodselsdato: [harSvartTekstMedFeilmelding, harFyltInnDato],
+        fødselsdato: [harSvartTekstMedFeilmelding, harFyltInnDato],
         navn: [harFyltInnNavn],
     },
     oppsummering: {
