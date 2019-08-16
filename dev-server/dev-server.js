@@ -17,7 +17,9 @@ app.use(webpackHotMiddleware(compiler));
 
 app.get('*', (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write(middleware.fileSystem.readFileSync(path.join(__dirname, '/../dist/index.html')));
+    res.write(
+        middleware.fileSystem.readFileSync(path.join(__dirname, '/../development/index.html'))
+    );
     res.end();
 });
 
