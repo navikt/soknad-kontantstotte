@@ -83,6 +83,7 @@
     "react-router-dom": "5.0.0",
     "redux": "4.0.1",
     "redux-saga": "1.0.2",
+    "snyk": "^1.216.5",
     "url-search-params-polyfill": "5.1.0"
   },
   "resolutions": {
