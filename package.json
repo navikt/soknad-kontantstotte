@@ -1,6 +1,6 @@
 {
   "name": "soknad-kontantstotte",
-  "version": "1.0.1",
+  "version": "1.1",
   "description": "Søknad om kontantstøtte",
   "main": "index.js",
   "scripts": {
