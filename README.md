@@ -21,6 +21,8 @@ Se også `./build.sh --help` for alternativer
 
 ---
 
+# Rollback
+
 # Henvendelser
 
 Spørsmål knyttet til koden eller prosjektet kan rettes til <epost>

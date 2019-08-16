@@ -84,7 +84,7 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
                 tittel={intl.formatMessage({ id: 'barn.tittel' })}
                 intl={intl}
             >
-                <form>
+                <form className={'mine-barn__form'}>
                     <RadioPanelGruppe
                         legend={intl.formatMessage({ id: 'barn.subtittel.vanlig' })}
                         name={'mine-barn__sporsmal'}
