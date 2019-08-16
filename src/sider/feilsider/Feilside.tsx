@@ -1,4 +1,4 @@
-import { AlertStripeAdvarselSolid } from 'nav-frontend-alertstriper';
+import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import { Sidetittel } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -27,14 +27,14 @@ const Feilside: React.StatelessComponent<IFeilside> = ({ ikon, tekster, knapp })
                 <FormattedMessage id={tekster.tittel} defaultMessage={'Obs!'} />
             </h3>
 
-            <AlertStripeAdvarselSolid className={'feilside__alertstripe'}>
+            <AlertStripeAdvarsel className={'feilside__alertstripe'}>
                 <FormattedMessage
                     id={tekster.feilmelding}
                     defaultMessage={
                         'En feil har oppstått og vi klarer ikke vise deg søknaden. Prøv igjen senere'
                     }
                 />
-            </AlertStripeAdvarselSolid>
+            </AlertStripeAdvarsel>
 
             {knapp !== undefined ? (
                 knapp

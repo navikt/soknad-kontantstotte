@@ -13,21 +13,21 @@ import { sendInnSoknad } from './api';
 function* mapStateToModel(): object {
     const soknad = yield select(selectSoknad);
 
-    const strippetSoknad = Object.entries(soknad).reduce((acc: object, [stegKey, steg]) => {
+    const strippetSoknad = Object.keys(soknad).reduce((acc: object, stegKey: string) => {
         return {
             ...acc,
             [stegKey]: {
-                ...Object.entries(steg).reduce((accFelt: object, [feltKey, felt]) => {
-                    if (isIVedleggFelt(felt)) {
+                ...Object.keys(soknad[stegKey]).reduce((accFelt: object, feltKey) => {
+                    if (isIVedleggFelt(soknad[stegKey][feltKey])) {
                         return {
                             ...accFelt,
-                            [feltKey]: felt.verdi.map((v: IVedlegg) => ({
+                            [feltKey]: soknad[stegKey][feltKey].verdi.map((v: IVedlegg) => ({
                                 filnavn: v.filnavn,
                                 filreferanse: v.filreferanse,
                             })),
                         };
                     }
-                    return { ...accFelt, [feltKey]: felt.verdi };
+                    return { ...accFelt, [feltKey]: soknad[stegKey][feltKey].verdi };
                 }, {}),
             },
         };

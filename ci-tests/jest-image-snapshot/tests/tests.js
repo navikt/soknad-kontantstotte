@@ -80,7 +80,9 @@ describe('soknad-kontantstotte', () => {
 
         test('mine-barn-utfylt', async () => {
             if ((await page.$('.inputPanelGruppe')) !== null) {
-                await page.click('[name="mine-barn__sporsmal"][value="2"]');
+                await page.evaluate(() =>
+                    document.querySelector('[name="mine-barn__sporsmal"][value="2"]').click()
+                );
             } else {
                 await page.type('.mine-barn__navn-input > input', 'NAVNESEN JENTEBARN');
                 await page.type('.mine-barn__fodselsdato-input > input', '01.01.2018');
@@ -110,8 +112,14 @@ describe('soknad-kontantstotte', () => {
         });
 
         test('barnehageplass-utfylt', async () => {
-            await page.click('[name="harBarnehageplass"][value="JA"]');
-            await page.click('[name="barnBarnehageplassStatus"][value="harBarnehageplass"]');
+            await page.evaluate(() =>
+                document.querySelector('[name="harBarnehageplass"][value="JA"]').click()
+            );
+            await page.evaluate(() =>
+                document
+                    .querySelector('[name="barnBarnehageplassStatus"][value="harBarnehageplass"]')
+                    .click()
+            );
 
             await page.type('.barnehageplass__dato-input input', '20.12.2018');
             await page.type('.barnehageplass__kommune-input input', 'Oslo');
@@ -128,7 +136,9 @@ describe('soknad-kontantstotte', () => {
         });
 
         test('familieforhold-feilmelding', async () => {
-            await page.click('[name="borForeldreneSammenMedBarnet"][value="JA"]');
+            await page.evaluate(() =>
+                document.querySelector('[name="borForeldreneSammenMedBarnet"][value="JA"]').click()
+            );
             await page.click('.knapp.knapp--hoved');
             await page.waitFor('.skjemaelement__feilmelding');
             await takeSnapshot(`familieforhold-feilmelding-${name}`, page);
@@ -148,30 +158,56 @@ describe('soknad-kontantstotte', () => {
         });
 
         test('arbeid-i-utlandet-plain', async () => {
-            await page.click('[name="boddEllerJobbetINorgeMinstFemAar"][value="jaINorge"]');
-            await page.click(
-                '[name="annenForelderBoddEllerJobbetINorgeMinstFemAar"][value="jaINorge"]'
+            await page.evaluate(() =>
+                document
+                    .querySelector('[name="boddEllerJobbetINorgeMinstFemAar"][value="jaINorge"]')
+                    .click()
+            );
+            await page.evaluate(() =>
+                document
+                    .querySelector(
+                        '[name="annenForelderBoddEllerJobbetINorgeMinstFemAar"][value="jaINorge"]'
+                    )
+                    .click()
             );
             await page.click('.knapp.knapp--hoved');
             await takeSnapshot(`arbeid-i-utlandet-plain-${name}`, page);
         });
 
         test('utenlandske-ytelser-plain', async () => {
-            await page.click('[name="arbeiderIUtlandetEllerKontinentalsokkel"][value="NEI"]');
-            await page.click('[name="arbeiderAnnenForelderIUtlandet"][value="NEI"]');
+            await page.evaluate(() =>
+                document
+                    .querySelector('[name="arbeiderIUtlandetEllerKontinentalsokkel"][value="NEI"]')
+                    .click()
+            );
+            await page.evaluate(() =>
+                document
+                    .querySelector('[name="arbeiderAnnenForelderIUtlandet"][value="NEI"]')
+                    .click()
+            );
             await page.click('.knapp.knapp--hoved');
             await takeSnapshot(`utenlandske-ytelser-plain-${name}`, page);
         });
 
         test('utenlandske-kontantstotte-plain', async () => {
-            await page.click('[name="mottarYtelserFraUtland"][value="NEI"]');
-            await page.click('[name="mottarAnnenForelderYtelserFraUtland"][value="NEI"]');
+            await page.evaluate(() =>
+                document.querySelector('[name="mottarYtelserFraUtland"][value="NEI"]').click()
+            );
+            await page.evaluate(() =>
+                document
+                    .querySelector('[name="mottarAnnenForelderYtelserFraUtland"][value="NEI"]')
+                    .click()
+            );
             await page.click('.knapp.knapp--hoved');
             await takeSnapshot(`utenlandske-kontantstotte-plain-${name}`, page);
         });
 
         test('oppsummering-plain', async () => {
-            await page.click('[name="mottarKontantstotteFraUtlandet"][value="NEI"]');
+            await page.evaluate(() =>
+                document
+                    .querySelector('[name="mottarKontantstotteFraUtlandet"][value="NEI"]')
+                    .click()
+            );
             await page.click('.knapp.knapp--hoved');
             await page.waitFor('.oppsummering');
             await takeSnapshot(`oppsummering-plain-${name}`, page);
@@ -230,7 +266,9 @@ async function veiledningTilOppsummering(page) {
 
     // Mine barn
     if ((await page.$('.inputPanelGruppe')) !== null) {
-        await page.click('[name="mine-barn__sporsmal"][value="0"]');
+        await page.evaluate(() =>
+            document.querySelector('[name="mine-barn__sporsmal"][value="0"]').click()
+        );
     } else {
         await page.type('.mine-barn__navn-input > input', 'NAVNESEN JENTEBARN');
         await page.type('.mine-barn__fodselsdato-input > input', '01.01.2018');
@@ -238,27 +276,47 @@ async function veiledningTilOppsummering(page) {
     await page.click('.knapp.knapp--hoved');
 
     // Barnehageplass
-    await page.click('[name="harBarnehageplass"][value="NEI"]');
-    await page.click('[name="barnBarnehageplassStatus"][value="garIkkeIBarnehage"]');
+    await page.evaluate(() =>
+        document.querySelector('[name="harBarnehageplass"][value="NEI"]').click()
+    );
+    await page.evaluate(() =>
+        document
+            .querySelector('[name="barnBarnehageplassStatus"][value="garIkkeIBarnehage"]')
+            .click()
+    );
     await page.click('.knapp.knapp--hoved');
 
     // Familieforhold
-    await page.click('[name="borForeldreneSammenMedBarnet"][value="NEI"]');
+    await page.evaluate(() =>
+        document.querySelector('[name="borForeldreneSammenMedBarnet"][value="NEI"]').click()
+    );
     await page.click('.knapp.knapp--hoved');
 
     // Tilknytning til utland
-    await page.click('[name="boddEllerJobbetINorgeMinstFemAar"][value="jaINorge"]');
+    await page.evaluate(() =>
+        document
+            .querySelector('[name="boddEllerJobbetINorgeMinstFemAar"][value="jaINorge"]')
+            .click()
+    );
     await page.click('.knapp.knapp--hoved');
 
     // Arbeid i utlandet
-    await page.click('[name="arbeiderIUtlandetEllerKontinentalsokkel"][value="NEI"]');
+    await page.evaluate(() =>
+        document
+            .querySelector('[name="arbeiderIUtlandetEllerKontinentalsokkel"][value="NEI"]')
+            .click()
+    );
     await page.click('.knapp.knapp--hoved');
 
     // Utenlandske ytelser
-    await page.click('[name="mottarYtelserFraUtland"][value="NEI"]');
+    await page.evaluate(() =>
+        document.querySelector('[name="mottarYtelserFraUtland"][value="NEI"]').click()
+    );
     await page.click('.knapp.knapp--hoved');
 
     // Kontantstøtte utlandet
-    await page.click('[name="mottarKontantstotteFraUtlandet"][value="NEI"]');
+    await page.evaluate(() =>
+        document.querySelector('[name="mottarKontantstotteFraUtlandet"][value="NEI"]').click()
+    );
     await page.click('.knapp.knapp--hoved');
 }
