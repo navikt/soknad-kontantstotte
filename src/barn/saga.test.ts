@@ -6,7 +6,7 @@ describe('barn - saga', () => {
             expect(
                 genererFlerling([
                     { fulltnavn: 'test', fødselsnummer: '00000000001', fødselsdato: '01.01.2018' },
-                    { fulltnavn: 'test1', fødselsnummer: '00000000001', fødselsdato: '01.01.2016' },
+                    { fulltnavn: 'test1', fødselsnummer: '00000000002', fødselsdato: '01.01.2016' },
                 ])
             ).toEqual([
                 [{ fulltnavn: 'test', fødselsnummer: '00000000001', fødselsdato: '01.01.2018' }],
