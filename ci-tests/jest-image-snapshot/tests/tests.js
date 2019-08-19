@@ -85,7 +85,7 @@ describe('soknad-kontantstotte', () => {
                 );
             } else {
                 await page.type('.mine-barn__navn-input > input', 'NAVNESEN JENTEBARN');
-                await page.type('.mine-barn__fodselsdato-input > input', '01.01.2018');
+                await page.type('.mine-barn__fødselsdato-input > input', '01.01.2018');
             }
             await page.click('.typo-undertittel');
             await takeSnapshot(`mine-barn-utfylt-${name}`, page);
@@ -146,7 +146,7 @@ describe('soknad-kontantstotte', () => {
 
         test('familieforhold-utfylt', async () => {
             await page.type('[name="annenForelder.navn"]', 'Mockman McMockface');
-            await page.type('[name="annenforelder.fodselsnummer"]', '00000000000');
+            await page.type('[name="annenforelder.fødselsnummer"]', '00000000000');
             await page.click('.typo-undertittel');
             await takeSnapshot(`familieforhold-utfylt-${name}`, page);
         });
@@ -271,7 +271,7 @@ async function veiledningTilOppsummering(page) {
         );
     } else {
         await page.type('.mine-barn__navn-input > input', 'NAVNESEN JENTEBARN');
-        await page.type('.mine-barn__fodselsdato-input > input', '01.01.2018');
+        await page.type('.mine-barn__fødselsdato-input > input', '01.01.2018');
     }
     await page.click('.knapp.knapp--hoved');
 

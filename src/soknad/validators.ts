@@ -88,10 +88,10 @@ const harFyltInnDato = (felt: IFelt): IFelt => {
     return ok(felt);
 };
 
-const harFyltInnFodselsnummer = (felt: IFelt): IFelt => {
+const harFyltInnFødselsnummer = (felt: IFelt): IFelt => {
     return /^\d{11}$/.test(felt.verdi.replace(' ', ''))
         ? ok(felt)
-        : feil(felt, 'feilmelding.generell.fodselsnummer');
+        : feil(felt, 'feilmelding.generell.fødselsnummer');
 };
 
 const harFyltInnTall = (felt: IFelt): IFelt => {
@@ -153,7 +153,7 @@ export {
     harBekreftetOppsummering,
     harBekreftetVeiledning,
     harFyltInnDato,
-    harFyltInnFodselsnummer,
+    harFyltInnFødselsnummer,
     harFyltInnGyldigAntallTimer,
     harFyltInnNavn,
     harFyltInnTall,

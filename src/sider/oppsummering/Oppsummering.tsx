@@ -61,7 +61,7 @@ const Oppsummering: React.StatelessComponent<OppsummeringSideProps> = ({
             <SoknadPanel className={'oppsummering__panel'}>
                 <PersonaliaOppsummering
                     soker={{
-                        fodselsnummer: soker.innloggetSom,
+                        fødselsnummer: soker.innloggetSom,
                         navn: soker.fulltnavn,
                         statsborgerskap: soker.statsborgerskap,
                     }}

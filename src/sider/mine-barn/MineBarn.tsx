@@ -28,7 +28,8 @@ interface IMapStateToProps {
 
 interface IMapDispatchToProps {
     settBarnNavn: (navn: string) => void;
-    settBarnFodselsdato: (fodselsdato: string) => void;
+    settBarnFødselsdato: (fødselsdato: string) => void;
+    settBarnFødselsnummer: (fødselsnummer: string) => void;
     settBarnFlerlingStatus: (flerlingStatus: Svar) => void;
 }
 
@@ -51,7 +52,7 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
                     return (
                         <div key={b.fulltnavn}>
                             <div className={'mine-barn__barn-navn'}>{b.fulltnavn}</div>
-                            <div>{b.fodselsdato}</div>
+                            <div>{b.fødselsdato}</div>
                         </div>
                     );
                 }),
@@ -90,7 +91,7 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
                         onChange={this.handleChange}
                         checked={this.state.selected}
                         radios={this.state.vanligeBarn}
-                        feil={feltMedFeil.fodselsdato}
+                        feil={feltMedFeil.fødselsdato}
                     />
 
                     {this.state.flerlinger.length > 0 && (
@@ -100,7 +101,7 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
                             onChange={this.handleChange}
                             checked={this.state.selected}
                             radios={this.state.flerlinger}
-                            feil={feltMedFeil.fodselsdato}
+                            feil={feltMedFeil.fødselsdato}
                         />
                     )}
                 </form>
@@ -134,10 +135,14 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
         };
 
         const navn = nyttValgtBarn.barn.map(b => b.fulltnavn).reduce(joinBarnFelter, '');
-        const fodselsdato = nyttValgtBarn.barn.map(b => b.fodselsdato).reduce(joinBarnFelter, '');
+        const fødselsdato = nyttValgtBarn.barn.map(b => b.fødselsdato).reduce(joinBarnFelter, '');
+        const fødselsnummer = nyttValgtBarn.barn
+            .map(b => b.fødselsnummer)
+            .reduce(joinBarnFelter, '');
 
         this.props.settBarnNavn(navn);
-        this.props.settBarnFodselsdato(fodselsdato);
+        this.props.settBarnFødselsdato(fødselsdato);
+        this.props.settBarnFødselsnummer(fødselsnummer);
         this.props.settBarnFlerlingStatus(nyttValgtBarn.erFlerling ? Svar.JA : Svar.NEI);
     }
 }
@@ -154,8 +159,10 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
     return {
         settBarnFlerlingStatus: (flerlingStatus: Svar) =>
             dispatch(soknadValiderFelt('mineBarn', 'erFlerling', flerlingStatus)),
-        settBarnFodselsdato: (fodselsdato: string) =>
-            dispatch(soknadValiderFelt('mineBarn', 'fodselsdato', fodselsdato)),
+        settBarnFødselsdato: (fødselsdato: string) =>
+            dispatch(soknadValiderFelt('mineBarn', 'fødselsdato', fødselsdato)),
+        settBarnFødselsnummer: fødselsnummer =>
+            dispatch(soknadValiderFelt('mineBarn', 'fødselsnummer', fødselsnummer)),
         settBarnNavn: (navn: string) => dispatch(soknadValiderFelt('mineBarn', 'navn', navn)),
     };
 };

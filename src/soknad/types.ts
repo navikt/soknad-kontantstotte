@@ -71,14 +71,15 @@ interface IVeiledning extends ISteg {
 
 interface IMineBarn extends ISteg {
     readonly erFlerling: IFelt;
-    readonly fodselsdato: IFelt;
+    readonly fødselsdato: IFelt;
+    readonly fødselsnummer: IFelt;
     readonly navn: IFelt;
 }
 
 interface IFamilieforhold extends ISteg {
     readonly borForeldreneSammenMedBarnet: IFelt;
     readonly annenForelderNavn: IFelt;
-    readonly annenForelderFodselsnummer: IFelt;
+    readonly annenForelderFødselsnummer: IFelt;
 }
 
 interface IUtenlandskKontantstotte extends ISteg {

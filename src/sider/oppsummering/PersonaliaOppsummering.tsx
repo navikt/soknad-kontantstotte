@@ -5,7 +5,7 @@ import OppsummeringSteg from './OppsummeringSteg';
 
 interface IMapStateToProps {
     soker: {
-        fodselsnummer: string;
+        fødselsnummer: string;
         navn: string;
         statsborgerskap: string;
     };
@@ -21,8 +21,8 @@ const PersonaliaOppsummering: React.StatelessComponent<PersonaliaOgBarnProps> = 
             </Element>
             <Normaltekst>{soker.navn}</Normaltekst>
             <Normaltekst>
-                <FormattedMessage id="oppsummering.fodselsnummer.label" />
-                {soker.fodselsnummer}
+                <FormattedMessage id="oppsummering.fødselsnummer.label" />
+                {soker.fødselsnummer}
             </Normaltekst>
             <Normaltekst>
                 <FormattedMessage id="oppsummering.statsborgerskap.label" />

@@ -64,7 +64,7 @@ const initialState: ISoknadState = {
         skalSlutteIBarnehageVedlegg: standardVedleggInitialFelt,
     },
     familieforhold: {
-        annenForelderFodselsnummer: standardStringInitialFelt,
+        annenForelderFødselsnummer: standardStringInitialFelt,
         annenForelderNavn: standardStringInitialFelt,
         borForeldreneSammenMedBarnet: standardSvarInitialFelt,
     },
@@ -76,7 +76,8 @@ const initialState: ISoknadState = {
     },
     mineBarn: {
         erFlerling: standardSvarInitialFelt,
-        fodselsdato: standardStringInitialFelt,
+        fødselsdato: standardStringInitialFelt,
+        fødselsnummer: standardStringInitialFelt,
         navn: standardStringInitialFelt,
     },
     oppsummering: {
