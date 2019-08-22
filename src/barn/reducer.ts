@@ -4,11 +4,13 @@ import { IBarn } from './types';
 interface IBarnState {
     readonly barn: IBarn[];
     readonly henter: boolean;
+    indeksForValgtBarn: string;
 }
 
 const initialState: IBarnState = {
     barn: [],
     henter: false,
+    indeksForValgtBarn: '',
 };
 
 function barnReducer(state = initialState, action: BarnActionTypes) {
@@ -30,6 +32,11 @@ function barnReducer(state = initialState, action: BarnActionTypes) {
                 henter: false,
             };
         }
+        case BarnTypeKeys.SETT_INDEKS_FOR_VALGT_BARN:
+            return {
+                ...state,
+                indeksForValgtBarn: action.indeks,
+            };
         default:
             return state;
     }

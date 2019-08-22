@@ -5,4 +5,8 @@ function selectBarn(state: IRootState): IBarn[] {
     return state.barn.barn;
 }
 
-export { selectBarn };
+function selectIndeksForValgtBarn(state: IRootState) {
+    return state.barn.indeksForValgtBarn;
+}
+
+export { selectBarn, selectIndeksForValgtBarn };

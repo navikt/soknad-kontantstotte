@@ -5,7 +5,8 @@ import { FormattedHTMLMessage, InjectedIntlProps, injectIntl } from 'react-intl'
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
-import { selectBarn } from '../../barn/selectors';
+import { selectBarn, selectIndeksForValgtBarn } from '../../barn/selectors';
+import { barnSettIndeksForValgtBarn } from '../../barn/actions';
 import { IBarn } from '../../barn/types';
 import { hentFeltMedFeil } from '../../common/utils';
 import BarnIkon from '../../component/Ikoner/BarnIkon';
@@ -24,6 +25,7 @@ interface IMapStateToProps {
     barn: IBarn[];
     harForsoktNesteSteg: boolean;
     valgtBarn: IMineBarn;
+    indeksForValgtBarn: string;
 }
 
 interface IMapDispatchToProps {
@@ -31,6 +33,7 @@ interface IMapDispatchToProps {
     settBarnFødselsdato: (fødselsdato: string) => void;
     settBarnFødselsnummer: (fødselsnummer: string) => void;
     settBarnFlerlingStatus: (flerlingStatus: Svar) => void;
+    settIndeksForValgtBarn: (indeks: string) => void;
 }
 
 type MineBarnSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlProps;
@@ -38,7 +41,6 @@ type MineBarnSideProps = IMapStateToProps & IMapDispatchToProps & InjectedIntlPr
 interface IMineBarnState {
     vanligeBarn: IRadioContent[];
     flerlinger: IRadioContent[];
-    selected: string;
 }
 
 class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
@@ -67,7 +69,6 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
 
         this.state = {
             flerlinger,
-            selected: '',
             vanligeBarn,
         };
     }
@@ -89,7 +90,7 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
                         legend={intl.formatMessage({ id: 'barn.subtittel.vanlig' })}
                         name={'mine-barn__sporsmal'}
                         onChange={this.handleChange}
-                        checked={this.state.selected}
+                        checked={this.props.indeksForValgtBarn}
                         radios={this.state.vanligeBarn}
                         feil={feltMedFeil.fødselsdato}
                     />
@@ -99,7 +100,7 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
                             legend={intl.formatMessage({ id: 'barn.subtittel.flerling' })}
                             name={'mine-barn__sporsmal'}
                             onChange={this.handleChange}
-                            checked={this.state.selected}
+                            checked={this.props.indeksForValgtBarn}
                             radios={this.state.flerlinger}
                             feil={feltMedFeil.fødselsdato}
                         />
@@ -116,8 +117,6 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
     }
 
     private handleChange(evt: {}, value: string) {
-        this.setState({ selected: value });
-
         const nyttValgtBarn = this.props.barn.find(b => `${b.index}` === value);
 
         if (nyttValgtBarn == null) {
@@ -144,6 +143,7 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
         this.props.settBarnFødselsdato(fødselsdato);
         this.props.settBarnFødselsnummer(fødselsnummer);
         this.props.settBarnFlerlingStatus(nyttValgtBarn.erFlerling ? Svar.JA : Svar.NEI);
+        this.props.settIndeksForValgtBarn(value);
     }
 }
 
@@ -152,6 +152,7 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
         barn: selectBarn(state),
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
         valgtBarn: selectMineBarn(state),
+        indeksForValgtBarn: selectIndeksForValgtBarn(state),
     };
 };
 
@@ -164,6 +165,7 @@ const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => {
         settBarnFødselsnummer: fødselsnummer =>
             dispatch(soknadValiderFelt('mineBarn', 'fødselsnummer', fødselsnummer)),
         settBarnNavn: (navn: string) => dispatch(soknadValiderFelt('mineBarn', 'navn', navn)),
+        settIndeksForValgtBarn: (indeks: string) => dispatch(barnSettIndeksForValgtBarn(indeks)),
     };
 };
 
