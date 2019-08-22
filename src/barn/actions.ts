@@ -8,7 +8,7 @@ enum BarnTypeKeys {
     SETT_INDEKS_FOR_VALGT_BARN = 'SETT_INDEKS_FOR_VALGT_BARN',
 }
 
-type BarnActionTypes = IBarnHent | IBarnHentOk | IBarnHentFeilet | IAppSettIndeksForValgtBarn;
+type BarnActionTypes = IBarnHent | IBarnHentOk | IBarnHentFeilet | IBarnSettIndeksForValgtBarn;
 
 interface IBarnHent extends Action {
     type: BarnTypeKeys.HENT;
@@ -23,7 +23,7 @@ interface IBarnHentFeilet extends Action {
     type: BarnTypeKeys.HENT_FEILET;
 }
 
-interface IAppSettIndeksForValgtBarn extends Action {
+interface IBarnSettIndeksForValgtBarn extends Action {
     indeks: string;
     type: BarnTypeKeys.SETT_INDEKS_FOR_VALGT_BARN;
 }
@@ -47,7 +47,7 @@ function barnHentFeilet(): IBarnHentFeilet {
     };
 }
 
-function barnSettIndeksForValgtBarn(indeks: string): IAppSettIndeksForValgtBarn {
+function barnSettIndeksForValgtBarn(indeks: string): IBarnSettIndeksForValgtBarn {
     return {
         type: BarnTypeKeys.SETT_INDEKS_FOR_VALGT_BARN,
         indeks,
