@@ -201,7 +201,7 @@ workflows:
       - slack/approval-notification:
           context: familie-ci
           mentions: 'here'
-          message: Godkjenn deploy av branchen \`master\` til \`prod-fss\`
+          message: Godkjenn deploy av branchen \`master\` til \`prod-sbs\`
           filters:
             branches:
               ignore: /pull\/.*/
@@ -242,7 +242,7 @@ workflows:
             - test-ci
       - slack/approval-notification:
           context: familie-ci
-          message: Godkjenn deploy av branchen \`${CIRCLE_BRANCH}\` til \`dev-fss\`
+          message: Godkjenn deploy av branchen \`${CIRCLE_BRANCH}\` til \`dev-sbs\`
           filters:
             branches:
               ignore: /pull\/.*/
