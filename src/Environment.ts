@@ -14,6 +14,16 @@ const Environment = (): IEnvUrls => {
                 'https://www.nav.no/no/Person/Skjemaer-for-privatpersoner/skjemaveileder/vedlegg?key=235029&veiledertype=privatperson&method=mail',
             saksoversikt: 'https://tjenester.nav.no/saksoversikt/app',
         };
+    } else if (
+        window.location.hostname.indexOf('soknad-kontantstotte-e2e') > -1 ||
+        window.location.hostname.indexOf('localhost') > -1
+    ) {
+        return {
+            apiUrl: 'http://localhost:8000/api',
+            loginUrl: '',
+            papirsoknad: '',
+            saksoversikt: '',
+        };
     } else if (window.location.hostname.indexOf('ci-test-server') > -1) {
         return {
             apiUrl: '/soknad-kontantstotte-api/api',
