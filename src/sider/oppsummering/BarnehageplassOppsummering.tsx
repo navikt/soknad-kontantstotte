@@ -1,6 +1,7 @@
 import { Element } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { harHattBarnehageplassOver33TimerPrUkeSisteTreMåneder } from '../../common/utils';
 import { BarnehageplassVerdier, IBarnehageplass, ValideringsStatus } from '../../soknad/types';
 import { stegConfig } from '../../stegConfig';
 import { JaNeiSvar } from './JaNeiSvar';
@@ -188,8 +189,11 @@ const BarnehageplassOppsummering: React.StatelessComponent<IBarnehageplassOppsum
                         }
                         svar={barnehageplass.harBarnehageplassAntallTimer.verdi}
                     />
-                    {barnehageplass.harBarnehageplassAntallTimer.valideringsStatus ===
-                        ValideringsStatus.ADVARSEL && (
+                    {harHattBarnehageplassOver33TimerPrUkeSisteTreMåneder(
+                        barnehageplass.harBarnehageplassAntallTimer,
+                        barnehageplass.harBarnehageplassDato,
+                        barnehageplass.barnBarnehageplassStatus
+                    ) && (
                         <OppsummeringsAdvarsel
                             meldingsNokkel={
                                 brukFlertall

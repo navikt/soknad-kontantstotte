@@ -4,7 +4,6 @@ import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { IFeltFeil } from '../../common/types';
-import AdvarselIkon from '../../component/Ikoner/AdvarselIkon';
 import { IRootState } from '../../rootReducer';
 import { selectBarnehageplass } from '../../soknad/selectors';
 import { BarnehageplassVerdier, Feltnavn, IFelt, ValideringsStatus } from '../../soknad/types';
@@ -76,13 +75,6 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                         autoComplete={'off'}
                         maxLength={5}
                     />
-                    {harBarnehageplassAntallTimer.valideringsStatus ===
-                        ValideringsStatus.ADVARSEL && (
-                        <AdvarselIkon
-                            className={'barnehageplass__antallTimer--advarsel'}
-                            style={{}}
-                        />
-                    )}
                 </div>
                 <Input
                     className={classNames('inputElement', 'barnehageplass__kommune-input')}
