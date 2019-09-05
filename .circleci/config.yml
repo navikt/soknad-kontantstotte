@@ -133,6 +133,39 @@ jobs:
           paths:
             - properties.env
 
+  deploy_docker_e2e:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - attach_workspace:
+          at: /home/circleci/project
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Set up environment variables
+          command: cat /home/circleci/project/properties.env >> $BASH_ENV
+      - run:
+          name: Slett test resources
+          command: rm -rf development
+      - run:
+          name: Sett docker e2e tag navn
+          command: export DOCKER_TAG_E2E="${DOCKER_TAG}-e2e"
+      - run:
+          name: Bygger Docker image
+          command: |
+            echo $DOCKER_TAG_E2E $VERSION
+            docker build -f Dockerfile.e2e -t $DOCKER_TAG_E2E .
+      - run:
+          name: Docker push
+          command: |
+            echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_LOGIN" --password-stdin
+            echo "Pushing with tag $DOCKER_TAG_E2E"
+            docker push $DOCKER_TAG_E2E
+      - persist_to_workspace:
+          root: /home/circleci/project
+          paths:
+            - properties.env
+
   deploy_dev:
       executor: nais-deployer
       steps:
@@ -194,6 +227,10 @@ workflows:
           requires:
             - test-unit
             - test-ci
+      - deploy_docker_e2e:
+          context: NAIS deployment
+          requires:
+            - deploy_docker
       - deploy_dev:
           context: familie-ci
           requires:
@@ -240,6 +277,10 @@ workflows:
           requires:
             - test-unit
             - test-ci
+      - deploy_docker_e2e:
+          context: NAIS deployment
+          requires:
+            - deploy_docker
       - slack/approval-notification:
           context: familie-ci
           message: Godkjenn deploy av branchen \`${CIRCLE_BRANCH}\` til \`dev-sbs\`
