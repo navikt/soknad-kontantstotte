@@ -14,6 +14,7 @@ import {
 } from './types';
 import {
     annenForelderHarIkkeSvartNeiTilknytningTilUtland,
+    fødselsnummerPassererMod10ogMod11Sjekk,
     harBekreftetOppsummering,
     harBekreftetVeiledning,
     harFyltInnDato,
@@ -98,7 +99,11 @@ const valideringsConfig: IValideringsConfig = {
         skalSlutteIBarnehageVedlegg: [harLastetOppVedlegg],
     },
     familieforhold: {
-        annenForelderFødselsnummer: [harSvartTekstMedFeilmelding, harFyltInnFødselsnummer],
+        annenForelderFødselsnummer: [
+            harSvartTekstMedFeilmelding,
+            harFyltInnFødselsnummer,
+            fødselsnummerPassererMod10ogMod11Sjekk,
+        ],
         annenForelderNavn: [harFyltInnNavn],
         borForeldreneSammenMedBarnet: [harSvartMedFeilmelding],
     },
