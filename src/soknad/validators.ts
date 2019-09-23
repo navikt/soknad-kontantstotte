@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import { ANTALL_LOVLIGE_TEGN_I_TEKSTFELT } from '../common/utils';
 import {
     BarnehageplassVerdier,
@@ -76,16 +77,15 @@ const harFyltInnNavn = (felt: IFelt): IFelt => {
 };
 
 const harFyltInnDato = (felt: IFelt): IFelt => {
-    const datoer = felt.verdi
-        .replace('og', ',')
-        .replace(/ /g, '')
-        .split(',');
-    for (const dato of datoer) {
-        if (!/^\d{2}\.\d{2}\.\d{4}$/.test(dato)) {
-            return feil(felt, 'feilmelding.generell.dato');
-        }
-    }
-    return ok(felt);
+    return /^\d{2}\.\d{2}\.\d{4}$/.test(felt.verdi)
+        ? ok(felt)
+        : feil(felt, 'feilmelding.generell.dato');
+};
+
+const erGyldigDato = (felt: IFelt): IFelt => {
+    return moment(felt.verdi, 'DD.MM.YYY').isValid()
+        ? ok(felt)
+        : feil(felt, 'feilmelding.generell.ugyldigDato');
 };
 
 const harFyltInnFødselsnummer = (felt: IFelt): IFelt => {
@@ -164,6 +164,7 @@ const svarUtenValidering = (felt: IFelt): IFelt => ok(felt);
 
 export {
     annenForelderHarIkkeSvartNeiTilknytningTilUtland,
+    erGyldigDato,
     fødselsnummerPassererMod10ogMod11Sjekk,
     harBekreftetOppsummering,
     harBekreftetVeiledning,
