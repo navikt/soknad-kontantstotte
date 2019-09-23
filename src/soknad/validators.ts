@@ -77,29 +77,15 @@ const harFyltInnNavn = (felt: IFelt): IFelt => {
 };
 
 const harFyltInnDato = (felt: IFelt): IFelt => {
-    const datoer = felt.verdi
-        .replace('og', ',')
-        .replace(/ /g, '')
-        .split(',');
-    for (const dato of datoer) {
-        if (!/^\d{2}\.\d{2}\.\d{4}$/.test(dato)) {
-            return feil(felt, 'feilmelding.generell.dato');
-        }
-    }
-    return ok(felt);
+    return /^\d{2}\.\d{2}\.\d{4}$/.test(felt.verdi)
+        ? ok(felt)
+        : feil(felt, 'feilmelding.generell.dato');
 };
 
 const erGyldigDato = (felt: IFelt): IFelt => {
-    const datoer = felt.verdi
-        .replace('og', ',')
-        .replace(/ /g, '')
-        .split(',');
-    for (const dato of datoer) {
-        if (!moment(dato, 'DD.MM.YYY').isValid()) {
-            return feil(felt, 'feilmelding.generell.ugyldigDato');
-        }
-    }
-    return ok(felt);
+    return moment(felt.verdi, 'DD.MM.YYY').isValid()
+        ? ok(felt)
+        : feil(felt, 'feilmelding.generell.ugyldigDato');
 };
 
 const harFyltInnFødselsnummer = (felt: IFelt): IFelt => {
