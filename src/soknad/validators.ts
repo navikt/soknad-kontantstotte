@@ -83,7 +83,7 @@ const harFyltInnDato = (felt: IFelt): IFelt => {
 };
 
 const erGyldigDato = (felt: IFelt): IFelt => {
-    return moment(felt.verdi, 'DD.MM.YYY').isValid()
+    return moment(felt.verdi, 'DD.MM.YYYY').isValid()
         ? ok(felt)
         : feil(felt, 'feilmelding.generell.ugyldigDato');
 };
