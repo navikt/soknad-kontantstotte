@@ -7,11 +7,22 @@ import VedleggOpplastingFeilet from './sider/feilsider/VedleggOpplastingFeilet';
 import Kvittering from './sider/kvittering/Kvittering';
 import { ISteg, stegConfig } from './stegConfig';
 
+import Axios from 'axios';
 import PapirsoknadFeilside from './sider/feilsider/PapirsoknadFeilside';
 
 const Routes: React.StatelessComponent<{}> = () => {
+    const sentryTest = () => {
+        Axios.request({
+            method: 'GET',
+            url: '/familie-ks-sak/api/sentryFail',
+        })
+            .then(data => console.log('data: ', data))
+            .catch(error => console.log('error: ', error));
+    };
+
     return (
         <Switch>
+            <button onClick={sentryTest}>Sentry test</button>
             {Object.values(stegConfig).map(
                 (side: ISteg): JSX.Element => {
                     return <Route {...side} exact={true} key={side.key} />;
