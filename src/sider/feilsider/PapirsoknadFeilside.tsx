@@ -26,7 +26,7 @@ const PapirsoknadFeilside: React.StatelessComponent<Props> = ({ status, feilside
     const sentryTest = () => {
         Axios.request({
             method: 'GET',
-            url: '/familie-ks-sak/api/sentryFail',
+            url: 'https://localhost:8080/familie-ks-sak/api/sentryFail',
         })
             .then(data => console.log('data: ', data))
             .catch(error => console.log('error: ', error));
