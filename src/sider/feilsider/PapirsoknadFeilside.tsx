@@ -1,4 +1,3 @@
-import Axios from 'axios';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Element, Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import Veileder from 'nav-frontend-veileder';

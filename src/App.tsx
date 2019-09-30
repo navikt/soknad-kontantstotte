@@ -18,8 +18,6 @@ type Props = IMapStateToProps & RouteComponentProps<{}>;
 class App extends React.Component<Props> {
     public constructor(props: any) {
         super(props);
-
-        this.state = {};
     }
 
     public componentDidCatch(error: any, info: any) {
