@@ -25,11 +25,9 @@ type Props = IOwnProps & IMapStateToProps;
 const PapirsoknadFeilside: React.StatelessComponent<Props> = ({ status, feilsidemelding }) => {
     const sentryTest = () => {
         Axios.request({
-            method: 'GET',
-            url: 'https://localhost:8080/familie-ks-sak/api/sentryFail',
-        })
-            .then(data => console.log('data: ', data))
-            .catch(error => console.log('error: ', error));
+            method: 'POST',
+            url: '/soknad-kontantstotte/api/sentryFail',
+        }).then(data => console.log('data: ', data));
     };
 
     if (status === AppStatus.FEILSITUASJON) {
