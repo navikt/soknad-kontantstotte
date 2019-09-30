@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Element, Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import Veileder from 'nav-frontend-veileder';
@@ -22,9 +23,19 @@ interface IMapStateToProps {
 type Props = IOwnProps & IMapStateToProps;
 
 const PapirsoknadFeilside: React.StatelessComponent<Props> = ({ status, feilsidemelding }) => {
+    const sentryTest = () => {
+        Axios.request({
+            method: 'GET',
+            url: '/familie-ks-sak/api/sentryFail',
+        })
+            .then(data => console.log('data: ', data))
+            .catch(error => console.log('error: ', error));
+    };
+
     if (status === AppStatus.FEILSITUASJON) {
         return (
             <div className={'veiledning'}>
+                <button onClick={sentryTest}>Sentry test</button>
                 <div className={'veiledning__veileder-container'}>
                     <Veileder
                         posisjon={'topp'}
