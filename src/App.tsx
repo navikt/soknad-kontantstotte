@@ -1,3 +1,5 @@
+import { showReportDialog } from '@sentry/browser';
+import { captureException, configureScope, withScope } from '@sentry/core';
 import Spinner from 'nav-frontend-spinner';
 import * as React from 'react';
 import { connect } from 'react-redux';
@@ -13,15 +15,32 @@ interface IMapStateToProps {
 
 type Props = IMapStateToProps & RouteComponentProps<{}>;
 
-const App: React.StatelessComponent<Props> = ({ status }) => {
-    switch (status) {
-        case AppStatus.IKKE_STARTET:
-        case AppStatus.STARTER:
-            return <Spinner className={'app__spinner'} type={'XXL'} />;
-        default:
-            return <Routes />;
+class App extends React.Component<Props> {
+    public constructor(props: any) {
+        super(props);
     }
-};
+
+    public componentDidCatch(error: any, info: any) {
+        if (process.env.NODE_ENV !== 'development') {
+            withScope(scope => {
+                Object.keys(info).forEach(key => {
+                    scope.setExtra(key, info[key]);
+                    captureException(error);
+                });
+            });
+        }
+    }
+
+    public render() {
+        switch (this.props.status) {
+            case AppStatus.IKKE_STARTET:
+            case AppStatus.STARTER:
+                return <Spinner className={'app__spinner'} type={'XXL'} />;
+            default:
+                return <Routes />;
+        }
+    }
+}
 
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
