@@ -23,17 +23,9 @@ interface IMapStateToProps {
 type Props = IOwnProps & IMapStateToProps;
 
 const PapirsoknadFeilside: React.StatelessComponent<Props> = ({ status, feilsidemelding }) => {
-    const sentryTest = () => {
-        Axios.request({
-            method: 'POST',
-            url: '/soknad-kontantstotte/api/sentryFail',
-        }).then(data => console.log('data: ', data));
-    };
-
     if (status === AppStatus.FEILSITUASJON) {
         return (
             <div className={'veiledning'}>
-                <button onClick={sentryTest}>Sentry test</button>
                 <div className={'veiledning__veileder-container'}>
                     <Veileder
                         posisjon={'topp'}
