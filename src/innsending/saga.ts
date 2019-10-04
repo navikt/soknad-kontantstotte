@@ -5,7 +5,7 @@ import { SagaIterator } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { appEndreStatus } from '../app/actions';
 import { selectValgtSprak } from '../app/selectors';
-import { AppStatus } from '../app/types';
+import { AppStatus, ISprak } from '../app/types';
 import { selectBarn, selectIndeksForValgtBarn } from '../barn/selectors';
 import { IBarn, IBarnDTO } from '../barn/types';
 import { selectSoker } from '../soker/selectors';
@@ -63,63 +63,11 @@ const mapStandpunktTilBoolean = (standpunkt: string): boolean => {
     }
 };
 
-const mapAktørArbeidYtelseUtland = (
-    soknad: ISoknadState,
-    fødselsnummer: string,
-    annenPart: boolean
-): IAktørArbeidYtelseUtland => {
-    return {
-        arbeidIUtlandet: !annenPart
-            ? toStandpunkt(soknad.arbeidIUtlandet.arbeiderIUtlandetEllerKontinentalsokkel.verdi)
-            : toStandpunkt(soknad.arbeidIUtlandet.arbeiderAnnenForelderIUtlandet.verdi),
-        arbeidIUtlandetForklaring: !annenPart
-            ? soknad.arbeidIUtlandet.arbeiderAnnenForelderIUtlandetForklaring.verdi
-            : soknad.arbeidIUtlandet.arbeiderIUtlandetEllerKontinentalsokkelForklaring.verdi,
-        fødselsnummer,
-        kontantstøtteIUtlandet: !annenPart
-            ? toStandpunkt(soknad.utenlandskKontantstotte.mottarKontantstotteFraUtlandet.verdi)
-            : Standpunkt.UBESVART,
-        kontantstøtteIUtlandetForklaring: !annenPart
-            ? soknad.utenlandskKontantstotte.mottarKontantstotteFraUtlandetTilleggsinfo.verdi
-            : '',
-        ytelseIUtlandet: !annenPart
-            ? toStandpunkt(soknad.utenlandskeYtelser.mottarYtelserFraUtland.verdi)
-            : toStandpunkt(soknad.utenlandskeYtelser.mottarAnnenForelderYtelserFraUtland.verdi),
-        ytelseIUtlandetForklaring: !annenPart
-            ? soknad.utenlandskeYtelser.mottarYtelserFraUtlandForklaring.verdi
-            : soknad.utenlandskeYtelser.mottarAnnenForelderYtelserFraUtlandForklaring.verdi,
-    };
-};
-
-const mapAktørTilknytningUtland = (
-    soknad: ISoknadState,
-    fødselsnummer: string,
-    annenPart: boolean
-): IAktørTilknytningUtland => {
-    return {
-        boddEllerJobbetINorgeMinstFemAar: !annenPart
-            ? toTilknytningTilUtlandVerdier(
-                  soknad.tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.verdi
-              )
-            : toTilknytningTilUtlandVerdier(
-                  soknad.tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.verdi
-              ),
-        boddEllerJobbetINorgeMinstFemAarForklaring: !annenPart
-            ? soknad.tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAarForklaring.verdi
-            : soknad.tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring
-                  .verdi,
-        fødselsnummer,
-    };
-};
-
-const mapNorskDatoTilIso = (dato: string) => {
-    return moment(dato, 'DD.MM.YYYY').format('YYYY-MM-DD');
-};
-
 const mapStateToKontraktSøknad = (
     barna?: IBarn[],
     indeksForValgtBarn?: string,
     soknad?: ISoknadState,
+    språk?: ISprak,
     søker?: ISoker
 ): IKontraktSøknad => {
     if (!barna) {
@@ -132,6 +80,10 @@ const mapStateToKontraktSøknad = (
 
     if (!soknad) {
         throw new Error('Søknad fra state mangler');
+    }
+
+    if (!språk) {
+        throw new Error('Språk fra state mangler');
     }
 
     if (!søker) {
@@ -210,6 +162,7 @@ const mapStateToKontraktSøknad = (
                     barnehageKommune,
                     barnehageStatus: soknad.barnehageplass.barnBarnehageplassStatus.verdi,
                     fødselsnummer: barn.fødselsnummer,
+                    navn: barn.fulltnavn,
                     vedlegg,
                 })
             )
@@ -217,6 +170,7 @@ const mapStateToKontraktSøknad = (
         borBeggeForeldreSammen: mapStandpunktTilBoolean(
             soknad.familieforhold.borForeldreneSammenMedBarnet.verdi
         ),
+        oppgittAnnenPartNavn: soknad.familieforhold.annenForelderNavn.verdi,
     };
 
     const oppgittUtlandsTilknytning: IOppgittUtlandsTilknytning = {
@@ -243,10 +197,64 @@ const mapStateToKontraktSøknad = (
         oppgittErklæring,
         oppgittFamilieforhold,
         oppgittUtlandsTilknytning,
+        språk,
         søkerFødselsnummer: søker.innloggetSom,
     };
 
     return kontraktSøknad;
+};
+
+const mapAktørArbeidYtelseUtland = (
+    soknad: ISoknadState,
+    fødselsnummer: string,
+    annenPart: boolean
+): IAktørArbeidYtelseUtland => {
+    return {
+        arbeidIUtlandet: !annenPart
+            ? toStandpunkt(soknad.arbeidIUtlandet.arbeiderIUtlandetEllerKontinentalsokkel.verdi)
+            : toStandpunkt(soknad.arbeidIUtlandet.arbeiderAnnenForelderIUtlandet.verdi),
+        arbeidIUtlandetForklaring: !annenPart
+            ? soknad.arbeidIUtlandet.arbeiderIUtlandetEllerKontinentalsokkelForklaring.verdi
+            : soknad.arbeidIUtlandet.arbeiderAnnenForelderIUtlandetForklaring.verdi,
+        fødselsnummer,
+        kontantstøtteIUtlandet: !annenPart
+            ? toStandpunkt(soknad.utenlandskKontantstotte.mottarKontantstotteFraUtlandet.verdi)
+            : Standpunkt.UBESVART,
+        kontantstøtteIUtlandetForklaring: !annenPart
+            ? soknad.utenlandskKontantstotte.mottarKontantstotteFraUtlandetTilleggsinfo.verdi
+            : '',
+        ytelseIUtlandet: !annenPart
+            ? toStandpunkt(soknad.utenlandskeYtelser.mottarYtelserFraUtland.verdi)
+            : toStandpunkt(soknad.utenlandskeYtelser.mottarAnnenForelderYtelserFraUtland.verdi),
+        ytelseIUtlandetForklaring: !annenPart
+            ? soknad.utenlandskeYtelser.mottarYtelserFraUtlandForklaring.verdi
+            : soknad.utenlandskeYtelser.mottarAnnenForelderYtelserFraUtlandForklaring.verdi,
+    };
+};
+
+const mapAktørTilknytningUtland = (
+    soknad: ISoknadState,
+    fødselsnummer: string,
+    annenPart: boolean
+): IAktørTilknytningUtland => {
+    return {
+        boddEllerJobbetINorgeMinstFemAar: !annenPart
+            ? toTilknytningTilUtlandVerdier(
+                  soknad.tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAar.verdi
+              )
+            : toTilknytningTilUtlandVerdier(
+                  soknad.tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAar.verdi
+              ),
+        boddEllerJobbetINorgeMinstFemAarForklaring: !annenPart
+            ? soknad.tilknytningTilUtland.boddEllerJobbetINorgeMinstFemAarForklaring.verdi
+            : soknad.tilknytningTilUtland.annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring
+                  .verdi,
+        fødselsnummer,
+    };
+};
+
+const mapNorskDatoTilIso = (dato: string) => {
+    return moment(dato, 'DD.MM.YYYY').format('YYYY-MM-DD');
 };
 
 function* sendInnSaga(): SagaIterator {
@@ -254,12 +262,14 @@ function* sendInnSaga(): SagaIterator {
         const barna = yield select(selectBarn);
         const indexForValgtBarn = yield select(selectIndeksForValgtBarn);
         const soknad = yield select(selectSoknad);
+        const språk = yield select(selectValgtSprak);
         const søker = yield select(selectSoker);
 
         const søknad: IKontraktSøknad = mapStateToKontraktSøknad(
             barna,
             indexForValgtBarn,
             soknad,
+            språk,
             søker
         );
         yield call(sendInnKontraktSøknad, søknad);

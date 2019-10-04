@@ -20,6 +20,7 @@ export interface IKontraktSøknad {
     oppgittErklæring: IOppgittErklæring;
     oppgittFamilieforhold: IOppgittFamilieforhold;
     oppgittUtlandsTilknytning: IOppgittUtlandsTilknytning;
+    språk: string;
     søkerFødselsnummer: string;
 }
 
@@ -29,12 +30,14 @@ export interface IKontraktBarn {
     barnehageKommune: string;
     barnehageStatus: string;
     fødselsnummer: string;
+    navn: string;
     vedlegg: string[];
 }
 
 export interface IOppgittFamilieforhold {
     barna: Set<IKontraktBarn>;
     borBeggeForeldreSammen: boolean;
+    oppgittAnnenPartNavn: string;
 }
 
 export interface IAktørArbeidYtelseUtland {
