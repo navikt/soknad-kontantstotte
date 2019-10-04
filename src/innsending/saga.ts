@@ -112,6 +112,10 @@ const mapAktørTilknytningUtland = (
     };
 };
 
+const mapNorskDatoTilIso = (dato: string) => {
+    return moment(dato, 'DD.MM.YYYY').format('YYYY-MM-DD');
+};
+
 const mapStateToKontraktSøknad = (
     barna?: IBarn[],
     indeksForValgtBarn?: string,
@@ -159,14 +163,16 @@ const mapStateToKontraktSøknad = (
             barnehageAntallTimer = parseFloat(
                 soknad.barnehageplass.harBarnehageplassAntallTimer.verdi
             );
-            barnehageDato = soknad.barnehageplass.harBarnehageplassDato.verdi;
+            barnehageDato = mapNorskDatoTilIso(soknad.barnehageplass.harBarnehageplassDato.verdi);
             barnehageKommune = soknad.barnehageplass.harBarnehageplassKommune.verdi;
             break;
         case BarnehageplassVerdier.harSluttetIBarnehage:
             barnehageAntallTimer = parseFloat(
                 soknad.barnehageplass.harSluttetIBarnehageAntallTimer.verdi
             );
-            barnehageDato = soknad.barnehageplass.harSluttetIBarnehageDato.verdi;
+            barnehageDato = mapNorskDatoTilIso(
+                soknad.barnehageplass.harSluttetIBarnehageDato.verdi
+            );
             barnehageKommune = soknad.barnehageplass.harSluttetIBarnehageKommune.verdi;
             vedlegg = soknad.barnehageplass.harSluttetIBarnehageVedlegg.verdi.map(
                 mapVedlegg => mapVedlegg.filreferanse
@@ -176,7 +182,9 @@ const mapStateToKontraktSøknad = (
             barnehageAntallTimer = parseFloat(
                 soknad.barnehageplass.skalSlutteIBarnehageAntallTimer.verdi
             );
-            barnehageDato = soknad.barnehageplass.skalSlutteIBarnehageDato.verdi;
+            barnehageDato = mapNorskDatoTilIso(
+                soknad.barnehageplass.skalSlutteIBarnehageDato.verdi
+            );
             barnehageKommune = soknad.barnehageplass.skalSlutteIBarnehageKommune.verdi;
             vedlegg = soknad.barnehageplass.skalSlutteIBarnehageVedlegg.verdi.map(
                 mapVedlegg => mapVedlegg.filreferanse
@@ -186,7 +194,9 @@ const mapStateToKontraktSøknad = (
             barnehageAntallTimer = parseFloat(
                 soknad.barnehageplass.skalBegynneIBarnehageAntallTimer.verdi
             );
-            barnehageDato = soknad.barnehageplass.skalBegynneIBarnehageDato.verdi;
+            barnehageDato = mapNorskDatoTilIso(
+                soknad.barnehageplass.skalBegynneIBarnehageDato.verdi
+            );
             barnehageKommune = soknad.barnehageplass.skalBegynneIBarnehageKommune.verdi;
             break;
     }
