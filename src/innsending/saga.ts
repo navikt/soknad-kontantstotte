@@ -161,9 +161,9 @@ const mapStateToKontraktSøknad = (
                     barnehageDato,
                     barnehageKommune,
                     barnehageStatus: soknad.barnehageplass.barnBarnehageplassStatus.verdi,
+                    barnehageVedlegg: vedlegg,
                     fødselsnummer: barn.fødselsnummer,
                     navn: barn.fulltnavn,
-                    vedlegg,
                 })
             )
         ),
