@@ -29,9 +29,9 @@ export interface IKontraktBarn {
     barnehageDato: string;
     barnehageKommune: string;
     barnehageStatus: string;
+    barnehageVedlegg: string[];
     fødselsnummer: string;
     navn: string;
-    vedlegg: string[];
 }
 
 export interface IOppgittFamilieforhold {
