@@ -39,6 +39,10 @@ app.post('/soknad-kontantstotte-api/api/sendinn', function(req, res) {
     setTimeout(() => res.send(lesMockFil('innsending-respons.json')), delayMs);
 });
 
+app.post('/soknad-kontantstotte-api/api/sendinn/medkontrakt', function(req, res) {
+    res.status(200).send();
+});
+
 app.post('/soknad-kontantstotte-api/api/vedlegg/', upload.single('file'), function(req, res) {
     const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = (Math.random() * 16) | 0,
