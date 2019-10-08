@@ -1,5 +1,4 @@
-import { showReportDialog } from '@sentry/browser';
-import { captureException, configureScope, withScope } from '@sentry/core';
+import { captureException, withScope } from '@sentry/core';
 import Spinner from 'nav-frontend-spinner';
 import * as React from 'react';
 import { connect } from 'react-redux';

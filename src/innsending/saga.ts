@@ -191,8 +191,12 @@ const mapStateToKontraktSøknad = (
         );
     }
 
+    const utcOffset = moment.tz('Europe/Paris').utcOffset();
     const kontraktSøknad: IKontraktSøknad = {
-        innsendtTidspunkt: moment.utc().toISOString(),
+        innsendtTidspunkt: moment
+            .utc()
+            .add(utcOffset, 'minutes')
+            .toISOString(),
         oppgittAnnenPartFødselsnummer,
         oppgittErklæring,
         oppgittFamilieforhold,
