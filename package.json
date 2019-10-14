@@ -88,7 +88,7 @@
     "url-search-params-polyfill": "7.0.0"
   },
   "resolutions": {
-    "@types/react": "16.9.2"
+    "@types/react": "16.9.5"
   },
   "devDependencies": {
     "@redux-saga/testing-utils": "1.0.5",
@@ -97,7 +97,7 @@
     "@types/moment": "2.13.0",
     "@types/moment-timezone": "0.5.12",
     "@types/prop-types": "15.7.1",
-    "@types/react": "16.9.2",
+    "@types/react": "16.9.5",
     "@types/react-dom": "16.8.5",
     "@types/react-intl": "2.3.18",
     "@types/react-modal": "3.8.2",
