@@ -14,7 +14,7 @@ import { selectSoknad } from '../soknad/selectors';
 import { BarnehageplassVerdier, isIVedleggFelt, ISoknadState } from '../soknad/types';
 import { IVedlegg } from '../vedlegg/types';
 import { InnsendingTypeKeys, sendInnFeilet, sendInnOk } from './actions';
-import { sendInnKontraktSøknad, sendInnSoknad } from './api';
+import { sendInnSamletSøknad } from './api';
 import {
     IAktørArbeidYtelseUtland,
     IAktørTilknytningUtland,
@@ -265,39 +265,36 @@ function* sendInnSaga(): SagaIterator {
     try {
         const barna = yield select(selectBarn);
         const indexForValgtBarn = yield select(selectIndeksForValgtBarn);
-        const soknad = yield select(selectSoknad);
+        const stateSoknad = yield select(selectSoknad);
         const språk = yield select(selectValgtSprak);
         const søker = yield select(selectSoker);
 
-        const søknad: IKontraktSøknad = mapStateToKontraktSøknad(
+        const kontraktSøknad: IKontraktSøknad = mapStateToKontraktSøknad(
             barna,
             indexForValgtBarn,
-            soknad,
+            stateSoknad,
             språk,
             søker
         );
-        yield call(sendInnKontraktSøknad, søknad);
-    } catch (error) {
-        if (process.env.NODE_ENV !== 'development') {
-            withScope(scope => {
-                scope.setExtra('melding', 'Innsending av kontrakt søknad feilet');
-                captureException(error);
-            });
-        }
-    }
 
-    try {
         const soknad = yield call(mapStateToModel);
-        if (!soknad) {
+        if (!soknad || !kontraktSøknad) {
             throw new Error('Søknad mangler etter mapping ved innsending');
         }
-        const dato = yield call(sendInnSoknad, soknad);
+        const dato = yield call(sendInnSamletSøknad, soknad, kontraktSøknad);
         if (!dato) {
             throw new Error('Dato mangler etter innsending. Innsending har trolig feilet');
         }
         yield put(sendInnOk(dato));
         yield put(push('/kvittering'));
     } catch (error) {
+        if (process.env.NODE_ENV !== 'development') {
+            withScope(scope => {
+                scope.setExtra('melding', 'Innsending av søknad feilet');
+                captureException(error);
+            });
+        }
+
         yield put(sendInnFeilet());
         yield put(appEndreStatus(AppStatus.FEILSITUASJON));
         yield put(push('/innsending-feilet'));
