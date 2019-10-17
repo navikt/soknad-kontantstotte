@@ -16,7 +16,7 @@ const sendInnSamletSøknad = (soknad: object, kontraktSøknad: IKontraktSøknad)
             }
         )
         .then(response => {
-            return response.data;
+            return moment(response.data.innsendtDato);
         });
 };
 
