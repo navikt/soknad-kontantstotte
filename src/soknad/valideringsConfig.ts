@@ -14,6 +14,8 @@ import {
 } from './types';
 import {
     annenForelderHarIkkeSvartNeiTilknytningTilUtland,
+    erGyldigDato,
+    fødselsnummerPassererMod10ogMod11Sjekk,
     harBekreftetOppsummering,
     harBekreftetVeiledning,
     harFyltInnDato,
@@ -71,14 +73,14 @@ const valideringsConfig: IValideringsConfig = {
             harFyltInnTall,
             harFyltInnGyldigAntallTimer,
         ],
-        harBarnehageplassDato: [harSvartTekstMedFeilmelding, harFyltInnDato],
+        harBarnehageplassDato: [harSvartTekstMedFeilmelding, harFyltInnDato, erGyldigDato],
         harBarnehageplassKommune: [harSvartTekstMedFeilmelding],
         harSluttetIBarnehageAntallTimer: [
             harSvartTekstMedFeilmelding,
             harFyltInnTall,
             harFyltInnGyldigAntallTimer,
         ],
-        harSluttetIBarnehageDato: [harSvartTekstMedFeilmelding, harFyltInnDato],
+        harSluttetIBarnehageDato: [harSvartTekstMedFeilmelding, harFyltInnDato, erGyldigDato],
         harSluttetIBarnehageKommune: [harSvartTekstMedFeilmelding],
         harSluttetIBarnehageVedlegg: [harLastetOppVedlegg],
         skalBegynneIBarnehageAntallTimer: [
@@ -86,19 +88,23 @@ const valideringsConfig: IValideringsConfig = {
             harFyltInnTall,
             harFyltInnGyldigAntallTimer,
         ],
-        skalBegynneIBarnehageDato: [harSvartTekstMedFeilmelding, harFyltInnDato],
+        skalBegynneIBarnehageDato: [harSvartTekstMedFeilmelding, harFyltInnDato, erGyldigDato],
         skalBegynneIBarnehageKommune: [harSvartTekstMedFeilmelding],
         skalSlutteIBarnehageAntallTimer: [
             harSvartTekstMedFeilmelding,
             harFyltInnTall,
             harFyltInnGyldigAntallTimer,
         ],
-        skalSlutteIBarnehageDato: [harSvartTekstMedFeilmelding, harFyltInnDato],
+        skalSlutteIBarnehageDato: [harSvartTekstMedFeilmelding, harFyltInnDato, erGyldigDato],
         skalSlutteIBarnehageKommune: [harSvartTekstMedFeilmelding],
         skalSlutteIBarnehageVedlegg: [harLastetOppVedlegg],
     },
     familieforhold: {
-        annenForelderFødselsnummer: [harSvartTekstMedFeilmelding, harFyltInnFødselsnummer],
+        annenForelderFødselsnummer: [
+            harSvartTekstMedFeilmelding,
+            harFyltInnFødselsnummer,
+            fødselsnummerPassererMod10ogMod11Sjekk,
+        ],
         annenForelderNavn: [harFyltInnNavn],
         borForeldreneSammenMedBarnet: [harSvartMedFeilmelding],
     },
@@ -110,7 +116,7 @@ const valideringsConfig: IValideringsConfig = {
     },
     mineBarn: {
         erFlerling: [svarUtenValidering],
-        fødselsdato: [harSvartTekstMedFeilmelding, harFyltInnDato],
+        fødselsdato: [harSvartTekstMedFeilmelding],
         fødselsnummer: [svarUtenValidering],
         navn: [harFyltInnNavn],
     },

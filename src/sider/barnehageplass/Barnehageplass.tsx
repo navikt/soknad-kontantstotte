@@ -7,7 +7,10 @@ import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
-import { hentFeltMedFeil } from '../../common/utils';
+import {
+    harHattBarnehageplassOver33TimerPrUkeSisteTreMåneder,
+    hentFeltMedFeil,
+} from '../../common/utils';
 import Barnehageikon from '../../component/Ikoner/BarnehageIkon';
 import Veilederikon from '../../component/Ikoner/Veilederikon';
 import SideContainer from '../../component/StegSide/StegSide';
@@ -63,6 +66,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
     const {
         barnBarnehageplassStatus,
         harBarnehageplass,
+        harBarnehageplassDato,
         harBarnehageplassAntallTimer,
     } = barnehageplass;
     const feltMedFeil = hentFeltMedFeil(barnehageplass, harForsoktNesteSteg, intl);
@@ -162,23 +166,22 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                                 />
                             )}
                         </PanelBase>
-                        {barnBarnehageplassStatus.verdi ===
-                            BarnehageplassVerdier.harBarnehageplass &&
-                            harBarnehageplassAntallTimer.valideringsStatus ===
-                                ValideringsStatus.ADVARSEL && (
-                                <Veileder
-                                    posisjon={'høyre'}
-                                    className={'barnehage__advarsel'}
-                                    tekst={
-                                        <FormattedMessage
-                                            id={harBarnehageplassAntallTimer.feilmeldingsNokkel}
-                                        />
-                                    }
-                                    type={'advarsel'}
-                                >
-                                    <Veilederikon morkBakgrunn={true} />
-                                </Veileder>
-                            )}
+                        {harHattBarnehageplassOver33TimerPrUkeSisteTreMåneder(
+                            harBarnehageplassAntallTimer,
+                            harBarnehageplassDato,
+                            barnBarnehageplassStatus
+                        ) && (
+                            <Veileder
+                                posisjon={'høyre'}
+                                className={'barnehage__advarsel'}
+                                tekst={
+                                    <FormattedMessage id="advarsel.barnehageplass.timerIBarnehage" />
+                                }
+                                type={'advarsel'}
+                            >
+                                <Veilederikon morkBakgrunn={true} />
+                            </Veileder>
+                        )}
                     </>
                 )}
             </form>

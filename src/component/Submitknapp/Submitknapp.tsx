@@ -47,7 +47,12 @@ const Submitknapp: React.StatelessComponent<SubmitKnappProps> = ({
         : 'app.neste';
 
     return (
-        <KnappBase spinner={senderinn} className={className} type="hoved" onClick={nesteSteg}>
+        <KnappBase
+            spinner={senderinn}
+            className={className}
+            type="hoved"
+            onClick={() => !senderinn && nesteSteg()}
+        >
             <FormattedMessage id={label} />
         </KnappBase>
     );

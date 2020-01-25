@@ -1,3 +1,4 @@
+import { init } from '@sentry/browser';
 import { ConnectedRouter } from 'connected-react-router';
 import Modal from 'nav-frontend-modal';
 import * as React from 'react';
@@ -9,7 +10,21 @@ import { appStart } from './app/actions';
 import { history, store } from './createStore';
 import IntlProvider from './IntlProvider';
 
+/* tslint:disable */
+const packageConfig = require('../package.json');
+/* tslint:enable */
+
 import './index.less';
+
+if (process.env.NODE_ENV !== 'development') {
+    const environment = window.location.hostname;
+
+    init({
+        dsn: 'https://9bb17d6a1f384a618adf60f3b80ad060@sentry.gc.nav.no/2',
+        environment,
+        release: packageConfig.version,
+    });
+}
 
 if (document.getElementById('pagewrapper')) {
     Modal.setAppElement('#pagewrapper');

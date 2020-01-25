@@ -49,8 +49,8 @@ function barnHentFeilet(): IBarnHentFeilet {
 
 function barnSettIndeksForValgtBarn(indeks: string): IBarnSettIndeksForValgtBarn {
     return {
-        type: BarnTypeKeys.SETT_INDEKS_FOR_VALGT_BARN,
         indeks,
+        type: BarnTypeKeys.SETT_INDEKS_FOR_VALGT_BARN,
     };
 }
 

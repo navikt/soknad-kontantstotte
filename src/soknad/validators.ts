@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import { ANTALL_LOVLIGE_TEGN_I_TEKSTFELT } from '../common/utils';
 import {
     BarnehageplassVerdier,
@@ -76,22 +77,40 @@ const harFyltInnNavn = (felt: IFelt): IFelt => {
 };
 
 const harFyltInnDato = (felt: IFelt): IFelt => {
-    const datoer = felt.verdi
-        .replace('og', ',')
-        .replace(/ /g, '')
-        .split(',');
-    for (const dato of datoer) {
-        if (!/^\d{2}\.\d{2}\.\d{4}$/.test(dato)) {
-            return feil(felt, 'feilmelding.generell.dato');
-        }
-    }
-    return ok(felt);
+    return /^\d{2}\.\d{2}\.\d{4}$/.test(felt.verdi)
+        ? ok(felt)
+        : feil(felt, 'feilmelding.generell.dato');
+};
+
+const erGyldigDato = (felt: IFelt): IFelt => {
+    return moment(felt.verdi, 'DD.MM.YYYY').isValid()
+        ? ok(felt)
+        : feil(felt, 'feilmelding.generell.ugyldigDato');
 };
 
 const harFyltInnFødselsnummer = (felt: IFelt): IFelt => {
     return /^\d{11}$/.test(felt.verdi.replace(' ', ''))
         ? ok(felt)
         : feil(felt, 'feilmelding.generell.fødselsnummer');
+};
+
+const fødselsnummerPassererMod10ogMod11Sjekk = (felt: IFelt): IFelt => {
+    const vektSifreMod10 = [3, 7, 6, 1, 8, 9, 4, 5, 2, 1];
+    const vektSifreMod11 = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2, 1];
+
+    let sumMod10 = 0;
+    for (let i = 0; i < 10; i++) {
+        sumMod10 += Number.parseInt(felt.verdi.charAt(i), 10) * vektSifreMod10[i];
+    }
+
+    let sumMod11 = 0;
+    for (let i = 0; i < 11; i++) {
+        sumMod11 += Number.parseInt(felt.verdi.charAt(i), 10) * vektSifreMod11[i];
+    }
+
+    return sumMod10 % 11 === 0 && sumMod11 % 11 === 0
+        ? ok(felt)
+        : feil(felt, 'familieforhold.annenForelder.fødselsnummer.feilmeldingEtterModSjekk');
 };
 
 const harFyltInnTall = (felt: IFelt): IFelt => {
@@ -102,14 +121,9 @@ const harFyltInnTall = (felt: IFelt): IFelt => {
 
 const harFyltInnGyldigAntallTimer = (felt: IFelt): IFelt => {
     const timer = parseFloat(felt.verdi);
-    switch (true) {
-        case timer >= 0 && timer <= 33:
-            return ok(felt);
-        case timer >= 33 && timer <= 80:
-            return advarsel(felt, 'advarsel.barnehageplass.timerIBarnehage');
-        default:
-            return feil(felt, 'feilmelding.barnehageplass.timerIBarnehage');
-    }
+    return timer >= 0 && timer <= 80
+        ? ok(felt)
+        : feil(felt, 'feilmelding.barnehageplass.timerIBarnehage');
 };
 
 const sokerHarIkkeSvartNeiTilknytningTilUtland = (felt: IFelt): IFelt => {
@@ -150,6 +164,8 @@ const svarUtenValidering = (felt: IFelt): IFelt => ok(felt);
 
 export {
     annenForelderHarIkkeSvartNeiTilknytningTilUtland,
+    erGyldigDato,
+    fødselsnummerPassererMod10ogMod11Sjekk,
     harBekreftetOppsummering,
     harBekreftetVeiledning,
     harFyltInnDato,

@@ -5,8 +5,8 @@ import { FormattedHTMLMessage, InjectedIntlProps, injectIntl } from 'react-intl'
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
-import { selectBarn, selectIndeksForValgtBarn } from '../../barn/selectors';
 import { barnSettIndeksForValgtBarn } from '../../barn/actions';
+import { selectBarn, selectIndeksForValgtBarn } from '../../barn/selectors';
 import { IBarn } from '../../barn/types';
 import { hentFeltMedFeil } from '../../common/utils';
 import BarnIkon from '../../component/Ikoner/BarnIkon';
@@ -151,8 +151,8 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         barn: selectBarn(state),
         harForsoktNesteSteg: selectHarForsoktNesteSteg(state),
-        valgtBarn: selectMineBarn(state),
         indeksForValgtBarn: selectIndeksForValgtBarn(state),
+        valgtBarn: selectMineBarn(state),
     };
 };
 
