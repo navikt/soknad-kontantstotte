@@ -25,7 +25,7 @@ jobs:
             - "29:6d:36:0c:64:d5:86:7d:cc:08:b7:72:38:13:cc:96"
       - checkout
       - setup_remote_docker:
-          docker_layer_caching: true
+          docker_layer_caching: false
       - run:
           name: Generate version number, github token and docker image tags
           command: |
