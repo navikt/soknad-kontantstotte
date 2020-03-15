@@ -21,6 +21,7 @@ import { sokerHent, SokerTypeKeys } from '../soker/actions';
 import { ISteg, stegConfig } from '../stegConfig';
 import { teksterHent, TeksterTypeKeys } from '../tekster/actions';
 import { ToggelsTypeKeys, togglesHent } from '../toggles/actions';
+import { isMaintenance } from '../toggles/selectors';
 import {
     appEndreStatus,
     appPingOk,
@@ -50,26 +51,28 @@ function* autentiserBruker(): SagaIterator {
 }
 
 function* forsteSidelastSaga(): SagaIterator {
-    yield fork(autentiserBruker);
-    yield take([AppTypeKeys.PING_OK]);
     yield put(togglesHent());
     yield take([ToggelsTypeKeys.HENT_FEILET, ToggelsTypeKeys.HENT_OK]);
-
     yield put(teksterHent());
     yield put(landHent());
-    yield put(sokerHent());
+    yield all([take(TeksterTypeKeys.HENT_OK), take(LandTypeKeys.HENT_OK)]);
 
-    yield put(barnHent());
-    yield all([
-        take(TeksterTypeKeys.HENT_OK),
-        take(LandTypeKeys.HENT_OK),
-        take(SokerTypeKeys.HENT_OK),
-        take(BarnTypeKeys.HENT_OK),
-    ]);
-    const barn = yield select(selectBarn);
-    if (barn.length === 0) {
-        yield put(appEndreStatus(AppStatus.FEILSITUASJON));
-        yield put(push('/ingen-barn'));
+    const vedlikeholdsmodus = yield select(isMaintenance);
+    if (!vedlikeholdsmodus) {
+        yield fork(autentiserBruker);
+        yield take([AppTypeKeys.PING_OK]);
+
+        yield put(sokerHent());
+        yield put(barnHent());
+        yield all([take(SokerTypeKeys.HENT_OK), take(BarnTypeKeys.HENT_OK)]);
+
+        const barn = yield select(selectBarn);
+        if (barn.length === 0) {
+            yield put(appEndreStatus(AppStatus.FEILSITUASJON));
+            yield put(push('/ingen-barn'));
+        } else {
+            yield put(appEndreStatus(AppStatus.KLAR));
+        }
     } else {
         yield put(appEndreStatus(AppStatus.KLAR));
     }
