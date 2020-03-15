@@ -22,14 +22,6 @@ describe('app - saga', () => {
             saga = cloneableGenerator(forsteSidelastSaga)();
         });
 
-        test('autentiserer bruker', () => {
-            expect(saga.next().value).toEqual(fork(autentiserBruker));
-        });
-
-        test('venter på at bruker er autentisert', () => {
-            expect(saga.next().value).toEqual(take([AppTypeKeys.PING_OK]));
-        });
-
         test('henter toggles', () => {
             expect(saga.next(AppTypeKeys.PING_OK).value).toEqual(put(togglesHent()));
         });
@@ -53,6 +45,14 @@ describe('app - saga', () => {
 
         test('henter ut vedlikeholdsmodus fra state', () => {
             expect(saga.next().value).toEqual(select(isMaintenance));
+        });
+
+        test('autentiserer bruker', () => {
+            expect(saga.next().value).toEqual(fork(autentiserBruker));
+        });
+
+        test('venter på at bruker er autentisert', () => {
+            expect(saga.next().value).toEqual(take([AppTypeKeys.PING_OK]));
         });
 
         test('henter søker og barn', () => {

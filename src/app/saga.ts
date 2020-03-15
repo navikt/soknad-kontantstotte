@@ -51,8 +51,6 @@ function* autentiserBruker(): SagaIterator {
 }
 
 function* forsteSidelastSaga(): SagaIterator {
-    yield fork(autentiserBruker);
-    yield take([AppTypeKeys.PING_OK]);
     yield put(togglesHent());
     yield take([ToggelsTypeKeys.HENT_FEILET, ToggelsTypeKeys.HENT_OK]);
     yield put(teksterHent());
@@ -61,6 +59,9 @@ function* forsteSidelastSaga(): SagaIterator {
 
     const vedlikeholdsmodus = yield select(isMaintenance);
     if (!vedlikeholdsmodus) {
+        yield fork(autentiserBruker);
+        yield take([AppTypeKeys.PING_OK]);
+
         yield put(sokerHent());
         yield put(barnHent());
         yield all([take(SokerTypeKeys.HENT_OK), take(BarnTypeKeys.HENT_OK)]);
