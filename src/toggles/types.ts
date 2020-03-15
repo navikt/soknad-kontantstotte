@@ -4,6 +4,7 @@ interface IToggles {
 
 enum IToggleName {
     legg_til_barn = 'kontantstotte.leggtilbarn',
+    vedlikeholdsmodus = 'kontantstotte.vedlikehold',
 }
 
 const allTogglesOff = (): IToggles => {

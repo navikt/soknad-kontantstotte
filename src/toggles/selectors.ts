@@ -5,4 +5,8 @@ function isEnabled(state: IRootState, toggleName: IToggleName): boolean {
     return state.toggles.toggles[toggleName];
 }
 
-export { isEnabled };
+function isMaintenance(state: IRootState): boolean {
+    return state.toggles.toggles[IToggleName.vedlikeholdsmodus];
+}
+
+export { isEnabled, isMaintenance };

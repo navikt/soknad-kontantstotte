@@ -7,9 +7,13 @@ import { selectAppStatus } from './app/selectors';
 import { AppStatus } from './app/types';
 import { IRootState } from './rootReducer';
 import { Routes } from './Routes';
+import Vedlikeholdsmodus from './sider/vedlikehold/Vedlikeholdsmodus';
+import { isEnabled } from './toggles/selectors';
+import { IToggleName } from './toggles/types';
 
 interface IMapStateToProps {
     status: AppStatus;
+    vedlikeholdsmodus: boolean;
 }
 
 type Props = IMapStateToProps & RouteComponentProps<{}>;
@@ -31,6 +35,10 @@ class App extends React.Component<Props> {
     }
 
     public render() {
+        if (this.props.vedlikeholdsmodus) {
+            return <Vedlikeholdsmodus />;
+        }
+
         switch (this.props.status) {
             case AppStatus.IKKE_STARTET:
             case AppStatus.STARTER:
@@ -44,6 +52,7 @@ class App extends React.Component<Props> {
 const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         status: selectAppStatus(state),
+        vedlikeholdsmodus: isEnabled(state, IToggleName.vedlikeholdsmodus),
     };
 };
 
