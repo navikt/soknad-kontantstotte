@@ -11,6 +11,7 @@ import { ToggelsTypeKeys, togglesHent } from '../toggles/actions';
 import { appEndreStatus, AppTypeKeys } from './actions';
 import { autentiserBruker, forsteSidelastSaga, startAppSaga } from './saga';
 import { AppStatus } from './types';
+import { isMaintenance } from '../toggles/selectors';
 
 describe('app - saga', () => {
     describe('forsteSidelastSaga', () => {
@@ -39,33 +40,36 @@ describe('app - saga', () => {
             );
         });
 
-        test('henter tekster, land, søker og barn', () => {
+        test('henter tekster og land', () => {
             expect(saga.next().value).toEqual(put(teksterHent()));
             expect(saga.next().value).toEqual(put(landHent()));
+        });
+
+        test('venter på svar fra alle uautoriserte endepunktene', () => {
+            expect(saga.next().value).toEqual(
+                all([take(TeksterTypeKeys.HENT_OK), take(LandTypeKeys.HENT_OK)])
+            );
+        });
+
+        test('henter ut vedlikeholdsmodus fra state', () => {
+            expect(saga.next().value).toEqual(select(isMaintenance));
+        });
+
+        test('henter søker og barn', () => {
             expect(saga.next().value).toEqual(put(sokerHent()));
             expect(saga.next().value).toEqual(put(barnHent()));
         });
 
-        test('venter på svar fra alle endepunktene', () => {
+        test('venter på svar fra alle autoriserte endepunktene', () => {
             expect(saga.next().value).toEqual(
-                all([
-                    take(TeksterTypeKeys.HENT_OK),
-                    take(LandTypeKeys.HENT_OK),
-                    take(SokerTypeKeys.HENT_OK),
-                    take(BarnTypeKeys.HENT_OK),
-                ])
+                all([take(SokerTypeKeys.HENT_OK), take(BarnTypeKeys.HENT_OK)])
             );
         });
 
         test('henter ut barn fra state', () => {
-            expect(
-                saga.next([
-                    TeksterTypeKeys.HENT_OK,
-                    LandTypeKeys.HENT_OK,
-                    SokerTypeKeys.HENT_OK,
-                    BarnTypeKeys.HENT_OK,
-                ]).value
-            ).toEqual(select(selectBarn));
+            expect(saga.next([SokerTypeKeys.HENT_OK, BarnTypeKeys.HENT_OK]).value).toEqual(
+                select(selectBarn)
+            );
         });
 
         describe('har barn flyt', () => {
