@@ -22,7 +22,7 @@ const Vedlikeholdsmodus: React.FC = () => {
             </h3>
 
             <AlertStripeAdvarsel className={'feilside__alertstripe'}>
-                <Normaltekst children={'På grunn av vedlikehold er søknaden utilgjengelig.'} />
+                <Normaltekst children={'På grunn av vedlikehold er søknaden midlertidig utilgjengelig.'} />
                 <br />
                 <Normaltekst children={'Vi beklager ulempene dette måtte medføre.'} />
             </AlertStripeAdvarsel>
