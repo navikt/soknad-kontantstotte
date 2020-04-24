@@ -6,7 +6,7 @@ on:
       - 'master'
 
 env:
-  IMAGE: docker.pkg.github.com/${{ github.repository }}/familie-ks-sak-frontend:${{ github.sha }}
+  IMAGE: docker.pkg.github.com/${{ github.repository }}/soknad-kontantstotte:${{ github.sha }}
 
 jobs:
   test:
@@ -44,7 +44,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           yarn
-          cp ./.github/oauth2.js ./node_modules/oauth/lib/oauth2.js
           yarn build
           docker build . -t ${IMAGE}
           docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
