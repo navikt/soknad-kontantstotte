@@ -21,7 +21,9 @@ spec:
     max: 4
     cpuThresholdPercentage: 50
   ingresses:
+    - "https://soknad-kontantstotte-q.nav.no"
     - "https://soknad-kontantstotte.nais.oera-q.local"
+    - "https://soknad-kontantstotte.dev-sbs.nais.io"
   vault:
     enabled: true
   resources:
