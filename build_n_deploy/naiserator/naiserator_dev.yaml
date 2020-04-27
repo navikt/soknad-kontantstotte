@@ -21,8 +21,7 @@ spec:
     max: 4
     cpuThresholdPercentage: 50
   ingresses:
-    - "https://soknad-kontantstotte-q.nav.no"
-    - "https://soknad-kontantstotte.dev-sbs.nais.io"
+    - "https://soknad-kontantstotte.nais.oera-q.local"
   vault:
     enabled: true
   resources:
@@ -51,6 +50,6 @@ spec:
   - name: UNLEASH_API_URL
     value: https://unleashproxy.nais.oera.no/api/
   - name: LOADBALANCER_SOKNAD_KONTANTSTOTTE_URL
-    value: soknad-kontantstotte-q.nav.no
+    value: soknad-kontantstotte.nais.oera-q.local
   - name: LOADBALANCER_SOKNAD_KONTANTSTOTTE_POOLNAME
     value: na
