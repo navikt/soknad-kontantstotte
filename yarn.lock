@@ -4392,9 +4392,10 @@ natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
 
-nav-frontend-alertstriper-style@2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/nav-frontend-alertstriper-style/-/nav-frontend-alertstriper-style-2.0.2.tgz#6109083967f814dccb97e900018741480426623c"
+nav-frontend-alertstriper-style@2.0.14:
+  version "2.0.14"
+  resolved "https://registry.yarnpkg.com/nav-frontend-alertstriper-style/-/nav-frontend-alertstriper-style-2.0.14.tgz#66edde2d6eb0bbc06051b07080b0444ac08f6503"
+  integrity sha512-2/bXQ2aSbXKFk6K7GQX0IsR7iqLHNtRBccZiejTO6tb5pZ/74L0GBYULxkY3dLAlKr2ImxEPtjora6rYTraYGw==
 
 nav-frontend-alertstriper@3.0.3:
   version "3.0.3"
