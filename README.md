@@ -38,6 +38,10 @@ Warning: kubectl apply should be used on resource created by either kubectl crea
 application.nais.io/soknad-kontantstotte configured 
 ```
 
+# Pålogging i preprod
+Man kan logge på i preprod med brukere opprettet i Dolly. Man blir videresendt til loginservice og velger da å logge på "Uten IDPorten". 
+
+NB: Du må selv være pålogget i preprod for at du skal komme til oidc-stub. Dersom du etter å ha valgt "Uten IDPorten" havner i vanlig innloggingsløp og blir bedt om å logge på med epostadresse så logg på med egen bruker først. Deretter vil du da komme til oidc-stub der du kun oppgir fnr til testbrukeren din. 
 
 # Henvendelser
 
