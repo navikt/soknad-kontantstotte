@@ -112,7 +112,7 @@
     "fork-ts-checker-webpack-plugin": "1.5.0",
     "html-webpack-plugin": "3.2.0",
     "husky": "3.0.3",
-    "jest": "24.9.0",
+    "jest": "26.6",
     "less": "3.9.0",
     "less-loader": "5.0.0",
     "mini-css-extract-plugin": "0.8.0",
@@ -138,6 +138,8 @@
     "webpack-dev-middleware": "3.7.0",
     "webpack-env": "0.8.0",
     "webpack-hot-middleware": "2.25.0",
-    "webpack-merge": "4.2.1"
+    "webpack-merge": "4.2.1",
+    "serialize-javascript": "^3.1.0",
+    "handlebars": "^4.5.3"
   }
 }
