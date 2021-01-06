@@ -51,7 +51,7 @@ class StegSide extends React.Component<Props> {
 
         return (
             <div>
-                <Undertittel className={'side-container__soknadtittel'}>
+                <Undertittel tag="h1" className={'side-container__soknadtittel'}>
                     <FormattedMessage id={'kontantstotte.tittel'} />
                 </Undertittel>
 
