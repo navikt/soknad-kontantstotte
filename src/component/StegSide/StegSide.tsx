@@ -1,5 +1,5 @@
 import * as classNames from 'classnames';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Innholdstittel, Undertittel } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -68,14 +68,12 @@ class StegSide extends React.Component<Props> {
                         />
                     ) : (
                         tittel && (
-                            <h3
-                                className={classNames(
-                                    'typo-innholdstittel side-container__sidetittel',
-                                    className
-                                )}
+                            <Innholdstittel
+                                tag="h2"
+                                className={classNames('side-container__sidetittel', className)}
                             >
                                 {tittel}
-                            </h3>
+                            </Innholdstittel>
                         )
                     )}
                     <div className={classNames('side-container__children', className)}>
