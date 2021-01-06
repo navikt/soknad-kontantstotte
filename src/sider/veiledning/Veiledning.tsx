@@ -80,7 +80,7 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({
                     center={true}
                     tekst={
                         <div className={'veiledning__veileder-snakkeboble'}>
-                            <Element>
+                            <Element tag="h2">
                                 <FormattedMessage id={'veiledningsside.veileder.hei'} />{' '}
                                 <span className={'veiledning__veileder-navn'}>{fornavn}</span>!
                             </Element>
