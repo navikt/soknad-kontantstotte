@@ -4,6 +4,7 @@ import { InjectedIntl } from 'react-intl';
 import { BarnehageplassVerdier, IFelt, ValideringsStatus } from '../soknad/types';
 import { IFeil, IFeltFeil } from './types';
 import { SkjemaelementFeil } from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
+import { ISprak } from '../app/types';
 
 export const ANTALL_LOVLIGE_TEGN_I_TEKSTFELT = 500;
 
@@ -61,4 +62,8 @@ export const harHattBarnehageplassOver33TimerPrUkeSisteTreMåneder = (
     } else {
         return false;
     }
+};
+
+export const oppdaterLanguageAttributt = (språk: ISprak) => {
+    document.documentElement.lang = språk;
 };
