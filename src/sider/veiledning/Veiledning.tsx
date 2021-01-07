@@ -116,9 +116,9 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({
                 soknad.veiledning.bekreftelse.valideringsStatus !== ValideringsStatus.OK && (
                     <FormattedMessage id={soknad.veiledning.bekreftelse.feilmeldingsNokkel}>
                         {txt => (
-                            <div role="alert" className={'skjemaelement__feilmelding'}>
+                            <p role="alert" className={'skjemaelement__feilmelding'}>
                                 {txt}
-                            </div>
+                            </p>
                         )}
                     </FormattedMessage>
                 )}

@@ -1,11 +1,12 @@
 import CheckboksPanelGruppe from 'nav-frontend-skjema/lib/checkboks-panel-gruppe';
+import { SkjemaelementFeil } from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
 import * as React from 'react';
 import { FormattedHTMLMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { IFeil } from '../../common/types';
-import { hentFeltMedFeil } from '../../common/utils';
+import { hentFeilmeldingElement, hentFeltMedFeil } from '../../common/utils';
 import SideContainer from '../../component/StegSide/StegSide';
 import Veileder from '../../component/Veileder/Veileder';
 import { IRootState } from '../../rootReducer';
@@ -31,8 +32,8 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
     settCheckboxVerdi,
 }) => {
     const feil = Object.values(hentFeltMedFeil(kravTilSoker, harForsoktNesteSteg, intl)).reduce(
-        (acc: IFeil | undefined, felt: IFeil | undefined) => {
-            return felt !== undefined ? felt : acc;
+        (acc: SkjemaelementFeil | undefined, felt: IFeil | undefined) => {
+            return felt !== undefined ? hentFeilmeldingElement(felt) : acc;
         },
         undefined
     );

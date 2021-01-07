@@ -1,7 +1,9 @@
 import * as moment from 'moment';
+import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
 import { BarnehageplassVerdier, IFelt, ValideringsStatus } from '../soknad/types';
-import { IFeltFeil } from './types';
+import { IFeil, IFeltFeil } from './types';
+import { SkjemaelementFeil } from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
 
 export const ANTALL_LOVLIGE_TEGN_I_TEKSTFELT = 500;
 
@@ -23,6 +25,15 @@ export const hentFeltMedFeil = (
     }, {});
 
     return feltMedFeil;
+};
+
+export const hentFeilmeldingElement = (feil: IFeil | undefined): SkjemaelementFeil | undefined => {
+    if (feil) {
+        const element = React.createElement('p', null, feil.feilmelding);
+        return { feilmelding: element };
+    } else {
+        return undefined;
+    }
 };
 
 export const harHattBarnehageplassOver33TimerPrUkeSisteTreMåneder = (

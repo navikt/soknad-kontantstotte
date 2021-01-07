@@ -1,7 +1,7 @@
 import { Input } from 'nav-frontend-skjema';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { hentFeltMedFeil } from '../../common/utils';
+import { hentFeilmeldingElement, hentFeltMedFeil } from '../../common/utils';
 import SoknadPanel from '../../component/SoknadPanel/SoknadPanel';
 import { IFamilieforhold } from '../../soknad/types';
 
@@ -33,7 +33,7 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
                     settAnnenForelderNavn((event.target as HTMLInputElement).value);
                 }}
                 defaultValue={familieforhold.annenForelderNavn.verdi}
-                feil={feltMedFeil.annenForelderNavn}
+                feil={hentFeilmeldingElement(feltMedFeil.annenForelderNavn)}
                 maxLength={50}
             />
             <Input
@@ -45,7 +45,7 @@ const AnnenForelderInfo: React.StatelessComponent<AnnenForelderInfoProps> = ({
                     settAnnenForelderFødselsnummer((event.target as HTMLInputElement).value);
                 }}
                 defaultValue={familieforhold.annenForelderFødselsnummer.verdi}
-                feil={feltMedFeil.annenForelderFødselsnummer}
+                feil={hentFeilmeldingElement(feltMedFeil.annenForelderFødselsnummer)}
                 type={'tel'}
                 autoComplete={'off'}
                 maxLength={11}
