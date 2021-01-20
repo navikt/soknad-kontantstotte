@@ -59,7 +59,7 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({
         <div className={'veiledning'}>
             <Select
                 className={'veiledning__sprakvalg'}
-                label=""
+                label={intl.formatMessage({ id: 'app.velgSpråk' })}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                     oppdaterSprak(sprakMap(e.target.value))
                 }
