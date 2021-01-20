@@ -10,10 +10,10 @@ const Veilederikon: React.StatelessComponent<IVeilderikonProps> = ({ morkBakgrun
             version="1.1"
             viewBox="0 0 100 100"
             xmlns="http://www.w3.org/2000/svg"
-            aria-label="veilederikon"
+            aria-labelledby="veilederikon"
             role="img"
         >
-            <title>Veileder Ikon</title>
+            <title id="veilederikon">Veileder Ikon</title>
             <g fill="none" fillRule="evenodd">
                 <mask id="veilderIkon-a" fill="white">
                     <circle cx="50" cy="50" r="50" />
