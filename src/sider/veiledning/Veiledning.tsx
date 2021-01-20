@@ -110,7 +110,18 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({
                 checked={soknad.veiledning.bekreftelse.verdi === Svar.JA}
                 label={intl.formatHTMLMessage({ id: 'veiledningsside.bekreftelse.label' })}
             >
-                <FormattedHTMLMessage id={'veiledningsside.bekreftelse.innhold'} />
+                <FormattedHTMLMessage
+                    tagName="p"
+                    id={'veiledningsside.bekreftelse.innhold.paragraf-1'}
+                />
+                <FormattedHTMLMessage
+                    tagName="p"
+                    id={'veiledningsside.bekreftelse.innhold.paragraf-2'}
+                />
+                <FormattedHTMLMessage
+                    tagName="p"
+                    id={'veiledningsside.bekreftelse.innhold.paragraf-3'}
+                />
             </BekreftCheckboksPanel>
             {harForsoktNesteSteg &&
                 soknad.veiledning.bekreftelse.valideringsStatus !== ValideringsStatus.OK && (
