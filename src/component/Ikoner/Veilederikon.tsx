@@ -6,7 +6,13 @@ interface IVeilderikonProps {
 
 const Veilederikon: React.StatelessComponent<IVeilderikonProps> = ({ morkBakgrunn }) => {
     return (
-        <svg version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <svg
+            version="1.1"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-label="veilederikon"
+            role="img"
+        >
             <title>Veileder Ikon</title>
             <g fill="none" fillRule="evenodd">
                 <mask id="veilderIkon-a" fill="white">
