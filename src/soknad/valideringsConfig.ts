@@ -27,9 +27,11 @@ import {
     harSvartBarnehageplassVerdiMedFeilmelding,
     harSvartJaMedFeilmelding,
     harSvartMedFeilmelding,
+    harSvartMineBarnMedFeilmelding,
     harSvartTekstMedFeilmelding,
     harSvartTekstUnderAntallTegnMedFeilmelding,
     harSvartTilknytningTilUtlandVerdiMedFeilmelding,
+    harSvartTomtFødselsnummer,
     sokerHarIkkeSvartNeiTilknytningTilUtland,
     svarUtenValidering,
 } from './validators';
@@ -101,7 +103,7 @@ const valideringsConfig: IValideringsConfig = {
     },
     familieforhold: {
         annenForelderFødselsnummer: [
-            harSvartTekstMedFeilmelding,
+            harSvartTomtFødselsnummer,
             harFyltInnFødselsnummer,
             fødselsnummerPassererMod10ogMod11Sjekk,
         ],
@@ -116,7 +118,7 @@ const valideringsConfig: IValideringsConfig = {
     },
     mineBarn: {
         erFlerling: [svarUtenValidering],
-        fødselsdato: [harSvartTekstMedFeilmelding],
+        fødselsdato: [harSvartMineBarnMedFeilmelding],
         fødselsnummer: [svarUtenValidering],
         navn: [harFyltInnNavn],
     },

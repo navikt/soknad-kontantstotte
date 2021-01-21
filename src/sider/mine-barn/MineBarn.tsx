@@ -78,6 +78,8 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
 
         const feltMedFeil = hentFeltMedFeil(valgtBarn, harForsoktNesteSteg, intl);
 
+        console.log(feltMedFeil);
+
         return (
             <SideContainer
                 className={'mine-barn'}
