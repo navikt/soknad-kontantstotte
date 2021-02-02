@@ -50,7 +50,7 @@ const KravTilSoker: React.StatelessComponent<KravTilSokerProps> = ({
             />
             <form>
                 <CheckboksPanelGruppe
-                    legend={''}
+                    legend={<FormattedHTMLMessage id={'startside.krav.veileder'} />}
                     checkboxes={[
                         {
                             checked: kravTilSoker.borSammenMedBarnet.verdi === Svar.JA,
