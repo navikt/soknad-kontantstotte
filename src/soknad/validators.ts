@@ -159,6 +159,9 @@ const harSvartTekstMedFeilmelding = (felt: IFelt): IFelt =>
 const harSvartMineBarnMedFeilmelding = (felt: IFelt): IFelt =>
     harSvartTekst(felt, 'barn.feilmelding');
 
+const harSvartOppgiInfoMedFeilmelding = (felt: IFelt): IFelt =>
+    harSvartTekst(felt, 'feilmelding.generell.oppgiInformasjon');
+
 const harSvartTekstUnderAntallTegnMedFeilmelding = (felt: IFelt): IFelt =>
     harSvartTekstUnderAntallTegn(felt, 'feilmelding.generell.forMangeTegn');
 
@@ -186,6 +189,7 @@ export {
     harSvartJaMedFeilmelding,
     harSvartMedFeilmelding,
     harSvartMineBarnMedFeilmelding,
+    harSvartOppgiInfoMedFeilmelding,
     harSvartTekstMedFeilmelding,
     harSvartTekstUnderAntallTegnMedFeilmelding,
     harSvartTilknytningTilUtlandVerdiMedFeilmelding,
