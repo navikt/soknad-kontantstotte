@@ -4,6 +4,7 @@ import { InjectedIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { IFeltFeil } from '../../common/types';
+import { hentFeilmeldingElement } from '../../common/utils';
 import { Vedlegg } from '../../component/Vedlegg';
 import { IRootState } from '../../rootReducer';
 import { selectBarnehageplass } from '../../soknad/selectors';
@@ -58,7 +59,7 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
                         )
                     }
                     defaultValue={skalSlutteIBarnehageDato.verdi}
-                    feil={feltMedFeil.skalSlutteIBarnehageDato}
+                    feil={hentFeilmeldingElement(feltMedFeil.skalSlutteIBarnehageDato)}
                     maxLength={10}
                 />
                 <Input
@@ -78,7 +79,7 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
                         )
                     }
                     defaultValue={skalSlutteIBarnehageAntallTimer.verdi}
-                    feil={feltMedFeil.skalSlutteIBarnehageAntallTimer}
+                    feil={hentFeilmeldingElement(feltMedFeil.skalSlutteIBarnehageAntallTimer)}
                     type={'tel'}
                     autoComplete={'off'}
                     maxLength={5}
@@ -95,7 +96,7 @@ const BarnehageplassSkalSlutteInfo: React.StatelessComponent<BarnehageplassSkalS
                         )
                     }
                     defaultValue={skalSlutteIBarnehageKommune.verdi}
-                    feil={feltMedFeil.skalSlutteIBarnehageKommune}
+                    feil={hentFeilmeldingElement(feltMedFeil.skalSlutteIBarnehageKommune)}
                     maxLength={50}
                 />
                 <Vedlegg

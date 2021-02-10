@@ -3,6 +3,8 @@ import * as React from 'react';
 const BorSammenIkon: React.StatelessComponent<{}> = () => {
     return (
         <svg
+            aria-label="bor sammen-ikon"
+            role="img"
             enableBackground="new 0 0 64 64"
             version="1.1"
             viewBox="0 0 64 64"
