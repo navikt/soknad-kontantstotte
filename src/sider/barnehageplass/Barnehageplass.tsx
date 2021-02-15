@@ -9,6 +9,7 @@ import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import {
     harHattBarnehageplassOver33TimerPrUkeSisteTreMåneder,
+    hentFeilmeldingElement,
     hentFeltMedFeil,
 } from '../../common/utils';
 import Barnehageikon from '../../component/Ikoner/BarnehageIkon';
@@ -106,7 +107,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                         { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
                         { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                     ]}
-                    feil={feltMedFeil.harBarnehageplass}
+                    feil={hentFeilmeldingElement(feltMedFeil.harBarnehageplass)}
                 />
                 {harBarnehageplass.verdi !== Svar.UBESVART && (
                     <>
