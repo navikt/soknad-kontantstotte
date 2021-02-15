@@ -2,6 +2,7 @@ import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
 import { IFeltFeil } from '../../common/types';
+import { hentFeilmeldingElement } from '../../common/utils';
 import { BarnehageplassVerdier, Feltnavn, IFelt, Svar } from '../../soknad/types';
 
 interface IBarnehageplassStatus {
@@ -75,7 +76,7 @@ const BarnehageplassStatus: React.StatelessComponent<BarnehageplassStatusProps> 
                           },
                       ]
             }
-            feil={feltMedFeil.barnBarnehageplassStatus}
+            feil={hentFeilmeldingElement(feltMedFeil.barnBarnehageplassStatus)}
         />
     );
 };
