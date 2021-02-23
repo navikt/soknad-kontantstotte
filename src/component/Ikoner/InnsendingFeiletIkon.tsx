@@ -2,7 +2,12 @@ import * as React from 'react';
 
 const InnsendingFeiletIkon = () => {
     return (
-        <svg viewBox="-1 -1 68 68" xmlns="http://www.w3.org/2000/svg">
+        <svg
+            viewBox="-1 -1 68 68"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-label="innsending feilet-ikon"
+            role="img"
+        >
             <path
                 fill="#e3b0a8"
                 d="M32 0C14.33 0 0 14.33 0 32s14.33 32 32 32 32-14.33 32-32S49.67 0 32 0z"

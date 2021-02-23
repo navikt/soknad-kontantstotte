@@ -3,6 +3,7 @@ import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { IFeltFeil } from '../../common/types';
+import { hentFeilmeldingElement } from '../../common/utils';
 import { IRootState } from '../../rootReducer';
 import { selectBarnehageplass } from '../../soknad/selectors';
 import { BarnehageplassVerdier, Feltnavn, IFelt } from '../../soknad/types';
@@ -50,7 +51,7 @@ const BarnehageplassskalBegynneInfo: React.StatelessComponent<
                         )
                     }
                     defaultValue={skalBegynneIBarnehageDato.verdi}
-                    feil={feltMedFeil.skalBegynneIBarnehageDato}
+                    feil={hentFeilmeldingElement(feltMedFeil.skalBegynneIBarnehageDato)}
                     maxLength={10}
                 />
                 <Input
@@ -70,7 +71,7 @@ const BarnehageplassskalBegynneInfo: React.StatelessComponent<
                         )
                     }
                     defaultValue={skalBegynneIBarnehageAntallTimer.verdi}
-                    feil={feltMedFeil.skalBegynneIBarnehageAntallTimer}
+                    feil={hentFeilmeldingElement(feltMedFeil.skalBegynneIBarnehageAntallTimer)}
                     type={'tel'}
                     autoComplete={'off'}
                     maxLength={5}
@@ -87,7 +88,7 @@ const BarnehageplassskalBegynneInfo: React.StatelessComponent<
                         )
                     }
                     defaultValue={skalBegynneIBarnehageKommune.verdi}
-                    feil={feltMedFeil.skalBegynneIBarnehageKommune}
+                    feil={hentFeilmeldingElement(feltMedFeil.skalBegynneIBarnehageKommune)}
                     maxLength={50}
                 />
             </div>

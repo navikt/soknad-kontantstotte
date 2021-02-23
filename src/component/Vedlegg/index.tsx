@@ -54,14 +54,16 @@ class Vedlegg extends React.Component<IVedleggProps> {
                 <VedleggKnapp onChange={onChange} inputId={inputId} />
                 {feil.status === ValideringsStatus.ADVARSEL && (
                     <AlertStripeInfo
-                        children={<FormattedMessage id={feil.meldingsNokkel} />}
+                        children={<FormattedMessage tagName="p" id={feil.meldingsNokkel} />}
                         className={'vedlegg__advarsel'}
                     />
                 )}
                 <VedleggListe vedlegg={vedlegg} onDelete={onDelete} />
                 {feil.status === ValideringsStatus.FEIL && harForsoktNesteSteg && (
                     <SkjemaelementFeilmelding
-                        feil={{ feilmelding: <FormattedMessage id={feil.meldingsNokkel} /> }}
+                        feil={{
+                            feilmelding: <FormattedMessage tagName="p" id={feil.meldingsNokkel} />,
+                        }}
                     />
                 )}
             </div>
