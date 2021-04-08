@@ -38,6 +38,14 @@ const Environment = (): IEnvUrls => {
                 'https://www.nav.no/soknader/nb/person/familie/kontantstotte/NAV%2034-00.08/brev',
             saksoversikt: 'https://tjenester-q0.nav.no/saksoversikt/app',
         };
+    } else if (window.location.hostname.indexOf('soknad-kontantstotte-dev-sbs') > -1) {
+        return {
+            apiUrl: 'https://soknad-kontantstotte-dev-sbs.dev-sbs.nais.io/api',
+            loginUrl: 'https://loginservice.dev.nav.no/login',
+            papirsoknad:
+                'https://www.nav.no/soknader/nb/person/familie/kontantstotte/NAV%2034-00.08/brev',
+            saksoversikt: 'https://tjenester-q0.nav.no/saksoversikt/app',
+        };
     }
 
     return {

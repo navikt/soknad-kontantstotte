@@ -23,7 +23,7 @@ spec:
   ingresses:
     - "https://soknad-kontantstotte-q.nav.no"
     - "https://soknad-kontantstotte.nais.oera-q.local"
-    - "https://soknad-kontantstotte.dev-sbs.nais.io"
+    - "https://soknad-kontantstotte-dev-sbs.dev-sbs.nais.io"
   vault:
     enabled: true
   resources:
