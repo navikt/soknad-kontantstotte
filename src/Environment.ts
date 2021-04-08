@@ -40,7 +40,7 @@ const Environment = (): IEnvUrls => {
         };
     } else if (window.location.hostname.indexOf('soknad-kontantstotte-dev-sbs') > -1) {
         return {
-            apiUrl: 'https://soknad-kontantstotte-dev-sbs.dev-sbs.nais.io/api',
+            apiUrl: 'https://soknad-kontantstotte-api.dev-sbs.nais.io/api',
             loginUrl: 'https://loginservice.dev.nav.no/login',
             papirsoknad:
                 'https://www.nav.no/soknader/nb/person/familie/kontantstotte/NAV%2034-00.08/brev',
