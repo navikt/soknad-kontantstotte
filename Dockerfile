@@ -1,4 +1,4 @@
-FROM navikt/pus-decorator:216.20190522.1711
+FROM docker.pkg.github.com/navikt/pus-decorator/pus-decorator:bb933fdabee97947acfab903ef25ccc02a11cd9d
 ENV APPLICATION_NAME=soknad-kontantstotte
 ENV HEADER_TYPE=WITHOUT_MENU
 ENV CONTEXT_PATH=/
