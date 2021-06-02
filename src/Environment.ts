@@ -32,7 +32,7 @@ const Environment = (): IEnvUrls => {
         };
     } else if (window.location.hostname.indexOf('soknad-kontantstotte-q') > -1) {
         return {
-            apiUrl: 'https://soknad-kontantstotte-api-q.nav.no/api',
+            apiUrl: 'https://soknad-kontantstotte-api.dev.intern.nav.no/api',
             loginUrl: 'https://loginservice-q.nav.no/login',
             papirsoknad:
                 'https://www.nav.no/soknader/nb/person/familie/kontantstotte/NAV%2034-00.08/brev',
@@ -41,6 +41,14 @@ const Environment = (): IEnvUrls => {
     } else if (window.location.hostname.indexOf('soknad-kontantstotte-dev-sbs') > -1) {
         return {
             apiUrl: 'https://soknad-kontantstotte-api.dev-sbs.nais.io/api',
+            loginUrl: 'https://loginservice.dev.nav.no/login',
+            papirsoknad:
+                'https://www.nav.no/soknader/nb/person/familie/kontantstotte/NAV%2034-00.08/brev',
+            saksoversikt: 'https://tjenester-q0.nav.no/saksoversikt/app',
+        };
+    } else if (window.location.hostname.indexOf('soknad-kontantstotte.dev') > -1) {
+        return {
+            apiUrl: 'https://soknad-kontantstotte-api.dev.intern.nav.no/api',
             loginUrl: 'https://loginservice.dev.nav.no/login',
             papirsoknad:
                 'https://www.nav.no/soknader/nb/person/familie/kontantstotte/NAV%2034-00.08/brev',

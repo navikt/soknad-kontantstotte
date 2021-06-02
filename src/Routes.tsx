@@ -11,48 +11,56 @@ import PapirsoknadFeilside from './sider/feilsider/PapirsoknadFeilside';
 
 const Routes: React.StatelessComponent<{}> = () => {
     return (
-        <Switch>
-            {Object.values(stegConfig).map(
-                (side: ISteg): JSX.Element => {
-                    return <Route {...side} exact={true} key={side.key} />;
-                }
-            )}
-            <Route component={Kvittering} key="kvittering" path="/kvittering" exact={true} />
-            <Route
-                key={'fortrolig-adresse'}
-                render={props => (
-                    <PapirsoknadFeilside
-                        {...props}
-                        feilsidemelding="papirsoknad.feilmelding.veileder.fortrolig.adresse"
-                    />
+        <>
+            <div>Backend on GCP</div>
+            <Switch>
+                {Object.values(stegConfig).map(
+                    (side: ISteg): JSX.Element => {
+                        return <Route {...side} exact={true} key={side.key} />;
+                    }
                 )}
-                path={'/fortrolig-adresse'}
-            />
-            <Route
-                key={'ingen-barn'}
-                render={props => (
-                    <PapirsoknadFeilside
-                        {...props}
-                        feilsidemelding="papirsoknad.feilmelding.veileder.ingen.barn"
-                    />
-                )}
-                path={'/ingen-barn'}
-            />
-            <Route
-                component={VedleggOpplastingFeilet}
-                key={'vedlegg-opplasting-feilet'}
-                path={'/vedlegg-opplasting-feilet'}
-                exact={true}
-            />
-            <Route
-                component={InnsendingFeilet}
-                key="innsending-feilet"
-                path="/innsending-feilet"
-                exact={true}
-            />
-            <Route component={GenerellFeilside} key={'feilside'} path={'/feilside'} exact={true} />
-            <Route component={SidenFinnesIkke} key={'siden-finnes-ikke'} />
-        </Switch>
+                <Route component={Kvittering} key="kvittering" path="/kvittering" exact={true} />
+                <Route
+                    key={'fortrolig-adresse'}
+                    render={props => (
+                        <PapirsoknadFeilside
+                            {...props}
+                            feilsidemelding="papirsoknad.feilmelding.veileder.fortrolig.adresse"
+                        />
+                    )}
+                    path={'/fortrolig-adresse'}
+                />
+                <Route
+                    key={'ingen-barn'}
+                    render={props => (
+                        <PapirsoknadFeilside
+                            {...props}
+                            feilsidemelding="papirsoknad.feilmelding.veileder.ingen.barn"
+                        />
+                    )}
+                    path={'/ingen-barn'}
+                />
+                <Route
+                    component={VedleggOpplastingFeilet}
+                    key={'vedlegg-opplasting-feilet'}
+                    path={'/vedlegg-opplasting-feilet'}
+                    exact={true}
+                />
+                <Route
+                    component={InnsendingFeilet}
+                    key="innsending-feilet"
+                    path="/innsending-feilet"
+                    exact={true}
+                />
+                <Route
+                    component={GenerellFeilside}
+                    key={'feilside'}
+                    path={'/feilside'}
+                    exact={true}
+                />
+                <Route component={SidenFinnesIkke} key={'siden-finnes-ikke'} />
+            </Switch>
+        </>
     );
 };
 
