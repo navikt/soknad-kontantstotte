@@ -49,7 +49,7 @@ jobs:
           docker build . -t ${IMAGE}
           docker push ${IMAGE}
   deploy:
-    name: Deploy to NAIS
+    name: Deploy to SBS (dev)
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -59,3 +59,14 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-sbs
           RESOURCE: build_n_deploy/naiserator/naiserator_dev.yaml
+    name: Deploy to GCP (dev)
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: dev-gcp
+          RESOURCE: build_n_deploy/naiserator/naiserator.yaml
+          VARS: build_n_deploy/dev-gcp.json
