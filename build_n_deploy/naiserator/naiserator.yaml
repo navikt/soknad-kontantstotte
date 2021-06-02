@@ -24,8 +24,10 @@ spec:
   {{#each ingresses as |url|}}
      - {{url}}
   {{/each}}
-  vault:
-    enabled: true
+  accessPolicy:
+    outbound:
+      rules:
+        - application: soknad-kontantstotte-api
   resources:
     limits:
       cpu: "3"
