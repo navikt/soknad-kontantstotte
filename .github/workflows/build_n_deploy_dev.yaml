@@ -48,7 +48,7 @@ jobs:
           docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
           docker build . -t ${IMAGE}
           docker push ${IMAGE}
-  deploy:
+  deploy_sbs:
     name: Deploy to SBS (dev)
     needs: build
     runs-on: ubuntu-latest
@@ -59,6 +59,7 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-sbs
           RESOURCE: build_n_deploy/naiserator/naiserator_dev.yaml
+  deploy_gcp:
     name: Deploy to GCP (dev)
     needs: build
     runs-on: ubuntu-latest
