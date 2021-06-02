@@ -29,6 +29,8 @@ spec:
       rules:
         - application: soknad-kontantstotte-api
         - application: loginservice
+          namespace: plattformsikkerhet
+
   resources:
     limits:
       cpu: "3"
