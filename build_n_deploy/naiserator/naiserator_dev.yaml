@@ -17,11 +17,13 @@ spec:
     enabled: true
     path: /internal/metrics
   replicas:
-    min: 2
-    max: 4
+    min: 1
+    max: 2
     cpuThresholdPercentage: 50
   ingresses:
+    - "https://soknad-kontantstotte-q.nav.no"
     - "https://soknad-kontantstotte.nais.oera-q.local"
+    - "https://soknad-kontantstotte-dev-sbs.dev.nav.no"
   vault:
     enabled: true
   resources:
@@ -48,7 +50,7 @@ spec:
   - name: APPDYNAMICS_AGENT_ACCOUNT_NAME
     value: NON-PROD
   - name: UNLEASH_API_URL
-    value: https://unleashproxy.nais.oera.no/api/
+    value: https://unleash.nais.io/api/
   - name: LOADBALANCER_SOKNAD_KONTANTSTOTTE_URL
     value: soknad-kontantstotte.nais.oera-q.local
   - name: LOADBALANCER_SOKNAD_KONTANTSTOTTE_POOLNAME

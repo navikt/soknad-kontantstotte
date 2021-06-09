@@ -2,8 +2,14 @@ import * as React from 'react';
 
 const TimeglassIkon: React.StatelessComponent<{}> = () => {
     return (
-        <svg version="1.1" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <title>Timeglass ikon</title>
+        <svg
+            version="1.1"
+            viewBox="0 0 64 64"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-labelledby="timeglassikon"
+            role="img"
+        >
+            <title id="timeglassikon">Timeglass ikon</title>
             <g fill="none" fillRule="evenodd">
                 <mask id="a" fill="white">
                     <circle cx="32" cy="32" r="32" />

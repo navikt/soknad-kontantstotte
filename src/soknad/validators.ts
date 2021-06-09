@@ -47,7 +47,7 @@ const harSvart = (felt: IFelt, feilmeldingsNokkel: string): IFelt => {
 const harSvartBarnehageplassVerdiMedFeilmelding = (felt: IFelt): IFelt => {
     return felt.verdi !== BarnehageplassVerdier.Ubesvart
         ? ok(felt)
-        : feil(felt, 'feilmelding.generell.feilmelding');
+        : feil(felt, 'barnehageplass.harPlass.feilmelding');
 };
 
 const harSvartTilknytningTilUtlandVerdiMedFeilmelding = (felt: IFelt): IFelt => {
@@ -87,6 +87,9 @@ const erGyldigDato = (felt: IFelt): IFelt => {
         ? ok(felt)
         : feil(felt, 'feilmelding.generell.ugyldigDato');
 };
+
+const harSvartTomtFødselsnummer = (felt: IFelt): IFelt =>
+    harSvartTekst(felt, 'feilmelding.generell.fødselsnummerTom');
 
 const harFyltInnFødselsnummer = (felt: IFelt): IFelt => {
     return /^\d{11}$/.test(felt.verdi.replace(' ', ''))
@@ -153,6 +156,12 @@ const harSvartJaMedFeilmelding = (felt: IFelt): IFelt =>
 const harSvartTekstMedFeilmelding = (felt: IFelt): IFelt =>
     harSvartTekst(felt, 'feilmelding.generell.feilmelding');
 
+const harSvartMineBarnMedFeilmelding = (felt: IFelt): IFelt =>
+    harSvartTekst(felt, 'barn.feilmelding');
+
+const harSvartOppgiInfoMedFeilmelding = (felt: IFelt): IFelt =>
+    harSvartTekst(felt, 'feilmelding.generell.oppgiInformasjon');
+
 const harSvartTekstUnderAntallTegnMedFeilmelding = (felt: IFelt): IFelt =>
     harSvartTekstUnderAntallTegn(felt, 'feilmelding.generell.forMangeTegn');
 
@@ -179,9 +188,12 @@ export {
     harSvartJa,
     harSvartJaMedFeilmelding,
     harSvartMedFeilmelding,
+    harSvartMineBarnMedFeilmelding,
+    harSvartOppgiInfoMedFeilmelding,
     harSvartTekstMedFeilmelding,
     harSvartTekstUnderAntallTegnMedFeilmelding,
     harSvartTilknytningTilUtlandVerdiMedFeilmelding,
+    harSvartTomtFødselsnummer,
     sokerHarIkkeSvartNeiTilknytningTilUtland,
     svarUtenValidering,
 };

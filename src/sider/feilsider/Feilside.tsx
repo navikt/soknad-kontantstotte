@@ -1,5 +1,5 @@
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
-import { Sidetittel } from 'nav-frontend-typografi';
+import { Innholdstittel, Sidetittel } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -23,9 +23,9 @@ const Feilside: React.StatelessComponent<IFeilside> = ({ ikon, tekster, knapp })
             </Sidetittel>
             <div className={'feilside__ikon'}>{ikon}</div>
 
-            <h3 className={'typo-innholdstittel'}>
+            <Innholdstittel tag="h2">
                 <FormattedMessage id={tekster.tittel} defaultMessage={'Obs!'} />
-            </h3>
+            </Innholdstittel>
 
             <AlertStripeAdvarsel className={'feilside__alertstripe'}>
                 <FormattedMessage
