@@ -1,3 +1,4 @@
+import { Innholdstittel } from 'nav-frontend-typografi';
 import * as React from 'react';
 import ModalHjelpetekst from '../ModalHjelpetekst/ModalHjelpetekst';
 
@@ -12,7 +13,9 @@ const HjelpetekstContainer: React.StatelessComponent<IHjelpetekstContainerProps>
 }) => {
     return (
         <div className={'hjelpetekst-container'}>
-            <h3 className={'typo-innholdstittel side-container__sidetittel'}>{tittel}</h3>
+            <Innholdstittel tag="h2" className={'side-container__sidetittel'}>
+                {tittel}
+            </Innholdstittel>
             <ModalHjelpetekst
                 ariaContentLabel={hjelpetekstNokkel + '.label'}
                 className={'hjelpetekst-container__hjelpetekst'}

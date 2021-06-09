@@ -33,7 +33,7 @@ const PapirsoknadFeilside: React.StatelessComponent<Props> = ({ status, feilside
                         center={true}
                         tekst={
                             <div className={'veiledning__veileder-snakkeboble'}>
-                                <Element>
+                                <Element tag="h2">
                                     <FormattedMessage id={'papirsoknad.feilmelding.veileder.hei'} />
                                 </Element>
                                 <Normaltekst>
