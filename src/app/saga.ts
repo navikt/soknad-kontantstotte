@@ -32,8 +32,9 @@ import {
     IAppSettSprak,
 } from './actions';
 import { pingBackend } from './api';
-import { selectAppSteg } from './selectors';
+import { selectAppSteg, selectValgtSprak } from './selectors';
 import { AppStatus, ILocationChangeAction } from './types';
+import { oppdaterLanguageAttributt } from '../common/utils';
 
 const redirectTilLogin = () => {
     window.location.href = Environment().loginUrl + '?redirect=' + window.location.href;
@@ -79,6 +80,8 @@ function* forsteSidelastSaga(): SagaIterator {
 }
 
 function* startAppSaga(): SagaIterator {
+    const språk = yield select(selectValgtSprak);
+    oppdaterLanguageAttributt(språk);
     yield put(appEndreStatus(AppStatus.STARTER));
     const startSaga = yield fork(forsteSidelastSaga);
     const { fortrolig_adresse } = yield race({
@@ -141,6 +144,7 @@ function* gaaTilStegSaga(action: IAppGaaTilSteg): SagaIterator {
 }
 
 function* settSprakSaga(action: IAppSettSprak) {
+    oppdaterLanguageAttributt(action.valgtSprak);
     yield put(appSettSprak(action.valgtSprak));
 }
 

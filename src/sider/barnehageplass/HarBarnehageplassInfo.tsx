@@ -4,6 +4,7 @@ import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { IFeltFeil } from '../../common/types';
+import { hentFeilmeldingElement } from '../../common/utils';
 import { IRootState } from '../../rootReducer';
 import { selectBarnehageplass } from '../../soknad/selectors';
 import { BarnehageplassVerdier, Feltnavn, IFelt, ValideringsStatus } from '../../soknad/types';
@@ -49,7 +50,7 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                         )
                     }
                     defaultValue={harBarnehageplassDato.verdi}
-                    feil={feltMedFeil.harBarnehageplassDato}
+                    feil={hentFeilmeldingElement(feltMedFeil.harBarnehageplassDato)}
                     maxLength={10}
                 />
                 <div className={'inputElement barnehageplass__antallTimer--container'}>
@@ -70,7 +71,7 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                             )
                         }
                         defaultValue={harBarnehageplassAntallTimer.verdi}
-                        feil={feltMedFeil.harBarnehageplassAntallTimer}
+                        feil={hentFeilmeldingElement(feltMedFeil.harBarnehageplassAntallTimer)}
                         type={'tel'}
                         autoComplete={'off'}
                         maxLength={5}
@@ -88,7 +89,7 @@ const HarBarnehageplassInfo: React.StatelessComponent<HarBarnehageplassType> = (
                         )
                     }
                     defaultValue={harBarnehageplassKommune.verdi}
-                    feil={feltMedFeil.harBarnehageplassKommune}
+                    feil={hentFeilmeldingElement(feltMedFeil.harBarnehageplassKommune)}
                     maxLength={50}
                 />
             </div>
