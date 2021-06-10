@@ -2,7 +2,7 @@ import PanelBase from 'nav-frontend-paneler';
 import { TextareaControlled } from 'nav-frontend-skjema';
 import * as React from 'react';
 import { IFeil } from '../../common/types';
-import { ANTALL_LOVLIGE_TEGN_I_TEKSTFELT } from '../../common/utils';
+import { ANTALL_LOVLIGE_TEGN_I_TEKSTFELT, hentFeilmeldingElement } from '../../common/utils';
 import { IFelt } from '../../soknad/types';
 
 interface ITilleggsinformasjonInputProps {
@@ -31,7 +31,7 @@ const TilleggsinformasjonInput: React.StatelessComponent<TilleggsinformasjonInpu
                 onBlur={(evt: any) => {
                     onBlur(evt.target.value);
                 }}
-                feil={feil}
+                feil={hentFeilmeldingElement(feil)}
             />
         </PanelBase>
     );

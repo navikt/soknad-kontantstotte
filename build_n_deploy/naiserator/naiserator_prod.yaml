@@ -48,7 +48,7 @@ spec:
   - name: APPDYNAMICS_AGENT_ACCOUNT_NAME
     value: PROD
   - name: UNLEASH_API_URL
-    value: https://unleashproxy.nais.oera.no/api/
+    value: https://unleash.nais.io/api/
   - name: LOADBALANCER_SOKNAD_KONTANTSTOTTE_URL
     value: soknad-kontantstotte.nav.no
   - name: LOADBALANCER_SOKNAD_KONTANTSTOTTE_POOLNAME

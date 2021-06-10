@@ -6,6 +6,8 @@ interface IAdvarselIkon {
 const AdvarselIkon: React.StatelessComponent<IAdvarselIkon> = ({ style, className }) => {
     return (
         <svg
+            aria-labelledby="advarselikon"
+            role="img"
             className={className}
             style={style}
             enableBackground="new 0 0 60 60"
@@ -16,7 +18,7 @@ const AdvarselIkon: React.StatelessComponent<IAdvarselIkon> = ({ style, classNam
             xmlSpace="preserve"
             xmlns="http://www.w3.org/2000/svg"
         >
-            <title>Advarsel</title>
+            <title id="advarselikon">Advarsel</title>
             <path
                 className="st0"
                 fill={'#FFB249'}
