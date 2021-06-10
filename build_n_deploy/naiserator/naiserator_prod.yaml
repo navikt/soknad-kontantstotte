@@ -31,10 +31,6 @@ spec:
     requests:
       memory: 512Mi
   env:
-  - name: NAV_TRUSTSTORE_KEYSTOREALIAS
-    value: na
-  - name: NAV_TRUSTSTORE_PATH
-    value: /var/run/secrets/naisd.io/nav_truststore_path
   - name: APPRES_CMS_URL
     value: https://appres.nav.no
   - name: LOGINSERVICE_URL
