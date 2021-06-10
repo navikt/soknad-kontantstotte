@@ -45,8 +45,8 @@ jobs:
         run: |
           yarn
           yarn build
-          docker build . -t ${IMAGE}
           docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
+          docker build . -t ${IMAGE}
           docker push ${IMAGE}
   deploy:
     name: Deploy to NAIS

@@ -3,12 +3,14 @@ import * as React from 'react';
 const utenlandskeYtelserIkon: React.StatelessComponent<{}> = () => {
     return (
         <svg
+            aria-labelledby="utenlandskeytelserikon"
+            role="img"
             version="1.1"
             viewBox="0 0 64 64"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
         >
-            <title>Utenlandsk ytelser ikon</title>
+            <title id="utenlandskeytelserikon">Utenlandske ytelser ikon</title>
             <defs>
                 <circle id="a" cx="32" cy="32" r="32" />
             </defs>
