@@ -59,7 +59,7 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({
         <div className={'veiledning'}>
             <Select
                 className={'veiledning__sprakvalg'}
-                label=""
+                label={intl.formatMessage({ id: 'app.velgSpråk' })}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                     oppdaterSprak(sprakMap(e.target.value))
                 }
@@ -80,7 +80,7 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({
                     center={true}
                     tekst={
                         <div className={'veiledning__veileder-snakkeboble'}>
-                            <Element>
+                            <Element tag="h2">
                                 <FormattedMessage id={'veiledningsside.veileder.hei'} />{' '}
                                 <span className={'veiledning__veileder-navn'}>{fornavn}</span>!
                             </Element>
@@ -110,15 +110,22 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({
                 checked={soknad.veiledning.bekreftelse.verdi === Svar.JA}
                 label={intl.formatHTMLMessage({ id: 'veiledningsside.bekreftelse.label' })}
             >
-                <FormattedHTMLMessage id={'veiledningsside.bekreftelse.innhold'} />
+                <FormattedHTMLMessage
+                    tagName="p"
+                    id={'veiledningsside.bekreftelse.innhold.paragraf-1'}
+                />
+                <FormattedHTMLMessage
+                    tagName="p"
+                    id={'veiledningsside.bekreftelse.innhold.paragraf-2'}
+                />
             </BekreftCheckboksPanel>
             {harForsoktNesteSteg &&
                 soknad.veiledning.bekreftelse.valideringsStatus !== ValideringsStatus.OK && (
                     <FormattedMessage id={soknad.veiledning.bekreftelse.feilmeldingsNokkel}>
                         {txt => (
-                            <div role="alert" className={'skjemaelement__feilmelding'}>
+                            <p role="alert" className={'skjemaelement__feilmelding'}>
                                 {txt}
-                            </div>
+                            </p>
                         )}
                     </FormattedMessage>
                 )}
