@@ -4,7 +4,7 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
-import { hentFeltMedFeil } from '../../common/utils';
+import { hentFeilmeldingElement, hentFeltMedFeil } from '../../common/utils';
 import UtenlandskeYtelserIkon from '../../component/Ikoner/UtenlandskeYtelserIkon';
 import SideContainer from '../../component/StegSide/StegSide';
 import TilleggsinformasjonInput from '../../component/TilleggsinformasjonInput/TilleggsinformasjonInput';
@@ -71,7 +71,7 @@ const UtenlandskeYtelser: React.StatelessComponent<UtenlandskeYtelserProps> = ({
                         { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
                         { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                     ]}
-                    feil={feltMedFeil.mottarYtelserFraUtland}
+                    feil={hentFeilmeldingElement(feltMedFeil.mottarYtelserFraUtland)}
                 />
                 {mottarYtelserFraUtland.verdi === Svar.JA && (
                     <TilleggsinformasjonInput
@@ -109,7 +109,9 @@ const UtenlandskeYtelser: React.StatelessComponent<UtenlandskeYtelserProps> = ({
                             { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
                             { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                         ]}
-                        feil={feltMedFeil.mottarAnnenForelderYtelserFraUtland}
+                        feil={hentFeilmeldingElement(
+                            feltMedFeil.mottarAnnenForelderYtelserFraUtland
+                        )}
                     />
                 )}
                 {mottarAnnenForelderYtelserFraUtland.verdi === Svar.JA && (
