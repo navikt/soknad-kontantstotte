@@ -4,7 +4,7 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
-import { hentFeltMedFeil } from '../../common/utils';
+import { hentFeilmeldingElement, hentFeltMedFeil } from '../../common/utils';
 import FlaskeIkon from '../../component/Ikoner/FlaskeIkon';
 import SideContainer from '../../component/StegSide/StegSide';
 import TilleggsinformasjonInput from '../../component/TilleggsinformasjonInput/TilleggsinformasjonInput';
@@ -61,7 +61,7 @@ const UtenlandskKontantstotte: React.StatelessComponent<UtenlandskKontantstotteS
                         { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
                         { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                     ]}
-                    feil={feltMedFeil.mottarKontantstotteFraUtlandet}
+                    feil={hentFeilmeldingElement(feltMedFeil.mottarKontantstotteFraUtlandet)}
                 />
                 {mottarKontantstotteFraUtlandet.verdi === Svar.JA && (
                     <TilleggsinformasjonInput

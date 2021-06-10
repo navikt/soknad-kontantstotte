@@ -2,8 +2,14 @@ import * as React from 'react';
 
 const Barnehageikon: React.StatelessComponent<{}> = () => {
     return (
-        <svg version="1.1" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <title>Barnehage Ikon</title>
+        <svg
+            version="1.1"
+            viewBox="0 0 64 64"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-labelledby="barnehageikon"
+            role="img"
+        >
+            <title id="barnehageikon">Barnehage Ikon</title>
             <g fill="none" fillRule="evenodd" strokeWidth="1">
                 <mask id="b" fill="white">
                     <circle cx="32" cy="32" r="32" />

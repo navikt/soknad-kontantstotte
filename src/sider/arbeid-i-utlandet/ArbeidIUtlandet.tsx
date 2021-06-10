@@ -4,7 +4,7 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
-import { hentFeltMedFeil } from '../../common/utils';
+import { hentFeilmeldingElement, hentFeltMedFeil } from '../../common/utils';
 import ArbeidIUtlandetIkon from '../../component/Ikoner/ArbeidIUtlandetIkon';
 import SideContainer from '../../component/StegSide/StegSide';
 import TilleggsinformasjonInput from '../../component/TilleggsinformasjonInput/TilleggsinformasjonInput';
@@ -73,7 +73,9 @@ const ArbeidIUtlandet: React.StatelessComponent<ArbeidIUtlandetProps> = ({
                         { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
                         { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                     ]}
-                    feil={feltMedFeil.arbeiderIUtlandetEllerKontinentalsokkel}
+                    feil={hentFeilmeldingElement(
+                        feltMedFeil.arbeiderIUtlandetEllerKontinentalsokkel
+                    )}
                 />
                 {arbeiderIUtlandetEllerKontinentalsokkel.verdi === Svar.JA && (
                     <TilleggsinformasjonInput
@@ -113,7 +115,7 @@ const ArbeidIUtlandet: React.StatelessComponent<ArbeidIUtlandetProps> = ({
                             { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
                             { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                         ]}
-                        feil={feltMedFeil.arbeiderAnnenForelderIUtlandet}
+                        feil={hentFeilmeldingElement(feltMedFeil.arbeiderAnnenForelderIUtlandet)}
                     />
                 )}
                 {arbeiderAnnenForelderIUtlandet.verdi === Svar.JA && (

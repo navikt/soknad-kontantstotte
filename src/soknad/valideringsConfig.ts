@@ -27,9 +27,12 @@ import {
     harSvartBarnehageplassVerdiMedFeilmelding,
     harSvartJaMedFeilmelding,
     harSvartMedFeilmelding,
+    harSvartMineBarnMedFeilmelding,
+    harSvartOppgiInfoMedFeilmelding,
     harSvartTekstMedFeilmelding,
     harSvartTekstUnderAntallTegnMedFeilmelding,
     harSvartTilknytningTilUtlandVerdiMedFeilmelding,
+    harSvartTomtFødselsnummer,
     sokerHarIkkeSvartNeiTilknytningTilUtland,
     svarUtenValidering,
 } from './validators';
@@ -56,12 +59,12 @@ const valideringsConfig: IValideringsConfig = {
     arbeidIUtlandet: {
         arbeiderAnnenForelderIUtlandet: [harSvartMedFeilmelding],
         arbeiderAnnenForelderIUtlandetForklaring: [
-            harSvartTekstMedFeilmelding,
+            harSvartOppgiInfoMedFeilmelding,
             harSvartTekstUnderAntallTegnMedFeilmelding,
         ],
         arbeiderIUtlandetEllerKontinentalsokkel: [harSvartMedFeilmelding],
         arbeiderIUtlandetEllerKontinentalsokkelForklaring: [
-            harSvartTekstMedFeilmelding,
+            harSvartOppgiInfoMedFeilmelding,
             harSvartTekstUnderAntallTegnMedFeilmelding,
         ],
     },
@@ -101,7 +104,7 @@ const valideringsConfig: IValideringsConfig = {
     },
     familieforhold: {
         annenForelderFødselsnummer: [
-            harSvartTekstMedFeilmelding,
+            harSvartTomtFødselsnummer,
             harFyltInnFødselsnummer,
             fødselsnummerPassererMod10ogMod11Sjekk,
         ],
@@ -116,7 +119,7 @@ const valideringsConfig: IValideringsConfig = {
     },
     mineBarn: {
         erFlerling: [svarUtenValidering],
-        fødselsdato: [harSvartTekstMedFeilmelding],
+        fødselsdato: [harSvartMineBarnMedFeilmelding],
         fødselsnummer: [svarUtenValidering],
         navn: [harFyltInnNavn],
     },
@@ -129,7 +132,7 @@ const valideringsConfig: IValideringsConfig = {
             annenForelderHarIkkeSvartNeiTilknytningTilUtland,
         ],
         annenForelderBoddEllerJobbetINorgeMinstFemAarForklaring: [
-            harSvartTekstMedFeilmelding,
+            harSvartOppgiInfoMedFeilmelding,
             harSvartTekstUnderAntallTegnMedFeilmelding,
         ],
         boddEllerJobbetINorgeMinstFemAar: [
@@ -137,26 +140,26 @@ const valideringsConfig: IValideringsConfig = {
             sokerHarIkkeSvartNeiTilknytningTilUtland,
         ],
         boddEllerJobbetINorgeMinstFemAarForklaring: [
-            harSvartTekstMedFeilmelding,
+            harSvartOppgiInfoMedFeilmelding,
             harSvartTekstUnderAntallTegnMedFeilmelding,
         ],
     },
     utenlandskKontantstotte: {
         mottarKontantstotteFraUtlandet: [harSvartMedFeilmelding],
         mottarKontantstotteFraUtlandetTilleggsinfo: [
-            harSvartTekstMedFeilmelding,
+            harSvartOppgiInfoMedFeilmelding,
             harSvartTekstUnderAntallTegnMedFeilmelding,
         ],
     },
     utenlandskeYtelser: {
         mottarAnnenForelderYtelserFraUtland: [harSvartMedFeilmelding],
         mottarAnnenForelderYtelserFraUtlandForklaring: [
-            harSvartTekstMedFeilmelding,
+            harSvartOppgiInfoMedFeilmelding,
             harSvartTekstUnderAntallTegnMedFeilmelding,
         ],
         mottarYtelserFraUtland: [harSvartMedFeilmelding],
         mottarYtelserFraUtlandForklaring: [
-            harSvartTekstMedFeilmelding,
+            harSvartOppgiInfoMedFeilmelding,
             harSvartTekstUnderAntallTegnMedFeilmelding,
         ],
     },

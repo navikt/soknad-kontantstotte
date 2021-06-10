@@ -4,7 +4,7 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
-import { hentFeltMedFeil } from '../../common/utils';
+import { hentFeilmeldingElement, hentFeltMedFeil } from '../../common/utils';
 import BorSammenIkon from '../../component/Ikoner/BorSammenIkon';
 import SideContainer from '../../component/StegSide/StegSide';
 import { IRootState } from '../../rootReducer';
@@ -60,7 +60,7 @@ const Familieforhold: React.StatelessComponent<FamilieforholdSideProps> = ({
                         { label: intl.formatMessage({ id: 'svar.nei' }), value: Svar.NEI },
                         { label: intl.formatMessage({ id: 'svar.ja' }), value: Svar.JA },
                     ]}
-                    feil={feltMedFeil.borForeldreneSammenMedBarnet}
+                    feil={hentFeilmeldingElement(feltMedFeil.borForeldreneSammenMedBarnet)}
                 />
 
                 {familieforhold.borForeldreneSammenMedBarnet.verdi === Svar.JA && (
