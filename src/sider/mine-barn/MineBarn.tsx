@@ -8,7 +8,7 @@ import { selectHarForsoktNesteSteg } from '../../app/selectors';
 import { barnSettIndeksForValgtBarn } from '../../barn/actions';
 import { selectBarn, selectIndeksForValgtBarn } from '../../barn/selectors';
 import { IBarn } from '../../barn/types';
-import { hentFeltMedFeil } from '../../common/utils';
+import { hentFeilmeldingElement, hentFeltMedFeil } from '../../common/utils';
 import BarnIkon from '../../component/Ikoner/BarnIkon';
 import SideContainer from '../../component/StegSide/StegSide';
 import { IRootState } from '../../rootReducer';
@@ -92,7 +92,7 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
                         onChange={this.handleChange}
                         checked={this.props.indeksForValgtBarn}
                         radios={this.state.vanligeBarn}
-                        feil={feltMedFeil.fødselsdato}
+                        feil={hentFeilmeldingElement(feltMedFeil.fødselsdato)}
                     />
 
                     {this.state.flerlinger.length > 0 && (
@@ -102,7 +102,7 @@ class MineBarn extends React.Component<MineBarnSideProps, IMineBarnState> {
                             onChange={this.handleChange}
                             checked={this.props.indeksForValgtBarn}
                             radios={this.state.flerlinger}
-                            feil={feltMedFeil.fødselsdato}
+                            feil={hentFeilmeldingElement(feltMedFeil.fødselsdato)}
                         />
                     )}
                 </form>
