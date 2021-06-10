@@ -8,6 +8,8 @@ interface IBindersIkon {
 const BindersIkon: React.FunctionComponent<IBindersIkon> = ({ className, style }) => {
     return (
         <svg
+            aria-label="bindersikon"
+            role="img"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             className={className}
