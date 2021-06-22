@@ -16,6 +16,7 @@ import {
 } from 'redux-saga/effects';
 import { barnHent, BarnTypeKeys } from '../barn/actions';
 import { selectBarn } from '../barn/selectors';
+import { oppdaterLanguageAttributt } from '../common/utils';
 import { landHent, LandTypeKeys } from '../land/actions';
 import { sokerHent, SokerTypeKeys } from '../soker/actions';
 import { ISteg, stegConfig } from '../stegConfig';
@@ -34,7 +35,6 @@ import {
 import { pingBackend } from './api';
 import { selectAppSteg, selectValgtSprak } from './selectors';
 import { AppStatus, ILocationChangeAction } from './types';
-import { oppdaterLanguageAttributt } from '../common/utils';
 
 const redirectTilLogin = () => {
     window.location.href = Environment().loginUrl + '?redirect=' + window.location.href;

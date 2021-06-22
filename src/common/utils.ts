@@ -1,10 +1,10 @@
 import * as moment from 'moment';
+import { SkjemaelementFeil } from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
 import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
+import { ISprak } from '../app/types';
 import { BarnehageplassVerdier, IFelt, ValideringsStatus } from '../soknad/types';
 import { IFeil, IFeltFeil } from './types';
-import { SkjemaelementFeil } from 'nav-frontend-skjema/lib/skjemaelement-feilmelding';
-import { ISprak } from '../app/types';
 
 export const ANTALL_LOVLIGE_TEGN_I_TEKSTFELT = 500;
 
