@@ -62,6 +62,10 @@ export interface IOppgittUtlandsTilknytning {
     aktørerArbeidYtelseIUtlandet: IAktørArbeidYtelseUtland[];
     aktørerTilknytningTilUtlandet: IAktørTilknytningUtland[];
 }
+export interface IOppgittUtlandsTilknytningSet {
+    aktørerArbeidYtelseIUtlandet: Set<IAktørArbeidYtelseUtland>;
+    aktørerTilknytningTilUtlandet: Set<IAktørTilknytningUtland>;
+}
 
 export interface IOppgittErklæring {
     isBarnetHjemmeværendeOgIkkeAdoptert: boolean;

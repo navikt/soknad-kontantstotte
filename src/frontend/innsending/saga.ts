@@ -23,6 +23,7 @@ import {
     IOppgittErklæring,
     IOppgittFamilieforhold,
     IOppgittUtlandsTilknytning,
+    IOppgittUtlandsTilknytningSet,
     Standpunkt,
     toStandpunkt,
     toTilknytningTilUtlandVerdier,
@@ -176,23 +177,32 @@ const mapStateToKontraktSøknad = (
         oppgittAnnenPartNavn: soknad.familieforhold.annenForelderNavn.verdi,
     };
 
-    const oppgittUtlandsTilknytning: IOppgittUtlandsTilknytning = {
-        aktørerArbeidYtelseIUtlandet: Array.from(
-            new Set([mapAktørArbeidYtelseUtland(soknad, søker.innloggetSom, false)])
-        ),
-        aktørerTilknytningTilUtlandet: Array.from(
-            new Set([mapAktørTilknytningUtland(soknad, søker.innloggetSom, false)])
-        ),
+    const oppgittUtlandsTilknytningSet: IOppgittUtlandsTilknytningSet = {
+        aktørerArbeidYtelseIUtlandet: new Set([
+            mapAktørArbeidYtelseUtland(soknad, søker.innloggetSom, false),
+        ]),
+        aktørerTilknytningTilUtlandet: new Set([
+            mapAktørTilknytningUtland(soknad, søker.innloggetSom, false),
+        ]),
     };
 
     if (oppgittAnnenPartFødselsnummer !== '') {
-        oppgittUtlandsTilknytning.aktørerArbeidYtelseIUtlandet.add(
+        oppgittUtlandsTilknytningSet.aktørerArbeidYtelseIUtlandet.add(
             mapAktørArbeidYtelseUtland(soknad, oppgittAnnenPartFødselsnummer, true)
         );
-        oppgittUtlandsTilknytning.aktørerTilknytningTilUtlandet.add(
+        oppgittUtlandsTilknytningSet.aktørerTilknytningTilUtlandet.add(
             mapAktørTilknytningUtland(soknad, oppgittAnnenPartFødselsnummer, true)
         );
     }
+
+    const oppgittUtlandsTilknytning: IOppgittUtlandsTilknytning = {
+        aktørerArbeidYtelseIUtlandet: Array.from(
+            oppgittUtlandsTilknytningSet.aktørerArbeidYtelseIUtlandet
+        ),
+        aktørerTilknytningTilUtlandet: Array.from(
+            oppgittUtlandsTilknytningSet.aktørerTilknytningTilUtlandet
+        ),
+    };
 
     const utcOffset = tz('Europe/Paris').utcOffset();
     const kontraktSøknad: IKontraktSøknad = {
