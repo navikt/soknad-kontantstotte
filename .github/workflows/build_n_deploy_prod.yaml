@@ -1,4 +1,4 @@
-name: Build, push, and deploy app to dev and prod
+name: Build, push, and deploy app to prod
 
 on:
   push:
@@ -6,34 +6,22 @@ on:
       - 'master'
 
 env:
-  IMAGE: docker.pkg.github.com/${{ github.repository }}/soknad-kontantstotte:${{ github.sha }}
+  IMAGE: docker.pkg.github.com/${{ github.repository }}/familie-ba-soknad:${{ github.sha }}
+  IMAGE_LATEST: docker.pkg.github.com/${{ github.repository }}/familie-ba-soknad:latest
+  BASE_PATH: /familie/barnetrygd/soknad/ordinaer/
 
 jobs:
   test:
     name: Run tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-      - uses: actions/cache@v1
-        with:
-          path: ./node_modules
-          key: ${{ runner.os }}-node-cache-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-cache-
-      - name: Build and run tests
-        run: |
-          yarn install
-          mkdir ./ci-tests/reports
-          yarn build:ci
-          yarn test:ci
-      - name: Archive test reports
-        uses: actions/upload-artifact@v1
-        with:
-          name: reports
-          path: ./ci-tests/reports
+      - uses: actions/checkout@v2
+      - name: Installer node-pakker
+        run: npx yarn
+      - name: Kjør tester
+        env:
+          CI: true
+        run: npx yarn test
   build:
     name: Build and push Docker container
     runs-on: ubuntu-latest
@@ -43,26 +31,27 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          yarn
-          yarn build
+          docker build . -t ${IMAGE} -t ${IMAGE_LATEST} --build-arg base_path=${BASE_PATH}
           docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
-          docker build . -t ${IMAGE}
           docker push ${IMAGE}
+          docker push ${IMAGE_LATEST}
   deploy:
-    name: Deploy to NAIS
-    needs: build
+    name: Deploy to gcp
+    needs:
+      - build
+      - test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Deploy til dev-sbs
-        uses: nais/deploy/actions/deploy@v1
+      - uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-sbs
+          CLUSTER: dev-gcp
           RESOURCE: build_n_deploy/naiserator/naiserator_dev.yaml
-      - name: Deploy til prod-sbs
-        uses: nais/deploy/actions/deploy@v1
+          VAR: base_path=${{ env.BASE_PATH }}
+      - uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: prod-sbs
+          CLUSTER: prod-gcp
           RESOURCE: build_n_deploy/naiserator/naiserator_prod.yaml
+          VAR: base_path=${{ env.BASE_PATH }}

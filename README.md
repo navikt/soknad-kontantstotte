@@ -1,52 +1,106 @@
-soknad-kontantstotte
-====================
+# familie-ba-soknad
 
-Søknadsdialog for ny kontantstøtte-søknad
+Frontend - søknad for barnetrygd.
 
-# Kom i gang med utvikling
+## Avhengigheter
+1. Node versjon >=14
 
-* Installere avhengigheter `yarn`
-* Starte dev-server `yarn start`
-* Åpne `http://localhost:8000/` i nettleseren din
+## Kjør lokalt
 
-For å bygge en prodversjon kjør `yarn build`
 
-Test med backend lokalt ved å kjøre [_soknad-kontantstotte-proxy_](https://github.com/navikt/soknad-kontantstotte-proxy), [_soknad-kontantstotte-api_](https://github.com/navikt/soknad-kontantstotte-api) og `yarn start:proxy`.
+1. `yarn install`
+2. `yarn start:dev`
 
-# Bygging på egen maskin
+For å kjøre med mellomlagring må du ha familie-dokument kjørende. 
 
-`./build.sh` 
+## Kjør full app
+For å kunne se PDFen som blir sent til joark (arkivering) lokalt må vi kjøre en del apper i tillegg til denne.
+From the top (rekkefølge er viktig, steg 5 krasjer hvis du ikke gjør steg 3 først f.eks.)
 
-Se også `./build.sh --help` for alternativer 
+1.  ### [familie-ba-soknad-api](https://github.com/navikt/familie-ba-soknad-api)
+    Kjør LokalLauncher
+   
+2.  ### [navkafka-docker-compose](https://github.com/navikt/navkafka-docker-compose)
+    Kjør `docker-compose up -d`
+    
+3.  ### [postgres](https://hub.docker.com/_/postgres)
+    Kjør
+    ```shell
+    docker run \
+        --name postgres \
+        --rm \
+        -p 5432:5432 \
+        -e POSTGRES_PASSWORD=test \
+        -e POSTGRES_USER=postgres \
+        -e POSTGRES_DB=familie-ba-mottak \
+        -d \
+        postgres
+    ```
+    
+    Eller legg til tilsvarende service i `navkafka-docker-compose/docker-compose.yml`
 
----
+4.  ### [familie-ba-dokgen](https://github.com/navikt/familie-ba-dokgen)
+    Kjør `docker-compose up -d`
+   
+5.  ### [familie-ba-mottak](https://github.com/navikt/familie-ba-mottak)
+    Git apply den følgende diffen
+    ```diff
+    diff --git "a/src/main/kotlin/no/nav/familie/ba/mottak/task/Journalf\303\270rS\303\270knadTask.kt" "b/src/main/kotlin/no/nav/familie/ba/mottak/task/Journalf\303\270rS\303\270knadTask.kt"
+    index 0efad49..bbda0d8 100644
+    --- "a/src/main/kotlin/no/nav/familie/ba/mottak/task/Journalf\303\270rS\303\270knadTask.kt"
+    +++ "b/src/main/kotlin/no/nav/familie/ba/mottak/task/Journalf\303\270rS\303\270knadTask.kt"
+    @@ -8,6 +8,7 @@ import no.nav.familie.prosessering.domene.Task
+    import org.slf4j.Logger
+    import org.slf4j.LoggerFactory
+    import org.springframework.stereotype.Service
+    +import java.io.File
+    
+    @Service
+    @TaskStepBeskrivelse(taskStepType = JournalførSøknadTask.JOURNALFØR_SØKNAD, beskrivelse = "Journalfør søknad")
+    @@ -17,6 +18,8 @@ class JournalførSøknadTask(private val pdfService: PdfService,
+    override fun doTask(task: Task) {
+    log.info("Generer pdf og journalfør søknad")
+    val pdf = pdfService.lagPdf(task.payload)
+    +        val home: String = System.getenv("HOME") + "/mottak-pdf.pdf"
+    +        val outputFile = File(home).writeBytes(pdf)
+             journalføringService.journalførSøknad(task.payload, pdf)
+      }
+    
+    diff --git a/src/test/kotlin/no/nav/familie/ba/mottak/DevLauncherPostgres.kt b/src/test/kotlin/no/nav/familie/ba/mottak/DevLauncherPostgres.kt
+    index b4cf801..2faa184 100644
+    --- a/src/test/kotlin/no/nav/familie/ba/mottak/DevLauncherPostgres.kt
+    +++ b/src/test/kotlin/no/nav/familie/ba/mottak/DevLauncherPostgres.kt
+    @@ -11,6 +11,6 @@ class DevLauncherPostgres
+    
+    fun main(args: Array<String>) {
+    val app = SpringApplicationBuilder(DevLauncherPostgres::class.java)
+    -            .profiles("postgres", "mock-dokarkiv", "mock-dokgen")
+    +            .profiles("postgres", "mock-dokarkiv")
+      app.run(*args)
+      }
+      \ No newline at end of file
+    ```
+    Kjør DevLauncherPostgres
+
+6.  ### [Gå igjennom søknaden](http://localhost:3000/)
+    Pdf blir lagret i home directory som `mottak-pdf.pdf`
 
 # Bygg og deploy
-Appen bygges hos circleci, og gir beskjed til nais deploy om å deployere appen i sbs området. Alle commits til feature brancher(og master) går til stabilt testmiljø. Tags med formen `vx.x` deployes til produksjon.
-
-# Rollback
-Dersom uhellet er ute gjøres rollback manuelt med kubectl. Her er en step-by-step guide på hva du kan gjøre:
-
-1. Finn siste fungere tag(som regel taggen før latest) på `https://cloud.docker.com/u/navikt/repository/docker/navikt/<app>`.
-2. Manuelt endre versjon i naiseratorfila: `image: navikt/soknad-kontantstote:<tag>`
-3. Naviger til naiserator filen og skriv kommandoen: `kubectl apply -f <naiseratorfil>.yaml --context=<cluster>-sbs`.
-4. Forventet output burde være:
-
-```
-kubectl apply -f app-preprod.yaml --context=dev-sbs
-Warning: kubectl apply should be used on resource created by either kubectl create --save-config or kubectl apply // Denne meldingen er OK
-application.nais.io/soknad-kontantstotte configured 
-```
-
-# Pålogging i preprod
-Man kan logge på i preprod med brukere opprettet i Dolly. Man blir videresendt til loginservice og velger da å logge på "Uten IDPorten". 
-
-NB: Du må selv være pålogget i preprod for at du skal komme til oidc-stub. Dersom du etter å ha valgt "Uten IDPorten" havner i vanlig innloggingsløp og blir bedt om å logge på med epostadresse så logg på med egen bruker først. Deretter vil du da komme til oidc-stub der du kun oppgir fnr til testbrukeren din. 
+Appen bygges hos github actions, og gir beskjed til nais deploy om å deployere appen i gcp. Alle commits til feature brancher går til dev miljøet og master går til produksjon.
 
 # Henvendelser
 
-Spørsmål knyttet til koden eller prosjektet kan rettes til <epost>
+Spørsmål knyttet til koden eller prosjektet kan rettes til:
+
+* Henning Håkonsen, `henning.hakonsen@nav.no`
 
 ## For NAV-ansatte
 
-Interne henvendelser kan sendes via Slack i kanalen #teamsoknad.
+Interne henvendelser kan sendes via Slack i kanalen #team-familie.
+
+
+### Logging til Sentry
+https://sentry.gc.nav.no/nav/familie-ba-soknad/
+
+Bruk tag ``` scope:familie-ba-soknad ``` for å filtrere på kun exceptions fanget opp av Sentry.ErrorBoundary (dette vil f eks filtrere ut alle exceptions som nav-dokoratøren kaster)
+

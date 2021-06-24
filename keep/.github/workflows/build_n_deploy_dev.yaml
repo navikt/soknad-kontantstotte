@@ -1,0 +1,61 @@
+name: Build, push, and deploy app to dev
+
+on:
+  push:
+    branches-ignore:
+      - 'master'
+
+env:
+  IMAGE: docker.pkg.github.com/${{ github.repository }}/soknad-kontantstotte:${{ github.sha }}
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - uses: actions/cache@v1
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-node-cache-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-cache-
+      - name: Build and run tests
+        run: |
+          yarn install
+          mkdir ./ci-tests/reports
+          yarn build:ci
+          yarn test:ci
+      - name: Archive test reports
+        uses: actions/upload-artifact@v1
+        with:
+          name: reports
+          path: ./ci-tests/reports
+  build:
+    name: Build and push Docker container
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build and publish Docker image
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          yarn
+          yarn build
+          docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
+          docker build . -t ${IMAGE}
+          docker push ${IMAGE}
+  deploy:
+    name: Deploy to NAIS
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: dev-sbs
+          RESOURCE: build_n_deploy/naiserator/naiserator_dev.yaml

@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "../..",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "typeRoots": ["../../node_modules/@types", "./@types"]
+  },
+  "exclude": ["../../node_modules", "../../dist", "../../build", "../backend", "../webpack", "../jest-setup.ts"],
+  "lib": [
+    "es2015",
+    "esnext"
+  ]
+}
