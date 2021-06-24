@@ -155,17 +155,19 @@ const mapStateToKontraktSøknad = (
     }
 
     const oppgittFamilieforhold: IOppgittFamilieforhold = {
-        barna: new Set(
-            barna[parseInt(indeksForValgtBarn, 10)].barn.map(
-                (barn: IBarnDTO): IKontraktBarn => ({
-                    barnehageAntallTimer,
-                    barnehageDato,
-                    barnehageKommune,
-                    barnehageStatus: soknad.barnehageplass.barnBarnehageplassStatus.verdi,
-                    barnehageVedlegg: vedlegg,
-                    fødselsnummer: barn.fødselsnummer,
-                    navn: barn.fulltnavn,
-                })
+        barna: Array.from(
+            new Set(
+                barna[parseInt(indeksForValgtBarn, 10)].barn.map(
+                    (barn: IBarnDTO): IKontraktBarn => ({
+                        barnehageAntallTimer,
+                        barnehageDato,
+                        barnehageKommune,
+                        barnehageStatus: soknad.barnehageplass.barnBarnehageplassStatus.verdi,
+                        barnehageVedlegg: vedlegg,
+                        fødselsnummer: barn.fødselsnummer,
+                        navn: barn.fulltnavn,
+                    })
+                )
             )
         ),
         borBeggeForeldreSammen: mapStandpunktTilBoolean(
@@ -175,12 +177,12 @@ const mapStateToKontraktSøknad = (
     };
 
     const oppgittUtlandsTilknytning: IOppgittUtlandsTilknytning = {
-        aktørerArbeidYtelseIUtlandet: new Set([
-            mapAktørArbeidYtelseUtland(soknad, søker.innloggetSom, false),
-        ]),
-        aktørerTilknytningTilUtlandet: new Set([
-            mapAktørTilknytningUtland(soknad, søker.innloggetSom, false),
-        ]),
+        aktørerArbeidYtelseIUtlandet: Array.from(
+            new Set([mapAktørArbeidYtelseUtland(soknad, søker.innloggetSom, false)])
+        ),
+        aktørerTilknytningTilUtlandet: Array.from(
+            new Set([mapAktørTilknytningUtland(soknad, søker.innloggetSom, false)])
+        ),
     };
 
     if (oppgittAnnenPartFødselsnummer !== '') {

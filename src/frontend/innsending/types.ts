@@ -35,7 +35,7 @@ export interface IKontraktBarn {
 }
 
 export interface IOppgittFamilieforhold {
-    barna: Set<IKontraktBarn>;
+    barna: IKontraktBarn[];
     borBeggeForeldreSammen: boolean;
     oppgittAnnenPartNavn: string;
 }
@@ -59,8 +59,8 @@ export interface IAktørTilknytningUtland {
 }
 
 export interface IOppgittUtlandsTilknytning {
-    aktørerArbeidYtelseIUtlandet: Set<IAktørArbeidYtelseUtland>;
-    aktørerTilknytningTilUtlandet: Set<IAktørTilknytningUtland>;
+    aktørerArbeidYtelseIUtlandet: IAktørArbeidYtelseUtland[];
+    aktørerTilknytningTilUtlandet: IAktørTilknytningUtland[];
 }
 
 export interface IOppgittErklæring {
