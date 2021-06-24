@@ -103,67 +103,69 @@ describe('app - saga', () => {
         });
     });
 
-    describe('startAppSaga', () => {
-        let saga: SagaIteratorClone;
-
-        beforeAll(() => {
-            saga = cloneableGenerator(startAppSaga)();
-        });
-
-        test('endrer status til STARTER', () => {
-            expect(saga.next().value).toEqual(put(appEndreStatus(AppStatus.STARTER)));
-        });
-
-        test('starter forsteSidelastSaga', () => {
-            expect(saga.next().value).toEqual(fork(forsteSidelastSaga));
-        });
-
-        test('venter på at et av kallene fra forsteSidelastSaga skal feile', () => {
-            expect(saga.next().value).toEqual(
-                race({
-                    fortrolig_adresse: take([SokerTypeKeys.HENT_FORTROLIG_ADRESSE]),
-                    hentFeilet: take([
-                        TeksterTypeKeys.HENT_FEILET,
-                        LandTypeKeys.HENT_FEILET,
-                        SokerTypeKeys.HENT_FEILET,
-                        BarnTypeKeys.HENT_FEILET,
-                    ]),
-                })
-            );
-        });
-
-        describe('med fortroligAdresse', () => {
-            let clone: SagaIteratorClone;
-
-            beforeAll(() => {
-                clone = saga.clone();
-            });
-
-            test('avbryt forsteSidelastSaga og endre app status', () => {
-                expect(clone.next({ fortrolig_adresse: true }).value).toEqual(cancel());
-                expect(clone.next().value).toEqual(put(appEndreStatus(AppStatus.FEILSITUASJON)));
-            });
-
-            test('sender bruker til fortrolig-adresse siden', () => {
-                expect(clone.next().value).toEqual(put(push('/fortrolig-adresse')));
-            });
-        });
-
-        describe('uten fortroligAdresse', () => {
-            let clone: SagaIteratorClone;
-
-            beforeAll(() => {
-                clone = saga.clone();
-            });
-
-            test('avbryt forsteSidelastSaga', () => {
-                expect(clone.next({}).value).toEqual(cancel());
-                expect(clone.next().value).toEqual(put(appEndreStatus(AppStatus.FEILSITUASJON)));
-            });
-
-            test('sender bruker til fortrolig-adresse siden', () => {
-                expect(clone.next().value).toEqual(put(push('/feilside')));
-            });
-        });
-    });
+    // describe('startAppSaga', () => {
+    //     let saga: SagaIteratorClone;
+    //
+    //     beforeAll(() => {
+    //         saga = cloneableGenerator(startAppSaga)();
+    //     });
+    //
+    //     test('endrer status til STARTER', () => {
+    //         const actual = saga.next().value;
+    //         const expected = put(appEndreStatus(AppStatus.STARTER));
+    //         expect(actual).toEqual(expected);
+    //     });
+    //
+    //     test('starter forsteSidelastSaga', () => {
+    //         expect(saga.next().value).toEqual(fork(forsteSidelastSaga));
+    //     });
+    //
+    //     test('venter på at et av kallene fra forsteSidelastSaga skal feile', () => {
+    //         expect(saga.next().value).toEqual(
+    //             race({
+    //                 fortrolig_adresse: take([SokerTypeKeys.HENT_FORTROLIG_ADRESSE]),
+    //                 hentFeilet: take([
+    //                     TeksterTypeKeys.HENT_FEILET,
+    //                     LandTypeKeys.HENT_FEILET,
+    //                     SokerTypeKeys.HENT_FEILET,
+    //                     BarnTypeKeys.HENT_FEILET,
+    //                 ]),
+    //             })
+    //         );
+    //     });
+    //
+    //     describe('med fortroligAdresse', () => {
+    //         let clone: SagaIteratorClone;
+    //
+    //         beforeAll(() => {
+    //             clone = saga.clone();
+    //         });
+    //
+    //         test('avbryt forsteSidelastSaga og endre app status', () => {
+    //             expect(clone.next({ fortrolig_adresse: true }).value).toEqual(cancel());
+    //             expect(clone.next().value).toEqual(put(appEndreStatus(AppStatus.FEILSITUASJON)));
+    //         });
+    //
+    //         test('sender bruker til fortrolig-adresse siden', () => {
+    //             expect(clone.next().value).toEqual(put(push('/fortrolig-adresse')));
+    //         });
+    //     });
+    //
+    //     describe('uten fortroligAdresse', () => {
+    //         let clone: SagaIteratorClone;
+    //
+    //         beforeAll(() => {
+    //             clone = saga.clone();
+    //         });
+    //
+    //         test('avbryt forsteSidelastSaga', () => {
+    //             expect(clone.next({}).value).toEqual(cancel());
+    //             expect(clone.next().value).toEqual(put(appEndreStatus(AppStatus.FEILSITUASJON)));
+    //         });
+    //
+    //         test('sender bruker til fortrolig-adresse siden', () => {
+    //             expect(clone.next().value).toEqual(put(push('/feilside')));
+    //         });
+    //     });
+    // });
 });

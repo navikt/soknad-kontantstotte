@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import moment from 'moment';
 import { ANTALL_LOVLIGE_TEGN_I_TEKSTFELT } from '../common/utils';
 import {
     BarnehageplassVerdier,

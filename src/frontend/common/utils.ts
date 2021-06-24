@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import moment from 'moment';
 import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
 import { BarnehageplassVerdier, IFelt, ValideringsStatus } from '../soknad/types';

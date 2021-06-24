@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import moment from 'moment';
 import { SagaIterator } from 'redux-saga';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { barnHentFeilet, barnHentOk, BarnTypeKeys } from './actions';

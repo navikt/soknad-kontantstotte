@@ -1,6 +1,6 @@
 import { captureException, withScope } from '@sentry/core';
 import { push } from 'connected-react-router';
-import * as moment from 'moment';
+import moment from 'moment';
 import { SagaIterator } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { appEndreStatus } from '../app/actions';
