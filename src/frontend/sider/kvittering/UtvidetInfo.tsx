@@ -1,7 +1,7 @@
-import * as moment from 'moment-timezone';
+import moment from 'moment-timezone';
 import Lenke from 'nav-frontend-lenker';
 import PanelBase from 'nav-frontend-paneler';
-import * as React from 'react';
+import React from 'react';
 import { InjectedIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import SuksessIkon from '../../component/Ikoner/Suksessikon';

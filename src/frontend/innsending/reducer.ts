@@ -1,4 +1,4 @@
-import * as moment from 'moment-timezone';
+import moment from 'moment-timezone';
 import { InnsendingActionTypes, InnsendingTypeKeys } from './actions';
 
 interface IInnsendingState {

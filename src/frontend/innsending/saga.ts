@@ -27,6 +27,7 @@ import {
     toStandpunkt,
     toTilknytningTilUtlandVerdier,
 } from './types';
+import { tz } from 'moment-timezone/moment-timezone';
 
 function* mapStateToModel(): object {
     const soknad = yield select(selectSoknad);
@@ -191,7 +192,7 @@ const mapStateToKontraktSøknad = (
         );
     }
 
-    const utcOffset = moment.tz('Europe/Paris').utcOffset();
+    const utcOffset = tz('Europe/Paris').utcOffset();
     const kontraktSøknad: IKontraktSøknad = {
         innsendtTidspunkt: moment.utc().add(utcOffset, 'minutes').toISOString(),
         oppgittAnnenPartFødselsnummer,

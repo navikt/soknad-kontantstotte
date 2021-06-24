@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as moment from 'moment-timezone';
+import moment from 'moment-timezone';
 import Environment from '../Environment';
 import { IKontraktSøknad } from './types';
 
