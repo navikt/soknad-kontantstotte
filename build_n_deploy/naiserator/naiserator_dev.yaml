@@ -1,8 +1,8 @@
 apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
-  name: familie-ba-soknad
-  namespace: teamfamilie
+  name: soknad-kontantstotte
+  namespace: deafult
   labels:
     team: teamfamilie
 spec:
@@ -20,21 +20,15 @@ spec:
     path: /internal/isReady
     initialDelay: 5
   ingresses:
-    - "https://familie-ba-soknad.dev.nav.no/familie/barnetrygd/soknad/ordinaer"
-  accessPolicy:
-    outbound:
-      rules:
-        - application: familie-ba-soknad-api
-      external:
-        - host: "www-q1.nav.no"
+    - "https://soknad-kontantstotte-q.nav.no"
+    - "https://soknad-kontantstotte.nais.oera-q.local"
+    - "https://soknad-kontantstotte-dev-sbs.dev.nav.no"
   resources:
     limits:
       cpu: 2000m
       memory: 1024Mi
     requests:
       memory: 512Mi
-  envFrom:
-    - secret: ba-soknad
   env:
     - name: BASE_PATH
       value: {{base_path}}

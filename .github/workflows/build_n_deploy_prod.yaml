@@ -6,9 +6,9 @@ on:
       - 'master'
 
 env:
-  IMAGE: docker.pkg.github.com/${{ github.repository }}/familie-ba-soknad:${{ github.sha }}
-  IMAGE_LATEST: docker.pkg.github.com/${{ github.repository }}/familie-ba-soknad:latest
-  BASE_PATH: /familie/barnetrygd/soknad/ordinaer/
+  IMAGE: docker.pkg.github.com/${{ github.repository }}/soknad-kontantstotte:${{ github.sha }}
+  IMAGE_LATEST: docker.pkg.github.com/${{ github.repository }}/soknad-kontantstotte:latest
+  BASE_PATH: /
 
 jobs:
   test:
@@ -36,7 +36,7 @@ jobs:
           docker push ${IMAGE}
           docker push ${IMAGE_LATEST}
   deploy:
-    name: Deploy to gcp
+    name: Deploy to NAIS
     needs:
       - build
       - test
@@ -52,6 +52,6 @@ jobs:
       - uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: prod-gcp
+          CLUSTER: prod-sbs
           RESOURCE: build_n_deploy/naiserator/naiserator_prod.yaml
           VAR: base_path=${{ env.BASE_PATH }}
