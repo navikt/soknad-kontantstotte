@@ -24,9 +24,11 @@ function genererPowerSet<T>(arr: T[]): T[][] {
         for (let setElementIndex = 0; setElementIndex < arr.length; setElementIndex++) {
             // tslint:disable:no-bitwise
             if (combinationIndex & (1 << setElementIndex)) {
+                // @ts-ignore
                 subSet.push(arr[setElementIndex]);
             }
         }
+        // @ts-ignore
         subSets.push(subSet);
     }
 
@@ -39,6 +41,7 @@ function erEttBarnEllerFlerling(set: IBarnDTO[]) {
     } else if (set.length === 1) {
         return true;
     }
+    // @ts-ignore
     const fødselsdatoMoments = set.map((barn: IBarnDTO) => moment(barn.fødselsdato, 'DD.MM.YYYY'));
     const min = moment.min(fødselsdatoMoments);
     const max = moment.max(fødselsdatoMoments);
