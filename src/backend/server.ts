@@ -13,9 +13,10 @@ import { indexHandler } from './dekorator';
 import environment from './environment';
 import { escapeBody } from './escape';
 import { createApiForwardingFunction } from './proxy';
+import mockServer from './mock-server';
 
 dotenv.config();
-const app = express();
+const app = process.env.NODE_ENV === 'development' ? mockServer : express();
 
 const basePath = process.env.BASE_PATH ?? '/';
 const frontendMappe = path.join(process.cwd(), 'dist');
