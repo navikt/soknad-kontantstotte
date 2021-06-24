@@ -35,6 +35,7 @@ jobs:
           docker push ${IMAGE}
   deploy:
     name: Deploy to NAIS
+    needs:
       - build
       - test
     runs-on: ubuntu-latest
