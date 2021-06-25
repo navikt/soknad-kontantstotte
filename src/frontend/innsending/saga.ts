@@ -199,7 +199,8 @@ const mapStateToKontraktSøknad = (
         aktørerArbeidYtelseIUtlandet: Array.from(
             oppgittUtlandsTilknytningSet.aktørerArbeidYtelseIUtlandet
         ),
-        aktørerTilknytningTilUtlandet: Array.from(
+
+        aktørerArbeidYtelseIUtlandet: Array.from(
             oppgittUtlandsTilknytningSet.aktørerTilknytningTilUtlandet
         ),
     };

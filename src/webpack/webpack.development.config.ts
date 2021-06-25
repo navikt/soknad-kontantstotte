@@ -1,6 +1,7 @@
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import webpack from 'webpack';
 import { CustomizeRule, mergeWithRules } from 'webpack-merge';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 import baseConfig, { createHtmlWebpackPlugin } from './webpack.common.config';
 
