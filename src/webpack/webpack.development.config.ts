@@ -22,7 +22,7 @@ const devConfig: webpack.Configuration = mergeWithRules({
         new ReactRefreshWebpackPlugin(),
         new ForkTsCheckerWebpackPlugin({
             typescript: {
-                configFile: './tsconfig.base.json',
+                configFile: './src/frontend/tsconfig.json',
             },
         }),
     ],

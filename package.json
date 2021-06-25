@@ -11,6 +11,7 @@
     "start": "NODE_ENV=production node --es-module-specifier-resolution=node build/backend/server.js",
     "build": "TS_NODE_PROJECT=src/webpack/tsconfig.json NODE_ENV=production webpack --config src/webpack/webpack.production.config.ts && tsc -p tsconfig.backend.json",
     "build:analysis": "TS_NODE_PROJECT=src/webpack/tsconfig.json NODE_ENV=production webpack --config src/webpack/webpack.analysis.config.ts",
+    "typecheck-frontend": "tsc --noEmit -p src/frontend/tsconfig.json",
     "test-ci": "CI=true build",
     "test": "jest",
     "clean": "rm -rf dist build"
@@ -57,7 +58,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged && yarn run typecheck-frontend"
     }
   },
   "lint-staged": {

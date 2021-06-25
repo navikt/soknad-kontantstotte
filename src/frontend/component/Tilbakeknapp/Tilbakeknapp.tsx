@@ -1,4 +1,4 @@
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import NavFrontendChevron from 'nav-frontend-chevron';
 import KnappBase from 'nav-frontend-knapper';
 import * as React from 'react';

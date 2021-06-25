@@ -1,4 +1,4 @@
-import * as classNames from 'classnames';
+import classNames from 'classnames';
 import { Innholdstittel, Undertittel } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntl } from 'react-intl';

@@ -13,14 +13,15 @@ enum SoknadTypeKeys {
     ERSTATT_VEDLEGG = 'SOKNAD_ERSTATT_VEDLEGG',
 }
 
-type SoknadActionTypes = ISoknadValiderFelt &
-    ISoknadValiderSteg &
-    ISoknadNesteSteg &
-    ISoknadNullstillNesteSteg &
-    ISoknadLeggTilVedlegg &
-    ISoknadFjernVedlegg &
-    ISoknadErstattVedlegg &
-    ISoknadSettFelt;
+type SoknadActionTypes =
+    | ISoknadValiderFelt
+    | ISoknadValiderSteg
+    | ISoknadNesteSteg
+    | ISoknadNullstillNesteSteg
+    | ISoknadLeggTilVedlegg
+    | ISoknadFjernVedlegg
+    | ISoknadErstattVedlegg
+    | ISoknadSettFelt;
 
 interface ISoknadValiderFelt extends Action {
     feltnavn: Feltnavn;
