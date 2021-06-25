@@ -20,6 +20,11 @@ const devConfig: webpack.Configuration = mergeWithRules({
         createHtmlWebpackPlugin(false),
         new webpack.HotModuleReplacementPlugin(),
         new ReactRefreshWebpackPlugin(),
+        new ForkTsCheckerWebpackPlugin({
+            typescript: {
+                configFile: './tsconfig.base.json',
+            },
+        }),
     ],
     module: {
         rules: [
