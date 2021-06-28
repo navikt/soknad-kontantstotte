@@ -8,6 +8,7 @@ function fetchToggles() {
     //     return response.data;
     // });
     // TODO: pus-decorator fikset unleash integrasjon før. Må sette opp unleash integrasjon på nytt.
+    // Kun vedlikeholdsmodus er brukt i koden.
     throw new Error('Unleash is not set up');
 }
 

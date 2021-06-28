@@ -5,14 +5,11 @@
   "type": "module",
   "scripts": {
     "format-all": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-    "build_and_serve": "yarn build; yarn start",
-    "start:dev": "tsc -p tsconfig.backend.json && NODE_ENV=development node --es-module-specifier-resolution=node build/backend/server.js",
-    "start:proxy": "tsc -p tsconfig.backend.json && NODE_ENV=development node --es-module-specifier-resolution=node build/backend/proxy-server.js",
+    "start:dev": "tsc -p tsconfig.backend.json && NODE_ENV=development ENV=localhost node --es-module-specifier-resolution=node build/backend/server.js",
     "start": "NODE_ENV=production node --es-module-specifier-resolution=node build/backend/server.js",
     "build": "TS_NODE_PROJECT=src/webpack/tsconfig.json NODE_ENV=production webpack --config src/webpack/webpack.production.config.ts && tsc -p tsconfig.backend.json",
     "build:analysis": "TS_NODE_PROJECT=src/webpack/tsconfig.json NODE_ENV=production webpack --config src/webpack/webpack.analysis.config.ts",
     "typecheck-frontend": "tsc --noEmit -p src/frontend/tsconfig.json",
-    "test-ci": "CI=true build",
     "test": "jest",
     "clean": "rm -rf dist build"
   },

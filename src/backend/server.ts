@@ -11,8 +11,6 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import projectWebpackDevConfig from '../webpack/webpack.development.config';
 import { indexHandler } from './dekorator';
 import environment from './environment';
-import { escapeBody } from './escape';
-import { createApiForwardingFunction } from './proxy';
 import mockServer from './mock-server';
 
 dotenv.config();
@@ -26,10 +24,6 @@ app.set('view engine', 'mustache');
 
 app.engine('html', mustacheExpress());
 app.use(compression());
-
-app.use(`${basePath}api/soknad`, express.json());
-app.use(`${basePath}api/soknad`, escapeBody);
-app.use(`${basePath}api`, createApiForwardingFunction());
 
 app.get('/', indexHandler);
 
