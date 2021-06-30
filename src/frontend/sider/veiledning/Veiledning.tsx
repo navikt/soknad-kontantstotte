@@ -1,6 +1,7 @@
 import { BekreftCheckboksPanel, Select } from 'nav-frontend-skjema';
 import { Element, Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import Veileder from 'nav-frontend-veileder';
+import { useEffect, useState } from 'react';
 import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -55,8 +56,16 @@ const Veiledning: React.StatelessComponent<VeiledningProps> = ({
         });
     }
 
+    const [throwError, setThrowError] = useState(false);
+    useEffect(() => {
+        if (throwError) {
+            throw new Error('Just a random error to test Sentry integration. glhf.');
+        }
+    });
+
     return (
         <div className={'veiledning'}>
+            <button onClick={() => setThrowError(true)}>Throw random error</button>
             <Select
                 className={'veiledning__sprakvalg'}
                 label={intl.formatMessage({ id: 'app.velgSpråk' })}
