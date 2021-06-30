@@ -1,17 +1,8 @@
 node_modules
-dist
-development
-production
-.DS_Store
-VERSION
-yarn-error.log
-ci-tests/reports
+build
 .idea
-
-# Fra https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
-
-# File-based project format
-*.iws
-
-# IntelliJ
-out/
+.env
+.eslintcache
+yarn-error.log
+dist/
+keep/
