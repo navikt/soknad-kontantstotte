@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { init } from '@sentry/browser';
+import * as Sentry from '@sentry/react';
 import { ConnectedRouter } from 'connected-react-router';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -18,15 +18,14 @@ import './index.less';
 /* tslint:disable */
 const packageConfig = require('../../package.json');
 
-if (process.env.NODE_ENV !== 'development') {
-    const environment = window.location.hostname;
-
-    init({
-        dsn: 'https://9bb17d6a1f384a618adf60f3b80ad060@sentry.gc.nav.no/2',
-        environment,
-        release: packageConfig.version,
-    });
-}
+const environment = window.location.hostname;
+Sentry.init({
+    dsn: 'https://9bb17d6a1f384a618adf60f3b80ad060@sentry.gc.nav.no/2',
+    environment,
+    release: packageConfig.version,
+    autoSessionTracking: false,
+    enabled: process.env.NODE_ENV !== 'development',
+});
 
 if (document.getElementById('pagewrapper')) {
     Modal.setAppElement('#pagewrapper');
