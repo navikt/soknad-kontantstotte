@@ -46,7 +46,7 @@ jobs:
       - uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-gcp
+          CLUSTER: dev-sbs
           RESOURCE: build_n_deploy/naiserator/naiserator_dev.yaml
           VAR: base_path=${{ env.BASE_PATH }}
       - uses: nais/deploy/actions/deploy@v1
