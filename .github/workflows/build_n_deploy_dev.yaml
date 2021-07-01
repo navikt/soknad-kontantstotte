@@ -21,10 +21,6 @@ jobs:
         env:
           CI: true
         run: npx yarn test
-      - name: Kjør ci-tester
-        env:
-          CI_MODE: true
-        run: npx yarn test:ci
   build:
     name: Build and push Docker container
     runs-on: ubuntu-latest
@@ -48,7 +44,9 @@ jobs:
       - name: Kjør ci-tester
         env:
           CI_MODE: true
-        run: npx yarn test:ci ${IMAGE}
+        run: |
+          docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
+          npx yarn test:ci ${IMAGE}
   deploy:
     name: Deploy to NAIS
     needs:
