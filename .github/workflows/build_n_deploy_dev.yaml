@@ -22,6 +22,8 @@ jobs:
           CI: true
         run: npx yarn test
       - name: Kjør ci-tester
+        env:
+          CI_MODE: true
         run: npx yarn test:ci
   build:
     name: Build and push Docker container
@@ -32,14 +34,27 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          docker build . -t ${IMAGE} --build-arg base_path=${BASE_PATH}
+          docker build . -t ${IMAGE} -t ${IMAGE}:ci-test --build-arg base_path=${BASE_PATH}
           docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
           docker push ${IMAGE}
+  ci-test:
+    name: Run ci-tests
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+#      - name: Installer node-pakker <-- for å slippe så må node_modules og build folder caches fra forrige steg.
+#        run: npx yarn
+      - name: Kjør ci-tester
+        env:
+          CI_MODE: true
+        run: npx yarn test:ci ${IMAGE}
   deploy:
     name: Deploy to NAIS
     needs:
       - build
       - test
+      - ci-test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1

@@ -13,6 +13,7 @@
     "test": "jest",
     "test:ci": "./run-ci-tests.sh test",
     "test:ci-update": "./run-ci-tests.sh update",
+    "start:ci-api-mock": "node --es-module-specifier-resolution=node build/backend/ci-api-mock.js",
     "clean": "rm -rf dist build"
   },
   "jest": {

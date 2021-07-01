@@ -19,10 +19,11 @@ describe('soknad-kontantstotte', () => {
         let page;
 
         beforeAll(async () => {
+            jest.setTimeout(30000);
             page = await browser.newPage();
             page.setViewport(size);
             await page.goto(rootUrl);
-        }, 15000);
+        });
 
         test('veiledning-feilmelding', async () => {
             await page.waitFor('.typo-sidetittel');
