@@ -5,8 +5,8 @@ const puppeteer = require('puppeteer');
 const large = { width: 1600, height: 450 };
 const medium = { width: 800, height: 500 };
 const small = { width: 320, height: 500 };
-
-const config = [['large', large], ['medium', medium],['small', small]];
+// ['large', large], ['medium', medium],
+const config = [['small', small]];
 const rootUrl = 'http://ci-frontend:3000';
 
 describe('soknad-kontantstotte', () => {
