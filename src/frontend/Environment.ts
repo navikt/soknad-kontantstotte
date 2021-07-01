@@ -31,7 +31,7 @@ const Environment = (): IEnvUrls => {
                 'https://www.nav.no/soknader/nb/person/familie/kontantstotte/NAV%2034-00.08/brev',
             saksoversikt: 'https://tjenester-q0.nav.no/saksoversikt/app',
         };
-    } else if (window.location.hostname.indexOf('http://ci-frontend') > -1) {
+    } else if (window.location.hostname.indexOf('ci-frontend') > -1) {
         return {
             apiUrl: 'http://ci-api-mock:8080/soknad-kontantstotte-api/api',
             loginUrl: 'http://ci-api-mock:8080/login',
@@ -39,7 +39,7 @@ const Environment = (): IEnvUrls => {
                 'https://www.nav.no/soknader/nb/person/familie/kontantstotte/NAV%2034-00.08/brev',
             saksoversikt: 'https://tjenester-q0.nav.no/saksoversikt/app',
         };
-    } else if (window.location.hostname.indexOf('http://localhost') > -1) {
+    } else if (window.location.hostname.indexOf('localhost') > -1) {
         return {
             apiUrl: 'http://localhost:8080/soknad-kontantstotte-api/api',
             loginUrl: 'http://localhost:8080/login',
