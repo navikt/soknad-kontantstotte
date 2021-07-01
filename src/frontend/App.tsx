@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { selectAppStatus } from './app/selectors';
 import { AppStatus } from './app/types';
+import Environment from './Environment';
 import { IRootState } from './rootReducer';
 import { Routes } from './Routes';
 import Vedlikeholdsmodus from './sider/vedlikehold/Vedlikeholdsmodus';
@@ -14,6 +15,8 @@ import { IToggleName } from './toggles/types';
 interface IMapStateToProps {
     status: AppStatus;
     vedlikeholdsmodus: boolean;
+    error: any;
+    state: string;
 }
 
 type Props = IMapStateToProps & RouteComponentProps;
@@ -36,15 +39,36 @@ class App extends React.Component<Props> {
 
     public render() {
         if (this.props.vedlikeholdsmodus) {
-            return <Vedlikeholdsmodus />;
+            return (
+                <div>
+                    <Vedlikeholdsmodus />
+                    <div>{JSON.stringify(this.props.error)}</div>
+                    <div>{JSON.stringify(Environment().apiUrl)}</div>
+                    <div>{this.props.state}</div>
+                </div>
+            );
         }
 
         switch (this.props.status) {
             case AppStatus.IKKE_STARTET:
             case AppStatus.STARTER:
-                return <Spinner className={'app__spinner'} type={'XXL'} />;
+                return (
+                    <div>
+                        <Spinner className={'app__spinner'} type={'XXL'} />
+                        <div>{JSON.stringify(this.props.error)}</div>
+                        <div>{JSON.stringify(Environment().apiUrl)}</div>
+                        <div>{this.props.state}</div>
+                    </div>
+                );
             default:
-                return <Routes />;
+                return (
+                    <div>
+                        <Routes />
+                        <div>{JSON.stringify(this.props.error)}</div>
+                        <div>{JSON.stringify(Environment().apiUrl)}</div>
+                        <div>{this.props.state}</div>
+                    </div>
+                );
         }
     }
 }
@@ -53,6 +77,8 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         status: selectAppStatus(state),
         vedlikeholdsmodus: isEnabled(state, IToggleName.vedlikeholdsmodus),
+        error: state.app.error,
+        state: JSON.stringify(state, null, 4),
     };
 };
 

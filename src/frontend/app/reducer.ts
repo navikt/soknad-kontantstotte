@@ -6,6 +6,7 @@ interface IAppState {
     status: AppStatus;
     steg: number;
     valgtSprak: ISprak;
+    error: any;
 }
 
 const initialState: IAppState = {
@@ -13,6 +14,7 @@ const initialState: IAppState = {
     status: AppStatus.IKKE_STARTET,
     steg: 0,
     valgtSprak: ISprak.nb,
+    error: 'undefined',
 };
 
 function appReducer(state: IAppState = initialState, action: AppActionTypes) {
@@ -37,6 +39,11 @@ function appReducer(state: IAppState = initialState, action: AppActionTypes) {
             return {
                 ...state,
                 valgtSprak: action.valgtSprak,
+            };
+        case AppTypeKeys.VIS_REQUEST_ERROR:
+            return {
+                ...state,
+                error: action.error,
             };
         default:
             return state;
