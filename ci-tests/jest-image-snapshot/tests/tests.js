@@ -21,7 +21,7 @@ describe('soknad-kontantstotte', () => {
         beforeAll(async () => {
             page = await browser.newPage();
             page.setViewport(size);
-            await page.waitFor(30000);
+            await page.waitFor(5000);
             await page.goto(rootUrl);
         });
 
