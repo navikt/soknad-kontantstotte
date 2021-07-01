@@ -1,7 +1,4 @@
 // @ts-nocheck
-/**
- * @jest-environment puppeteer
- */
 
 const puppeteer = require('puppeteer');
 
@@ -9,7 +6,7 @@ const large = { width: 1600, height: 450 };
 const medium = { width: 800, height: 500 };
 const small = { width: 320, height: 500 };
 
-const config = [['large', large], ['medium', medium], ['small', small]];
+const config = [['large', large], ['medium', medium],['small', small]];
 const rootUrl = 'http://ci-frontend:3000';
 
 describe('soknad-kontantstotte', () => {
@@ -25,7 +22,7 @@ describe('soknad-kontantstotte', () => {
             page = await browser.newPage();
             page.setViewport(size);
             await page.goto(rootUrl);
-        }, 8000);
+        });
 
         test('veiledning-feilmelding', async () => {
             await page.waitFor('.typo-sidetittel');
@@ -37,6 +34,7 @@ describe('soknad-kontantstotte', () => {
         test('veiledning-utfylt', async () => {
             await page.click('.skjemaelement__input.checkboks');
             await page.click('.typo-sidetittel');
+            await page.waitFor(2000);
             await takeSnapshot(`veiledning-utfylt-${name}`, page);
         });
 
@@ -225,6 +223,7 @@ describe('soknad-kontantstotte', () => {
         test('oppsummering-utfylt', async () => {
             await page.click('.skjemaelement__input.checkboks');
             await page.click('.typo-undertittel');
+            await page.waitFor(2000);
             await takeSnapshot(`oppsummering-utfylt-${name}`, page);
         });
 
@@ -234,18 +233,19 @@ describe('soknad-kontantstotte', () => {
             await takeSnapshot(`kvittering-${name}`, page);
         });
 
-        // test('sprak-tekster', async () => {
-        //     await page.goto(rootUrl);
-        //     await page.waitFor('.typo-sidetittel');
-        //     await page.select('select', 'nn');
-        //     await takeSnapshot(`sprak-tekster-${name}`, page);
-        // }, 8000);
-        //
-        // test('sprak-land', async () => {
-        //     veiledningTilOppsummering(page);
-        //     await page.waitFor('.oppsummering');
-        //     await takeSnapshot(`sprak-land-${name}`, page);
-        // });
+        test('sprak-tekster', async () => {
+            await page.goto(rootUrl);
+            await page.waitFor('.typo-sidetittel');
+            await page.select('select', 'nn');
+            await page.waitFor(1000);
+            await takeSnapshot(`sprak-tekster-${name}`, page);
+        }, 8000);
+
+        test('sprak-land', async () => {
+            veiledningTilOppsummering(page);
+            await page.waitFor('.oppsummering');
+            await takeSnapshot(`sprak-land-${name}`, page);
+        });
     });
 
     afterAll(async () => {
