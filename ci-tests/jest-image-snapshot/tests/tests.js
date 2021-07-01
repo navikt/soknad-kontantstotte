@@ -7,7 +7,7 @@ const medium = { width: 800, height: 500 };
 const small = { width: 320, height: 500 };
 // ['large', large], ['medium', medium],
 const config = [['small', small]];
-const rootUrl = 'http://ci-frontend:3000';
+const rootUrl = 'http://ci-frontend:9000';
 
 describe('soknad-kontantstotte', () => {
     let browser;

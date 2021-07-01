@@ -30,7 +30,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          docker build . -t ${IMAGE} -t "docker.pkg.github.com/navikt/soknad-kontantstotte/soknad-kontantstotte:ci-test" --build-arg base_path=${BASE_PATH}
+          docker build . -t ${IMAGE} --build-arg base_path=${BASE_PATH}
           docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
           docker push ${IMAGE}
   ci-test:

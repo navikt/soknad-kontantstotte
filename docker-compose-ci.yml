@@ -2,7 +2,7 @@ version: '3'
 
 services:
   ci-frontend:
-    image: docker.pkg.github.com/navikt/soknad-kontantstotte/soknad-kontantstotte:ci-test
+    image: docker.pkg.github.com/navikt/soknad-kontantstotte/soknad-kontantstotte:f198b736be8d74c78ec41f90bc50b6009c3fcaa6
 #    build:
 #      context: .
 #      dockerfile: DockerfileCi
