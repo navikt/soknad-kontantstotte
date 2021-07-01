@@ -21,6 +21,8 @@ jobs:
         env:
           CI: true
         run: npx yarn test
+      - name: Kjør ci-tester
+        run: npx yarn test:ci
   build:
     name: Build and push Docker container
     runs-on: ubuntu-latest

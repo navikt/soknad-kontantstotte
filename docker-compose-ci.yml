@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  ci-frontend:
+    build:
+      context: .
+      dockerfile: DockerfileCi
+    ports:
+      - "3013:3000"
+  jest-image-snapshot:
+    image: navikt/docker-jest-image-snapshot:1.0.0
+    depends_on:
+      - ci-frontend
+    volumes:
+      - ./ci-tests/jest-image-snapshot/tests:/app/tests
+      - ./ci-tests/jest-image-snapshot/baseline:/app/baseline
+      - ./ci-tests/reports:/app/reports

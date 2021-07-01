@@ -11,6 +11,8 @@
     "build:analysis": "TS_NODE_PROJECT=src/webpack/tsconfig.json NODE_ENV=production webpack --config src/webpack/webpack.analysis.config.ts",
     "typecheck-frontend": "tsc --noEmit -p src/frontend/tsconfig.json",
     "test": "jest",
+    "test:ci": "./run-ci-tests.sh test",
+    "test:ci-update": "./run-ci-tests.sh update",
     "clean": "rm -rf dist build"
   },
   "jest": {

@@ -1,10 +1,9 @@
 import express from 'express';
-import path from 'path';
 import fs from 'fs';
 import multer from 'multer';
 import { URL } from 'url';
 
-const delayMs = 1000;
+const delayMs = 1;
 const app = express();
 const upload = multer();
 
