@@ -19,11 +19,10 @@ describe('soknad-kontantstotte', () => {
         let page;
 
         beforeAll(async () => {
-            await page.waitFor(6000);
             page = await browser.newPage();
             page.setViewport(size);
             await page.goto(rootUrl);
-        });
+        }, 15000);
 
         test('veiledning-feilmelding', async () => {
             await page.waitFor('.typo-sidetittel');
