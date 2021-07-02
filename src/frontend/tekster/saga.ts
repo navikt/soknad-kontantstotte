@@ -1,5 +1,6 @@
 import { SagaIterator } from 'redux-saga';
 import { call, put, takeEvery } from 'redux-saga/effects';
+import { showRequestError } from '../app/actions';
 import { teksterHentFeilet, teksterHentOk, TeksterTypeKeys } from './actions';
 import { fetchTekster } from './api';
 
@@ -8,6 +9,7 @@ function* fetchTeksterSaga(): SagaIterator {
         const tekster = yield call(fetchTekster);
         yield put(teksterHentOk(tekster));
     } catch (err) {
+        yield put(showRequestError(err));
         yield put(teksterHentFeilet());
     }
 }

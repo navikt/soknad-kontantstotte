@@ -14,7 +14,7 @@ const initialState: IAppState = {
     status: AppStatus.IKKE_STARTET,
     steg: 0,
     valgtSprak: ISprak.nb,
-    error: 'undefined',
+    error: 'initiell',
 };
 
 function appReducer(state: IAppState = initialState, action: AppActionTypes) {
