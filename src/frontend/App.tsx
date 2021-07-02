@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { selectAppStatus } from './app/selectors';
 import { AppStatus } from './app/types';
+import Environment from './Environment';
 import { IRootState } from './rootReducer';
 import { Routes } from './Routes';
 import Vedlikeholdsmodus from './sider/vedlikehold/Vedlikeholdsmodus';
@@ -41,6 +42,7 @@ class App extends React.Component<Props> {
                 <div>
                     <Vedlikeholdsmodus />
                     <div>{JSON.stringify(this.props.error)}</div>
+                    <div>{JSON.stringify(Environment().apiUrl)}</div>
                 </div>
             );
         }
@@ -52,6 +54,7 @@ class App extends React.Component<Props> {
                     <div>
                         <Spinner className={'app__spinner'} type={'XXL'} />
                         <div>{JSON.stringify(this.props.error)}</div>
+                        <div>{JSON.stringify(Environment().apiUrl)}</div>
                     </div>
                 );
             default:
@@ -59,6 +62,7 @@ class App extends React.Component<Props> {
                     <div>
                         <Routes />
                         <div>{JSON.stringify(this.props.error)}</div>
+                        <div>{JSON.stringify(Environment().apiUrl)}</div>
                     </div>
                 );
         }
