@@ -2,7 +2,7 @@ version: '3'
 
 services:
   ci-frontend:
-    image: docker.pkg.github.com/navikt/soknad-kontantstotte/soknad-kontantstotte:3740199a874274a57f11289c4e33c189f24a89cf
+    image: ${CI_IMAGE}
     ports:
       - "9000:9000"
   ci-api-mock:
