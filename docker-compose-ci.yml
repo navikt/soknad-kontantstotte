@@ -2,10 +2,7 @@ version: '3'
 
 services:
   ci-frontend:
-    image: docker.pkg.github.com/navikt/soknad-kontantstotte/soknad-kontantstotte:53e69ce7ba59a50c93946e86a83710146eedcd56
-#    build:
-#      context: .
-#      dockerfile: DockerfileCi
+    image: docker.pkg.github.com/navikt/soknad-kontantstotte/soknad-kontantstotte:5b8a7f56ec1ef8baaf52fb2317ff34513b32ed14
     ports:
       - "9000:9000"
   ci-api-mock:
@@ -21,7 +18,6 @@ services:
     depends_on:
       - ci-api-mock
     volumes:
-      - ./ci-tests/wait:/app/wait
       - ./ci-tests/jest-image-snapshot/tests:/app/tests
       - ./ci-tests/jest-image-snapshot/baseline:/app/baseline
       - ./ci-tests/reports:/app/reports

@@ -6,7 +6,7 @@ case "$1" in
     "test")
         (
             set -e
-            docker-compose -f docker-compose-ci.yml build --no-cache
+            docker-compose -f docker-compose-ci.yml build # --no-cache
             docker-compose -f docker-compose-ci.yml run --rm jest-image-snapshot test
 #            docker-compose -f docker-compose-ci.yml down
         )

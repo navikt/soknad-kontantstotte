@@ -14,6 +14,7 @@ import { IToggleName } from './toggles/types';
 interface IMapStateToProps {
     status: AppStatus;
     vedlikeholdsmodus: boolean;
+    error: any;
 }
 
 type Props = IMapStateToProps & RouteComponentProps;
@@ -36,15 +37,30 @@ class App extends React.Component<Props> {
 
     public render() {
         if (this.props.vedlikeholdsmodus) {
-            return <Vedlikeholdsmodus />;
+            return (
+                <div>
+                    <Vedlikeholdsmodus />
+                    <div>{JSON.stringify(this.props.error)}</div>
+                </div>
+            );
         }
 
         switch (this.props.status) {
             case AppStatus.IKKE_STARTET:
             case AppStatus.STARTER:
-                return <Spinner className={'app__spinner'} type={'XXL'} />;
+                return (
+                    <div>
+                        <Spinner className={'app__spinner'} type={'XXL'} />
+                        <div>{JSON.stringify(this.props.error)}</div>
+                    </div>
+                );
             default:
-                return <Routes />;
+                return (
+                    <div>
+                        <Routes />
+                        <div>{JSON.stringify(this.props.error)}</div>
+                    </div>
+                );
         }
     }
 }
@@ -53,6 +69,7 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
     return {
         status: selectAppStatus(state),
         vedlikeholdsmodus: isEnabled(state, IToggleName.vedlikeholdsmodus),
+        error: state.app.error,
     };
 };
 
