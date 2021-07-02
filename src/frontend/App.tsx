@@ -44,7 +44,7 @@ class App extends React.Component<Props> {
                     <Vedlikeholdsmodus />
                     <div>{JSON.stringify(this.props.error)}</div>
                     <div>{JSON.stringify(Environment().apiUrl)}</div>
-                    <div>{JSON.stringify(Environment().apiUrl)}</div>
+                    <div>{this.props.state}</div>
                 </div>
             );
         }
@@ -57,7 +57,7 @@ class App extends React.Component<Props> {
                         <Spinner className={'app__spinner'} type={'XXL'} />
                         <div>{JSON.stringify(this.props.error)}</div>
                         <div>{JSON.stringify(Environment().apiUrl)}</div>
-                        <div>{JSON.stringify(Environment().apiUrl)}</div>
+                        <div>{this.props.state}</div>
                     </div>
                 );
             default:
@@ -66,7 +66,7 @@ class App extends React.Component<Props> {
                         <Routes />
                         <div>{JSON.stringify(this.props.error)}</div>
                         <div>{JSON.stringify(Environment().apiUrl)}</div>
-                        <div>{JSON.stringify(Environment().apiUrl)}</div>
+                        <div>{this.props.state}</div>
                     </div>
                 );
         }
