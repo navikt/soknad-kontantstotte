@@ -16,6 +16,7 @@ interface IMapStateToProps {
     status: AppStatus;
     vedlikeholdsmodus: boolean;
     error: any;
+    state: string;
 }
 
 type Props = IMapStateToProps & RouteComponentProps;
@@ -43,6 +44,7 @@ class App extends React.Component<Props> {
                     <Vedlikeholdsmodus />
                     <div>{JSON.stringify(this.props.error)}</div>
                     <div>{JSON.stringify(Environment().apiUrl)}</div>
+                    <div>{JSON.stringify(Environment().apiUrl)}</div>
                 </div>
             );
         }
@@ -55,6 +57,7 @@ class App extends React.Component<Props> {
                         <Spinner className={'app__spinner'} type={'XXL'} />
                         <div>{JSON.stringify(this.props.error)}</div>
                         <div>{JSON.stringify(Environment().apiUrl)}</div>
+                        <div>{JSON.stringify(Environment().apiUrl)}</div>
                     </div>
                 );
             default:
@@ -62,6 +65,7 @@ class App extends React.Component<Props> {
                     <div>
                         <Routes />
                         <div>{JSON.stringify(this.props.error)}</div>
+                        <div>{JSON.stringify(Environment().apiUrl)}</div>
                         <div>{JSON.stringify(Environment().apiUrl)}</div>
                     </div>
                 );
@@ -74,6 +78,7 @@ const mapStateToProps = (state: IRootState): IMapStateToProps => {
         status: selectAppStatus(state),
         vedlikeholdsmodus: isEnabled(state, IToggleName.vedlikeholdsmodus),
         error: state.app.error,
+        state: JSON.stringify(state, null, 4),
     };
 };
 
