@@ -45,6 +45,7 @@ function* autentiserBruker(): SagaIterator {
     try {
         yield call(pingBackend);
         yield put(appPingOk());
+        yield put(showRequestError('App ping OK!'));
     } catch (error) {
         yield put(showRequestError(error));
         if (error.response.status === 401) {
