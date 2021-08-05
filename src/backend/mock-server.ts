@@ -1,12 +1,23 @@
 import express from 'express';
-import path from 'path';
 import fs from 'fs';
 import multer from 'multer';
 import { URL } from 'url';
 
-const delayMs = 1000;
+const delayMs = 1;
 const app = express();
 const upload = multer();
+
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', `http://${req.hostname}:9000`);
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    next();
+});
+
+const h1 = 'Access-Control-Allow-Origin';
+const h1value = req => `http://${req.hostname}:9000`;
+const h2 = 'Access-Control-Allow-Headers';
+const h2value = 'Origin, X-Requested-With, Content-Type, Accept';
 
 function lesMockFil(filnavn) {
     const base = import.meta.url;
@@ -22,7 +33,7 @@ app.get('/soknad-kontantstotte-api/api/land', function (req, res) {
 });
 
 app.get('/soknad-kontantstotte-api/api/status/ping', function (req, res) {
-    setTimeout(() => res.status(200).send(), delayMs);
+    setTimeout(() => res.send('pong'), delayMs);
 });
 
 app.get('/api/feature', function (req, res) {
