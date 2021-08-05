@@ -3,9 +3,11 @@ USER root
 RUN apk --no-cache add curl
 USER apprunner
 
-COPY --chown=apprunner:apprunner ./ /var/server/
+COPY --chown=apprunner:apprunner ./yarn.lock ./package.json /var/server/
 
 RUN yarn
+
+COPY --chown=apprunner:apprunner ./ /var/server/
 RUN yarn build
 
 EXPOSE 8080

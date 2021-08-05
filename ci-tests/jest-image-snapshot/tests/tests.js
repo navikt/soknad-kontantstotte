@@ -12,7 +12,7 @@ const rootUrl = 'http://ci-frontend:9000';
 describe('soknad-kontantstotte', () => {
     let browser;
     beforeAll(async () => {
-        browser = await puppeteer.launch({ args: ['--no-sandbox'] });
+        browser = await puppeteer.launch({ args: ['--no-sandbox'], dumpio: true });
     });
 
     describe.each(config)('%s', (name, size) => {
