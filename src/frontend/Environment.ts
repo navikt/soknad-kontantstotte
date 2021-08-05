@@ -33,7 +33,7 @@ const Environment = (): IEnvUrls => {
         };
     } else if (window.location.hostname.indexOf('ci-frontend') > -1) {
         return {
-            apiUrl: 'http://ci-api-mock:8080/soknad-kontantstotte-api/api',
+            apiUrl: '/soknad-kontantstotte-api/api',
             loginUrl: 'http://ci-api-mock:8080/login',
             papirsoknad:
                 'https://www.nav.no/soknader/nb/person/familie/kontantstotte/NAV%2034-00.08/brev',

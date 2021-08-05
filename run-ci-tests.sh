@@ -8,7 +8,7 @@ case "$1" in
             set -e
             docker-compose -f docker-compose-ci.yml build # --no-cache
             docker-compose -f docker-compose-ci.yml run --rm jest-image-snapshot test
-            docker-compose -f docker-compose-ci.yml down
+#            docker-compose -f docker-compose-ci.yml down
         )
         errorCode=$?
         if [ $errorCode -ne 0 ]; then

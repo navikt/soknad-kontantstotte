@@ -2,17 +2,14 @@ version: '3'
 
 services:
   ci-frontend:
-    image: ${CI_IMAGE}
-    ports:
-      - "9000:9000"
-  ci-api-mock:
-    depends_on:
-      - ci-frontend
     build:
       context: .
-      dockerfile: DockerfileCiApiMock
+      dockerfile: DockerfileCi
     ports:
-    - "8080:8080"
+      - "9000:9000"
+    environment:
+      - HOST=ci-api-mock
+      - HOST_PORT=8080
   jest-image-snapshot:
     image: navikt/docker-jest-image-snapshot:1.0.0
     depends_on:
@@ -21,6 +18,3 @@ services:
       - ./ci-tests/jest-image-snapshot/tests:/app/tests
       - ./ci-tests/jest-image-snapshot/baseline:/app/baseline
       - ./ci-tests/reports:/app/reports
-    environment:
-      - HOST=ci-frontend
-      - HOST_PORT=9000
