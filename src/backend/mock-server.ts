@@ -15,11 +15,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-const h1 = 'Access-Control-Allow-Origin';
-const h1value = req => `http://${req.hostname}:9000`;
-const h2 = 'Access-Control-Allow-Headers';
-const h2value = 'Origin, X-Requested-With, Content-Type, Accept';
-
 function lesMockFil(filnavn) {
     const base = import.meta.url;
     return fs.readFileSync(new URL('../../mock/' + filnavn, base));

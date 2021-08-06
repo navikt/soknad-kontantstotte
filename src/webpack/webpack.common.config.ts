@@ -14,11 +14,8 @@ const { DefinePlugin } = webpackModule;
 export const publicUrl = '/public';
 
 export const createHtmlWebpackPlugin = prodMode => {
-    const template = prodMode
-        ? 'src/frontend/public/index.html'
-        : 'src/frontend/public/index-no-decorator.html';
     return new HtmlWebpackPlugin({
-        template: path.join(process.cwd(), template),
+        template: path.join(process.cwd(), 'src/frontend/public/index.html'),
         inject: 'body',
         alwaysWriteToDisk: true,
         // Dette gjør at hvis vi navigerer direkte til /basepath/om-barna/ så henter vi fortsatt main.js fra /basepath/main.js

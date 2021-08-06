@@ -12,7 +12,6 @@ enum AppTypeKeys {
     PING_OK = 'APP_PING_OK',
     VELG_SPRAK = 'APP_VELG_SPRAK',
     SETT_SPRAK = 'APP_SETT_SPRAK',
-    VIS_REQUEST_ERROR = 'VIS_REQUEST_ERROR',
 }
 
 type AppActionTypes =
@@ -23,8 +22,7 @@ type AppActionTypes =
     | IAppSettSteg
     | IAppSettHarForsoktNesteSteg
     | IAppSettSprak
-    | IAppVelgSprak
-    | IAppVisRequestError;
+    | IAppVelgSprak;
 
 interface IAppEndreStatus extends Action {
     status: AppStatus;
@@ -70,11 +68,6 @@ interface IAppSettSprak extends Action {
 interface IAppVelgSprak extends Action {
     valgtSprak: ISprak;
     type: AppTypeKeys.VELG_SPRAK;
-}
-
-interface IAppVisRequestError extends Action {
-    error: any;
-    type: AppTypeKeys.VIS_REQUEST_ERROR;
 }
 
 function appEndreStatus(status: AppStatus): IAppEndreStatus {
@@ -143,13 +136,6 @@ function appSettSprak(valgtSprak: ISprak): IAppSettSprak {
     };
 }
 
-function showRequestError(error: any): IAppVisRequestError {
-    return {
-        type: AppTypeKeys.VIS_REQUEST_ERROR,
-        error,
-    };
-}
-
 export {
     AppTypeKeys,
     AppActionTypes,
@@ -165,5 +151,4 @@ export {
     appPingOk,
     IAppGaaTilSteg,
     IAppSettSprak,
-    showRequestError,
 };

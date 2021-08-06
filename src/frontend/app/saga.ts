@@ -30,7 +30,6 @@ import {
     AppTypeKeys,
     IAppGaaTilSteg,
     IAppSettSprak,
-    showRequestError,
 } from './actions';
 import { pingBackend } from './api';
 import { selectAppSteg, selectValgtSprak } from './selectors';
@@ -45,9 +44,7 @@ function* autentiserBruker(): SagaIterator {
     try {
         yield call(pingBackend);
         yield put(appPingOk());
-        yield put(showRequestError('App ping OK!'));
     } catch (error) {
-        yield put(showRequestError(error));
         if (error.response.status === 401) {
             yield call(redirectTilLogin);
         }
