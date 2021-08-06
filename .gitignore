@@ -6,3 +6,4 @@ build
 yarn-error.log
 dist/
 keep/
+.DS_Store
