@@ -4,7 +4,7 @@ services:
   ci-frontend:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: DockerfileCiFrontend
     ports:
       - "9000:9000"
   ci-api-mock:

@@ -1,6 +1,4 @@
 #!/bin/bash
-#scriptdir="$(dirname "$0")"
-#cd "$scriptdir"
 
 case "$1" in
     "test")
@@ -19,6 +17,6 @@ case "$1" in
     "update")
         docker-compose -f docker-compose-ci.yml build
         docker-compose -f docker-compose-ci.yml run --rm jest-image-snapshot update
-        docker-compose down
+        docker-compose -f docker-compose-ci.yml down
         ;;
 esac
