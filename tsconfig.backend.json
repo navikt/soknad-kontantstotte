@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "outDir": "./build",
+    "rootDir": "./src",
+    "resolveJsonModule": true
+  },
+  "include": [
+    "./src/backend",
+    "./src/webpack"
+  ],
+  "exclude": ["./src/frontend"],
+  "lib": ["es2015", "esnext"]
+}

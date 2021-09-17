@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "lib": ["dom", "esnext", "es6"],
+    "importHelpers": true,
+    "declaration": true,
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "traceResolution": false,
+    "jsx": "react",
+    "esModuleInterop": true
+  },
+  "exclude": [
+    "./src/**/*.test.tsx",
+    "./src/**/*.test.ts",
+    "./src/**/*.test.jsx",
+    "./src/**/*.test.js"
+  ]
+}

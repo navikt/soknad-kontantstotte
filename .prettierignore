@@ -1,6 +1,8 @@
 *.json
 *.less
-README.md
-*.yml
 *.yaml
-Jenkinsfile
+*.yml
+*.md
+*.html
+.gitignore
+*.lock
