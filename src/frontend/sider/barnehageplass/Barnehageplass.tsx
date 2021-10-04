@@ -3,7 +3,7 @@ import PanelBase from 'nav-frontend-paneler';
 import RadioPanelGruppe from 'nav-frontend-skjema/lib/radio-panel-gruppe';
 import Veileder from 'nav-frontend-veileder';
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { FormattedHTMLMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { selectHarForsoktNesteSteg } from '../../app/selectors';
@@ -176,7 +176,7 @@ const Barnehageplass: React.StatelessComponent<BarnehageplassSideProps> = ({
                                 posisjon={'høyre'}
                                 className={'barnehage__advarsel'}
                                 tekst={
-                                    <FormattedMessage id="advarsel.barnehageplass.timerIBarnehage" />
+                                    <FormattedHTMLMessage id="advarsel.barnehageplass.timerIBarnehage" />
                                 }
                                 type={'advarsel'}
                             >
