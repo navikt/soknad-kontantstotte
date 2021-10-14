@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedHTMLMessage } from 'react-intl';
 import AdvarselIkon from '../../component/Ikoner/AdvarselIkon';
 
 interface IOppsummeringsAdvarsel {
@@ -12,7 +12,7 @@ const OppsummeringsAdvarsel: React.StatelessComponent<IOppsummeringsAdvarsel> = 
     return (
         <div className={'oppsummering__advarsel'}>
             <AdvarselIkon style={{ flex: 'none', marginRight: '1rem' }} />
-            <FormattedMessage id={meldingsNokkel} />
+            <FormattedHTMLMessage id={meldingsNokkel} />
         </div>
     );
 };
