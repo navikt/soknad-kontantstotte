@@ -43,4 +43,4 @@ Spørsmål knyttet til koden eller prosjektet kan rettes til <epost>
 
 ## For NAV-ansatte
 
-Interne henvendelser kan sendes via Slack i kanalen #teamsoknad.
+Interne henvendelser kan sendes via Slack i kanalen #team-familie.
