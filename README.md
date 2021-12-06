@@ -39,7 +39,7 @@ NB: Du må selv være pålogget i preprod for at du skal komme til oidc-stub. De
 
 # Henvendelser
 
-Spørsmål knyttet til koden eller prosjektet kan rettes til <epost>
+Spørsmål knyttet til koden eller prosjektet kan stilles som issues her på GitHub.
 
 ## For NAV-ansatte
 
