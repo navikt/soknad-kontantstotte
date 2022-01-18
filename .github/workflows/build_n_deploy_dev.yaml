@@ -7,33 +7,20 @@ on:
 
 env:
   IMAGE: docker.pkg.github.com/${{ github.repository }}/soknad-kontantstotte:${{ github.sha }}
+  BASE_PATH: /
 
 jobs:
   test:
     name: Run tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-      - uses: actions/cache@v1
-        with:
-          path: ./node_modules
-          key: ${{ runner.os }}-node-cache-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-cache-
-      - name: Build and run tests
-        run: |
-          yarn install
-          mkdir ./ci-tests/reports
-          yarn build:ci
-          yarn test:ci
-      - name: Archive test reports
-        uses: actions/upload-artifact@v1
-        with:
-          name: reports
-          path: ./ci-tests/reports
+      - uses: actions/checkout@v2
+      - name: Installer node-pakker
+        run: npx yarn
+      - name: Kjør tester
+        env:
+          CI: true
+        run: npx yarn test
   build:
     name: Build and push Docker container
     runs-on: ubuntu-latest
@@ -43,14 +30,27 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          yarn
-          yarn build
+          docker build . -t ${IMAGE} --build-arg base_path=${BASE_PATH}
           docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
-          docker build . -t ${IMAGE}
           docker push ${IMAGE}
+  ci-test:
+    name: Run ci-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Kjør ci-tester
+        env:
+          CI_MODE: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
+          npx yarn test:ci
   deploy_sbs:
     name: Deploy to SBS (dev)
-    needs: build
+    needs:
+      - build
+      - test
+      - ci-test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -59,6 +59,7 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-sbs
           RESOURCE: build_n_deploy/naiserator/naiserator_dev.yaml
+          VAR: base_path=${{ env.BASE_PATH }}
   deploy_gcp:
     name: Deploy to GCP (dev)
     needs: build
@@ -71,3 +72,4 @@ jobs:
           CLUSTER: dev-gcp
           RESOURCE: build_n_deploy/naiserator/naiserator.yaml
           VARS: build_n_deploy/naiserator/dev-gcp.json
+          VAR: base_path=${{ env.BASE_PATH }}

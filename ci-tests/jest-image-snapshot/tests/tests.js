@@ -5,22 +5,24 @@ const puppeteer = require('puppeteer');
 const large = { width: 1600, height: 450 };
 const medium = { width: 800, height: 500 };
 const small = { width: 320, height: 500 };
-
+// ,
 const config = [['large', large], ['medium', medium], ['small', small]];
+const rootUrl = 'http://ci-frontend:9000';
 
 describe('soknad-kontantstotte', () => {
     let browser;
     beforeAll(async () => {
-        browser = await puppeteer.launch({ args: ['--no-sandbox'] });
+        browser = await puppeteer.launch({ args: ['--no-sandbox'], dumpio: true });
     });
 
     describe.each(config)('%s', (name, size) => {
         let page;
 
         beforeAll(async () => {
+            jest.setTimeout(30000);
             page = await browser.newPage();
             page.setViewport(size);
-            await page.goto('http://ci-test-server:8000');
+            await page.goto(rootUrl);
         });
 
         test('veiledning-feilmelding', async () => {
@@ -233,7 +235,7 @@ describe('soknad-kontantstotte', () => {
         });
 
         test('sprak-tekster', async () => {
-            await page.goto('http://ci-test-server:8000');
+            await page.goto(rootUrl);
             await page.waitFor('.typo-sidetittel');
             await page.select('select', 'nn');
             await page.waitFor(1000);
