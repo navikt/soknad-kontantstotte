@@ -60,3 +60,7 @@ spec:
     value: soknad-kontantstotte.dev.nav.no
   - name: LOADBALANCER_SOKNAD_KONTANTSTOTTE_POOLNAME
     value: na
+  - name: BASE_PATH
+    value: {{base_path}}
+  - name: ENV
+      value: {{env}}

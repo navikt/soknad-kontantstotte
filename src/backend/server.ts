@@ -17,6 +17,10 @@ dotenv.config();
 const app = process.env.NODE_ENV === 'development' ? mockServer : express();
 
 const basePath = process.env.BASE_PATH ?? '/';
+
+console.log(`process.env.BASE_PATH: ${process.env.BASE_PATH}`);
+console.log(`process.env.ENV: ${process.env.ENV}`);
+
 const frontendMappe = path.join(process.cwd(), 'dist');
 
 app.set('views', frontendMappe);

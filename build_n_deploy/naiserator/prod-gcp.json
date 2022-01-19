@@ -1,3 +1,4 @@
 {
-    "ingresses": ["https://soknad-kontantstotte.nav.no"]
+    "ingresses": ["https://soknad-kontantstotte.nav.no"],
+    "env": "prod"
 }
