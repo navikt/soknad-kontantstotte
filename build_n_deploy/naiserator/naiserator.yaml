@@ -38,29 +38,29 @@ spec:
     requests:
       memory: 512Mi
   env:
-  - name: NAV_TRUSTSTORE_KEYSTOREALIAS
-    value: na
-  - name: NAV_TRUSTSTORE_PATH
-    value: /var/run/secrets/naisd.io/nav_truststore_path
-  - name: APPRES_CMS_URL
-    value: https://appres-q0.nav.no
-  - name: LOGINSERVICE_URL
-    value: https://loginservice-q.nav.no/login
-  - name: APPDYNAMICS_CONTROLLER_HOST_NAME
-    value: appdynamics.adeo.no
-  - name: APPDYNAMICS_CONTROLLER_PORT
-    value: "443"
-  - name: APPDYNAMICS_CONTROLLER_SSL_ENABLED
-    value: "true"
-  - name: APPDYNAMICS_AGENT_ACCOUNT_NAME
-    value: NON-PROD
-  - name: UNLEASH_API_URL
-    value: https://unleash.nais.io/api/
-  - name: LOADBALANCER_SOKNAD_KONTANTSTOTTE_URL
-    value: soknad-kontantstotte.dev.nav.no
-  - name: LOADBALANCER_SOKNAD_KONTANTSTOTTE_POOLNAME
-    value: na
-  - name: BASE_PATH
-    value: /
-  - name: ENV
-      value: {{env}}
+    - name: NAV_TRUSTSTORE_KEYSTOREALIAS
+      value: na
+    - name: NAV_TRUSTSTORE_PATH
+      value: /var/run/secrets/naisd.io/nav_truststore_path
+    - name: APPRES_CMS_URL
+      value: https://appres-q0.nav.no
+    - name: LOGINSERVICE_URL
+      value: https://loginservice-q.nav.no/login
+    - name: APPDYNAMICS_CONTROLLER_HOST_NAME
+      value: appdynamics.adeo.no
+    - name: APPDYNAMICS_CONTROLLER_PORT
+      value: "443"
+    - name: APPDYNAMICS_CONTROLLER_SSL_ENABLED
+      value: "true"
+    - name: APPDYNAMICS_AGENT_ACCOUNT_NAME
+      value: NON-PROD
+    - name: UNLEASH_API_URL
+      value: https://unleash.nais.io/api/
+    - name: LOADBALANCER_SOKNAD_KONTANTSTOTTE_URL
+      value: soknad-kontantstotte.dev.nav.no
+    - name: LOADBALANCER_SOKNAD_KONTANTSTOTTE_POOLNAME
+      value: na
+    - name: BASE_PATH
+      value: /
+    - name: ENV
+      value: "dev"
