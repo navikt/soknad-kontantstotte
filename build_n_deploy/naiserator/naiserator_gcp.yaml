@@ -61,6 +61,6 @@ spec:
     - name: LOADBALANCER_SOKNAD_KONTANTSTOTTE_POOLNAME
       value: na
     - name: BASE_PATH
-      value: /
+      value: {{base_path}}
     - name: ENV
-      value: "dev"
+      value: 'dev'
