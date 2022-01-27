@@ -8,18 +8,18 @@ metadata:
 
 spec:
   image: {{image}}
-  port: 8080
-  liveness:
-    path: /internal/isAlive
-  readiness:
-    path: /internal/isAlive
-  prometheus:
-    enabled: true
-    path: /internal/metrics
+  team: teamfamilie
   replicas:
     min: 1
     max: 2
     cpuThresholdPercentage: 50
+  port: 9000
+  liveness:
+    path: /internal/isAlive
+    initialDelay: 5
+  readiness:
+    path: /internal/isReady
+    initialDelay: 5
   ingresses: # Optional. List of ingress URLs that will route HTTP traffic to the application.
   {{#each ingresses as |url|}}
      - {{url}}
@@ -33,8 +33,8 @@ spec:
 
   resources:
     limits:
-      cpu: "3"
-      memory: 786Mi
+      cpu: 2000m
+      memory: 1024Mi
     requests:
       memory: 512Mi
   env:
