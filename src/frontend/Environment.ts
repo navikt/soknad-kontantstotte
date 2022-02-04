@@ -17,7 +17,7 @@ const Environment = (): IEnvUrls => {
         };
     } else if (window.location.hostname.indexOf('soknad-kontantstotte-q') > -1) {
         return {
-            apiUrl: 'https://soknad-kontantstotte-api-q.nav.no/api',
+            apiUrl: 'https://soknad-kontantstotte-api.dev.nav.no',
             loginUrl: 'https://loginservice-q.nav.no/login',
             papirsoknad:
                 'https://www.nav.no/soknader/nb/person/familie/kontantstotte/NAV%2034-00.08/brev',
