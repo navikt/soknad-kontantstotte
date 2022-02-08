@@ -48,14 +48,15 @@ const Environment = (): IEnvUrls => {
             saksoversikt: 'https://tjenester-q0.nav.no/saksoversikt/app',
         };
     } else if (window.location.hostname.indexOf('soknad-kontantstotte.dev') > -1) {
-        console.log('Use backend on GCP: https://soknad-kontantstotte-api.dev.intern.nav.no/api');
-        return {
-            apiUrl: 'https://soknad-kontantstotte-api.dev.intern.nav.no/api',
+        const environmentUrl = {
+            apiUrl: 'https://soknad-kontantstotte-api.dev.nav.no/api',
             loginUrl: 'https://loginservice.dev.nav.no/login',
             papirsoknad:
                 'https://www.nav.no/soknader/nb/person/familie/kontantstotte/NAV%2034-00.08/brev',
             saksoversikt: 'https://tjenester-q0.nav.no/saksoversikt/app',
         };
+        console.log(`environment URl ${environmentUrl}`);
+        return environmentUrl;
     }
 
     return {
