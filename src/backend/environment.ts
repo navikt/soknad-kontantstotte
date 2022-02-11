@@ -6,7 +6,7 @@ export default function () {
         };
     } else if (process.env.ENV === 'dev') {
         return {
-            dekoratørUrl: 'https://www-q1.nav.no/dekoratoren/?simple=true',
+            dekoratørUrl: 'https://dekoratoren.dev.nav.no/?simple=true',
             port: 9000,
         };
     }
