@@ -58,7 +58,7 @@ const Environment = (): IEnvUrls => {
     }
 
     return {
-        apiUrl: 'https://soknad-kontantstotte-api.nav.no/api',
+        apiUrl: 'https://soknad-kontantstotte-api-gcp.nav.no/api',
         loginUrl: 'https://loginservice.nav.no/login',
         papirsoknad:
             'https://www.nav.no/soknader/nb/person/familie/kontantstotte/NAV%2034-00.08/brev',
