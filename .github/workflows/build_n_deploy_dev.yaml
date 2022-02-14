@@ -7,7 +7,6 @@ on:
 
 env:
   IMAGE: docker.pkg.github.com/${{ github.repository }}/soknad-kontantstotte:${{ github.sha }}
-  BASE_PATH: /
 
 jobs:
   test:
@@ -45,21 +44,6 @@ jobs:
         run: |
           docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
           npx yarn test:ci
-  deploy-sbs:
-    name: Deploy to SBS
-    needs:
-      - build
-      - test
-      - ci-test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: nais/deploy/actions/deploy@v1
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-sbs
-          RESOURCE: build_n_deploy/naiserator/naiserator_dev.yaml
-          VAR: base_path=${{ env.BASE_PATH }}
   deploy-gcp:
     name: Deploy to GCP
     needs:
@@ -73,6 +57,5 @@ jobs:
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
-          RESOURCE: build_n_deploy/naiserator/naiserator_gcp.yaml
+          RESOURCE: build_n_deploy/naiserator/naiserator.yaml
           VARS: build_n_deploy/naiserator/dev-gcp.json
-          VAR: base_path=${{ env.BASE_PATH }}

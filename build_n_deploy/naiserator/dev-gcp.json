@@ -1,4 +1,5 @@
 {
     "ingresses": ["https://soknad-kontantstotte.dev.nav.no"],
-    "env": "dev"
+    "env": "dev",
+    "base_path": "/"
 }

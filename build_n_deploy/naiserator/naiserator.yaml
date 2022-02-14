@@ -2,11 +2,12 @@ apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
   name: soknad-kontantstotte
-  namespace: default
+  namespace: teamfamilie
   labels:
     team: teamfamilie
+
 spec:
-  image: {{ image }}
+  image: {{image}}
   team: teamfamilie
   replicas:
     min: 1
@@ -19,8 +20,16 @@ spec:
   readiness:
     path: /internal/isReady
     initialDelay: 5
-  ingresses:
-    - "https://soknad-kontantstotte.nav.no"
+  ingresses: # Optional. List of ingress URLs that will route HTTP traffic to the application.
+  {{#each ingresses as |url|}}
+     - {{url}}
+  {{/each}}
+  accessPolicy:
+    outbound:
+      rules:
+        - application: soknad-kontantstotte-api
+        - application: loginservice
+          namespace: plattformsikkerhet
   resources:
     limits:
       cpu: 2000m
@@ -30,3 +39,5 @@ spec:
   env:
     - name: BASE_PATH
       value: {{base_path}}
+    - name: ENV
+      value: {{env}}
