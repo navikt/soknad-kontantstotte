@@ -8,7 +8,6 @@ on:
 env:
   IMAGE: docker.pkg.github.com/${{ github.repository }}/soknad-kontantstotte:${{ github.sha }}
   IMAGE_LATEST: docker.pkg.github.com/${{ github.repository }}/soknad-kontantstotte:latest
-  BASE_PATH: /
 
 jobs:
   test:
@@ -47,8 +46,8 @@ jobs:
         run: |
           docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
           npx yarn test:ci
-  deploy:
-    name: Deploy to NAIS
+  deploy-gcp:
+    name: Deploy to GCP
     needs:
       - build
       - test
@@ -59,12 +58,6 @@ jobs:
       - uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-sbs
-          RESOURCE: build_n_deploy/naiserator/naiserator_dev.yaml
-          VAR: base_path=${{ env.BASE_PATH }}
-      - uses: nais/deploy/actions/deploy@v1
-        env:
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: prod-sbs
-          RESOURCE: build_n_deploy/naiserator/naiserator_prod.yaml
-          VAR: base_path=${{ env.BASE_PATH }}
+          CLUSTER: prod-gcp
+          RESOURCE: build_n_deploy/naiserator/naiserator.yaml
+          VARS: build_n_deploy/naiserator/prod-gcp.json

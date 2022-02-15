@@ -1,0 +1,5 @@
+{
+    "ingresses": ["https://soknad-kontantstotte-gcp.nav.no"],
+    "env": "prod",
+    "base_path": "/"
+}

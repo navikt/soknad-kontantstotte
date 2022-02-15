@@ -47,10 +47,18 @@ const Environment = (): IEnvUrls => {
                 'https://www.nav.no/soknader/nb/person/familie/kontantstotte/NAV%2034-00.08/brev',
             saksoversikt: 'https://tjenester-q0.nav.no/saksoversikt/app',
         };
+    } else if (window.location.hostname.indexOf('soknad-kontantstotte.dev') > -1) {
+        return {
+            apiUrl: 'https://soknad-kontantstotte-api.dev.nav.no/api',
+            loginUrl: 'https://loginservice.dev.nav.no/login',
+            papirsoknad:
+                'https://www.nav.no/soknader/nb/person/familie/kontantstotte/NAV%2034-00.08/brev',
+            saksoversikt: 'https://tjenester-q0.nav.no/saksoversikt/app',
+        };
     }
 
     return {
-        apiUrl: 'https://soknad-kontantstotte-api.nav.no/api',
+        apiUrl: 'https://soknad-kontantstotte-api-gcp.nav.no/api',
         loginUrl: 'https://loginservice.nav.no/login',
         papirsoknad:
             'https://www.nav.no/soknader/nb/person/familie/kontantstotte/NAV%2034-00.08/brev',
