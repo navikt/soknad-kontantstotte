@@ -173,7 +173,7 @@
     "react-intl": "2.8.0",
     "react-modal": "^3.14.2",
     "react-redux": "7.1.0",
-    "react-refresh": "^0.9.0",
+    "react-refresh": "^0.11.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "redux": "4.0.4",
