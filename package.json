@@ -206,7 +206,7 @@
     "babel-plugin-styled-components": "^1.12.0",
     "copy-webpack-plugin": "^6.4.1",
     "css-loader": "^5.0.2",
-    "css-minimizer-webpack-plugin": "^3",
+    "css-minimizer-webpack-plugin": "~4",
     "eslint": "^7.11.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-config-react-app": "^6.0.0",
