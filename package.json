@@ -98,7 +98,6 @@
     "@testing-library/react-hooks": "^5.1.1",
     "@types/classnames": "^2.2.10",
     "@types/jest": "^26.0.4",
-    "@types/moment": "2.13.0",
     "@types/node": "^14.0.23",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
