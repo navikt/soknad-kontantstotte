@@ -1583,19 +1583,19 @@
   resolved "https://registry.yarnpkg.com/@navikt/fnrvalidator/-/fnrvalidator-1.1.4.tgz#22a776ba05a90c1ba5316a4f7567f9a45abcda04"
   integrity sha512-IroYFqa8PpzVxtIk6ifeEQBFzsI2QJX/FSIQyBtJvpp2D8Cb5Z9+hGNFppCILWR+QYbY8Dkk48la7K5fPGXeWQ==
 
-"@navikt/sif-common-core@^9.4.1":
-  version "9.4.2"
-  resolved "https://registry.yarnpkg.com/@navikt/sif-common-core/-/sif-common-core-9.4.2.tgz#4ddcb8f93d3c093d096d9d689066e3b0e74554b6"
-  integrity sha512-qLaYrxdcKxR2gNeGDq2OAiBsCEiWkE0RE5Vda1oQxq6t7c6jsZdy01BRmp7YEzbSj15s++SfhN7KLI7yZeN4sw==
+"@navikt/sif-common-core@^9.7.1":
+  version "9.7.1"
+  resolved "https://registry.yarnpkg.com/@navikt/sif-common-core/-/sif-common-core-9.7.1.tgz#8e3582011f1598ebfbd8134fce05b75946073647"
+  integrity sha512-Pj5D16idGKXIH60SBArIqb7aX14UZWOK0Xl4TyFwity22tusCZ28lBNR+sjkM09Z1uQz1vjtYhkcPR4yAqif1w==
   dependencies:
     "@navikt/appstatus-react" "^2.0.0"
     "@navikt/fnrvalidator" "^1.1.4"
-    "@types/react-modal" "^3.12.0"
+    "@types/react-modal" "^3.12.1"
     classnames "^2.3.1"
-    dayjs "^1.10.5"
-    history "^5.0.0"
+    dayjs "^1.10.6"
+    history "^5.0.1"
     http-status-codes "^2.1.4"
-    i18n-iso-countries "^6.7.0"
+    i18n-iso-countries "^6.8.0"
     iso8601-duration "^1.3.0"
     lodash.throttle "^4.1.1"
     nav-frontend-alertstriper "^4.0.1"
@@ -1603,12 +1603,12 @@
     nav-frontend-chevron "^1.0.30"
     nav-frontend-chevron-style "^1.0.4"
     nav-frontend-core "^6.0.1"
-    nav-frontend-hjelpetekst "^3.0.2"
+    nav-frontend-hjelpetekst "^3.1.1"
     nav-frontend-hjelpetekst-style "^3.0.1"
     nav-frontend-ikoner-assets "^3.0.1"
     nav-frontend-js-utils "^1.0.19"
-    nav-frontend-knapper "^3.0.1"
-    nav-frontend-knapper-style "^2.0.1"
+    nav-frontend-knapper "^3.0.2"
+    nav-frontend-knapper-style "^2.0.2"
     nav-frontend-lenker "^2.0.1"
     nav-frontend-lenker-style "^2.0.1"
     nav-frontend-lukknapp "^2.0.1"
@@ -1625,7 +1625,7 @@
     nav-frontend-spinner-style "^1.0.2"
     nav-frontend-stegindikator "^2.0.1"
     nav-frontend-stegindikator-style "^2.0.1"
-    nav-frontend-tabell-style "^2.0.1"
+    nav-frontend-tabell-style "^2.0.2"
     nav-frontend-tabs "^2.0.1"
     nav-frontend-tabs-style "^2.0.1"
     nav-frontend-typografi "^4.0.1"
@@ -1636,10 +1636,10 @@
     nav-frontend-veilederpanel-style "^2.0.1"
     normalize.css "^8.0.1"
     pretty-bytes "^5.6.0"
-    react-aria-menubutton "^7.0.2"
+    react-aria-menubutton "^7.0.3"
     react-collapse "^5.1.0"
     react-dom "^17.0.2"
-    react-modal "^3.13.1"
+    react-modal "^3.14.3"
     react-responsive "^8.2.0"
     react-router-dom "^5.2.0"
 
@@ -2341,6 +2341,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-modal@^3.12.1":
+  version "3.13.1"
+  resolved "https://registry.yarnpkg.com/@types/react-modal/-/react-modal-3.13.1.tgz#5b9845c205fccc85d9a77966b6e16dc70a60825a"
+  integrity sha512-iY/gPvTDIy6Z+37l+ibmrY+GTV4KQTHcCyR5FIytm182RQS69G5ps4PH2FxtC7bAQ2QRHXMevsBgck7IQruHNg==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-redux@7.1.2":
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.2.tgz#02303b77d87e54f327c09507cf80ee3ca3063898"
@@ -2895,12 +2902,7 @@ ansi-regex@^2.0.0:
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-2.1.1.tgz#c3b33ab5ee360d86e0e628f0468ae7ef27d654df"
   integrity sha1-w7M6te42DYbg5ijwRorn7yfWVN8=
 
-ansi-regex@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.0.tgz#388539f55179bf39339c81af30a654d69f87cb75"
-  integrity sha512-bY6fj56OUQ0hU1KjFNDQuJFezqKdrAyFdIevADiqrWHwSlbmBNMHp5ak2f40Pm8JTFyM2mqxkG6ngkHO11f/lg==
-
-ansi-regex@^5.0.1:
+ansi-regex@^5.0.0, ansi-regex@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.1.tgz#082cb2c89c9fe8659a311a53bd6a4dc5301db304"
   integrity sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==
@@ -4282,10 +4284,15 @@ data-urls@^2.0.0:
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
 
-dayjs@^1.10.4, dayjs@^1.10.5:
+dayjs@^1.10.4:
   version "1.10.5"
   resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.10.5.tgz#5600df4548fc2453b3f163ebb2abbe965ccfb986"
   integrity sha512-BUFis41ikLz+65iH6LHQCDm4YPMj5r1YFLdupPIyM4SGcXMmtiLQ7U37i+hGS8urIuqe7I/ou3IS1jVc4nbN4g==
+
+dayjs@^1.10.6:
+  version "1.11.3"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.3.tgz#4754eb694a624057b9ad2224b67b15d552589258"
+  integrity sha512-xxwlswWOlGhzgQ4TKzASQkUhqERI3egRNqgV4ScR8wlANA/A9tZ7miXa44vTTKEq5l7vWoL5G57bG3zA+Kow0A==
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.8, debug@^2.6.9:
   version "2.6.9"
@@ -5851,10 +5858,10 @@ history@^4.9.0:
     tiny-warning "^1.0.0"
     value-equal "^1.0.1"
 
-history@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/history/-/history-5.0.0.tgz#0cabbb6c4bbf835addb874f8259f6d25101efd08"
-  integrity sha512-3NyRMKIiFSJmIPdq7FxkNMJkQ7ZEtVblOQ38VtKaA0zZMW1Eo6Q6W8oDKEflr1kNNTItSnk4JMCO1deeSgbLLg==
+history@^5.0.1:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/history/-/history-5.3.0.tgz#1548abaa245ba47992f063a0783db91ef201c73b"
+  integrity sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==
   dependencies:
     "@babel/runtime" "^7.7.6"
 
@@ -6056,7 +6063,7 @@ hyphenate-style-name@^1.0.0:
   resolved "https://registry.yarnpkg.com/hyphenate-style-name/-/hyphenate-style-name-1.0.4.tgz#691879af8e220aea5750e8827db4ef62a54e361d"
   integrity sha512-ygGZLjmXfPHj+ZWh6LwbC37l43MhfztxetbFCoYTM2VjkIUpeHgSNn7QIyVFj7YQ1Wl9Cbw5sholVJPzWvC2MQ==
 
-i18n-iso-countries@^6.5.0, i18n-iso-countries@^6.7.0:
+i18n-iso-countries@^6.5.0, i18n-iso-countries@^6.8.0:
   version "6.8.0"
   resolved "https://registry.yarnpkg.com/i18n-iso-countries/-/i18n-iso-countries-6.8.0.tgz#eebbc75594c6832aff86176c1bb38daa133d6dfd"
   integrity sha512-jJs/+CA6+VUICFxqGcB0vFMERGfhfvyNk+8Vb9EagSZkl7kSpm/kT0VyhvzM/zixDWEV/+oN9L7v/GT9BwzoGg==
@@ -7786,7 +7793,7 @@ moment-timezone@0.5.34:
   dependencies:
     moment ">= 2.9.0"
 
-"moment@>= 2.9.0", moment@>=2.14.0, moment@2.29.3:
+moment@2.29.3, "moment@>= 2.9.0", moment@>=2.14.0:
   version "2.29.3"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.3.tgz#edd47411c322413999f7a5940d526de183c031f3"
   integrity sha512-c6YRvhEo//6T2Jz/vVtYzqBzwvPT95JBQ+smCytzf7c50oMZRsR/a4w88aD34I+/QVSfnoAnSBFPJHItlOMJVw==
@@ -7940,10 +7947,10 @@ nav-frontend-hjelpetekst@3.0.1:
   resolved "https://registry.yarnpkg.com/nav-frontend-hjelpetekst/-/nav-frontend-hjelpetekst-3.0.1.tgz#b8c9b5c2ed12e6af36d98ebea729770f920a79f5"
   integrity sha512-8yTe5dGt0uwiBLJ5qi9Szgx3+Qocra6IYRflidBWzzZMgCwEB5ONuIBKiwKHbXwR5zcZu/V35sH+ijjlP/GvIg==
 
-nav-frontend-hjelpetekst@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/nav-frontend-hjelpetekst/-/nav-frontend-hjelpetekst-3.0.2.tgz#9ebd5e3df2cac05d4019e199508ddc8729d29226"
-  integrity sha512-BM7bx2cNg7OF4jxwhX+lg9QJpnYeA8uyMc705c6i4DNFcN0krEMOdtvNQDvHbimj5/W7CBgyuUEbXKZCZVtGDg==
+nav-frontend-hjelpetekst@^3.1.1:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/nav-frontend-hjelpetekst/-/nav-frontend-hjelpetekst-3.1.2.tgz#de3f17c51d2a0aee98190dcfc48a08e060213fed"
+  integrity sha512-D3kHzENBw82WwY4+Gvms2C9a3Zx2dkhycXwOExu34kwvXow17IsmHNKdUKvXVOEP4NVtXQxzxvXxDPyPGn1oBg==
 
 nav-frontend-ikoner-assets@1.0.1:
   version "1.0.1"
@@ -7977,10 +7984,10 @@ nav-frontend-knapper-style@^1.1.2:
   resolved "https://registry.yarnpkg.com/nav-frontend-knapper-style/-/nav-frontend-knapper-style-1.1.2.tgz#700c3ee14f8e757d0d4e706a4b1ee5488eae9a40"
   integrity sha512-A8y4PkjAUBTjs4HzWJuGvk1rwXHE5Slz2SsnedqPt79Oyy+/msp+f/WyIRSsCyzp2qcMQyhcj1JSccqglpBbBA==
 
-nav-frontend-knapper-style@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/nav-frontend-knapper-style/-/nav-frontend-knapper-style-2.0.1.tgz#798d03d0175026f1c281c8782233be2fb232613a"
-  integrity sha512-916fAOLIClJfnzNzP6uz3uzBL2Nt1MtWz6+EJsdbjasxS/QA0gRctDE7tPKSaMuM3GWBSffO1x4KpXRfJV2mbw==
+nav-frontend-knapper-style@^2.0.2:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/nav-frontend-knapper-style/-/nav-frontend-knapper-style-2.1.1.tgz#ab55c1915651ab3a656d40b88e001e02d368a1ed"
+  integrity sha512-JP0ktCIGYNlDLdvsOlAphACa8v5/ITIW9hFsTFFvaSo3RHCrAKu7/uYu+Lad1mNaZyr4xb3AbcgFBQfERxfL6g==
 
 nav-frontend-knapper@1.0.40:
   version "1.0.40"
@@ -7992,10 +7999,10 @@ nav-frontend-knapper@^2.1.2:
   resolved "https://registry.yarnpkg.com/nav-frontend-knapper/-/nav-frontend-knapper-2.1.4.tgz#8eea6a82a5f014987e22a4aba02f847a1382e220"
   integrity sha512-qq4d6mZ1wlvo62cNe4rwWbTgupEyJlaQzZNuYLWCCkIbSDNR6vz/pkfAue57lsFgeAXAWK4YC13r/8MbMu6f+w==
 
-nav-frontend-knapper@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/nav-frontend-knapper/-/nav-frontend-knapper-3.0.1.tgz#4adde4c9f5f6c2b3115b7c73aa3354a85c943fed"
-  integrity sha512-v0+GCO74K/jPLQXJ5jnt9TrcmipBzw/Azyv9ThJXHYQsDACvaFI7iVAqdSHqlBRglVQa7JwBcynmrGL//M/UVw==
+nav-frontend-knapper@^3.0.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/nav-frontend-knapper/-/nav-frontend-knapper-3.1.2.tgz#18f4ed49f778d8cc55d44a4086b54e7087b07af4"
+  integrity sha512-IR+0lz1ir14FnLx6rZNA3DH6DUAUlN1MK/cwg7syDx1v0qh1wMHjv9GI85ciP0WW65W2zBo2fDjRMA7IlHB2wA==
 
 nav-frontend-lenker-style@0.2.20:
   version "0.2.20"
@@ -8167,10 +8174,10 @@ nav-frontend-stegindikator@^2.0.1:
   resolved "https://registry.yarnpkg.com/nav-frontend-stegindikator/-/nav-frontend-stegindikator-2.0.1.tgz#bedc3fe39d54c8550f7f6a2e69ddd36864b62f64"
   integrity sha512-IlCD6ys9Ft6IKZOD40ZENAzxk02D+9+KO/8WXmXDv/2/mC9qDicSMKsDXNcc78DvJgns4o6r2X+3cDNWhOlofQ==
 
-nav-frontend-tabell-style@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/nav-frontend-tabell-style/-/nav-frontend-tabell-style-2.0.1.tgz#5a4de2a1559e94f68781791256d25ed662c650bc"
-  integrity sha512-u65OBoMXMm6rh5JV6NwvdMD4+Kn15/FGorSb3HMrh+6B/LHK/3nl7aiZnIyy1o+R13IsuDSoMTD20qU9bgPauA==
+nav-frontend-tabell-style@^2.0.2:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/nav-frontend-tabell-style/-/nav-frontend-tabell-style-2.1.1.tgz#b0c364ee9626f471978f0eb51b2aee14f9d166d5"
+  integrity sha512-aoMw6g+vh5uZTBJFQBGfQILZfo1cdWBlKiZLiKdgbg6b5t2A93JeYjjAUYERGkcHvJODJFbroqqll1jTIZeTAQ==
 
 nav-frontend-tabs-style@^2.0.1:
   version "2.0.1"
@@ -9356,10 +9363,10 @@ react-app-polyfill@^2.0.0:
     regenerator-runtime "^0.13.7"
     whatwg-fetch "^3.4.1"
 
-react-aria-menubutton@^7.0.2:
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/react-aria-menubutton/-/react-aria-menubutton-7.0.2.tgz#0bcbb929f609e94253e5ea71147a8cce54c2defc"
-  integrity sha512-Y1GbKiTlec9RKLXLZPkZIMXRxQKIhvabZ+KRXBLoRPPAX2XMopJLkyVvN8sQnBMy7nyKfjgpZHgsX98/9CyP6A==
+react-aria-menubutton@^7.0.3:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/react-aria-menubutton/-/react-aria-menubutton-7.0.3.tgz#9f3c96e8f0b9469dc1d5dab7cf244b73069f2882"
+  integrity sha512-Ql4W3rNiZmuVJ1wQ0UUeV4OZX3IZq2evsfEqJGefSMdfkK6o8X/6Ufxrzu0wL+/Dr7JUY3xnrnIQimSCFghlCQ==
   dependencies:
     focus-group "^0.3.1"
     prop-types "^15.6.0"
@@ -9475,10 +9482,20 @@ react-masonry-css@^1.0.16:
   resolved "https://registry.yarnpkg.com/react-masonry-css/-/react-masonry-css-1.0.16.tgz#72b28b4ae3484e250534700860597553a10f1a2c"
   integrity sha512-KSW0hR2VQmltt/qAa3eXOctQDyOu7+ZBevtKgpNDSzT7k5LA/0XntNa9z9HKCdz3QlxmJHglTZ18e4sX4V8zZQ==
 
-react-modal@^3.13.1, react-modal@^3.14.2:
+react-modal@^3.14.2:
   version "3.14.3"
   resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-3.14.3.tgz#7eb7c5ec85523e5843e2d4737cc17fc3f6aeb1c0"
   integrity sha512-+C2KODVKyu20zHXPJxfOOcf571L1u/EpFlH+oS/3YDn8rgVE51QZuxuuIwabJ8ZFnOEHaD+r6XNjqwtxZnXO0g==
+  dependencies:
+    exenv "^1.2.0"
+    prop-types "^15.7.2"
+    react-lifecycles-compat "^3.0.0"
+    warning "^4.0.3"
+
+react-modal@^3.14.3:
+  version "3.15.1"
+  resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-3.15.1.tgz#950ce67bfef80971182dd0ed38f2d9b1a681288b"
+  integrity sha512-duB9bxOaYg7Zt6TMFldIFxQRtSP+Dg3F1ZX3FXxSUn+3tZZ/9JCgeAQKDg7rhZSAqopq8TFRw3yIbnx77gyFTw==
   dependencies:
     exenv "^1.2.0"
     prop-types "^15.7.2"

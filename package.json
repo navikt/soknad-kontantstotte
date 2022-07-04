@@ -90,7 +90,7 @@
     "@navikt/familie-form-elements": "^3.0.2",
     "@navikt/familie-typer": "^3.0.13",
     "@navikt/fnrvalidator": "^1.1.2",
-    "@navikt/sif-common-core": "^9.4.1",
+    "@navikt/sif-common-core": "^9.7.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "@sentry/browser": "^6.2.0",
     "@sentry/react": "^6.2.0",
