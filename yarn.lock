@@ -1814,23 +1814,23 @@
     "@redux-saga/symbols" "^1.1.2"
     "@redux-saga/types" "^1.1.0"
 
-"@redux-saga/symbols@^1.0.1", "@redux-saga/symbols@^1.1.2":
+"@redux-saga/symbols@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@redux-saga/symbols/-/symbols-1.1.2.tgz#216a672a487fc256872b8034835afc22a2d0595d"
   integrity sha512-EfdGnF423glv3uMwLsGAtE6bg+R9MdqlHEzExnfagXPrIiuxwr3bdiAwz3gi+PsrQ3yBlaBpfGLtDG8rf3LgQQ==
 
-"@redux-saga/testing-utils@1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@redux-saga/testing-utils/-/testing-utils-1.0.5.tgz#600493f5796f8cc7e630635f344a35c34fc91ca7"
-  integrity sha512-XsUbxo2lpWDP6Bt37ilRcx4C2elK4FeQEvk0hln4wXAqkLeUHMwogqUUefKVbdSF4JTfwbXPG5rSOz71QVvnoA==
+"@redux-saga/testing-utils@1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@redux-saga/testing-utils/-/testing-utils-1.1.4.tgz#491e93c98934649176ad11b7b61987c2370eeec4"
+  integrity sha512-cNTxIgncTPapaEvoylYdOWx3aPg3GklLs0sJQsPi6rPaHq4WirCbrTLdnm632eMQHKe31oXaoGrZIByQqw2Zuw==
   dependencies:
-    "@redux-saga/symbols" "^1.0.1"
-    "@redux-saga/types" "^1.0.2"
+    "@redux-saga/symbols" "^1.1.2"
+    "@redux-saga/types" "^1.2.0"
 
-"@redux-saga/types@^1.0.2", "@redux-saga/types@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@redux-saga/types/-/types-1.1.0.tgz#0e81ce56b4883b4b2a3001ebe1ab298b84237204"
-  integrity sha512-afmTuJrylUU/0OtqzaRkbyYFFNgCF73Bvel/sw90pvGrWIZ+vyoIJqA6eMSoA6+nb443kTmulmBtC9NerXboNg==
+"@redux-saga/types@^1.1.0", "@redux-saga/types@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@redux-saga/types/-/types-1.2.0.tgz#50c80041f6d21a538d7763d9bf73604f0efdddc8"
+  integrity sha512-SCZVqXX4l3WwVM58eXFtXabJdxGQKY7hvSToV+xivtPwmutCbhOhgJ53JwKGX3HCBwEkzn4t9WItBQKbzNNxyw==
 
 "@rexxars/eventsource-polyfill@^1.0.0":
   version "1.0.0"
