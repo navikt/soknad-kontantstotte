@@ -235,7 +235,7 @@
     "react-masonry-css": "^1.0.16",
     "react-refresh": "~0.10.0",
     "style-loader": "^2.0.0",
-    "terser": "^5.6.0-beta",
+    "terser": "^5.16.1",
     "terser-webpack-plugin": "^5.1.1",
     "ts-jest": "~27.1.5",
     "ts-loader": "^8.0.16",
