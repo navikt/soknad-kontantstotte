@@ -6,7 +6,7 @@ on:
       - 'master'
 
 env:
-  IMAGE: docker.pkg.github.com/${{ github.repository }}/soknad-kontantstotte:${{ github.sha }}
+  IMAGE: ghcr.io/${{ github.repository }}/soknad-kontantstotte:${{ github.sha }}
 
 jobs:
   test:
